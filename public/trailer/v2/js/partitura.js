@@ -3,7 +3,7 @@
    lead / arp / sub / snare / duck / keys). Voices: js/audio.js (Handy copy + pluck, keys, sub, snare, duck).
    Full description: score.md.
 
-   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 48 bars = 96 s.
+   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 49 bars = 98 s.
    The hook ("the seed"): four bars in the A-minor pentatonic (A C D E G) that climb a step per bar and
    resolve on C. It enters at drop 1 on a warm pluck, returns at drop 2 over new harmony (F G Em Am) with
    a bell doubling, is whispered in the breakdown and comes back an octave-doubled in the last drop.
@@ -36,7 +36,7 @@ export const PARTITURA = {
     { from: 8, style: 'hit', chords: [F], volume: 0.9 },
     { from: 8, to: 16, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', duck: true, volume: 0.78 },
 
-    // ── ACT 3 · CARRERA (16–32): the verse. C G Am F, keys + answers; it fills up at the wheel (24).
+    // ── ACT 3 · CARRERA (12–32): the verse. C G Am F, keys + answers; it fills up at the wheel (24).
     { from: 16, to: 24, style: 'verso', chords: [C, G, Am, F], answer: true, keys: true, duck: true },
     { from: 24, to: 30, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
     { from: 30, to: 32, style: 'subida', chords: [G] },                     // 2 s build under "2026 · SSR AI"
@@ -44,22 +44,22 @@ export const PARTITURA = {
     // ── DROP 2 · CompliA (32–48): the hook over new harmony (IV V iii vi), pluck + bell, sub, snare.
     { from: 32, style: 'hit', chords: [F], volume: 0.8 },
     { from: 32, to: 40, style: 'coro', chords: [F, G, Em, Am], hook: HOOK, lead: 'both', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.88 },
-    { from: 40, to: 52, style: 'coro', chords: [F, G, Am, C], hook: false, arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.86 },
+    { from: 40, to: 54, style: 'coro', chords: [F, G, Am, C], hook: false, arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.86 },
 
-    // ── ACT 5 · RAMAS (42–58): the product montage cuts on this groove; verse full under the last shots + the wall.
-    { from: 52, to: 58, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
+    // ── ACT 5 · RAMAS (42–60): the product montage cuts on this groove; verse full under the last shots + the wall.
+    { from: 54, to: 60, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
 
-    // ── ACT 6 · SISTEMA (58–78): breakdown (the hook on long bells, no kick) → the pulse grows as the
+    // ── ACT 6 · SISTEMA (60–80): breakdown (the hook on long bells, no kick) → the pulse grows as the
     //    agents assemble → verse → 2 s build under "nothing ships without human approval".
-    { from: 58, to: 62, style: 'quiebre', chords: [Am, F], hook: HOOK, lead: 'bell', hookVol: 0.075 },
-    { from: 62, to: 70, style: 'latido', chords: [C, G, Am, F] },
-    { from: 70, to: 76, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
-    { from: 76, to: 78, style: 'subida', chords: [G] },
+    { from: 60, to: 64, style: 'quiebre', chords: [Am, F], hook: HOOK, lead: 'bell', hookVol: 0.075 },
+    { from: 64, to: 72, style: 'latido', chords: [C, G, Am, F] },
+    { from: 72, to: 78, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
+    { from: 78, to: 80, style: 'subida', chords: [G] },
 
-    // ── DROP 3 · FINAL (78–94): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
-    { from: 78, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
-    { from: 78, to: 90, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 82, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
-    { from: 90, to: 94, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
-    // 94–96: silence. The picture fades to the portfolio's ink; nothing is scheduled at 94 or after.
+    // ── DROP 3 · FINAL (80–96): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
+    { from: 80, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
+    { from: 80, to: 92, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 84, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
+    { from: 92, to: 96, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
+    // 96–98: silence. The picture fades to the portfolio's ink; nothing is scheduled at 96 or after.
   ],
 };

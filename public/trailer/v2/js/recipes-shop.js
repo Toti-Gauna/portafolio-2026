@@ -594,8 +594,10 @@
       tl.set(word, { '--wd': [125, 80, 125, 100][i % 4] }, at);
       D.sfx('clap', at, 0.2);
     });
-    tl.set(word, { textShadow: D.chroma(10) }, T + 0.75);
-    tl.to(word, { textShadow: D.chroma(0), duration: 1.6, ease: 'power2.out' }, T + 0.8);
+    if (o.chroma !== false) { // IG: chroma: false skips it (a text-shadow tween repaints the whole word every frame)
+      tl.set(word, { textShadow: D.chroma(10) }, T + 0.75);
+      tl.to(word, { textShadow: D.chroma(0), duration: 1.6, ease: 'power2.out' }, T + 0.8);
+    }
     // the click
     const tc = T + 3.0;
     tl.to(cur, { x: hitP.x, duration: 0.85, ease: 'power2.inOut' }, tc - 0.9);

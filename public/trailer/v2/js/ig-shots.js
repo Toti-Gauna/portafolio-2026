@@ -72,15 +72,17 @@
     if (o.label) D.label(T, o.label);
 
     // ── title: the words rise on ink
-    const words = D.split(title, { type: 'words', mask: 'words' }).words;
-    gsap.set(words, { yPercent: 110 });
-    D.setBg(o.bg || INK, T);
-    D.ink(PAPER, T);
-    D.show(titleBox, T);
-    tl.to(words, { yPercent: 0, duration: 0.5, ease: 'expo.out', stagger: 0.06 }, T + 0.02);
-    tl.to(title, { scale: 1.05, duration: TITLE, ease: 'none' }, T);
-    D.hide(titleBox, T + TITLE);
-    D.sfx('whoosh', T, 0.6, 0.25);
+    if (TITLE > 0) { // titleDur: 0 → the montage opens straight on its first cut (the branches scene titles it)
+      const words = D.split(title, { type: 'words', mask: 'words' }).words;
+      gsap.set(words, { yPercent: 110 });
+      D.setBg(o.bg || INK, T);
+      D.ink(PAPER, T);
+      D.show(titleBox, T);
+      tl.to(words, { yPercent: 0, duration: 0.5, ease: 'expo.out', stagger: 0.06 }, T + 0.02);
+      tl.to(title, { scale: 1.05, duration: TITLE, ease: 'none' }, T);
+      D.hide(titleBox, T + TITLE);
+      D.sfx('whoosh', T, 0.6, 0.25);
+    }
 
     // ── the cuts
     gsap.set(frames, { autoAlpha: 0, transformPerspective: 2000, transformOrigin: '50% 50%' });
@@ -102,6 +104,7 @@
       D.hide(tag, t + dur);
       D.sfx('whoosh', t, 0.35, 0.18);
       D.sfx('tick', t + 0.12, 0.04);
+      (D.cfg.warmAt ||= []).push(t + 0.65); // the warm-up pass paints each view once it is on screen (js/ig-kit.js)
       const tx = def.text[lang] || def.text.es;
       try { def.play(D, D.$('.ish-view', f), t, dur, tx); } catch (e) { console.error(`[igshots] ${sh.id}`, e); }
       D.hide(f, t + dur);
