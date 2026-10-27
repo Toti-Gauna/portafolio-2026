@@ -27,6 +27,8 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - Cada texto sale de `messages/*.json` (`trailer.scenes.*`). Cualquier dato nuevo del tráiler tiene que estar respaldado como el resto del sitio.
 
 ## Contenido del sitio (fase 9)
-- Secciones de la home en `components/sections/Sections.tsx` (`#recorrido`, `#trabajo`, `#laboratorio`, `#metodo`, `#sistema`, `#capacidades`, `#sobre-mi`, `#contacto`); páginas de caso en `app/[locale]/proyectos/[slug]` (complia, handyx, eclipse, kinetic). Todo el texto vive en `messages/{es,en}.json`; los enlaces y los slugs en `lib/cases.ts`.
+- Secciones de la home en `components/sections/Sections.tsx` (`#recorrido`, `#trabajo`, `#laboratorio`, `#metodo`, `#sistema`, `#capacidades`, `#sobre-mi`, `#contacto`); páginas de caso en `app/[locale]/proyectos/[slug]` (complia, tuenti, handyx, eclipse, kinetic). Todo el texto vive en `messages/{es,en}.json`; los enlaces y los slugs en `lib/cases.ts`.
 - Reglas de contenido: cada afirmación tiene respaldo aprobado; los proyectos llevan su estado (Producción interna / En desarrollo / Demo / Prototipo / Banco de pruebas); los ejemplos del método son hechos reales, y las lecturas figuran como influencias, no como práctica. No se publican números de tests hasta verificarlos.
 - Las entradas con `.reveal` solo se ocultan si hay JavaScript y no hay movimiento reducido (clase `js` en `<html>`).
+- Capturas del laboratorio (`public/media/lab/*.webp`, 960×600): son capturas reales de builds locales de cada demo, con sus datos de muestra. Kinetic usa un cuadro de `kinetic-studio/exports/kinetic.mp4`.
+- Celulares: botón flotante de contacto (`components/FloatingContact.tsx`), que se oculta cuando hay otro botón de contacto en pantalla.

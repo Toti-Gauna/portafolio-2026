@@ -210,34 +210,41 @@
       "kinetic": {
         "name": "Kinetic Studio",
         "status": "Laboratorio",
-        "text": "32 tráileres de motion graphics hechos con código: GSAP, canvas, WebGL y audio sintetizado."
+        "text": "32 tráileres de motion graphics hechos con código: GSAP, canvas, WebGL y audio sintetizado.",
+        "alt": "Cuadro del tráiler KINETIC de Kinetic Studio."
       },
       "volta": {
         "name": "Volta",
         "status": "Demo",
-        "text": "Tienda de suplementos deportivos con panel de administración, gamificación y regalos. No procesa pagos; los datos son de muestra."
+        "text": "Tienda de suplementos deportivos con panel de administración, gamificación y regalos. No procesa pagos; los datos son de muestra.",
+        "alt": "Captura de la demo de Volta: portada de la tienda, con la barra «Demo» y precios de muestra."
       },
       "velmar": {
         "name": "Velmar",
         "status": "Demo · hecha para un cliente",
-        "text": "Tienda con cupones, club y ruleta. Datos de ejemplo."
+        "text": "Tienda con cupones, club y ruleta. Datos de ejemplo.",
+        "alt": "Captura de la demo de Velmar: panel de administración con datos ficticios."
       },
       "dentalos": {
         "name": "DentalOS",
         "status": "Demo",
-        "text": "Circuito administrativo de una clínica odontológica ficticia, con 15 módulos. Solo frontend, datos sintéticos."
+        "text": "Circuito administrativo de una clínica odontológica ficticia, con 15 módulos. Solo frontend, datos sintéticos.",
+        "alt": "Captura de la demo de DentalOS: agenda de recepción de una clínica ficticia."
       },
       "supernova": {
         "name": "Supernova Eventos",
         "status": "Prototipo",
-        "text": "Micro-app de eventos para Telefónica: inscripción, favoritos y administración por pasos. Datos ficticios, sin backend."
+        "text": "Micro-app de eventos para Telefónica: inscripción, favoritos y administración por pasos. Datos ficticios, sin backend.",
+        "alt": "Captura del prototipo Supernova Eventos: administración de experiencias con datos ficticios."
       },
       "games": {
         "name": "games-market",
         "status": "Banco de pruebas",
-        "text": "Banco de pruebas pensado para 24 juegos web, 2D y 3D, con un roadmap ordenado por complejidad."
+        "text": "Banco de pruebas pensado para 24 juegos web, 2D y 3D, con un roadmap ordenado por complejidad.",
+        "alt": "Captura de games-market: catálogo de juegos del banco de pruebas."
       }
-    }
+    },
+    "shot": "Captura real del proyecto"
   },
   "method": {
     "label": "04 · Método",

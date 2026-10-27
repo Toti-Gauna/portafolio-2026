@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/lib/site';
+import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { LAB, type CaseSlug } from '@/lib/cases';
 import { Reveal } from '../Reveal';
 import { MethodIcon } from '../MethodIcon';
@@ -76,6 +76,7 @@ export function Lab() {
       <ul className="lab">
         {LAB.map((it) => (
           <Reveal as="li" key={it.id} className="lab__item">
+            <img className="lab__shot" src={asset(`/media/lab/${it.id}.webp`)} alt={t(`items.${it.id}.alt`)} width={960} height={600} loading="lazy" decoding="async" />
             <p className="status">{t(`items.${it.id}.status`)}</p>
             <h3 className="lab__name">{t(`items.${it.id}.name`)}</h3>
             <p>{t(`items.${it.id}.text`)}</p>

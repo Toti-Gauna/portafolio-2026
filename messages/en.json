@@ -210,34 +210,41 @@
       "kinetic": {
         "name": "Kinetic Studio",
         "status": "Lab",
-        "text": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio."
+        "text": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio.",
+        "alt": "Frame from the KINETIC trailer by Kinetic Studio."
       },
       "volta": {
         "name": "Volta",
         "status": "Demo",
-        "text": "Sports-supplements store with an admin panel, gamification and gifts. It processes no payments; the data is sample data."
+        "text": "Sports-supplements store with an admin panel, gamification and gifts. It processes no payments; the data is sample data.",
+        "alt": "Screenshot of the Volta demo: store front page, with the «Demo» bar and sample prices."
       },
       "velmar": {
         "name": "Velmar",
         "status": "Demo · made for a client",
-        "text": "Store with coupons, a club and a roulette. Sample data."
+        "text": "Store with coupons, a club and a roulette. Sample data.",
+        "alt": "Screenshot of the Velmar demo: admin panel with fictional data."
       },
       "dentalos": {
         "name": "DentalOS",
         "status": "Demo",
-        "text": "Administrative flow of a fictional dental clinic, with 15 modules. Frontend only, synthetic data."
+        "text": "Administrative flow of a fictional dental clinic, with 15 modules. Frontend only, synthetic data.",
+        "alt": "Screenshot of the DentalOS demo: reception schedule of a fictional clinic."
       },
       "supernova": {
         "name": "Supernova Eventos",
         "status": "Prototype",
-        "text": "Events micro-app for Telefónica: sign-up, favourites and step-by-step administration. Fictional data, no backend."
+        "text": "Events micro-app for Telefónica: sign-up, favourites and step-by-step administration. Fictional data, no backend.",
+        "alt": "Screenshot of the Supernova Eventos prototype: experience administration with fictional data."
       },
       "games": {
         "name": "games-market",
         "status": "Test bench",
-        "text": "Test bench designed for 24 web games, 2D and 3D, with a roadmap ordered by complexity."
+        "text": "Test bench designed for 24 web games, 2D and 3D, with a roadmap ordered by complexity.",
+        "alt": "Screenshot of games-market: the test bench game catalogue."
       }
-    }
+    },
+    "shot": "Real screenshot of the project"
   },
   "method": {
     "label": "04 · Method",
