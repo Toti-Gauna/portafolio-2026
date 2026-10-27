@@ -38,6 +38,10 @@
   const IMG = n => `media/shots/handy-${n}.webp`;
   const RUBRO_IC = ['rayo', 'canilla', 'llama', 'llave', 'ladrillos', 'aire'];
   const PICK = 1; // the tile that gets pressed: Plomería
+  // status bar of the phone (signal, wifi, battery), as the landing draws it (.app-senal, .app-wifi, .app-bateria)
+  const STATUS = '<svg viewBox="0 0 78 22" aria-hidden="true"><g fill="currentColor"><rect x="0" y="14" width="4" height="6" rx="1"/><rect x="6" y="10" width="4" height="10" rx="1"/><rect x="12" y="6" width="4" height="14" rx="1"/><rect x="18" y="2" width="4" height="18" rx="1"/>'
+    + '<path d="M38 19.5 33.6 15a6.2 6.2 0 0 1 8.8 0Z"/><path d="M30.8 12.2a10.2 10.2 0 0 1 14.4 0l-1.9 1.9a7.5 7.5 0 0 0-10.6 0Z"/><path d="M28 9.4a14.2 14.2 0 0 1 20 0l-1.9 1.9a11.5 11.5 0 0 0-16.2 0Z"/>'
+    + '<rect x="56" y="5" width="19" height="12" rx="2.5"/><rect x="76" y="9" width="2" height="4" rx="1"/></g><rect x="54" y="3" width="23" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45"/></svg>';
 
   /* ── 1 · handy-landing: «¿Se rompió algo en casa?» + the app's «¿Qué necesitás hoy?» ───────────────────── */
   add('handy-landing', {
@@ -87,7 +91,7 @@
         <i class="hl-mosaicos"></i>
         <img class="hl-handy hl-lamparita" src="${IMG('lamparita')}" alt="" width="202" height="346">
         <div class="hl-tel"><div class="hl-scr">
-          <div class="hl-estado"><span class="tex">${t.time}</span><i class="hl-isla"></i><span class="hl-estado-ic"><i></i><i></i><i></i></span></div>
+          <div class="hl-estado"><span class="tex">${t.time}</span><i class="hl-isla"></i><span class="hl-estado-ic">${STATUS}</span></div>
           <div class="hl-app-h">
             <span class="hl-app-logo"><img src="${IMG('logo')}" alt="" width="720" height="158"><small class="tex">${t.tagline}</small></span>
             <span class="hl-sq">${ic('campana')}<b class="tex">${t.badge}</b></span><span class="hl-sq">${ic('pin')}</span>
@@ -198,7 +202,7 @@
               <span class="ho-tab ho-tab--con">${t.tabs[3]}<b>${roll(2, 3)}</b></span>
               <span class="ho-tab">${t.tabs[4]}<b>3</b></span>
             </div>
-            <ul class="ho-filas">${ROWS.map((r, i) => `<li class="ho-fila${i === 0 ? ' ho-fila--sel' : ''}">
+            <ul class="ho-filas">${ROWS.map((r, i) => `<li class="ho-fila${i === 0 ? ' ho-fila--sel' : ''}">${i === 0 ? '<i class="ho-sel"></i>' : ''}
               <span class="ho-av">${r.ini}</span>
               <span class="ho-fila-p"><strong>${r.name}</strong><span class="ho-meta tex"><span class="ho-ciudad">${ic('pin')}${t.ciudad}</span> · ${t.anoto[i]}</span></span>
               <span class="ho-rubro tex">${ic(r.ic)}${t.rubros[i]}</span>
@@ -212,7 +216,7 @@
             <i class="ho-manija"></i>
             <p class="ho-eyebrow ho-eyebrow--claro tex">${t.sheetEyebrow}</p>
             <h2 class="ho-sub">${t.sheetTitle}</h2>
-            <div class="ho-burbuja"><span class="ho-msg">${t.msgA}</span></div>
+            <div class="ho-burbuja"><span class="ho-msg">${t.msgA}</span><span class="ho-msg-alto" aria-hidden="true">${t.msgA}</span></div>
             <div class="ho-acciones">
               <span class="ho-btn ho-btn--wa">${ic('whatsapp')}${t.abrir}</span>
               <span class="ho-btn ho-btn--ama">${ic('copiar')}${t.copiar}</span>
@@ -231,7 +235,7 @@
       // the list settles in, the selected record lights up
       D.hit($$('.ho-fila'), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out', stagger: 0.05 }, T + 0.06);
       D.hit($('.ho-hoja'), { y: 60 }, { y: 0, duration: 0.6, ease: 'expo.out' }, T + 0.04);
-      D.hit($('.ho-sel-ring') || $('.ho-fila--sel'), { '--sel': 0 }, { '--sel': 1, duration: 0.01 }, T + 0.3);
+      D.hit($('.ho-sel'), { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.3, ease: 'power3.out' }, T + 0.3);
       // the pill flips, the OPS-01 counters tick (con intentos 3→2, contactado 2→3, para contactar 9→8)
       const old = $('.ho-fila--sel .ho-pill'), neu = $('.ho-pill--nueva');
       D.hit(old, { scale: 1, opacity: 1 }, { scale: 0.7, opacity: 0, duration: 0.14, ease: 'power2.in' }, AT);
