@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
-import { LAB, type CaseSlug } from '@/lib/cases';
+import { LAB, WORK_SHOT, type CaseSlug } from '@/lib/cases';
 import { Reveal } from '../Reveal';
 import { MethodIcon } from '../MethodIcon';
 import { AgentIcon, type AgentId } from '../AgentIcon';
@@ -56,6 +56,7 @@ export function Work() {
       <div className="work">
         {(['complia', 'tuenti', 'handyx', 'eclipse'] as const).map((k) => (
           <Reveal as="article" key={k} className="work__card">
+            {WORK_SHOT[k] && <img className="work__shot" src={asset(WORK_SHOT[k])} alt={t(`cards.${k}.shotAlt`)} width={1600} height={1000} loading="lazy" decoding="async" />}
             {tag(t(`cards.${k}.status`))}
             <h3 className="work__name">{t(`cards.${k}.name`)}</h3>
             <p>{t(`cards.${k}.text`)}</p>

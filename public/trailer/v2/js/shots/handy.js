@@ -5,7 +5,7 @@
    · handy-ops: the pre-registrations list of handy-internal-portal in its sample view (?demo=1):
      src/components/frame.ts (header + «Muestra» notice), src/pages/preregistros-list.ts (OPS-01 state tabs and rows),
      src/pages/preregistro-detail.ts (the WhatsApp sheet and «Paso que falta»), src/domain/preregistros.ts (labels and
-     contactMessage), records from src/data/demo-data.ts (PRE-DEMO-E07, E04, E05, E08: fictional people).
+     contactMessage), records from src/data/demo-data.ts (PRE-DEMO-E07, E06, E05, E08: fictional people).
    Brand: «Handyx» (as both products write it). Fonts: Archivo (shared, fonts/) + DM Sans (fonts/handy/, OFL).
    Images (media/shots/handy-*.webp): the Handyx logo and the Handys, from the landing's own src/img (assets/brand). */
 (() => {

@@ -139,7 +139,8 @@
       "handyx": {
         "name": "HandyX",
         "status": "In development · launches November 10",
-        "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project."
+        "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project.",
+        "shotAlt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades."
       },
       "eclipse": {
         "name": "Eclipse",
@@ -459,7 +460,25 @@
             "There are no results or metrics to show yet."
           ]
         }
-      ]
+      ],
+      "gallery": {
+        "handy-landing": {
+          "alt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades.",
+          "caption": "Handyx landing: waiting list and pre-registration. Launches Nov 10 in Mar del Plata. Captured on 10/27/2026."
+        },
+        "handy-especialistas": {
+          "alt": "Handyx page for specialists, on blue: «Tus herramientas. Tu precio.» (Your tools. Your price.), the buttons to join and to see how payment works, and a phone with the «Tu precio» screen, where the specialist builds the quote from the price Handyx suggests.",
+          "caption": "Handyx for specialists: each specialist sets the price; Handyx only suggests one. Captured on 10/27/2026."
+        },
+        "handy-ops-inicio": {
+          "alt": "Home of the Handyx internal portal in sample mode: a notice that every record is fictional, counters (9 to contact, 14 specialists signed up, 11 on the waiting list, 3 committed), the «Para contactar» queue and the Mar del Plata specialists by trade.",
+          "caption": "Handyx internal portal, sample view with fictional records: who to message today."
+        },
+        "handy-ops-registros": {
+          "alt": "Pre-registration list of the Handyx internal portal in sample mode: tabs by contact state (not contacted, with attempts, contacted, committed), filters by trade and city, and fictional specialists sorted by the nearest follow-up.",
+          "caption": "Pre-registrations by contact stage, with fictional records."
+        }
+      }
     },
     "eclipse": {
       "title": "Eclipse",
