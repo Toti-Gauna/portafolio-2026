@@ -70,7 +70,7 @@
     let s = '';
     for (let i = 0; i < 110; i++) {
       const x = hash(i) * 1440, y = 70 + hash(i + 500) * 746, r = 0.5 + hash(i + 900) ** 3 * 1.4, o = 0.18 + hash(i + 1300) * 0.5;
-      if (Math.hypot(x - EX, y - EY) < R * 1.5) continue;
+      if (Math.hypot(x - EX, y - EY) < R * 1.5 || (x > 70 && x < 800 && y > 90 && y < 700)) continue; // clear of the disc and the copy
       s += `<circle cx="${f2(x)}" cy="${f2(y)}" r="${f2(r)}" fill="#F4EFE6" opacity="${f2(o)}"/>`;
     }
     return `<svg class="el-stars" viewBox="0 0 1440 816" aria-hidden="true">${s}</svg>`;
