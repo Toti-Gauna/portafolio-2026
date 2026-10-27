@@ -4,6 +4,7 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl';
 import { Monogram } from './Monogram';
 import { OPEN_TRAILER_EVENT } from './TrailerButton';
+import { primeTrailer } from '@/lib/trailer-prime';
 import './intro.css';
 
 // The trailer (engine + audio + scenes) is a separate chunk: it downloads only when asked for.
@@ -147,7 +148,7 @@ export function Intro() {
                   <path d="M12 34V96C12 106 20 112 36 112" stroke="var(--paper)" strokeOpacity=".6" strokeWidth="2" strokeLinecap="round" pathLength="1" />
                   <circle cx="12" cy="6" r="5" fill="var(--accent)" />
                 </svg>
-                <button ref={trailerBtn} type="button" className="btn btn-primary" onClick={() => setTrailer(true)}>
+                <button ref={trailerBtn} type="button" className="btn btn-primary" onClick={() => { primeTrailer(); setTrailer(true); }}>
                   {t('trailer')}
                 </button>
                 <button ref={portfolioBtn} type="button" className="btn btn-ghost" onClick={close}>

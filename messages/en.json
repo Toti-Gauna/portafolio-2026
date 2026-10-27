@@ -16,85 +16,32 @@
   "trailer": {
     "title": "Meet Ignacio",
     "close": "Skip to the portfolio",
-    "play": "Play",
-    "pause": "Pause",
     "soundOn": "Turn sound on",
     "soundOff": "Mute",
-    "progress": "Trailer progress",
-    "scene": "Scene {n} of {total}",
+    "loading": "Loading the trailer…",
     "textTitle": "Text version",
-    "textLead": "The same eleven moments of the trailer, without animation.",
+    "textLead": "The same moments of the trailer, without animation.",
     "watch": "Watch the animation anyway",
-    "noscript": "The trailer needs JavaScript.",
-    "video": "Clip from the CompliA demo. Sample data.",
-    "scenes": {
-      "s1a": "Mar del Plata.",
-      "s1b": "17 years old.",
-      "typePre": "I wanted to make a ",
-      "typeWord": "games",
-      "typePost": " website.",
-      "s3": "That year, every road opened up.",
-      "tach": {
-        "year": "2021",
-        "name": "TACH Argentina",
-        "text": "Virtual wallet. Web and mobile."
-      },
-      "ada": {
-        "year": "2023",
-        "name": "Ada ITW",
-        "text": "I taught JavaScript and React."
-      },
-      "tuenti": {
-        "year": "Since 2024",
-        "name": "Tuenti",
-        "text": "Roulette. Referrals. Automatic top-up. Payments.",
-        "game": "The game came back.",
-        "p1": "Roulette",
-        "p2": "Referrals",
-        "p3": "Automatic top-up",
-        "p4": "Payments"
-      },
-      "complia": {
-        "year": "2026",
-        "name": "CompliA",
-        "text": "Artificial intelligence in production, for compliance.",
-        "note": "Assistant for Telefónica's compliance portal. In internal production."
-      },
-      "projects": {
-        "title": "And my own branches.",
-        "eclipse": "Eclipse",
-        "eclipseS": "In development",
-        "handyx": "HandyX",
-        "handyxS": "In development · launches Nov 10",
-        "volta": "Volta",
-        "voltaS": "Demo",
-        "velmar": "Velmar",
-        "velmarS": "Demo",
-        "dentalos": "DentalOS",
-        "dentalosS": "Demo",
-        "supernova": "Supernova Eventos",
-        "supernovaS": "Prototype",
-        "games": "games-market",
-        "gamesS": "Test bench",
-        "kinetic": "Kinetic Studio",
-        "kineticS": "32 trailers in code"
-      },
-      "system": {
-        "title": "An agentic system.",
-        "text": "11 agents. Gates with human sign-off.",
-        "g1": "Discover",
-        "g2": "Plan",
-        "g3": "Build",
-        "g4": "Test",
-        "g5": "Review",
-        "g6": "Deliver",
-        "note": "Nothing ships without human approval."
-      },
-      "role": "Ssr AI Fullstack Developer",
-      "open": "Open to new opportunities.",
-      "mail": "ignaciogauna.developer@gmail.com"
-    },
-    "videoShort": "Sample data"
+    "textVersion": "Text version",
+    "rotateTitle": "Turn your phone",
+    "rotateText": "The trailer is made to be watched in landscape.",
+    "watchAnyway": "Watch anyway",
+    "frame": "Ignacio Gauna's trailer, made with Kinetic Studio",
+    "transcript": [
+      "Mar del Plata. 17 years old. I wanted to build a games website.",
+      "That year, every road opened up. I'm self-taught: I read a lot and study online.",
+      "2021 – 2022 · TACH Argentina · Software Developer. Remote development: a virtual wallet, on web and mobile.",
+      "2023 – 2024 · Ada ITW · Professor. I taught JavaScript and React.",
+      "Since 2024 · Tsoft, for Tuenti and Telefónica: the Tuenti roulette and the referral system (the game came back), automatic top-up and payments. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL.",
+      "January 2026: Special Recognition from Tsoft. 2026: Dev Ssr → Ssr AI Fullstack Developer.",
+      "CompliA: a RAG assistant for Telefónica's compliance portal. I designed and built it. In internal production. (Demo clip, with sample data.)",
+      "And my own branches: Eclipse (in development), HandyX (in development · launches Nov 10), Volta (demo), Velmar (demo made for a client), DentalOS (demo), Supernova Eventos (prototype), games-market (test bench), Kinetic Studio (32 trailers in code).",
+      "An agentic system, split into parts: 11 agents with separate roles. Not a prompt: a system with roles.",
+      "Specification first, code second. Every claim carries its level of evidence. Gates with human approval. Tested, not eyeballed.",
+      "Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779, internal portal 132 and 14 browser journeys. Nothing ships without human approval.",
+      "Ignacio Gauna. Ssr AI Fullstack Developer. I build AI software that ships.",
+      "Open to new opportunities. I'm looking for a Ssr or Sr fullstack role with AI. ignaciogauna.developer@gmail.com"
+    ]
   },
   "header": {
     "home": "Ignacio Gauna, home",
@@ -560,7 +507,7 @@
         },
         {
           "h": "Where to see it",
-          "p": "The «Meet Ignacio» trailer on this site uses the same ideas, with a new, smaller engine."
+          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 21 scenes in 90 seconds, with synthesised music."
         },
         {
           "h": "Known debt",

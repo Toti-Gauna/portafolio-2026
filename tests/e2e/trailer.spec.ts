@@ -10,79 +10,92 @@ async function openTrailer(page: Page, url = '/es/', names = { skip: 'Saltar', t
   await page.getByRole('button', { name: names.trailer }).click();
 }
 
-test('trailer opens, plays, pauses, seeks, toggles sound and has no console errors', async ({ page }) => {
+const film = (page: Page) => page.locator('iframe.tplayer__frame');
+async function ready(page: Page) {
+  await expect(film(page)).toHaveCount(1);
+  await expect(page.frameLocator('iframe.tplayer__frame').locator('html')).toHaveAttribute('data-trailer', 'ready', { timeout: 15000 });
+  await expect(page.locator('.tplayer__loading')).toHaveCount(0);
+}
+
+test('the trailer plays fullscreen with no player bar; sound and skip work; no console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await page.setViewportSize({ width: 1280, height: 720 });
   await openTrailer(page);
   const dialog = page.getByRole('dialog', { name: 'Conocer a Ignacio' });
   await expect(dialog).toBeVisible();
-  const pauseBtn = page.getByRole('button', { name: 'Pausar' });
-  await expect(pauseBtn).toBeVisible({ timeout: 8000 }); // it autoplays once built
-  await pauseBtn.click();
-  await expect(page.getByRole('button', { name: 'Reproducir' })).toBeVisible();
+  await expect(film(page)).toHaveAttribute('src', /\/trailer\/v2\/index\.html\?host&lang=es$/);
+  await ready(page);
 
-  const range = page.getByRole('slider', { name: 'Progreso del tráiler' });
-  await range.fill('50');
-  await expect(range).toHaveAttribute('aria-valuetext', /0:50 \/ 2:00/);
-  await expect(page.locator('[data-k="card-tuenti"]')).toBeVisible();
-  await range.fill('110');
-  await expect(page.locator('[data-k="role"]')).toBeVisible();
+  // the film covers the whole screen; there is no progress bar, in the page or in the film
+  const box = await film(page).boundingBox();
+  expect(box).toEqual({ x: 0, y: 0, width: 1280, height: 720 });
+  await expect(dialog.getByRole('slider')).toHaveCount(0);
+  const frame = page.frameLocator('iframe.tplayer__frame');
+  await expect(frame.locator('#ui')).toBeHidden();
+  await expect(frame.locator('html')).toHaveAttribute('data-duration', '90.00');
 
-  const sound = page.getByRole('button', { name: 'Activar sonido' });
-  await expect(sound).toHaveAttribute('aria-pressed', 'false'); // sound starts off
-  await sound.click();
-  await expect(page.getByRole('button', { name: 'Silenciar' })).toHaveAttribute('aria-pressed', 'true');
+  // the controls step aside while the film plays, and come back when the pointer moves over it
+  const player = page.locator('.tplayer');
+  await expect(player).toHaveAttribute('data-ui', 'false', { timeout: 5000 });
+  const controls = page.locator('.tplayer__ctl');
+  await expect(controls).toHaveCSS('opacity', '0');
+  await page.keyboard.press('Tab'); // the keyboard brings them back, with the focus ring on the first one
+  await expect(page.getByRole('button', { name: 'Silenciar' })).toBeFocused();
+  await expect(controls).toHaveCSS('opacity', '1');
+  await page.locator('.tplayer').focus();
+  await expect(player).toHaveAttribute('data-ui', 'false', { timeout: 5000 });
+  await page.mouse.move(640, 600);
+  await page.mouse.move(660, 610);
+  await expect(player).toHaveAttribute('data-ui', 'true');
 
-  await page.locator('.stage').click({ position: { x: 5, y: 5 } }); // focus leaves the buttons
-  await page.keyboard.press('Space');
-  await expect(page.getByRole('button', { name: 'Pausar' })).toBeVisible();
+  await page.getByRole('button', { name: 'Silenciar' }).click();
+  await expect(page.getByRole('button', { name: 'Activar sonido' })).toBeVisible();
+
   await page.getByRole('button', { name: 'Saltar al portafolio' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Ignacio');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
-test('the trailer ends by itself and lands on the portfolio', async ({ page }) => {
-  await openTrailer(page, '/es/?t=118.5');
-  await page.getByRole('button', { name: 'Reproducir' }).click();
-  await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 8000 });
+test('when the film ends it hands off to the portfolio', async ({ page }) => {
+  await openTrailer(page, '/es/?t=88.6'); // ?t= opens the film paused on that frame
+  await ready(page);
+  await page.evaluate(() => document.querySelector('iframe')!.contentWindow!.postMessage({ type: 'trailer:play' }, location.origin));
+  await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 8000 });
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+});
+
+test('English film, and Escape leaves it', async ({ page }) => {
+  await openTrailer(page, '/en/', { skip: 'Skip', trailer: 'Meet Ignacio' });
+  await expect(film(page)).toHaveAttribute('src', /lang=en$/);
+  await ready(page);
+  await expect(page.frameLocator('iframe.tplayer__frame').locator('html')).toHaveAttribute('lang', 'en');
+  await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
-test('English trailer and portrait layout', async ({ page }) => {
+test('portrait phones get a «rotate» gate that lets go once the phone is horizontal', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await openTrailer(page, '/en/?t=110', { skip: 'Skip', trailer: 'Meet Ignacio' });
-  await expect(page.locator('.stage')).toHaveAttribute('data-o', 'portrait');
-  await expect(page.locator('[data-k="role"]')).toContainText('Ssr AI Fullstack Developer');
+  await openTrailer(page);
+  await expect(page.getByRole('heading', { name: 'Girá el teléfono' })).toBeVisible();
+  await expect(film(page)).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  await page.setViewportSize({ width: 844, height: 390 });
+  await expect(film(page)).toHaveCount(1);
 });
 
-test('reduced motion: text version instead of the animation, with a way to watch it anyway', async ({ browser }) => {
+test('reduced motion: text version instead of the film, with a way to watch it anyway', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   await openTrailer(page, 'http://127.0.0.1:4173/es/');
   await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeVisible();
-  await expect(page.locator('.trailer__list li')).toHaveCount(11);
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await expect(page.locator('.tplayer__list li')).toHaveCount(13);
+  await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeFocused(); // reading starts at the top
+  await expect(page.locator('.tplayer__list li').first()).toBeInViewport();
+  await expect(film(page)).toHaveCount(0);
   await page.getByRole('button', { name: 'Ver la animación igual' }).click();
-  await expect(page.locator('canvas')).toHaveCount(1);
+  await expect(film(page)).toHaveCount(1);
   await ctx.close();
-});
-
-test('focus lands on play when ready; sound survives a rotation; small screens keep text readable', async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  await openTrailer(page, '/es/?t=96');
-  await expect(page.getByRole('button', { name: 'Reproducir' })).toBeFocused();
-  await page.getByRole('button', { name: 'Activar sonido' }).click();
-  await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.locator('.stage')).toHaveAttribute('data-o', 'portrait');
-  await expect(page.getByRole('button', { name: 'Silenciar' })).toHaveAttribute('aria-pressed', 'true');
-  // rotation keeps the frame (no jump back to ?t)
-  await expect(page.getByRole('slider', { name: 'Progreso del tráiler' })).toHaveValue('96');
-  const tiny = await page.evaluate(() => Array.from(document.querySelectorAll('.stage .tx, .stage .tx *')).filter((e) => {
-    const cs = getComputedStyle(e);
-    return cs.visibility !== 'hidden' && cs.display !== 'none' && Number(cs.opacity) > 0.5 && e.getBoundingClientRect().height > 0 && parseFloat(cs.fontSize) < 12;
-  }).length);
-  expect(tiny).toBe(0);
 });

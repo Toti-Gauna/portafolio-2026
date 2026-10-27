@@ -1,0 +1,134 @@
+/* ============================================================================
+   CONOCER A IGNACIO — styles for js/ig-kit.js + legibility overrides for the kit recipes it uses.
+   Load AFTER css/style.css (the bifurcacion copy: it carries every module's styles).
+   Legibility rule (portfolio: nothing under 12 px on screen): text that carries meaning is ≥ 34 px on the
+   1920×1080 stage, so it stays ≥ 12 px down to a 390 px-tall landscape phone (scale 0.36). Decorative mono
+   readouts (HUD, FIG. captions) are hidden below 1100 px of viewport instead of shrunk.
+   ========================================================================== */
+
+/* ---------- host mode (inside the portfolio): no intro, no end screen, no player bar ---------- */
+.is-host #intro, .is-host #end, .is-host #ui { display: none !important; }
+.is-host body, .is-host #viewport { background: #0e0e10; }
+.is-host body.idle { cursor: default; }
+
+/* ---------- act backgrounds (#ig-acts sits between #wipe and #camera) ---------- */
+#ig-acts { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.igb { position: absolute; inset: 0; visibility: hidden; }
+.igb-dots { position: absolute; left: -240px; top: -240px; width: 2400px; height: 1560px;
+  background: radial-gradient(circle, currentColor 1.9px, transparent 2.7px) 0 0 / 32px 32px; }
+.igb-ring { position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%; border: 2px solid currentColor; }
+.igb-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.igb-svg line, .igb-svg circle, .igb-svg path { fill: none; stroke: currentColor; stroke-width: 2; }
+.igb-svg .n { fill: currentColor; stroke: none; }
+.igb-lines { position: absolute; left: 0; right: 0; top: 0; height: 1560px; background: repeating-linear-gradient(0deg, currentColor 0 2px, transparent 2px 12px); opacity: .55; }
+.igb-band { position: absolute; left: 0; right: 0; top: 0; height: 300px; background: linear-gradient(180deg, transparent, currentColor 50%, transparent); opacity: .6; }
+.igb-sun { position: absolute; left: 50%; top: 42%; width: 1700px; height: 1700px; margin: -850px 0 0 -850px; border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0%, color-mix(in srgb, currentColor 45%, transparent) 24%, transparent 62%); }
+
+/* ---------- captions (#ig-caps sits right over #camera, under the letterbox and the HUD) ---------- */
+#ig-caps { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.igc { position: absolute; max-width: 1120px; padding: 26px 42px 30px 54px; visibility: hidden; }
+.igc-dark { background: rgba(10, 10, 12, .88); color: #eeeae3; }
+.igc-light { background: rgba(238, 234, 227, .95); color: #0e0e10; }
+.igc-bl { left: 96px; bottom: 150px; } .igc-br { right: 96px; bottom: 150px; }
+.igc-tl { left: 96px; top: 140px; } .igc-tr { right: 96px; top: 150px; }
+.igc-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: var(--acc); }
+.igc-k { font-size: 34px; letter-spacing: .12em; line-height: 1.25; opacity: .8; margin-bottom: 10px; white-space: normal; }
+.igc-t { font-family: var(--display); font-size: 58px; line-height: 1.05; font-variation-settings: "wdth" 100, "wght" 800; letter-spacing: -.01em; white-space: normal; }
+.igc-d { font-family: var(--display); font-size: 40px; line-height: 1.22; font-variation-settings: "wdth" 100, "wght" 500; margin-top: 12px; opacity: .92; white-space: normal; }
+
+/* ---------- igwheel ---------- */
+.igw { position: absolute; inset: 0; color: var(--fg); }
+.igw-box { position: absolute; left: 150px; top: 130px; width: 680px; height: 680px; }
+.igw-wheel { width: 100%; height: 100%; overflow: visible; display: block; }
+.igw-seg { stroke: var(--bg); stroke-width: 3; }
+.igw-rim { fill: none; stroke: var(--fg); stroke-width: 10; }
+.igw-peg { fill: var(--bg); stroke: var(--fg); stroke-width: 3; }
+.igw-hub { fill: var(--fg); stroke: var(--bg); stroke-width: 6; }
+.igw-ptr { fill: #ff4d2e; stroke: var(--fg); stroke-width: 4; stroke-linejoin: round; }
+.igw-copy { position: absolute; left: 960px; top: 250px; width: 860px; }
+.igw-k { font-size: 34px; letter-spacing: .2em; opacity: .8; min-height: 1.2em; }
+.igw-t { display: inline-block; margin-top: 18px; font-size: 128px; --wd: 100; --wg: 900; letter-spacing: -.02em; line-height: 1; }
+.igw-pills { display: flex; gap: 18px; margin-top: 40px; }
+.igw-pills span { padding: 14px 30px; border: 3px solid currentColor; border-radius: 999px; font: 700 40px/1 var(--display); }
+
+/* ---------- igclip ---------- */
+.igv { position: absolute; inset: 0; perspective: 1800px; }
+.igv-win { position: absolute; left: 70px; top: 200px; width: 1020px; margin: 0; border-radius: 16px; overflow: hidden; background: #0b0f1d;
+  border: 1px solid rgba(127, 212, 255, .35); box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 90px rgba(43, 80, 255, .25); }
+.igv-bar { position: relative; height: 46px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #11182b; border-bottom: 1px solid rgba(127, 212, 255, .2); }
+.igv-bar i { width: 13px; height: 13px; border-radius: 50%; background: #ff5f57; }
+.igv-bar i:nth-child(2) { background: #febc2e; } .igv-bar i:nth-child(3) { background: #28c840; }
+.igv-bar span { position: absolute; left: 0; right: 0; text-align: center; font: 600 22px var(--display); color: #c9d6f0; }
+.igv-media { position: relative; width: 1020px; height: 574px; background: #000; }
+.igv-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.igv-tag { position: absolute; right: 18px; top: 62px; padding: 10px 18px; border-radius: 10px; background: #ffc21a; color: #0e0e10; font-size: 26px; letter-spacing: .14em; font-weight: 500; }
+
+/* ---------- igprojects ---------- */
+.igp, .igp-cam { position: absolute; inset: 0; }
+.igp-g { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.igp-main { fill: none; stroke: rgba(238, 234, 227, .55); stroke-width: 5; stroke-linecap: round; }
+.igp-br { fill: none; stroke-width: 5; stroke-linecap: round; }
+.igp-tag { position: absolute; width: 780px; height: 96px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 0 28px 0 30px; border-left: 10px solid var(--c); background: color-mix(in srgb, var(--c) 15%, #0e0e10); color: #eeeae3; }
+.igp-tag b { font: 800 50px/1 var(--display); white-space: nowrap; letter-spacing: -.01em; }
+.igp-tag span { font: 500 36px/1 var(--display); font-variation-settings: "wdth" 80, "wght" 500; white-space: nowrap; color: color-mix(in srgb, var(--c) 45%, #eeeae3); }
+
+/* ---------- igagents ---------- */
+.iga { position: absolute; inset: 0; color: var(--ink); }
+.iga-tile { position: absolute; width: 260px; height: 240px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.iga-g { width: 128px; height: 128px; overflow: visible; fill: none; stroke: var(--ink); stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+.iga-g .acc-s { stroke: var(--acc); }
+.iga-g .acc-f { fill: var(--acc); stroke: none; }
+.iga-n { font: 800 36px/1.08 var(--display); text-align: center; letter-spacing: -.01em; }
+
+/* ---------- igend ---------- */
+.ige { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; padding-top: 128px; text-align: center; }
+.ige-mono { width: 132px; height: 132px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.ige-dot { fill: var(--acc); stroke: none; }
+.ige-name { margin-top: 34px; font-size: 168px; --wd: 112; --wg: 900; letter-spacing: -.02em; line-height: .95; }
+.ige-role { margin-top: 26px; font-size: 38px; letter-spacing: .26em; padding-left: .26em; min-height: 1.2em; }
+.ige-rule { display: block; width: 760px; height: 3px; margin-top: 34px; background: var(--acc); }
+.ige-open { display: flex; align-items: center; gap: 22px; margin-top: 34px; font: 700 58px/1.1 var(--display); }
+.ige-live { display: block; width: 22px; height: 22px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 24px rgba(63, 185, 80, .7); }
+.ige-lead { margin-top: 18px; font: 500 38px/1.3 var(--display); }
+.ige-mail { margin-top: 34px; font-size: 44px; letter-spacing: .02em; text-transform: none; white-space: nowrap; text-align: left; color: var(--acc); }
+.ige-caret { display: inline-block; width: 4px; height: 44px; margin-left: 6px; vertical-align: -6px; background: currentColor; }
+
+/* ---------- legibility overrides for kit recipes used in the film ---------- */
+#hud { font-size: 20px; }
+.o-line { font-size: 46px; }                                   /* origin: MAR DEL PLATA / 17 AÑOS */
+.sh-count, .sh-meta { font-size: 26px; }                       /* shift FIG. readouts */
+.sk-cap, .ru-head { font-size: 26px; }
+.sp-lab { font-size: 38px; letter-spacing: .18em; }            /* statpunch */
+.sp-note { font-size: 34px; letter-spacing: .1em; bottom: 140px; opacity: .85; }
+.t-sub { font-size: 40px; letter-spacing: .34em; }             /* title subtitle = the role */
+.br-k { font-size: 30px; }                                     /* brline */
+.br-cl { font-size: 34px; color: #eeeae3; }
+.br-line .br-t2 em { color: #ff4d2e; }
+.ig-pipe .dx-st { height: 84px; }                              /* pipeline: six gates fit */
+.ig-pipe .dx-st b { font-size: 30px; line-height: 34px; }
+.ig-pipe .dx-st em { font-size: 22px; }
+.ig-pipe .dx-pt { font-size: 40px; }
+.ig-pipe .dx-ps, .ig-pipe .dx-pill { font-size: 24px; }
+.ig-pipe .dx-pill { height: 48px; padding: 0 22px; border-radius: 24px; min-width: 290px; justify-content: center; } /* fits «✓ Todo en verde» / «✓ All green» */
+.ig-pipe .dx-jobs { top: 190px; }
+.ig-pipe .dx-jh, .ig-pipe .dx-job { grid-template-columns: 330px 1fr 190px 80px; }
+.ig-pipe .dx-jh { height: 46px; font-size: 20px; }
+.ig-pipe .dx-job b { font-size: 30px; }
+.ig-pipe .dx-jv, .ig-pipe .dx-js { font-size: 30px; }
+.ig-pipe .dx-pf { font-size: 24px; }
+.ig-pipe .dx-bar-t { font-size: 20px; }
+@media (max-width: 1100px) { #hud, .sh-count, .sh-meta, .sk-cap, .ru-head { visibility: hidden !important; } }
+/* Phones in landscape (stage scale ≈ 0.35–0.5): nothing under 12 px on screen. 36 stage px ≈ 12.5 px at 667×375.
+   Secondary labels that repeat what the caption says step aside; the data grows. */
+@media (max-width: 959px), (max-height: 539px) {
+  .ig-pipe .dx-bar-t, .ig-pipe .dx-ps, .ig-pipe .dx-jh, .ig-pipe .dx-st em { visibility: hidden; }
+  .ig-pipe .dx-st b, .ig-pipe .dx-job b, .ig-pipe .dx-jv, .ig-pipe .dx-js { font-size: 36px; line-height: 40px; }
+  .ig-pipe .dx-job { height: 72px; }
+  .ig-pipe .dx-st { height: 78px; }
+  .ig-pipe .dx-jh, .ig-pipe .dx-job { grid-template-columns: 420px 1fr 230px 50px; }
+  .ig-pipe .dx-pill, .ig-pipe .dx-pf { font-size: 36px; }
+  .ig-pipe .dx-pill { height: 60px; padding: 0 26px; border-radius: 30px; min-width: 410px; }
+  .igv-bar span, .igv-tag, .br-k, .br-cl, .igc-k, .igw-k, .sp-note { font-size: 36px; }
+}

@@ -11,20 +11,24 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - **Sin copy en componentes:** todo texto sale de `messages/{es,en}.json` (mismas claves; lo verifica `tests/unit/messages.test.ts`).
 - **Mobile-first:** sin scroll horizontal a 360 px, gutter de 16 px, objetivos táctiles ≥ 44 px.
 - **Accesibilidad:** HTML semántico, teclado completo, foco visible, contraste AA, `prefers-reduced-motion` respetado en toda animación.
-- **Motion:** solo `transform`, `opacity`, `stroke-dashoffset`, `clip-path`. Nada en bucle fuera de pantalla. Sonido apagado por defecto. Excepción aprobada: el eje de ancho de Archivo (`--wdth`) en unos pocos titulares del tráiler.
+- **Motion:** solo `transform`, `opacity`, `stroke-dashoffset`, `clip-path`. Nada en bucle fuera de pantalla. Sonido apagado por defecto en el sitio; el tráiler arranca con música porque el visitante lo pidió con un clic (se silencia con un botón). Excepción aprobada: el tráiler v2 usa el kit de Kinetic tal cual (ejes de Archivo, colores de fondo, filtros del kit).
 - **Texto legible:** nada por debajo de 12 px en ninguna pantalla (en el tráiler: `max(12px, …)` y container queries para escenarios chicos).
 - Grafía del producto: **CompliA**.
 - **Dependencias:** no se agregan sin aprobación explícita.
 - Pantalla de carga en cada recarga, con puerta «Conocer a Ignacio» / «Ver portafolio» (`components/Intro.tsx`). El contenido queda en el HTML, inerte mientras la pantalla está abierta.
+- Sistema agéntico: se presenta como «un sistema agéntico, dividido en partes» con 11 agentes, cada uno con su ícono (`components/AgentIcon.tsx`). Nunca se menciona «vibe coding».
 - SVG propios en `design/svg/` (se incrustan en línea; como `<img>` no reciben las variables CSS).
 - `next dev` reescribe `tsconfig.json`: ignorar esos cambios.
 
-## Tráiler «Conocer a Ignacio» (120 s)
-- `components/TrailerOverlay.tsx` (chunk lazy, `<dialog>` nativo) + `components/trailer/`: una sola timeline GSAP pausada (`scenes.ts`) maneja el texto DOM y el estado del canvas (`state.ts`, `draw.ts`); cualquier segundo se puede buscar y dibuja ese cuadro. Tiempos en `timing.ts`; partitura como datos en `score.ts`; síntesis WebAudio en `audio.ts` (apagado por defecto).
-- Formato: 16:9 en horizontal y 9:16 en pantallas verticales (`data-o`). `?t=<segundos>` abre el tráiler pausado en ese cuadro (para QA y capturas).
-- Movimiento reducido: no se reproduce; se muestra la versión en texto (con botón para verlo igual).
+## Tráiler «Conocer a Ignacio» (v2: 90 s, kit de Kinetic Studio)
+- Es una página estática del kit de Kinetic Studio en `public/trailer/v2/` (módulos ES sin bundler): `engine.js` y `recipes*.js` copiados de kinetic-studio, `audio.js` y `recipes-music.js` con parche IG, `ig-kit.js` (actos, cortes, recetas propias y el modo `?host`), `partitura.js` (120 BPM) y un guion por idioma: `trailer.es.js` / `trailer.en.js` (21 escenas, mismos tiempos; lo verifica `tests/unit/trailer-config.test.ts`). GSAP y sus plugins se copian de `node_modules` a `public/trailer/vendor/` en `predev`/`prebuild` (`scripts/copy-trailer-vendor.mjs`, ignorado en git). Fuentes autoalojadas en `public/trailer/fonts/`.
+- **Excepción a «sin copy en componentes»:** los textos del tráiler viven en esos dos guiones (son datos del kit, no componentes). Cada dato tiene que estar respaldado como el resto del sitio. La versión en texto (13 líneas) y los botones del reproductor sí están en `messages/*.json` (`trailer.*`).
+- Reproductor: `components/TrailerOverlay.tsx` (chunk lazy) abre un `<dialog>` a pantalla completa con el iframe `trailer/v2/index.html?host&lang=…`. Sin barra de reproducción: solo «Silenciar», «Versión en texto» y «Saltar al portafolio», que se esconden a los 2,5 s y vuelven con el puntero o el teclado. Al terminar (`trailer:end`) se funde y entra al portafolio.
+- Sonido y pantalla completa: `primeTrailer()` (`lib/trailer-prime.ts`) corre DENTRO del clic que abre el tráiler: crea el `AudioContext` (`window.__igTrailerAudio`, que el iframe toma prestado) y pide pantalla completa. Al cerrar se cierra el contexto (`releaseTrailer()`), si no, los pads siguen sonando.
+- Mensajes iframe ↔ página (mismo origen): → `trailer:ready` · `trailer:end` · `trailer:close` (Esc); ← `trailer:mute {muted}` · `trailer:pause` · `trailer:play` · `trailer:toggle`. En modo host no hay atajos de una letra (WCAG 2.1.4).
+- Celular vertical (< 700 px): pantalla «Girá el teléfono» con «Ver igual» y «Versión en texto»; al girar, arranca solo. Movimiento reducido: versión en texto, con botón para verlo igual.
+- QA: `?t=<segundos>` en la URL de la página abre el tráiler pausado en ese cuadro. La página del tráiler también se abre sola: `/trailer/v2/index.html?lang=es&t=30`.
 - El recorte de CompliA (`public/media/complia-demo.mp4`) es de una demo con datos de ejemplo y sin marcas; va rotulado en pantalla.
-- Cada texto sale de `messages/*.json` (`trailer.scenes.*`). Cualquier dato nuevo del tráiler tiene que estar respaldado como el resto del sitio.
 
 ## Contenido del sitio (fase 9)
 - Secciones de la home en `components/sections/Sections.tsx` (`#recorrido`, `#trabajo`, `#laboratorio`, `#metodo`, `#sistema`, `#capacidades`, `#sobre-mi`, `#contacto`); páginas de caso en `app/[locale]/proyectos/[slug]` (complia, tuenti, handyx, eclipse, kinetic). Todo el texto vive en `messages/{es,en}.json`; los enlaces y los slugs en `lib/cases.ts`.
