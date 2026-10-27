@@ -24,7 +24,3 @@
   .boot, .boot[data-phase='closing'] { transition: none; }
   .boot__fill { animation: none; stroke-dashoffset: 0; }
 }
-.trailer { border: 0; padding: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; background: var(--ink); color: var(--paper); }
-.trailer::backdrop { background: var(--ink); }
-.trailer__body { display: grid; align-content: center; justify-items: start; gap: 16px; min-height: 100%; padding: 24px 16px; max-width: 640px; margin: 0 auto; }
-.trailer__title { font-size: clamp(32px, 7vw, 56px); font-variation-settings: 'wdth' 125; font-weight: 800; }

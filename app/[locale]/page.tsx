@@ -2,7 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { use } from 'react';
 import { TrailerButton } from '@/components/TrailerButton';
-import { CONTACT_EMAIL } from '@/lib/site';
+import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
 
 export default function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
@@ -28,6 +28,7 @@ export default function Home({ params }: { params: Promise<{ locale: string }> }
           </ul>
           <div className="hero__cta">
             <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t('write')}</a>
+            <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> ({t('newTab')})</span></a>
             <TrailerButton className="btn btn-ghost">{t('watch')}</TrailerButton>
           </div>
         </div>

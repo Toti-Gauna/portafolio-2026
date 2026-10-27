@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing, localeTags, type Locale } from '@/i18n/routing';
 import { fontMono, fontSans } from '../fonts';
-import { SITE_URL, CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
+import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, absoluteUrl } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Intro } from '@/components/Intro';
 
@@ -62,6 +62,7 @@ export default async function LocaleLayout({
     jobTitle: 'Ssr AI Fullstack Developer',
     url: absoluteUrl(`/${locale}/`),
     email: CONTACT_EMAIL,
+    sameAs: [LINKEDIN_URL, GITHUB_URL],
     description: t('description'),
   };
 

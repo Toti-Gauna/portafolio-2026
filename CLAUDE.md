@@ -16,3 +16,10 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - Pantalla de carga en cada recarga, con puerta «Conocer a Ignacio» / «Ver portafolio» (`components/Intro.tsx`). El contenido queda en el HTML, inerte mientras la pantalla está abierta.
 - SVG propios en `design/svg/` (se incrustan en línea; como `<img>` no reciben las variables CSS).
 - `next dev` reescribe `tsconfig.json`: ignorar esos cambios.
+
+## Tráiler «Conocer a Ignacio» (120 s)
+- `components/TrailerOverlay.tsx` (chunk lazy, `<dialog>` nativo) + `components/trailer/`: una sola timeline GSAP pausada (`scenes.ts`) maneja el texto DOM y el estado del canvas (`state.ts`, `draw.ts`); cualquier segundo se puede buscar y dibuja ese cuadro. Tiempos en `timing.ts`; partitura como datos en `score.ts`; síntesis WebAudio en `audio.ts` (apagado por defecto).
+- Formato: 16:9 en horizontal y 9:16 en pantallas verticales (`data-o`). `?t=<segundos>` abre el tráiler pausado en ese cuadro (para QA y capturas).
+- Movimiento reducido: no se reproduce; se muestra la versión en texto (con botón para verlo igual).
+- El recorte de ComplIA (`public/media/complia-demo.mp4`) es de una demo con datos de ejemplo y sin marcas; va rotulado en pantalla.
+- Cada texto sale de `messages/*.json` (`trailer.scenes.*`). Cualquier dato nuevo del tráiler tiene que estar respaldado como el resto del sitio.

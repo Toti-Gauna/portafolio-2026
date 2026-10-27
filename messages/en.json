@@ -14,13 +14,91 @@
   },
   "trailer": {
     "title": "Meet Ignacio",
-    "soon": "The trailer is in production. It will run up to 120 seconds and can be paused or skipped at any time.",
-    "close": "Close"
+    "close": "Skip to the portfolio",
+    "play": "Play",
+    "pause": "Pause",
+    "soundOn": "Turn sound on",
+    "soundOff": "Mute",
+    "progress": "Trailer progress",
+    "scene": "Scene {n} of {total}",
+    "textTitle": "Text version",
+    "textLead": "The same eleven moments of the trailer, without animation.",
+    "watch": "Watch the animation anyway",
+    "noscript": "The trailer needs JavaScript.",
+    "video": "Clip from the ComplIA demo. Sample data.",
+    "scenes": {
+      "s1a": "Mar del Plata.",
+      "s1b": "17 years old.",
+      "typePre": "I wanted to make a ",
+      "typeWord": "games",
+      "typePost": " website.",
+      "s3": "That year, every road opened up.",
+      "tach": {
+        "year": "2021",
+        "name": "TACH Argentina",
+        "text": "Virtual wallet. Web and mobile."
+      },
+      "ada": {
+        "year": "2023",
+        "name": "Ada ITW",
+        "text": "I taught JavaScript and React."
+      },
+      "tuenti": {
+        "year": "2024",
+        "name": "Tuenti",
+        "text": "Roulette. Referrals. Automatic top-up. Payments.",
+        "game": "The game came back.",
+        "p1": "Roulette",
+        "p2": "Referrals",
+        "p3": "Automatic top-up",
+        "p4": "Payments"
+      },
+      "complia": {
+        "year": "2026",
+        "name": "ComplIA",
+        "text": "Artificial intelligence in production, for compliance.",
+        "note": "Assistant for Telefónica's compliance portal. In internal production."
+      },
+      "projects": {
+        "title": "And my own branches.",
+        "eclipse": "Eclipse",
+        "eclipseS": "In development",
+        "handyx": "HandyX",
+        "handyxS": "In development · launches Nov 10",
+        "volta": "Volta",
+        "voltaS": "Demo",
+        "velmar": "Velmar",
+        "velmarS": "Demo",
+        "dentalos": "DentalOS",
+        "dentalosS": "Demo",
+        "supernova": "Supernova Eventos",
+        "supernovaS": "Prototype",
+        "games": "games-market",
+        "gamesS": "Test bench",
+        "kinetic": "Kinetic Studio",
+        "kineticS": "32 trailers in code"
+      },
+      "system": {
+        "title": "This is not vibe coding.",
+        "text": "11 agents. Gates with human sign-off.",
+        "g1": "Discover",
+        "g2": "Plan",
+        "g3": "Build",
+        "g4": "Test",
+        "g5": "Review",
+        "g6": "Deliver",
+        "note": "Nothing ships without human approval."
+      },
+      "role": "Ssr AI Fullstack Developer",
+      "open": "Open to new opportunities.",
+      "mail": "ignaciogauna.developer@gmail.com"
+    }
   },
   "header": {
     "home": "Ignacio Gauna, home",
     "language": "Language",
     "contact": "Contact",
+    "newTab": "opens in a new tab",
     "nav": "Main"
   },
   "hero": {
@@ -34,6 +112,7 @@
       "system": "11 agents · tests · CI"
     },
     "write": "Write to me",
+    "newTab": "opens in a new tab",
     "watch": "Watch the trailer"
   },
   "skipLink": "Skip to content"

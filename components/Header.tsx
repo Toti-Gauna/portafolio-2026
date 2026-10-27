@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
-import { CONTACT_EMAIL } from '@/lib/site';
+import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
 import { Monogram } from './Monogram';
 import { LocaleSwitch } from './LocaleSwitch';
 
@@ -17,6 +17,7 @@ export function Header({ locale }: { locale: Locale }) {
         </Link>
         <nav aria-label={t('nav')} className="site-header__nav">
           <LocaleSwitch current={locale} locales={routing.locales} label={t('language')} />
+          <a className="btn btn-ghost site-header__li" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> ({t('newTab')})</span></a>
           <a className="btn btn-ghost" href={`mailto:${CONTACT_EMAIL}`}>{t('contact')}</a>
         </nav>
       </div>
