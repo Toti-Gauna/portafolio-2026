@@ -16,85 +16,32 @@
   "trailer": {
     "title": "Conocer a Ignacio",
     "close": "Saltar al portafolio",
-    "play": "Reproducir",
-    "pause": "Pausar",
     "soundOn": "Activar sonido",
     "soundOff": "Silenciar",
-    "progress": "Progreso del tráiler",
-    "scene": "Escena {n} de {total}",
+    "loading": "Cargando el tráiler…",
     "textTitle": "Versión en texto",
-    "textLead": "Los mismos once momentos del tráiler, sin animación.",
+    "textLead": "Los mismos momentos del tráiler, sin animación.",
     "watch": "Ver la animación igual",
-    "noscript": "El tráiler necesita JavaScript.",
-    "video": "Recorte de la demo de CompliA. Datos de ejemplo.",
-    "scenes": {
-      "s1a": "Mar del Plata.",
-      "s1b": "17 años.",
-      "typePre": "Quería hacer una web de ",
-      "typeWord": "juegos",
-      "typePost": ".",
-      "s3": "Ese año se abrieron todos los caminos.",
-      "tach": {
-        "year": "2021",
-        "name": "TACH Argentina",
-        "text": "Billetera virtual. Web y móvil."
-      },
-      "ada": {
-        "year": "2023",
-        "name": "Ada ITW",
-        "text": "Enseñé JavaScript y React."
-      },
-      "tuenti": {
-        "year": "Desde 2024",
-        "name": "Tuenti",
-        "text": "Ruleta. Referidos. Recarga automática. Pagos.",
-        "game": "El juego volvió.",
-        "p1": "Ruleta",
-        "p2": "Referidos",
-        "p3": "Recarga automática",
-        "p4": "Pagos"
-      },
-      "complia": {
-        "year": "2026",
-        "name": "CompliA",
-        "text": "Inteligencia artificial en producción, para compliance.",
-        "note": "Asistente del portal de compliance de Telefónica. En producción interna."
-      },
-      "projects": {
-        "title": "Y mis propias ramas.",
-        "eclipse": "Eclipse",
-        "eclipseS": "En desarrollo",
-        "handyx": "HandyX",
-        "handyxS": "En desarrollo · lanza el 10/11",
-        "volta": "Volta",
-        "voltaS": "Demo",
-        "velmar": "Velmar",
-        "velmarS": "Demo",
-        "dentalos": "DentalOS",
-        "dentalosS": "Demo",
-        "supernova": "Supernova Eventos",
-        "supernovaS": "Prototipo",
-        "games": "games-market",
-        "gamesS": "Banco de pruebas",
-        "kinetic": "Kinetic Studio",
-        "kineticS": "32 tráileres en código"
-      },
-      "system": {
-        "title": "No es vibe coding.",
-        "text": "11 agentes. Puertas con OK humano.",
-        "g1": "Descubrir",
-        "g2": "Planificar",
-        "g3": "Construir",
-        "g4": "Probar",
-        "g5": "Revisar",
-        "g6": "Entregar",
-        "note": "Nada se entrega sin aprobación humana."
-      },
-      "role": "Ssr AI Fullstack Developer",
-      "open": "Abierto a nuevas oportunidades.",
-      "mail": "ignaciogauna.developer@gmail.com"
-    },
-    "videoShort": "Datos de ejemplo"
+    "textVersion": "Versión en texto",
+    "rotateTitle": "Girá el teléfono",
+    "rotateText": "El tráiler está hecho para verse en horizontal.",
+    "watchAnyway": "Ver igual",
+    "frame": "Tráiler de Ignacio Gauna, hecho con Kinetic Studio",
+    "transcript": [
+      "Mar del Plata. 17 años. Quería hacer una web de juegos.",
+      "Ese año se abrieron todos los caminos. Soy autodidacta: leo mucho y estudio por internet.",
+      "2021 – 2022 · TACH Argentina · Software Developer. Desarrollo en remoto: una billetera virtual, en web y móvil.",
+      "2023 – 2024 · Ada ITW · Profesor. Enseñé JavaScript y React.",
+      "Desde 2024 · Tsoft, para Tuenti y Telefónica: la ruleta Tuenti y el sistema de referidos (el juego volvió), recarga automática y pagos. React, React Native, TypeScript, Next.js, Tailwind, Node.js y SQL.",
+      "Enero 2026: Reconocimiento Especial de Tsoft. 2026: Dev Ssr → Ssr AI Fullstack Developer.",
+      "CompliA: un asistente con RAG para el portal de compliance de Telefónica. Lo diseñé y lo construí. En producción interna. (Recorte de la demo, con datos de ejemplo.)",
+      "Y mis propias ramas: Eclipse (en desarrollo), HandyX (en desarrollo · lanza el 10/11), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), Supernova Eventos (prototipo), games-market (banco de pruebas), Kinetic Studio (32 tráileres en código).",
+      "Un sistema agéntico, dividido en partes: 11 agentes con roles separados. No es un prompt: es un sistema con roles.",
+      "Primero la especificación, después el código. Cada afirmación tiene su nivel de evidencia. Puertas con aprobación humana. Se prueba, no se mira a ojo.",
+      "Corrida del 27/10/2026, todo en verde: Eclipse-Web 463 tests, backend de Eclipse 779, portal interno 132 y 14 recorridos en navegador. Nada se entrega sin aprobación humana.",
+      "Ignacio Gauna. Ssr AI Fullstack Developer. Construyo software con IA que llega a producción.",
+      "Abierto a nuevas oportunidades. Busco un rol Ssr o Sr de desarrollo fullstack con IA. ignaciogauna.developer@gmail.com"
+    ]
   },
   "header": {
     "home": "Ignacio Gauna, inicio",
@@ -182,22 +129,26 @@
       "complia": {
         "name": "CompliA",
         "status": "En producción interna",
-        "text": "Asistente conversacional del portal de compliance de Telefónica: analiza declaraciones, ayuda a dictaminar y arma reportes. Lo diseñé y construí: RAG, validaciones, restricciones y recomendaciones."
+        "text": "Asistente conversacional del portal de compliance de Telefónica: analiza declaraciones, ayuda a dictaminar y arma reportes. Lo diseñé y construí: RAG, validaciones, restricciones y recomendaciones.",
+        "shotAlt": "Fotograma de la demo de CompliA con datos de ejemplo: 28 declaraciones encontradas, 8 en análisis y 13 procesadas."
       },
       "tuenti": {
         "name": "Tuenti",
         "status": "Trabajo profesional",
-        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft."
+        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft.",
+        "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad."
       },
       "handyx": {
         "name": "HandyX",
         "status": "En desarrollo · lanza el 10 de noviembre",
-        "text": "Marketplace de especialistas del hogar en Mar del Plata. Producto propio: soy la única persona en el proyecto."
+        "text": "Marketplace de especialistas del hogar en Mar del Plata. Producto propio: soy la única persona en el proyecto.",
+        "shotAlt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros."
       },
       "eclipse": {
         "name": "Eclipse",
         "status": "En desarrollo",
-        "text": "Estudio propio de desarrollo, IA y automatización. Una web que muestra demos antes de hablar, un portal de clientes en modo demo y su backend."
+        "text": "Estudio propio de desarrollo, IA y automatización. Una web que muestra demos antes de hablar, un portal de clientes en modo demo y su backend.",
+        "shotAlt": "Portada de la landing de Eclipse sobre cielo negro: el titular «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.», el botón ámbar «Quiero potenciar mi negocio» y, a la derecha, un eclipse total con su corona dentro de un dial con marcas."
       }
     }
   },
@@ -302,8 +253,8 @@
   },
   "system": {
     "label": "05 · Sistema",
-    "title": "No es vibe coding. Es un sistema.",
-    "lead": "Programo con agentes, pero dentro de un proceso que planifica, prueba y entrega, con una persona que aprueba.",
+    "title": "Un sistema agéntico, dividido en partes.",
+    "lead": "Programo con agentes, pero cada uno tiene su parte y nada se entrega sin una persona que apruebe.",
     "points": [
       {
         "title": "No es un prompt: es un sistema con roles",
@@ -334,7 +285,66 @@
         "text": "Sin testimonios ni clientes inventados, todo lo ficticio dice «Demo», y ninguna dependencia ni gasto nuevo sin mi OK."
       }
     ],
-    "limits": "Lo que no digo: que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho. Las pruebas contra base de datos del backend corren en CI; en la corrida de arriba no las ejecuté."
+    "limits": "Lo que no digo: que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho. Las pruebas contra base de datos del backend corren en CI; en la corrida de arriba no las ejecuté.",
+    "agentsTitle": "Once agentes, cada uno con su rol",
+    "principlesTitle": "Cómo trabajan juntos",
+    "agents": [
+      {
+        "id": "chief",
+        "name": "Dirección",
+        "role": "Ordena el plan, el alcance y el costo. No escribe código: decide qué se hace y en qué orden."
+      },
+      {
+        "id": "uxui",
+        "name": "UX/UI",
+        "role": "Flujos, estados y accesibilidad antes que pantallas."
+      },
+      {
+        "id": "design",
+        "name": "Diseño",
+        "role": "Sistema visual, tipografía, color y motion, con una rúbrica de revisión."
+      },
+      {
+        "id": "marketing",
+        "name": "Marketing",
+        "role": "Mensaje, posicionamiento y contenido."
+      },
+      {
+        "id": "ads",
+        "name": "Anuncios",
+        "role": "Piezas y ganchos para campañas, con reglas de honestidad."
+      },
+      {
+        "id": "frontend",
+        "name": "Arquitecto frontend",
+        "role": "Análisis de proyecto, componentes, integración de datos y rendimiento."
+      },
+      {
+        "id": "backend",
+        "name": "Arquitecto backend",
+        "role": "Capas, esquemas, servicios y transacciones, siempre con descubrimiento primero."
+      },
+      {
+        "id": "security",
+        "name": "Ciberseguridad",
+        "role": "Modelado de amenazas, OWASP y endurecimiento; pruebas solo en entornos propios."
+      },
+      {
+        "id": "game",
+        "name": "Arquitecto de juegos",
+        "role": "Mecánicas, economía de recompensas y rendimiento de juegos web."
+      },
+      {
+        "id": "trailer",
+        "name": "Arquitecto de tráileres",
+        "role": "Dirección, storyboard, motion y sonido de piezas como este tráiler."
+      },
+      {
+        "id": "docs",
+        "name": "Documentación",
+        "role": "Documenta proyectos y decisiones."
+      }
+    ]
   },
   "skills": {
     "label": "06 · Capacidades",
@@ -401,7 +411,8 @@
     "contactTitle": "¿Hablamos?",
     "contactText": "Abierto a nuevas oportunidades.",
     "videoCaption": "Recorte de la demo de CompliA. Datos de ejemplo.",
-    "next": "Otros casos"
+    "next": "Otros casos",
+    "gallery": "Capturas"
   },
   "cases": {
     "complia": {
@@ -452,7 +463,25 @@
             "Todavía no hay resultados ni métricas para mostrar."
           ]
         }
-      ]
+      ],
+      "gallery": {
+        "handy-landing": {
+          "alt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros.",
+          "caption": "Landing de Handyx: lista de espera y preregistro. Sale el 10/11 en Mar del Plata. Captura del 27/10/2026."
+        },
+        "handy-especialistas": {
+          "alt": "Página de Handyx para especialistas, sobre azul: «Tus herramientas. Tu precio.», los botones «Quiero sumarme» y «Cómo cobrás», y un celular con la pantalla «Tu precio», donde el especialista arma su presupuesto a partir del precio que sugiere Handyx.",
+          "caption": "Handyx Especialistas: el precio lo pone cada especialista; Handyx solo sugiere. Captura del 27/10/2026."
+        },
+        "handy-ops-inicio": {
+          "alt": "Inicio del portal interno de Handyx en modo muestra: aviso «Todos los registros son ficticios», contadores (9 para contactar, 14 especialistas anotados, 11 en lista de espera, 3 comprometidos), la cola «Para contactar» y los especialistas de Mar del Plata por rubro.",
+          "caption": "Portal interno de Handyx, vista de muestra con registros ficticios: a quién hay que escribirle hoy."
+        },
+        "handy-ops-registros": {
+          "alt": "Lista de pre-registros del portal interno de Handyx en modo muestra: pestañas por estado de contacto (sin contactar, con intentos, contactado, comprometido), filtros por rubro y ciudad, y especialistas ficticios ordenados por el seguimiento más próximo.",
+          "caption": "Pre-registros por etapa de contacto, con registros ficticios."
+        }
+      }
     },
     "eclipse": {
       "title": "Eclipse",
@@ -480,7 +509,37 @@
           "h": "Estado",
           "p": "En construcción. No hay clientes ni resultados comerciales para mostrar, y no los invento."
         }
-      ]
+      ],
+      "gallery": {
+        "eclipse-landing": {
+          "alt": "Portada de la landing de Eclipse sobre cielo negro: el titular «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.», el botón ámbar «Quiero potenciar mi negocio» y, a la derecha, un eclipse total con su corona dentro de un dial con marcas.",
+          "caption": "La landing: el eclipse en totalidad y una sola acción."
+        },
+        "eclipse-landing-precios": {
+          "alt": "Sección de precios de la landing de Eclipse sobre fondo crema: el título «Cuánto cuesta y cómo se paga.», el selector de moneda en USD, las pestañas «Planes (6)» y «Pieza por pieza (18)» y el primer nivel, Contact, a US$ 30 por mes.",
+          "caption": "Precios: seis niveles mensuales y la lista de piezas, en dólares."
+        },
+        "eclipse-portal-proyectos": {
+          "alt": "Portal de clientes de Eclipse en modo demostración: el aviso «Vista de demostración — datos ficticios», el saludo «Hola, Lucía.», un resumen con «2 cosas esperan tu respuesta.» y la tabla de proyectos de una ferretería ficticia, con la etapa de cada uno marcada con el glifo de fase del eclipse.",
+          "caption": "Portal de clientes, «Mis proyectos», con datos ficticios."
+        },
+        "eclipse-portal-detalle": {
+          "alt": "Detalle de un proyecto ficticio en el portal de clientes de Eclipse: «Chatbot de consultas», la etapa actual «Revisión del cliente» (4 de 5) con su glifo de fase, el próximo hito «Tu aprobación de las respuestas» con su fecha estimada y la tarjeta «Tu acción» marcada «Te toca a vos».",
+          "caption": "Detalle de un proyecto: etapa, próximo hito y lo que te toca. Datos ficticios."
+        },
+        "eclipse-ops-prospectos": {
+          "alt": "Portal interno de Eclipse en modo oscuro y en modo demostración: la pantalla Prospectos, con el título «Del contacto a la seña.», los filtros por etapa y una lista de negocios ficticios con su etapa, su fuente y la próxima acción calculada, como «Llamar (mismo día que respondió)», con su vencimiento.",
+          "caption": "Operación interna: prospectos con la próxima acción calculada. Datos de ejemplo."
+        },
+        "eclipse-ops-proyectos": {
+          "alt": "Portal interno de Eclipse, pantalla Proyectos: el título «Proyectos en curso.», los contadores de proyectos activos (5) y de los que esperan al cliente (3), los filtros y la lista de proyectos ficticios con su etapa —las mismas cinco que ve el cliente—, su próximo hito y lo que se le pidió al cliente.",
+          "caption": "Operación interna: proyectos en las cinco etapas que ve el cliente. Datos de ejemplo."
+        },
+        "eclipse-ops-calendario": {
+          "alt": "Portal interno de Eclipse, pantalla Calendario: el título «Dale espacio a lo importante.», la grilla de octubre de 2026 y, a la derecha, la agenda del 27 de octubre con actividades de ejemplo como «10:00 Dejar listas las propuestas de hoy» y «15:00 Llamada de propuesta · Constructora».",
+          "caption": "Operación interna: el calendario y la agenda del día. Datos de ejemplo."
+        }
+      }
     },
     "kinetic": {
       "title": "Kinetic Studio",
@@ -501,7 +560,7 @@
         },
         {
           "h": "Dónde se ve",
-          "p": "El tráiler «Conocer a Ignacio» de este sitio usa las mismas ideas, con un motor nuevo y más chico."
+          "p": "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 20 escenas en 96 segundos, con música sintetizada y componentes reales de mis proyectos reconstruidos en código."
         },
         {
           "h": "Deuda conocida",

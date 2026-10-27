@@ -1,0 +1,237 @@
+/* Act 5 shots — lab group (Volta, Velmar, DentalOS, Supernova Eventos, games-market, Kinetic Studio).
+   Every rule under .shot-<id>. Fonts are each project's own (OFL, self-hosted in public/trailer/fonts/<project>/,
+   licences next to the files); Archivo and JetBrains Mono come from fonts/fonts.css. Families carry a "Lab" prefix so
+   they never collide with another group's faces. */
+@font-face { font-family: 'LabBigShoulders'; font-style: normal; font-weight: 100 900; font-display: block; src: url(../../../fonts/volta/big-shoulders-display-latin-wght-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabFraunces'; font-style: normal; font-weight: 100 900; font-display: block; src: url(../../../fonts/velmar/fraunces-latin-opsz-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabFraunces'; font-style: italic; font-weight: 100 900; font-display: block; src: url(../../../fonts/velmar/fraunces-latin-opsz-italic.woff2) format('woff2'); }
+@font-face { font-family: 'LabManrope'; font-style: normal; font-weight: 200 800; font-display: block; src: url(../../../fonts/velmar/manrope-latin-wght-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabCaveat'; font-style: normal; font-weight: 600; font-display: block; src: url(../../../fonts/velmar/caveat-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabNewsreader'; font-style: normal; font-weight: 500; font-display: block; src: url(../../../fonts/dentalos/newsreader-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabSourceSans'; font-style: normal; font-weight: 400; font-display: block; src: url(../../../fonts/dentalos/source-sans-3-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabSourceSans'; font-style: normal; font-weight: 600; font-display: block; src: url(../../../fonts/dentalos/source-sans-3-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabSourceSans'; font-style: normal; font-weight: 700; font-display: block; src: url(../../../fonts/dentalos/source-sans-3-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabDMSans'; font-style: normal; font-weight: 400; font-display: block; src: url(../../../fonts/supernova/dm-sans-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabDMSans'; font-style: normal; font-weight: 500; font-display: block; src: url(../../../fonts/supernova/dm-sans-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabSpaceGrotesk'; font-style: normal; font-weight: 300 700; font-display: block; src: url(../../../fonts/games/space-grotesk-latin-wght-normal.woff2) format('woff2'); }
+@font-face { font-family: 'LabInter'; font-style: normal; font-weight: 100 900; font-display: block; src: url(../../../fonts/games/inter-latin-wght-normal.woff2) format('woff2'); }
+
+/* ── VOLTA · Club Volta (supplements-ecommerce: src/features/club/ClubHero.tsx, ClubNextPrize.tsx,
+      components/molecules/PlateRing.tsx, components/atoms/Led.tsx; palette src/config/brands/volta.ts) ── */
+.shot-volta { background: #0b0c0d; color: #f2f0ea; font-family: 'Archivo', system-ui, sans-serif; }
+.shot-volta .vt-head { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center; gap: 46px; padding: 0 48px; background: #0b0c0d; border-bottom: 1px solid #33383d; }
+.shot-volta .vt-logo { display: flex; align-items: center; gap: 12px; }
+.shot-volta .vt-logo svg { width: 42px; height: 42px; }
+.shot-volta .vt-logo b { font: 800 30px/1 'Archivo', sans-serif; font-stretch: 125%; font-variation-settings: "wdth" 125, "wght" 800; letter-spacing: .03em; }
+.shot-volta .vt-nav { display: flex; gap: 34px; font: 700 15px/1 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #a6abb0; }
+.shot-volta .vt-nav span { position: relative; padding: 29px 0; }
+.shot-volta .vt-nav .on { color: #f2f0ea; }
+.shot-volta .vt-nav .on::after { content: ''; position: absolute; left: -8px; right: -8px; bottom: 0; height: 3px; background: #c8ff2e; }
+.shot-volta .vt-demo { margin-left: auto; display: flex; align-items: center; gap: 10px; font: 700 15px/1 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #c8ff2e; }
+.shot-volta .vt-demo i { width: 9px; height: 9px; background: #c8ff2e; }
+.shot-volta .vt-band { position: absolute; left: 0; right: 0; top: 76px; bottom: 0; overflow: hidden; background-color: #060707;
+  background-image: radial-gradient(rgb(255 255 255 / .035) .6px, transparent .8px), linear-gradient(90deg, rgb(242 240 234 / .045) 1px, transparent 1px);
+  background-size: 5px 5px, 120px 100%; }
+.shot-volta .vt-glow { position: absolute; right: -160px; top: -260px; width: 820px; height: 820px; border-radius: 50%; background: radial-gradient(closest-side, rgb(139 114 255 / .4), transparent); }
+.shot-volta .vt-copy { position: absolute; left: 72px; top: 76px; width: 760px; }
+.shot-volta .vt-eye { font: 700 24px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: #c8ff2e; }
+.shot-volta .vt-h { margin-top: 26px; font: 800 144px/.92 'LabBigShoulders', 'Arial Narrow', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
+.shot-volta .vt-h span { display: block; white-space: nowrap; }
+.shot-volta .vt-h .vt-h2 { color: #c8ff2e; font-style: italic; }
+.shot-volta .vt-p { margin-top: 30px; max-width: 640px; font: 400 28px/1.4 'Archivo', sans-serif; color: #a6abb0; }
+.shot-volta .vt-plate { position: absolute; left: 872px; top: 40px; width: 504px; padding: 38px 40px 34px; display: flex; flex-direction: column; align-items: center; text-align: center; border-radius: 4px;
+  background: linear-gradient(180deg, rgb(255 255 255 / .075), rgb(255 255 255 / .02)); box-shadow: inset 1px 1px 0 rgb(255 255 255 / .1), inset -1px -1px 0 rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .1); }
+.shot-volta .vt-gift { position: absolute; right: -14px; top: -18px; width: 68px; height: 68px; display: grid; place-items: center; border-radius: 2px; background: #c8ff2e; color: #060707; box-shadow: inset 1px 1px 0 rgb(255 255 255 / .35), inset -1px -1px 0 rgb(0 0 0 / .3); }
+.shot-volta .vt-gift svg { width: 32px; height: 32px; }
+.shot-volta .vt-ring { position: relative; width: 300px; height: 300px; flex: none; color: #c8ff2e; }
+.shot-volta .vt-ring > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.shot-volta .vt-lit { filter: drop-shadow(0 0 3px rgb(200 255 46 / .55)); }
+.shot-volta .vt-read { position: absolute; inset: 22%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.shot-volta .vt-leds { display: grid; place-items: center; height: 84px; }
+.shot-volta .vt-led { grid-area: 1 / 1; height: 84px; overflow: visible; color: #c8ff2e; opacity: 0; }
+.shot-volta .vt-led:last-child { opacity: 1; }
+.shot-volta .vt-led .on { filter: drop-shadow(0 0 5px rgb(200 255 46 / .55)); }
+.shot-volta .vt-read .tex { font: 700 16px/1 'JetBrains Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #a6abb0; }
+.shot-volta .vt-plate .vt-eye { margin-top: 22px; font-size: 20px; }
+.shot-volta .vt-prize { margin-top: 14px; font: 800 46px/.95 'LabBigShoulders', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
+.shot-volta .vt-claim { margin-top: 18px; max-width: 400px; font: 700 24px/1.25 'Archivo', sans-serif; color: #c8ff2e; text-decoration: underline; text-underline-offset: 6px; }
+.shot-volta .vt-nw { white-space: nowrap; }
+.shot-volta .vt-claim svg { display: inline-block; width: 24px; height: 24px; margin-left: 6px; vertical-align: -4px; }
+
+/* ── VELMAR · "Escribí el nombre" (velmar: src/features/home/LiveCustomizer.tsx, components/illustrations/CollarPreview.tsx,
+      collar/geometry.ts, collar/Cord.tsx; tokens src/config/brand.ts + app/globals.css) ── */
+.shot-velmar { background: #f6f1e8; color: #1c2016; font-family: 'LabManrope', system-ui, sans-serif; }
+.shot-velmar .vm-head { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center; gap: 40px; padding: 0 56px; background: #fffdf8; border-bottom: 1px solid #e2d8c4; }
+.shot-velmar .vm-logo { display: flex; align-items: center; gap: 10px; color: #3a4527; }
+.shot-velmar .vm-logo svg { width: 40px; height: 40px; }
+.shot-velmar .vm-logo b { font: 420 34px/1 'LabFraunces', Georgia, serif; font-variation-settings: "opsz" 144; letter-spacing: -.02em; color: #1c2016; }
+.shot-velmar .vm-nav { display: flex; gap: 32px; font: 500 18px/1 'LabManrope', sans-serif; color: #1c2016; }
+.shot-velmar .vm-card { position: absolute; left: 40px; right: 40px; top: 104px; bottom: -60px; border-radius: 40px; background: #fffdf8; box-shadow: 0 1px 2px rgb(28 32 22 / .04), 0 18px 40px -22px rgb(28 32 22 / .28); }
+.shot-velmar .vm-copy { position: absolute; left: 96px; top: 150px; width: 620px; }
+.shot-velmar .vm-eye { font: 800 19px/1 'LabManrope', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #7a5c26; }
+.shot-velmar .vm-h { margin-top: 20px; font: 420 78px/1.04 'LabFraunces', Georgia, serif; font-variation-settings: "opsz" 144; letter-spacing: -.02em; }
+.shot-velmar .vm-h span { display: block; white-space: nowrap; }
+.shot-velmar .vm-h em { font-style: italic; color: #3a4527; }
+.shot-velmar .vm-label { margin-top: 34px; font: 700 26px/1 'LabManrope', sans-serif; }
+.shot-velmar .vm-input { position: relative; height: 118px; margin-top: 4px; border-bottom: 3px solid #3a4527; }
+.shot-velmar .vm-st { position: absolute; left: 0; bottom: 10px; display: flex; align-items: center; opacity: 0; font: 420 92px/1 'LabFraunces', Georgia, serif; font-variation-settings: "opsz" 144; letter-spacing: -.02em; white-space: pre; }
+.shot-velmar .vm-st:last-child { opacity: 1; }
+.shot-velmar .vm-caret { display: inline-block; width: 4px; height: 78px; margin-left: 6px; background: #3a4527; }
+.shot-velmar .vm-chips { display: flex; gap: 12px; margin-top: 30px; }
+.shot-velmar .vm-chip { display: inline-flex; align-items: center; height: 60px; padding: 0 26px; border: 1.5px solid #e2d8c4; border-radius: 999px; font-size: 27px; color: #1c2016; }
+.shot-velmar .vm-chip.on { background: #3a4527; border-color: #3a4527; color: #fffdf8; font-family: 'LabManrope', sans-serif; font-weight: 500; }
+.shot-velmar .vm-chip.serif { font-family: Georgia, 'LabFraunces', serif; }
+.shot-velmar .vm-chip.hand { font-family: 'LabCaveat', cursive; font-weight: 600; font-size: 30px; }
+.shot-velmar .vm-prev { position: absolute; left: 744px; top: 128px; width: 640px; height: 464px; border-radius: 24px; overflow: hidden; background: radial-gradient(120% 90% at 50% 0%, #fffaf1, #efe6d4); box-shadow: 0 2px 4px rgb(28 32 22 / .05), 0 30px 60px -28px rgb(28 32 22 / .4); }
+.shot-velmar .vm-halo { position: absolute; left: 700px; top: 84px; width: 730px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, #efe3cb, transparent); }
+.shot-velmar .vm-prev svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.shot-velmar .vm-pill { position: absolute; left: 18px; bottom: 16px; padding: 4px 14px; border-radius: 999px; background: rgb(255 255 255 / .85); font: 600 17px/1.3 'LabManrope', sans-serif; color: #4f5545; }
+
+/* ── DENTALOS · Hoy y agenda, por profesional (DentalOS: src/pages/admin/Today.tsx, styles/app.css .res-*;
+      seed src/domain/seed.ts, lunes 19/10) ── */
+.shot-dentalos { background: #f6f1e8; color: #1b2a28; font-family: 'LabSourceSans', system-ui, sans-serif; }
+.shot-dentalos .do-head { position: absolute; left: 0; right: 0; top: 0; height: 68px; display: flex; align-items: center; gap: 18px; padding: 0 24px; background: rgb(246 241 232 / .94); border-bottom: 1px solid #d8cdbb; }
+.shot-dentalos .do-logo { display: flex; align-items: center; gap: 12px; }
+.shot-dentalos .do-logo svg { width: 44px; height: 44px; filter: drop-shadow(0 3px 8px rgb(18 48 46 / .18)); }
+.shot-dentalos .do-logo b { display: block; font: 700 24px/1.05 'LabSourceSans', sans-serif; letter-spacing: -.01em; }
+.shot-dentalos .do-logo small { display: block; font: 400 15px/1.2 'LabSourceSans', sans-serif; color: #55615e; }
+.shot-dentalos .do-chip { padding: 5px 14px; border: 1px solid #8c816e; border-radius: 999px; font: 600 15px/1.2 'LabSourceSans', sans-serif; color: #1b2a28; }
+.shot-dentalos .do-search { flex: 0 1 460px; margin-left: 10px; height: 44px; display: flex; align-items: center; padding: 0 16px; border: 1px solid #d8cdbb; border-radius: 6px; background: #fbf7f0; font: 400 16px/1 'LabSourceSans', sans-serif; color: #55615e; }
+.shot-dentalos .do-role { margin-left: auto; padding: 7px 16px; border-radius: 999px; background: #e2ece8; border: 1px solid #cbddd7; font: 700 15px/1.2 'LabSourceSans', sans-serif; color: #164842; }
+.shot-dentalos .do-ph { position: absolute; left: 48px; top: 86px; }
+.shot-dentalos .do-eye { display: flex; align-items: center; gap: 12px; font: 700 20px/1 'LabSourceSans', sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #55615e; }
+.shot-dentalos .do-eye::before { content: ''; width: 30px; height: 2px; background: #b08a3e; }
+.shot-dentalos .do-h { margin-top: 10px; font: 500 74px/1 'LabNewsreader', Georgia, serif; letter-spacing: -.012em; }
+.shot-dentalos .do-sub { margin-top: 12px; font: 400 25px/1.2 'LabSourceSans', sans-serif; color: #55615e; }
+.shot-dentalos .do-seg { position: absolute; right: 48px; top: 160px; display: flex; border: 1px solid #8c816e; border-radius: 8px; overflow: hidden; background: #fffcf7; }
+.shot-dentalos .do-seg span { padding: 13px 20px; font: 600 19px/1 'LabSourceSans', sans-serif; border-left: 1px solid #d8cdbb; }
+.shot-dentalos .do-seg span:first-child { border-left: 0; background: #1e5c55; color: #fff; }
+.shot-dentalos .do-grid { position: absolute; left: 48px; right: 48px; top: 250px; height: 700px; border: 1px solid #d8cdbb; border-radius: 12px; overflow: hidden; background: #fffcf7; }
+.shot-dentalos .do-ghead { position: absolute; left: 0; right: 0; top: 0; height: 72px; background: #fbf7f0; border-bottom: 1px solid #d8cdbb; }
+.shot-dentalos .do-pro { position: absolute; top: 0; height: 72px; padding: 13px 16px 0; font: 700 25px/1.1 'LabSourceSans', sans-serif; }
+.shot-dentalos .do-pro small { display: block; margin-top: 3px; font: 600 17px/1.1 'LabSourceSans', sans-serif; color: #55615e; }
+.shot-dentalos .do-col { position: absolute; top: 72px; bottom: 0; border-left: 1px solid #d8cdbb;
+  background-image: repeating-linear-gradient(180deg, #d8cdbb 0 1px, transparent 1px 192px), repeating-linear-gradient(180deg, transparent 0 47px, #f1eadf 47px 48px); }
+.shot-dentalos .do-col.closed { background-image: repeating-linear-gradient(180deg, #d8cdbb 0 1px, transparent 1px 192px), repeating-linear-gradient(135deg, #fbf7f0 0 10px, #f4eee4 10px 20px); }
+.shot-dentalos .do-time { position: absolute; left: 0; width: 92px; padding-right: 12px; text-align: right; font: 600 24px/1 'LabSourceSans', sans-serif; color: #55615e; }
+.shot-dentalos .do-appt { position: absolute; padding: 8px 14px; border-radius: 10px; border: 1px solid #cbddd7; border-left: 6px solid #1e5c55; background: #e2ece8; overflow: hidden; white-space: nowrap; box-shadow: 0 6px 14px -10px rgb(18 48 46 / .5); }
+.shot-dentalos .do-appt.req { background: #f8efdc; border-color: #e4cf9f; border-left-color: #875200; }
+.shot-dentalos .do-appt b { display: block; font: 700 27px/1.12 'LabSourceSans', sans-serif; }
+.shot-dentalos .do-appt span { display: block; font: 400 24px/1.15 'LabSourceSans', sans-serif; }
+.shot-dentalos .do-appt small { display: block; margin-top: 3px; font: 400 18px/1.2 'LabSourceSans', sans-serif; color: #2b3d3a; }
+
+/* ── SUPERNOVA · el pase confirmado (supernova-eventos: src/features/registration/PersonalTicket.tsx, RegistrationModal.tsx,
+      registration.css; QR de src/features/qr/qr.ts; evento de src/data/events.ts) ── */
+.shot-supernova { color: #f5f0e9; font-family: 'LabDMSans', system-ui, sans-serif; background: linear-gradient(180deg, #001166 0%, #000a4a 24%, #04052a 52%, #0c0b14 74%, #0e0125 100%); }
+.shot-supernova .sn-stars { position: absolute; inset: 0; opacity: .8; background-image: radial-gradient(1.4px 1.4px at 14% 9%, #d4bcf0 60%, transparent), radial-gradient(1px 1px at 46% 4%, #b3a5c5 60%, transparent), radial-gradient(1.2px 1.2px at 67% 17%, #d4bcf0 60%, transparent), radial-gradient(1px 1px at 89% 31%, #d4bcf0 60%, transparent), radial-gradient(1.4px 1.4px at 8% 52%, #d4bcf0 60%, transparent), radial-gradient(1px 1px at 93% 63%, #b3a5c5 60%, transparent), radial-gradient(1.2px 1.2px at 26% 93%, #d4bcf0 60%, transparent), radial-gradient(1px 1px at 72% 96%, #d4bcf0 60%, transparent), radial-gradient(1px 1px at 55% 22%, #fff 60%, transparent); }
+.shot-supernova .sn-glow { position: absolute; left: -120px; bottom: -160px; width: 520px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgb(91 33 182 / .35), transparent); }
+.shot-supernova .sn-btn { position: absolute; top: 24px; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; border: 1px solid #ffffff22; background: #14102080; color: #e8dcf5; }
+.shot-supernova .sn-btn svg { width: 22px; height: 22px; }
+.shot-supernova .sn-intro { position: absolute; left: 20px; right: 20px; top: 92px; }
+.shot-supernova .sn-intro-row { display: flex; align-items: center; gap: 14px; }
+.shot-supernova .sn-emblem { position: relative; width: 50px; height: 50px; flex: none; display: grid; place-items: center; border-radius: 50%; border: 1px solid #cbb2ff40; background: #cbb2ff10; color: #d8c4ff; box-shadow: 0 0 0 6px #cbb2ff08; }
+.shot-supernova .sn-emblem svg { width: 26px; height: 26px; }
+.shot-supernova .sn-eye { font: 500 13px/1.3 'LabDMSans', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: #c5b5d4; }
+.shot-supernova .sn-title { margin-top: 12px; font: 500 56px/1 'LabManrope', sans-serif; letter-spacing: -2.6px; white-space: nowrap; }
+.shot-supernova .sn-ticket { position: absolute; left: 16px; right: 16px; top: 214px; border: 1px solid #d2b2f843; border-radius: 18px; overflow: hidden; isolation: isolate;
+  background: radial-gradient(ellipse at 90% 0, #8d6dae2b, transparent 65%), linear-gradient(135deg, #30223e, #21182b 65%, #2a1d35); box-shadow: 0 18px 40px #05010b66, inset 0 1px #fff2, inset 0 -1px #0005; }
+.shot-supernova .sn-ticket::before { content: ''; position: absolute; inset: 3px; border: 1px solid #f6e7ff0d; border-radius: 15px; pointer-events: none; }
+.shot-supernova .sn-water { position: absolute; z-index: -1; right: 14px; top: 64px; font: 400 130px/1 'LabDMSans', sans-serif; color: #d8bbff0c; }
+.shot-supernova .sn-foil { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3; }
+.shot-supernova .sn-foil i { position: absolute; top: -30%; left: -80%; width: 65%; height: 160%; background: linear-gradient(100deg, transparent, #f0cfff26, transparent); transform: rotate(20deg); }
+.shot-supernova .sn-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 20px 20px 0; }
+.shot-supernova .sn-brand { display: flex; align-items: center; gap: 8px; }
+.shot-supernova .sn-brand svg { width: 26px; height: 26px; color: #ceb3ee; }
+.shot-supernova .sn-brand b { font: 400 30px/1 'LabManrope', sans-serif; letter-spacing: -1.5px; }
+.shot-supernova .sn-ok { display: flex; align-items: center; gap: 5px; padding: 6px 9px; border: 1px solid #cbe8d82f; border-radius: 20px; font: 500 12px/1 'LabDMSans', sans-serif; letter-spacing: .8px; text-transform: uppercase; color: #c4dfcf; }
+.shot-supernova .sn-ok svg { width: 13px; height: 13px; }
+.shot-supernova .sn-main { padding: 16px 20px 14px; }
+.shot-supernova .sn-cat { display: flex; align-items: center; gap: 9px; font: 400 24px/1.2 'LabDMSans', sans-serif; color: #c3acd5; }
+.shot-supernova .sn-cat i { width: 4px; height: 4px; border-radius: 50%; background: #b59fc9; }
+.shot-supernova .sn-ev { margin: 8px 0 16px; font: 500 40px/1.06 'LabManrope', sans-serif; letter-spacing: -1.4px; text-wrap: balance; }
+.shot-supernova .sn-row { display: grid; grid-template-columns: minmax(0, 1fr) 140px; align-items: center; gap: 14px; }
+.shot-supernova .sn-dt { display: flex; flex-direction: column; gap: 10px; }
+.shot-supernova .sn-dt small { display: block; font: 400 12px/1 'LabDMSans', sans-serif; letter-spacing: 1.2px; text-transform: uppercase; color: #b39ac7; }
+.shot-supernova .sn-dt strong { display: block; margin-top: 5px; font: 400 25px/1.1 'LabDMSans', sans-serif; color: #e9dcf5; }
+.shot-supernova .sn-qr { width: 140px; height: 140px; border-radius: 10px; background: #fff; overflow: hidden; }
+.shot-supernova .sn-qr svg { display: block; width: 100%; height: 100%; }
+.shot-supernova .sn-loc { display: flex; align-items: center; gap: 7px; margin-top: 14px; font: 400 17px/1.3 'LabDMSans', sans-serif; color: #bba7cd; }
+.shot-supernova .sn-loc svg { width: 16px; height: 16px; flex: none; }
+.shot-supernova .sn-tear { display: flex; align-items: center; gap: 9px; margin: 0 -1px; }
+.shot-supernova .sn-tear span { flex: 1; border-top: 1px dashed #c8a9e43d; }
+.shot-supernova .sn-tear i { width: 11px; height: 20px; background: #0c0b14; border: 1px solid #d2b2f843; }
+.shot-supernova .sn-tear i:first-child { border-radius: 0 20px 20px 0; border-left: 0; }
+.shot-supernova .sn-tear i:last-child { border-radius: 20px 0 0 20px; border-right: 0; }
+.shot-supernova .sn-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px 20px; }
+.shot-supernova .sn-who small { display: block; font: 400 12px/1 'LabDMSans', sans-serif; letter-spacing: 1.2px; text-transform: uppercase; color: #b29ac5; }
+.shot-supernova .sn-who strong { display: block; margin-top: 7px; font: 500 26px/1.1 'LabDMSans', sans-serif; }
+.shot-supernova .sn-who span { display: block; margin-top: 4px; font: 400 17px/1.2 'LabDMSans', sans-serif; color: #bca7cf; }
+.shot-supernova .sn-code { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; color: #d0afe9; }
+.shot-supernova .sn-code svg { width: 28px; height: 28px; }
+.shot-supernova .sn-code span { font: 400 13px/1 'JetBrains Mono', monospace; letter-spacing: .4px; }
+.shot-supernova .sn-acts { position: absolute; left: 16px; right: 16px; top: 758px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.shot-supernova .sn-act { display: flex; align-items: center; justify-content: center; gap: 8px; height: 56px; border-radius: 14px; border: 1px solid #cbb2ff40; font: 500 17px/1.1 'LabDMSans', sans-serif; color: #e7dcf3; }
+.shot-supernova .sn-act.pri { background: #cbb2ff; border-color: #cbb2ff; color: #21172f; }
+.shot-supernova .sn-act svg { width: 18px; height: 18px; flex: none; }
+
+/* ── GAMES · Batería de experiencias (games-market: src/routes/CatalogPage.tsx, ui/catalog/badges.tsx,
+      styles/tokens.css + global.css; data src/games/registry.ts) ── */
+.shot-games { color: #f2efff; font-family: 'LabInter', system-ui, sans-serif; background-color: #07060f;
+  background-image: radial-gradient(960px 480px at 12% -10%, rgb(124 77 255 / .2), transparent 60%), radial-gradient(720px 450px at 95% 0%, rgb(255 61 174 / .13), transparent 55%), radial-gradient(640px 380px at 50% 110%, rgb(34 227 245 / .1), transparent 60%); }
+.shot-games .gm-top { position: absolute; left: 64px; right: 64px; top: 48px; display: flex; justify-content: space-between; align-items: flex-start; }
+.shot-games .gm-h { font: 600 66px/1.05 'LabSpaceGrotesk', sans-serif; letter-spacing: -.01em; }
+.shot-games .gm-kiosk { margin-top: 10px; padding: 12px 22px; border: 1px solid #2a2350; border-radius: 10px; background: #17132b; font: 500 19px/1 'LabInter', sans-serif; color: #f2efff; }
+.shot-games .gm-lede { position: absolute; left: 64px; top: 136px; max-width: 980px; font: 400 25px/1.4 'LabInter', sans-serif; color: #a79fd0; }
+.shot-games .gm-count { position: absolute; left: 64px; top: 222px; font: 400 24px/1 'LabInter', sans-serif; color: #6e67a0; }
+.shot-games .gm-count b { font: 600 24px/1 'JetBrains Mono', monospace; color: #22e3f5; }
+.shot-games .gm-count em { font: 400 24px/1 'JetBrains Mono', monospace; font-style: normal; color: #a79fd0; }
+.shot-games .gm-filters { position: absolute; left: 64px; top: 262px; display: flex; align-items: center; gap: 10px; font: 400 16px/1 'LabInter', sans-serif; }
+.shot-games .gm-filters small { margin: 0 4px 0 10px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #6e67a0; }
+.shot-games .gm-filters small:first-child { margin-left: 0; }
+.shot-games .gm-filters span { padding: 7px 14px; border: 1px solid #2a2350; border-radius: 999px; background: #100d1e; color: #a79fd0; }
+.shot-games .gm-filters span.on { background: #7c4dff; border-color: transparent; color: #fff; }
+.shot-games .gm-grid { position: absolute; left: 64px; right: 64px; top: 318px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.shot-games .gm-card { position: relative; height: 296px; display: flex; flex-direction: column; gap: 14px; padding: 24px 26px; border: 1px solid #1c1738; border-radius: 16px; background: rgb(23 19 43 / .82); }
+.shot-games .gm-glow { position: absolute; inset: -1px; border-radius: 16px; border: 1px solid #7c4dff; box-shadow: 0 0 34px -6px rgb(124 77 255 / .7), inset 0 0 22px -12px rgb(124 77 255 / .9); opacity: 0; pointer-events: none; }
+.shot-games .gm-card.hot .gm-glow { opacity: 1; }
+.shot-games .gm-ct { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.shot-games .gm-code { display: block; font: 400 15px/1 'JetBrains Mono', monospace; letter-spacing: .2em; color: #6e67a0; }
+.shot-games .gm-title { position: relative; display: block; margin-top: 8px; font: 600 38px/1.1 'LabSpaceGrotesk', sans-serif; white-space: nowrap; }
+.shot-games .gm-title i { position: absolute; left: 0; top: 0; font-style: normal; color: #22e3f5; opacity: 0; }
+.shot-games .gm-card.hot .gm-title i { opacity: 1; }
+.shot-games .gm-eff { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border: 1px solid #2a2350; border-radius: 50%; background: #100d1e; font: 500 17px/1 'LabInter', sans-serif; color: #f2efff; }
+.shot-games .gm-tag { flex: 1; font: 400 19px/1.45 'LabInter', sans-serif; color: #a79fd0; }
+.shot-games .gm-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.shot-games .gm-chips span { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border: 1px solid #2a2350; border-radius: 999px; background: #100d1e; font: 500 15px/1.2 'LabInter', sans-serif; color: #a79fd0; }
+.shot-games .gm-chips i { width: 9px; height: 9px; border-radius: 50%; }
+.shot-games .gm-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #1c1738; font: 400 16px/1 'LabInter', sans-serif; color: #6e67a0; }
+.shot-games .gm-foot b { font: 500 25px/1 'LabInter', sans-serif; color: #22e3f5; }
+
+/* ── KINETIC · el hub de tráileres (kinetic-studio: index.html + hub/hub.css + hub/main.ts; pósters de hub/motifs.ts
+      con la paleta de hub/catalog.ts) ── */
+.shot-kinetic { color: #f2ede4; font-family: 'Archivo', system-ui, sans-serif; background-color: #07070a;
+  background-image: radial-gradient(ellipse 70% 50% at 50% -10%, rgb(106 43 255 / .22), transparent 70%), linear-gradient(rgb(242 237 228 / .12) 1px, transparent 1px), linear-gradient(90deg, rgb(242 237 228 / .12) 1px, transparent 1px);
+  background-size: 100% 100%, 120px 120px, 120px 120px; background-position: 0 0, -1px -1px, -1px -1px; }
+.shot-kinetic .kn-fade { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0, #07070a 92%); }
+.shot-kinetic .kn-intro { position: absolute; left: 120px; top: 176px; width: 800px; z-index: 2; }
+.shot-kinetic .kn-brand { display: flex; align-items: center; gap: 16px; font: 500 24px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.shot-kinetic .kn-mark { display: flex; gap: 8px; align-items: center; }
+.shot-kinetic .kn-mark i { display: block; width: 16px; height: 16px; }
+.shot-kinetic .kn-mark i:nth-child(1) { border-radius: 50%; background: #ff4d2e; }
+.shot-kinetic .kn-mark i:nth-child(2) { background: #2b50ff; }
+.shot-kinetic .kn-mark i:nth-child(3) { background: #ffc21a; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.shot-kinetic .kn-eye { margin-top: 58px; font: 400 18px/1.3 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: rgb(242 237 228 / .62); }
+.shot-kinetic .kn-h { margin-top: 18px; font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 125%; font-variation-settings: "wdth" 125, "wght" 900; font-size: 134px; line-height: .9; letter-spacing: -.02em; font-kerning: none; }
+.shot-kinetic .kn-h > span { display: block; overflow: hidden; padding-bottom: .04em; }
+.shot-kinetic .kn-h > span > span { display: block; white-space: nowrap; }
+.shot-kinetic .kn-lede { margin-top: 30px; max-width: 700px; font: 400 28px/1.45 'Archivo', sans-serif; color: rgb(242 237 228 / .62); }
+.shot-kinetic .kn-stage { position: absolute; left: 960px; top: 120px; width: 1560px; height: 860px; perspective: 1700px; perspective-origin: 0% 50%; }
+.shot-kinetic .kn-wall { position: absolute; left: 0; top: 0; display: grid; grid-template-columns: repeat(4, 360px); gap: 22px; transform-origin: 0% 50%; transform: rotateY(24deg) rotateX(-3deg); transform-style: preserve-3d; }
+.shot-kinetic .kn-card { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid rgb(242 237 228 / .12); background: var(--p0); box-shadow: 0 30px 60px -30px rgb(0 0 0 / .8); }
+.shot-kinetic .kn-card::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, var(--p0) 0%, color-mix(in srgb, var(--p0) 70%, transparent) 26%, transparent 52%), radial-gradient(ellipse at 80% 40%, color-mix(in srgb, var(--p1) 26%, transparent), transparent 65%); }
+.shot-kinetic .kn-card svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.shot-kinetic .kn-num { position: absolute; z-index: 2; left: 14px; top: 12px; font: 400 14px/1 'JetBrains Mono', monospace; letter-spacing: .16em; }
+.shot-kinetic .kn-badge { position: absolute; z-index: 2; right: 12px; top: 10px; padding: 6px 10px; border-radius: 999px; background: #f2ede4; color: #07070a; font: 500 11px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.shot-kinetic .kn-word { position: absolute; z-index: 2; left: 14px; bottom: 10px; font-weight: 900; font-stretch: 125%; font-variation-settings: "wdth" 125, "wght" 900; line-height: .92; letter-spacing: -.01em; white-space: nowrap; }
+.shot-kinetic .kn-sel { position: absolute; inset: -1px; z-index: 3; border: 3px solid #f2ede4; border-radius: 14px; opacity: 0; }

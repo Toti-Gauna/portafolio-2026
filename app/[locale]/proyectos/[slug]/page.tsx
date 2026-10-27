@@ -4,7 +4,7 @@ import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { routing, localeTags } from '@/i18n/routing';
-import { CASE_LINKS, CASE_SLUGS, type CaseSlug } from '@/lib/cases';
+import { CASE_GALLERY, CASE_LINKS, CASE_SLUGS, type CaseSlug } from '@/lib/cases';
 import { CONTACT_EMAIL, absoluteUrl, asset } from '@/lib/site';
 import { Footer } from '@/components/sections/Sections';
 import '@/components/sections.css';
@@ -44,6 +44,7 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
   const c = await getTranslations({ locale, namespace: 'contact' });
   const sections = t.raw('sections') as Section[];
   const links = CASE_LINKS[slug as CaseSlug];
+  const gallery = CASE_GALLERY[slug as CaseSlug];
   const others = CASE_SLUGS.filter((s) => s !== slug);
   const nameOf = async (s: string) => (await getTranslations({ locale, namespace: `cases.${s}` }))('title');
   const otherNames = await Promise.all(others.map(nameOf));
@@ -82,6 +83,20 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
           </section>
         )}
       </div>
+
+      {gallery && (
+        <section className="case__gallery" aria-labelledby="h-gallery">
+          <h2 id="h-gallery" className="case__gallery-h">{u('gallery')}</h2>
+          <div className="gallery">
+            {gallery.map((id) => (
+              <figure key={id} className="gallery__item">
+                <img src={asset(`/media/portals/${id}.webp`)} alt={t(`gallery.${id}.alt`)} width={1600} height={1000} loading="lazy" decoding="async" />
+                <figcaption className="note">{t(`gallery.${id}.caption`)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="case__more">
         <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>

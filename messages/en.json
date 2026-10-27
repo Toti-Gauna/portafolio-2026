@@ -16,85 +16,32 @@
   "trailer": {
     "title": "Meet Ignacio",
     "close": "Skip to the portfolio",
-    "play": "Play",
-    "pause": "Pause",
     "soundOn": "Turn sound on",
     "soundOff": "Mute",
-    "progress": "Trailer progress",
-    "scene": "Scene {n} of {total}",
+    "loading": "Loading the trailer…",
     "textTitle": "Text version",
-    "textLead": "The same eleven moments of the trailer, without animation.",
+    "textLead": "The same moments of the trailer, without animation.",
     "watch": "Watch the animation anyway",
-    "noscript": "The trailer needs JavaScript.",
-    "video": "Clip from the CompliA demo. Sample data.",
-    "scenes": {
-      "s1a": "Mar del Plata.",
-      "s1b": "17 years old.",
-      "typePre": "I wanted to make a ",
-      "typeWord": "games",
-      "typePost": " website.",
-      "s3": "That year, every road opened up.",
-      "tach": {
-        "year": "2021",
-        "name": "TACH Argentina",
-        "text": "Virtual wallet. Web and mobile."
-      },
-      "ada": {
-        "year": "2023",
-        "name": "Ada ITW",
-        "text": "I taught JavaScript and React."
-      },
-      "tuenti": {
-        "year": "Since 2024",
-        "name": "Tuenti",
-        "text": "Roulette. Referrals. Automatic top-up. Payments.",
-        "game": "The game came back.",
-        "p1": "Roulette",
-        "p2": "Referrals",
-        "p3": "Automatic top-up",
-        "p4": "Payments"
-      },
-      "complia": {
-        "year": "2026",
-        "name": "CompliA",
-        "text": "Artificial intelligence in production, for compliance.",
-        "note": "Assistant for Telefónica's compliance portal. In internal production."
-      },
-      "projects": {
-        "title": "And my own branches.",
-        "eclipse": "Eclipse",
-        "eclipseS": "In development",
-        "handyx": "HandyX",
-        "handyxS": "In development · launches Nov 10",
-        "volta": "Volta",
-        "voltaS": "Demo",
-        "velmar": "Velmar",
-        "velmarS": "Demo",
-        "dentalos": "DentalOS",
-        "dentalosS": "Demo",
-        "supernova": "Supernova Eventos",
-        "supernovaS": "Prototype",
-        "games": "games-market",
-        "gamesS": "Test bench",
-        "kinetic": "Kinetic Studio",
-        "kineticS": "32 trailers in code"
-      },
-      "system": {
-        "title": "This is not vibe coding.",
-        "text": "11 agents. Gates with human sign-off.",
-        "g1": "Discover",
-        "g2": "Plan",
-        "g3": "Build",
-        "g4": "Test",
-        "g5": "Review",
-        "g6": "Deliver",
-        "note": "Nothing ships without human approval."
-      },
-      "role": "Ssr AI Fullstack Developer",
-      "open": "Open to new opportunities.",
-      "mail": "ignaciogauna.developer@gmail.com"
-    },
-    "videoShort": "Sample data"
+    "textVersion": "Text version",
+    "rotateTitle": "Turn your phone",
+    "rotateText": "The trailer is made to be watched in landscape.",
+    "watchAnyway": "Watch anyway",
+    "frame": "Ignacio Gauna's trailer, made with Kinetic Studio",
+    "transcript": [
+      "Mar del Plata. 17 years old. I wanted to build a games website.",
+      "That year, every road opened up. I'm self-taught: I read a lot and study online.",
+      "2021 – 2022 · TACH Argentina · Software Developer. Remote development: a virtual wallet, on web and mobile.",
+      "2023 – 2024 · Ada ITW · Professor. I taught JavaScript and React.",
+      "Since 2024 · Tsoft, for Tuenti and Telefónica: the Tuenti roulette and the referral system (the game came back), automatic top-up and payments. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL.",
+      "January 2026: Special Recognition from Tsoft. 2026: Dev Ssr → Ssr AI Fullstack Developer.",
+      "CompliA: a RAG assistant for Telefónica's compliance portal. I designed and built it. In internal production. (Demo clip, with sample data.)",
+      "And my own branches: Eclipse (in development), HandyX (in development · launches Nov 10), Volta (demo), Velmar (demo made for a client), DentalOS (demo), Supernova Eventos (prototype), games-market (test bench), Kinetic Studio (32 trailers in code).",
+      "An agentic system, split into parts: 11 agents with separate roles. Not a prompt: a system with roles.",
+      "Specification first, code second. Every claim carries its level of evidence. Gates with human approval. Tested, not eyeballed.",
+      "Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779, internal portal 132 and 14 browser journeys. Nothing ships without human approval.",
+      "Ignacio Gauna. Ssr AI Fullstack Developer. I build AI software that ships.",
+      "Open to new opportunities. I'm looking for a Ssr or Sr fullstack role with AI. ignaciogauna.developer@gmail.com"
+    ]
   },
   "header": {
     "home": "Ignacio Gauna, home",
@@ -182,22 +129,26 @@
       "complia": {
         "name": "CompliA",
         "status": "In internal production",
-        "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations."
+        "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations.",
+        "shotAlt": "Frame of the CompliA demo with sample data: 28 declarations found, 8 under analysis and 13 processed."
       },
       "tuenti": {
         "name": "Tuenti",
         "status": "Professional work",
-        "text": "Gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module, from Tsoft."
+        "text": "Gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module, from Tsoft.",
+        "shotAlt": "Illustration of a prize wheel, for the Tuenti gamification work. There are no screenshots of the product, for confidentiality."
       },
       "handyx": {
         "name": "HandyX",
         "status": "In development · launches November 10",
-        "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project."
+        "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project.",
+        "shotAlt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades."
       },
       "eclipse": {
         "name": "Eclipse",
         "status": "In development",
-        "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend."
+        "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend.",
+        "shotAlt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks."
       }
     }
   },
@@ -302,8 +253,8 @@
   },
   "system": {
     "label": "05 · System",
-    "title": "Not vibe coding. A system.",
-    "lead": "I code with agents, but inside a process that plans, tests and delivers, with a person who approves.",
+    "title": "An agentic system, split into parts.",
+    "lead": "I code with agents, but each one has its own part and nothing ships without a person who approves.",
     "points": [
       {
         "title": "Not a prompt: a system with roles",
@@ -334,7 +285,66 @@
         "text": "No invented testimonials or clients, everything fictional says «Demo», and no new dependency or spending without my OK."
       }
     ],
-    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above."
+    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above.",
+    "agentsTitle": "Eleven agents, each with its role",
+    "principlesTitle": "How they work together",
+    "agents": [
+      {
+        "id": "chief",
+        "name": "Direction",
+        "role": "Owns the plan, the scope and the cost. Writes no code: decides what gets done and in what order."
+      },
+      {
+        "id": "uxui",
+        "name": "UX/UI",
+        "role": "Flows, states and accessibility before screens."
+      },
+      {
+        "id": "design",
+        "name": "Design",
+        "role": "Visual system, type, colour and motion, with a review rubric."
+      },
+      {
+        "id": "marketing",
+        "name": "Marketing",
+        "role": "Message, positioning and content."
+      },
+      {
+        "id": "ads",
+        "name": "Ads",
+        "role": "Pieces and hooks for campaigns, with honesty rules."
+      },
+      {
+        "id": "frontend",
+        "name": "Frontend architect",
+        "role": "Project analysis, components, data integration and performance."
+      },
+      {
+        "id": "backend",
+        "name": "Backend architect",
+        "role": "Layers, schemas, services and transactions, always discovery first."
+      },
+      {
+        "id": "security",
+        "name": "Cybersecurity",
+        "role": "Threat modelling, OWASP and hardening; tests only in our own environments."
+      },
+      {
+        "id": "game",
+        "name": "Game architect",
+        "role": "Mechanics, reward economies and web game performance."
+      },
+      {
+        "id": "trailer",
+        "name": "Trailer architect",
+        "role": "Direction, storyboard, motion and sound for pieces like this trailer."
+      },
+      {
+        "id": "docs",
+        "name": "Documentation",
+        "role": "Documents projects and decisions."
+      }
+    ]
   },
   "skills": {
     "label": "06 · Skills",
@@ -401,7 +411,8 @@
     "contactTitle": "Shall we talk?",
     "contactText": "Open to new opportunities.",
     "videoCaption": "Clip from the CompliA demo. Sample data.",
-    "next": "Other cases"
+    "next": "Other cases",
+    "gallery": "Screenshots"
   },
   "cases": {
     "complia": {
@@ -452,7 +463,25 @@
             "There are no results or metrics to show yet."
           ]
         }
-      ]
+      ],
+      "gallery": {
+        "handy-landing": {
+          "alt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades.",
+          "caption": "Handyx landing: waiting list and pre-registration. Launches Nov 10 in Mar del Plata. Captured on 10/27/2026."
+        },
+        "handy-especialistas": {
+          "alt": "Handyx page for specialists, on blue: «Tus herramientas. Tu precio.» (Your tools. Your price.), the buttons to join and to see how payment works, and a phone with the «Tu precio» screen, where the specialist builds the quote from the price Handyx suggests.",
+          "caption": "Handyx for specialists: each specialist sets the price; Handyx only suggests one. Captured on 10/27/2026."
+        },
+        "handy-ops-inicio": {
+          "alt": "Home of the Handyx internal portal in sample mode: a notice that every record is fictional, counters (9 to contact, 14 specialists signed up, 11 on the waiting list, 3 committed), the «Para contactar» queue and the Mar del Plata specialists by trade.",
+          "caption": "Handyx internal portal, sample view with fictional records: who to message today."
+        },
+        "handy-ops-registros": {
+          "alt": "Pre-registration list of the Handyx internal portal in sample mode: tabs by contact state (not contacted, with attempts, contacted, committed), filters by trade and city, and fictional specialists sorted by the nearest follow-up.",
+          "caption": "Pre-registrations by contact stage, with fictional records."
+        }
+      }
     },
     "eclipse": {
       "title": "Eclipse",
@@ -480,7 +509,37 @@
           "h": "Status",
           "p": "Under construction. There are no clients or commercial results to show, and I don't invent them."
         }
-      ]
+      ],
+      "gallery": {
+        "eclipse-landing": {
+          "alt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks.",
+          "caption": "The landing page: the eclipse at totality and a single call to action."
+        },
+        "eclipse-landing-precios": {
+          "alt": "Pricing section of the Eclipse landing page on a cream background: the Spanish headline «Cuánto cuesta y cómo se paga.» (what it costs and how it's paid), the currency switch set to USD, the tabs «Planes (6)» and «Pieza por pieza (18)» and the first level, Contact, at US$ 30 a month.",
+          "caption": "Pricing: six monthly levels and the list of pieces, in US dollars."
+        },
+        "eclipse-portal-proyectos": {
+          "alt": "Eclipse's client portal in demo mode, in Spanish: the notice «Vista de demostración — datos ficticios» (demo view, fictional data), the greeting «Hola, Lucía.», a summary saying two things await an answer and the project table of a fictional hardware store, each stage marked with the eclipse phase glyph.",
+          "caption": "Client portal, “My projects”, with fictional data."
+        },
+        "eclipse-portal-detalle": {
+          "alt": "Detail of a fictional project in Eclipse's client portal, in Spanish: «Chatbot de consultas» (questions chatbot), the current stage «Revisión del cliente» (client review, 4 of 5) with its phase glyph, the next milestone with its estimated date and the «Tu acción» card flagged «Te toca a vos» (your turn).",
+          "caption": "Project detail: stage, next milestone and what's on you. Fictional data."
+        },
+        "eclipse-ops-prospectos": {
+          "alt": "Eclipse's internal portal in dark mode and demo mode, in Spanish: the Prospects screen, with the headline «Del contacto a la seña.» (from first contact to deposit), the stage filters and a list of fictional businesses with their stage, source and the computed next action, such as «Llamar (mismo día que respondió)» (call the same day they replied), with its due tag.",
+          "caption": "Internal operations: prospects with the computed next action. Sample data."
+        },
+        "eclipse-ops-proyectos": {
+          "alt": "Eclipse's internal portal, Projects screen, in Spanish: the headline «Proyectos en curso.» (projects in progress), the counters of active projects (5) and of those waiting on the client (3), the filters and the list of fictional projects with their stage (the same five stages the client sees), their next milestone and what was asked of the client.",
+          "caption": "Internal operations: projects in the five stages the client sees. Sample data."
+        },
+        "eclipse-ops-calendario": {
+          "alt": "Eclipse's internal portal, Calendar screen, in Spanish: the headline «Dale espacio a lo importante.» (make room for what matters), the October 2026 grid and, on the right, the agenda for October 27 with sample activities such as «10:00 Dejar listas las propuestas de hoy» (get today's proposals ready) and «15:00 Llamada de propuesta · Constructora» (proposal call).",
+          "caption": "Internal operations: the calendar and the day's agenda. Sample data."
+        }
+      }
     },
     "kinetic": {
       "title": "Kinetic Studio",
@@ -501,7 +560,7 @@
         },
         {
           "h": "Where to see it",
-          "p": "The «Meet Ignacio» trailer on this site uses the same ideas, with a new, smaller engine."
+          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 20 scenes in 96 seconds, with synthesised music and real components of my projects rebuilt in code."
         },
         {
           "h": "Known debt",
