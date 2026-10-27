@@ -82,7 +82,7 @@
     grid(D, el, a, bar) {
       const H = [180, 360, 540, 720, 900], V = [240, 480, 720, 960, 1200, 1440, 1680];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g">${H.map(y => `<line x1="-300" y1="${y}" x2="2220" y2="${y}"/>`).join('')}${V.map(x => `<line x1="${x}" y1="-60" x2="${x}" y2="1140"/>`).join('')}<circle cx="1440" cy="360" r="300"/><circle cx="480" cy="760" r="190"/></g></svg>`;
-      const g = el.querySelector('.g'), parts = el.querySelectorAll('line, circle');
+      const g = el.querySelector('.igb-svg'), parts = el.querySelectorAll('line, circle');
       gsap.set(parts, { drawSVG: '0%' });
       D.hit(parts, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.4, ease: 'expo.inOut', stagger: 0.05 }, a.from);
       D.tl.set(g, { x: 0 }, a.from);
@@ -102,7 +102,7 @@
     branches(D, el, a) {
       const fk = [[100, 700], [380, 520], [700, 800], [980, 360], [1260, 620], [1540, 460]];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g"><path d="M-100 900H2120"/>${fk.map(([x, y]) => `<path d="M${x} 900C${x + 130} 900 ${x + 130} ${y} ${x + 260} ${y}H2120"/>`).join('')}${fk.map(([x]) => `<circle class="n" cx="${x}" cy="900" r="8"/>`).join('')}</g></svg>`;
-      const g = el.querySelector('.g'), paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
+      const g = el.querySelector('.igb-svg'), paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
       const span = a.to - a.from;
       gsap.set(paths, { drawSVG: '0%' });
       gsap.set(nodes, { scale: 0, transformOrigin: '50% 50%' });
@@ -122,8 +122,8 @@
       pts.forEach((p, i) => pts.map((q, j) => [j, (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2]).filter(([j]) => j !== i).sort((x, y) => x[1] - y[1]).slice(0, 2)
         .forEach(([j]) => { if (!links.some(([u, v]) => (u === j && v === i))) links.push([i, j]); }));
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g">${links.map(([i, j]) => `<line x1="${pts[i][0].toFixed(0)}" y1="${pts[i][1].toFixed(0)}" x2="${pts[j][0].toFixed(0)}" y2="${pts[j][1].toFixed(0)}"/>`).join('')}${pts.map(([x, y]) => `<circle class="n" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="5"/>`).join('')}</g></svg>`;
-      const g = el.querySelector('.g'), nodes = Array.from(el.querySelectorAll('.n'));
-      gsap.set(g, { svgOrigin: '960 540' });
+      const g = el.querySelector('.igb-svg'), nodes = Array.from(el.querySelectorAll('.n'));
+      gsap.set(g, { transformOrigin: '50% 50%' });
       D.tl.set(g, { rotation: 0 }, a.from);
       D.tl.to(g, { rotation: 14, duration: a.to - a.from, ease: 'none' }, a.from);
       gsap.set(nodes, { transformOrigin: '50% 50%' });
@@ -182,6 +182,25 @@
     if (desc) D.tl.to(desc, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, a + 0.25);
     D.tl.to(el, { clipPath: 'inset(0% 0% 0% 100%)', duration: 0.28, ease: 'power3.in' }, b);
     D.tl.set(el, { autoAlpha: 0 }, b + 0.28);
+  }
+
+  // ================================================================== WARM-UP
+  /** Every scene's first frame is the expensive one (styles, text splits, fonts, the first paint of a big
+   *  view): the cuts stuttered there. Before playing, walk the film once, a frame every 1.5 s plus the
+   *  moments recipes ask for (`extra`: e.g. each montage view once it is visible — a layer at opacity 0 is
+   *  never painted), behind a cover, so the playback only repeats work already done. Seeking suppresses
+   *  callbacks: no sound. */
+  async function warm(tl, extra = []) {
+    const cover = document.createElement('div');
+    cover.id = 'ig-warm';
+    document.body.appendChild(cover);
+    const frame = () => new Promise(r => requestAnimationFrame(() => r()));
+    const at = [];
+    for (let t = 0; t < tl.duration(); t += 1.5) at.push(t);
+    for (const t of [...at, ...extra].sort((a, b) => a - b)) { tl.seek(t, true); await frame(); }
+    tl.seek(0, true);
+    await frame();
+    cover.remove();
   }
 
   // ================================================================== HOST MODE (inside the portfolio)
@@ -256,9 +275,12 @@
         if (d.type === 'trailer:mute') SFX.setMuted(!!d.muted);
         else if (d.type === 'trailer:toggle' || (d.type === 'trailer:pause' && !tl.paused()) || (d.type === 'trailer:play' && tl.paused())) dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
       });
-      post('trailer:ready', { duration: tl.duration() });
-      // the engine enables #play at the very end of its build: start on the next task (not in ?t= / ?embed)
-      if (!Q.has('t') && !Q.has('embed')) setTimeout(() => { const b = document.getElementById('play'); if (b && !b.disabled) b.click(); }, 0);
+      const go = () => {
+        post('trailer:ready', { duration: tl.duration() });
+        // the engine enables #play at the very end of its build: start on the next task (not in ?t= / ?embed)
+        if (!Q.has('t') && !Q.has('embed')) setTimeout(() => { const b = document.getElementById('play'); if (b && !b.disabled) b.click(); }, 0);
+      };
+      if (Q.has('t') || Q.has('embed')) go(); else warm(tl, cfg.warmAt).then(go, go);
     },
   });
 

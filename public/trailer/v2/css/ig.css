@@ -10,10 +10,17 @@
 .is-host #intro, .is-host #end, .is-host #ui { display: none !important; }
 .is-host body, .is-host #viewport { background: #0e0e10; }
 .is-host body.idle { cursor: default; }
+#ig-warm { position: fixed; inset: 0; z-index: 100; background: #0e0e10; }
+
+/* ---------- the film's HUD, trimmed: name and role top-left, the chapter top-right (no REC / timecode / fps) ---------- */
+#hud .hud-bl, #hud .hud-br, #hud .rec { display: none; }
+#hud .hud-tl { font-size: 0; }
+#hud .hud-tl #hud-brand, #hud .hud-tr { font-size: 18px; }
 
 /* ---------- act backgrounds (#ig-acts sits between #wipe and #camera) ---------- */
 #ig-acts { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .igb { position: absolute; inset: 0; visibility: hidden; }
+.igb > * { will-change: transform, opacity; } /* each background moves on the compositor, not by repainting */
 .igb-dots { position: absolute; left: -240px; top: -240px; width: 2400px; height: 1560px;
   background: radial-gradient(circle, currentColor 1.9px, transparent 2.7px) 0 0 / 32px 32px; }
 .igb-ring { position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%; border: 2px solid currentColor; }

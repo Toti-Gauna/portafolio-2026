@@ -28,7 +28,7 @@ const strings = (x: unknown): string[] =>
 describe('trailer v2 configs', () => {
   it('es and en are the same film: scenes, timings and data match, only words change', () => {
     const { es: cEs, en: cEn } = configs;
-    expect((cEs.scenes as unknown[]).length).toBe(20);
+    expect((cEs.scenes as unknown[]).length).toBe(16);
     expect(shape(cEn.scenes)).toEqual(shape(cEs.scenes));
     expect(shape(cEn.ui)).toEqual(shape(cEs.ui));
   });

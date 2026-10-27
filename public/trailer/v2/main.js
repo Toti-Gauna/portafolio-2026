@@ -12,6 +12,7 @@ import './js/recipes-shop.js';
 import './js/recipes-branch.js';
 import './js/recipes-music.js';
 import './js/ig-kit.js';
+import './js/ig-career.js';
 import './js/ig-shots.js';
 import './js/shots/eclipse.js';
 import './js/shots/handy.js';
