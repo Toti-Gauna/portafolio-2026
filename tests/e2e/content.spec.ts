@@ -21,6 +21,9 @@ test('home has the eight sections, each with its heading, and no console errors'
   await expect(page.locator('.journey__item')).toHaveCount(7);
   await expect(page.locator('.method__step')).toHaveCount(6);
   await expect(page.locator('.system__item')).toHaveCount(7);
+  await expect(page.locator('.agent')).toHaveCount(11);
+  await expect(page.locator('.agent svg')).toHaveCount(11);
+  expect((await page.locator('main').innerText()).toLowerCase()).not.toContain('vibe coding');
   // honesty: every project card/lab item carries a status, and the product name is spelled CompliA
   await expect(page.locator('.work__card .status')).toHaveCount(4);
   await expect(page.locator('.lab__item .status')).toHaveCount(6);

@@ -80,7 +80,7 @@
         "kineticS": "32 trailers in code"
       },
       "system": {
-        "title": "This is not vibe coding.",
+        "title": "An agentic system.",
         "text": "11 agents. Gates with human sign-off.",
         "g1": "Discover",
         "g2": "Plan",
@@ -302,8 +302,8 @@
   },
   "system": {
     "label": "05 · System",
-    "title": "Not vibe coding. A system.",
-    "lead": "I code with agents, but inside a process that plans, tests and delivers, with a person who approves.",
+    "title": "An agentic system, split into parts.",
+    "lead": "I code with agents, but each one has its own part and nothing ships without a person who approves.",
     "points": [
       {
         "title": "Not a prompt: a system with roles",
@@ -334,7 +334,66 @@
         "text": "No invented testimonials or clients, everything fictional says «Demo», and no new dependency or spending without my OK."
       }
     ],
-    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above."
+    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above.",
+    "agentsTitle": "Eleven agents, each with its role",
+    "principlesTitle": "How they work together",
+    "agents": [
+      {
+        "id": "chief",
+        "name": "Direction",
+        "role": "Owns the plan, the scope and the cost. Writes no code: decides what gets done and in what order."
+      },
+      {
+        "id": "uxui",
+        "name": "UX/UI",
+        "role": "Flows, states and accessibility before screens."
+      },
+      {
+        "id": "design",
+        "name": "Design",
+        "role": "Visual system, type, colour and motion, with a review rubric."
+      },
+      {
+        "id": "marketing",
+        "name": "Marketing",
+        "role": "Message, positioning and content."
+      },
+      {
+        "id": "ads",
+        "name": "Ads",
+        "role": "Pieces and hooks for campaigns, with honesty rules."
+      },
+      {
+        "id": "frontend",
+        "name": "Frontend architect",
+        "role": "Project analysis, components, data integration and performance."
+      },
+      {
+        "id": "backend",
+        "name": "Backend architect",
+        "role": "Layers, schemas, services and transactions, always discovery first."
+      },
+      {
+        "id": "security",
+        "name": "Cybersecurity",
+        "role": "Threat modelling, OWASP and hardening; tests only in our own environments."
+      },
+      {
+        "id": "game",
+        "name": "Game architect",
+        "role": "Mechanics, reward economies and web game performance."
+      },
+      {
+        "id": "trailer",
+        "name": "Trailer architect",
+        "role": "Direction, storyboard, motion and sound for pieces like this trailer."
+      },
+      {
+        "id": "docs",
+        "name": "Documentation",
+        "role": "Documents projects and decisions."
+      }
+    ]
   },
   "skills": {
     "label": "06 · Skills",

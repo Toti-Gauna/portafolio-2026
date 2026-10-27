@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/copy-trailer-vendor.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/copy-trailer-vendor.mjs",
     "build": "next build",
     "start": "npx serve@14 out",
     "typecheck": "tsc --noEmit",

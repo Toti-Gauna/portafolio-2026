@@ -4,6 +4,7 @@ import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { LAB, type CaseSlug } from '@/lib/cases';
 import { Reveal } from '../Reveal';
 import { MethodIcon } from '../MethodIcon';
+import { AgentIcon, type AgentId } from '../AgentIcon';
 import '../sections.css';
 
 type Item = { when: string; title: string; text: string };
@@ -126,6 +127,19 @@ export function System() {
   return (
     <section id="sistema" className="sec container-x" aria-labelledby="h-sistema">
       <Head id="h-sistema" label={t('label')} title={t('title')} lead={t('lead')} />
+      <h3 className="sub-title">{t('agentsTitle')}</h3>
+      <ul className="agents">
+        {(t.raw('agents') as { id: AgentId; name: string; role: string }[]).map((a) => (
+          <Reveal as="li" key={a.id} className="agent">
+            <AgentIcon id={a.id} />
+            <div>
+              <p className="agent__name">{a.name}</p>
+              <p className="agent__role">{a.role}</p>
+            </div>
+          </Reveal>
+        ))}
+      </ul>
+      <h3 className="sub-title">{t('principlesTitle')}</h3>
       <ol className="system">
         {points.map((p, i) => (
           <Reveal as="li" key={i} className="system__item">
