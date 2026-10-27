@@ -35,6 +35,9 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
   const audioRef = useRef<TrailerAudio | null>(null);
   const timeRef = useRef(0);
   const wantPlay = useRef(true);
+  const startApplied = useRef(false);
+  const focusedOnce = useRef(false);
+  const playBtnRef = useRef<HTMLButtonElement>(null);
 
   const [o, setO] = useState<Orientation>(() => (window.innerHeight > window.innerWidth * 1.05 ? 'portrait' : 'landscape'));
   const [reduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -51,6 +54,17 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
     if (d && !d.open) d.showModal();
     return () => d?.close();
   }, []);
+
+  // One audio engine for the whole dialog: rebuilding the scene (rotation) keeps its on/off state.
+  useEffect(() => {
+    const audio = new TrailerAudio(() => tlRef.current?.time() ?? 0);
+    audioRef.current = audio;
+    return () => { audio.dispose(); audioRef.current = null; };
+  }, []);
+
+  useEffect(() => {
+    if (ready && !focusedOnce.current) { focusedOnce.current = true; playBtnRef.current?.focus(); }
+  }, [ready]);
 
   useEffect(() => {
     let id: ReturnType<typeof setTimeout>;
@@ -117,21 +131,26 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
         setPlaying(false);
         wantPlay.current = false;
         audioRef.current?.pause();
-        setTimeout(() => { if (!disposed) onClose(); }, 500);
+        // close only if nobody scrubbed back during the last half second
+        setTimeout(() => { if (!disposed && tl.time() >= DURATION - 0.05) onClose(); }, 500);
       });
       tlRef.current = tl;
 
-      const audio = new TrailerAudio(() => tl.time());
-      audio.setEnabled(false);
-      audioRef.current = audio;
-
-      const startAt = new URLSearchParams(window.location.search).get('t');
-      const from = startAt !== null && !Number.isNaN(Number(startAt)) ? Math.min(DURATION, Math.max(0, Number(startAt))) : timeRef.current;
-      if (startAt !== null) wantPlay.current = false;
+      // ?t=<seconds> opens paused on that frame (QA / screenshots). Applied once, not on every rebuild.
+      let from = timeRef.current;
+      if (!startApplied.current) {
+        startApplied.current = true;
+        const startAt = new URLSearchParams(window.location.search).get('t');
+        if (startAt !== null && !Number.isNaN(Number(startAt))) {
+          from = Math.min(DURATION, Math.max(0, Number(startAt)));
+          wantPlay.current = false;
+        }
+      }
       tl.time(from);
       render();
+      audioRef.current?.seek();
       setReady(true);
-      if (wantPlay.current) { tl.play(); audio.play(); setPlaying(true); }
+      if (wantPlay.current) { tl.play(); audioRef.current?.play(); setPlaying(true); }
     })();
 
     const onVis = () => { if (document.hidden) pause(); };
@@ -141,8 +160,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
       document.removeEventListener('visibilitychange', onVis);
       tlRef.current?.kill();
       tlRef.current = null;
-      audioRef.current?.dispose();
-      audioRef.current = null;
+      audioRef.current?.pause();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [o, textMode]);
@@ -184,7 +202,6 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
   const onKeyDown = (e: React.KeyboardEvent) => {
     const tag = (e.target as HTMLElement).tagName;
     if (e.key === ' ' && tag !== 'BUTTON' && tag !== 'INPUT') { e.preventDefault(); toggle(); }
-    if ((e.key === 'm' || e.key === 'M') && tag !== 'INPUT') toggleSound();
   };
 
   const s = (k: string) => t(`scenes.${k}`);
@@ -275,7 +292,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
               </ul>
             </div>
 
-            {/* 2026 · ComplIA */}
+            {/* 2026 · CompliA */}
             <div className="tx card" data-k="card-complia">
               <p className="card__year">{s('complia.year')}</p>
               <p className="card__name">{s('complia.name')}</p>
@@ -286,7 +303,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
               <video ref={videoRef} muted playsInline preload="auto" poster={asset('/media/complia-demo-poster.jpg')} aria-label={t('video')}>
                 <source src={asset('/media/complia-demo.mp4')} type="video/mp4" />
               </video>
-              <figcaption className="label">{t('video')}</figcaption>
+              <figcaption className="label"><span className="cap-long">{t('video')}</span><span className="cap-short">{t('videoShort')}</span></figcaption>
             </figure>
 
             {/* mis propias ramas */}
@@ -303,9 +320,19 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
             {/* el sistema */}
             <p className="tx sys-title" data-k="sys-title">{s('system.title')}</p>
             <p className="tx sys-text" data-k="sys-text">{s('system.text')}</p>
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <p key={i} className="tx gate" data-k="gate" style={{ left: gatePos(i - 1), top: `${(gateY(o) + 0.03) * 100}%` }}>{s(`system.g${i}`)}</p>
-            ))}
+            <ol className="gates" style={{ ['--gy' as string]: `${(gateY(o) + 0.03) * 100}%` }}>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <li key={i} className="tx gate" data-k="gate" style={{ ['--gx' as string]: gatePos(i - 1) }}>
+                  <span className="gate__n" aria-hidden="true">{String(i).padStart(2, '0')}</span> {s(`system.g${i}`)}
+                </li>
+              ))}
+            </ol>
+            {/* short stages (phone landscape): one caption under the line, for the gate being lit */}
+            <div className="gate-caps" style={{ ['--gy' as string]: `${(gateY(o) + 0.03) * 100}%` }} aria-hidden="true">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <p key={i} className="tx gate-cap" data-k="gatecap"><span>{String(i).padStart(2, '0')}</span> {s(`system.g${i}`)}</p>
+              ))}
+            </div>
             <p className="tx sys-note" data-k="sys-note">{s('system.note')}</p>
 
             {/* unión y créditos */}
@@ -314,11 +341,12 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
             <div className="cut cut--b" data-k="cut-b" />
             <p className="tx open" data-k="open">{s('open')}</p>
             <p className="tx mail" data-k="mail">{s('mail')}</p>
+            <div className="sweep" data-k="sweep" aria-hidden="true" />
             <div className="stage__fade" data-k="stage-fade" />
           </div>
 
           <div className="controls" role="group" aria-label={t('title')}>
-            <button type="button" className="ctl" onClick={toggle} disabled={!ready} aria-label={playing ? t('pause') : t('play')} autoFocus>
+            <button ref={playBtnRef} type="button" className="ctl" onClick={toggle} disabled={!ready} aria-label={playing ? t('pause') : t('play')}>
               {playing ? <Pause /> : <Play />}
             </button>
             <input

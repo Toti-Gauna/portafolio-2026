@@ -24,6 +24,8 @@ export function Intro() {
   const t = useTranslations('intro');
   const [phase, setPhase] = useState<Phase>('loading');
   const [trailer, setTrailer] = useState(false);
+  // Real load progress: hydrated -> fonts -> window load -> done.
+  const [progress, setProgress] = useState(0.12);
   const portfolioBtn = useRef<HTMLButtonElement>(null);
   const trailerBtn = useRef<HTMLButtonElement>(null);
 
@@ -42,12 +44,15 @@ export function Intro() {
     const finish = () => {
       if (finished) return;
       finished = true;
-      timer = setTimeout(() => setPhase('ready'), Math.max(0, min - (performance.now() - start)));
+      setProgress(1);
+      timer = setTimeout(() => setPhase('ready'), Math.max(350, min - (performance.now() - start)));
     };
     const loaded = new Promise<void>((resolve) => {
       if (document.readyState === 'complete') resolve();
       else window.addEventListener('load', () => resolve(), { once: true });
     });
+    void document.fonts?.ready.then(() => setProgress((p) => Math.max(p, 0.6)));
+    void loaded.then(() => setProgress((p) => Math.max(p, 0.85)));
     void Promise.all([loaded, document.fonts?.ready]).then(finish);
     const safety = setTimeout(finish, SAFETY_MS);
     return () => {
@@ -126,7 +131,7 @@ export function Intro() {
               <>
                 <svg className="boot__line" viewBox="0 0 320 24" fill="none" aria-hidden="true">
                   <path d="M16 12h288" stroke="currentColor" strokeOpacity=".25" strokeWidth="2" strokeLinecap="round" />
-                  <path className="boot__fill" d="M16 12h288" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" pathLength="1" />
+                  <path className="boot__fill" d="M16 12h288" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" pathLength="1" style={{ strokeDashoffset: 1 - progress }} />
                   <circle cx="16" cy="12" r="6" fill="var(--accent)" />
                 </svg>
                 <p role="status" className="boot__status">{t('loading')}…</p>
@@ -136,6 +141,12 @@ export function Intro() {
               </>
             ) : (
               <div className="boot__gate">
+                {/* the seed opens into two branches: one per path */}
+                <svg className="boot__fork" viewBox="0 0 40 136" fill="none" aria-hidden="true">
+                  <path d="M12 4V34C12 46 20 52 36 52" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" pathLength="1" />
+                  <path d="M12 34V96C12 106 20 112 36 112" stroke="var(--paper)" strokeOpacity=".6" strokeWidth="2" strokeLinecap="round" pathLength="1" />
+                  <circle cx="12" cy="6" r="5" fill="var(--accent)" />
+                </svg>
                 <button ref={trailerBtn} type="button" className="btn btn-primary" onClick={() => setTrailer(true)}>
                   {t('trailer')}
                 </button>

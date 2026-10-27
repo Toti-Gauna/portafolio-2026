@@ -68,3 +68,20 @@ test('reduced motion: text version instead of the animation, with a way to watch
   await expect(page.locator('canvas')).toHaveCount(1);
   await ctx.close();
 });
+
+test('focus lands on play when ready; sound survives a rotation; small screens keep text readable', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await openTrailer(page, '/es/?t=96');
+  await expect(page.getByRole('button', { name: 'Reproducir' })).toBeFocused();
+  await page.getByRole('button', { name: 'Activar sonido' }).click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.stage')).toHaveAttribute('data-o', 'portrait');
+  await expect(page.getByRole('button', { name: 'Silenciar' })).toHaveAttribute('aria-pressed', 'true');
+  // rotation keeps the frame (no jump back to ?t)
+  await expect(page.getByRole('slider', { name: 'Progreso del tráiler' })).toHaveValue('96');
+  const tiny = await page.evaluate(() => Array.from(document.querySelectorAll('.stage .tx, .stage .tx *')).filter((e) => {
+    const cs = getComputedStyle(e);
+    return cs.visibility !== 'hidden' && cs.display !== 'none' && Number(cs.opacity) > 0.5 && e.getBoundingClientRect().height > 0 && parseFloat(cs.fontSize) < 12;
+  }).length);
+  expect(tiny).toBe(0);
+});

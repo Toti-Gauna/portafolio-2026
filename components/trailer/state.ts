@@ -15,6 +15,8 @@ export interface DrawState {
   converge: number; // 0..1 pulls every branch to the centre
   agents: number; // 0..1 reveal of the agent graph
   gates: number; // 0..6 gates lit
+  cam: number; // 0..1 camera moves from the wide shot to the focused branch
+  zoom: number; // camera zoom on the graph
 }
 
 export function initialState(): DrawState {
@@ -22,6 +24,6 @@ export function initialState(): DrawState {
     seedA: 0, seedR: 0.01, toWord: 0, toScatter: 0, toName: 0, pAlpha: 0, burst: 0,
     trunk: 0, m0: 0, m1: 0, m2: 0, m3: 0, focus: -1,
     s0: 0, s1: 0, s2: 0, s3: 0, s4: 0, s5: 0, s6: 0, s7: 0, s8: 0,
-    graphA: 1, converge: 0, agents: 0, gates: 0,
+    graphA: 1, converge: 0, agents: 0, gates: 0, cam: 0, zoom: 1,
   };
 }

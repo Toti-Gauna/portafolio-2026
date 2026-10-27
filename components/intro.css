@@ -3,7 +3,8 @@
   inset: 0;
   z-index: 100;
   display: grid;
-  place-items: center;
+  place-items: safe center;
+  overflow-y: auto;
   background: var(--ink);
   color: var(--paper);
   transition: opacity 350ms var(--ease-expo);
@@ -15,12 +16,27 @@
 .boot__name { font-size: clamp(28px, 8vw, 44px); font-variation-settings: 'wdth' 125; font-weight: 800; line-height: 1; }
 .boot__role { font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em; }
 .boot__line { width: min(320px, 100%); margin-top: 20px; color: var(--paper); }
-.boot__fill { stroke-dasharray: 1; stroke-dashoffset: 1; animation: boot-draw 1200ms var(--ease-expo) forwards; }
-@keyframes boot-draw { to { stroke-dashoffset: 0; } }
+.boot__fill { stroke-dasharray: 1; transition: stroke-dashoffset 450ms var(--ease-expo); }
 .boot__status { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.boot__gate { display: grid; gap: 12px; margin-top: 24px; width: min(320px, 100%); }
-.boot__gate .btn { width: 100%; }
+.boot__gate { position: relative; display: grid; gap: 12px; margin-top: 24px; width: min(340px, 100%); padding-left: 40px; }
+.boot__gate .btn { width: 100%; height: 48px; }
+.boot__fork { position: absolute; left: 0; top: -28px; width: 40px; height: 136px; overflow: visible; }
+.boot__fork path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: boot-draw 700ms var(--ease-expo) forwards; }
+.boot__fork path + path { animation-delay: 120ms; }
+.boot__gate .btn { animation: boot-in 500ms var(--ease-expo) both; }
+.boot__gate .btn:last-of-type { animation-delay: 120ms; }
+@keyframes boot-draw { to { stroke-dashoffset: 0; } }
+@keyframes boot-in { from { opacity: 0; transform: translateX(-8px); } }
+/* short screens (phone landscape): everything must fit, the buttons stay reachable */
+@media (max-height: 460px) {
+  .boot__inner { gap: 6px; padding-block: 12px; }
+  .boot__mark { width: 44px; height: 44px; }
+  .boot__name { font-size: 26px; }
+  .boot__line { margin-top: 6px; }
+  .boot__gate { margin-top: 32px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .boot, .boot[data-phase='closing'] { transition: none; }
-  .boot__fill { animation: none; stroke-dashoffset: 0; }
+  .boot__fill { transition: none; }
+  .boot__fork path, .boot__gate .btn { animation: none; stroke-dashoffset: 0; }
 }

@@ -4,6 +4,7 @@ import {
   ACCENT, BLUE, PAPER, INK, GATE_X0, GATE_STEP, agentNodes, buildBranches, gateY, graphRect, mapUV, partial, type Pt,
 } from './graph';
 import { rng } from './rng';
+import { pulseAt } from './score';
 
 export const PARTICLES = 3200;
 
@@ -67,6 +68,7 @@ export function draw(g: CanvasRenderingContext2D, s: DrawState, sc: Scene, time:
   g.fillRect(0, 0, W, H);
   const k = Math.min(W, H) / 1080; // line widths scale with the stage
   const cx = W / 2, cy = H / 2;
+  const beat = pulseAt(time); // 0..1, decays after every kick
 
   // seed glow
   if (s.seedA > 0) {
@@ -80,31 +82,43 @@ export function draw(g: CanvasRenderingContext2D, s: DrawState, sc: Scene, time:
     dot(g, { x: cx, y: cy }, 7 * k, PAPER, s.seedA);
   }
 
-  // commit graph
+  // commit graph, seen through a camera that follows the focused branch
   if (s.graphA > 0.001) {
     const { trunk, main, side } = sc.graph;
     const centre = { x: cx, y: cy };
     const pull = (p: Pt): Pt => (s.converge > 0 ? { x: lerp(p.x, centre.x, s.converge), y: lerp(p.y, centre.y, s.converge) } : p);
     const pp = (pts: Pt[]) => (s.converge > 0 ? pts.map(pull) : pts);
     const a = s.graphA;
-    line(g, pp(partial(trunk, s.trunk)), PAPER, 2.5 * k, a);
+    // camera target: between the nodes of the branches around `focus`
+    const f = Math.min(3, Math.max(0, s.focus));
+    const i0 = Math.floor(f), i1 = Math.min(3, i0 + 1), fk = f - i0;
+    const n0 = main[i0].pts[0], n1 = main[i1].pts[0];
+    const target = { x: lerp(n0.x, n1.x, fk), y: lerp(n0.y, n1.y, fk) };
+    const r = graphRect(o, W, H);
+    const gc = { x: r.x + r.w / 2, y: r.y + r.h / 2 };
+    const look = { x: lerp(gc.x, target.x, s.cam), y: gc.y };
+    g.save();
+    g.translate(gc.x, gc.y);
+    g.scale(s.zoom, s.zoom);
+    g.translate(-look.x, -gc.y);
+    const lw = k / Math.sqrt(s.zoom);
+    line(g, pp(partial(trunk, s.trunk)), PAPER, 2.5 * lw, a);
     main.forEach((b, i) => {
       const prog = [s.m0, s.m1, s.m2, s.m3][i];
       const hot = Math.max(0, 1 - Math.abs(s.focus - i));
       const part = pp(partial(b.pts, prog));
-      line(g, part, b.color, (2.4 + hot * 2) * k, a * (0.45 + 0.55 * Math.max(hot, prog >= 1 && s.focus < 0 ? 1 : 0)));
-      if (prog >= 1) dot(g, pull(b.node), (5 + hot * 4) * k, b.color, a);
+      // light: a wide, faint stroke under the focused branch
+      if (hot > 0.05) line(g, part, b.color, (16 + beat * 10) * lw, a * 0.13 * hot);
+      line(g, part, b.color, (2.4 + hot * 2 + hot * beat * 1.5) * lw, a * (0.45 + 0.55 * Math.max(hot, prog >= 1 && s.focus < 0 ? 1 : 0)));
+      if (prog >= 1) dot(g, pull(b.node), (5 + hot * 4) * lw * (1 + hot * beat * 0.6), b.color, a);
     });
     side.forEach((b, i) => {
       const prog = [s.s0, s.s1, s.s2, s.s3, s.s4, s.s5, s.s6, s.s7, s.s8][i];
-      line(g, pp(partial(b.pts, prog)), b.color, 2 * k, a * 0.9);
-      if (prog >= 1) dot(g, pull(b.node), 4.5 * k, b.color, a);
+      line(g, pp(partial(b.pts, prog)), b.color, 2 * lw, a * 0.9);
+      if (prog >= 1) dot(g, pull(b.node), 4.5 * lw * (1 + beat * 0.5), b.color, a);
     });
-    // trunk nodes where the branches leave
-    if (s.trunk > 0) {
-      const t0 = pull(trunk[0]);
-      dot(g, t0, 8 * k, ACCENT, a);
-    }
+    if (s.trunk > 0) dot(g, pull(trunk[0]), 8 * lw * (1 + beat * 0.3), ACCENT, a);
+    g.restore();
   }
 
   // agents graph
@@ -116,7 +130,7 @@ export function draw(g: CanvasRenderingContext2D, s: DrawState, sc: Scene, time:
       const nx = N[i === 10 ? 1 : i + 1];
       if (show >= 1) line(g, [N[i], nx], PAPER, 1 * k, 0.18);
     }
-    N.forEach((p, i) => dot(g, p, (i === 0 ? 13 : 8) * k, i === 0 ? ACCENT : i % 2 ? BLUE : PAPER, Math.min(1, ag * 3 - i * 0.1)));
+    N.forEach((p, i) => dot(g, p, (i === 0 ? 13 : 8) * k * (1 + beat * (i === 0 ? 0.5 : 0.25)), i === 0 ? ACCENT : i % 2 ? BLUE : PAPER, Math.min(1, ag * 3 - i * 0.1)));
     // gates
     const gy = gateY(o) * H;
     const gx = (i: number) => (GATE_X0 + i * GATE_STEP) * W;
@@ -140,7 +154,8 @@ export function draw(g: CanvasRenderingContext2D, s: DrawState, sc: Scene, time:
         const d = s.burst * s.burst * p.spd * Math.min(W, H) * 0.9;
         x += Math.cos(p.ang) * d; y += Math.sin(p.ang) * d;
       }
-      x = lerp(x, p.rx + Math.sin(time * 0.6 + p.ang) * 12, s.toScatter);
+      const par = (s.cam * (p.tone - 0.5) * 60 + s.cam * 40) * k; // depth: far stars move less
+      x = lerp(x, p.rx - par + Math.sin(time * 0.6 + p.ang) * 12, s.toScatter);
       y = lerp(y, p.ry + Math.cos(time * 0.5 + p.ang) * 12, s.toScatter);
       x = lerp(x, n.x, s.toName); y = lerp(y, n.y, s.toName);
       g.globalAlpha = s.pAlpha * (0.45 + 0.55 * p.tone);

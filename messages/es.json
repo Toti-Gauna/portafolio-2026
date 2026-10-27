@@ -25,7 +25,7 @@
     "textLead": "Los mismos once momentos del tráiler, sin animación.",
     "watch": "Ver la animación igual",
     "noscript": "El tráiler necesita JavaScript.",
-    "video": "Recorte de la demo de ComplIA. Datos de ejemplo.",
+    "video": "Recorte de la demo de CompliA. Datos de ejemplo.",
     "scenes": {
       "s1a": "Mar del Plata.",
       "s1b": "17 años.",
@@ -55,7 +55,7 @@
       },
       "complia": {
         "year": "2026",
-        "name": "ComplIA",
+        "name": "CompliA",
         "text": "Inteligencia artificial en producción, para compliance.",
         "note": "Asistente del portal de compliance de Telefónica. En producción interna."
       },
@@ -92,7 +92,8 @@
       "role": "Ssr AI Fullstack Developer",
       "open": "Abierto a nuevas oportunidades.",
       "mail": "ignaciogauna.developer@gmail.com"
-    }
+    },
+    "videoShort": "Datos de ejemplo"
   },
   "header": {
     "home": "Ignacio Gauna, inicio",
@@ -107,7 +108,7 @@
     "lead": "De la interfaz al backend, con un sistema que planifica, prueba y entrega.",
     "availability": "Abierto a nuevas oportunidades",
     "proofs": {
-      "complia": "ComplIA en producción",
+      "complia": "CompliA en producción",
       "since": "Desde 2021",
       "system": "11 agentes · tests · CI"
     },

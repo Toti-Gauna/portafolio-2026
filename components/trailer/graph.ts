@@ -32,7 +32,7 @@ export function cubic(p0: Pt, p1: Pt, p2: Pt, p3: Pt, n = 28): Pt[] {
 
 export interface Branch { pts: Pt[]; color: string; node: Pt }
 
-/** Four career branches (TACH, Ada, Tuenti, ComplIA). */
+/** Four career branches (TACH, Ada, Tuenti, CompliA). */
 export const MAIN = [
   { u: 0.14, v: -0.62, color: ACCENT },
   { u: 0.3, v: 0.66, color: ACCENT },

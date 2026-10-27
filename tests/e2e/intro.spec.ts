@@ -67,3 +67,10 @@ test('reduced motion: boot screen still works and finishes quickly', async ({ br
   await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeVisible({ timeout: 2000 });
   await ctx.close();
 });
+
+test('the gate opens into two branches and fits a short phone in landscape', async ({ page }) => {
+  await page.setViewportSize({ width: 568, height: 320 });
+  await page.goto('/es/');
+  await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeInViewport();
+  await expect(page.locator('.boot__fork path')).toHaveCount(2);
+});

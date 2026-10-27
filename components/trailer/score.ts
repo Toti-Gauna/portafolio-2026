@@ -84,3 +84,15 @@ export function buildScore(): ScoreEvent[] {
 
   return e.sort((a, b) => a.t - b.t);
 }
+
+/** Times of every kick, for visuals that pulse with the beat (pure function of time: seekable). */
+export const KICKS: number[] = buildScore().filter((e) => e.k === 'kick' || e.k === 'hit').map((e) => e.t);
+
+/** 0..1 pulse that decays after the last kick before t. */
+export function pulseAt(t: number): number {
+  let lo = 0, hi = KICKS.length - 1, last = -1;
+  while (lo <= hi) { const m = (lo + hi) >> 1; if (KICKS[m] <= t) { last = KICKS[m]; lo = m + 1; } else hi = m - 1; }
+  if (last < 0) return 0;
+  const d = t - last;
+  return d > 0.6 ? 0 : Math.exp(-d * 9);
+}

@@ -11,7 +11,9 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - **Sin copy en componentes:** todo texto sale de `messages/{es,en}.json` (mismas claves; lo verifica `tests/unit/messages.test.ts`).
 - **Mobile-first:** sin scroll horizontal a 360 px, gutter de 16 px, objetivos táctiles ≥ 44 px.
 - **Accesibilidad:** HTML semántico, teclado completo, foco visible, contraste AA, `prefers-reduced-motion` respetado en toda animación.
-- **Motion:** solo `transform`, `opacity`, `stroke-dashoffset`, `clip-path`. Nada en bucle fuera de pantalla. Sonido apagado por defecto.
+- **Motion:** solo `transform`, `opacity`, `stroke-dashoffset`, `clip-path`. Nada en bucle fuera de pantalla. Sonido apagado por defecto. Excepción aprobada: el eje de ancho de Archivo (`--wdth`) en unos pocos titulares del tráiler.
+- **Texto legible:** nada por debajo de 12 px en ninguna pantalla (en el tráiler: `max(12px, …)` y container queries para escenarios chicos).
+- Grafía del producto: **CompliA**.
 - **Dependencias:** no se agregan sin aprobación explícita.
 - Pantalla de carga en cada recarga, con puerta «Conocer a Ignacio» / «Ver portafolio» (`components/Intro.tsx`). El contenido queda en el HTML, inerte mientras la pantalla está abierta.
 - SVG propios en `design/svg/` (se incrustan en línea; como `<img>` no reciben las variables CSS).
@@ -21,5 +23,5 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - `components/TrailerOverlay.tsx` (chunk lazy, `<dialog>` nativo) + `components/trailer/`: una sola timeline GSAP pausada (`scenes.ts`) maneja el texto DOM y el estado del canvas (`state.ts`, `draw.ts`); cualquier segundo se puede buscar y dibuja ese cuadro. Tiempos en `timing.ts`; partitura como datos en `score.ts`; síntesis WebAudio en `audio.ts` (apagado por defecto).
 - Formato: 16:9 en horizontal y 9:16 en pantallas verticales (`data-o`). `?t=<segundos>` abre el tráiler pausado en ese cuadro (para QA y capturas).
 - Movimiento reducido: no se reproduce; se muestra la versión en texto (con botón para verlo igual).
-- El recorte de ComplIA (`public/media/complia-demo.mp4`) es de una demo con datos de ejemplo y sin marcas; va rotulado en pantalla.
+- El recorte de CompliA (`public/media/complia-demo.mp4`) es de una demo con datos de ejemplo y sin marcas; va rotulado en pantalla.
 - Cada texto sale de `messages/*.json` (`trailer.scenes.*`). Cualquier dato nuevo del tráiler tiene que estar respaldado como el resto del sitio.

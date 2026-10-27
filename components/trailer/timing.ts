@@ -6,7 +6,7 @@ export const T = {
   s4: 28, // TACH 2021
   s5: 38, // Ada 2023
   s6: 48, // Tuenti 2024
-  s7: 60, // ComplIA 2026
+  s7: 60, // CompliA 2026
   s8: 72, // ramas propias
   s9: 84, // el sistema
   s10: 100, // unión
