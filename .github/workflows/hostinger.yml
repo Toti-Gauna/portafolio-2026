@@ -1,0 +1,103 @@
+name: Deploy a Hostinger (subdominio)
+
+# Preparado y apagado: no publica nada hasta que la variable del repo HOSTINGER_DEPLOY_ENABLED sea 'true'
+# y existan los secretos HOSTINGER_SSH_KEY y HOSTINGER_KNOWN_HOSTS. Pasos en docs/hostinger.md.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: vars.HOSTINGER_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_BASE_PATH: ''
+      NEXT_PUBLIC_SITE_URL: ${{ vars.HOSTINGER_SITE_URL || 'https://portafolio.eclipse-business.com' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: bash -n scripts/hostinger-publish.sh scripts/hostinger-smoke.sh
+      - run: npm run build
+      - name: Reglas de Apache para Hostinger
+        run: cp deploy/hostinger.htaccess out/.htaccess
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-site
+          path: out/
+          include-hidden-files: true
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && vars.HOSTINGER_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: hostinger-production
+      url: ${{ vars.HOSTINGER_SITE_URL || 'https://portafolio.eclipse-business.com' }}
+    env:
+      HOSTINGER_HOST: ${{ vars.HOSTINGER_HOST }}
+      HOSTINGER_PORT: ${{ vars.HOSTINGER_PORT || '65002' }}
+      HOSTINGER_USER: ${{ vars.HOSTINGER_USER }}
+      HOSTINGER_PATH: ${{ vars.HOSTINGER_PATH }}
+      SITE_URL: ${{ vars.HOSTINGER_SITE_URL || 'https://portafolio.eclipse-business.com' }}
+      RELEASE: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: hostinger-site
+          path: site
+      - name: Variables completas
+        run: |
+          set -euo pipefail
+          for v in HOSTINGER_HOST HOSTINGER_USER HOSTINGER_PATH; do
+            [[ -n "${!v}" ]] || { echo "Falta la variable del repo $v (ver docs/hostinger.md)." >&2; exit 1; }
+          done
+      - name: Acceso SSH verificado
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.HOSTINGER_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KEY" && test -n "$KNOWN_HOSTS"
+          mkdir -m 700 -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/hostinger
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/hostinger ~/.ssh/known_hosts
+          ssh-keygen -F "[$HOSTINGER_HOST]:$HOSTINGER_PORT" -f ~/.ssh/known_hosts >/dev/null
+      - name: Subir, respaldar y publicar
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_args=(-p "$HOSTINGER_PORT" -i ~/.ssh/hostinger -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=3)
+          destination="$HOSTINGER_USER@$HOSTINGER_HOST"
+          # staging lives outside public_html, so it is never served
+          stage="${HOSTINGER_PATH%%/public_html*}/.portafolio-deploy/staging/$RELEASE"
+          tar -cf "$RUNNER_TEMP/site.tar" -C site .
+          ssh "${ssh_args[@]}" "$destination" "umask 077; mkdir -p '$stage' && tar -xf - -C '$stage'" < "$RUNNER_TEMP/site.tar"
+          ssh "${ssh_args[@]}" "$destination" "bash -s -- publish '$HOSTINGER_PATH' '$RELEASE'" < scripts/hostinger-publish.sh
+          if ! bash scripts/hostinger-smoke.sh "$SITE_URL"; then
+            echo 'Fallaron los chequeos públicos; se restauran los archivos anteriores.' >&2
+            ssh "${ssh_args[@]}" "$destination" "bash -s -- rollback '$HOSTINGER_PATH' '$RELEASE'" < scripts/hostinger-publish.sh
+            exit 1
+          fi
+      - name: Borrar archivos SSH del runner
+        if: always()
+        run: rm -f ~/.ssh/hostinger ~/.ssh/known_hosts

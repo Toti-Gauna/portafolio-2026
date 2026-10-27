@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Ignacio Gauna — Ssr AI Fullstack Developer",
-    "description": "I build AI software that ships: from interface to backend, with a system that plans, tests and delivers."
+    "description": "I build AI software that ships: from interface to backend, with a system that plans, tests and delivers.",
+    "ogAlt": "Ignacio Gauna, Ssr AI Fullstack Developer, with a line branching into several paths."
   },
   "intro": {
     "loading": "Loading",
@@ -14,13 +15,92 @@
   },
   "trailer": {
     "title": "Meet Ignacio",
-    "soon": "The trailer is in production. It will run up to 120 seconds and can be paused or skipped at any time.",
-    "close": "Close"
+    "close": "Skip to the portfolio",
+    "play": "Play",
+    "pause": "Pause",
+    "soundOn": "Turn sound on",
+    "soundOff": "Mute",
+    "progress": "Trailer progress",
+    "scene": "Scene {n} of {total}",
+    "textTitle": "Text version",
+    "textLead": "The same eleven moments of the trailer, without animation.",
+    "watch": "Watch the animation anyway",
+    "noscript": "The trailer needs JavaScript.",
+    "video": "Clip from the CompliA demo. Sample data.",
+    "scenes": {
+      "s1a": "Mar del Plata.",
+      "s1b": "17 years old.",
+      "typePre": "I wanted to make a ",
+      "typeWord": "games",
+      "typePost": " website.",
+      "s3": "That year, every road opened up.",
+      "tach": {
+        "year": "2021",
+        "name": "TACH Argentina",
+        "text": "Virtual wallet. Web and mobile."
+      },
+      "ada": {
+        "year": "2023",
+        "name": "Ada ITW",
+        "text": "I taught JavaScript and React."
+      },
+      "tuenti": {
+        "year": "Since 2024",
+        "name": "Tuenti",
+        "text": "Roulette. Referrals. Automatic top-up. Payments.",
+        "game": "The game came back.",
+        "p1": "Roulette",
+        "p2": "Referrals",
+        "p3": "Automatic top-up",
+        "p4": "Payments"
+      },
+      "complia": {
+        "year": "2026",
+        "name": "CompliA",
+        "text": "Artificial intelligence in production, for compliance.",
+        "note": "Assistant for Telefónica's compliance portal. In internal production."
+      },
+      "projects": {
+        "title": "And my own branches.",
+        "eclipse": "Eclipse",
+        "eclipseS": "In development",
+        "handyx": "HandyX",
+        "handyxS": "In development · launches Nov 10",
+        "volta": "Volta",
+        "voltaS": "Demo",
+        "velmar": "Velmar",
+        "velmarS": "Demo",
+        "dentalos": "DentalOS",
+        "dentalosS": "Demo",
+        "supernova": "Supernova Eventos",
+        "supernovaS": "Prototype",
+        "games": "games-market",
+        "gamesS": "Test bench",
+        "kinetic": "Kinetic Studio",
+        "kineticS": "32 trailers in code"
+      },
+      "system": {
+        "title": "This is not vibe coding.",
+        "text": "11 agents. Gates with human sign-off.",
+        "g1": "Discover",
+        "g2": "Plan",
+        "g3": "Build",
+        "g4": "Test",
+        "g5": "Review",
+        "g6": "Deliver",
+        "note": "Nothing ships without human approval."
+      },
+      "role": "Ssr AI Fullstack Developer",
+      "open": "Open to new opportunities.",
+      "mail": "ignaciogauna.developer@gmail.com"
+    },
+    "videoShort": "Sample data"
   },
   "header": {
     "home": "Ignacio Gauna, home",
     "language": "Language",
     "contact": "Contact",
+    "newTab": "opens in a new tab",
     "nav": "Main"
   },
   "hero": {
@@ -29,12 +109,437 @@
     "lead": "From interface to backend, with a system that plans, tests and delivers.",
     "availability": "Open to new opportunities",
     "proofs": {
-      "complia": "ComplIA in production",
+      "complia": "CompliA in production",
       "since": "Building since 2021",
       "system": "11 agents · tests · CI"
     },
     "write": "Write to me",
+    "newTab": "opens in a new tab",
     "watch": "Watch the trailer"
   },
-  "skipLink": "Skip to content"
+  "skipLink": "Skip to content",
+  "nav": {
+    "journey": "Journey",
+    "work": "Work",
+    "lab": "Lab",
+    "method": "Method",
+    "system": "System",
+    "skills": "Skills",
+    "about": "About",
+    "contact": "Contact",
+    "menu": "Sections",
+    "label": "Page sections"
+  },
+  "journey": {
+    "label": "01 · Journey",
+    "title": "One seed, many paths.",
+    "lead": "Seven moments, in order. What can be told, with no internal data from any client.",
+    "items": [
+      {
+        "when": "At 17",
+        "title": "I start studying",
+        "text": "I wanted to build a games website. That site doesn't exist, but it opened the road I'm on. I'm self-taught: I read a lot and study online."
+      },
+      {
+        "when": "2021 – 2022",
+        "title": "TACH Argentina · Software Developer",
+        "text": "Remote software development: a virtual wallet, on web and mobile."
+      },
+      {
+        "when": "2023 – 2024",
+        "title": "Ada ITW · Professor",
+        "text": "I taught the JavaScript and React course. Teaching helped me strengthen my basics and explain technical ideas clearly."
+      },
+      {
+        "when": "2024 – 2026",
+        "title": "Tsoft · Jr Frontend Developer",
+        "text": "Tuenti and Telefónica products, focused on gamification: interactive and reward mechanics such as the Tuenti roulette and the referral system. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL."
+      },
+      {
+        "when": "January 2026",
+        "title": "Special Recognition from Tsoft",
+        "text": "An internal Special Recognition from Tsoft, with a message and a gesture from the People team."
+      },
+      {
+        "when": "2026",
+        "title": "Dev Ssr · day with clients",
+        "text": "Promoted to Dev Ssr. In April I travelled from Mar del Plata to Buenos Aires for an in-person day of demos, alignment and direct conversation with clients."
+      },
+      {
+        "when": "2026 – today",
+        "title": "Ssr AI Fullstack Developer · CompliA",
+        "text": "Frontend, backend, CI/CD, integrations and AI features. In the Tuenti app: top-up processes, internal flows, backend and deployments. In Telefónica's compliance portal I designed and built CompliA, a RAG assistant that now runs in internal production."
+      }
+    ]
+  },
+  "work": {
+    "label": "02 · Work",
+    "title": "Cases, with their status.",
+    "lead": "Each case says what it is, what I did and where it stands. What isn't proven isn't claimed.",
+    "more": "See the case",
+    "tuentiNote": "No internal details, for confidentiality.",
+    "cards": {
+      "complia": {
+        "name": "CompliA",
+        "status": "In internal production",
+        "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations."
+      },
+      "tuenti": {
+        "name": "Tuenti",
+        "status": "Professional work",
+        "text": "Gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module, from Tsoft."
+      },
+      "handyx": {
+        "name": "HandyX",
+        "status": "In development · launches November 10",
+        "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project."
+      },
+      "eclipse": {
+        "name": "Eclipse",
+        "status": "In development",
+        "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend."
+      }
+    }
+  },
+  "lab": {
+    "label": "03 · Lab",
+    "title": "Where I try things.",
+    "lead": "Demos, prototypes and test benches. Everything fictional says so.",
+    "view": "View the code",
+    "open": "Open",
+    "items": {
+      "kinetic": {
+        "name": "Kinetic Studio",
+        "status": "Lab",
+        "text": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio.",
+        "alt": "Frame from the KINETIC trailer by Kinetic Studio."
+      },
+      "volta": {
+        "name": "Volta",
+        "status": "Demo",
+        "text": "Sports-supplements store with an admin panel, gamification and gifts. It processes no payments; the data is sample data.",
+        "alt": "Screenshot of the Volta demo: store front page, with the «Demo» bar and sample prices."
+      },
+      "velmar": {
+        "name": "Velmar",
+        "status": "Demo · made for a client",
+        "text": "Store with coupons, a club and a roulette. Sample data.",
+        "alt": "Screenshot of the Velmar demo: admin panel with fictional data."
+      },
+      "dentalos": {
+        "name": "DentalOS",
+        "status": "Demo",
+        "text": "Administrative flow of a fictional dental clinic, with 15 modules. Frontend only, synthetic data.",
+        "alt": "Screenshot of the DentalOS demo: reception schedule of a fictional clinic."
+      },
+      "supernova": {
+        "name": "Supernova Eventos",
+        "status": "Prototype",
+        "text": "Events micro-app for Telefónica: sign-up, favourites and step-by-step administration. Fictional data, no backend.",
+        "alt": "Screenshot of the Supernova Eventos prototype: experience administration with fictional data."
+      },
+      "games": {
+        "name": "games-market",
+        "status": "Test bench",
+        "text": "Test bench designed for 24 web games, 2D and 3D, with a roadmap ordered by complexity.",
+        "alt": "Screenshot of games-market: the test bench game catalogue."
+      }
+    },
+    "shot": "Real screenshot of the project"
+  },
+  "method": {
+    "label": "04 · Method",
+    "title": "How I create value.",
+    "lead": "Six steps. Each with something I did, not a nice phrase.",
+    "steps": [
+      {
+        "name": "Understand the problem",
+        "text": "Before building, I understand the context and the business. Talking to the people who use the software changes what gets prioritised.",
+        "example": "In-person day with clients in Buenos Aires (April 2026): demos, alignment and direct conversation about their real challenges."
+      },
+      {
+        "name": "Align and negotiate priorities",
+        "text": "I agree on scope and priorities before writing code, and I hold the difficult conversations when they're needed.",
+        "example": "At Tsoft I take part in technical decisions with the team and support people who join."
+      },
+      {
+        "name": "Design",
+        "text": "I design the interface and the system together: rules, states and limits before pretty screens.",
+        "example": "Volta and DentalOS: navigable demos with their own identity and labelled data."
+      },
+      {
+        "name": "Build in stages",
+        "text": "I split the work into small batches, each with its acceptance criteria.",
+        "example": "Eclipse moves forward in documented batches, with approval gates."
+      },
+      {
+        "name": "Show and validate",
+        "text": "I show something that works as early as possible and test it: automated tests, visual QA and demos.",
+        "example": "Velmar: a navigable demo for a client, with sample data."
+      },
+      {
+        "name": "Deliver and learn",
+        "text": "I ship with CI/CD, document what I learned and apply it again.",
+        "example": "At Tsoft I work with deployment pipelines, integrations and CI/CD on Telefónica and Tuenti projects."
+      }
+    ],
+    "readsTitle": "Influences",
+    "readsNote": "Reading and learning, not certifications. I don't count them as practice until I have an example.",
+    "reads": [
+      {
+        "title": "The Lean Startup",
+        "state": "Read"
+      },
+      {
+        "title": "The Mom Test",
+        "state": "Read"
+      },
+      {
+        "title": "SPIN Selling",
+        "state": "Reading"
+      }
+    ]
+  },
+  "system": {
+    "label": "05 · System",
+    "title": "Not vibe coding. A system.",
+    "lead": "I code with agents, but inside a process that plans, tests and delivers, with a person who approves.",
+    "points": [
+      {
+        "title": "Not a prompt: a system with roles",
+        "text": "I built 11 agents with separate responsibilities (product, UX/UI, design, marketing, and frontend, backend, cybersecurity, games and trailer architects), with skills that load depending on the task."
+      },
+      {
+        "title": "Specification first, code second",
+        "text": "Every change starts with a short document: problem, scope, acceptance criteria and how to roll back. The work is cut into small batches."
+      },
+      {
+        "title": "Every claim carries its level of evidence",
+        "text": "I tell apart what I read, what I tested locally and what runs in a real environment. What I haven't tested is labelled «not tested»."
+      },
+      {
+        "title": "Gates with human approval",
+        "text": "The agents don't publish, spend or change prices on their own. I authorise publishing and spending."
+      },
+      {
+        "title": "Tested, not eyeballed",
+        "text": "The main projects have automated tests, end-to-end tests with Playwright and CI that runs the tests and the build. Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779 and internal portal 132, plus 14 complete browser journeys."
+      },
+      {
+        "title": "Visual QA with binary criteria",
+        "text": "Redesigns are compared against the previous state at several widths and with reduced motion. I state the limits: I test in Chromium."
+      },
+      {
+        "title": "Cost and honesty as design rules",
+        "text": "No invented testimonials or clients, everything fictional says «Demo», and no new dependency or spending without my OK."
+      }
+    ],
+    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above."
+  },
+  "skills": {
+    "label": "06 · Skills",
+    "title": "What I use, and where each comes from.",
+    "lead": "I separate what I use at work, what I did in my own projects and what I'm exploring.",
+    "layers": {
+      "pro": {
+        "title": "At work",
+        "items": [
+          "React, React Native, TypeScript, Next.js",
+          "Node.js and SQL",
+          "Tailwind CSS",
+          "CI/CD, deployment pipelines and integrations",
+          "RAG and AI features in a corporate environment",
+          "Gamification, payments and top-ups",
+          "Compliance (Telefónica's portal)",
+          "Teaching JavaScript and React"
+        ]
+      },
+      "own": {
+        "title": "In my own projects",
+        "items": [
+          "Motion graphics in code: GSAP, canvas, WebGL, WebAudio",
+          "Next.js 16, Vitest and Playwright",
+          "Interface design and visual systems",
+          "Agent-based systems: roles, specification, tests and gates"
+        ]
+      },
+      "exploring": {
+        "title": "Exploring",
+        "items": [
+          "Consultative selling (SPIN Selling)"
+        ]
+      }
+    }
+  },
+  "about": {
+    "label": "07 · About",
+    "title": "From Mar del Plata.",
+    "paragraphs": [
+      "I started studying at 17 with one idea: to build a games website. That site doesn't exist, but it opened the road I'm on.",
+      "I'm 100% self-taught: I like to read and study online. I taught JavaScript and React, and today I work as a Ssr AI Fullstack Developer.",
+      "I care about what happens between a business problem and a product people actually use."
+    ]
+  },
+  "contact": {
+    "label": "08 · Contact",
+    "title": "Open to new opportunities.",
+    "lead": "I'm looking for a Ssr or Sr fullstack role with AI.",
+    "email": "Write to me",
+    "emailLabel": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "newTab": "opens in a new tab"
+  },
+  "footer": {
+    "text": "© 2026 Ignacio Gauna · Mar del Plata, Argentina",
+    "top": "Back to top"
+  },
+  "caseUi": {
+    "back": "Back to the portfolio",
+    "status": "Status",
+    "links": "Links",
+    "contactTitle": "Shall we talk?",
+    "contactText": "Open to new opportunities.",
+    "videoCaption": "Clip from the CompliA demo. Sample data.",
+    "next": "Other cases"
+  },
+  "cases": {
+    "complia": {
+      "title": "CompliA",
+      "status": "In internal production",
+      "summary": "Conversational assistant for Telefónica's compliance portal. I designed and built it: RAG, validations, restrictions and recommendations.",
+      "sections": [
+        {
+          "h": "Context",
+          "p": "Telefónica's compliance portal digitalises internal processes, improves traceability and supports end-to-end flows: declarations, forms, interactions and administrative operations. I work on it as a Ssr AI Fullstack Developer at Tsoft."
+        },
+        {
+          "h": "What it does",
+          "list": [
+            "Answers in natural language about historical and new compliance data (RAG on top of a language model).",
+            "Analyses sworn declarations and flags possible conflicts of interest and breaches of the programme's rules.",
+            "Helps issue rulings, assigns forms and builds the programme's reports.",
+            "States its limits: it can make mistakes and some processes need human action. A person confirms the ruling."
+          ]
+        },
+        {
+          "h": "My contribution",
+          "p": "I designed and built all of it: the RAG, the validations, the restrictions and the recommendations. The language model is one component; the rules that bound it are mine."
+        },
+        {
+          "h": "What I don't show",
+          "p": "For confidentiality I don't show architecture, data, controls or internal screenshots from Telefónica or Tsoft. The video uses sample data."
+        }
+      ]
+    },
+    "handyx": {
+      "title": "HandyX",
+      "status": "In development · launches November 10, 2026",
+      "summary": "Marketplace of home specialists in Mar del Plata. My own product.",
+      "sections": [
+        {
+          "h": "What it is",
+          "p": "A person asks for a service for their home, specialists send quotes and the person compares the proposals."
+        },
+        {
+          "h": "My role",
+          "p": "I'm the only person on the project: product, design and development. HandyX is an independent product; it is not part of Eclipse."
+        },
+        {
+          "h": "Status",
+          "list": [
+            "In development; the launch is planned for November 10, 2026.",
+            "There are no results or metrics to show yet."
+          ]
+        }
+      ]
+    },
+    "eclipse": {
+      "title": "Eclipse",
+      "status": "In development",
+      "summary": "My own development, AI and automation studio.",
+      "sections": [
+        {
+          "h": "What it is",
+          "p": "Eclipse is my initiative to offer development, AI and automation. Its website shows demos of fictional businesses before proposing anything; everything fictional says «Demo»."
+        },
+        {
+          "h": "What exists today",
+          "list": [
+            "A landing page with an industry selector and interactive demos.",
+            "A client portal in demo mode and its mode connected to the backend.",
+            "Its own backend, an internal portal and an email kit.",
+            "Automated tests and CI in the repositories."
+          ]
+        },
+        {
+          "h": "How I build it",
+          "p": "In batches with a specification, approval gates and QA, as I explain in «System»."
+        },
+        {
+          "h": "Status",
+          "p": "Under construction. There are no clients or commercial results to show, and I don't invent them."
+        }
+      ]
+    },
+    "kinetic": {
+      "title": "Kinetic Studio",
+      "status": "Lab · public",
+      "summary": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio.",
+      "sections": [
+        {
+          "h": "What it is",
+          "p": "A lab where each trailer is a page drawn live in the browser. The audio is synthesised too (WebAudio): there is no recorded music."
+        },
+        {
+          "h": "Techniques",
+          "list": [
+            "One paused master timeline per trailer: in the kit trailers, any frame can be frozen with ?t=.",
+            "Scores as data, synced with the image.",
+            "Particles in canvas and WebGL, text that turns into stars, simulations with a fixed seed."
+          ]
+        },
+        {
+          "h": "Where to see it",
+          "p": "The «Meet Ignacio» trailer on this site uses the same ideas, with a new, smaller engine."
+        },
+        {
+          "h": "Known debt",
+          "p": "The kit is copied into every folder and has drifted apart. Unifying it is next."
+        }
+      ]
+    },
+    "tuenti": {
+      "title": "Tuenti",
+      "status": "Professional work · Tsoft",
+      "summary": "Gamification, top-ups and payments in Tuenti and Telefónica products, from Tsoft.",
+      "sections": [
+        {
+          "h": "Context",
+          "p": "Since 2024 I've worked at Tsoft on Tuenti and Telefónica products. First as a Jr Frontend Developer and, since 2026, as a Ssr AI Fullstack Developer."
+        },
+        {
+          "h": "What I did",
+          "list": [
+            "Gamification: interactive and reward mechanics to improve engagement, such as the Tuenti roulette and the referral system.",
+            "Automatic top-up and a payments module.",
+            "In the Tuenti app: internal flows, backend logic, deployment pipelines and integrations.",
+            "Turning business requirements into technical solutions, alongside multidisciplinary teams."
+          ]
+        },
+        {
+          "h": "Stack",
+          "p": "React, React Native, TypeScript, Next.js, Tailwind CSS, Node.js and SQL."
+        },
+        {
+          "h": "What I don't show",
+          "p": "For confidentiality I don't show architecture, data, metrics or internal screenshots from Tuenti, Telefónica or Tsoft."
+        }
+      ]
+    }
+  },
+  "fab": {
+    "label": "Contact",
+    "aria": "Contact: email Ignacio"
+  }
 }

@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 // The server HTML already has the boot screen; its buttons only work once React has hydrated.
 async function skipBoot(page: Page, skip: string, next: string) {
   await expect(async () => {
+    if (await page.getByRole('button', { name: next }).isVisible()) return; // the gate may already be up
     await page.getByRole('button', { name: skip }).click({ timeout: 500 });
     await expect(page.getByRole('button', { name: next })).toBeVisible({ timeout: 500 });
   }).toPass();
@@ -37,7 +38,7 @@ test('skip jumps to the gate; Escape closes it; trailer opens and closes', async
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator('#boot')).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'Write to me' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Write to me' }).first()).toBeVisible();
   await page.getByRole('button', { name: 'Watch the trailer' }).click();
   await expect(page.getByRole('dialog', { name: 'Meet Ignacio' })).toBeVisible();
 });
@@ -66,4 +67,11 @@ test('reduced motion: boot screen still works and finishes quickly', async ({ br
   await page.goto('http://127.0.0.1:4173/es/');
   await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeVisible({ timeout: 2000 });
   await ctx.close();
+});
+
+test('the gate opens into two branches and fits a short phone in landscape', async ({ page }) => {
+  await page.setViewportSize({ width: 568, height: 320 });
+  await page.goto('/es/');
+  await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeInViewport();
+  await expect(page.locator('.boot__fork path')).toHaveCount(2);
 });
