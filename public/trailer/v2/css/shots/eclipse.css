@@ -1,1 +1,201 @@
-/* Act 5 shots — eclipse group: every rule under .shot-<id>. */
+/* Act 5 shots — eclipse group: every rule under .shot-<id>.
+   Tokens from Eclipse-Web app/globals.css («Efemérides»): void #05050A · night #0C0C14 · corona #F5B942 · flare #FFE8B0
+   · dawn #F4EFE6 · ink #111114 · mist #9A97A6 · corona-deep #8A5A00 · mist-ink #5B5866. The internal portal
+   (Eclipse-internal-portal workspace.css, dark): fg-muted #A5A1B0 · surface #101017 · late #F4988A.
+   Fonts: the repos' own files (OFL), under their own family names so nothing else on the stage picks them up. */
+@font-face { font-family: 'Eclipse Serif'; font-style: normal; font-weight: 400; font-display: block; src: url(../../../fonts/eclipse/InstrumentSerif-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'Eclipse Serif'; font-style: italic; font-weight: 400; font-display: block; src: url(../../../fonts/eclipse/InstrumentSerif-Italic.woff2) format('woff2'); }
+@font-face { font-family: 'Eclipse Sans'; font-style: normal; font-weight: 100 900; font-display: block; src: url(../../../fonts/eclipse/Geist-Variable.woff2) format('woff2'); }
+@font-face { font-family: 'Eclipse Mono'; font-style: normal; font-weight: 400 600; font-display: block; src: url(../../../fonts/eclipse/GeistMono-Variable.woff2) format('woff2'); }
+
+/* ───────────────────────────────────────────────────────────── 1 · landing (the hero) */
+.shot-eclipse-landing { background: #05050a; color: #f4efe6; font-family: 'Eclipse Sans', system-ui, sans-serif; }
+.shot-eclipse-landing .el-stars { position: absolute; left: 0; top: 0; width: 1440px; height: 816px; }
+.shot-eclipse-landing .el-hdr { position: absolute; z-index: 3; left: 0; right: 0; top: 0; height: 84px; display: flex; align-items: center; gap: 28px; padding: 0 60px; font-size: 18px; white-space: nowrap; }
+.shot-eclipse-landing .el-logo { display: flex; align-items: center; gap: 14px; color: #f4efe6; }
+.shot-eclipse-landing .el-logo b { font-size: 17px; font-weight: 500; letter-spacing: .32em; }
+.shot-eclipse-landing .el-nav { display: flex; gap: 38px; margin: 0 auto; color: #9a97a6; }
+.shot-eclipse-landing .el-tools { display: flex; align-items: center; gap: 20px; color: #9a97a6; }
+.shot-eclipse-landing .el-prefs { display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 18px; border: 1px solid rgb(244 239 230 / .18); border-radius: 999px; font: 500 15px/1 'Eclipse Mono', monospace; letter-spacing: .08em; color: #f4efe6; }
+.shot-eclipse-landing .el-login { display: inline-flex; align-items: center; gap: 9px; }
+.shot-eclipse-landing .el-vsep { width: 1px; height: 28px; background: rgb(244 239 230 / .18); }
+.shot-eclipse-landing .el-hcta { display: inline-flex; align-items: center; height: 50px; padding: 0 24px; border: 1px solid #f5b942; border-radius: 999px; color: #f4efe6; font-weight: 500; }
+
+.shot-eclipse-landing .el-copy { position: absolute; z-index: 2; left: 96px; top: 100px; width: 668px; }
+.shot-eclipse-landing .el-mark { display: flex; align-items: center; gap: 16px; font: 450 16px/1 'Eclipse Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: #9a97a6; }
+.shot-eclipse-landing .el-mark-i { color: #f4efe6; font-weight: 500; letter-spacing: .04em; }
+.shot-eclipse-landing .el-mark-rule { width: 78px; height: 1px; background: rgb(244 239 230 / .18); }
+.shot-eclipse-landing .el-mark-g { color: #f5b942; flex: none; }
+.shot-eclipse-landing .el-h1 { margin-top: 20px; font: 400 100px/.98 'Eclipse Serif', Georgia, serif; letter-spacing: -.02em; color: #f4efe6; }
+.shot-eclipse-landing .el-h1 em { font-style: italic; color: #f5b942; }
+.shot-eclipse-landing .el-sub { margin-top: 22px; max-width: 630px; font-size: 24px; line-height: 1.42; color: #9a97a6; }
+.shot-eclipse-landing .el-cta { position: relative; display: inline-flex; align-items: center; height: 66px; margin-top: 26px; padding: 0 36px; border-radius: 999px; overflow: hidden; background: #f5b942; color: #05050a; font-size: 25px; font-weight: 500; white-space: nowrap; box-shadow: 0 10px 40px -14px rgb(245 185 66 / .7); }
+/* the .btn-primary sparkle (globals.css), 1.4×: a bright point and its cross flare on the upper rim */
+.shot-eclipse-landing .el-glint { position: absolute; left: 4px; top: 0; width: 40px; height: 24px; pointer-events: none;
+  background:
+    radial-gradient(circle at 20px 11px, #fff 0 1.8px, rgb(255 251 240 / .95) 3.4px, rgb(255 244 214 / .55) 6.5px, transparent 12px),
+    linear-gradient(90deg, transparent, rgb(255 255 255 / .95) 50%, transparent) 0 10.25px / 40px 1.5px no-repeat,
+    linear-gradient(180deg, transparent, rgb(255 255 255 / .9) 50%, transparent) 19.25px 0 / 1.5px 22px no-repeat; }
+
+/* THE eclipse: Eclipse.tsx's layers (square 560 px, disc 42 %), the dial 8 % beyond the square */
+.shot-eclipse-landing .el-eclipse { position: absolute; left: 830px; top: 166px; width: 560px; height: 560px; }
+.shot-eclipse-landing .el-eclipse > * { position: absolute; }
+.shot-eclipse-landing .el-glow { inset: -18%; border-radius: 50%; background: radial-gradient(closest-side, rgb(245 185 66 / .32) 34%, rgb(245 185 66 / .12) 52%, rgb(245 185 66 / .04) 72%, transparent 100%); }
+.shot-eclipse-landing .el-lit { inset: 0; }
+.shot-eclipse-landing .el-corona { position: absolute; left: -18%; top: -18%; width: 136%; height: 136%; overflow: visible; }
+.shot-eclipse-landing .el-rays { position: absolute; inset: 0; border-radius: 50%; opacity: .5;
+  -webkit-mask-image: radial-gradient(closest-side, transparent 38%, #000 42%, rgb(0 0 0 / .6) 62%, transparent 100%);
+  mask-image: radial-gradient(closest-side, transparent 38%, #000 42%, rgb(0 0 0 / .6) 62%, transparent 100%); }
+.shot-eclipse-landing .el-rays::before, .shot-eclipse-landing .el-rays::after { content: ''; position: absolute; inset: 0; border-radius: 50%; filter: blur(1.5px); }
+.shot-eclipse-landing .el-rays::before { background: repeating-conic-gradient(from 0deg, rgb(255 232 176 / 0) 0deg 3deg, rgb(255 232 176 / .55) 5deg, rgb(255 232 176 / 0) 8deg 13deg, rgb(245 185 66 / .35) 15deg, rgb(255 232 176 / 0) 18deg 24deg); }
+.shot-eclipse-landing .el-rays::after { opacity: .8; background: repeating-conic-gradient(from 7deg, rgb(245 185 66 / 0) 0deg 6deg, rgb(245 185 66 / .4) 8deg, rgb(245 185 66 / 0) 11deg 19deg); }
+.shot-eclipse-landing .el-sun { inset: 29%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #fffaf0 0%, #ffe8b0 55%, #f5b942 100%); box-shadow: 0 0 40px 8px rgb(255 232 176 / .55); }
+.shot-eclipse-landing .el-moon { inset: 28.6%; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #0d0d16 0%, #050509 60%, #020204 100%); box-shadow: inset 0 0 18px rgb(0 0 0 / .9); }
+.shot-eclipse-landing .el-dial { inset: -8%; z-index: 1; }
+.shot-eclipse-landing .el-bezel { position: absolute; inset: 0; }
+.shot-eclipse-landing .el-dial svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.shot-eclipse-landing .el-dial svg * { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.shot-eclipse-landing .el-d-ring { stroke: rgb(244 239 230 / .14); }
+.shot-eclipse-landing .el-d-tick { stroke: rgb(244 239 230 / .2); }
+.shot-eclipse-landing .el-d-mid { stroke: rgb(244 239 230 / .34); }
+.shot-eclipse-landing .el-d-major { stroke: rgb(255 232 176 / .72); }
+.shot-eclipse-landing .el-d-cross { stroke: rgb(244 239 230 / .32); }
+.shot-eclipse-landing .el-d-pointer { stroke: rgb(245 185 66 / .9); }
+.shot-eclipse-landing .el-dial svg .el-d-diamond { fill: #f5b942; stroke: none; }
+.shot-eclipse-landing .el-dial-n { position: absolute; font: 400 13px/1 'Eclipse Mono', monospace; letter-spacing: .06em; color: rgb(244 239 230 / .5); text-shadow: 0 0 6px rgb(5 5 10 / .95); }
+/* the diamond ring: a bright bead at the limb with its cross flare and bloom */
+.shot-eclipse-landing .el-ring { z-index: 2; width: 260px; height: 260px; }
+.shot-eclipse-landing .el-ring > i { position: absolute; display: block; }
+.shot-eclipse-landing .el-ring-bloom { inset: 0; border-radius: 50%; background: radial-gradient(closest-side, rgb(255 248 230 / .95) 0%, rgb(255 232 176 / .5) 16%, rgb(245 185 66 / .18) 40%, transparent 72%); }
+.shot-eclipse-landing .el-ring-h { left: 0; right: 0; top: 129px; height: 2px; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .95) 50%, transparent); }
+.shot-eclipse-landing .el-ring-v { top: 40px; bottom: 40px; left: 129px; width: 2px; background: linear-gradient(180deg, transparent, rgb(255 255 255 / .9) 50%, transparent); }
+.shot-eclipse-landing .el-ring-dot { left: 121px; top: 121px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 4px #fff8e6, 0 0 36px 12px rgb(245 185 66 / .6); }
+
+/* ───────────────────────────────────────────────────────────── 2 · client portal «Mis proyectos» */
+.shot-eclipse-portal { background: #f4efe6; color: #111114; font-family: 'Eclipse Sans', system-ui, sans-serif; }
+.shot-eclipse-portal .ep-light { position: absolute; left: 0; right: 0; top: 0; height: 760px; background: radial-gradient(58% 62% at 92% 0%, rgb(255 232 176 / .72), transparent 70%), radial-gradient(26% 30% at 96% 0%, rgb(245 185 66 / .14), transparent 70%); }
+.shot-eclipse-portal .ep-hdr { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; align-items: center; gap: 22px; padding: 0 64px; font-size: 18px; white-space: nowrap; }
+.shot-eclipse-portal .ep-logo { display: flex; align-items: center; gap: 13px; color: #111114; }
+.shot-eclipse-portal .ep-logo b { font-size: 16px; font-weight: 500; letter-spacing: .32em; }
+.shot-eclipse-portal .ep-portal { padding-left: 22px; border-left: 1px solid rgb(17 17 20 / .22); font: 400 14px/1.4 'Eclipse Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: #5b5866; }
+.shot-eclipse-portal .ep-nav { display: flex; align-items: center; gap: 30px; margin-left: auto; color: #5b5866; }
+.shot-eclipse-portal .ep-nav span { display: inline-flex; align-items: center; gap: 9px; }
+.shot-eclipse-portal .ep-nav .on { color: #111114; }
+.shot-eclipse-portal .ep-vsep { width: 1px; height: 26px; background: rgb(17 17 20 / .22); }
+.shot-eclipse-portal .ep-prefs { height: 48px; padding: 0 18px; border: 1px solid rgb(17 17 20 / .22); border-radius: 999px; font: 500 14px/1 'Eclipse Mono', monospace; letter-spacing: .08em; color: #111114; }
+.shot-eclipse-portal .ep-notice { position: absolute; left: 0; right: 0; top: 76px; height: 62px; display: flex; align-items: center; gap: 18px; padding: 0 64px; border-top: 1px solid rgb(17 17 20 / .12); border-bottom: 1px solid rgb(17 17 20 / .12); background: rgb(255 255 255 / .45); }
+.shot-eclipse-portal .ep-notice p { font-size: 24px; line-height: 1.3; color: #5b5866; white-space: nowrap; }
+.shot-eclipse-portal .ep-badge { flex: none; display: inline-flex; align-items: center; height: 34px; padding: 0 15px; border-radius: 999px; background: #f5b942; color: #05050a; font-size: 18px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.shot-eclipse-portal .ep-notice .ep-badge { font-size: 18px; }
+.shot-eclipse-portal .ep-page { position: absolute; left: 64px; right: 64px; top: 138px; bottom: 0; }
+.shot-eclipse-portal .ep-crumbs { position: absolute; left: 0; top: 30px; display: flex; gap: 12px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #5b5866; display: none; }
+.shot-eclipse-portal .ep-help { position: absolute; right: 0; top: 20px; display: none; }
+.shot-eclipse-portal .ep-head { position: absolute; left: 0; top: 28px; }
+.shot-eclipse-portal .ep-kicker { display: flex; align-items: center; gap: 16px; font: 400 16px/1 'Eclipse Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #5b5866; }
+.shot-eclipse-portal .ep-kicker .ep-badge { height: 30px; font-family: 'Eclipse Sans', sans-serif; font-size: 16px; }
+.shot-eclipse-portal .ep-hello { margin-top: 12px; font: 400 150px/.9 'Eclipse Serif', Georgia, serif; letter-spacing: -.02em; white-space: nowrap; padding-bottom: 6px; }
+.shot-eclipse-portal .ep-company { margin-top: 8px; font-size: 24px; color: #5b5866; white-space: nowrap; }
+
+/* StageTimeline (the cronograma): five marks on an axis, done = ink, current = amber with a halo */
+.shot-eclipse-portal .ep-tl { position: absolute; right: 0; top: 70px; width: 580px; }
+.shot-eclipse-portal .ep-tl-cap { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #5b5866; }
+.shot-eclipse-portal .ep-tl-cap span:first-child { font-family: 'Eclipse Sans', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: 0; text-transform: none; color: #111114; }
+.shot-eclipse-portal .ep-railbox { position: relative; width: 580px; height: 96px; }
+.shot-eclipse-portal .ep-rail-line { position: absolute; left: 0; top: 0; overflow: visible; }
+.shot-eclipse-portal .ep-seg { fill: none; stroke-linecap: butt; }
+.shot-eclipse-portal .ep-seg-done { stroke: #111114; stroke-width: 2; }
+.shot-eclipse-portal .ep-seg-dash { stroke: rgb(17 17 20 / .3); stroke-width: 1.4; stroke-dasharray: 5 5; }
+.shot-eclipse-portal .ep-seg-rest { stroke: rgb(17 17 20 / .22); stroke-width: 1.4; }
+.shot-eclipse-portal .ep-rail { position: absolute; left: 0; top: 0; display: flex; gap: 66px; list-style: none; }
+.shot-eclipse-portal .ep-step { width: 50px; display: flex; flex-direction: column; }
+.shot-eclipse-portal .ep-step-g { position: relative; display: block; width: 50px; height: 50px; }
+.shot-eclipse-portal .ep-step-g svg { position: absolute; left: 0; top: 0; }
+.shot-eclipse-portal .ep-g-base { color: #5b5866; }
+.shot-eclipse-portal .ep-g-ink { color: #111114; }
+.shot-eclipse-portal .ep-g-amber { color: #8a5a00; }
+.shot-eclipse-portal .ep-halo { position: absolute; inset: 0; border-radius: 50%; opacity: 0; background: #f4efe6; box-shadow: 0 0 0 5px rgb(245 185 66 / .28), 0 0 22px rgb(245 185 66 / .55); }
+.shot-eclipse-portal .ep-step-n { margin-top: 12px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .08em; color: #5b5866; white-space: nowrap; }
+
+/* ProjectsTable (≥1024 px), close-up */
+.shot-eclipse-portal .ep-table { position: absolute; left: 0; right: 0; top: 290px; }
+.shot-eclipse-portal .ep-thead, .shot-eclipse-portal .ep-row { display: grid; grid-template-columns: 318px 292px 318px 1fr; gap: 26px; padding: 0 0 0 14px; }
+.shot-eclipse-portal .ep-thead { padding-bottom: 12px; font: 450 15px/1 'Eclipse Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: #5b5866; }
+.shot-eclipse-portal .ep-rule { display: block; height: 1px; background: rgb(17 17 20 / .12); transform-origin: 0 50%; }
+.shot-eclipse-portal .ep-rule-ink { background: #111114; }
+.shot-eclipse-portal .ep-row { position: relative; padding-top: 20px; padding-bottom: 20px; min-height: 112px; }
+.shot-eclipse-portal .ep-row > div { position: relative; min-width: 0; }
+.shot-eclipse-portal .ep-row[data-turn]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #f5b942; }
+.shot-eclipse-portal .ep-row-hl { position: absolute; inset: 0; background: rgb(255 255 255 / .55); }
+.shot-eclipse-portal .ep-name { display: block; font-size: 26px; font-weight: 600; line-height: 1.2; }
+.shot-eclipse-portal .ep-meta { display: block; margin-top: 6px; font-size: 18px; line-height: 1.35; color: #5b5866; }
+.shot-eclipse-portal .ep-code { display: block; margin-top: 6px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .06em; color: #5b5866; }
+.shot-eclipse-portal .ep-date { font-family: 'Eclipse Mono', monospace; }
+.shot-eclipse-portal .ep-stage { display: flex; align-items: flex-start; gap: 12px; }
+.shot-eclipse-portal .ep-sg { flex: none; margin-top: 16px; color: #8a5a00; }
+.shot-eclipse-portal .ep-stage[data-stage='support'] .ep-sg { color: #111114; }
+.shot-eclipse-portal .ep-pos { display: block; font: 400 16px/1.2 'Eclipse Mono', monospace; letter-spacing: .03em; color: #5b5866; white-space: nowrap; }
+.shot-eclipse-portal .ep-sname { display: block; margin-top: 2px; font-size: 25px; font-weight: 500; line-height: 1.2; white-space: nowrap; }
+.shot-eclipse-portal .ep-ms { display: block; font-size: 24px; line-height: 1.25; }
+.shot-eclipse-portal .ep-ok { display: flex; gap: 10px; font-size: 24px; line-height: 1.25; }
+.shot-eclipse-portal .ep-ok svg { flex: none; margin-top: 2px; color: #5b5866; }
+.shot-eclipse-portal .ep-tag { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border: 1px solid rgb(138 90 0 / .5); border-radius: 999px; background: rgb(255 255 255 / .7); font-size: 18px; font-weight: 500; }
+.shot-eclipse-portal .ep-tag::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #f5b942; box-shadow: 0 0 0 3px rgb(245 185 66 / .25); }
+.shot-eclipse-portal .ep-act { display: block; margin-top: 8px; font-size: 24px; font-weight: 600; line-height: 1.25; }
+
+/* ───────────────────────────────────────────────────────────── 3 · internal ops, Prospectos (dark) */
+.shot-eclipse-ops { background: #05050a; color: #f4efe6; font-family: 'Eclipse Sans', system-ui, sans-serif; }
+.shot-eclipse-ops .eo-light { position: absolute; inset: 0; background: radial-gradient(52% 72% at 90% 0%, rgb(245 185 66 / .07), transparent 78%); }
+.shot-eclipse-ops .eo-hdr { position: absolute; left: 0; right: 0; top: 0; height: 72px; display: flex; align-items: center; gap: 22px; padding: 0 64px; border-bottom: 1px solid rgb(244 239 230 / .1); background: rgb(5 5 10 / .86); font-size: 18px; white-space: nowrap; }
+.shot-eclipse-ops .eo-logo { display: flex; align-items: center; gap: 12px; }
+.shot-eclipse-ops .eo-logo-g { color: #f5b942; }
+.shot-eclipse-ops .eo-logo b { font-size: 16px; font-weight: 500; letter-spacing: .32em; }
+.shot-eclipse-ops .eo-label { display: inline-flex; align-items: center; gap: 16px; font: 400 13px/1 'Eclipse Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #a5a1b0; }
+.shot-eclipse-ops .eo-label::before { content: ''; width: 1px; height: 22px; background: rgb(244 239 230 / .22); }
+.shot-eclipse-ops .eo-nav { display: flex; align-items: center; gap: 26px; margin-left: auto; color: #a5a1b0; }
+.shot-eclipse-ops .eo-nav span { position: relative; display: inline-flex; align-items: center; gap: 7px; }
+.shot-eclipse-ops .eo-nav .on { color: #f4efe6; }
+.shot-eclipse-ops .eo-nav .on::after { content: ''; position: absolute; left: 0; right: 0; bottom: -10px; height: 1px; background: #f4efe6; }
+.shot-eclipse-ops .eo-count { display: inline-grid; place-items: center; min-width: 24px; height: 22px; padding: 0 6px; border-radius: 999px; background: #f5b942; color: #05050a; font: 500 13px/1 'Eclipse Mono', monospace; font-style: normal; }
+.shot-eclipse-ops .eo-tools { display: flex; align-items: center; gap: 16px; color: #a5a1b0; }
+.shot-eclipse-ops .eo-vsep { width: 1px; height: 24px; background: rgb(244 239 230 / .22); }
+.shot-eclipse-ops .eo-plan { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border: 1px solid rgb(244 239 230 / .22); border-radius: 999px; color: #f5b942; }
+.shot-eclipse-ops .eo-mode, .shot-eclipse-ops .eo-notice { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 14px; padding: 0 64px; border-bottom: 1px solid rgb(244 239 230 / .1); background: rgb(245 185 66 / .055); }
+.shot-eclipse-ops .eo-mode { top: 72px; height: 42px; }
+.shot-eclipse-ops .eo-notice { top: 114px; height: 50px; }
+.shot-eclipse-ops .eo-badge { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #f5b942; color: #05050a; font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.shot-eclipse-ops .eo-notice p { font-size: 17px; color: #a5a1b0; white-space: nowrap; }
+.shot-eclipse-ops .eo-notice u { margin-left: auto; font-size: 17px; font-weight: 500; text-underline-offset: 5px; text-decoration-color: rgb(244 239 230 / .4); white-space: nowrap; }
+.shot-eclipse-ops .eo-page { position: absolute; left: 64px; right: 64px; top: 164px; bottom: 0; }
+.shot-eclipse-ops .eo-crumbs { position: absolute; left: 0; top: 18px; display: flex; gap: 12px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #a5a1b0; }
+.shot-eclipse-ops .eo-crumbs i { opacity: .5; font-style: normal; }
+.shot-eclipse-ops .eo-crumbs b { font-weight: 400; color: #f4efe6; }
+.shot-eclipse-ops .eo-kicker { position: absolute; left: 0; top: 48px; font: 400 15px/1 'Eclipse Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #a5a1b0; }
+.shot-eclipse-ops .eo-title { position: absolute; left: -4px; top: 66px; display: inline-block; white-space: nowrap; font: 400 120px/.94 'Eclipse Serif', Georgia, serif; letter-spacing: -.02em; padding-bottom: 8px; }
+.shot-eclipse-ops .eo-title em { display: inline-block; font-style: italic; color: #f5b942; }
+.shot-eclipse-ops .eo-rule { position: absolute; left: 0; right: 0; top: 196px; font-size: 24px; line-height: 1.4; color: #a5a1b0; }
+.shot-eclipse-ops .eo-add { position: absolute; right: 0; top: 96px; display: inline-flex; align-items: center; gap: 10px; height: 62px; padding: 0 28px; border-radius: 999px; background: #f5b942; color: #05050a; font-size: 24px; font-weight: 500; box-shadow: 0 10px 40px -14px rgb(245 185 66 / .7); }
+.shot-eclipse-ops .eo-thead, .shot-eclipse-ops .eo-row { display: grid; grid-template-columns: 370px 250px 112px 1fr 104px; gap: 20px; padding: 0 10px; }
+.shot-eclipse-ops .eo-thead { position: absolute; left: 0; right: 0; top: 252px; font: 450 15px/1 'Eclipse Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: #a5a1b0; }
+.shot-eclipse-ops .eo-hr { position: absolute; left: 0; right: 0; top: 278px; height: 1px; background: #f4efe6; transform-origin: 0 50%; }
+.shot-eclipse-ops .eo-rows { position: absolute; left: 0; right: 0; top: 279px; }
+.shot-eclipse-ops .eo-row { position: relative; padding-top: 16px; padding-bottom: 16px; border-bottom: 1px solid rgb(244 239 230 / .1); }
+.shot-eclipse-ops .eo-row > div { min-width: 0; }
+.shot-eclipse-ops .eo-edge { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #f5b942; transform-origin: 50% 0; }
+.shot-eclipse-ops .eo-row[data-late] .eo-edge { background: #f4988a; }
+.shot-eclipse-ops .eo-name { display: block; font-size: 24px; font-weight: 600; line-height: 1.25; }
+.shot-eclipse-ops .eo-meta { display: block; margin-top: 5px; font-size: 17px; line-height: 1.35; color: #a5a1b0; }
+.shot-eclipse-ops .eo-stage { display: flex; align-items: flex-start; gap: 10px; }
+.shot-eclipse-ops .eo-sg { flex: none; margin-top: 15px; color: #f5b942; }
+.shot-eclipse-ops .eo-pos { display: block; font: 400 15px/1.25 'Eclipse Mono', monospace; letter-spacing: .04em; color: #a5a1b0; }
+.shot-eclipse-ops .eo-stage b { display: block; font-size: 24px; font-weight: 500; line-height: 1.25; white-space: nowrap; }
+.shot-eclipse-ops .eo-src { font-size: 24px; line-height: 1.25; }
+.shot-eclipse-ops .eo-next { font-size: 24px; line-height: 1.3; }
+.shot-eclipse-ops .eo-next-t { display: block; min-height: 31px; }
+.shot-eclipse-ops .eo-tag { display: inline-flex; align-items: center; gap: 8px; height: 34px; margin-top: 8px; padding: 0 14px; border: 1px solid rgb(244 239 230 / .22); border-radius: 999px; background: #101017; font-size: 19px; font-weight: 500; line-height: 1; white-space: nowrap; transform-origin: 0 50%; }
+.shot-eclipse-ops .eo-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; }
+.shot-eclipse-ops .eo-late { border-color: rgb(244 152 138 / .45); color: #f4988a; }
+.shot-eclipse-ops .eo-late::before { background: #f4988a; }
+.shot-eclipse-ops .eo-attn { border-color: rgb(245 185 66 / .45); }
+.shot-eclipse-ops .eo-attn::before { background: #f5b942; box-shadow: 0 0 0 2px rgb(245 185 66 / .25); }
+.shot-eclipse-ops .eo-end { display: flex; justify-content: flex-end; }
+.shot-eclipse-ops .eo-open { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 18px; border: 1px solid rgb(244 239 230 / .22); border-radius: 999px; font-size: 19px; font-weight: 500; }

@@ -99,8 +99,8 @@
           <span class="hl-addr tex">${ic('pin')}${t.addr}${ic('abajo')}</span>
           <p class="hl-q${t.q.join('').length > 20 ? ' hl-q--largo' : ''}">${t.q[0]}<span class="hl-q-mk">${t.q[1]}</span>${t.q[2]}</p>
           <div class="hl-grid">${t.tiles.map((r, i) => `<span class="hl-tile${i === PICK ? ' hl-tile--pick' : ''}"><i class="hl-tile-base"></i><i class="hl-tile-base hl-on"></i>
-            <span class="hl-tile-face">${ic(RUBRO_IC[i])}<span class="${r.length > 11 ? 'tex' : ''}">${r}</span>
-              ${i === PICK ? `<span class="hl-tile-on hl-on">${ic(RUBRO_IC[i])}<span>${r}</span></span><i class="hl-tap"></i>` : ''}</span></span>`).join('')}</div>
+            <span class="hl-tile-face">${ic(RUBRO_IC[i])}<span class="tex">${r}</span>
+              ${i === PICK ? `<span class="hl-tile-on hl-on">${ic(RUBRO_IC[i])}<span class="tex">${r}</span></span><i class="hl-tap"></i>` : ''}</span></span>`).join('')}</div>
           <p class="hl-sobre tex">${t.next}</p>
           <div class="hl-turno"><span class="hl-av">${t.espIni}<i>${ic('check')}</i></span><span class="hl-turno-t"><strong>${t.esp}</strong><small class="tex">${ic('rayo')}${t.espRubro}</small></span><span class="hl-ok tex">${t.estado}</span></div>
         </div></div>
@@ -136,26 +136,26 @@
   });
 
   /* ── 2 · handy-ops: «Pre-registros» in the sample view; a record moves to the next OPS-01 stage ─────────── */
-  const ROWS = [ // PRE-DEMO-E07, E04, E05, E08 (src/data/demo-data.ts), all in Mar del Plata
+  const ROWS = [ // PRE-DEMO-E07, E06, E05, E08 (src/data/demo-data.ts): one per OPS-01 state, all in Mar del Plata
     { ini: 'FO', name: 'Federico O.', ic: 'llama' },
-    { ini: 'GC', name: 'Gabriela C.', ic: 'aire' },
+    { ini: 'NK', name: 'Natalia K.', ic: 'canilla' },
     { ini: 'JM', name: 'Julián M.', ic: 'ladrillos' },
     { ini: 'ME', name: 'Mariana E.', ic: 'rayo' },
   ];
-  const STATE = ['con_intentos', 'con_intentos', 'contactado', 'comprometido'];
+  const STATE = ['con_intentos', 'sin_contactar', 'contactado', 'comprometido'];
   const roll = (a, b) => `<span class="ho-roll"><span class="ho-roll-in"><i>${a}</i><i>${b}</i></span></span>`;
 
   add('handy-ops', {
-    frame: 'browser', url: 'interno.handyc.com/?demo=1', bg: '#F7F6F1', color: '#1F57A8',
+    frame: 'browser', url: 'toti-gauna.github.io/handy-internal-portal/?demo=1', bg: '#F7F6F1', color: '#F5F59A',
     text: {
       es: {
         portal: 'Portal interno', nav: ['Inicio', 'Pre-registros', 'Especialistas'], salir: 'Salir de la muestra',
         muestra: 'Muestra', aviso: 'Todos los registros son ficticios.',
         eyebrow: 'Formulario de la landing', h: ['Pre-', 'registros'],
         tabs: ['Todos', 'Sin contactar', 'Con intentos', 'Contactado', 'Comprometido'],
-        ciudad: 'Mar del Plata', anoto: ['Se anotó el 30 sept', 'Se anotó el 1 oct', 'Se anotó el 28 sept', 'Se anotó el 25 sept'],
-        rubros: ['Gas', 'Aire acondicionado', 'Albañilería', 'Electricidad'],
-        pills: ['Con intentos · 1', 'Con intentos · 2', 'Contactado', 'Comprometido'],
+        ciudad: 'Mar del Plata', anoto: ['Se anotó el 30 sept', 'Se anotó el 3 oct', 'Se anotó el 28 sept', 'Se anotó el 25 sept'],
+        rubros: ['Gas', 'Plomería', 'Albañilería', 'Electricidad'],
+        pills: ['Con intentos · 1', 'Sin contactar', 'Contactado', 'Comprometido'],
         sheetEyebrow: 'Mensaje sugerido', sheetTitle: 'Escribile por WhatsApp',
         msgA: 'Hola Federico, te escribimos de nuevo desde Handyx por tu pre-registro como especialista en gas. ¿Cuándo te queda cómodo que hablemos unos minutos?',
         msgB: 'Hola Federico, gracias por la charla. Para seguir con tu alta en Handyx, ¿qué día te queda bien?',
@@ -168,10 +168,10 @@
         muestra: 'Sample', aviso: 'Every record is fictional.',
         eyebrow: 'Landing form', h: ['Pre-', 'registrations'],
         tabs: ['All', 'Not contacted', 'With attempts', 'Contacted', 'Committed'],
-        ciudad: 'Mar del Plata', anoto: ['Signed up Sep 30', 'Signed up Oct 1', 'Signed up Sep 28', 'Signed up Sep 25'],
-        rubros: ['Gas', 'Air conditioning', 'Masonry', 'Electrical'],
-        pills: ['With attempts · 1', 'With attempts · 2', 'Contacted', 'Committed'],
-        sheetEyebrow: 'Suggested message', sheetTitle: 'Message them on WhatsApp',
+        ciudad: 'Mar del Plata', anoto: ['Signed up Sep 30', 'Signed up Oct 3', 'Signed up Sep 28', 'Signed up Sep 25'],
+        rubros: ['Gas', 'Plumbing', 'Masonry', 'Electrical'],
+        pills: ['With attempts · 1', 'Not contacted', 'Contacted', 'Committed'],
+        sheetEyebrow: 'Suggested message', sheetTitle: 'Message on WhatsApp',
         msgA: 'Hi Federico, we’re writing again from Handyx about your pre-registration as a gas specialist. When would be a good time to talk for a few minutes?',
         msgB: 'Hi Federico, thanks for the chat. To move on with your onboarding at Handyx, which day works for you?',
         abrir: 'Open WhatsApp', copiar: 'Copy message',
@@ -181,7 +181,7 @@
     },
     html: t => `<div class="ho">
       <header class="ho-hdr">
-        <span class="ho-logo"><img src="${IMG('logo')}" alt="" width="720" height="158"><small>${t.portal}</small></span>
+        <span class="ho-logo"><img src="${IMG('logo')}" alt="" width="720" height="158"><small class="tex">${t.portal}</small></span>
         <nav class="ho-nav">
           <span class="ho-nl">${ic('casa')}${t.nav[0]}</span>
           <span class="ho-nl ho-nl--on">${ic('lista')}${t.nav[1]}<b class="ho-badge">${roll(9, 8)}</b></span>
@@ -207,7 +207,6 @@
               <span class="ho-fila-p"><strong>${r.name}</strong><span class="ho-meta tex"><span class="ho-ciudad">${ic('pin')}${t.ciudad}</span> · ${t.anoto[i]}</span></span>
               <span class="ho-rubro tex">${ic(r.ic)}${t.rubros[i]}</span>
               <span class="ho-estado"><span class="ho-pill ho-pill--${STATE[i]}">${t.pills[i]}</span>${i === 0 ? `<span class="ho-pill ho-pill--contactado ho-pill--nueva">${t.pills[2]}</span>` : ''}</span>
-              <span class="ho-flecha">${ic('derecha')}</span>
             </li>`).join('')}</ul>
           </div>
         </section>
@@ -216,7 +215,7 @@
             <i class="ho-manija"></i>
             <p class="ho-eyebrow ho-eyebrow--claro tex">${t.sheetEyebrow}</p>
             <h2 class="ho-sub">${t.sheetTitle}</h2>
-            <div class="ho-burbuja"><span class="ho-msg">${t.msgA}</span><span class="ho-msg-alto" aria-hidden="true">${t.msgA}</span></div>
+            <div class="ho-burbuja"><span class="ho-msg ho-msg--a">${t.msgA}</span><span class="ho-msg ho-msg--b">${t.msgB}</span></div>
             <div class="ho-acciones">
               <span class="ho-btn ho-btn--wa">${ic('whatsapp')}${t.abrir}</span>
               <span class="ho-btn ho-btn--ama">${ic('copiar')}${t.copiar}</span>
@@ -229,8 +228,8 @@
         </aside>
       </div>
     </div>`,
-    play(D, v, T, dur, t) {
-      const { tl } = D, $ = s => v.querySelector(s), $$ = s => [...v.querySelectorAll(s)];
+    play(D, v, T) {
+      const $ = s => v.querySelector(s), $$ = s => [...v.querySelectorAll(s)];
       const AT = T + 0.56; // the record moves: «Hablamos» → Contactado (OPS-01: a conversation moves pendiente → contactado)
       // the list settles in, the selected record lights up
       D.hit($$('.ho-fila'), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out', stagger: 0.05 }, T + 0.06);
@@ -243,10 +242,11 @@
       D.hit($$('.ho-roll-in'), { yPercent: 0 }, { yPercent: -50, duration: 0.4, ease: 'expo.out', stagger: 0.04 }, AT + 0.06);
       D.hit($$('.ho-tab--int, .ho-tab--con'), { scale: 1 }, { scale: 1.06, duration: 0.12, ease: 'power2.out', yoyo: true, repeat: 1 }, AT + 0.06);
       // «Paso que falta» moves to the next stage
-      D.hit($$('.ho-swap .ho-a'), { yPercent: 0, opacity: 1 }, { yPercent: -60, opacity: 0, duration: 0.25, ease: 'power2.in' }, AT + 0.08);
+      D.hit($$('.ho-swap .ho-a'), { yPercent: 0, opacity: 1 }, { yPercent: -50, opacity: 0, duration: 0.16, ease: 'power2.in' }, AT + 0.06);
       D.hit($$('.ho-swap .ho-b'), { yPercent: 70, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'expo.out' }, AT + 0.2);
       // and the next WhatsApp message is the one for a Contactado (contactMessage)
-      tl.to($('.ho-msg'), { duration: 0.55, scrambleText: { text: t.msgB, chars: 'abcdefghijklmnopqrstuvwxyz', speed: 1, revealDelay: 0.15 }, ease: 'none' }, AT + 0.18);
+      D.hit($('.ho-msg--a'), { opacity: 1, y: 0 }, { opacity: 0, y: -10, duration: 0.16, ease: 'power2.in' }, AT + 0.14);
+      D.hit($('.ho-msg--b'), { opacity: 1, y: 8, clipPath: 'inset(0% 0% 100% 0%)' }, { y: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.5, ease: 'power3.out' }, AT + 0.26);
       D.sfx('tick', AT, 0.05);
       D.sfx('key', AT + 0.2, 0.08);
     },
