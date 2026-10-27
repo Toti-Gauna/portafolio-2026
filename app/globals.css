@@ -38,7 +38,7 @@ img, svg { display: block; max-width: 100%; }
 .btn:active { transform: scale(0.98); }
 .btn-primary { background: var(--accent); color: var(--ink); }
 .btn-primary:hover { background: #ff6347; }
-.btn-ghost { background: transparent; color: var(--paper); border-color: #55555b; }
+.btn-ghost { background: transparent; color: var(--paper); border-color: #6f6f77; }
 .btn-ghost:hover { border-color: var(--paper); }
 
 .skip-link { position: absolute; left: 16px; top: -64px; z-index: 50; background: var(--paper); color: var(--ink); padding: 12px 16px; border-radius: 8px; }
@@ -50,8 +50,8 @@ img, svg { display: block; max-width: 100%; }
 .site-header__brand { display: grid; place-items: center; width: 44px; height: 44px; }
 .site-header__mark { width: 36px; height: 36px; color: var(--paper); }
 .site-header__nav { display: flex; align-items: center; gap: 12px; }
-.locale-switch { display: flex; border: 1px solid #55555b; border-radius: 8px; overflow: hidden; }
-.locale-switch a { display: grid; place-items: center; min-width: 44px; min-height: 42px; font: 600 12px var(--font-mono); letter-spacing: 0.08em; text-decoration: none; color: var(--muted); }
+.locale-switch { display: flex; border: 1px solid #6f6f77; border-radius: 8px; overflow: hidden; }
+.locale-switch a { display: grid; place-items: center; min-width: 44px; min-height: 44px; font: 600 12px var(--font-mono); letter-spacing: 0.08em; text-decoration: none; color: var(--muted); }
 .locale-switch a[aria-current='true'] { background: var(--paper); color: var(--ink); }
 
 #contenido:focus { outline: none; }
@@ -83,7 +83,7 @@ img, svg { display: block; max-width: 100%; }
 .site-header__links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: var(--muted); text-decoration: none; font-size: 15px; }
 .site-header__links a:hover { color: var(--paper); }
 .site-header__menu { position: relative; }
-.site-header__menu summary { list-style: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #55555b; border-radius: 8px; cursor: pointer; font: 600 14px var(--font-sans); }
+.site-header__menu summary { list-style: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #6f6f77; border-radius: 8px; cursor: pointer; font: 600 14px var(--font-sans); }
 .site-header__menu summary::-webkit-details-marker { display: none; }
 .site-header__menu nav { position: absolute; right: 0; top: calc(100% + 8px); min-width: 200px; display: grid; background: #131316; border: 1px solid var(--line-strong, #3a3a40); border-radius: 10px; padding: 6px; z-index: 30; }
 .site-header__menu nav a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; text-decoration: none; border-radius: 6px; }

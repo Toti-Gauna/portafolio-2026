@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Ignacio Gauna — Ssr AI Fullstack Developer",
-    "description": "I build AI software that ships: from interface to backend, with a system that plans, tests and delivers."
+    "description": "I build AI software that ships: from interface to backend, with a system that plans, tests and delivers.",
+    "ogAlt": "Ignacio Gauna, Ssr AI Fullstack Developer, with a line branching into several paths."
   },
   "intro": {
     "loading": "Loading",
@@ -322,7 +323,7 @@
       },
       {
         "title": "Tested, not eyeballed",
-        "text": "The main projects have automated tests, end-to-end tests with Playwright and CI that runs the tests and the build."
+        "text": "The main projects have automated tests, end-to-end tests with Playwright and CI that runs the tests and the build. Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779 and internal portal 132, plus 14 complete browser journeys."
       },
       {
         "title": "Visual QA with binary criteria",
@@ -333,7 +334,7 @@
         "text": "No invented testimonials or clients, everything fictional says «Demo», and no new dependency or spending without my OK."
       }
     ],
-    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done."
+    "limits": "What I don't say: that the agents work on their own, that the system has been audited or that a pentest has been done. The backend's database tests run in CI; I did not run them in the run above."
   },
   "skills": {
     "label": "06 · Skills",

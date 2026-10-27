@@ -30,7 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       canonical: absoluteUrl(`/${locale}/proyectos/${slug}/`),
       languages: Object.fromEntries(routing.locales.map((l) => [localeTags[l], absoluteUrl(`/${l}/proyectos/${slug}/`)])),
     },
-    openGraph: { title, description: t('summary'), type: 'article', url: absoluteUrl(`/${locale}/proyectos/${slug}/`) },
+    openGraph: { title, description: t('summary'), type: 'article', url: absoluteUrl(`/${locale}/proyectos/${slug}/`), images: [{ url: absoluteUrl('/og.png'), width: 1200, height: 630 }] },
+    twitter: { card: 'summary_large_image', title, description: t('summary'), images: [absoluteUrl('/og.png')] },
   };
 }
 

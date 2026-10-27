@@ -91,7 +91,7 @@ h3 { font-weight: 700; }
 .contact { display: grid; gap: 28px; justify-items: start; }
 .contact__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .contact__list li { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--line); min-width: min(100%, 420px); }
-.contact__list a { word-break: break-word; min-height: 24px; }
+.contact__list a { word-break: break-word; min-height: 44px; display: inline-flex; align-items: center; }
 
 .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-block: 28px 48px; border-top: 1px solid var(--line); color: var(--muted); font: 13px var(--font-mono); }
 .foot a { color: var(--paper); min-height: 44px; display: inline-flex; align-items: center; }

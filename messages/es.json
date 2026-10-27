@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Ignacio Gauna — Ssr AI Fullstack Developer",
-    "description": "Construyo software con IA que llega a producción: de la interfaz al backend, con un sistema que planifica, prueba y entrega."
+    "description": "Construyo software con IA que llega a producción: de la interfaz al backend, con un sistema que planifica, prueba y entrega.",
+    "ogAlt": "Ignacio Gauna, Ssr AI Fullstack Developer, con una línea que se bifurca en ramas."
   },
   "intro": {
     "loading": "Cargando",
@@ -322,7 +323,7 @@
       },
       {
         "title": "Se prueba, no se mira a ojo",
-        "text": "Los proyectos principales tienen tests automáticos, pruebas end-to-end con Playwright y CI que corre los tests y el build."
+        "text": "Los proyectos principales tienen tests automáticos, pruebas end-to-end con Playwright y CI que corre los tests y el build. Corrida del 27/10/2026, todo en verde: Eclipse-Web 463 tests, backend de Eclipse 779 y portal interno 132, más 14 recorridos completos en navegador."
       },
       {
         "title": "QA visual con criterios binarios",
@@ -333,7 +334,7 @@
         "text": "Sin testimonios ni clientes inventados, todo lo ficticio dice «Demo», y ninguna dependencia ni gasto nuevo sin mi OK."
       }
     ],
-    "limits": "Lo que no digo: que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho."
+    "limits": "Lo que no digo: que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho. Las pruebas contra base de datos del backend corren en CI; en la corrida de arriba no las ejecuté."
   },
   "skills": {
     "label": "06 · Capacidades",
