@@ -69,6 +69,7 @@ export default async function LocaleLayout({
   return (
     <html lang={localeTags[locale as Locale]} className={`${fontSans.variable} ${fontMono.variable}`}>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
         <noscript>
           <style>{'#boot{display:none!important}'}</style>

@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { use } from 'react';
 import { TrailerButton } from '@/components/TrailerButton';
 import { CONTACT_EMAIL, LINKEDIN_URL } from '@/lib/site';
+import { About, Contact, Footer, Journey, Lab, Method, Skills, System, Work } from '@/components/sections/Sections';
 
 export default function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
@@ -10,7 +11,7 @@ export default function Home({ params }: { params: Promise<{ locale: string }> }
   const t = useTranslations('hero');
   return (
     <main id="contenido" tabIndex={-1}>
-      <section className="hero" aria-labelledby="hero-name">
+      <section id="inicio" className="hero" aria-labelledby="hero-name">
         <div className="container-x">
           <p className="hero__role label">
             <span>{t('role')}</span>
@@ -33,6 +34,15 @@ export default function Home({ params }: { params: Promise<{ locale: string }> }
           </div>
         </div>
       </section>
+      <Journey />
+      <Work />
+      <Lab />
+      <Method />
+      <System />
+      <Skills />
+      <About />
+      <Contact />
+      <Footer />
     </main>
   );
 }

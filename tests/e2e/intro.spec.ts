@@ -37,7 +37,7 @@ test('skip jumps to the gate; Escape closes it; trailer opens and closes', async
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator('#boot')).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'Write to me' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Write to me' }).first()).toBeVisible();
   await page.getByRole('button', { name: 'Watch the trailer' }).click();
   await expect(page.getByRole('dialog', { name: 'Meet Ignacio' })).toBeVisible();
 });
