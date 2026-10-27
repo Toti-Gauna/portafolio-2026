@@ -54,8 +54,8 @@
 .shot-volta .vt-read .tex { font: 700 16px/1 'JetBrains Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #a6abb0; }
 .shot-volta .vt-plate .vt-eye { margin-top: 22px; font-size: 20px; }
 .shot-volta .vt-prize { margin-top: 14px; font: 800 46px/.95 'LabBigShoulders', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
-.shot-volta .vt-claim { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font: 700 24px/1.25 'Archivo', sans-serif; color: #c8ff2e; text-decoration: underline; text-underline-offset: 6px; }
-.shot-volta .vt-claim svg { width: 24px; height: 24px; flex: none; }
+.shot-volta .vt-claim { margin-top: 18px; max-width: 400px; font: 700 24px/1.25 'Archivo', sans-serif; color: #c8ff2e; text-decoration: underline; text-underline-offset: 6px; }
+.shot-volta .vt-claim svg { display: inline-block; width: 24px; height: 24px; margin-left: 6px; vertical-align: -4px; }
 
 /* ── VELMAR · "Escribí el nombre" (velmar: src/features/home/LiveCustomizer.tsx, components/illustrations/CollarPreview.tsx,
       collar/geometry.ts, collar/Cord.tsx; tokens src/config/brand.ts + app/globals.css) ── */
@@ -213,18 +213,18 @@
   background-size: 100% 100%, 120px 120px, 120px 120px; background-position: 0 0, -1px -1px, -1px -1px; }
 .shot-kinetic .kn-fade { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0, #07070a 92%); }
 .shot-kinetic .kn-intro { position: absolute; left: 120px; top: 176px; width: 800px; z-index: 2; }
-.shot-kinetic .kn-brand { display: flex; align-items: center; gap: 16px; font: 500 22px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.shot-kinetic .kn-brand { display: flex; align-items: center; gap: 16px; font: 500 24px/1 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
 .shot-kinetic .kn-mark { display: flex; gap: 8px; align-items: center; }
 .shot-kinetic .kn-mark i { display: block; width: 16px; height: 16px; }
 .shot-kinetic .kn-mark i:nth-child(1) { border-radius: 50%; background: #ff4d2e; }
 .shot-kinetic .kn-mark i:nth-child(2) { background: #2b50ff; }
 .shot-kinetic .kn-mark i:nth-child(3) { background: #ffc21a; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .shot-kinetic .kn-eye { margin-top: 58px; font: 400 18px/1.3 'JetBrains Mono', monospace; letter-spacing: .16em; text-transform: uppercase; color: rgb(242 237 228 / .62); }
-.shot-kinetic .kn-h { margin-top: 18px; font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 125%; font-variation-settings: "wdth" 125, "wght" 900; font-size: 150px; line-height: .9; letter-spacing: -.02em; font-kerning: none; }
+.shot-kinetic .kn-h { margin-top: 18px; font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 125%; font-variation-settings: "wdth" 125, "wght" 900; font-size: 134px; line-height: .9; letter-spacing: -.02em; font-kerning: none; }
 .shot-kinetic .kn-h > span { display: block; overflow: hidden; padding-bottom: .04em; }
 .shot-kinetic .kn-h > span > span { display: block; white-space: nowrap; }
 .shot-kinetic .kn-lede { margin-top: 30px; max-width: 700px; font: 400 28px/1.45 'Archivo', sans-serif; color: rgb(242 237 228 / .62); }
-.shot-kinetic .kn-stage { position: absolute; left: 880px; top: 120px; width: 1560px; height: 860px; perspective: 1700px; perspective-origin: 0% 50%; }
+.shot-kinetic .kn-stage { position: absolute; left: 960px; top: 120px; width: 1560px; height: 860px; perspective: 1700px; perspective-origin: 0% 50%; }
 .shot-kinetic .kn-wall { position: absolute; left: 0; top: 0; display: grid; grid-template-columns: repeat(4, 360px); gap: 22px; transform-origin: 0% 50%; transform: rotateY(24deg) rotateX(-3deg); transform-style: preserve-3d; }
 .shot-kinetic .kn-card { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid rgb(242 237 228 / .12); background: var(--p0); box-shadow: 0 30px 60px -30px rgb(0 0 0 / .8); }
 .shot-kinetic .kn-card::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;

@@ -450,7 +450,7 @@
         const [n, title] = t.posters[i];
         const size = Math.min(44, 330 / ([...title].length * 0.98)).toFixed(1);
         return `<div class="kn-card" style="--p0:${p.p0};--p1:${p.p1};color:${p.fg}"><svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${p.m}</svg>
-          <span class="kn-num tex">${esc(n)}</span><span class="kn-badge tex">▶ ${esc(t.badge)}</span><span class="kn-word" style="font-size:${size}px">${esc(title)}</span>${i === 0 ? '<i class="kn-sel"></i>' : ''}</div>`;
+          <span class="kn-num tex">${esc(n)}</span><span class="kn-badge tex">▶ ${esc(t.badge)}</span><span class="kn-word${size < 24 ? ' tex' : ''}" style="font-size:${size}px">${esc(title)}</span>${i === 0 ? '<i class="kn-sel"></i>' : ''}</div>`;
       }).join('')}</div></div>
       <div class="kn-intro">
         <p class="kn-brand"><span class="kn-mark"><i></i><i></i><i></i></span>${esc(t.brand)}</p>
