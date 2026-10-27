@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 async function openTrailer(page: Page, url = '/es/', names = { skip: 'Saltar', trailer: 'Conocer a Ignacio' }) {
   await page.goto(url);
   await expect(async () => {
+    if (await page.getByRole('button', { name: names.trailer }).isVisible()) return;
     await page.getByRole('button', { name: names.skip }).first().click({ timeout: 500 });
     await expect(page.getByRole('button', { name: names.trailer })).toBeVisible({ timeout: 500 });
   }).toPass();

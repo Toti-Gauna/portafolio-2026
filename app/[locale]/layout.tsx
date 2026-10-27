@@ -9,6 +9,7 @@ import { fontMono, fontSans } from '../fonts';
 import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, absoluteUrl } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Intro } from '@/components/Intro';
+import { FloatingContact } from '@/components/FloatingContact';
 
 export const dynamicParams = false;
 
@@ -55,6 +56,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const t = await getTranslations('meta');
+  const tf = await getTranslations('fab');
   const person = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -79,6 +81,7 @@ export default async function LocaleLayout({
           <div id="app-shell">
             <Header locale={locale as Locale} />
             {children}
+            <FloatingContact label={tf('label')} aria={tf('aria')} />
           </div>
         </NextIntlClientProvider>
       </body>

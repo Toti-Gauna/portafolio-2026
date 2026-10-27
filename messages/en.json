@@ -44,7 +44,7 @@
         "text": "I taught JavaScript and React."
       },
       "tuenti": {
-        "year": "2024",
+        "year": "Since 2024",
         "name": "Tuenti",
         "text": "Roulette. Referrals. Automatic top-up. Payments.",
         "game": "The game came back.",
@@ -142,17 +142,17 @@
       {
         "when": "2021 – 2022",
         "title": "TACH Argentina · Software Developer",
-        "text": "My first job as a developer, remote: a virtual wallet, on web and mobile."
+        "text": "Remote software development: a virtual wallet, on web and mobile."
       },
       {
         "when": "2023 – 2024",
         "title": "Ada ITW · Professor",
-        "text": "I taught the JavaScript and React course. Teaching strengthened my basics and forced me to explain technical ideas clearly."
+        "text": "I taught the JavaScript and React course. Teaching helped me strengthen my basics and explain technical ideas clearly."
       },
       {
         "when": "2024 – 2026",
         "title": "Tsoft · Jr Frontend Developer",
-        "text": "Tuenti and Telefónica products: gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL."
+        "text": "Tuenti and Telefónica products, focused on gamification: interactive and reward mechanics such as the Tuenti roulette and the referral system. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL."
       },
       {
         "when": "January 2026",
@@ -160,14 +160,14 @@
         "text": "An internal Special Recognition from Tsoft, with a message and a gesture from the People team."
       },
       {
-        "when": "April 2026",
+        "when": "2026",
         "title": "Dev Ssr · day with clients",
-        "text": "Promoted to Dev Ssr. I travelled from Mar del Plata to Buenos Aires for an in-person day of demos, alignment and direct conversation with clients."
+        "text": "Promoted to Dev Ssr. In April I travelled from Mar del Plata to Buenos Aires for an in-person day of demos, alignment and direct conversation with clients."
       },
       {
         "when": "2026 – today",
         "title": "Ssr AI Fullstack Developer · CompliA",
-        "text": "Frontend, backend, CI/CD, integrations and AI features in Telefónica's compliance portal and in the Tuenti app. In the portal I designed and built CompliA, a RAG assistant that now runs in internal production."
+        "text": "Frontend, backend, CI/CD, integrations and AI features. In the Tuenti app: top-up processes, internal flows, backend and deployments. In Telefónica's compliance portal I designed and built CompliA, a RAG assistant that now runs in internal production."
       }
     ]
   },
@@ -235,7 +235,7 @@
       "games": {
         "name": "games-market",
         "status": "Test bench",
-        "text": "Test bench for 24 web games, 2D and 3D, with a roadmap ordered by complexity."
+        "text": "Test bench designed for 24 web games, 2D and 3D, with a roadmap ordered by complexity."
       }
     }
   },
@@ -267,7 +267,7 @@
       {
         "name": "Show and validate",
         "text": "I show something that works as early as possible and test it: automated tests, visual QA and demos.",
-        "example": "Velmar: a navigable demo for a client, before committing to the final product."
+        "example": "Velmar: a navigable demo for a client, with sample data."
       },
       {
         "name": "Deliver and learn",
@@ -315,11 +315,11 @@
       },
       {
         "title": "Tested, not eyeballed",
-        "text": "The projects have automated tests, end-to-end tests with Playwright and CI that runs tests, types and build on every change."
+        "text": "The main projects have automated tests, end-to-end tests with Playwright and CI that runs the tests and the build."
       },
       {
         "title": "Visual QA with binary criteria",
-        "text": "Every redesign is compared against the previous state at several widths and with reduced motion. I state the limits: I test in Chromium."
+        "text": "Redesigns are compared against the previous state at several widths and with reduced motion. I state the limits: I test in Chromium."
       },
       {
         "title": "Cost and honesty as design rules",
@@ -375,7 +375,7 @@
   "contact": {
     "label": "08 · Contact",
     "title": "Open to new opportunities.",
-    "lead": "I'm looking for a Ssr or Sr fullstack role with AI, in teams that ship product.",
+    "lead": "I'm looking for a Ssr or Sr fullstack role with AI.",
     "email": "Write to me",
     "emailLabel": "Email",
     "linkedin": "LinkedIn",
@@ -486,8 +486,8 @@
         {
           "h": "Techniques",
           "list": [
-            "One paused master timeline per trailer: any frame can be frozen with ?t=.",
-            "Scores as data: the music drives the image.",
+            "One paused master timeline per trailer: in the kit trailers, any frame can be frozen with ?t=.",
+            "Scores as data, synced with the image.",
             "Particles in canvas and WebGL, text that turns into stars, simulations with a fixed seed."
           ]
         },
@@ -500,6 +500,38 @@
           "p": "The kit is copied into every folder and has drifted apart. Unifying it is next."
         }
       ]
+    },
+    "tuenti": {
+      "title": "Tuenti",
+      "status": "Professional work · Tsoft",
+      "summary": "Gamification, top-ups and payments in Tuenti and Telefónica products, from Tsoft.",
+      "sections": [
+        {
+          "h": "Context",
+          "p": "Since 2024 I've worked at Tsoft on Tuenti and Telefónica products. First as a Jr Frontend Developer and, since 2026, as a Ssr AI Fullstack Developer."
+        },
+        {
+          "h": "What I did",
+          "list": [
+            "Gamification: interactive and reward mechanics to improve engagement, such as the Tuenti roulette and the referral system.",
+            "Automatic top-up and a payments module.",
+            "In the Tuenti app: internal flows, backend logic, deployment pipelines and integrations.",
+            "Turning business requirements into technical solutions, alongside multidisciplinary teams."
+          ]
+        },
+        {
+          "h": "Stack",
+          "p": "React, React Native, TypeScript, Next.js, Tailwind CSS, Node.js and SQL."
+        },
+        {
+          "h": "What I don't show",
+          "p": "For confidentiality I don't show architecture, data, metrics or internal screenshots from Tuenti, Telefónica or Tsoft."
+        }
+      ]
     }
+  },
+  "fab": {
+    "label": "Contact",
+    "aria": "Contact: email Ignacio"
   }
 }

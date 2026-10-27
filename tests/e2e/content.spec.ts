@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 async function enter(page: Page, url: string, skip = 'Saltar', portfolio = 'Ver portafolio') {
   await page.goto(url);
   await expect(async () => {
+    if (await page.getByRole('button', { name: portfolio }).isVisible()) return;
     await page.getByRole('button', { name: skip }).first().click({ timeout: 500 });
     await expect(page.getByRole('button', { name: portfolio })).toBeVisible({ timeout: 500 });
   }).toPass();
@@ -39,7 +40,7 @@ test('contact has email, LinkedIn and GitHub; external links open safely', async
 
 test('every case page exists in both languages and says its status', async ({ page }) => {
   for (const [loc, skip, port] of [['es', 'Saltar', 'Ver portafolio'], ['en', 'Skip', 'View portfolio']] as const) {
-    for (const slug of ['complia', 'handyx', 'eclipse', 'kinetic']) {
+    for (const slug of ['complia', 'tuenti', 'handyx', 'eclipse', 'kinetic']) {
       await enter(page, `/${loc}/proyectos/${slug}/`, skip, port);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       await expect(page.locator('.case .status').first()).not.toBeEmpty();
@@ -67,4 +68,24 @@ test('English home mirrors the Spanish structure', async ({ page }) => {
   await enter(page, '/en/', 'Skip', 'View portfolio');
   await expect(page.locator('section#recorrido h2')).toContainText('One seed');
   await expect(page.locator('.method__step')).toHaveCount(6);
+});
+
+test('phones get a floating contact button that steps aside near other contact actions', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await enter(page, '/es/');
+  const fab = page.locator('.fab-contact');
+  await expect(fab).toHaveAttribute('data-hidden', 'true'); // hero buttons are on screen
+  await page.locator('#metodo').scrollIntoViewIfNeeded();
+  await expect(fab).toHaveAttribute('data-hidden', 'false');
+  await expect(page.getByRole('link', { name: /^Contacto/ }).last()).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
+  await page.locator('#contacto').scrollIntoViewIfNeeded();
+  await expect(fab).toHaveAttribute('data-hidden', 'true');
+});
+
+test('Tuenti and Eclipse cases: own page, Eclipse links to its site', async ({ page }) => {
+  await enter(page, '/es/');
+  await page.locator('.work__card', { hasText: 'Tuenti' }).getByRole('link').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tuenti');
+  await enter(page, '/es/proyectos/eclipse/');
+  await expect(page.getByRole('link', { name: /eclipse-business\.com/ })).toHaveAttribute('href', 'https://eclipse-business.com/');
 });

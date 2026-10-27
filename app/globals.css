@@ -92,3 +92,16 @@ img, svg { display: block; max-width: 100%; }
   .site-header__menu { display: none; }
 }
 @media (max-width: 520px) { .site-header__mail { display: none; } }
+
+/* floating contact (phones only: the header hides its contact button below 520px) */
+.fab-contact { display: none; }
+@media (max-width: 520px) {
+  .fab-contact {
+    position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 25;
+    display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 999px;
+    background: var(--accent); color: var(--ink); font-weight: 700; text-decoration: none;
+    box-shadow: 0 8px 24px #0009; transition: transform 250ms var(--ease-expo), opacity 250ms;
+  }
+  .fab-contact[data-hidden='true'] { transform: translateY(120%); opacity: 0; pointer-events: none; }
+  .foot { padding-bottom: 96px; }
+}

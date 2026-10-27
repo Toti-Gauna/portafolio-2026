@@ -58,7 +58,8 @@ export function Work() {
             {tag(t(`cards.${k}.status`))}
             <h3 className="work__name">{t(`cards.${k}.name`)}</h3>
             <p>{t(`cards.${k}.text`)}</p>
-            {k === 'tuenti' ? <p className="note">{t('tuentiNote')}</p> : link(k)}
+            {k === 'tuenti' && <p className="note">{t('tuentiNote')}</p>}
+            {link(k)}
           </Reveal>
         ))}
       </div>

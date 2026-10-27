@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 // The server HTML already has the boot screen; its buttons only work once React has hydrated.
 async function skipBoot(page: Page, skip: string, next: string) {
   await expect(async () => {
+    if (await page.getByRole('button', { name: next }).isVisible()) return; // the gate may already be up
     await page.getByRole('button', { name: skip }).click({ timeout: 500 });
     await expect(page.getByRole('button', { name: next })).toBeVisible({ timeout: 500 });
   }).toPass();
