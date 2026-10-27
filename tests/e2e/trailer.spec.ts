@@ -82,6 +82,8 @@ test('portrait phones get a «rotate» gate that lets go once the phone is horiz
   await expect(page.getByRole('heading', { name: 'Girá el teléfono' })).toBeVisible();
   await expect(film(page)).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  // the opening click asked for fullscreen; a window in fullscreen can't be resized by the test (a phone just rotates)
+  await page.evaluate(() => (document.fullscreenElement ? document.exitFullscreen() : undefined));
   await page.setViewportSize({ width: 844, height: 390 });
   await expect(film(page)).toHaveCount(1);
 });
