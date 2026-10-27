@@ -14,11 +14,14 @@ export const LAB = [
 /** Screenshots of each case's portals: public/media/portals/<id>.webp (1600×1000), alt and caption in cases.<slug>.gallery.<id>. */
 export const CASE_GALLERY: Partial<Record<CaseSlug, readonly string[]>> = {
   handyx: ['handy-landing', 'handy-especialistas', 'handy-ops-inicio', 'handy-ops-registros'],
+  eclipse: ['eclipse-landing', 'eclipse-landing-precios', 'eclipse-portal-proyectos', 'eclipse-portal-detalle', 'eclipse-ops-prospectos', 'eclipse-ops-proyectos', 'eclipse-ops-calendario'],
 };
 
 /** Cover of a work card (its alt text in work.cards.<k>.shotAlt). */
 export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', string>> = {
+  complia: '/media/complia-demo-poster.jpg',
   handyx: '/media/portals/handy-landing.webp',
+  eclipse: '/media/portals/eclipse-landing.webp',
 };
 
 export const CASE_LINKS: Partial<Record<CaseSlug, { label: string; href: string }[]>> = {

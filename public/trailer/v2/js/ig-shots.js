@@ -47,7 +47,7 @@
 
   function frameHtml(id, def, t) {
     const f = def.frame || 'browser', view = `<div class="ish-view shot-${id}">${def.html(t)}</div>`;
-    if (f === 'browser') return `<div class="ish-frame ish-browser" data-shot="${id}"><div class="ish-bar"><i></i><i></i><i></i>${def.url ? `<span class="ish-url mono">${esc(def.url)}</span>` : ''}</div>${view}</div>`;
+    if (f === 'browser') return `<div class="ish-frame ish-browser" data-shot="${id}"><div class="ish-bar"><i></i><i></i><i></i>${def.url ? `<span class="ish-url">${esc(def.url)}</span>` : ''}</div>${view}</div>`;
     if (f === 'phone') return `<div class="ish-frame ish-phone" data-shot="${id}">${view}</div>`;
     return `<div class="ish-frame ish-none" data-shot="${id}">${view}</div>`;
   }

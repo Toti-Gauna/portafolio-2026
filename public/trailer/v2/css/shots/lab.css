@@ -55,6 +55,7 @@
 .shot-volta .vt-plate .vt-eye { margin-top: 22px; font-size: 20px; }
 .shot-volta .vt-prize { margin-top: 14px; font: 800 46px/.95 'LabBigShoulders', sans-serif; letter-spacing: .01em; text-transform: uppercase; }
 .shot-volta .vt-claim { margin-top: 18px; max-width: 400px; font: 700 24px/1.25 'Archivo', sans-serif; color: #c8ff2e; text-decoration: underline; text-underline-offset: 6px; }
+.shot-volta .vt-nw { white-space: nowrap; }
 .shot-volta .vt-claim svg { display: inline-block; width: 24px; height: 24px; margin-left: 6px; vertical-align: -4px; }
 
 /* ── VELMAR · "Escribí el nombre" (velmar: src/features/home/LiveCustomizer.tsx, components/illustrations/CollarPreview.tsx,

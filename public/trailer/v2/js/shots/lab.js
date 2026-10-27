@@ -13,6 +13,9 @@
   const { add } = Trailer.igShots;
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const q = (v, s) => v.querySelector(s), qa = (v, s) => Array.from(v.querySelectorAll(s));
+  // a from → to that starts after the cut: its from-state is set AT the cut (T), so the view never shows its final
+  // state while the frame whips in (D.hit only sets it when the tween starts)
+  const enter = (D, T, el, from, to, at) => { D.tl.set(el, from, T); D.tl.to(el, to, at); };
   const icon = (d, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra}>${d}</svg>`;
 
   /* ── VOLTA ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -86,15 +89,15 @@
           </div>
           <p class="vt-eye tex">${esc(t.next)}</p>
           <p class="vt-prize">${esc(t.prize)}</p>
-          <p class="vt-claim">${esc(t.claim)}${icon('<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>')}</p>
+          <p class="vt-claim">${esc(t.claim.split(' ').slice(0, -1).join(' '))} <span class="vt-nw">${esc(t.claim.split(' ').slice(-1)[0])}${icon('<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>')}</span></p>
         </div>
       </div>`,
     play(D, v, T) {
       const { tl } = D;
       const lit = qa(v, '.vt-lit path'), leds = qa(v, '.vt-led');
-      const s0 = T + 0.12, step = 0.018;
+      const s0 = T + 0.12, step = 0.016;
       // the 24 plates light clockwise; the LED counts with them
-      D.hit(lit, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: 'none', stagger: step }, s0);
+      enter(D, T, lit, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: 'none', stagger: step }, s0);
       tl.set(leds, { opacity: 0 }, T);
       tl.set(leds[0], { opacity: 1 }, T);
       LED_AT.forEach((i, k) => {
@@ -104,11 +107,11 @@
         tl.set(leds[k], { opacity: 1 }, at);
       });
       // full ring: the gift unlocks and the reward reads "ready to claim"
-      const full = s0 + 23 * step + 0.07;
-      D.hit(q(v, '.vt-ring'), { scale: 1.05 }, { scale: 1, duration: 0.5, ease: 'expo.out' }, full);
-      D.hit(q(v, '.vt-gift'), { scale: 0.2, rotation: -30, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: 'back.out(2.6)' }, full);
-      D.hit(q(v, '.vt-prize'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'expo.out' }, full + 0.02);
-      D.hit(q(v, '.vt-claim'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, full + 0.1);
+      const full = s0 + 23 * step + 0.06;
+      D.hit(q(v, '.vt-ring'), { scale: 1.05 }, { scale: 1, duration: 0.4, ease: 'expo.out' }, full);
+      enter(D, T, q(v, '.vt-gift'), { scale: 0.2, rotation: -30, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: 'back.out(2.6)' }, full);
+      enter(D, T, q(v, '.vt-prize'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'expo.out' }, full + 0.02);
+      enter(D, T, q(v, '.vt-claim'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }, full + 0.1);
       D.sfx('plip', full, 0.16, 640);
     },
   });
@@ -181,17 +184,17 @@
       tl.set(states[0], { opacity: 1 }, T);
       // each key: the input shows one more letter and that letter drops onto the cord, swinging from its ring
       const drop = (g, at, from) => {
-        D.hit(g, { svgOrigin: g.dataset.o, y: -54, opacity: 0, rotation: from }, { y: 0, opacity: 1, duration: 0.2, ease: 'power2.in' }, at);
-        tl.to(g, { rotation: 0, duration: 0.75, ease: 'elastic.out(1, 0.32)' }, at + 0.12);
+        enter(D, T, g, { svgOrigin: g.dataset.o, y: -22, scale: 0.55, opacity: 0, rotation: from }, { y: 0, scale: 1, opacity: 1, duration: 0.18, ease: 'power2.out' }, at);
+        tl.to(g, { rotation: 0, duration: 0.54, ease: 'elastic.out(1, 0.35)' }, at + 0.04);
       };
       letters.forEach((g, i) => {
         const at = k0 + i * dk;
         tl.set(states[i], { opacity: 0 }, at);
         tl.set(states[i + 1], { opacity: 1 }, at);
-        drop(g, at, i % 2 ? 14 : -14);
+        drop(g, at, i % 2 ? 22 : -22);
         D.sfx('key', at, 0.1);
       });
-      drop(charm, k0 + letters.length * dk, 18);
+      drop(charm, k0 + letters.length * dk, 26);
     },
   });
 
@@ -262,7 +265,7 @@
       </div>`,
     play(D, v, T) {
       // the day's appointments slide into their professional and chair, in the order of the clock
-      D.hit(qa(v, '.do-appt'), { x: 110, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: 'expo.out', stagger: 0.075 }, T + 0.12);
+      enter(D, T, qa(v, '.do-appt'), { x: 110, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, ease: 'expo.out', stagger: 0.075 }, T + 0.12);
       D.sfx('tick', T + 0.42, 0.03);
     },
   });
@@ -323,14 +326,14 @@
     play(D, v, T) {
       // "Ya sos parte.": the emblem checks, the pass rises (PersonalTicket: y 28 → 0, .96 → 1, ease [.16, 1, .3, 1]),
       // its QR prints top to bottom and the foil light crosses it
-      D.hit(q(v, '.sn-emblem'), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2.4)' }, T + 0.06);
-      D.hit(qa(v, '.sn-chk'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: 'power2.out', stagger: 0.08 }, T + 0.16);
-      D.hit(q(v, '.sn-title'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, T + 0.1);
-      D.hit(q(v, '.sn-ticket'), { y: 90, scale: 0.94, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }, T + 0.14);
-      D.hit(q(v, '.sn-qr svg'), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.32, ease: 'power2.inOut' }, T + 0.4);
-      D.hit(q(v, '.sn-ok'), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2.2)' }, T + 0.5);
-      D.hit(q(v, '.sn-foil i'), { xPercent: 0 }, { xPercent: 330, duration: 0.42, ease: 'power2.inOut' }, T + 0.56);
-      D.hit(q(v, '.sn-acts'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, T + 0.5);
+      enter(D, T, q(v, '.sn-emblem'), { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2.4)' }, T + 0.06);
+      enter(D, T, qa(v, '.sn-chk'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: 'power2.out', stagger: 0.08 }, T + 0.16);
+      enter(D, T, q(v, '.sn-title'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, T + 0.1);
+      enter(D, T, q(v, '.sn-ticket'), { y: 90, scale: 0.94, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }, T + 0.14);
+      enter(D, T, q(v, '.sn-qr svg'), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.32, ease: 'power2.inOut' }, T + 0.4);
+      enter(D, T, q(v, '.sn-ok'), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(2.2)' }, T + 0.5);
+      enter(D, T, q(v, '.sn-foil i'), { xPercent: 0 }, { xPercent: 330, duration: 0.42, ease: 'power2.inOut' }, T + 0.56);
+      enter(D, T, q(v, '.sn-acts'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, T + 0.5);
       D.sfx('beep', T + 0.42, 1320, 0.08, 0.04);
     },
   });
@@ -398,12 +401,12 @@
       const order = [0, 1, 3, 2, 4, 5]; // diagonal wave: (0,0) (0,1) (1,0) (0,2) (1,1) (1,2)
       const at = i => T + 0.1 + order.indexOf(i) * 0.065;
       cards.forEach((c, i) => {
-        D.hit(c, { opacity: 0, y: 46, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, at(i));
+        enter(D, T, c, { opacity: 0, y: 46, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'expo.out' }, at(i));
         // each tile lights as it lands; the hovered one stays lit, the rest settle
-        if (i === GM_HOT) D.hit(glows[i], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, at(i) + 0.12);
-        else { D.hit(glows[i], { opacity: 0 }, { opacity: 0.85, duration: 0.14, ease: 'power2.out' }, at(i) + 0.08); D.tl.to(glows[i], { opacity: 0, duration: 0.4, ease: 'power2.in' }, at(i) + 0.24); }
+        if (i === GM_HOT) enter(D, T, glows[i], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, at(i) + 0.12);
+        else { enter(D, T, glows[i], { opacity: 0 }, { opacity: 0.85, duration: 0.14, ease: 'power2.out' }, at(i) + 0.08); D.tl.to(glows[i], { opacity: 0, duration: 0.3, ease: 'power2.in' }, at(i) + 0.24); }
       });
-      D.hit(q(v, '.gm-card.hot .gm-title i'), { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' }, at(GM_HOT) + 0.2);
+      enter(D, T, q(v, '.gm-card.hot .gm-title i'), { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' }, at(GM_HOT) + 0.2);
       D.sfx('plip', at(GM_HOT) + 0.12, 0.1, 880);
     },
   });
@@ -463,10 +466,10 @@
       // the library flips on in a diagonal wave, then KINETIC (01, where the kit was born) is the selected one
       cards.forEach((c, i) => {
         const r = Math.floor(i / 4), k = i % 4;
-        D.hit(c, { opacity: 0, rotationX: -80, y: 40, transformOrigin: '50% 100%' }, { opacity: 1, rotationX: 0, y: 0, duration: 0.55, ease: 'expo.out' }, T + 0.06 + (r + k) * 0.045);
+        enter(D, T, c, { opacity: 0, rotationX: -80, y: 40, transformOrigin: '50% 100%' }, { opacity: 1, rotationX: 0, y: 0, duration: 0.55, ease: 'expo.out' }, T + 0.06 + (r + k) * 0.045);
       });
-      D.hit(qa(v, '.kn-h > span > span'), { yPercent: 105 }, { yPercent: 0, duration: 0.55, ease: 'expo.out', stagger: 0.07 }, T + 0.04);
-      D.hit(q(v, '.kn-sel'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' }, T + 0.6);
+      enter(D, T, qa(v, '.kn-h > span > span'), { yPercent: 135 }, { yPercent: 0, duration: 0.55, ease: 'expo.out', stagger: 0.07 }, T + 0.04);
+      enter(D, T, q(v, '.kn-sel'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' }, T + 0.6);
       D.hit(cards[0], { scale: 1 }, { scale: 1.04, duration: 0.4, ease: 'expo.out' }, T + 0.6);
       D.hit(q(v, '.kn-stage'), { x: 0 }, { x: -70, duration: dur, ease: 'sine.inOut' }, T);
     },

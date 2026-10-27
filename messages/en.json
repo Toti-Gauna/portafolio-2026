@@ -129,7 +129,8 @@
       "complia": {
         "name": "CompliA",
         "status": "In internal production",
-        "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations."
+        "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations.",
+        "shotAlt": "Frame of the CompliA demo: the assistant searching the compliance portal, with sample data."
       },
       "tuenti": {
         "name": "Tuenti",
@@ -145,7 +146,8 @@
       "eclipse": {
         "name": "Eclipse",
         "status": "In development",
-        "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend."
+        "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend.",
+        "shotAlt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks."
       }
     }
   },
@@ -506,7 +508,37 @@
           "h": "Status",
           "p": "Under construction. There are no clients or commercial results to show, and I don't invent them."
         }
-      ]
+      ],
+      "gallery": {
+        "eclipse-landing": {
+          "alt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks.",
+          "caption": "The landing page: the eclipse at totality and a single call to action."
+        },
+        "eclipse-landing-precios": {
+          "alt": "Pricing section of the Eclipse landing page on a cream background: the Spanish headline «Cuánto cuesta y cómo se paga.» (what it costs and how it's paid), the currency switch set to USD, the tabs «Planes (6)» and «Pieza por pieza (18)» and the first level, Contact, at US$ 30 a month.",
+          "caption": "Pricing: six monthly levels and the list of pieces, in US dollars."
+        },
+        "eclipse-portal-proyectos": {
+          "alt": "Eclipse's client portal in demo mode, in Spanish: the notice «Vista de demostración — datos ficticios» (demo view, fictional data), the greeting «Hola, Lucía.», a summary saying two things await an answer and the project table of a fictional hardware store, each stage marked with the eclipse phase glyph.",
+          "caption": "Client portal, “My projects”, with fictional data."
+        },
+        "eclipse-portal-detalle": {
+          "alt": "Detail of a fictional project in Eclipse's client portal, in Spanish: «Chatbot de consultas» (questions chatbot), the current stage «Revisión del cliente» (client review, 4 of 5) with its phase glyph, the next milestone with its estimated date and the «Tu acción» card flagged «Te toca a vos» (your turn).",
+          "caption": "Project detail: stage, next milestone and what's on you. Fictional data."
+        },
+        "eclipse-ops-prospectos": {
+          "alt": "Eclipse's internal portal in dark mode and demo mode, in Spanish: the Prospects screen, with the headline «Del contacto a la seña.» (from first contact to deposit), the stage filters and a list of fictional businesses with their stage, source and the computed next action, such as «Llamar (mismo día que respondió)» (call the same day they replied), with its due tag.",
+          "caption": "Internal operations: prospects with the computed next action. Sample data."
+        },
+        "eclipse-ops-proyectos": {
+          "alt": "Eclipse's internal portal, Projects screen, in Spanish: the headline «Proyectos en curso.» (projects in progress), the counters of active projects (5) and of those waiting on the client (3), the filters and the list of fictional projects with their stage (the same five stages the client sees), their next milestone and what was asked of the client.",
+          "caption": "Internal operations: projects in the five stages the client sees. Sample data."
+        },
+        "eclipse-ops-calendario": {
+          "alt": "Eclipse's internal portal, Calendar screen, in Spanish: the headline «Dale espacio a lo importante.» (make room for what matters), the October 2026 grid and, on the right, the agenda for October 27 with sample activities such as «10:00 Dejar listas las propuestas de hoy» (get today's proposals ready) and «15:00 Llamada de propuesta · Constructora» (proposal call).",
+          "caption": "Internal operations: the calendar and the day's agenda. Sample data."
+        }
+      }
     },
     "kinetic": {
       "title": "Kinetic Studio",

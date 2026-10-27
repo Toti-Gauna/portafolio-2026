@@ -341,7 +341,7 @@
       tl.set(q('.ep-row-hl'), { opacity: 0 }, T);
       // hairlines draw, the greeting is uncovered by an edge passing (occultation)
       tl.to(rules, { scaleX: 1, duration: 0.7, ease: 'expo.out', stagger: 0.06 }, T + 0.08);
-      tl.to(hello, { clipPath: 'inset(0% 0% -20% 0%)', duration: 0.7, ease: 'expo.inOut' }, T + 0.06);
+      tl.to(hello, { clipPath: 'inset(0% 0% -20% 0%)', duration: 0.6, ease: 'expo.out' }, T + 0.04);
       // the website project advances: the row lights, its moon slides, the stage scrambles to the next one
       const A = T + 0.34;
       tl.to(q('.ep-row-hl'), { opacity: 1, duration: 0.3, ease: 'power2.out' }, A - 0.1);
@@ -416,7 +416,7 @@
         <div><b class="eo-name">${t[`r${n}Name`]}</b><span class="eo-meta tex">${t[`r${n}Meta`]}</span></div>
         <div class="eo-stage">${glyph(phase, 30, 'eo-sg')}<span><span class="eo-pos tex">${t[`r${n}Pos`]}</span><b>${t[`r${n}Stage`]}</b></span></div>
         <div class="eo-src">${t[`r${n}Source`]}${t[`r${n}Warm`] ? `<span class="eo-meta tex">${t[`r${n}Warm`]}</span>` : ''}</div>
-        <div class="eo-next"><span class="eo-next-t" data-text="${t[`r${n}Next`]}">${t[`r${n}Next`]}</span><span class="eo-tag tex ${late ? 'eo-late' : 'eo-attn'}">${t[`r${n}Due`]}</span></div>
+        <div class="eo-next"><span class="eo-next-t"><span class="eo-ghost">${t[`r${n}Next`]}</span><span class="eo-live" data-text="${t[`r${n}Next`]}">${t[`r${n}Next`]}</span></span><span class="eo-tag tex ${late ? 'eo-late' : 'eo-attn'}">${t[`r${n}Due`]}</span></div>
         <div class="eo-end"><span class="eo-open tex">${t.open}${icon('arrow', 20)}</span></div>
       </div>`;
       return `<div class="eo-light"></div>
@@ -442,7 +442,8 @@
       const { tl } = D;
       const q = s => v.querySelector(s), qa = s => Array.from(v.querySelectorAll(s));
       D.fit(q('.eo-title'), 1000); // en is longer: one line, clear of «+ Prospect»
-      const nexts = qa('.eo-next-t'), tags = qa('.eo-tag'), edges = qa('.eo-edge');
+      // .eo-ghost keeps each cell's final size, so the rows never jump while the text types in
+      const nexts = qa('.eo-live'), tags = qa('.eo-tag'), edges = qa('.eo-edge');
       tl.set(q('.eo-hr'), { scaleX: 0 }, T);
       tl.set(nexts, { scrambleText: { text: ' ' } }, T);
       tl.set(tags, { opacity: 0, scale: 0.4 }, T);
@@ -452,11 +453,11 @@
       tl.to(q('.eo-title em'), { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, T + 0.2);
       // the next action is computed: each row's action types itself in, its due tag lands, its edge lights
       nexts.forEach((el, i) => {
-        const at = T + 0.26 + i * 0.1;
-        tl.to(el, { duration: 0.42, scrambleText: { text: el.dataset.text, chars: 'abcdefghijklmnopqrstuvwxyz+≤()', revealDelay: 0.1, speed: 0.8 }, ease: 'none' }, at);
-        tl.to(tags[i], { opacity: 1, scale: 1, duration: 0.42, ease: 'back.out(2.2)' }, at + 0.3);
-        tl.to(edges[i], { scaleY: 1, duration: 0.4, ease: 'expo.out' }, at + 0.2);
-        D.sfx('key', at + 0.3, 0.025);
+        const at = T + 0.2 + i * 0.08;
+        tl.to(el, { duration: 0.38, scrambleText: { text: el.dataset.text, chars: 'abcdefghijklmnopqrstuvwxyz+≤()', revealDelay: 0.08, speed: 0.8 }, ease: 'none' }, at);
+        tl.to(tags[i], { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.2)' }, at + 0.26);
+        tl.to(edges[i], { scaleY: 1, duration: 0.4, ease: 'expo.out' }, at + 0.16);
+        if (i < 2) D.sfx('key', at + 0.26, 0.025);
       });
       void dur;
     },

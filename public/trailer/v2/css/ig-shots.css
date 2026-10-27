@@ -13,7 +13,7 @@
 .ish-bar { position: relative; height: 44px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #1b1b1f; border-bottom: 1px solid rgba(255, 255, 255, .08); }
 .ish-bar i { width: 13px; height: 13px; border-radius: 50%; background: #ff5f57; }
 .ish-bar i:nth-child(2) { background: #febc2e; } .ish-bar i:nth-child(3) { background: #28c840; }
-.ish-url { position: absolute; left: 50%; transform: translateX(-50%); padding: 4px 22px; border-radius: 8px; background: rgba(255, 255, 255, .07); color: #b9b9c2; font-size: 20px; letter-spacing: .02em; white-space: nowrap; }
+.ish-url { font-family: var(--mono); position: absolute; left: 50%; transform: translateX(-50%); padding: 4px 22px; border-radius: 8px; background: rgba(255, 255, 255, .07); color: #b9b9c2; font-size: 20px; letter-spacing: .02em; white-space: nowrap; }
 .ish-browser .ish-view { position: relative; width: 1440px; height: 816px; overflow: hidden; }
 .ish-phone { border-radius: 64px; padding: 14px; background: #08080a; box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 0 2px rgba(255, 255, 255, .12) inset; }
 .ish-phone .ish-view { position: relative; width: 392px; height: 832px; border-radius: 50px; overflow: hidden; }
