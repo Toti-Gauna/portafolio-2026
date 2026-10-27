@@ -407,7 +407,8 @@
     "contactTitle": "¿Hablamos?",
     "contactText": "Abierto a nuevas oportunidades.",
     "videoCaption": "Recorte de la demo de CompliA. Datos de ejemplo.",
-    "next": "Otros casos"
+    "next": "Otros casos",
+    "gallery": "Capturas"
   },
   "cases": {
     "complia": {
@@ -507,7 +508,7 @@
         },
         {
           "h": "Dónde se ve",
-          "p": "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 21 escenas en 90 segundos, con música sintetizada."
+          "p": "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 20 escenas en 96 segundos, con música sintetizada y componentes reales de mis proyectos reconstruidos en código."
         },
         {
           "h": "Deuda conocida",

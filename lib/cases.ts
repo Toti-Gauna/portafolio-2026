@@ -11,6 +11,9 @@ export const LAB = [
   { id: 'games', code: 'https://github.com/Toti-Gauna/games-market' },
 ] as const;
 
+/** Screenshots of each case's portals: public/media/portals/<id>.webp (1600×1000), alt and caption in cases.<slug>.gallery.<id>. */
+export const CASE_GALLERY: Partial<Record<CaseSlug, readonly string[]>> = {};
+
 export const CASE_LINKS: Partial<Record<CaseSlug, { label: string; href: string }[]>> = {
   eclipse: [{ label: 'eclipse-business.com', href: 'https://eclipse-business.com/' }],
   kinetic: [

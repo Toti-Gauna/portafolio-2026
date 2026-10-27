@@ -407,7 +407,8 @@
     "contactTitle": "Shall we talk?",
     "contactText": "Open to new opportunities.",
     "videoCaption": "Clip from the CompliA demo. Sample data.",
-    "next": "Other cases"
+    "next": "Other cases",
+    "gallery": "Screenshots"
   },
   "cases": {
     "complia": {
@@ -507,7 +508,7 @@
         },
         {
           "h": "Where to see it",
-          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 21 scenes in 90 seconds, with synthesised music."
+          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 20 scenes in 96 seconds, with synthesised music and real components of my projects rebuilt in code."
         },
         {
           "h": "Known debt",

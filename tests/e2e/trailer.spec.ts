@@ -34,7 +34,7 @@ test('the trailer plays fullscreen with no player bar; sound and skip work; no c
   await expect(dialog.getByRole('slider')).toHaveCount(0);
   const frame = page.frameLocator('iframe.tplayer__frame');
   await expect(frame.locator('#ui')).toBeHidden();
-  await expect(frame.locator('html')).toHaveAttribute('data-duration', '90.00');
+  await expect(frame.locator('html')).toHaveAttribute('data-duration', '96.00');
 
   // the controls step aside while the film plays, and come back when the pointer moves over it
   const player = page.locator('.tplayer');
@@ -60,7 +60,7 @@ test('the trailer plays fullscreen with no player bar; sound and skip work; no c
 });
 
 test('when the film ends it hands off to the portfolio', async ({ page }) => {
-  await openTrailer(page, '/es/?t=88.6'); // ?t= opens the film paused on that frame
+  await openTrailer(page, '/es/?t=94.6'); // ?t= opens the film paused on that frame
   await ready(page);
   await page.evaluate(() => document.querySelector('iframe')!.contentWindow!.postMessage({ type: 'trailer:play' }, location.origin));
   await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 8000 });

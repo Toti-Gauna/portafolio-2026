@@ -1,0 +1,38 @@
+/* ============================================================================
+   Act 5 montage (js/ig-shots.js): frames, tags, mosaic. Each shot's own view styles live in
+   css/shots/<group>.css, every rule under .shot-<id>.
+   Legibility: the tag (name, status, note) carries what must be read: ≥ 36 px on the stage (≥ 12 px down to a
+   667×375 phone). Inside a view, the interface is a picture of the product: its main text is ≥ 24 px.
+   ========================================================================== */
+.ish { position: absolute; inset: 0; }
+.ish-title { position: absolute; inset: 0; display: grid; place-items: center; visibility: hidden; }
+.ish-title-t { font-family: var(--display); font-size: 150px; line-height: .95; font-variation-settings: "wdth" 112, "wght" 900; letter-spacing: -.02em; color: #eeeae3; text-align: center; max-width: 1500px; }
+
+.ish-frame { position: absolute; visibility: hidden; will-change: transform; }
+.ish-browser { border-radius: 18px; overflow: hidden; background: #111; box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); }
+.ish-bar { position: relative; height: 44px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #1b1b1f; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.ish-bar i { width: 13px; height: 13px; border-radius: 50%; background: #ff5f57; }
+.ish-bar i:nth-child(2) { background: #febc2e; } .ish-bar i:nth-child(3) { background: #28c840; }
+.ish-url { position: absolute; left: 50%; transform: translateX(-50%); padding: 4px 22px; border-radius: 8px; background: rgba(255, 255, 255, .07); color: #b9b9c2; font-size: 20px; letter-spacing: .02em; white-space: nowrap; }
+.ish-browser .ish-view { position: relative; width: 1440px; height: 816px; overflow: hidden; }
+.ish-phone { border-radius: 64px; padding: 14px; background: #08080a; box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 0 2px rgba(255, 255, 255, .12) inset; }
+.ish-phone .ish-view { position: relative; width: 392px; height: 832px; border-radius: 50px; overflow: hidden; }
+.ish-none .ish-view { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+.ish-view { text-align: left; white-space: normal; }
+
+.ish-tag { position: absolute; left: 96px; bottom: 72px; z-index: 3; min-width: 560px; max-width: 980px; padding: 24px 40px 26px 50px; background: rgba(14, 14, 16, .9); color: #eeeae3; visibility: hidden; }
+.ish-tag-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: var(--c); }
+.ish-tag-top { display: flex; align-items: baseline; gap: 26px; overflow: hidden; }
+.ish-tag-top b { font: 900 74px/1 var(--display); font-variation-settings: "wdth" 110, "wght" 900; letter-spacing: -.015em; white-space: nowrap; }
+.ish-tag-st { padding: 6px 16px; border: 2px solid var(--c); border-radius: 999px; color: var(--c); font-size: 36px; line-height: 1.1; white-space: nowrap; }
+.ish-tag-nt { margin-top: 10px; font: 500 38px/1.2 var(--display); color: #c9c5bc; }
+
+.ish-labels { position: absolute; inset: 0; pointer-events: none; }
+.ish-cl { position: absolute; display: flex; align-items: center; gap: 12px; font: 700 36px/1 var(--display); color: #eeeae3; white-space: nowrap; opacity: 0; }
+.ish-cl i { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--c); }
+.ish-end { position: absolute; display: grid; align-content: center; visibility: hidden; }
+.ish-end-t { font: 900 66px/1 var(--display); font-variation-settings: "wdth" 110, "wght" 900; color: #ff4d2e; }
+
+/* the placeholder view (until a project's module is in) */
+.shot-ph { position: absolute; inset: 0; display: grid; place-items: center; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 24px, transparent 24px 48px); }
+.shot-ph b { font: 900 96px/1 var(--display); color: rgba(255, 255, 255, .5); }
