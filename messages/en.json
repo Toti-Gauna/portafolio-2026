@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Ignacio Gauna — Ssr AI Fullstack Developer",
+    "description": "I build AI software that ships: from interface to backend, with a system that plans, tests and delivers."
+  },
+  "intro": {
+    "loading": "Loading",
+    "skip": "Skip",
+    "name": "Ignacio Gauna",
+    "role": "Ssr AI Fullstack Developer",
+    "trailer": "Meet Ignacio",
+    "portfolio": "View portfolio",
+    "dialog": "Welcome"
+  },
+  "trailer": {
+    "title": "Meet Ignacio",
+    "soon": "The trailer is in production. It will run up to 120 seconds and can be paused or skipped at any time.",
+    "close": "Close"
+  },
+  "header": {
+    "home": "Ignacio Gauna, home",
+    "language": "Language",
+    "contact": "Contact",
+    "nav": "Main"
+  },
+  "hero": {
+    "role": "Ssr AI Fullstack Developer",
+    "title": "I build AI software that ships.",
+    "lead": "From interface to backend, with a system that plans, tests and delivers.",
+    "availability": "Open to new opportunities",
+    "proofs": {
+      "complia": "ComplIA in production",
+      "since": "Building since 2021",
+      "system": "11 agents · tests · CI"
+    },
+    "write": "Write to me",
+    "watch": "Watch the trailer"
+  },
+  "skipLink": "Skip to content"
+}

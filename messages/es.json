@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Ignacio Gauna — Ssr AI Fullstack Developer",
+    "description": "Construyo software con IA que llega a producción: de la interfaz al backend, con un sistema que planifica, prueba y entrega."
+  },
+  "intro": {
+    "loading": "Cargando",
+    "skip": "Saltar",
+    "name": "Ignacio Gauna",
+    "role": "Ssr AI Fullstack Developer",
+    "trailer": "Conocer a Ignacio",
+    "portfolio": "Ver portafolio",
+    "dialog": "Bienvenida"
+  },
+  "trailer": {
+    "title": "Conocer a Ignacio",
+    "soon": "El tráiler está en producción. Va a durar hasta 120 segundos y se podrá pausar o saltar en cualquier momento.",
+    "close": "Cerrar"
+  },
+  "header": {
+    "home": "Ignacio Gauna, inicio",
+    "language": "Idioma",
+    "contact": "Contacto",
+    "nav": "Principal"
+  },
+  "hero": {
+    "role": "Ssr AI Fullstack Developer",
+    "title": "Construyo software con IA que llega a producción.",
+    "lead": "De la interfaz al backend, con un sistema que planifica, prueba y entrega.",
+    "availability": "Abierto a nuevas oportunidades",
+    "proofs": {
+      "complia": "ComplIA en producción",
+      "since": "Desde 2021",
+      "system": "11 agentes · tests · CI"
+    },
+    "write": "Escribime",
+    "watch": "Ver el tráiler"
+  },
+  "skipLink": "Saltar al contenido"
+}

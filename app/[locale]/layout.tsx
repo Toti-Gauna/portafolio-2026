@@ -1,0 +1,85 @@
+import '../globals.css';
+import type { Metadata, Viewport } from 'next';
+import type { ReactNode } from 'react';
+import { notFound } from 'next/navigation';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import { routing, localeTags, type Locale } from '@/i18n/routing';
+import { fontMono, fontSans } from '../fonts';
+import { SITE_URL, CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
+import { Header } from '@/components/Header';
+import { Intro } from '@/components/Intro';
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0e0e10',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) return {};
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: absoluteUrl(`/${locale}/`),
+      languages: {
+        ...Object.fromEntries(routing.locales.map((l) => [localeTags[l], absoluteUrl(`/${l}/`)])),
+        'x-default': absoluteUrl('/es/'),
+      },
+    },
+    openGraph: { title: t('title'), description: t('description'), type: 'website', locale: localeTags[locale as Locale], url: absoluteUrl(`/${locale}/`) },
+    twitter: { card: 'summary', title: t('title'), description: t('description') },
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const messages = await getMessages();
+  const t = await getTranslations('meta');
+  const person = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Ignacio Gauna',
+    jobTitle: 'Ssr AI Fullstack Developer',
+    url: absoluteUrl(`/${locale}/`),
+    email: CONTACT_EMAIL,
+    description: t('description'),
+  };
+
+  return (
+    <html lang={localeTags[locale as Locale]} className={`${fontSans.variable} ${fontMono.variable}`}>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
+        <noscript>
+          <style>{'#boot{display:none!important}'}</style>
+        </noscript>
+        <NextIntlClientProvider messages={messages}>
+          <Intro />
+          <div id="app-shell">
+            <Header locale={locale as Locale} />
+            {children}
+          </div>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

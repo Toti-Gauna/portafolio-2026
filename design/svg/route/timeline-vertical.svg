@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 800" preserveAspectRatio="xMidYMin meet" fill="none" aria-hidden="true">
+  <path class="trunk" d="M24 24V776" stroke="currentColor" stroke-width="2" stroke-linecap="round" pathLength="1"/>
+  <g stroke="var(--accent,#ff4d2e)" stroke-width="2" stroke-linecap="round">
+    <path class="branch b1" d="M24 220C24 250 60 250 60 280V300" pathLength="1"/>
+    <path class="branch b2" d="M24 400C24 430 60 430 60 460V480" pathLength="1"/>
+    <path class="branch b3" d="M24 580C24 610 60 610 60 640V660" pathLength="1"/>
+    <path class="branch b4" d="M24 700C24 724 80 724 80 748V764" stroke="var(--blue,#2b50ff)" pathLength="1"/>
+  </g>
+  <circle cx="24" cy="24" r="7" fill="var(--accent,#ff4d2e)"/>
+  <g fill="currentColor"><circle cx="24" cy="220" r="5"/><circle cx="24" cy="400" r="5"/><circle cx="24" cy="580" r="5"/><circle cx="24" cy="700" r="5"/></g>
+  <g fill="var(--accent,#ff4d2e)"><circle cx="60" cy="300" r="4"/><circle cx="60" cy="480" r="4"/><circle cx="60" cy="660" r="4"/></g>
+  <circle cx="80" cy="764" r="4" fill="var(--blue,#2b50ff)"/>
+</svg>

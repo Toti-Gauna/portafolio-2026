@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid meet" fill="none" aria-hidden="true">
+  <path class="trunk" d="M40 150H1160" stroke="currentColor" stroke-width="2" stroke-linecap="round" pathLength="1"/>
+  <g stroke="var(--accent,#ff4d2e)" stroke-width="2" stroke-linecap="round">
+    <path class="branch b1" d="M260 150C310 150 310 90 370 90H400" pathLength="1"/>
+    <path class="branch b2" d="M480 150C530 150 530 70 590 70H620" pathLength="1"/>
+    <path class="branch b3" d="M700 150C750 150 750 190 810 190H840" pathLength="1"/>
+    <path class="branch b4" d="M920 150C970 150 970 50 1030 50H1080" stroke="var(--blue,#2b50ff)" pathLength="1"/>
+  </g>
+  <g fill="currentColor">
+    <circle cx="40" cy="150" r="7" fill="var(--accent,#ff4d2e)"/>
+    <circle cx="260" cy="150" r="5"/><circle cx="480" cy="150" r="5"/>
+    <circle cx="700" cy="150" r="5"/><circle cx="920" cy="150" r="5"/>
+  </g>
+  <g fill="var(--accent,#ff4d2e)"><circle cx="400" cy="90" r="4"/><circle cx="620" cy="70" r="4"/><circle cx="840" cy="190" r="4"/></g>
+  <circle cx="1080" cy="50" r="4" fill="var(--blue,#2b50ff)"/>
+</svg>
