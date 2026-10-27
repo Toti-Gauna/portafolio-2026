@@ -71,9 +71,9 @@ test('social and search metadata on home and a case page', async ({ page }) => {
   for (const url of ['/es/', '/en/', '/es/proyectos/tuenti/']) {
     await page.goto(url);
     const meta = (sel: string, attr = 'content') => page.locator(sel).first().getAttribute(attr);
-    expect(await meta('meta[property="og:image"]')).toBe('https://portfolio.eclipse-business.com/og.png');
+    expect(await meta('meta[property="og:image"]')).toBe('https://portafolio.eclipse-business.com/og.png');
     expect(await meta('meta[name="twitter:card"]')).toBe('summary_large_image');
-    expect(await meta('link[rel="canonical"]', 'href')).toContain(`https://portfolio.eclipse-business.com${url}`);
+    expect(await meta('link[rel="canonical"]', 'href')).toContain(`https://portafolio.eclipse-business.com${url}`);
     expect(await page.locator('link[rel="alternate"][hreflang]').count()).toBeGreaterThanOrEqual(2);
     expect((await page.title()).length).toBeLessThan(70);
   }

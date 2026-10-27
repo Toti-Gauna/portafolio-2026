@@ -3,7 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
-// Custom domain (portfolio.eclipse-business.com): no basePath. Set NEXT_PUBLIC_BASE_PATH only for a subpath preview.
+// Custom domain (portafolio.eclipse-business.com): no basePath. Set NEXT_PUBLIC_BASE_PATH only for a subpath preview.
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
 
 const config: NextConfig = {

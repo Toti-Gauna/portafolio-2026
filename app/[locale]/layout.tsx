@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing, localeTags, type Locale } from '@/i18n/routing';
 import { fontMono, fontSans } from '../fonts';
-import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, absoluteUrl } from '@/lib/site';
+import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, NOINDEX, absoluteUrl } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Intro } from '@/components/Intro';
 import { FloatingContact } from '@/components/FloatingContact';
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'meta' });
   return {
     metadataBase: new URL(SITE_URL),
+    ...(NOINDEX ? { robots: { index: false, follow: false } } : {}),
     title: t('title'),
     description: t('description'),
     alternates: {

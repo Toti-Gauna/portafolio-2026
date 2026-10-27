@@ -1,6 +1,6 @@
 # Portafolio de Ignacio Gauna (2026)
 
-Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GSAP. Sitio estático para `portfolio.eclipse-business.com`.
+Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GSAP. Sitio estático para `portafolio.eclipse-business.com`.
 
 ## Comandos
 - `npm run dev` · `npm run typecheck` · `npm test` (Vitest) · `npm run build` (→ `out/`) · `npm run test:e2e` (Playwright sobre `out/`; usa Chromium de `/opt/pw-browsers/chromium` o `CHROMIUM_PATH`).
@@ -36,3 +36,7 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 ## QA (fase 11)
 - `tests/e2e/a11y.spec.ts`: contraste AA calculado sobre el color real de cada texto, recorrido con teclado (anillo de foco, ≥ 44 px, dentro de pantalla), metadatos de buscadores y redes, y movimiento reducido. `public/og.png` (1200×630) es la imagen para redes.
 - Rendimiento medido (CPU 4× y 1,6 Mbps): FCP/LCP ≈ 1,1 s, CLS 0,017; el tráiler no se descarga hasta el clic.
+
+## Deploy
+- `.github/workflows/pages.yml`: en cada PR corre typecheck, Vitest, build y Playwright; en `main` publica una copia de prueba en GitHub Pages (`/portafolio-2026`, `noindex`).
+- `.github/workflows/hostinger.yml` + `scripts/hostinger-*.sh` + `deploy/hostinger.htaccess`: deploy al subdominio `portafolio.eclipse-business.com`, apagado hasta configurar variables y secretos (`docs/hostinger.md`).

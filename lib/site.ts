@@ -1,6 +1,8 @@
 /** Public facts used across the site. Everything here has been approved by Ignacio. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portfolio.eclipse-business.com').replace(/\/$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portafolio.eclipse-business.com').replace(/\/$/, '');
 export const BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+/** Builds that must not be indexed (the GitHub Pages test copy). */
+export const NOINDEX = process.env.NEXT_PUBLIC_NOINDEX === '1';
 export const CONTACT_EMAIL = 'ignaciogauna.developer@gmail.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/ignacio-emanuel-gauna/';
 export const GITHUB_URL = 'https://github.com/Toti-Gauna';

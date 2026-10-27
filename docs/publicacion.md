@@ -1,4 +1,4 @@
-# Checklist de publicación — portfolio.eclipse-business.com
+# Checklist de publicación — portafolio.eclipse-business.com
 
 Estado al 27/10/2026: el sitio está completo en la rama `claude/ignacio-portfolio-9juacc`. **No está publicado.** Publicar requiere la autorización expresa de Ignacio.
 
@@ -11,12 +11,12 @@ Estado al 27/10/2026: el sitio está completo en la rama `claude/ignacio-portfol
 
 ## Publicar (con autorización)
 1. Elegir hosting: GitHub Pages (repo público) o Hostinger.
-2. GitHub Pages: agregar un workflow que corra `npm ci`, `npm test`, `npm run build` y publique `out/`; agregar `public/CNAME` con `portfolio.eclipse-business.com`; activar Settings → Pages → Source: GitHub Actions; activar «Enforce HTTPS».
+2. GitHub Pages: agregar un workflow que corra `npm ci`, `npm test`, `npm run build` y publique `out/`; agregar `public/CNAME` con `portafolio.eclipse-business.com`; activar Settings → Pages → Source: GitHub Actions; activar «Enforce HTTPS».
 3. DNS: registro `CNAME` `portfolio` → `toti-gauna.github.io` (o el destino que indique el hosting elegido).
 4. Abrir un PR de la rama a `main`, revisar y mergear.
 
 ## Después de publicar
-- [ ] `npm run test:e2e` contra la URL pública (o recorrido manual) y revisar `https://portfolio.eclipse-business.com/sitemap.xml`.
+- [ ] `npm run test:e2e` contra la URL pública (o recorrido manual) y revisar `https://portafolio.eclipse-business.com/sitemap.xml`.
 - [ ] Vista previa en redes: LinkedIn Post Inspector con la URL de la home.
 - [ ] Enviar el sitemap a Google Search Console.
 - [ ] Agregar el enlace del portafolio al perfil de LinkedIn y a GitHub.
