@@ -92,3 +92,23 @@ test('Tuenti and Eclipse cases: own page, Eclipse links to its site', async ({ p
   await enter(page, '/es/proyectos/eclipse/');
   await expect(page.getByRole('link', { name: /eclipse-business\.com/ })).toHaveAttribute('href', 'https://eclipse-business.com/');
 });
+
+test('portal screenshots: Eclipse and HandyX galleries load, with alt text and a caption; work cards have covers', async ({ page }) => {
+  for (const [slug, n] of [['eclipse', 7], ['handyx', 4]] as const) {
+    await enter(page, `/es/proyectos/${slug}/`);
+    const items = page.locator('.gallery__item');
+    await expect(items).toHaveCount(n);
+    for (let i = 0; i < n; i++) {
+      const img = items.nth(i).locator('img');
+      await img.scrollIntoViewIfNeeded();
+      await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth)).toBe(1600);
+      expect((await img.getAttribute('alt'))!.length).toBeGreaterThan(20);
+      await expect(items.nth(i).locator('figcaption')).not.toBeEmpty();
+    }
+  }
+  await enter(page, '/es/');
+  const covers = page.locator('.work__shot');
+  await expect(covers).toHaveCount(4);
+  // Tuenti: a drawn illustration, never a screenshot (confidentiality)
+  await expect(page.locator('.work__card').filter({ hasText: 'Tuenti' }).locator('img')).toHaveAttribute('src', /tuenti-cover\.svg$/);
+});

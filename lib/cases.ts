@@ -19,7 +19,8 @@ export const CASE_GALLERY: Partial<Record<CaseSlug, readonly string[]>> = {
 
 /** Cover of a work card (its alt text in work.cards.<k>.shotAlt). */
 export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', string>> = {
-  complia: '/media/complia-demo-poster.jpg',
+  complia: '/media/complia-cover.webp',
+  tuenti: '/media/tuenti-cover.svg',
   handyx: '/media/portals/handy-landing.webp',
   eclipse: '/media/portals/eclipse-landing.webp',
 };

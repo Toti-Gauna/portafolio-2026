@@ -120,7 +120,9 @@
       const at = M + 0.05 + i * 0.04;
       D.show(frames[i], at);
       D.hit(frames[i], { x: x * 0.6, y: y * 0.6 + 120, scale: k * 0.7, rotationY: 0, opacity: 0 }, { x, y, scale: k, opacity: 1, duration: 0.6, ease: 'expo.out' }, at);
-      gsap.set(labels[i], { left: c.x + (CW - box.w * k) / 2, top: c.y + CH + 12 });
+      // under the frame's left edge; pulled back inside the cell when the name is wider than the frame (phones)
+      const fl = c.x + (CW - box.w * k) / 2;
+      gsap.set(labels[i], { left: Math.max(c.x, Math.min(fl, c.x + CW - labels[i].offsetWidth)), top: c.y + CH + 12 });
       D.hit(labels[i], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, at + 0.2);
     });
     const ce = cell(shots.length);

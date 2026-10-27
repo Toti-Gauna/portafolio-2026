@@ -130,12 +130,13 @@
         "name": "CompliA",
         "status": "En producción interna",
         "text": "Asistente conversacional del portal de compliance de Telefónica: analiza declaraciones, ayuda a dictaminar y arma reportes. Lo diseñé y construí: RAG, validaciones, restricciones y recomendaciones.",
-        "shotAlt": "Fotograma de la demo de CompliA: el asistente buscando en el portal de compliance, con datos de ejemplo."
+        "shotAlt": "Fotograma de la demo de CompliA con datos de ejemplo: 28 declaraciones encontradas, 8 en análisis y 13 procesadas."
       },
       "tuenti": {
         "name": "Tuenti",
         "status": "Trabajo profesional",
-        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft."
+        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft.",
+        "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad."
       },
       "handyx": {
         "name": "HandyX",

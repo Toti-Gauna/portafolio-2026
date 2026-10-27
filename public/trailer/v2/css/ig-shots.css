@@ -20,9 +20,9 @@
 .ish-none .ish-view { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
 .ish-view { text-align: left; white-space: normal; }
 
-.ish-tag { position: absolute; left: 96px; bottom: 72px; z-index: 3; min-width: 560px; max-width: 980px; padding: 24px 40px 26px 50px; background: rgba(14, 14, 16, .9); color: #eeeae3; visibility: hidden; }
+.ish-tag { position: absolute; left: 96px; bottom: 72px; z-index: 3; min-width: 560px; max-width: 1180px; padding: 24px 40px 26px 50px; background: rgba(14, 14, 16, .9); color: #eeeae3; visibility: hidden; }
 .ish-tag-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: var(--c); }
-.ish-tag-top { display: flex; align-items: baseline; gap: 26px; overflow: hidden; }
+.ish-tag-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 26px; overflow: hidden; padding-bottom: 4px; }
 .ish-tag-top b { font: 900 74px/1 var(--display); font-variation-settings: "wdth" 110, "wght" 900; letter-spacing: -.015em; white-space: nowrap; }
 .ish-tag-st { padding: 6px 16px; border: 2px solid var(--c); border-radius: 999px; color: var(--c); font-size: 36px; line-height: 1.1; white-space: nowrap; }
 .ish-tag-nt { margin-top: 10px; font: 500 38px/1.2 var(--display); color: #c9c5bc; }
