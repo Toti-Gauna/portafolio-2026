@@ -559,7 +559,9 @@
     "legend": "Referencias del diagrama",
     "why": "Por qué",
     "alt": "Descartado",
-    "nextCase": "Siguiente caso"
+    "nextCase": "Siguiente caso",
+    "play": "Reproducir el video",
+    "pause": "Pausar el video"
   },
   "fab": {
     "label": "Contacto",

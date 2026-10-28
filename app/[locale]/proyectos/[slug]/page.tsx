@@ -55,7 +55,7 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
   const nameOf = async (s: string) => (await getTranslations({ locale, namespace: `cases.${s}` }))('title');
   const others = CASE_SLUGS.filter((s) => s !== slug);
   const otherNames = await Promise.all(others.map(nameOf));
-  const ui = { asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt') };
+  const ui = { asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt'), play: u('play'), pause: u('pause') };
 
   return (
     <main id="contenido" tabIndex={-1} className="case">

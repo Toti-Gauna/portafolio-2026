@@ -9,6 +9,8 @@ import { Readouts, type Readout } from '@/components/diagrams/Readouts';
 import { MoneySplit, type SplitCopy } from '@/components/diagrams/MoneySplit';
 import { Reveal } from '@/components/Reveal';
 import { TuentiArt, type TuentiArtCopy } from '@/components/art/TuentiArt';
+import { Showcase, type ShowCopy } from './Showcase';
+import './showcase.css';
 
 type Copy = {
   h?: string; p?: string[]; list?: string[];
@@ -17,7 +19,7 @@ type Copy = {
   items?: unknown; note?: string; groups?: { k: string; items: string[] }[];
 } & Partial<SplitCopy>;
 
-export type CaseUi = DiagramUi & { why: string; alt: string };
+export type CaseUi = DiagramUi & { why: string; alt: string; play: string; pause: string };
 
 /** Groups blocks into sections: a block with a heading opens one, the next blocks without a heading join it. */
 export function sectionsOf(blocks: BlockDef[], copy: Record<string, Copy>) {
@@ -117,6 +119,8 @@ function Block({ b, c, ui }: { b: BlockDef; c: Copy; ui: CaseUi }) {
           </figure>
         </>
       );
+    case 'showcase':
+      return <><Prose c={c} /><div className="cs__wide"><Showcase items={b.items} copy={(c.items ?? {}) as ShowCopy} labels={{ play: ui.play, pause: ui.pause }} /></div></>;
     case 'art':
       return <><Prose c={c} /><div className="cs__wide"><TuentiArt c={c as unknown as TuentiArtCopy} /></div></>;
     case 'gallery': {

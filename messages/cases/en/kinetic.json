@@ -1,35 +1,397 @@
 {
   "title": "Kinetic Studio",
-  "kind": "Lab · public",
+  "kind": "Own lab · motion graphics in code",
   "status": "Lab · public",
-  "summary": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio.",
-  "facts": [],
-  "tldr": [],
+  "summary": "My lab of motion-graphics trailers made in code: picture and sound are generated live in the browser, on an in-house engine with a single timeline that can be frozen at any second. This portfolio's trailer is built with its kit.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "My own project, built with a trailer agent"
+    },
+    {
+      "k": "Period",
+      "v": "September and October 2026 · 51 commits"
+    },
+    {
+      "k": "Pieces",
+      "v": "Hub · 31 trailers · engine, recipes and sound"
+    },
+    {
+      "k": "Status",
+      "v": "Public lab: repo on GitHub, deploy to GitHub Pages"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "What it is",
+      "v": "Product trailers with no video editor, no stock footage and no recorded audio. Every piece is code: it is edited as data and can be frozen at any frame."
+    },
+    {
+      "k": "How it works",
+      "v": "One paused master timeline drives picture and sound. Scenes are recipes that return their duration, and the music is a list of notes."
+    },
+    {
+      "k": "Where it is",
+      "v": "31 trailers in the hub and this portfolio's 112 s trailer. It is a lab: it has no tests and the kit is copied into every folder."
+    }
+  ],
   "blocks": {
-    "s1": {
+    "what": {
       "h": "What it is",
       "p": [
-        "A lab where each trailer is a page drawn live in the browser. The audio is synthesised too (WebAudio): there is no recorded music."
-      ]
-    },
-    "s2": {
-      "h": "Techniques",
+        "Kinetic Studio is my motion-graphics lab. Each trailer is a web page drawn live: type, shapes, canvas particles, 3D scenes in WebGL and a soundtrack synthesised on the spot with WebAudio.",
+        "Each idea in the catalogue asks the engine for something different: variable type, 120,000 particles on the GPU, a story with public data and its source cited on screen, vertical formats, or an interactive trailer where scrolling is time."
+      ],
       "list": [
-        "One paused master timeline per trailer: in the kit trailers, any frame can be frozen with ?t=.",
-        "Scores as data, synced with the image.",
-        "Particles in canvas and WebGL, text that turns into stars, simulations with a fixed seed."
+        "A hub with the library: generative SVG posters with a fixed seed (identical on every load) and a live, silent preview on hover.",
+        "31 trailers in the hub (32 folders): 29 are made with the kit alone and 2 are commercials that animate real captures of a demo.",
+        "Adding up the catalogue: 1,430 seconds of film and 272 scenes.",
+        "I use it for pieces of my own products (four HandyX spots) and for this site's «Meet Ignacio» trailer."
       ]
     },
-    "s3": {
-      "h": "Where to see it",
+    "engine": {
+      "h": "How a trailer works",
       "p": [
-        "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 15 scenes in 112 seconds, with synthesised music and real components of my projects rebuilt in code."
+        "A trailer is a configuration file. Each scene names a recipe, and the recipe returns how long it lasts: that way the engine knows the second each thing starts at and adds it to a single, paused GSAP timeline.",
+        "The music is data too: the score is a function that returns every note with its second and its voice, and that same list plays live, can be rendered offline and can move the picture on the beat. There are 23 synthesised voices and no audio files."
+      ],
+      "diagram": {
+        "title": "One timeline drives everything",
+        "caption": "The Kinetic Studio engine (each trailer's js/engine.js). Picture and sound read the same timeline: when it moves, they move together. The warm-up pass was added by this portfolio's trailer.",
+        "nodes": {
+          "config": {
+            "label": "trailer.js",
+            "sub": "the scenes"
+          },
+          "recipes": {
+            "label": "Recipes",
+            "sub": "→ duration",
+            "note": "Each scene is a recipe: it gets the director, its start second and its options, and returns how long it lasts. A missing recipe or duration stops the engine with an error."
+          },
+          "score": {
+            "label": "Score",
+            "sub": "{ t, voice }"
+          },
+          "tl": {
+            "label": "Master timeline",
+            "sub": "GSAP, paused",
+            "note": "One, and paused. With ?⁠t=seconds in the URL any frame stays frozen: useful to review frame by frame and to export."
+          },
+          "seek": {
+            "label": "?t=seconds",
+            "sub": "still frame"
+          },
+          "warm": {
+            "label": "Warm-up",
+            "sub": "a first pass",
+            "note": "Before playing, it walks the film once behind a cover, a frame every 1.5 s: each scene's first frame is the expensive one."
+          },
+          "image": {
+            "label": "Picture",
+            "sub": "DOM + canvas",
+            "note": "Canvas layers are pure functions of the animated state: moving the timeline moves the canvas too, with no hidden state."
+          },
+          "sound": {
+            "label": "Sound",
+            "sub": "WebAudio"
+          }
+        },
+        "edges": {
+          "run": "Trailer.run",
+          "tweens": "tweens at T",
+          "notes": "0 s callbacks",
+          "freeze": "pause at t",
+          "warmup": "seek every 1.5 s",
+          "draw": "tweens · ticker",
+          "play": "SFX.voice()"
+        }
+      }
+    },
+    "pipeline": {
+      "h": "From idea to hub",
+      "p": [
+        "A trailer agent builds the trailers on top of the kit. The rest of the way is mechanical, with guards so a mistake doesn't get published."
+      ],
+      "title": "Eight steps, from a folder to a preview",
+      "caption": "Per the README and scripts/adopt-trailer.mjs. CI only builds and publishes from main: there are no checks on PRs.",
+      "steps": [
+        {
+          "actor": "Agent",
+          "t": "Builds the folder",
+          "d": "Creates trailers/<id>/ with its own copy of the kit: engine, sound and recipes."
+        },
+        {
+          "actor": "npm run adopt",
+          "t": "Adopts the modules",
+          "d": "Replaces the classic <script> tags with a main.ts that has one import per file, in order."
+        },
+        {
+          "actor": "trailer.js",
+          "t": "Edited as data",
+          "d": "Scenes, palette, fonts and music: the only file you normally touch."
+        },
+        {
+          "actor": "Engine",
+          "t": "Builds the film",
+          "d": "Calls each recipe with its start second and lets the music join at the end."
+        },
+        {
+          "actor": "hub/catalog.ts",
+          "t": "Gets registered",
+          "d": "Poster and preview seconds, duration and number of scenes."
+        },
+        {
+          "actor": "Vite",
+          "t": "Guarded build",
+          "d": "Strict tsc and Vite. A plugin stops the build if a local classic <script> is left."
+        },
+        {
+          "actor": "GitHub Actions",
+          "t": "Publishes",
+          "d": "Every push to main builds the hub and publishes it to GitHub Pages."
+        },
+        {
+          "actor": "Hub",
+          "t": "Poster and preview",
+          "d": "An iframe with ?⁠embed plays silently on hover."
+        }
       ]
     },
-    "s4": {
+    "flagship": {
+      "h": "This portfolio's trailer",
+      "p": [
+        "The most demanding use of the kit is the «Meet Ignacio» trailer that opens this site. It uses the Kinetic engine with a single two-line change (inside the portfolio there are no single-letter shortcuts, per WCAG 2.1.4) and adds its own recipes, a mode to live inside the page and the warm-up pass.",
+        "In act 5, eleven views of real components from my projects are rebuilt in code (HTML, CSS and SVG animated with GSAP), with no screenshots. In act 6, each of the 17 technologies is an animation that shows what it does, with a fixed note on where I used it.",
+        "It is not all code: act 4 plays a recorded clip of the CompliA demo, and the HandyX views use four brand illustrations."
+      ]
+    },
+    "acts": {
+      "title": "112 seconds in eight acts",
+      "caption": "Timings from trailer.es.js, on a 120 BPM score (56 bars). The English version is the same film with other words.",
+      "steps": [
+        {
+          "actor": "0:00–0:08",
+          "t": "The seed",
+          "d": "Typographic cuts: where it all started."
+        },
+        {
+          "actor": "0:08–0:12",
+          "t": "Paths",
+          "d": "Branches burst out of a seed in every direction and one line remains."
+        },
+        {
+          "actor": "0:12–0:32",
+          "t": "Career",
+          "d": "The career as a git graph: one branch per job, with the camera travelling along the line."
+        },
+        {
+          "actor": "0:32–0:42",
+          "t": "CompliA",
+          "d": "The case on the left and the demo clip on the right, in sync with the timeline."
+        },
+        {
+          "actor": "0:42–1:00",
+          "t": "Own branches",
+          "d": "Eleven views rebuilt in code and a final wall: «All of it, in code.»"
+        },
+        {
+          "actor": "1:00–1:18",
+          "t": "Technologies",
+          "d": "17 animations on four screens, grouped by where I used each technology."
+        },
+        {
+          "actor": "1:18–1:34",
+          "t": "System",
+          "d": "The 11 agents, the rules and a CI board."
+        },
+        {
+          "actor": "1:34–1:52",
+          "t": "Ending",
+          "d": "Name, role and contact; then the frame empties and the portfolio comes in."
+        }
+      ]
+    },
+    "film": {
+      "items": [
+        {
+          "n": "112",
+          "u": "s",
+          "d": "Length of the film"
+        },
+        {
+          "n": "15",
+          "u": "scenes",
+          "d": "The same in Spanish and English"
+        },
+        {
+          "n": "11",
+          "u": "views",
+          "d": "Real components rebuilt in code"
+        },
+        {
+          "n": "17",
+          "u": "animations",
+          "d": "One per technology"
+        }
+      ],
+      "note": "The portfolio's tests pin them: the e2e test expects a 112.00 s duration and the unit tests require 15 scenes, 11 views and 17 technologies with the same texts in both languages. I ran the unit tests on 10/28/2026: green."
+    },
+    "host": {
+      "h": "How it plugs into the portfolio",
+      "p": [
+        "The trailer is not bundled with the site: it is a static kit page inside a same-origin iframe, and the player is a chunk that only downloads on the click.",
+        "Browsers only let audio play and fullscreen start from a user gesture. So the audio context is created inside the click and the iframe borrows it."
+      ],
+      "seq": {
+        "title": "From the click to the end of the film",
+        "caption": "Messages travel with postMessage, only within the same origin: the trailer checks the origin, and the portfolio also checks that the message comes from its own iframe. Visitors who prefer reduced motion get a text version: no sound, no fullscreen.",
+        "lanes": {
+          "page": "Portfolio",
+          "film": "Trailer (iframe)",
+          "audio": "AudioContext"
+        },
+        "msgs": {
+          "click": "click: audio and fullscreen",
+          "open": "opens ?host&lang=en",
+          "borrow": "borrows the context",
+          "warm": "warm-up behind a cover",
+          "ready": "trailer:ready",
+          "ctrl": "trailer:mute · trailer:toggle",
+          "end": "trailer:end",
+          "close": "closes the context on exit"
+        }
+      }
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "One timeline, paused",
+          "why": "If everything hangs off one timeline and each recipe returns its duration, the film is deterministic and you can jump to any second. That enables frame-by-frame review with ?⁠t=, the hub previews, frame-exact export and offline audio rendering."
+        },
+        {
+          "t": "Canvas as a function of state",
+          "why": "Particles and the tunnel are drawn from animated parameters, with no hidden per-frame state: moving the timeline moves the canvas. When the playhead jumps, motion-blur streaks are switched off so no trails are left behind."
+        },
+        {
+          "t": "The music is a list of events",
+          "why": "The same list plays live, renders offline with a fixed seed and can move the picture on the beat. In the offline render, voices are created just in time: creating them all up front made every audio block hundreds of times slower."
+        },
+        {
+          "t": "The expensive frame first, behind a cover",
+          "why": "Each scene's first frame is the costly one (styles, split text, fonts, the first paint of a big view): that is where the cuts stuttered. The portfolio's trailer walks the film once before playing, so playback only repeats work already done.",
+          "alt": "Canvas particles and animated chromatic shadows in that trailer: they went, and each act's background moves on the compositor."
+        },
+        {
+          "t": "The kit stays plain JavaScript",
+          "why": "Recipes are ES modules that talk through window, and Vite only bundles GSAP and Three.js from npm: trailers built by the agent work unchanged. Only a trailer that imports Three.js downloads it, and strict execution order keeps a shared chunk from running before the engine (it broke two pages)."
+        },
+        {
+          "t": "Guards at build time and at run time",
+          "why": "A Vite plugin stops the build if a page loads a local classic <script>. In the HandyX spots, ?⁠audit walks every tween and flags any property other than transform or opacity, and a scene that lasts differently from its storyboard stops the film from being built."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Performance and quality",
+      "p": [
+        "To keep the portfolio's trailer from stuttering: the warm-up pass, each act's background moved on the compositor, and no canvas particles or animated chromatic shadows. The engine's determinism was tested by reaching the same frame three ways.",
+        "The repo has no test suite: the build runs tsc in strict mode before Vite, and the JavaScript recipes are not type-checked."
+      ],
+      "items": [
+        {
+          "n": "20",
+          "u": "ms",
+          "d": "Average frame of the portfolio's trailer (before: 29 ms)"
+        },
+        {
+          "n": "2",
+          "u": "seconds",
+          "d": "With a frame over 100 ms (before: 10)"
+        },
+        {
+          "n": "2/4",
+          "u": "identical",
+          "d": "Moments identical bit for bit, reached three ways"
+        },
+        {
+          "n": "121",
+          "u": "pixels",
+          "d": "The largest difference in the other two, out of 2,073,600 and by one colour level"
+        }
+      ],
+      "note": "Performance: lab measurement on 10/28/2026 in Chromium without a GPU, walking the whole film; not field data. Determinism: Kinetic's hash test (exports/hash.json) opens the same second from 0, from the end and from slightly before, and compares the captures by SHA-256 and pixel by pixel."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Engine",
+          "items": [
+            "GSAP 3.13",
+            "SplitText",
+            "MorphSVG",
+            "DrawSVG",
+            "Canvas 2D",
+            "Three.js r147",
+            "WebAudio"
+          ]
+        },
+        {
+          "k": "Build",
+          "items": [
+            "Strict TypeScript",
+            "Vite 8",
+            "GitHub Actions",
+            "GitHub Pages"
+          ]
+        },
+        {
+          "k": "Tools",
+          "items": [
+            "Node",
+            "Chrome DevTools Protocol"
+          ]
+        },
+        {
+          "k": "In the portfolio",
+          "items": [
+            "GSAP 3.15",
+            "ES modules, no bundler",
+            "same-origin iframe",
+            "postMessage"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshot",
+      "items": {
+        "kinetic": {
+          "alt": "A frame of the KINETIC trailer: the word KINETIC, huge and white, on a dark violet background, crossed by a thin circle, with the line «A motion study in form, color & time», three coloured shapes and HUD marks in the corners.",
+          "caption": "A frame of the KINETIC trailer, taken from its MP4 export. Everything you see is drawn with code."
+        }
+      }
+    },
+    "debt": {
       "h": "Known debt",
-      "p": [
-        "The kit is copied into every folder and has drifted apart. Unifying it is next."
+      "list": [
+        "The kit is copied into every folder and has drifted: 30 copies of engine.js in 10 different versions and 30 of audio.js in 9 (counted by hash). Unifying it is next.",
+        "The MP4 export cannot be reproduced from the repo alone: the exporter lives outside it, in the kit's local tools.",
+        "There are no tests, and CI only builds and publishes from main.",
+        "The engine's embed mode accepts messages from any origin and answers anyone. The impact is low (it only moves a preview, no data), but it does not check the origin. The portfolio's trailer does not use that mode.",
+        "The film grain uses fresh randomness on every load: frames are identical within a load, not necessarily across loads.",
+        "The exported renders (MP4, GIF and WAV) are committed to git even though they are not published."
+      ]
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "Public lab: 31 trailers in the hub, one more unlisted folder and the first version of KINETIC as a legacy page.",
+        "I don't claim it is all code: two commercials animate real captures of a demo, and the portfolio's trailer has a video clip and four illustrations.",
+        "I don't claim bit-exact deterministic export: the test gave 2 of 4 moments identical and 2 differing by one colour level.",
+        "The exporter is not in the repo, and the repo has no licence: it is not open source.",
+        "The performance figures are lab numbers, in Chromium without a GPU."
       ]
     }
   }

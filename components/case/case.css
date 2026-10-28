@@ -80,7 +80,7 @@
 .gallery { display: grid; gap: 28px; grid-template-columns: 1fr; }
 .gallery__item { margin: 0; display: grid; gap: 8px; }
 .gallery__item img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); background: #131316; }
-@media (min-width: 900px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .gallery { grid-template-columns: repeat(2, 1fr); } .gallery > :only-child { grid-column: 1 / -1; } }
 
 /* next case */
 .case__next { margin-top: clamp(40px, 6vw, 80px); display: grid; gap: 24px; }

@@ -5,12 +5,16 @@ import { tuenti } from './tuenti';
 import { handyx } from './handyx';
 import { eclipse } from './eclipse';
 import { kinetic } from './kinetic';
+import { volta } from './volta';
+import { dentalos } from './dentalos';
+import { games } from './games';
+import { agentes } from './agentes';
 
-export const CASE_SLUGS = ['complia', 'tuenti', 'handyx', 'eclipse', 'kinetic'] as const;
+export const CASE_SLUGS = ['complia', 'tuenti', 'handyx', 'eclipse', 'agentes', 'kinetic', 'volta', 'dentalos', 'games'] as const;
 export type CaseSlug = (typeof CASE_SLUGS)[number];
 
 /** Each case page: its blocks (copy in messages/cases/<locale>/<slug>.json) and its public links. */
-export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, handyx, eclipse, kinetic };
+export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, handyx, eclipse, agentes, kinetic, volta, dentalos, games };
 
 export const LAB = [
   { id: 'kinetic', href: 'https://toti-gauna.github.io/motion-animations/', code: 'https://github.com/Toti-Gauna/kinetic-studio', page: 'kinetic' },

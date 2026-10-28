@@ -1,0 +1,175 @@
+{
+  "title": "Volta",
+  "kind": "Laboratorio · demo de venta",
+  "status": "Demo",
+  "summary": "Una tienda online de suplementos deportivos que se puede recorrer de punta a punta, con una marca inventada: catálogo, armador de stack, club con niveles, un juego que da cupones, regalos y un panel para el dueño. Todo corre en el navegador con datos de muestra: no procesa pagos ni crea pedidos reales.",
+  "facts": [
+    { "k": "Tipo", "v": "Demo clickeable, sin servidor" },
+    { "k": "Pantallas", "v": "29 de la tienda · 60 del panel" },
+    { "k": "Datos", "v": "Marca, productos y pedidos ficticios" },
+    { "k": "Estado", "v": "Demo: no cobra ni envía nada" }
+  ],
+  "tldr": [
+    { "k": "El problema", "v": "Una tienda chica de suplementos toma pedidos por WhatsApp, persigue listas de precios que cambian, tiene potes que se vencen en el estante y no sabe cuándo se le termina el producto a cada cliente." },
+    { "k": "Lo que muestra", "v": "Una tienda que calcula la recompra, ordena lotes por vencimiento y convierte juegos en cupones, más un panel donde el dueño ve qué hacer hoy." },
+    { "k": "Dónde está", "v": "Demo navegable, sin backend, pagos ni clientes. La versión de producción está descripta en el repo, no construida." }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Volta es una demo para mostrarle a un dueño de tienda de suplementos cómo podría vender online. La marca, la ciudad de muestra (Mar del Plata), el catálogo y los pedidos son inventados."
+      ],
+      "list": [
+        "Comprador: fichas con precio por servicio, «¿cuánto te dura?», lote y vencimiento; búsqueda que entiende el rubro, comparador, armador de stack, un quiz y un checkout de tres pasos.",
+        "Club: niveles por gasto acumulado, misiones, una ruleta y Shaker Rush, un juego en canvas que convierte el puntaje en un cupón.",
+        "Regalos: un código con dígito verificador y un link; quien lo recibe nunca ve el precio.",
+        "Dueño: un panel con nueve secciones (Hoy, Mostrador, Pedidos, Stock, Compras, Clientes, Promos, Campañas y Ajustes), con lotes que salen por vencimiento y la lista del proveedor importada desde Excel."
+      ]
+    },
+    "loop": {
+      "h": "La idea de negocio",
+      "p": [
+        "La demo se arma para una reunión con el dueño y su guion empieza por sus dolores. La respuesta central es la recompra: que el cliente vuelva antes de comprarle a otro."
+      ],
+      "title": "La rueda de la recompra",
+      "steps": [
+        { "actor": "Tienda", "t": "Compra", "d": "La ficha calcula cuánto le dura el pote, y el cliente puede pedir que le avisen antes." },
+        { "actor": "Panel", "t": "Se le termina", "d": "Con los servicios de la variante y la fecha de entrega, el panel lista a quién se le termina esta semana." },
+        { "actor": "Dueño", "t": "Le escribe", "d": "Un WhatsApp ya armado, con un link que carga el bolso." },
+        { "actor": "Comprador", "t": "Vuelve", "d": "Abre el link con el bolso listo; si jugó en el Club, tiene un cupón para usar." }
+      ],
+      "loop": "Y la rueda vuelve a empezar. Es el concepto que muestra la demo: no hay clientes ni métricas reales que lo midan.",
+      "caption": "Otras ideas de la demo: un 10 % de descuento al combinar tres categorías (regla editable), 17 campañas con fecha y cupón, y una ficha de marca que arma otra demo para otro prospecto."
+    },
+    "arch": {
+      "h": "Arquitectura",
+      "p": [
+        "Una sola app de Next.js exportada como sitio estático: no hay servidor ni base de datos. Las pantallas no calculan nada; delegan en contenedores que unen el estado con un motor de reglas puro."
+      ],
+      "diagram": {
+        "title": "Una app, todo en el navegador",
+        "caption": "Se publica en GitHub Pages desde la CI. Lo único fuera del navegador es el servidor de abajo: está descripto en el repo y no existe.",
+        "nodes": {
+          "shop": { "label": "Tienda", "sub": "29 páginas" },
+          "admin": { "label": "Panel", "sub": "60 páginas", "note": "Sin login a propósito y con la señal «Demo» a la vista: no es seguro y no se presenta como tal." },
+          "features": { "label": "Contenedores", "sub": "src/features" },
+          "engine": { "label": "Motor puro", "sub": "sin React", "note": "Precio, cupones, stock, estados del pedido y el juego son funciones puras y testeadas, sin React." },
+          "stores": { "label": "Stores", "sub": "Zustand", "note": "Se rehidratan después del primer render para no romper el HTML estático, con migraciones versionadas de lo guardado." },
+          "fixtures": { "label": "Catálogo", "sub": "de muestra" },
+          "ls": { "label": "localStorage", "sub": "por marca" },
+          "prod": { "label": "Servidor", "sub": "planificado", "note": "En producción el motor pasa a servicios del servidor y los componentes se reutilizan. Descripto, no construido." }
+        },
+        "edges": {
+          "calc": "calcula",
+          "state": "estado",
+          "read": "lee",
+          "persist": "JSON",
+          "later": "planificado"
+        }
+      }
+    },
+    "orders": {
+      "h": "El pedido, como máquina de estados",
+      "p": [
+        "El circuito de un pedido es lo que más tiene que ser correcto, así que vive en una sola función que decide qué transición es válida y con qué disparador. La pantalla no puede saltearse un paso."
+      ],
+      "diagram": {
+        "title": "De pendiente a entregado",
+        "caption": "Todas las transiciones pasan por canTransition. Del pago en adelante, cada paso lo da alguien del panel, y los cambios dejan un email en una bandeja simulada.",
+        "nodes": {
+          "cancelled": { "label": "Cancelado" },
+          "pending": { "label": "Pendiente", "sub": "de pago" },
+          "review": { "label": "En revisión", "sub": "comprobante", "note": "Un comprobante nunca paga solo: el panel lo aprueba, o lo rechaza con un motivo y el pedido vuelve a pendiente." },
+          "paid": { "label": "Pagado", "note": "También se llega directo si confirma el proveedor de pagos (una simulación) o si el dueño cobró en mano. En producción sería un webhook firmado, y el servidor verificaría monto, moneda y referencia." },
+          "prep": { "label": "En preparación" },
+          "ready": { "label": "Listo", "sub": "lote controlado" },
+          "shipped": { "label": "Enviado" },
+          "delivered": { "label": "Entregado" },
+          "claim": { "label": "En reclamo", "note": "Se abre desde cualquier estado pagado y termina en devolución o vuelve al estado anterior." },
+          "returned": { "label": "Devuelto" }
+        },
+        "edges": {
+          "proof": "comprobante",
+          "reject": "rechazado",
+          "approve": "aprobado",
+          "provider": "proveedor o en mano",
+          "cancel": "cancelar",
+          "prepare": "preparar",
+          "pack": "armado",
+          "ship": "envío",
+          "pickup": "retiro",
+          "deliver": "entrega",
+          "complain": "reclamo",
+          "refund": "devolución"
+        }
+      }
+    },
+    "security": {
+      "h": "Seguridad: lo que hay y lo que no",
+      "p": [
+        "Una demo sin servidor no puede ser segura en el sentido de producción, y no lo finge. Lo que sí hace es no pedir ni mandar nada que no deba."
+      ],
+      "items": [
+        { "t": "Ningún servicio externo", "d": "No hay secretos ni API: WhatsApp es un link con el texto armado y la foto de un comprobante se procesa en un canvas del navegador. Nada se sube." },
+        { "t": "Un comprobante no paga", "d": "Solo la aprobación del panel o la confirmación del proveedor llevan a Pagado. La confirmación es simulada y lo dice en pantalla." },
+        { "t": "Formularios validados", "d": "Zod con React Hook Form: largos, emojis, teléfono y código postal. Los archivos, solo JPG, PNG o WebP." },
+        { "t": "Regalos a prueba de errores", "d": "Los códigos llevan dígito verificador y el link no abre nada si se corta o se edita." },
+        { "t": "CI con permisos mínimos", "d": "Lectura en toda la CI; escribir en Pages solo en el paso de deploy." },
+        { "t": "Fuera de los buscadores", "d": "noindex y robots.txt, porque muestra precios y marcas de muestra." }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        { "t": "Export estático, sin servidor en esta etapa", "why": "Para publicarla en GitHub Pages: el repo prohíbe por escrito Server Actions, Route Handlers que lean el pedido, cookies, middleware e ISR.", "alt": "Un servidor desde el primer día: queda para producción, descripto pero no construido." },
+        { "t": "Reglas de negocio en un motor puro", "why": "Precio, stock, pagos y misiones viven fuera de los componentes, así se testean sin navegador y en producción pasan al servidor sin rehacer las pantallas." },
+        { "t": "Partir de otra demo del laboratorio", "why": "Volta es un fork de una tienda demo anterior, que ya resolvía lo difícil y probado. Rehacerlo desde cero costaba semanas.", "alt": "Empezar de cero." },
+        { "t": "Marca blanca por ficha", "why": "Una demo por prospecto cambiando una ficha: nombre, colores y su propio prefijo de almacenamiento, para que dos demos en el mismo dominio no se mezclen. Un test prohíbe escribir la marca fuera de las fichas." },
+        { "t": "Rehidratar después del primer render", "why": "El HTML estático no conoce lo que el visitante guardó: rehidratar después evita errores de hidratación. Lo guardado tiene migraciones versionadas." },
+        { "t": "Un juego en Canvas 2D con un solo loop", "why": "Un requestAnimationFrame con el delta limitado y la densidad de píxeles con tope 2. Lo que se ve antes de hidratar va en CSS." }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "TypeScript estricto y ESLint. La CI corre lint, typecheck, unitarios, build, una verificación del export y los e2e en un celular emulado antes de publicar."
+      ],
+      "items": [
+        { "n": "988", "u": "tests", "d": "Unitarios: precio, pedidos, lotes, recompra, juego y marca" },
+        { "n": "117", "u": "archivos", "d": "De tests unitarios" },
+        { "n": "893", "u": "e2e", "d": "Playwright, listados en 93 archivos, sin ejecutar" }
+      ],
+      "note": "Corrí los unitarios con Vitest el 28/10/2026: 988 en verde, en 117 archivos. Los 893 e2e los enumeré ese día con el listado de Playwright, en 93 archivos; no los ejecuté."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "App", "items": ["Next.js 16 (export estático)", "React 19", "TypeScript", "Tailwind CSS 4"] },
+        { "k": "Estado y formularios", "items": ["Zustand", "React Hook Form", "Zod"] },
+        { "k": "Movimiento y medios", "items": ["motion", "Canvas 2D", "WebAudio", "GSAP (tráiler)"] },
+        { "k": "Calidad", "items": ["Vitest", "Playwright", "axe-core", "ESLint", "GitHub Actions"] }
+      ]
+    },
+    "gallery": {
+      "h": "Captura",
+      "items": {
+        "volta": {
+          "alt": "Portada de la tienda de muestra Volta en escritorio: la barra «Demo · no se cobra nada», el producto destacado «5 g que se notan», una creatina de la marca propia ficticia, con su precio de muestra y el precio por servicio, y abajo el carrusel de productos.",
+          "caption": "La portada de la tienda. Captura de un build local, con datos de muestra."
+        }
+      }
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Demo. Marca, catálogo, clientes y pedidos son ficticios.",
+        "No hay backend, base de datos, autenticación, pagos, emails reales ni API de WhatsApp. La versión de producción está descripta en el repo, no construida.",
+        "No tiene clientes ni ventas. No afirmo que la recompra o la gamificación aumenten nada: no hay datos reales.",
+        "Las calculadoras de duración y dosis son orientativas: no son consejo de salud.",
+        "Pendiente: separar los datos del panel de los de la tienda y probar en iPhone y Android reales.",
+        "Los e2e los enumeré, pero no los corrí."
+      ]
+    }
+  }
+}

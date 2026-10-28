@@ -1,35 +1,397 @@
 {
   "title": "Kinetic Studio",
-  "kind": "Laboratorio · público",
+  "kind": "Laboratorio propio · motion graphics en código",
   "status": "Laboratorio · público",
-  "summary": "32 tráileres de motion graphics hechos con código: GSAP, canvas, WebGL y audio sintetizado.",
-  "facts": [],
-  "tldr": [],
+  "summary": "Mi laboratorio de tráileres de motion graphics hechos con código: la imagen y el sonido se generan en vivo en el navegador, sobre un motor propio con una sola línea de tiempo que se puede congelar en cualquier segundo. El tráiler de este portafolio está hecho con su kit.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Proyecto propio, hecho con un agente de tráileres"
+    },
+    {
+      "k": "Período",
+      "v": "Septiembre y octubre de 2026 · 51 commits"
+    },
+    {
+      "k": "Piezas",
+      "v": "Hub · 31 tráileres · motor, recetas y sonido"
+    },
+    {
+      "k": "Estado",
+      "v": "Laboratorio público: repo en GitHub, deploy a GitHub Pages"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "Qué es",
+      "v": "Tráileres de producto sin editor de video, sin material de stock y sin audio grabado. Cada pieza es código: se edita como datos y se congela en cualquier cuadro."
+    },
+    {
+      "k": "Cómo funciona",
+      "v": "Una línea de tiempo maestra, pausada, maneja la imagen y el sonido. Las escenas son recetas que devuelven su duración y la música es una lista de notas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "31 tráileres en el hub y el tráiler de 112 s de este portafolio. Es un laboratorio: no tiene tests y el kit está copiado en cada carpeta."
+    }
+  ],
   "blocks": {
-    "s1": {
+    "what": {
       "h": "Qué es",
       "p": [
-        "Un laboratorio donde cada tráiler es una página que se dibuja en vivo en el navegador. El audio también se sintetiza (WebAudio): no hay música grabada."
-      ]
-    },
-    "s2": {
-      "h": "Técnicas",
+        "Kinetic Studio es mi laboratorio de motion graphics. Cada tráiler es una página web que se dibuja en vivo: tipografía, formas, partículas en canvas, escenas 3D en WebGL y una banda sonora que se sintetiza en el momento con WebAudio.",
+        "Cada idea del catálogo le exige algo distinto al motor: tipografía variable, 120.000 partículas en la GPU, una historia con datos públicos y la fuente citada en pantalla, formatos verticales o un tráiler interactivo donde el scroll es el tiempo."
+      ],
       "list": [
-        "Una timeline maestra pausada por tráiler: en los tráileres del kit, cualquier cuadro se puede congelar con ?t=.",
-        "Partituras como datos, sincronizadas con la imagen.",
-        "Partículas en canvas y WebGL, texto que se vuelve estrellas, simulaciones con semilla fija."
+        "Un hub con la biblioteca: afiches SVG generativos con semilla fija (salen iguales en cada carga) y una vista previa en vivo, sin sonido, al pasar el mouse.",
+        "31 tráileres en el hub (32 carpetas): 29 se hacen solo con el kit y 2 son comerciales que animan capturas reales de una demo.",
+        "Sumando el catálogo: 1.430 segundos de película y 272 escenas.",
+        "Lo uso para piezas de mis productos (cuatro spots de HandyX) y para el tráiler «Conocer a Ignacio» de este sitio."
       ]
     },
-    "s3": {
-      "h": "Dónde se ve",
+    "engine": {
+      "h": "Cómo funciona un tráiler",
       "p": [
-        "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 15 escenas en 112 segundos, con música sintetizada y componentes reales de mis proyectos reconstruidos en código."
+        "Un tráiler es un archivo de configuración. Cada escena nombra una receta, y la receta devuelve cuánto dura: así el motor sabe en qué segundo empieza cada cosa y la suma a una sola línea de tiempo de GSAP, pausada.",
+        "La música también es datos: la partitura es una función que devuelve cada nota con su segundo y su voz, y esa misma lista suena en vivo, se puede renderizar offline y puede mover la imagen al compás. Hay 23 voces sintetizadas y ningún archivo de audio."
+      ],
+      "diagram": {
+        "title": "Una línea de tiempo maneja todo",
+        "caption": "El motor de Kinetic Studio (js/engine.js de cada tráiler). La imagen y el sonido leen la misma línea de tiempo: si se mueve, se mueven juntos. La pasada de calentamiento la agregó el tráiler de este portafolio.",
+        "nodes": {
+          "config": {
+            "label": "trailer.js",
+            "sub": "las escenas"
+          },
+          "recipes": {
+            "label": "Recetas",
+            "sub": "→ duración",
+            "note": "Cada escena es una receta: recibe al director, su segundo de inicio y sus opciones, y devuelve cuánto dura. Si falta la receta o la duración, el motor frena con un error."
+          },
+          "score": {
+            "label": "Partitura",
+            "sub": "{ t, voz }"
+          },
+          "tl": {
+            "label": "Timeline maestra",
+            "sub": "GSAP, pausada",
+            "note": "Una sola, y pausada. Con ?⁠t=segundos en la URL cualquier cuadro queda congelado: sirve para revisar cuadro por cuadro y para exportar."
+          },
+          "seek": {
+            "label": "?t=segundos",
+            "sub": "cuadro fijo"
+          },
+          "warm": {
+            "label": "Calentamiento",
+            "sub": "pasada previa",
+            "note": "Antes de reproducir, recorre la película una vez detrás de una cortina, un cuadro cada 1,5 s: el primer cuadro de cada escena es el caro."
+          },
+          "image": {
+            "label": "Imagen",
+            "sub": "DOM + canvas",
+            "note": "Las capas de canvas son funciones puras del estado animado: mover la línea de tiempo mueve también el canvas, sin estado oculto."
+          },
+          "sound": {
+            "label": "Sonido",
+            "sub": "WebAudio"
+          }
+        },
+        "edges": {
+          "run": "Trailer.run",
+          "tweens": "tweens en T",
+          "notes": "callbacks de 0 s",
+          "freeze": "pausa en t",
+          "warmup": "seek cada 1,5 s",
+          "draw": "tweens · ticker",
+          "play": "SFX.voz()"
+        }
+      }
+    },
+    "pipeline": {
+      "h": "De la idea al hub",
+      "p": [
+        "Los tráileres los arma un agente de tráileres sobre el kit. El resto del camino es mecánico y tiene guardias para que un error no llegue publicado."
+      ],
+      "title": "Ocho pasos, de una carpeta a una vista previa",
+      "caption": "Según el README y scripts/adopt-trailer.mjs. La CI solo construye y publica desde main: no hay checks en los PR.",
+      "steps": [
+        {
+          "actor": "Agente",
+          "t": "Arma la carpeta",
+          "d": "Crea trailers/<id>/ con su propia copia del kit: motor, sonido y recetas."
+        },
+        {
+          "actor": "npm run adopt",
+          "t": "Adopta los módulos",
+          "d": "Cambia los <script> clásicos por un main.ts con un import por archivo, en orden."
+        },
+        {
+          "actor": "trailer.js",
+          "t": "Se edita como datos",
+          "d": "Escenas, paleta, fuentes y música: el único archivo que se toca normalmente."
+        },
+        {
+          "actor": "Motor",
+          "t": "Arma la película",
+          "d": "Llama a cada receta con su segundo de inicio y deja que la música se sume al final."
+        },
+        {
+          "actor": "hub/catalog.ts",
+          "t": "Se registra",
+          "d": "Segundo del afiche y de la vista previa, duración y cantidad de escenas."
+        },
+        {
+          "actor": "Vite",
+          "t": "Build con guardia",
+          "d": "tsc estricto y Vite. Un plugin frena el build si queda un <script> clásico local."
+        },
+        {
+          "actor": "GitHub Actions",
+          "t": "Publica",
+          "d": "Cada push a main construye el hub y lo publica en GitHub Pages."
+        },
+        {
+          "actor": "Hub",
+          "t": "Afiche y vista previa",
+          "d": "Un iframe con ?⁠embed reproduce en silencio al pasar el mouse."
+        }
       ]
     },
-    "s4": {
+    "flagship": {
+      "h": "El tráiler de este portafolio",
+      "p": [
+        "El uso más exigente del kit es el tráiler «Conocer a Ignacio» que abre este sitio. Usa el motor de Kinetic con un solo cambio de dos líneas (dentro del portafolio no hay atajos de una letra, por WCAG 2.1.4) y le suma recetas propias, un modo para vivir dentro de la página y la pasada de calentamiento.",
+        "En el acto 5, once vistas de componentes reales de mis proyectos están reconstruidas en código (HTML, CSS y SVG animados con GSAP), sin capturas. En el acto 6, cada una de las 17 tecnologías es una animación que muestra qué hace, con una nota fija de dónde la usé.",
+        "No es todo código: el acto 4 reproduce un recorte grabado de la demo de CompliA, y las vistas de HandyX usan cuatro ilustraciones de la marca."
+      ]
+    },
+    "acts": {
+      "title": "112 segundos en ocho actos",
+      "caption": "Tiempos de trailer.es.js, sobre una partitura de 120 BPM (56 compases). El inglés es la misma película con otras palabras.",
+      "steps": [
+        {
+          "actor": "0:00–0:08",
+          "t": "La semilla",
+          "d": "Cortes tipográficos: dónde empezó todo."
+        },
+        {
+          "actor": "0:08–0:12",
+          "t": "Caminos",
+          "d": "De una semilla salen ramas en todas direcciones y queda una sola línea."
+        },
+        {
+          "actor": "0:12–0:32",
+          "t": "Carrera",
+          "d": "La carrera como un grafo de git: una rama por trabajo y la cámara viaja por la línea."
+        },
+        {
+          "actor": "0:32–0:42",
+          "t": "CompliA",
+          "d": "El caso a la izquierda y el recorte de la demo a la derecha, sincronizado con la línea de tiempo."
+        },
+        {
+          "actor": "0:42–1:00",
+          "t": "Ramas propias",
+          "d": "Once vistas reconstruidas en código y un muro final: «Todo, en código.»"
+        },
+        {
+          "actor": "1:00–1:18",
+          "t": "Tecnologías",
+          "d": "17 animaciones en cuatro pantallas, agrupadas por dónde usé cada tecnología."
+        },
+        {
+          "actor": "1:18–1:34",
+          "t": "Sistema",
+          "d": "Los 11 agentes, las reglas y un tablero de CI."
+        },
+        {
+          "actor": "1:34–1:52",
+          "t": "Final",
+          "d": "Nombre, rol y contacto; después el cuadro se vacía y entra el portafolio."
+        }
+      ]
+    },
+    "film": {
+      "items": [
+        {
+          "n": "112",
+          "u": "s",
+          "d": "Duración de la película"
+        },
+        {
+          "n": "15",
+          "u": "escenas",
+          "d": "Iguales en español y en inglés"
+        },
+        {
+          "n": "11",
+          "u": "vistas",
+          "d": "Componentes reales reconstruidos en código"
+        },
+        {
+          "n": "17",
+          "u": "animaciones",
+          "d": "Una por tecnología"
+        }
+      ],
+      "note": "Los fijan los tests del portafolio: el e2e espera una duración de 112,00 s y los unitarios exigen 15 escenas, 11 vistas y 17 tecnologías con los mismos textos en los dos idiomas. Corrí los unitarios el 28/10/2026, en verde."
+    },
+    "host": {
+      "h": "Cómo entra en el portafolio",
+      "p": [
+        "El tráiler no se empaqueta con el sitio: es una página estática del kit dentro de un iframe del mismo origen, y el reproductor es un chunk que se descarga recién con el clic.",
+        "El navegador solo deja sonar audio y pedir pantalla completa desde un gesto del usuario. Por eso el contexto de audio se crea dentro del clic y el iframe lo toma prestado."
+      ],
+      "seq": {
+        "title": "Del clic al final de la película",
+        "caption": "Los mensajes viajan con postMessage, solo dentro del mismo origen: el tráiler verifica el origen y el portafolio, además, que el mensaje venga de su iframe. Si el visitante prefiere movimiento reducido, ve una versión en texto: sin sonido ni pantalla completa.",
+        "lanes": {
+          "page": "Portafolio",
+          "film": "Tráiler (iframe)",
+          "audio": "AudioContext"
+        },
+        "msgs": {
+          "click": "clic: audio y pantalla completa",
+          "open": "abre ?host&lang=es",
+          "borrow": "toma prestado el contexto",
+          "warm": "calentamiento tras una cortina",
+          "ready": "trailer:ready",
+          "ctrl": "trailer:mute · trailer:toggle",
+          "end": "trailer:end",
+          "close": "cierra el contexto al salir"
+        }
+      }
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        {
+          "t": "Una sola línea de tiempo, pausada",
+          "why": "Si todo cuelga de una timeline y cada receta devuelve su duración, la película es determinista y se puede saltar a cualquier segundo. Eso habilita revisar cuadro por cuadro con ?⁠t=, las vistas previas del hub, exportar cuadro exacto y renderizar el audio offline."
+        },
+        {
+          "t": "El canvas como función del estado",
+          "why": "Las partículas y el túnel se dibujan a partir de parámetros animados, sin estado oculto por cuadro: mover la timeline mueve el canvas. Cuando el cabezal salta, se apagan las estelas de desenfoque para que no queden rastros."
+        },
+        {
+          "t": "La música es una lista de eventos",
+          "why": "La misma lista suena en vivo, se renderiza offline con una semilla fija y puede mover la imagen al compás. En el render offline las voces se crean justo a tiempo: crearlas todas al principio hacía cada bloque de audio cientos de veces más lento."
+        },
+        {
+          "t": "El cuadro caro, primero y detrás de una cortina",
+          "why": "El primer cuadro de cada escena es el que cuesta (estilos, texto partido, fuentes, el primer pintado de una vista grande): ahí se trababan los cortes. El tráiler del portafolio recorre la película una vez antes de reproducir, así la reproducción solo repite trabajo hecho.",
+          "alt": "Partículas en canvas y sombras cromáticas animadas en ese tráiler: salieron, y los fondos de cada acto se mueven en el compositor."
+        },
+        {
+          "t": "El kit sigue siendo JavaScript plano",
+          "why": "Las recetas son módulos ES que hablan por window, y Vite solo empaqueta GSAP y Three.js desde npm: los tráileres que arma el agente funcionan sin cambios. Three.js lo descarga solo el tráiler que lo importa, y el orden de ejecución estricto evita que un chunk compartido corra antes que el motor (rompía dos páginas)."
+        },
+        {
+          "t": "Guardias en el build y en ejecución",
+          "why": "Un plugin de Vite frena el build si una página carga un <script> clásico local. En los spots de HandyX, ?⁠audit recorre cada tween y marca cualquier propiedad que no sea transform u opacity, y una escena que dura distinto que su storyboard frena el armado de la película."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Rendimiento y calidad",
+      "p": [
+        "Para que el tráiler del portafolio no se trabe: la pasada de calentamiento, los fondos de cada acto movidos en el compositor y nada de partículas en canvas ni sombras cromáticas animadas. El determinismo del motor se probó llegando al mismo cuadro por tres caminos.",
+        "El repo no tiene suite de tests: el build corre tsc en modo estricto antes de Vite, y las recetas en JavaScript no se chequean."
+      ],
+      "items": [
+        {
+          "n": "20",
+          "u": "ms",
+          "d": "Cuadro medio del tráiler del portafolio (antes: 29 ms)"
+        },
+        {
+          "n": "2",
+          "u": "segundos",
+          "d": "Con algún cuadro de más de 100 ms (antes: 10)"
+        },
+        {
+          "n": "2/4",
+          "u": "idénticos",
+          "d": "Momentos iguales bit a bit, llegando por tres caminos"
+        },
+        {
+          "n": "121",
+          "u": "píxeles",
+          "d": "La mayor diferencia en los otros dos, de 2.073.600 y en un nivel de color"
+        }
+      ],
+      "note": "Rendimiento: medición de laboratorio del 28/10/2026 en Chromium sin GPU, recorriendo la película entera; no son datos de campo. Determinismo: la prueba de hash de Kinetic (exports/hash.json) abre el mismo segundo desde 0, desde el final y desde un poco antes, y compara las capturas por SHA-256 y píxel a píxel."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Motor",
+          "items": [
+            "GSAP 3.13",
+            "SplitText",
+            "MorphSVG",
+            "DrawSVG",
+            "Canvas 2D",
+            "Three.js r147",
+            "WebAudio"
+          ]
+        },
+        {
+          "k": "Build",
+          "items": [
+            "TypeScript estricto",
+            "Vite 8",
+            "GitHub Actions",
+            "GitHub Pages"
+          ]
+        },
+        {
+          "k": "Herramientas",
+          "items": [
+            "Node",
+            "Chrome DevTools Protocol"
+          ]
+        },
+        {
+          "k": "En el portafolio",
+          "items": [
+            "GSAP 3.15",
+            "módulos ES sin bundler",
+            "iframe del mismo origen",
+            "postMessage"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Captura",
+      "items": {
+        "kinetic": {
+          "alt": "Un cuadro del tráiler KINETIC: la palabra KINETIC enorme en blanco sobre un fondo violeta oscuro, cruzada por un círculo fino, con la bajada «A motion study in form, color & time», tres figuras de color y marcas de HUD en las esquinas.",
+          "caption": "Un cuadro del tráiler KINETIC, tomado de su exportación a MP4. Todo lo que se ve está dibujado con código."
+        }
+      }
+    },
+    "debt": {
       "h": "Deuda conocida",
-      "p": [
-        "El kit está copiado en cada carpeta y se fue desfasando. Unificarlo es lo próximo."
+      "list": [
+        "El kit está copiado en cada carpeta y se fue desfasando: 30 copias de engine.js en 10 versiones distintas y 30 de audio.js en 9 (contadas por hash). Unificarlo es lo próximo.",
+        "La exportación a MP4 no se reproduce solo con el repo: el exportador vive afuera, en las herramientas locales del kit.",
+        "No hay tests, y la CI solo construye y publica desde main.",
+        "El modo embed del motor acepta mensajes de cualquier origen y responde a cualquiera. El impacto es bajo (solo mueve una vista previa, sin datos), pero no verifica el origen. El tráiler del portafolio no usa ese modo.",
+        "El grano de película usa un azar nuevo en cada carga: los cuadros son iguales dentro de una carga, no necesariamente entre cargas.",
+        "Los renders exportados (MP4, GIF y WAV) están versionados en git aunque no se publican."
+      ]
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Laboratorio público: 31 tráileres en el hub, una carpeta más sin listar y la primera versión de KINETIC como página heredada.",
+        "No afirmo que todo sea código: dos comerciales animan capturas reales de una demo, y en el tráiler del portafolio hay un recorte de video y cuatro ilustraciones.",
+        "No afirmo una exportación determinista al bit: la prueba dio 2 de 4 momentos idénticos y 2 con diferencias de un nivel de color.",
+        "El exportador no está en el repo, y el repo no tiene licencia: no es código abierto.",
+        "Las cifras de rendimiento son de laboratorio, en Chromium sin GPU."
       ]
     }
   }

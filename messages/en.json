@@ -559,7 +559,9 @@
     "legend": "Diagram notes",
     "why": "Why",
     "alt": "Ruled out",
-    "nextCase": "Next case"
+    "nextCase": "Next case",
+    "play": "Play the video",
+    "pause": "Pause the video"
   },
   "fab": {
     "label": "Contact",
