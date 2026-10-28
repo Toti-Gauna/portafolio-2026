@@ -10,6 +10,7 @@ import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, NOINDEX, absoluteUrl
 import { Header } from '@/components/Header';
 import { Intro } from '@/components/Intro';
 import { FloatingContact } from '@/components/FloatingContact';
+import { SceneBackground } from '@/components/scene/SceneBackground';
 
 export const dynamicParams = false;
 
@@ -85,6 +86,8 @@ export default async function LocaleLayout({
         </noscript>
         <NextIntlClientProvider messages={messages}>
           <Intro />
+          {/* animated background: one fixed canvas behind #app-shell; three loads after the boot screen */}
+          <SceneBackground />
           <div id="app-shell">
             <Header locale={locale as Locale} />
             {children}

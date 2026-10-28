@@ -19,7 +19,7 @@ function observer() {
       if (w.live) e.target.toggleAttribute('data-live', e.isIntersecting);
       else if (e.isIntersecting) { io!.unobserve(e.target); watched.delete(e.target); }
     }
-  }, { rootMargin: '0px 0px -12% 0px' });
+  }, { rootMargin: '0px 0px -4% 0px' });
   return io;
 }
 

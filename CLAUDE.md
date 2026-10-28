@@ -49,6 +49,14 @@ Next.js (App Router, `output: 'export'`) + TypeScript + next-intl (es / en) + GS
 - Capturas de portales (`public/media/portals/*.webp`, 1600×1000, datos de ejemplo o ficticios, sin dinero): galería en las páginas de caso de Eclipse y HandyX (`CASE_GALLERY` en `lib/cases.ts`; alt y pie en `cases.<slug>.gallery.<id>`). Portadas de las tarjetas de Trabajo en `WORK_SHOT` (alt en `work.cards.<k>.shotAlt`); Tuenti lleva una ilustración dibujada (`tuenti-cover.svg`), nunca una captura.
 - Celulares: botón flotante de contacto (`components/FloatingContact.tsx`), que se oculta cuando hay otro botón de contacto en pantalla.
 
+## Fondos Three.js (fase 14)
+- `components/scene/`: un fondo animado por página, elegido por ruta (`routes.ts`; home, cada caso, `/negocio`, y un campo de puntos por defecto). `SceneBackground` (montado una vez en el layout) espera a que se vaya `#boot` y a que el navegador esté libre, verifica WebGL2 y recién ahí descarga three (`engine.ts`, chunk lazy: three nunca está en la primera carga). Píxeles ≤ 1,5 en escritorio y 1 en celulares (30 fps), pausa con la pestaña oculta o con `#app-shell` inerte; gobernador que baja a 30/20/15 fps si los cuadros vienen lentos. Movimiento reducido: un solo cuadro quieto. Save-Data o sin WebGL: luz en CSS. Escenas con semilla, sin `Math.random`.
+- Legibilidad medida sobre los píxeles reales (texto transparente → percentil 95 de luminancia por caja de texto): AA en todas las páginas a 360 y 1440 (28/10/2026). Escenas tenues, con velo en celulares donde hace falta.
+
+## Página «Cómo pienso el negocio» y medios
+- `/[locale]/negocio/` (`app/[locale]/negocio/page.tsx`, `components/business/`, copy en `business.*`): The Lean Startup, The Mom Test y Blue Ocean Strategy con sus modelos dibujados y cómo los aplico (HandyX y Eclipse, solo hechos de los repos).
+- Medios de cada proyecto en `public/media/<slug>/` (videos H.264 ≤ 1,6 MB con su póster, y capturas): bloque `showcase` (marco de navegador o de celular, se reproduce solo en pantalla, con botón de pausa). Datos ficticios o de muestra; marcas de clientes y pantallas de plata tapadas al capturar. Tuenti: ilustraciones propias animadas (`components/art/TuentiArt.tsx`), nunca capturas.
+
 ## QA (fase 11)
 - `tests/e2e/a11y.spec.ts`: contraste AA calculado sobre el color real de cada texto, recorrido con teclado (anillo de foco, ≥ 44 px, dentro de pantalla), metadatos de buscadores y redes, y movimiento reducido. `public/og.png` (1200×630) es la imagen para redes.
 - Rendimiento medido (CPU 4× y 1,6 Mbps): FCP/LCP ≈ 1,1 s, CLS 0,017; el tráiler no se descarga hasta el clic.
