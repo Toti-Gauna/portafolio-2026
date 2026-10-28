@@ -6,8 +6,9 @@ import { Monogram } from './Monogram';
 import { LocaleSwitch } from './LocaleSwitch';
 
 const LINKS = [
-  ['recorrido', 'journey'],
+  ['que-hago', 'what'],
   ['trabajo', 'work'],
+  ['recorrido', 'journey'],
   ['laboratorio', 'lab'],
   ['metodo', 'method'],
   ['sistema', 'system'],

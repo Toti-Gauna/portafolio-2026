@@ -72,7 +72,6 @@
 .stackl > div { display: grid; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .stackl dd { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 @media (min-width: 760px) { .stackl > div { grid-template-columns: 200px 1fr; align-items: center; } }
-.chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border: 1px solid #3d3d44; border-radius: 999px; font: 13px var(--font-mono); color: var(--paper); background: #141418; }
 
 .case__video { margin: 0; display: grid; gap: 8px; }
 .case__video video { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #0b0b0d; }

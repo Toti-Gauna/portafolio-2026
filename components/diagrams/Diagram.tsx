@@ -90,7 +90,7 @@ function Layer({ spec, copy, layout, v, num }: { spec: ArchSpec; copy: ArchCopy;
           const c = colorOf(e.tone ?? 'edge');
           return (
             <g key={e.id} style={{ '--o': i } as CSSProperties}>
-              <path className="dg__edge" d={d} pathLength={1} stroke={c} strokeDasharray={e.dashed ? undefined : 1} data-dashed={e.dashed || undefined} />
+              <path className="dg__edge" d={d} pathLength={e.dashed ? undefined : 1} stroke={c} strokeDasharray={e.dashed ? undefined : 1} data-dashed={e.dashed || undefined} />
               <path className="dg__arrow" d={d} markerEnd={`url(#${mk(e.tone ?? 'edge')})`} />
               <path className="dg__pkt" d={d} pathLength={1} stroke={e.tone && e.tone !== 'paper' ? TONE[e.tone] : TONE.coral} />
             </g>

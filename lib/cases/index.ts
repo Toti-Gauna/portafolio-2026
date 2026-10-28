@@ -29,4 +29,4 @@ export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclips
   eclipse: '/media/portals/eclipse-landing.webp',
 };
 
-export const SECTION_IDS = ['recorrido', 'trabajo', 'laboratorio', 'metodo', 'sistema', 'capacidades', 'sobre-mi', 'contacto'] as const;
+export const SECTION_IDS = ['que-hago', 'trabajo', 'recorrido', 'laboratorio', 'metodo', 'sistema', 'capacidades', 'sobre-mi', 'contacto'] as const;

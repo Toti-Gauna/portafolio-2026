@@ -56,14 +56,38 @@
     "title": "Construyo software con IA que llega a producción.",
     "lead": "De la interfaz al backend, con un sistema que planifica, prueba y entrega.",
     "availability": "Abierto a nuevas oportunidades",
-    "proofs": {
-      "complia": "CompliA en producción",
-      "since": "Desde 2021",
-      "system": "11 agentes · tests · CI"
-    },
     "write": "Escribime",
     "newTab": "se abre en una pestaña nueva",
-    "watch": "Ver el tráiler"
+    "watch": "Ver el tráiler",
+    "graph": {
+      "start": "2021",
+      "ai": "ia: rag + reglas",
+      "full": "api + portales",
+      "quality": "tests + ci",
+      "prod": "producción"
+    },
+    "readouts": [
+      {
+        "n": "2021",
+        "d": "Trabajo como desarrollador desde"
+      },
+      {
+        "n": "1",
+        "u": "en producción",
+        "d": "Asistente con IA que diseñé y construí: CompliA"
+      },
+      {
+        "n": "1.374",
+        "u": "tests",
+        "d": "En verde en la web, el backend y el portal de Eclipse (28/10/2026)"
+      },
+      {
+        "n": "11",
+        "u": "agentes",
+        "d": "Con roles separados en mi forma de trabajar"
+      }
+    ],
+    "readoutsLabel": "En números"
   },
   "skipLink": "Saltar al contenido",
   "nav": {
@@ -76,10 +100,11 @@
     "about": "Sobre mí",
     "contact": "Contacto",
     "menu": "Secciones",
-    "label": "Secciones de la página"
+    "label": "Secciones de la página",
+    "what": "Qué hago"
   },
   "journey": {
-    "label": "01 · Recorrido",
+    "label": "03 · Recorrido",
     "title": "Una semilla, muchos caminos.",
     "lead": "Siete momentos, en orden. Lo que se puede contar, sin datos internos de ningún cliente.",
     "items": [
@@ -131,30 +156,45 @@
         "name": "CompliA",
         "status": "En producción interna",
         "text": "Asistente conversacional del portal de compliance de Telefónica: analiza declaraciones, ayuda a dictaminar y arma reportes. Lo diseñé y construí: RAG, validaciones, restricciones y recomendaciones.",
-        "shotAlt": "Fotograma de la demo de CompliA con datos de ejemplo: 28 declaraciones encontradas, 8 en análisis y 13 procesadas."
+        "shotAlt": "Fotograma de la demo de CompliA con datos de ejemplo: 28 declaraciones encontradas, 8 en análisis y 13 procesadas.",
+        "role": "Diseño y desarrollo · 2026 – hoy"
       },
       "tuenti": {
         "name": "Tuenti",
         "status": "Trabajo profesional",
         "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft.",
-        "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad."
+        "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad.",
+        "role": "Jr Frontend → Ssr AI Fullstack · 2024 – hoy"
       },
       "handyx": {
         "name": "HandyX",
         "status": "En desarrollo · lanza el 10 de noviembre",
         "text": "Marketplace de especialistas del hogar en Mar del Plata. Producto propio: soy la única persona en el proyecto.",
-        "shotAlt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros."
+        "shotAlt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros.",
+        "role": "Única persona: producto, diseño y desarrollo"
       },
       "eclipse": {
         "name": "Eclipse",
         "status": "En desarrollo",
         "text": "Estudio propio de desarrollo, IA y automatización. Una web que muestra demos antes de hablar, un portal de clientes en modo demo y su backend.",
-        "shotAlt": "Portada de la landing de Eclipse sobre cielo negro: el titular «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.», el botón ámbar «Quiero potenciar mi negocio» y, a la derecha, un eclipse total con su corona dentro de un dial con marcas."
+        "shotAlt": "Portada de la landing de Eclipse sobre cielo negro: el titular «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.», el botón ámbar «Quiero potenciar mi negocio» y, a la derecha, un eclipse total con su corona dentro de un dial con marcas.",
+        "role": "Producto propio: cuatro repos, de punta a punta"
       }
+    },
+    "inside": {
+      "label": "Adentro",
+      "diagram": "Arquitectura",
+      "flow": "Flujos",
+      "business": "Negocio",
+      "security": "Seguridad",
+      "quality": "Calidad",
+      "decisions": "Decisiones",
+      "video": "Demo",
+      "limits": "Límites"
     }
   },
   "lab": {
-    "label": "03 · Laboratorio",
+    "label": "04 · Laboratorio",
     "title": "Donde pruebo cosas.",
     "lead": "Demos, prototipos y bancos de prueba. Todo lo ficticio lo dice.",
     "view": "Ver el código",
@@ -181,7 +221,7 @@
       "dentalos": {
         "name": "DentalOS",
         "status": "Demo",
-        "text": "Circuito administrativo de una clínica odontológica ficticia, con 15 módulos. Solo frontend, datos sintéticos.",
+        "text": "Circuito administrativo de una clínica odontológica ficticia, con 16 módulos. Solo frontend, datos sintéticos.",
         "alt": "Captura de la demo de DentalOS: agenda de recepción de una clínica ficticia."
       },
       "supernova": {
@@ -193,46 +233,53 @@
       "games": {
         "name": "games-market",
         "status": "Banco de pruebas",
-        "text": "Banco de pruebas pensado para 24 juegos web, 2D y 3D, con un roadmap ordenado por complejidad.",
+        "text": "Banco de pruebas de juegos web: 18 jugables de 24 planeados, en 2D y 3D, con un roadmap ordenado por complejidad.",
         "alt": "Captura de games-market: catálogo de juegos del banco de pruebas."
       }
     },
-    "shot": "Captura real del proyecto"
+    "shot": "Captura real del proyecto",
+    "deep": "Ver el caso"
   },
   "method": {
-    "label": "04 · Método",
+    "label": "05 · Método",
     "title": "Cómo genero valor.",
     "lead": "Seis pasos. Cada uno con algo que hice, no con una frase linda.",
     "steps": [
       {
         "name": "Entender el problema",
         "text": "Antes de construir, entiendo el contexto y el negocio. Hablar con quienes usan el software cambia lo que se prioriza.",
-        "example": "Jornada presencial con clientes en Buenos Aires (abril de 2026): demos, alineación y conversación directa sobre sus desafíos reales."
+        "example": "Jornada presencial con clientes en Buenos Aires (abril de 2026): demos, alineación y conversación directa sobre sus desafíos reales.",
+        "short": "Entender"
       },
       {
         "name": "Alinear y negociar prioridades",
         "text": "Acuerdo alcance y prioridades antes de escribir código, y sostengo las conversaciones difíciles cuando hacen falta.",
-        "example": "En Tsoft participo en decisiones técnicas con el equipo y acompaño a quienes se suman."
+        "example": "En Tsoft participo en decisiones técnicas con el equipo y acompaño a quienes se suman.",
+        "short": "Alinear"
       },
       {
         "name": "Diseñar",
         "text": "Diseño la interfaz y el sistema juntos: reglas, estados y límites antes que pantallas lindas.",
-        "example": "Volta y DentalOS: demos navegables con identidad propia y datos rotulados."
+        "example": "Volta y DentalOS: demos navegables con identidad propia y datos rotulados.",
+        "short": "Diseñar"
       },
       {
         "name": "Construir por etapas",
         "text": "Divido el trabajo en lotes chicos, cada uno con su criterio de aceptación.",
-        "example": "Eclipse avanza por lotes documentados, con puertas de aprobación."
+        "example": "Eclipse avanza por lotes documentados, con puertas de aprobación.",
+        "short": "Construir"
       },
       {
         "name": "Mostrar y validar",
         "text": "Muestro algo que funciona cuanto antes y lo pruebo: tests automáticos, QA visual y demos.",
-        "example": "Velmar: una demo navegable para un cliente, con datos de ejemplo."
+        "example": "Velmar: una demo navegable para un cliente, con datos de ejemplo.",
+        "short": "Validar"
       },
       {
         "name": "Entregar y aprender",
         "text": "Entrego con CI/CD, dejo documentado lo que aprendí y lo vuelvo a aplicar.",
-        "example": "En Tsoft trabajo con pipelines de despliegue, integraciones y CI/CD en proyectos de Telefónica y Tuenti."
+        "example": "En Tsoft trabajo con pipelines de despliegue, integraciones y CI/CD en proyectos de Telefónica y Tuenti.",
+        "short": "Entregar"
       }
     ],
     "readsTitle": "Influencias",
@@ -250,10 +297,11 @@
         "title": "SPIN Selling",
         "state": "Leyendo"
       }
-    ]
+    ],
+    "cycle": "Un ciclo, no una línea: lo que aprendo al entregar vuelve a entrar como problema."
   },
   "system": {
-    "label": "05 · Sistema",
+    "label": "06 · Sistema",
     "title": "Un sistema agéntico, dividido en partes.",
     "lead": "Programo con agentes, pero cada uno tiene su parte y nada se entrega sin una persona que apruebe.",
     "points": [
@@ -345,49 +393,147 @@
         "name": "Documentación",
         "role": "Documenta proyectos y decisiones."
       }
-    ]
+    ],
+    "flow": {
+      "title": "Cómo viaja un cambio",
+      "caption": "Cada cambio pasa por especificación, pruebas y una puerta humana antes de publicarse.",
+      "nodes": {
+        "ask": {
+          "label": "Pedido",
+          "sub": "un problema real"
+        },
+        "chief": {
+          "label": "Dirección",
+          "sub": "plan, alcance, costo",
+          "note": "No escribe código: decide qué se hace y en qué orden."
+        },
+        "spec": {
+          "label": "Especificación",
+          "sub": "criterios y reversión"
+        },
+        "roles": {
+          "label": "Agentes por rol",
+          "sub": "skills según la tarea"
+        },
+        "qa": {
+          "label": "Tests y QA",
+          "sub": "CI + QA visual",
+          "note": "Lo que no probé lo rotulo «no probado»."
+        },
+        "gate": {
+          "label": "Puerta humana",
+          "sub": "apruebo yo",
+          "note": "Los agentes no publican, no gastan y no cambian precios por su cuenta."
+        },
+        "ship": {
+          "label": "Publicar",
+          "sub": "con mi OK"
+        }
+      },
+      "edges": {
+        "brief": "brief",
+        "plan": "plan",
+        "lote": "lotes",
+        "change": "cambios",
+        "evidence": "evidencia",
+        "release": "publicar",
+        "fail": "falla"
+      }
+    },
+    "deep": "Ver el sistema en detalle"
   },
   "skills": {
-    "label": "06 · Capacidades",
+    "label": "07 · Capacidades",
     "title": "Qué uso, y de dónde sale cada cosa.",
-    "lead": "Separo lo que uso en el trabajo, lo que hice en proyectos propios y lo que estoy explorando.",
-    "layers": {
-      "pro": {
-        "title": "En el trabajo",
-        "items": [
-          "React, React Native, TypeScript, Next.js",
-          "Node.js y SQL",
-          "Tailwind CSS",
-          "CI/CD, pipelines de despliegue e integraciones",
-          "RAG y funciones con IA en un entorno corporativo",
-          "Gamificación, pagos y recargas",
-          "Compliance (portal de Telefónica)",
-          "Enseñanza de JavaScript y React"
-        ]
+    "lead": "Cada tecnología dice de dónde sale: del trabajo, de mis proyectos o de lo que estoy estudiando.",
+    "cols": {
+      "work": "Trabajo",
+      "own": "Proyectos",
+      "study": "Estudio"
+    },
+    "tech": "Tecnología",
+    "also": "También",
+    "rows": {
+      "react": {
+        "name": "React",
+        "note": "Tuenti, CompliA y mis productos"
       },
-      "own": {
-        "title": "En proyectos propios",
-        "items": [
-          "Motion graphics en código: GSAP, canvas, WebGL, WebAudio",
-          "Next.js 16, Vitest y Playwright",
-          "Diseño de interfaces y sistemas visuales",
-          "Sistemas con agentes: roles, especificación, pruebas y puertas",
-          "Python y C (estudio y proyectos propios)",
-          "Seguridad en lo que construyo: cookies HttpOnly, CSRF, 2FA y Argon2"
-        ]
+      "typescript": {
+        "name": "TypeScript",
+        "note": "En todo lo que escribo hoy"
       },
-      "exploring": {
-        "title": "Estudiando",
-        "items": [
-          "Fundamentos de machine learning",
-          "Nube: AWS y Azure",
-          "Ventas consultivas (SPIN Selling)"
-        ]
+      "nextjs": {
+        "name": "Next.js",
+        "note": "Trabajo, Eclipse y este sitio"
+      },
+      "reactnative": {
+        "name": "React Native",
+        "note": "Apps de Tuenti"
+      },
+      "tailwind": {
+        "name": "Tailwind CSS",
+        "note": "Trabajo y Eclipse"
+      },
+      "node": {
+        "name": "Node.js",
+        "note": "Trabajo y los backends de Eclipse y HandyX"
+      },
+      "sql": {
+        "name": "SQL y PostgreSQL",
+        "note": "Trabajo; PostgreSQL con Prisma en mis backends"
+      },
+      "cicd": {
+        "name": "CI/CD",
+        "note": "Pipelines en Tsoft; GitHub Actions en mis repos"
+      },
+      "rag": {
+        "name": "RAG con LLM",
+        "note": "CompliA"
+      },
+      "security": {
+        "name": "Seguridad",
+        "note": "HttpOnly, CSRF, 2FA y Argon2 en lo que construyo"
+      },
+      "tests": {
+        "name": "Vitest y Playwright",
+        "note": "Tests y e2e en mis proyectos"
+      },
+      "motion": {
+        "name": "GSAP y WebGL",
+        "note": "Kinetic Studio y el tráiler"
+      },
+      "python": {
+        "name": "Python",
+        "note": "Estudio y proyectos propios"
+      },
+      "c": {
+        "name": "C",
+        "note": "Estudio y proyectos propios"
+      },
+      "ml": {
+        "name": "Machine learning",
+        "note": "Fundamentos"
+      },
+      "aws": {
+        "name": "AWS",
+        "note": "Conocimiento y estudio"
+      },
+      "azure": {
+        "name": "Azure",
+        "note": "Conocimiento y estudio"
       }
-    }
+    },
+    "alsoItems": [
+      "Gamificación, pagos y recargas",
+      "Compliance (portal de Telefónica)",
+      "Diseño de interfaces y sistemas visuales",
+      "Sistemas con agentes: roles, especificación, pruebas y puertas",
+      "Enseñanza de JavaScript y React",
+      "Ventas consultivas (SPIN Selling), estudiando"
+    ]
   },
   "about": {
-    "label": "07 · Sobre mí",
+    "label": "08 · Sobre mí",
     "title": "De Mar del Plata.",
     "paragraphs": [
       "Empecé a estudiar a los 17 con una idea: hacer una web de juegos. Esa web no existe, pero abrió el camino que sigo.",
@@ -396,7 +542,7 @@
     ]
   },
   "contact": {
-    "label": "08 · Contacto",
+    "label": "09 · Contacto",
     "title": "Abierto a nuevas oportunidades.",
     "lead": "Busco un rol Ssr o Sr de desarrollo fullstack con IA.",
     "email": "Escribime",
@@ -426,5 +572,33 @@
   "fab": {
     "label": "Contacto",
     "aria": "Contacto: escribirle a Ignacio por mail"
+  },
+  "what": {
+    "label": "01 · Qué hago",
+    "title": "Cuatro cosas que hago bien, con pruebas.",
+    "lead": "Cada una apunta a un caso donde se puede ver el trabajo.",
+    "see": "Ver la prueba",
+    "items": {
+      "ai": {
+        "t": "IA aplicada a producto",
+        "d": "RAG, validaciones y restricciones para que un modelo de lenguaje sirva en un proceso real, con una persona que confirma.",
+        "proof": "CompliA, en producción interna"
+      },
+      "full": {
+        "t": "Fullstack, de la interfaz a la base",
+        "d": "Frontends, APIs, datos y despliegues. Diseño el sistema completo y lo construyo por etapas.",
+        "proof": "HandyX y Eclipse"
+      },
+      "quality": {
+        "t": "Seguridad y calidad desde el diseño",
+        "d": "Datos cifrados, segundo factor, cookies HttpOnly y CSRF; tests automáticos y CI en cada cambio.",
+        "proof": "Los backends de HandyX y Eclipse"
+      },
+      "motion": {
+        "t": "Interfaces con oficio",
+        "d": "Sistemas visuales, accesibilidad y motion en código: GSAP, WebGL y audio sintetizado.",
+        "proof": "Kinetic Studio y el tráiler de este sitio"
+      }
+    }
   }
 }

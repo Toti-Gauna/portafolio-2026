@@ -56,14 +56,38 @@
     "title": "I build AI software that ships.",
     "lead": "From interface to backend, with a system that plans, tests and delivers.",
     "availability": "Open to new opportunities",
-    "proofs": {
-      "complia": "CompliA in production",
-      "since": "Building since 2021",
-      "system": "11 agents · tests · CI"
-    },
     "write": "Write to me",
     "newTab": "opens in a new tab",
-    "watch": "Watch the trailer"
+    "watch": "Watch the trailer",
+    "graph": {
+      "start": "2021",
+      "ai": "ai: rag + rules",
+      "full": "api + portals",
+      "quality": "tests + ci",
+      "prod": "production"
+    },
+    "readouts": [
+      {
+        "n": "2021",
+        "d": "Working as a developer since"
+      },
+      {
+        "n": "1",
+        "u": "in production",
+        "d": "AI assistant I designed and built: CompliA"
+      },
+      {
+        "n": "1,374",
+        "u": "tests",
+        "d": "Green across Eclipse's web, backend and portal (10/28/2026)"
+      },
+      {
+        "n": "11",
+        "u": "agents",
+        "d": "With separate roles in the way I work"
+      }
+    ],
+    "readoutsLabel": "In numbers"
   },
   "skipLink": "Skip to content",
   "nav": {
@@ -76,10 +100,11 @@
     "about": "About",
     "contact": "Contact",
     "menu": "Sections",
-    "label": "Page sections"
+    "label": "Page sections",
+    "what": "What I do"
   },
   "journey": {
-    "label": "01 · Journey",
+    "label": "03 · Journey",
     "title": "One seed, many paths.",
     "lead": "Seven moments, in order. What can be told, with no internal data from any client.",
     "items": [
@@ -131,30 +156,45 @@
         "name": "CompliA",
         "status": "In internal production",
         "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports. I designed and built it: RAG, validations, restrictions and recommendations.",
-        "shotAlt": "Frame of the CompliA demo with sample data: 28 declarations found, 8 under analysis and 13 processed."
+        "shotAlt": "Frame of the CompliA demo with sample data: 28 declarations found, 8 under analysis and 13 processed.",
+        "role": "Design and development · 2026 – today"
       },
       "tuenti": {
         "name": "Tuenti",
         "status": "Professional work",
         "text": "Gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module, from Tsoft.",
-        "shotAlt": "Illustration of a prize wheel, for the Tuenti gamification work. There are no screenshots of the product, for confidentiality."
+        "shotAlt": "Illustration of a prize wheel, for the Tuenti gamification work. There are no screenshots of the product, for confidentiality.",
+        "role": "Jr Frontend → Ssr AI Fullstack · 2024 – today"
       },
       "handyx": {
         "name": "HandyX",
         "status": "In development · launches November 10",
         "text": "Marketplace of home specialists in Mar del Plata. My own product: I'm the only person on the project.",
-        "shotAlt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades."
+        "shotAlt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades.",
+        "role": "Sole person: product, design and development"
       },
       "eclipse": {
         "name": "Eclipse",
         "status": "In development",
         "text": "My own development, AI and automation studio. A website that shows demos before talking, a client portal in demo mode and its backend.",
-        "shotAlt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks."
+        "shotAlt": "Hero of the Eclipse landing page on a black sky: the Spanish headline «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.» (boost your business, get it seen and win loyal customers), the amber button «Quiero potenciar mi negocio» and, on the right, a total eclipse with its corona inside a dial with tick marks.",
+        "role": "My own product: four repos, end to end"
       }
+    },
+    "inside": {
+      "label": "Inside",
+      "diagram": "Architecture",
+      "flow": "Flows",
+      "business": "Business",
+      "security": "Security",
+      "quality": "Quality",
+      "decisions": "Decisions",
+      "video": "Demo",
+      "limits": "Limits"
     }
   },
   "lab": {
-    "label": "03 · Lab",
+    "label": "04 · Lab",
     "title": "Where I try things.",
     "lead": "Demos, prototypes and test benches. Everything fictional says so.",
     "view": "View the code",
@@ -181,7 +221,7 @@
       "dentalos": {
         "name": "DentalOS",
         "status": "Demo",
-        "text": "Administrative flow of a fictional dental clinic, with 15 modules. Frontend only, synthetic data.",
+        "text": "Administrative flow of a fictional dental clinic, with 16 modules. Frontend only, synthetic data.",
         "alt": "Screenshot of the DentalOS demo: reception schedule of a fictional clinic."
       },
       "supernova": {
@@ -193,46 +233,53 @@
       "games": {
         "name": "games-market",
         "status": "Test bench",
-        "text": "Test bench designed for 24 web games, 2D and 3D, with a roadmap ordered by complexity.",
+        "text": "Test bench of web games: 18 playable out of 24 planned, in 2D and 3D, with a roadmap ordered by complexity.",
         "alt": "Screenshot of games-market: the test bench game catalogue."
       }
     },
-    "shot": "Real screenshot of the project"
+    "shot": "Real screenshot of the project",
+    "deep": "See the case"
   },
   "method": {
-    "label": "04 · Method",
+    "label": "05 · Method",
     "title": "How I create value.",
     "lead": "Six steps. Each with something I did, not a nice phrase.",
     "steps": [
       {
         "name": "Understand the problem",
         "text": "Before building, I understand the context and the business. Talking to the people who use the software changes what gets prioritised.",
-        "example": "In-person day with clients in Buenos Aires (April 2026): demos, alignment and direct conversation about their real challenges."
+        "example": "In-person day with clients in Buenos Aires (April 2026): demos, alignment and direct conversation about their real challenges.",
+        "short": "Understand"
       },
       {
         "name": "Align and negotiate priorities",
         "text": "I agree on scope and priorities before writing code, and I hold the difficult conversations when they're needed.",
-        "example": "At Tsoft I take part in technical decisions with the team and support people who join."
+        "example": "At Tsoft I take part in technical decisions with the team and support people who join.",
+        "short": "Align"
       },
       {
         "name": "Design",
         "text": "I design the interface and the system together: rules, states and limits before pretty screens.",
-        "example": "Volta and DentalOS: navigable demos with their own identity and labelled data."
+        "example": "Volta and DentalOS: navigable demos with their own identity and labelled data.",
+        "short": "Design"
       },
       {
         "name": "Build in stages",
         "text": "I split the work into small batches, each with its acceptance criteria.",
-        "example": "Eclipse moves forward in documented batches, with approval gates."
+        "example": "Eclipse moves forward in documented batches, with approval gates.",
+        "short": "Build"
       },
       {
         "name": "Show and validate",
         "text": "I show something that works as early as possible and test it: automated tests, visual QA and demos.",
-        "example": "Velmar: a navigable demo for a client, with sample data."
+        "example": "Velmar: a navigable demo for a client, with sample data.",
+        "short": "Validate"
       },
       {
         "name": "Deliver and learn",
         "text": "I ship with CI/CD, document what I learned and apply it again.",
-        "example": "At Tsoft I work with deployment pipelines, integrations and CI/CD on Telefónica and Tuenti projects."
+        "example": "At Tsoft I work with deployment pipelines, integrations and CI/CD on Telefónica and Tuenti projects.",
+        "short": "Deliver"
       }
     ],
     "readsTitle": "Influences",
@@ -250,10 +297,11 @@
         "title": "SPIN Selling",
         "state": "Reading"
       }
-    ]
+    ],
+    "cycle": "A loop, not a line: what I learn when delivering comes back in as the next problem."
   },
   "system": {
-    "label": "05 · System",
+    "label": "06 · System",
     "title": "An agentic system, split into parts.",
     "lead": "I code with agents, but each one has its own part and nothing ships without a person who approves.",
     "points": [
@@ -345,49 +393,147 @@
         "name": "Documentation",
         "role": "Documents projects and decisions."
       }
-    ]
+    ],
+    "flow": {
+      "title": "How a change travels",
+      "caption": "Every change goes through a spec, tests and a human gate before it is published.",
+      "nodes": {
+        "ask": {
+          "label": "Request",
+          "sub": "a real problem"
+        },
+        "chief": {
+          "label": "Direction",
+          "sub": "plan, scope, cost",
+          "note": "It doesn't write code: it decides what gets done and in what order."
+        },
+        "spec": {
+          "label": "Spec",
+          "sub": "criteria and rollback"
+        },
+        "roles": {
+          "label": "Role agents",
+          "sub": "skills per task"
+        },
+        "qa": {
+          "label": "Tests and QA",
+          "sub": "CI + visual QA",
+          "note": "What I didn't test, I label «not tested»."
+        },
+        "gate": {
+          "label": "Human gate",
+          "sub": "I approve",
+          "note": "Agents don't publish, spend or change prices on their own."
+        },
+        "ship": {
+          "label": "Publish",
+          "sub": "with my OK"
+        }
+      },
+      "edges": {
+        "brief": "brief",
+        "plan": "plan",
+        "lote": "batches",
+        "change": "changes",
+        "evidence": "evidence",
+        "release": "publish",
+        "fail": "fails"
+      }
+    },
+    "deep": "See the system in detail"
   },
   "skills": {
-    "label": "06 · Skills",
+    "label": "07 · Skills",
     "title": "What I use, and where each comes from.",
-    "lead": "I separate what I use at work, what I did in my own projects and what I'm exploring.",
-    "layers": {
-      "pro": {
-        "title": "At work",
-        "items": [
-          "React, React Native, TypeScript, Next.js",
-          "Node.js and SQL",
-          "Tailwind CSS",
-          "CI/CD, deployment pipelines and integrations",
-          "RAG and AI features in a corporate environment",
-          "Gamification, payments and top-ups",
-          "Compliance (Telefónica's portal)",
-          "Teaching JavaScript and React"
-        ]
+    "lead": "Each technology says where it comes from: work, my own projects or what I'm studying.",
+    "cols": {
+      "work": "Work",
+      "own": "Projects",
+      "study": "Study"
+    },
+    "tech": "Technology",
+    "also": "Also",
+    "rows": {
+      "react": {
+        "name": "React",
+        "note": "Tuenti, CompliA and my products"
       },
-      "own": {
-        "title": "In my own projects",
-        "items": [
-          "Motion graphics in code: GSAP, canvas, WebGL, WebAudio",
-          "Next.js 16, Vitest and Playwright",
-          "Interface design and visual systems",
-          "Agent-based systems: roles, specification, tests and gates",
-          "Python and C (study and own projects)",
-          "Security in what I build: HttpOnly cookies, CSRF, 2FA and Argon2"
-        ]
+      "typescript": {
+        "name": "TypeScript",
+        "note": "In everything I write today"
       },
-      "exploring": {
-        "title": "Studying",
-        "items": [
-          "Machine learning fundamentals",
-          "Cloud: AWS and Azure",
-          "Consultative selling (SPIN Selling)"
-        ]
+      "nextjs": {
+        "name": "Next.js",
+        "note": "Work, Eclipse and this site"
+      },
+      "reactnative": {
+        "name": "React Native",
+        "note": "Tuenti apps"
+      },
+      "tailwind": {
+        "name": "Tailwind CSS",
+        "note": "Work and Eclipse"
+      },
+      "node": {
+        "name": "Node.js",
+        "note": "Work and the Eclipse and HandyX backends"
+      },
+      "sql": {
+        "name": "SQL and PostgreSQL",
+        "note": "Work; PostgreSQL with Prisma in my backends"
+      },
+      "cicd": {
+        "name": "CI/CD",
+        "note": "Pipelines at Tsoft; GitHub Actions in my repos"
+      },
+      "rag": {
+        "name": "RAG with LLMs",
+        "note": "CompliA"
+      },
+      "security": {
+        "name": "Security",
+        "note": "HttpOnly, CSRF, 2FA and Argon2 in what I build"
+      },
+      "tests": {
+        "name": "Vitest and Playwright",
+        "note": "Tests and e2e in my projects"
+      },
+      "motion": {
+        "name": "GSAP and WebGL",
+        "note": "Kinetic Studio and the trailer"
+      },
+      "python": {
+        "name": "Python",
+        "note": "Study and my own projects"
+      },
+      "c": {
+        "name": "C",
+        "note": "Study and my own projects"
+      },
+      "ml": {
+        "name": "Machine learning",
+        "note": "Fundamentals"
+      },
+      "aws": {
+        "name": "AWS",
+        "note": "Knowledge and study"
+      },
+      "azure": {
+        "name": "Azure",
+        "note": "Knowledge and study"
       }
-    }
+    },
+    "alsoItems": [
+      "Gamification, payments and top-ups",
+      "Compliance (Telefónica's portal)",
+      "Interface design and visual systems",
+      "Agent systems: roles, specs, tests and gates",
+      "Teaching JavaScript and React",
+      "Consultative selling (SPIN Selling), studying"
+    ]
   },
   "about": {
-    "label": "07 · About",
+    "label": "08 · About",
     "title": "From Mar del Plata.",
     "paragraphs": [
       "I started studying at 17 with one idea: to build a games website. That site doesn't exist, but it opened the road I'm on.",
@@ -396,7 +542,7 @@
     ]
   },
   "contact": {
-    "label": "08 · Contact",
+    "label": "09 · Contact",
     "title": "Open to new opportunities.",
     "lead": "I'm looking for a Ssr or Sr fullstack role with AI.",
     "email": "Write to me",
@@ -426,5 +572,33 @@
   "fab": {
     "label": "Contact",
     "aria": "Contact: email Ignacio"
+  },
+  "what": {
+    "label": "01 · What I do",
+    "title": "Four things I do well, with proof.",
+    "lead": "Each one points to a case where you can see the work.",
+    "see": "See the proof",
+    "items": {
+      "ai": {
+        "t": "AI applied to product",
+        "d": "RAG, validations and restrictions so a language model is useful in a real process, with a person who confirms.",
+        "proof": "CompliA, in internal production"
+      },
+      "full": {
+        "t": "Fullstack, from the interface to the database",
+        "d": "Frontends, APIs, data and deployments. I design the whole system and build it in stages.",
+        "proof": "HandyX and Eclipse"
+      },
+      "quality": {
+        "t": "Security and quality by design",
+        "d": "Encrypted data, a second factor, HttpOnly cookies and CSRF; automated tests and CI on every change.",
+        "proof": "The HandyX and Eclipse backends"
+      },
+      "motion": {
+        "t": "Crafted interfaces",
+        "d": "Visual systems, accessibility and motion in code: GSAP, WebGL and synthesised audio.",
+        "proof": "Kinetic Studio and this site's trailer"
+      }
+    }
   }
 }
