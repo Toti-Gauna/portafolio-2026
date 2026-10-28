@@ -13,7 +13,7 @@
    RECIPE  { type: 'igstack', screens: [{ k, t, tone, bg, dur, tiles: [ids] }], label }
      Each screen: the kicker (where) and the title (what) at the top, 3–5 tiles in a grid. The tiles arrive
      one after the other and each plays its animation as it lands; then the screen clears for the next.
-   9:16 (D.H > D.W): two columns of narrower tiles (the art scaled to fit, the caption at full size, css/ig-stack.css);
+   9:16 (D.vertical): two columns of narrower tiles (the art scaled to fit, the caption at full size, css/ig-stack.css);
      the header and the grid are centred together on the tall stage.
    ========================================================================== */
 (() => {
@@ -50,7 +50,7 @@
             <div class="stk-cap"><b>${esc(t.name)}</b><span>${esc(t.note)}</span></div></div>`; }).join('')}
       </div>`).join('')}</div>`);
     const scr = D.$$('.stk-screen', s);
-    if (D.H > D.W) scr.forEach(el => { // 9:16: rows of two under the header, the whole block centred on the stage
+    if (D.vertical) scr.forEach(el => { // 9:16: rows of two under the header, the whole block centred on the stage
       const head = D.$('.stk-head', el), tiles = D.$$('.stk-tile', el), n = tiles.length, rows = Math.ceil(n / 2);
       const hh = head.offsetHeight, gh = rows * VTH + (rows - 1) * VGY, top = Math.max(150, Math.round((D.H - hh - 70 - gh) / 2) - 30);
       head.style.top = top + 'px';

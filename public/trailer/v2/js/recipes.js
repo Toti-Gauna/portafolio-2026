@@ -568,7 +568,7 @@
       <h1 class="t-title v c">${tText}</h1>
       <div class="t-title t-sheen v c" aria-hidden="true">${tText}</div>
       <div class="t-sub mono c"></div>`);
-    const title = D.fit(D.$('.t-title', s), Math.min(1500, D.W - 100)), sheen = D.$('.t-sheen', s), sub = D.$('.t-sub', s);
+    const title = D.fit(D.$('.t-title', s), tall ? D.W - 200 : 1500), sheen = D.$('.t-sheen', s), sub = D.$('.t-sub', s);
     sheen.style.fontSize = title.style.fontSize;
     if (tall) sub.style.top = Math.round(D.CY + title.offsetHeight / 2 + 80) + 'px'; // under the two lines
     const ring = D.$('.t-ring', s), ring2 = D.$('.t-ring2', s), orbit = D.$('.t-orbit', s), os = D.$$('.t-o', s), glow = D.$('.t-glow', s);

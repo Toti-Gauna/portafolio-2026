@@ -32,8 +32,17 @@
      igagents   the eleven agents, one glyph each, appearing group by group on the beat.
      igend      the closing card: monogram, name, role, availability, e-mail; then it empties for the hand-off.
 
-   9:16 (main.js ?o=v → a 1080×1920 stage, html.is-vertical): every recipe here and every act background reads
-   D.W / D.H and lays itself out for a tall stage (vert(D)); captions go full width at the bottom (css/ig.css).
+   FORMATS — one film, two stages. main.js reads ?o=v and runs the SAME config on a 1080×1920 stage (cfg.stage);
+   the engine sets D.W / D.H / D.CX / D.CY and html.is-vertical. How a recipe supports both:
+     · never write 1920 / 1080 / 960 / 540: use D.W, D.H, D.CX, D.CY (an SVG: viewBox="0 0 ${D.W} ${D.H}");
+     · branch the layout on D.vertical (set by this plugin before any scene is built), e.g.
+         const L = D.vertical ? { x: 90, top: 300 } : { x: 220, top: 236 };
+       (kit recipes in recipes*.js don't depend on this file: they test D.H > D.W);
+     · CSS: `.is-vertical .my-class { … }` after the 16:9 rules, in the recipe's own css file;
+     · same tweens at the same times in both formats: only positions and sizes change (one score, one cut list);
+     · 9:16: readable text ≥ 36 stage px (a 390×844 phone shows the stage at ≈ 0.36); `cap` captions go full width
+       at the bottom whatever their pos (css/ig.css).
+   QA: index.html?host&o=v&lang=es&t=<s> freezes a 9:16 frame.
    ========================================================================== */
 (() => {
   'use strict';
@@ -45,7 +54,6 @@
   const VOL = { boom: [0, 1], braam: [0, 0.85], crash: [0, 0.3], tick: [0, 0.05], key: [0, 0.16], zap: [0, 0.4], fold: [0, 0.25],
     whoosh: [1, 0.5], riser: [1, 0.45], swell: [1, 0.22], glitch: [1, 0.35], beep: [2, 0.1] };
   const Q = new URLSearchParams(location.search);
-  const vert = D => D.H > D.W; // the 9:16 edition
   const rng = seed => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 
   /** scale every duration-like field of a tween's vars by k (positions are mapped by the caller) */
@@ -84,7 +92,7 @@
     },
     // Bauhaus construction lines that draw in and drift (the career act, on paper)
     grid(D, el, a, bar) {
-      const v = vert(D), W = D.W, Hs = D.H;
+      const v = D.vertical, W = D.W, Hs = D.H;
       const H = v ? [240, 480, 720, 960, 1200, 1440, 1680] : [180, 360, 540, 720, 900], V = v ? [180, 360, 540, 720, 900, 1080] : [240, 480, 720, 960, 1200, 1440, 1680];
       const O = v ? [[760, 520, 300], [300, 1380, 190]] : [[1440, 360, 300], [480, 760, 190]];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${W} ${Hs}"><g class="g">${H.map(y => `<line x1="-300" y1="${y}" x2="${W + 300}" y2="${y}"/>`).join('')}${V.map(x => `<line x1="${x}" y1="-60" x2="${x}" y2="${Hs + 60}"/>`).join('')}${O.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join('')}</g></svg>`;
@@ -106,7 +114,7 @@
     },
     // git branches leaving a main line, one after another (own projects)
     branches(D, el, a) {
-      const v = vert(D), M = D.H - 180, E = D.W + 200;
+      const v = D.vertical, M = D.H - 180, E = D.W + 200;
       const fk = v ? [[40, 1300], [190, 820], [340, 1520], [490, 420], [640, 1080], [790, 640]] : [[100, 700], [380, 520], [700, 800], [980, 360], [1260, 620], [1540, 460]];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${D.W} ${D.H}"><g class="g"><path d="M-100 ${M}H${E}"/>${fk.map(([x, y]) => `<path d="M${x} ${M}C${x + 130} ${M} ${x + 130} ${y} ${x + 260} ${y}H${E}"/>`).join('')}${fk.map(([x]) => `<circle class="n" cx="${x}" cy="${M}" r="8"/>`).join('')}</g></svg>`;
       const g = el.querySelector('.igb-svg'), paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
@@ -169,7 +177,7 @@
   function placeCap(D, layer, T, dur, c) {
     const el = document.createElement('div');
     el.className = `igc igc-${c.pos || 'bl'} igc-${c.tone || 'dark'}`;
-    if (c.w && !vert(D)) el.style.maxWidth = c.w + 'px'; // 9:16: every caption is full width at the bottom (css/ig.css)
+    if (c.w && !D.vertical) el.style.maxWidth = c.w + 'px'; // 9:16: every caption is full width at the bottom (css/ig.css)
     el.style.setProperty('--acc', c.accent || CORAL);
     el.innerHTML = `<i class="igc-bar"></i>${c.k ? '<div class="igc-k mono"></div>' : ''}${c.t ? `<div class="igc-t">${c.t}</div>` : ''}${c.d ? `<div class="igc-d">${c.d}</div>` : ''}`;
     layer.appendChild(el);
@@ -217,6 +225,7 @@
   // ================================================================== THE PLUGIN
   plugin({
     setup(D, cfg) {
+      D.vertical = D.H > D.W; // the 9:16 edition (see FORMATS above): every recipe branches on this
       // HUD label numbers for igcut (D.label returns "07" synchronously; igcut defers the call)
       const rawLabel = D.label;
       let labels = 0;
@@ -494,7 +503,7 @@
   //   and turns right into its tag (the caption sits under the column, full width).
   recipe('igprojects', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 6, items = (o.items || []).slice(0, 8), step = o.step || 0.25, bg = o.bg || INK, v = vert(D);
+    const dur = o.duration || 6, items = (o.items || []).slice(0, 8), step = o.step || 0.25, bg = o.bg || INK, v = D.vertical;
     const COLX = [150, 1060], ROWY = [370, 490, 610, 730], TAG_H = 96, MAIN = 900, LANE = [50, 960];
     const VX = 96, VTAG = 190, VY0 = 250, VGAP = 124; // 9:16: main line x, tags' left, first row, row pitch
     const geo = items.map((it, i) => {
@@ -549,7 +558,7 @@
     const { tl } = D;
     const dur = o.duration || 6, bg = o.bg || CORAL, ink = o.ink || INK, acc = o.accent || PAPER, step = o.step || 0.25;
     const names = Object.fromEntries((o.agents || []).map(a => [a.id, a.name]));
-    const v = vert(D); // 9:16: three columns, four rows (product + docs on top, the architects below)
+    const v = D.vertical; // 9:16: three columns, four rows (product + docs on top, the architects below)
     const rows = v ? o.rowsV || [['chief', 'uxui', 'design'], ['marketing', 'ads', 'docs'], ['frontend', 'backend', 'security'], ['game', 'trailer']]
       : o.rows || [['chief', 'uxui', 'design', 'marketing', 'ads', 'docs'], ['frontend', 'backend', 'security', 'game', 'trailer']];
     const RY = v ? o.rowsYV || [370, 680, 990, 1300] : o.rowsY || [270, 540], TW = v ? 320 : 260, PITCH = v ? 330 : 280;
@@ -597,7 +606,7 @@
   //   9:16: the column is centred on the stage and the name breaks in two lines, fitted to the width.
   recipe('igend', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 10, bg = o.bg || INK, ink = o.ink || PAPER, acc = o.accent || CORAL, M = o.mono, v = vert(D);
+    const dur = o.duration || 10, bg = o.bg || INK, ink = o.ink || PAPER, acc = o.accent || CORAL, M = o.mono, v = D.vertical;
     const s = D.scene('igend', `<div class="ige" style="color:${ink};--acc:${acc}">
       <svg class="ige-mono" viewBox="0 0 64 64">${M.strokes.map(d => `<path d="${d}"/>`).join('')}<circle class="ige-dot" cx="${M.dot.cx}" cy="${M.dot.cy}" r="${M.dot.r}"/></svg>
       <div class="ige-name v">${v ? String(o.name).replace(' ', '<br>') : o.name}</div>

@@ -2,7 +2,7 @@
    IG CASE — a case study in one slide (css/ig-case.css): what it is, my role, how it works and its status
    on the left; the real demo clip playing on the right, kept in sync with the timeline (seekable).
    { kicker, title, sub, facts: [{ k, t }], src, poster, from, window, tag, bg, duration }          10 s
-   9:16 (D.H > D.W): the text on top, the clip under it at the stage's width; the window rises in.
+   9:16 (D.vertical): the text on top, the clip under it at the stage's width; the window rises in.
    ========================================================================== */
 (() => {
   'use strict';
@@ -12,7 +12,7 @@
 
   recipe('igcase', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 10, from = o.from ?? 0, tall = D.H > D.W;
+    const dur = o.duration || 10, from = o.from ?? 0, tall = D.vertical;
     const s = D.scene('igcase', `<div class="igk">
       <div class="igk-l">
         <div class="igk-k mono"></div>

@@ -21,7 +21,7 @@
      1 s title («Y mis propias ramas.») → one cut per shot, on the beat: the background wipes to the shot's
      colour, the frame whips in, its tag (name · status · note) wipes on, the view plays → the mosaic: every
      frame flies into a 4×3 wall with its name, and the last cell says `end`.
-   9:16 (D.H > D.W): each frame keeps its own size and is scaled onto the stage (browsers to the stage's width,
+   9:16 (D.vertical): each frame keeps its own size and is scaled onto the stage (browsers to the stage's width,
      phones larger), with its tag full width under it; the mosaic is 3 columns × 4 rows.
    ========================================================================== */
 (() => {
@@ -65,7 +65,7 @@
     const { tl } = D;
     const lang = D.cfg.lang === 'en' ? 'en' : 'es';
     const shots = (o.shots || []).filter(s => SHOTS[s.id]);
-    const TITLE = o.titleDur ?? 1, MOS = o.mosaic ?? 1.5, v = D.H > D.W, BOXES = v ? BOX_V : BOX;
+    const TITLE = o.titleDur ?? 1, MOS = o.mosaic ?? 1.5, v = D.vertical, BOXES = v ? BOX_V : BOX;
     const s = D.scene('igshots', `<div class="ish">
       <div class="ish-title"><div class="ish-title-t">${esc(o.title)}</div></div>
       ${shots.map(sh => frameHtml(sh.id, SHOTS[sh.id], SHOTS[sh.id].text[lang] || SHOTS[sh.id].text.es)).join('')}

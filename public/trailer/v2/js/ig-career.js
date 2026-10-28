@@ -11,7 +11,7 @@
              wheel, the promotion and the stack). Ends on a pull-back over the whole graph.           20 s
              { kicker, title, seed, span, outro, stops: [{ year, k, t, t2, d, vis, color, label, … }], at: [stop starts] }
 
-   9:16 (D.H > D.W): the same moves on a 1080×1920 stage. igburst opens from a higher centre and leaves the main
+   9:16 (D.vertical): the same moves on a 1080×1920 stage. igburst opens from a higher centre and leaves the main
    line low (LINE_V); igcareer travels one stage width per stop with the card on top, the piece of work under it
    and the main line low on the stage, the branch climbing up the left edge into the card.
    ========================================================================== */
@@ -26,7 +26,7 @@
   // ================================================================== IGBURST
   recipe('igburst', (D, T, o) => {
     const { tl } = D;
-    const v = D.H > D.W, dur = o.duration || 4, r = rng(17), N = 34, CX = D.CX, CY = v ? 760 : 500, LINE = v ? LINE_V : LINE_H;
+    const v = D.vertical, dur = o.duration || 4, r = rng(17), N = 34, CX = D.CX, CY = v ? 760 : 500, LINE = v ? LINE_V : LINE_H;
     const col = i => (i % 7 === 0 ? CORAL : i % 7 === 3 ? BLUE : PAPER);
     const br = Array.from({ length: N }, (_, i) => {
       const a = (i / N) * Math.PI * 2 + (r() - 0.5) * 0.3, L = 560 + r() * 560, bend = (r() - 0.5) * 0.8;
@@ -156,8 +156,8 @@
     const { tl } = D;
     const stops = o.stops || [], at = o.at || [2, 6, 10, 14], dur = o.duration || 20;
     // 16:9: the card left of the work, the line at 900 · 9:16: the card on top, the work under it, the line low
-    const v = D.H > D.W, SW = D.W, SH = D.H, LINE = v ? LINE_V : LINE_H;
-    const NX = v ? 84 : 150, BY = v ? 252 : 280, CARD = v ? 140 : 220, VIS_X = v ? 160 : 1120; // 9:16: the work is scaled ×1.2 (css)
+    const v = D.vertical, SW = D.W, SH = D.H, LINE = v ? LINE_V : LINE_H;
+    const NX = v ? 84 : 150, BY = v ? 252 : 280, CARD = v ? 140 : 220, VIS_X = v ? 230 : 1120; // 9:16: the work centred under the card
     const n = stops.length, TW = SW * (n + 1);
     const X = i => SW * i; // stop i ≥ 1 sits at X(i); stop 0 is the intro
     const s = D.scene('igcareer', `<div class="igr"><div class="igr-track" style="width:${TW}px;height:${SH}px">

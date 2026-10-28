@@ -145,8 +145,8 @@
    9:16 — html.is-vertical (?o=v): the same film on a 1080×1920 stage. A phone held upright shows the stage at
    ≈ 0.36 (390×844): readable text stays ≥ 36 stage px (≈ 13 px there).
    ========================================================================== */
-.is-vertical .igb-dots { width: 1560px; height: 2400px; }
-.is-vertical .igb-lines { height: 2400px; }
+.is-vertical .igb-dots { width: 1480px; height: 2210px; } /* just covers the stage through its drift (x −192, y −96, ×1.05) */
+.is-vertical .igb-lines { height: 2180px; }
 /* captions: full width at the bottom, whatever corner the scene asked for */
 .is-vertical .igc { left: 48px; right: 48px; top: auto; bottom: 168px; max-width: none; padding: 28px 40px 32px 52px; }
 .is-vertical .igc-k { font-size: 36px; }
@@ -175,7 +175,7 @@
 .is-vertical .tw { font-size: 84px; }                                    /* typewriter */
 .is-vertical .t-sub { letter-spacing: .2em; padding-left: .2em; }        /* title: the role fits the width */
 .is-vertical .t-title { text-align: center; line-height: .92; }
-.is-vertical .st-text { width: 940px; white-space: normal; text-align: center; font-size: 128px; line-height: 1.02; } /* statement wraps */
+.is-vertical .st-text { width: 940px; white-space: normal; text-align: center; font-size: 120px; line-height: 1.04; } /* statement wraps */
 .is-vertical .st-text span:not(.st-acc) { color: inherit; } /* smartWrap's word spans are not the accent: only the author's <span> is */
 /* rules: the number on top, the rule under it */
 .is-vertical .ru-head { left: 72px; top: 170px; }
