@@ -49,12 +49,12 @@ Trailer.run({
       stops: [
         { year: '2021', label: 'TACH', color: FRONT.tach, vis: 'tach',
           lead: { text: 'Y ese fue mi primer paso hacia nuevas experiencias, como trabajar en…', dur: 4 }, stay: 5,
-          k: '2021 – 2022 · TACH Argentina',
+          name: 'TACH Argentina', k: '2021 – 2022',
           t: 'Una billetera virtual, de punta a punta.', d: 'En remoto: el backoffice, la landing y la app, en web y móvil.',
           v: { tags: ['BACKOFFICE', 'LANDING', 'APP'], balance: 'Saldo disponible', send: 'Enviar', receive: 'Recibir' } },
         { year: '2023', label: 'ADA ITW', color: FRONT.ada, vis: 'class',
           lead: { text: 'Después, otro desafío: del código al aula, en…', dur: 3 }, stay: 5.5,
-          k: '2023 – 2024 · Ada ITW',
+          name: 'Ada ITW', k: '2023 – 2024',
           t: 'Enseñar a programar.', d: 'JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero.',
           v: { out: 'Hola, mundo', click: 'Clic', todo: ['HTML', 'CSS', 'JavaScript'], code: [
             '<span class="kw">const</span> saludo = <span class="st">"Hola, mundo"</span>;',
@@ -62,7 +62,7 @@ Trailer.run({
             '<span class="cm">// → Hola, mundo</span>'] } },
         { year: '2024', label: 'TSOFT · TUENTI', color: FRONT.tuenti, vis: 'tuenti',
           lead: { text: 'De enseñar, a una empresa grande: Tsoft. Primero, en…', dur: 3 }, stay: 6.5,
-          k: '2024 · Tsoft · Tuenti',
+          name: 'Tsoft · Tuenti', k: '2024',
           t: 'Gamificación que se mide.', d: 'La ruleta y los referidos. Después, un dashboard para medirlos.',
           v: { tag: 'Ilustración · datos ficticios', rec: 'Recurrencia', ref: 'Referidos', game: 'Gamificación', plus: '+1' } },
       ],
@@ -70,7 +70,7 @@ Trailer.run({
 
     // ── 4 · CompliA (42–48) ──────────────────────────────────────────────────── azul noche · el caso con su demo
     { type: 'igcase', label: 'COMPLIA', duration: 6, bg: NAVY,                                                    //  42–48
-      kicker: '2026 · Portal de compliance de Telefónica', title: 'CompliA', sub: 'Inteligencia artificial en producción interna.',
+      kicker: '2026 · Tsoft · Portal de compliance de Telefónica', title: 'CompliA', sub: 'Inteligencia artificial en producción interna.',
       facts: [{ k: 'Qué hice', t: 'Lo diseñé y lo construí.' }, { k: 'Cómo', t: 'Un asistente con RAG: validaciones, restricciones y recomendaciones.' }, { k: 'Demo', t: 'Recorte de la demo, con datos de ejemplo.' }],
       src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'DATOS DE EJEMPLO' },
 
@@ -80,11 +80,11 @@ Trailer.run({
       stops: [
         { year: '2026', label: 'SUPERNOVA EVENTOS', color: FRONT.supernova, vis: 'events',
           lead: { text: 'En Tsoft, más frentes: un prototipo para…', dur: 3 }, stay: 2.6,
-          k: '2026 · Tsoft',
+          name: 'Supernova Eventos', k: '2026 · Tsoft',
           t: 'Una micro-app de eventos.', d: 'Supernova Eventos: un prototipo, con datos ficticios.',
           v: { app: 'Eventos', cat: 'Bienestar', title: 'Un respiro para vos', date: '28 oct · 09:00', cta: 'Me sumo', ok: 'Confirmado',
             steps: ['Información', 'Audiencia', 'Email', 'Revisión'], tag: 'Prototipo · datos ficticios' } },
-        { year: '2026', label: 'EQUIPO', color: FRONT.team, vis: 'team', stay: 2.5, k: '2026 · Tsoft',
+        { year: '2026', label: 'EQUIPO', color: FRONT.team, vis: 'team', stay: 2.5, name: 'Tsoft', k: '2026 · El equipo',
           t: 'Subir el nivel del equipo.', d: 'Capacité a compañeros.', v: { level: 'Nivel' } },
       ],
       exit: { text: 'Y en paralelo, con lo aprendido en cada frente, armé…', dur: 3, color: CORAL } },
