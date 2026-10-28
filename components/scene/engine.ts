@@ -237,6 +237,8 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
       if (e.target === canvas) {
         const r = e.contentRect;
         if (r.width < 1 || r.height < 1) continue;
+        // the observer's first report (and a relayout that keeps the size) must not redraw the still frame
+        if (r.width === w && r.height === h) continue;
         mobile = isMobile();
         if (mobile && debug.tier < 1) debug.tier = 1;
         w = r.width;
