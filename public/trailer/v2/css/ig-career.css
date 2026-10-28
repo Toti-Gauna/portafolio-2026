@@ -84,3 +84,13 @@
 .vs-k { margin-top: 44px; font-size: 30px; letter-spacing: .14em; color: #0e0e10; opacity: .65; }
 .vs-chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
 .vs-chips span { padding: 12px 24px; border: 3px solid #0e0e10; border-radius: 999px; font: 700 34px/1 var(--display); color: #0e0e10; }
+
+/* ---------- 9:16 (html.is-vertical): positions come from js/ig-career.js; here, sizes ---------- */
+.is-vertical .igu-word { font-size: 260px; }
+.is-vertical .igr-intro { left: 84px; top: 560px; }
+.is-vertical .igr-it { display: inline-block; font-size: 150px; }
+.is-vertical .igr-ik, .is-vertical .igr-is { font-size: 40px; }
+.is-vertical .igr-card { top: 214px; }
+.is-vertical .igr-vis { top: 770px; }
+.is-vertical .igr-vis > * { transform: scale(1.2); transform-origin: 0 0; }
+.is-vertical .igr-out { left: 70px; right: 70px; top: 600px; font-size: 104px; line-height: 1.02; white-space: normal; }

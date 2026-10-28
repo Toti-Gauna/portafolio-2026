@@ -76,16 +76,29 @@ test('English film, and Escape leaves it', async ({ page }) => {
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
-test('portrait phones get a «rotate» gate that lets go once the phone is horizontal', async ({ page }) => {
+test('portrait screens get the 9:16 edition: the same 112 s film on a tall stage, kept if the phone turns', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openTrailer(page);
-  await expect(page.getByRole('heading', { name: 'Girá el teléfono' })).toBeVisible();
-  await expect(film(page)).toHaveCount(0);
+  await expect(film(page)).toHaveAttribute('src', /\/trailer\/v2\/index\.html\?host&lang=es&o=v$/);
+  await ready(page);
+  const frame = page.frameLocator('iframe.tplayer__frame');
+  await expect(frame.locator('html')).toHaveClass(/\bis-vertical\b/);
+  await expect(frame.locator('html')).toHaveAttribute('data-stage', '1080x1920');
+  await expect(frame.locator('html')).toHaveAttribute('data-duration', '112.00');
+  // the tall stage fits the phone's width; nothing scrolls sideways
+  const stage = await frame.locator('#stage').boundingBox();
+  expect(stage!.width).toBeLessThanOrEqual(391);
+  expect(stage!.height).toBeGreaterThan(stage!.width);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
-  // the opening click asked for fullscreen; a window in fullscreen can't be resized by the test (a phone just rotates)
+  await expect(page.getByRole('heading', { name: 'Girá el teléfono' })).toHaveCount(0);
+  // turning the phone mid-film keeps the film running in its format (no reload); the next opening picks again.
+  // The opening click asked for fullscreen; a window in fullscreen can't be resized by the test (a phone just rotates).
   await page.evaluate(() => (document.fullscreenElement ? document.exitFullscreen() : undefined));
+  const html = await frame.locator('html').elementHandle();
   await page.setViewportSize({ width: 844, height: 390 });
-  await expect(film(page)).toHaveCount(1);
+  await expect(film(page)).toHaveAttribute('src', /&o=v$/);
+  expect(await html!.evaluate((el) => el.isConnected && el.classList.contains('is-vertical'))).toBe(true);
+  await html!.dispose();
 });
 
 test('reduced motion: text version instead of the film, with a way to watch it anyway', async ({ browser }) => {

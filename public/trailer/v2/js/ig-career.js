@@ -10,18 +10,23 @@
              piece of the work moves beside it (wallet in web and mobile, code being typed, the prize
              wheel, the promotion and the stack). Ends on a pull-back over the whole graph.           20 s
              { kicker, title, seed, span, outro, stops: [{ year, k, t, t2, d, vis, color, label, … }], at: [stop starts] }
+
+   9:16 (D.H > D.W): the same moves on a 1080×1920 stage. igburst opens from a higher centre and leaves the main
+   line low (LINE_V); igcareer travels one stage width per stop with the card on top, the piece of work under it
+   and the main line low on the stage, the branch climbing up the left edge into the card.
    ========================================================================== */
 (() => {
   'use strict';
   const { recipe } = Trailer;
   const INK = '#0e0e10', PAPER = '#eeeae3', CORAL = '#ff4d2e', BLUE = '#2b50ff', YELLOW = '#ffc21a';
   const rng = seed => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const LINE_H = 900, LINE_V = 1580; // the main line's height on the stage (16:9 · 9:16): igburst leaves it, igcareer walks it
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // ================================================================== IGBURST
   recipe('igburst', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 4, r = rng(17), N = 34, CX = 960, CY = 500;
+    const v = D.H > D.W, dur = o.duration || 4, r = rng(17), N = 34, CX = D.CX, CY = v ? 760 : 500, LINE = v ? LINE_V : LINE_H;
     const col = i => (i % 7 === 0 ? CORAL : i % 7 === 3 ? BLUE : PAPER);
     const br = Array.from({ length: N }, (_, i) => {
       const a = (i / N) * Math.PI * 2 + (r() - 0.5) * 0.3, L = 560 + r() * 560, bend = (r() - 0.5) * 0.8;
@@ -30,17 +35,17 @@
       return { d: `M${CX} ${CY}Q${x1.toFixed(0)} ${y1.toFixed(0)} ${x2.toFixed(0)} ${y2.toFixed(0)}`, x: x2, y: y2, c: col(i) };
     });
     const s = D.scene('igburst', `<div class="igu">
-      <svg class="igu-g" viewBox="0 0 1920 1080">
+      <svg class="igu-g" viewBox="0 0 ${D.W} ${D.H}">
         ${br.map(b => `<path class="igu-br" d="${b.d}" style="stroke:${b.c}"/>`).join('')}
         ${br.map(b => `<circle class="igu-n" cx="${b.x.toFixed(0)}" cy="${b.y.toFixed(0)}" r="7" style="fill:${b.c}"/>`).join('')}
-        <path class="igu-main" d="M-40 900H1960"/>
+        <path class="igu-main" d="M-40 ${LINE}H${D.W + 40}"/>
       </svg>
-      <i class="igu-halo"></i><i class="igu-seed"></i>
-      <div class="igu-word">${esc(o.word)}</div>
+      <i class="igu-halo" style="left:${CX - 700}px;top:${CY - 240}px"></i><i class="igu-seed" style="left:${CX - 16}px;top:${CY - 16}px"></i>
+      <div class="igu-word" style="top:${CY}px">${esc(o.word)}</div>
     </div>`);
     const g = D.$('.igu-g', s), paths = D.$$('.igu-br', s), nodes = D.$$('.igu-n', s), main = D.$('.igu-main', s);
     const seed = D.$('.igu-seed', s), word = D.$('.igu-word', s);
-    D.fit(word, 1700);
+    D.fit(word, Math.min(1700, D.W - 80));
     const chars = D.split(word, { type: 'chars', mask: 'chars' }).chars;
     D.show(s, T);
     D.setBg(o.bg || INK, T);
@@ -54,13 +59,13 @@
     tl.to(paths, { drawSVG: '100%', duration: 0.95, ease: 'expo.out', stagger: { each: 0.018, from: 'random' } }, T + 0.02);
     tl.to(nodes, { scale: 1, duration: 0.35, ease: 'back.out(3)', stagger: { each: 0.018, from: 'random' } }, T + 0.5);
     tl.to(chars, { yPercent: 0, duration: 0.7, ease: 'expo.out', stagger: 0.045 }, T + 0.3);
-    gsap.set(g, { transformOrigin: '50% 46%' });
+    gsap.set(g, { transformOrigin: v ? `50% ${(CY / D.H * 100).toFixed(1)}%` : '50% 46%' });
     tl.fromTo(g, { scale: 0.96, rotation: -2 }, { scale: 1.06, rotation: 2, duration: dur, ease: 'none' }, T);
     // the roads fade; one line stays: the one the career walks on
     const out = T + dur - 0.9;
     tl.to([paths, nodes], { opacity: 0.12, duration: 0.5, ease: 'power2.in' }, out);
     tl.to(word, { yPercent: -30, opacity: 0, duration: 0.45, ease: 'power3.in' }, out + 0.2);
-    tl.to(seed, { y: 400, scale: 0.6, duration: 0.6, ease: 'expo.inOut' }, out + 0.1);
+    tl.to(seed, { y: LINE - CY, scale: 0.6, duration: 0.6, ease: 'expo.inOut' }, out + 0.1);
     tl.to(main, { drawSVG: '100%', duration: 0.6, ease: 'expo.inOut' }, out + 0.2);
     D.sfx('whoosh', T, 0.6, 0.35);
     D.sfx('whoosh', out + 0.2, 0.4, 0.25);
@@ -149,22 +154,25 @@
   // ================================================================== IGCAREER
   recipe('igcareer', (D, T, o) => {
     const { tl } = D;
-    const stops = o.stops || [], at = o.at || [2, 6, 10, 14], dur = o.duration || 20, SW = 1920, LINE = 900;
+    const stops = o.stops || [], at = o.at || [2, 6, 10, 14], dur = o.duration || 20;
+    // 16:9: the card left of the work, the line at 900 · 9:16: the card on top, the work under it, the line low
+    const v = D.H > D.W, SW = D.W, SH = D.H, LINE = v ? LINE_V : LINE_H;
+    const NX = v ? 84 : 150, BY = v ? 252 : 280, CARD = v ? 140 : 220, VIS_X = v ? 160 : 1120; // 9:16: the work is scaled ×1.2 (css)
     const n = stops.length, TW = SW * (n + 1);
     const X = i => SW * i; // stop i ≥ 1 sits at X(i); stop 0 is the intro
-    const s = D.scene('igcareer', `<div class="igr"><div class="igr-track" style="width:${TW}px">
-      <svg class="igr-g" viewBox="0 0 ${TW} 1080" width="${TW}" height="1080">
+    const s = D.scene('igcareer', `<div class="igr"><div class="igr-track" style="width:${TW}px;height:${SH}px">
+      <svg class="igr-g" viewBox="0 0 ${TW} ${SH}" width="${TW}" height="${SH}">
         <path class="igr-main" d="M-40 ${LINE}H${TW + 40}"/>
-        ${stops.map((st, i) => { const x = X(i + 1) + 150; return `<path class="igr-br" d="M${x} ${LINE}V318Q${x} 280 ${x + 38} 280H${x + 70}" style="stroke:${st.color}"/>`; }).join('')}
-        <circle class="igr-n" cx="150" cy="${LINE}" r="14"/>
-        ${stops.map((st, i) => `<circle class="igr-n" cx="${X(i + 1) + 150}" cy="${LINE}" r="14" style="fill:${st.color}"/>`).join('')}
+        ${stops.map((st, i) => { const x = X(i + 1) + NX; return `<path class="igr-br" d="M${x} ${LINE}V${BY + 38}Q${x} ${BY} ${x + 38} ${BY}H${X(i + 1) + CARD}" style="stroke:${st.color}"/>`; }).join('')}
+        <circle class="igr-n" cx="${NX}" cy="${LINE}" r="14"/>
+        ${stops.map((st, i) => `<circle class="igr-n" cx="${X(i + 1) + NX}" cy="${LINE}" r="14" style="fill:${st.color}"/>`).join('')}
       </svg>
-      <div class="igr-yr mono" style="left:150px">${esc(o.seed)}</div>
-      ${stops.map((st, i) => `<div class="igr-yr mono" style="left:${X(i + 1) + 150}px">${esc(st.year)}</div>`).join('')}
+      <div class="igr-yr mono" style="left:${NX}px;top:${LINE + 34}px">${esc(o.seed)}</div>
+      ${stops.map((st, i) => `<div class="igr-yr mono" style="left:${X(i + 1) + NX}px;top:${LINE + 34}px">${esc(st.year)}</div>`).join('')}
       <div class="igr-intro"><div class="igr-ik mono">${esc(o.kicker)}</div><div class="igr-it">${o.title}</div><div class="igr-is mono">${esc(o.span)}</div></div>
-      ${stops.map((st, i) => `<article class="igr-card" style="left:${X(i + 1) + 220}px;--c:${st.color}"><i class="igr-bar"></i>
+      ${stops.map((st, i) => `<article class="igr-card" style="left:${X(i + 1) + CARD}px;--c:${st.color}"><i class="igr-bar"></i>
         <div class="igr-k mono"></div><h3 class="igr-t">${esc(st.t)}${st.t2 ? `<span class="igr-t2">${esc(st.t2)}</span>` : ''}</h3><p class="igr-d">${esc(st.d)}</p></article>
-        <div class="igr-vis igr-vis--${st.vis}" style="left:${X(i + 1) + 1120}px">${VIS[st.vis](st.v || {})}</div>`).join('')}
+        <div class="igr-vis igr-vis--${st.vis}" style="left:${X(i + 1) + VIS_X}px">${VIS[st.vis](st.v || {})}</div>`).join('')}
     </div>${o.outro ? `<div class="igr-out">${o.outro}</div>` : ''}</div>`);
     const track = D.$('.igr-track', s), main = D.$('.igr-main', s), brs = D.$$('.igr-br', s), nodes = D.$$('.igr-n', s), yrs = D.$$('.igr-yr', s);
     const cards = D.$$('.igr-card', s), vis = D.$$('.igr-vis', s);
@@ -175,10 +183,11 @@
     gsap.set(main, { drawSVG: '0% 0%' });
     gsap.set(brs, { drawSVG: '0%' });
     gsap.set(nodes, { scale: 0, transformOrigin: '50% 50%' });
-    gsap.set(yrs, { opacity: 0, y: 14, xPercent: -50 });
+    gsap.set(yrs, { opacity: 0, y: 14, xPercent: v ? 0 : -50, x: v ? -14 : 0 }); // 9:16: from the node's left edge (the seed's label would clip)
     gsap.set(track, { x: 0, y: 0, scale: 1, transformOrigin: '0 0' });
 
     // ── 0: the intro, on the line that the opening left behind
+    if (v) D.fit(it, SW - 180);
     const itw = D.split(it, { type: 'words', mask: 'words' }).words;
     gsap.set(itw, { yPercent: 110 });
     gsap.set([ik, is], { opacity: 0 });
@@ -220,7 +229,7 @@
     // ── the pull-back: the whole graph, then the cut
     const back = T + (o.backAt ?? dur - 2), k = SW / TW;
     tl.to(main, { drawSVG: '0% 100%', duration: 0.8, ease: 'power2.inOut' }, back);
-    tl.to(track, { x: 0, y: (1080 - 1080 * k) / 2 - 60, scale: k, duration: 1.1, ease: 'expo.inOut' }, back);
+    tl.to(track, { x: 0, y: (SH - SH * k) / 2 + (v ? 190 : -60), scale: k, duration: 1.1, ease: 'expo.inOut' }, back);
     D.sfx('whoosh', back, 0.6, 0.3);
     const out = D.$('.igr-out', s);
     if (out) {

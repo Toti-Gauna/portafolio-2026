@@ -19,7 +19,7 @@
     const lines = (o.lines || ['TODO EMPIEZA', 'CON UNA <em>PALABRA</em>.']).slice(0, 3);
     const bgc = o.bg || C.night, to = o.to || C.paper;
     const s = D.scene('typewriter', `<i class="tw-mark"></i><div class="tw mono c">${lines.map(l => `<div class="tw-line">${l}</div>`).join('')}</div><i class="tw-caret"></i>`);
-    const box = D.fit(D.$('.tw', s), 1640), caret = D.$('.tw-caret', s), mark = D.$('.tw-mark', s), em = D.$('em', s);
+    const box = D.fit(D.$('.tw', s), Math.min(1640, D.W - 140)), caret = D.$('.tw-caret', s), mark = D.$('.tw-mark', s), em = D.$('em', s);
     box.style.color = D.contrast(bgc);
     const chars = D.split(box, { type: 'chars' }).chars;
     const cb = chars.map(c => D.box(c));

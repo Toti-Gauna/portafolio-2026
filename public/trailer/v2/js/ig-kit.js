@@ -31,6 +31,9 @@
      igprojects own projects as git branches off one main line, each with its name and status.
      igagents   the eleven agents, one glyph each, appearing group by group on the beat.
      igend      the closing card: monogram, name, role, availability, e-mail; then it empties for the hand-off.
+
+   9:16 (main.js ?o=v → a 1080×1920 stage, html.is-vertical): every recipe here and every act background reads
+   D.W / D.H and lays itself out for a tall stage (vert(D)); captions go full width at the bottom (css/ig.css).
    ========================================================================== */
 (() => {
   'use strict';
@@ -42,6 +45,7 @@
   const VOL = { boom: [0, 1], braam: [0, 0.85], crash: [0, 0.3], tick: [0, 0.05], key: [0, 0.16], zap: [0, 0.4], fold: [0, 0.25],
     whoosh: [1, 0.5], riser: [1, 0.45], swell: [1, 0.22], glitch: [1, 0.35], beep: [2, 0.1] };
   const Q = new URLSearchParams(location.search);
+  const vert = D => D.H > D.W; // the 9:16 edition
   const rng = seed => () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 
   /** scale every duration-like field of a tween's vars by k (positions are mapped by the caller) */
@@ -80,8 +84,10 @@
     },
     // Bauhaus construction lines that draw in and drift (the career act, on paper)
     grid(D, el, a, bar) {
-      const H = [180, 360, 540, 720, 900], V = [240, 480, 720, 960, 1200, 1440, 1680];
-      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g">${H.map(y => `<line x1="-300" y1="${y}" x2="2220" y2="${y}"/>`).join('')}${V.map(x => `<line x1="${x}" y1="-60" x2="${x}" y2="1140"/>`).join('')}<circle cx="1440" cy="360" r="300"/><circle cx="480" cy="760" r="190"/></g></svg>`;
+      const v = vert(D), W = D.W, Hs = D.H;
+      const H = v ? [240, 480, 720, 960, 1200, 1440, 1680] : [180, 360, 540, 720, 900], V = v ? [180, 360, 540, 720, 900, 1080] : [240, 480, 720, 960, 1200, 1440, 1680];
+      const O = v ? [[760, 520, 300], [300, 1380, 190]] : [[1440, 360, 300], [480, 760, 190]];
+      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${W} ${Hs}"><g class="g">${H.map(y => `<line x1="-300" y1="${y}" x2="${W + 300}" y2="${y}"/>`).join('')}${V.map(x => `<line x1="${x}" y1="-60" x2="${x}" y2="${Hs + 60}"/>`).join('')}${O.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join('')}</g></svg>`;
       const g = el.querySelector('.igb-svg'), parts = el.querySelectorAll('line, circle');
       gsap.set(parts, { drawSVG: '0%' });
       D.hit(parts, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.4, ease: 'expo.inOut', stagger: 0.05 }, a.from);
@@ -96,12 +102,13 @@
       gsap.set(band, { y: -320 });
       D.tl.set(ln, { y: 0 }, a.from);
       D.tl.to(ln, { y: -240, duration: a.to - a.from, ease: 'none' }, a.from);
-      for (let t = a.from; t < a.to - 0.05; t += bar) D.hit(band, { y: -320 }, { y: 1400, duration: bar * 0.9, ease: 'power1.inOut' }, t);
+      for (let t = a.from; t < a.to - 0.05; t += bar) D.hit(band, { y: -320 }, { y: D.H + 320, duration: bar * 0.9, ease: 'power1.inOut' }, t);
     },
     // git branches leaving a main line, one after another (own projects)
     branches(D, el, a) {
-      const fk = [[100, 700], [380, 520], [700, 800], [980, 360], [1260, 620], [1540, 460]];
-      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g"><path d="M-100 900H2120"/>${fk.map(([x, y]) => `<path d="M${x} 900C${x + 130} 900 ${x + 130} ${y} ${x + 260} ${y}H2120"/>`).join('')}${fk.map(([x]) => `<circle class="n" cx="${x}" cy="900" r="8"/>`).join('')}</g></svg>`;
+      const v = vert(D), M = D.H - 180, E = D.W + 200;
+      const fk = v ? [[40, 1300], [190, 820], [340, 1520], [490, 420], [640, 1080], [790, 640]] : [[100, 700], [380, 520], [700, 800], [980, 360], [1260, 620], [1540, 460]];
+      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${D.W} ${D.H}"><g class="g"><path d="M-100 ${M}H${E}"/>${fk.map(([x, y]) => `<path d="M${x} ${M}C${x + 130} ${M} ${x + 130} ${y} ${x + 260} ${y}H${E}"/>`).join('')}${fk.map(([x]) => `<circle class="n" cx="${x}" cy="${M}" r="8"/>`).join('')}</g></svg>`;
       const g = el.querySelector('.igb-svg'), paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
       const span = a.to - a.from;
       gsap.set(paths, { drawSVG: '0%' });
@@ -117,11 +124,11 @@
     },
     // a slow network of nodes (the agents' system): it turns, its nodes pulse with the bar
     net(D, el, a, bar) {
-      const r = rng(11), N = 18, pts = Array.from({ length: N }, () => [120 + r() * 1680, 90 + r() * 900]);
+      const r = rng(11), N = 18, pts = Array.from({ length: N }, () => [120 + r() * (D.W - 240), 90 + r() * (D.H - 180)]);
       const links = [];
       pts.forEach((p, i) => pts.map((q, j) => [j, (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2]).filter(([j]) => j !== i).sort((x, y) => x[1] - y[1]).slice(0, 2)
         .forEach(([j]) => { if (!links.some(([u, v]) => (u === j && v === i))) links.push([i, j]); }));
-      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 1920 1080"><g class="g">${links.map(([i, j]) => `<line x1="${pts[i][0].toFixed(0)}" y1="${pts[i][1].toFixed(0)}" x2="${pts[j][0].toFixed(0)}" y2="${pts[j][1].toFixed(0)}"/>`).join('')}${pts.map(([x, y]) => `<circle class="n" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="5"/>`).join('')}</g></svg>`;
+      el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${D.W} ${D.H}"><g class="g">${links.map(([i, j]) => `<line x1="${pts[i][0].toFixed(0)}" y1="${pts[i][1].toFixed(0)}" x2="${pts[j][0].toFixed(0)}" y2="${pts[j][1].toFixed(0)}"/>`).join('')}${pts.map(([x, y]) => `<circle class="n" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="5"/>`).join('')}</g></svg>`;
       const g = el.querySelector('.igb-svg'), nodes = Array.from(el.querySelectorAll('.n'));
       gsap.set(g, { transformOrigin: '50% 50%' });
       D.tl.set(g, { rotation: 0 }, a.from);
@@ -162,7 +169,7 @@
   function placeCap(D, layer, T, dur, c) {
     const el = document.createElement('div');
     el.className = `igc igc-${c.pos || 'bl'} igc-${c.tone || 'dark'}`;
-    if (c.w) el.style.maxWidth = c.w + 'px';
+    if (c.w && !vert(D)) el.style.maxWidth = c.w + 'px'; // 9:16: every caption is full width at the bottom (css/ig.css)
     el.style.setProperty('--acc', c.accent || CORAL);
     el.innerHTML = `<i class="igc-bar"></i>${c.k ? '<div class="igc-k mono"></div>' : ''}${c.t ? `<div class="igc-t">${c.t}</div>` : ''}${c.d ? `<div class="igc-d">${c.d}</div>` : ''}`;
     layer.appendChild(el);
@@ -483,19 +490,27 @@
   // name and the status, in the project's colour. Two columns × four rows; the top row takes the outer
   // lane, so no branch crosses another. Then the frame holds and drifts.                       6 s
   //   { items: [{ name, status, color }] (up to 8, filled column by column), bg, step, duration }
+  //   9:16: one column. The main line runs down the left edge; each branch forks off it just below its row
+  //   and turns right into its tag (the caption sits under the column, full width).
   recipe('igprojects', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 6, items = (o.items || []).slice(0, 8), step = o.step || 0.25, bg = o.bg || INK;
+    const dur = o.duration || 6, items = (o.items || []).slice(0, 8), step = o.step || 0.25, bg = o.bg || INK, v = vert(D);
     const COLX = [150, 1060], ROWY = [370, 490, 610, 730], TAG_H = 96, MAIN = 900, LANE = [50, 960];
+    const VX = 96, VTAG = 190, VY0 = 250, VGAP = 124; // 9:16: main line x, tags' left, first row, row pitch
     const geo = items.map((it, i) => {
+      if (v) {
+        const y = VY0 + i * VGAP, ym = y + TAG_H / 2, ny = ym + 40;
+        return { ...it, x: VTAG, y, nx: VX, ny, d: `M${VX} ${ny}Q${VX} ${ym} ${VX + 40} ${ym}H${VTAG}` };
+      }
       const c = Math.floor(i / 4), r = i % 4, x = COLX[c], y = ROWY[r], fx = LANE[c] + r * 24, ym = y + TAG_H / 2;
       const d = `M${fx} ${MAIN}V${ym + 24}Q${fx} ${ym} ${fx + 24} ${ym}H${x}`;
-      return { ...it, c, r, x, y, fx, d };
+      return { ...it, c, r, x, y, nx: fx, ny: MAIN, d };
     });
+    const mainD = v ? `M${VX} ${VY0 - 110}V${VY0 + (items.length - 1) * VGAP + TAG_H + 90}` : `M40 ${MAIN}H1880`;
     const s = D.scene('igprojects', `<div class="igp"><div class="igp-cam">
-      <svg class="igp-g" viewBox="0 0 1920 1080"><path class="igp-main" d="M40 ${MAIN}H1880"/>
+      <svg class="igp-g" viewBox="0 0 ${D.W} ${D.H}"><path class="igp-main" d="${mainD}"/>
         ${geo.map(g => `<path class="igp-br" d="${g.d}" style="stroke:${g.color}"/>`).join('')}
-        ${geo.map(g => `<circle class="igp-n" cx="${g.fx}" cy="${MAIN}" r="11" style="fill:${g.color}"/>`).join('')}</svg>
+        ${geo.map(g => `<circle class="igp-n" cx="${g.nx}" cy="${g.ny}" r="11" style="fill:${g.color}"/>`).join('')}</svg>
       ${geo.map(g => `<div class="igp-tag" style="left:${g.x}px;top:${g.y}px;--c:${g.color}"><b>${g.name}</b><span>${g.status}</span></div>`).join('')}
     </div></div>`);
     const cam = D.$('.igp-cam', s), main = D.$('.igp-main', s), brs = D.$$('.igp-br', s), ns = D.$$('.igp-n', s), tags = D.$$('.igp-tag', s);
@@ -516,7 +531,7 @@
       D.hit(tags[i], { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: 'expo.out' }, t + 0.25);
       D.sfx('tick', t + 0.25, 0.05);
     });
-    gsap.set(cam, { transformOrigin: '960px 640px' });
+    gsap.set(cam, { transformOrigin: v ? `${D.CX}px 800px` : '960px 640px' });
     tl.set(cam, { x: 0, scale: 1 }, T);
     tl.to(cam, { x: -24, scale: 1.03, duration: dur - 0.4, ease: 'sine.inOut' }, T + 0.2);
     tl.to(cam, { opacity: 0, duration: 0.3, ease: 'power2.in' }, T + dur - 0.3);
@@ -534,14 +549,16 @@
     const { tl } = D;
     const dur = o.duration || 6, bg = o.bg || CORAL, ink = o.ink || INK, acc = o.accent || PAPER, step = o.step || 0.25;
     const names = Object.fromEntries((o.agents || []).map(a => [a.id, a.name]));
-    const rows = o.rows || [['chief', 'uxui', 'design', 'marketing', 'ads', 'docs'], ['frontend', 'backend', 'security', 'game', 'trailer']];
-    const RY = o.rowsY || [270, 540], TW = 260;
+    const v = vert(D); // 9:16: three columns, four rows (product + docs on top, the architects below)
+    const rows = v ? o.rowsV || [['chief', 'uxui', 'design'], ['marketing', 'ads', 'docs'], ['frontend', 'backend', 'security'], ['game', 'trailer']]
+      : o.rows || [['chief', 'uxui', 'design', 'marketing', 'ads', 'docs'], ['frontend', 'backend', 'security', 'game', 'trailer']];
+    const RY = v ? o.rowsYV || [370, 680, 990, 1300] : o.rowsY || [270, 540], TW = v ? 320 : 260, PITCH = v ? 330 : 280;
     const tile = (id, x, y) => {
       const g = o.glyphs[id];
-      return `<div class="iga-tile" data-id="${id}" style="left:${x - TW / 2}px;top:${y - 120}px">
+      return `<div class="iga-tile" data-id="${id}" style="left:${x - TW / 2}px;top:${y - 120}px;width:${TW}px">
         <svg class="iga-g" viewBox="0 0 24 24">${g.base}${g.acc}</svg><div class="iga-n">${names[id] || id}</div></div>`;
     };
-    const html = rows.map((ids, r) => ids.map((id, i) => tile(id, D.CX + (i - (ids.length - 1) / 2) * 280, RY[r])).join('')).join('');
+    const html = rows.map((ids, r) => ids.map((id, i) => tile(id, D.CX + (i - (ids.length - 1) / 2) * PITCH, RY[r])).join('')).join('');
     const s = D.scene('igagents', `<div class="iga" style="--ink:${ink};--acc:${acc}">${html}</div>`);
     const byId = Object.fromEntries(D.$$('.iga-tile', s).map(el => [el.dataset.id, el]));
     gsap.set(Object.values(byId), { opacity: 0 });
@@ -577,12 +594,13 @@
   // beats, the line about the role, then the e-mail types itself. Everything holds, then empties to the
   // bare background: that empty frame is the hand-off to the portfolio (the parent closes on trailer:end).
   //   { name, role, open, lead, email, link, mono: { strokes, dot }, bg, ink, accent, handoff, duration }
+  //   9:16: the column is centred on the stage and the name breaks in two lines, fitted to the width.
   recipe('igend', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 10, bg = o.bg || INK, ink = o.ink || PAPER, acc = o.accent || CORAL, M = o.mono;
+    const dur = o.duration || 10, bg = o.bg || INK, ink = o.ink || PAPER, acc = o.accent || CORAL, M = o.mono, v = vert(D);
     const s = D.scene('igend', `<div class="ige" style="color:${ink};--acc:${acc}">
       <svg class="ige-mono" viewBox="0 0 64 64">${M.strokes.map(d => `<path d="${d}"/>`).join('')}<circle class="ige-dot" cx="${M.dot.cx}" cy="${M.dot.cy}" r="${M.dot.r}"/></svg>
-      <div class="ige-name v">${o.name}</div>
+      <div class="ige-name v">${v ? String(o.name).replace(' ', '<br>') : o.name}</div>
       <div class="ige-role mono"></div>
       <i class="ige-rule"></i>
       <div class="ige-open"><i class="ige-live"></i><span>${o.open}</span></div>
@@ -590,7 +608,7 @@
       <div class="ige-mail mono"><span class="ige-mt"></span><i class="ige-caret"></i></div>
       ${o.link ? `<div class="ige-link mono">${o.link}</div>` : ''}
     </div>`);
-    const box = D.$('.ige', s), strokes = D.$$('.ige-mono path', s), dot = D.$('.ige-dot', s), name = D.fit(D.$('.ige-name', s), 1500);
+    const box = D.$('.ige', s), strokes = D.$$('.ige-mono path', s), dot = D.$('.ige-dot', s), name = D.fit(D.$('.ige-name', s), Math.min(1500, D.W - 120));
     const role = D.$('.ige-role', s), rule = D.$('.ige-rule', s), open = D.$('.ige-open span', s), live = D.$('.ige-live', s), lead = D.$('.ige-lead', s);
     const mt = D.$('.ige-mt', s), caret = D.$('.ige-caret', s), mailBox = D.$('.ige-mail', s);
     mt.textContent = o.email;

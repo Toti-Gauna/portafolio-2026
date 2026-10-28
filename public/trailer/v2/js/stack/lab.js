@@ -13,7 +13,7 @@
   add('security', {
     text: {
       es: { name: 'Seguridad', note: 'HttpOnly, CSRF, 2FA, Argon2', hash: '$argon2id$v=19$c2FsdA$Hq7…', tfa: '2FA', code: ['4', '8', '1', '9', '0', '3'], flags: ['HttpOnly', 'Secure', 'SameSite'], csrfH: 'X-CSRF-Token', csrf: 'a3f9e1c27b' },
-      en: { name: 'Seguridad', note: 'HttpOnly, CSRF, 2FA, Argon2', hash: '$argon2id$v=19$c2FsdA$Hq7…', tfa: '2FA', code: ['4', '8', '1', '9', '0', '3'], flags: ['HttpOnly', 'Secure', 'SameSite'], csrfH: 'X-CSRF-Token', csrf: 'a3f9e1c27b' },
+      en: { name: 'Security', note: 'HttpOnly, CSRF, 2FA, Argon2', hash: '$argon2id$v=19$c2FsdA$Hq7…', tfa: '2FA', code: ['4', '8', '1', '9', '0', '3'], flags: ['HttpOnly', 'Secure', 'SameSite'], csrfH: 'X-CSRF-Token', csrf: 'a3f9e1c27b' },
     },
     html: t => {
       const F = [21, 69, 117, 165];

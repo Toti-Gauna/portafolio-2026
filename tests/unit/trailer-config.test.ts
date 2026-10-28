@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import es from '@/messages/es.json';
 import en from '@/messages/en.json';
@@ -74,6 +75,13 @@ describe('trailer v2 configs', () => {
         expect(tiles[id].html(t), `${id} ${lang}`).not.toMatch(/undefined|https?:\/\//);
       }
     }
+  });
+
+  it('one film, two formats: the configs carry no stage; ?o=v (main.js) sets the 1080×1920 one', () => {
+    for (const lang of ['es', 'en'] as const) expect(configs[lang].stage, lang).toBeUndefined();
+    const main = readFileSync(new URL('../../public/trailer/v2/main.js', import.meta.url), 'utf8');
+    expect(main).toMatch(/get\('o'\) === 'v'/);
+    expect(main).toMatch(/stage: \{ w: 1080, h: 1920 \}/);
   });
 
   it('the text version has the same 14 moments in both languages', () => {

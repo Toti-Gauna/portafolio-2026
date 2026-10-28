@@ -285,7 +285,7 @@
     D.setBg(GH.bg, T);
     if (o.label) D.label(T, o.label);
     windowIn(D, w, T + 0.1);
-    gsap.set(cam, { transformOrigin: '960px 486px' });
+    gsap.set(cam, { transformOrigin: `${D.CX}px ${D.CY - 54}px` }); // IG: centre of any stage (9:16 too)
     const dur = o.duration || 10;
     tl.to(cam, { scale: 1.03, duration: dur - 0.3, ease: 'sine.inOut' }, T + 0.2);
     // stage helpers
