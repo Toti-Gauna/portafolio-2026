@@ -11,7 +11,8 @@
     "role": "Ssr AI Fullstack Developer",
     "trailer": "Conocer a Ignacio",
     "portfolio": "Ver portafolio",
-    "dialog": "Bienvenida"
+    "dialog": "Bienvenida",
+    "trailerLoading": "Cargando el tráiler…"
   },
   "trailer": {
     "title": "Conocer a Ignacio",

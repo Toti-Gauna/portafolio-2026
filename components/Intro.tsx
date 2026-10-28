@@ -71,23 +71,31 @@ export function Intro() {
     }
   }, [phase]);
 
-  // While the boot screen or the trailer is up, the page is inert and does not scroll.
-  const open = phase !== 'closed' || trailer;
+  // While the boot screen or the trailer is up, the page is inert and does not scroll. iOS Safari ignores
+  // overflow:hidden on <html> for touch scrolling, so the body is pinned in place (and restored after).
+  const open = phase === 'loading' || phase === 'ready' || trailer; // the page is usable again as the boot screen fades
   useEffect(() => {
     const shell = document.getElementById('app-shell');
-    const root = document.documentElement;
+    const root = document.documentElement, body = document.body;
+    const unlock = () => {
+      shell?.removeAttribute('inert');
+      if (body.style.position !== 'fixed') return;
+      const y = -parseInt(body.style.top || '0', 10);
+      root.style.overflow = ''; body.style.position = ''; body.style.top = ''; body.style.width = '';
+      window.scrollTo(0, y);
+    };
     if (open) {
       shell?.setAttribute('inert', '');
-      root.style.overflow = 'hidden';
+      if (body.style.position !== 'fixed') {
+        const y = window.scrollY;
+        root.style.overflow = 'hidden';
+        body.style.position = 'fixed'; body.style.top = `-${y}px`; body.style.width = '100%';
+      }
     } else {
-      shell?.removeAttribute('inert');
-      root.style.overflow = '';
-      if (phase === 'closed') document.getElementById('contenido')?.focus({ preventScroll: true });
+      unlock();
+      if (phase === 'closing' || phase === 'closed') document.getElementById('contenido')?.focus({ preventScroll: true });
     }
-    return () => {
-      shell?.removeAttribute('inert');
-      root.style.overflow = '';
-    };
+    return unlock;
   }, [open, phase]);
 
   // The hero's "watch the trailer" button asks for it through an event.
@@ -113,7 +121,7 @@ export function Intro() {
 
   return (
     <>
-      {phase !== 'closed' && (
+      {(phase !== 'closed' || trailer) && (
         <div
           id="boot"
           className="boot"
@@ -121,14 +129,17 @@ export function Intro() {
           role="dialog"
           aria-modal="true"
           aria-label={t('dialog')}
-          hidden={trailer}
+          aria-hidden={trailer || undefined}
+          data-trailer={trailer || undefined}
         >
           <div className="boot__inner">
             <Monogram className="boot__mark" />
             <p className="boot__name">{t('name')}</p>
             <p className="boot__role">{t('role')}</p>
 
-            {phase === 'loading' ? (
+            {trailer ? (
+              <p role="status" className="boot__status">{t('trailerLoading')}</p>
+            ) : phase === 'loading' ? (
               <>
                 <svg className="boot__line" viewBox="0 0 320 24" fill="none" aria-hidden="true">
                   <path d="M16 12h288" stroke="currentColor" strokeOpacity=".25" strokeWidth="2" strokeLinecap="round" />

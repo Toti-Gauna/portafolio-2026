@@ -16,6 +16,10 @@
    evento y el atraso no se usa: el render sale igual que antes. Los saltos con sonido (capítulos, replay, play)
    no disparan los callbacks del camino (suprimen eventos); los seeks de ?t= / ?embed sí, pero ahí no hay audio.
    SFX.stopAll sigue cortando los pads, también los que todavía no arrancaron.
+
+   IG (Conocer a Ignacio) — el canvas FX solo existe si alguna escena lo usa: sin capas (D.particles / D.tunnel /
+   D.layer) queda en 1×1 y fuera del render (un canvas 2D es una capa del compositor del tamaño del escenario, y
+   en iOS todo lo que se dibuja encima de él pasa a tener capa propia).
    ========================================================================== */
 (() => {
   'use strict';
@@ -201,12 +205,12 @@
     if (embed) document.body.classList.add('embed');
 
     // ---- stage fit
-    let K = 1;
+    let K = 1, fxOn = true;
     function fitStage() {
       const s = Math.min(innerWidth / W, innerHeight / H);
       stage.style.transform = `translate(-50%, -50%) scale(${s})`;
       const k = Math.min(1.5, Math.max(1, s * (devicePixelRatio || 1)));
-      if (Math.abs(k - K) > 0.01) { K = k; cvs.width = Math.round(W * K); cvs.height = Math.round(H * K); }
+      if (Math.abs(k - K) > 0.01) { K = k; if (fxOn) { cvs.width = Math.round(W * K); cvs.height = Math.round(H * K); } }
     }
     addEventListener('resize', fitStage);
     fitStage();
@@ -484,6 +488,7 @@
 
     let lastT = -1;
     function render() {
+      if (!fxOn) return;
       // a playhead jump (seek / replay) must not draw motion-blur streaks from stale positions
       const now = performance.now() / 1000, tt = tl.time(), jump = Math.abs(tt - lastT) > 0.25;
       lastT = tt;
@@ -569,6 +574,7 @@
     const pathLen = b => segs.filter(x => !x.branch || x.branch === b).reduce((a, x) => a + x.end - x.start, 0);
     tl.set({}, {}, t + (cfg.tail || 0));
     plugins.forEach(p => p.done && p.done(D, cfg)); // after every scene is sequenced (e.g. precomputed simulations)
+    if (!layers.length) { fxOn = false; cvs.width = cvs.height = 1; cvs.style.display = 'none'; } // IG: no canvas scene, no canvas
     gsap.ticker.add(render);
     // PARALLAX: every [data-depth] element follows the camera offset (D.cam, scripted by recipes and
     // deterministic, plus the pointer in interactive mode) times its depth, through the CSS `translate`

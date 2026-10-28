@@ -11,6 +11,7 @@
 }
 .boot[data-phase='closing'] { opacity: 0; pointer-events: none; }
 .boot[hidden] { display: none; }
+.boot { overscroll-behavior: contain; }
 .boot__inner { display: grid; justify-items: center; gap: 12px; padding: 24px 16px; text-align: center; width: min(100%, 420px); }
 .boot__mark { width: 72px; height: 72px; }
 .boot__name { font-size: clamp(28px, 8vw, 44px); font-variation-settings: 'wdth' 125; font-weight: 800; line-height: 1; }

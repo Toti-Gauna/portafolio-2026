@@ -2,9 +2,9 @@
    The work fronts (js/ig-fronts.js): the line, the stops' text and the five scenes (each a 900×720 box).
    Readable text ≥ 36 px on the stage; inside a scene the interface is a picture (≥ 24 px), its tags ≥ 36 px.
    ========================================================================== */
-.igf { position: absolute; inset: 0; overflow: hidden; }
+.igf { position: absolute; inset: 0; overflow: hidden; overflow: clip; }
 .igf-track { position: absolute; left: 0; top: 0; will-change: transform; }
-.igf-g { position: absolute; left: 0; top: 0; overflow: visible; }
+.igf-g { position: absolute; left: 0; top: 0; overflow: hidden; } /* visible: the fading track got a 3300 px layer in Chromium */
 .igf-main { fill: none; stroke: #0e0e10; stroke-width: 6; }
 .igf-br { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 .igf-yr { position: absolute; font-size: 40px; letter-spacing: .08em; color: #0e0e10; white-space: nowrap; }
@@ -165,3 +165,9 @@
 .is-vertical .igf-txt { width: 880px; }
 .is-vertical .igf-t { max-width: 880px; font-size: 96px; }
 .is-vertical .igf-d { max-width: 860px; font-size: 44px; }
+
+/* lite (phones, js/ig-kit.js): these panels move and scale on every frame; a 70–90 px blur is repainted each time.
+   A crisp shadow keeps the depth for a fraction of the paint. */
+.is-lite .ft-panel, .is-lite .fe-admin { box-shadow: 0 14px 0 -6px rgb(14 14 16 / .12), 0 0 0 2px rgb(14 14 16 / .08); }
+.is-lite .ft-app, .is-lite .fc-board, .is-lite .fc-proj, .is-lite .fu-dash, .is-lite .fe-phone { box-shadow: 0 14px 0 -6px rgb(14 14 16 / .16); }
+.is-lite .fe-pass { box-shadow: 0 -8px 0 -2px rgb(0 0 0 / .2); }

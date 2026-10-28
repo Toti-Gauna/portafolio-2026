@@ -26,3 +26,5 @@
 .is-vertical .igk-row dd { font-size: 40px; }
 .is-vertical .igk-win { left: 40px; top: 1110px; width: 1000px; }
 .is-vertical .igk-bar span { font-size: 30px; }
+/* lite (phones): the window holds the video, so it gets a layer; its 140 px shadow would make that layer twice as big */
+.is-lite .igk-win { box-shadow: 0 0 0 1px rgb(127 212 255 / .18); }

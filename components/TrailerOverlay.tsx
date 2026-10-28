@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { asset } from '@/lib/site';
+import { Monogram } from './Monogram';
 import { primeTrailer, releaseTrailer, stopTrailerAudio } from '@/lib/trailer-prime';
 import './trailer.css';
 
@@ -106,6 +107,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
       data-mode={mode}
       data-format={vertical ? 'vertical' : 'landscape'}
       data-ui={ui}
+      data-ready={ready}
       data-leaving={leaving}
       aria-label={t('title')}
       tabIndex={-1}
@@ -126,7 +128,13 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
             tabIndex={-1}
             onLoad={onFrameLoad}
           />
-          {!ready && <p className="tplayer__loading" role="status">{t('loading')}</p>}
+          {!ready && (
+            <div className="tplayer__cover">
+              <Monogram className="tplayer__mark" />
+              <span className="tplayer__bar" aria-hidden="true"><span /></span>
+              <p className="tplayer__loading" role="status">{t('loading')}</p>
+            </div>
+          )}
           <div className="tplayer__ctl">
             <button type="button" className="tplayer__btn" onClick={toggleSound}>
               {muted ? t('soundOn') : t('soundOff')}

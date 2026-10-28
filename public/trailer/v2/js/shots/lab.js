@@ -467,7 +467,9 @@
       // the library flips on in a diagonal wave, then KINETIC (01, where the kit was born) is the selected one
       cards.forEach((c, i) => {
         const r = Math.floor(i / 4), k = i % 4;
-        enter(D, T, c, { opacity: 0, rotationX: -80, y: 40, transformOrigin: '50% 100%' }, { opacity: 1, rotationX: 0, y: 0, duration: 0.55, ease: 'expo.out' }, T + 0.06 + (r + k) * 0.045);
+        // lite (phones, css/shots/lab.css): a flat wall, and the flip is a 2D fold (no 3D layer per card)
+        const flip = D.lite ? [{ scaleY: 0.1 }, { scaleY: 1 }] : [{ rotationX: -80 }, { rotationX: 0 }];
+        enter(D, T, c, { opacity: 0, ...flip[0], y: 40, transformOrigin: '50% 100%' }, { opacity: 1, ...flip[1], y: 0, duration: 0.55, ease: 'expo.out' }, T + 0.06 + (r + k) * 0.045);
       });
       enter(D, T, qa(v, '.kn-h > span > span'), { yPercent: 135 }, { yPercent: 0, duration: 0.55, ease: 'expo.out', stagger: 0.07 }, T + 0.04);
       enter(D, T, q(v, '.kn-sel'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' }, T + 0.6);

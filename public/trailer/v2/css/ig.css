@@ -12,6 +12,14 @@
 .is-host body.idle { cursor: default; }
 #ig-warm { position: fixed; inset: 0; z-index: 100; background: #0e0e10; }
 
+/* ---------- lite (html.is-lite: phones and tablets, js/ig-kit.js) — no compositor layer inside the stage ----------
+   iOS Safari backs every composited layer at its own CSS size × the screen's density, even when the stage is scaled
+   down to fit: one full 1080×1920 layer = 75 MB at DPR 3, and the film had 6–11 of them at once (it crashed the tab).
+   Here nothing asks for a layer: everything is painted, at the screen's real size, into the page's own layer. */
+.is-lite #stage *, .is-lite #stage *::before, .is-lite #stage *::after { will-change: auto !important; filter: none !important; }
+.is-lite #grain, .is-lite #vignette { display: none; } /* two full-stage overlays (the grain one animated forever) */
+#stage, #viewport { overflow: clip; } /* `hidden` makes them scroll containers, which Chromium composites (where supported) */
+
 /* ---------- the film's HUD, trimmed: name and role top-left, the chapter top-right (no REC / timecode / fps) ---------- */
 #hud .hud-bl, #hud .hud-br, #hud .rec { display: none; }
 #hud .hud-tl { font-size: 0; }
@@ -202,3 +210,5 @@
 .is-vertical .ig-pipe .dx-link { height: 32px; }
 .is-vertical .ig-pipe .dx-pf { bottom: 34px; font-size: 36px; }
 .is-vertical .ig-pipe .dx-pc { width: 100px; }
+/* lite (phones): the pipeline window of the kit, without its 120 px blur */
+.is-lite .dx-win { box-shadow: 0 18px 0 -8px rgba(0, 0, 0, .5); }

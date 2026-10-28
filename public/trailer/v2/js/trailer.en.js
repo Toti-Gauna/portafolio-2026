@@ -33,7 +33,7 @@ Trailer.run({
   scenes: [
     // ── 1 · MAR DEL PLATA (0–6) ──────────────────────────────────────────────── night · the coast and one light
     { type: 'igcoast', label: 'MAR DEL PLATA', duration: 6, foley: 0.5,                                          //   0–6
-      kicker: '38°00′S · 57°33′W', line: 'It all started in<br><em>Mar del Plata.</em>', sea: 'Atlantic Ocean' },
+      kicker: 'Mar del Plata · Argentina', line: 'It all started in<br><em>Mar del Plata.</em>', sea: 'Atlantic Ocean' },
 
     // ── 2 · THE FIRST PRODUCT (6–12) · DROP 1 on the click ────────────────────── ink · the games site → branches
     { type: 'igfirst', label: 'THE FIRST PRODUCT', duration: 6, foley: 0.6,                                      //   6–12

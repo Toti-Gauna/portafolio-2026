@@ -101,6 +101,31 @@ test('portrait screens get the 9:16 edition: the same 120 s film on a tall stage
   await html!.dispose();
 });
 
+test('phones get the light film: no stage-sized compositor layers anywhere in the 9:16 film', async ({ browser }) => {
+  // iOS Safari backs each layer at its CSS size × DPR even when the stage is scaled down: one 1080×1920 layer is
+  // 75 MB at DPR 3, and several at once crashed the tab. Chromium's layer tree is the proxy we can check here.
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });
+  const page = await ctx.newPage();
+  await page.goto('/trailer/v2/index.html?host&lang=es&o=v&t=0.5');
+  await expect(page.locator('html')).toHaveAttribute('data-trailer', 'ready');
+  await expect(page.locator('html')).toHaveClass(/\bis-lite\b/);
+  await expect(page.locator('#fx')).toBeHidden(); // no canvas scene, no canvas
+  const cdp = await ctx.newCDPSession(page);
+  let layers: { width: number; height: number; drawsContent: boolean }[] = [];
+  cdp.on('LayerTree.layerTreeDidChange', (e) => { if (e.layers) layers = e.layers; });
+  await cdp.send('LayerTree.enable');
+  for (const t of [3, 11, 20, 33, 45, 51, 56, 64, 75, 90, 102, 112]) {
+    await page.evaluate((t) => { (window as unknown as { trailer: { tl: { seek: (t: number, e: boolean) => void } } }).trailer.tl.seek(t, false); }, t);
+    await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+    await page.waitForTimeout(150);
+    // the page's own viewport-sized layers aside, nothing bigger than 30 % of the stage gets a layer. The CompliA
+    // clip (30–36 s) is the exception: a playing video always has a layer, and its container (the stage) gets one too
+    const big = layers.filter((l) => l.drawsContent && l.width * l.height > 0.3 * 1080 * 1920 && !(l.width <= 390 && l.height <= 844));
+    expect(big.length, `t=${t}: ${big.map((l) => `${l.width}x${l.height}`).join(' ')}`).toBeLessThanOrEqual(t === 33 ? 1 : 0);
+  }
+  await ctx.close();
+});
+
 test('reduced motion: text version instead of the film, with a way to watch it anyway', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();

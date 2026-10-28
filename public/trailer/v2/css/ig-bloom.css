@@ -4,7 +4,7 @@
    ========================================================================== */
 
 /* ---------- igzoom ---------- */
-.igz { position: absolute; inset: 0; overflow: hidden; }
+.igz { position: absolute; inset: 0; overflow: hidden; overflow: clip; }
 .igz-cam { position: absolute; inset: 0; will-change: transform; }
 .igz-g { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .igz-main { fill: none; stroke: #eeeae3; stroke-width: 6; stroke-linecap: round; }

@@ -56,6 +56,26 @@ describe('trailer v2 configs', () => {
     expect(sc.find((s) => s.type === 'igrubros')!.rubros!.map((r) => r.id)).toEqual(['startups', 'corporate', 'agro', 'space', 'mining', 'oilgas']);
   });
 
+  it('the opening names the place, not coordinates nobody gave', () => {
+    for (const lang of ['es', 'en'] as const) {
+      const coast = (configs[lang].scenes as { type: string; kicker?: string }[]).find((s) => s.type === 'igcoast')!;
+      expect(coast.kicker).toBe('Mar del Plata · Argentina');
+      expect(strings(configs[lang].scenes).join(' ')).not.toMatch(/\d+°/);
+    }
+  });
+
+  it('phones get the light film: no layer-hungry CSS inside the stage, the clip loads near its scene only', () => {
+    const css = readFileSync(new URL('../../public/trailer/v2/css/ig.css', import.meta.url), 'utf8');
+    expect(css).toMatch(/\.is-lite #stage \*[^{]*\{ will-change: auto !important; filter: none !important; \}/);
+    expect(css).toMatch(/\.is-lite #grain, \.is-lite #vignette \{ display: none; \}/);
+    const kit = readFileSync(new URL('../../public/trailer/v2/js/ig-kit.js', import.meta.url), 'utf8');
+    expect(kit).toMatch(/gsap\.config\(\{ force3D: false \}\)/);
+    expect(kit).toMatch(/contentVisibility: 'hidden'/);
+    const kase = readFileSync(new URL('../../public/trailer/v2/js/ig-case.js', import.meta.url), 'utf8');
+    expect(kase).toMatch(/preload="none"/);
+    expect(kase).not.toMatch(/<source src=/);
+  });
+
   it('act 5: every shot of the montage exists, and its view has the same texts in both languages', () => {
     const ids = montage(configs.es).shots!.map((s) => s.id);
     expect(ids).toHaveLength(6);
