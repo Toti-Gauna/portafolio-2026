@@ -93,21 +93,39 @@
   },
   "skipLink": "Skip to content",
   "nav": {
-    "journey": "Journey",
-    "work": "Work",
-    "lab": "Lab",
-    "method": "Method",
-    "system": "System",
-    "skills": "Skills",
-    "about": "About",
+    "label": "Main",
+    "menu": "Menu",
+    "close": "Close the menu",
+    "dialog": "Site menu",
+    "home": "Home",
+    "homeDesc": "The summary, on one screen.",
     "contact": "Contact",
-    "menu": "Sections",
-    "label": "Page sections",
-    "what": "What I do",
-    "business": "Business"
+    "elsewhere": "Also on",
+    "pages": {
+      "work": {
+        "t": "Work",
+        "d": "Cases with their status, and the lab."
+      },
+      "how": {
+        "t": "How I work",
+        "d": "The method and the agentic system."
+      },
+      "skills": {
+        "t": "Skills",
+        "d": "What I use and where each comes from."
+      },
+      "business": {
+        "t": "Business",
+        "d": "Three books and where I applied them."
+      },
+      "about": {
+        "t": "About",
+        "d": "From Mar del Plata: the journey and contact."
+      }
+    }
   },
   "journey": {
-    "label": "03 · Journey",
+    "label": "Journey",
     "title": "It all started in Mar del Plata.",
     "lead": "A seed and the paths it opened. I talk about challenges, not job titles; and only about what can be told, with no internal data from any client.",
     "items": [
@@ -154,7 +172,7 @@
     ]
   },
   "work": {
-    "label": "02 · Work",
+    "label": "Cases",
     "title": "Cases, with their status.",
     "lead": "Each case says what it is, what I did and where it stands. What isn't proven isn't claimed.",
     "more": "See the case",
@@ -202,7 +220,7 @@
     }
   },
   "lab": {
-    "label": "04 · Lab",
+    "label": "Lab",
     "title": "Where I try things.",
     "lead": "Demos, prototypes and test benches. Everything fictional says so.",
     "view": "View the code",
@@ -249,7 +267,7 @@
     "deep": "See the case"
   },
   "method": {
-    "label": "05 · Method",
+    "label": "Method",
     "title": "How I create value.",
     "lead": "Six steps. Each with something I did, not a nice phrase.",
     "steps": [
@@ -295,7 +313,7 @@
     "readsMore": "See the models and how I apply them"
   },
   "system": {
-    "label": "06 · System",
+    "label": "System",
     "title": "An agentic system, split into parts.",
     "lead": "I code with agents, but each one has its own part and nothing ships without a person who approves.",
     "points": [
@@ -437,7 +455,7 @@
     "deep": "See the system in detail"
   },
   "skills": {
-    "label": "07 · Skills",
+    "label": "Skills",
     "title": "What I use, and where each comes from.",
     "lead": "Each technology says where it comes from: work, my own projects or what I'm studying.",
     "cols": {
@@ -527,7 +545,7 @@
     ]
   },
   "about": {
-    "label": "08 · About",
+    "label": "About",
     "title": "From Mar del Plata.",
     "paragraphs": [
       "It all started in Mar del Plata: at 17 I built my first product, a games website, and that road never stopped.",
@@ -536,7 +554,7 @@
     ]
   },
   "contact": {
-    "label": "09 · Contact",
+    "label": "Contact",
     "title": "Open to new opportunities.",
     "lead": "I'm looking for new fullstack-with-AI challenges: boosting businesses and automating hard processes. In any industry: startups, corporates, agriculture, space, mining, oil & gas.",
     "email": "Write to me",
@@ -547,10 +565,13 @@
   },
   "footer": {
     "text": "© 2026 Ignacio Gauna · Mar del Plata, Argentina",
-    "top": "Back to top"
+    "top": "Back to top",
+    "sitemap": "Pages",
+    "cases": "Cases",
+    "contact": "Contact"
   },
   "caseUi": {
-    "back": "Back to the portfolio",
+    "back": "All the work",
     "links": "Links",
     "contactTitle": "Shall we talk?",
     "contactText": "Open to new opportunities.",
@@ -570,7 +591,7 @@
     "aria": "Contact: email Ignacio"
   },
   "what": {
-    "label": "01 · What I do",
+    "label": "What I do",
     "title": "Four things I do well, with proof.",
     "lead": "Each one points to a case where you can see the work.",
     "see": "See the proof",
@@ -595,6 +616,59 @@
         "d": "Visual systems, accessibility and motion in code: GSAP, WebGL and synthesised audio.",
         "proof": "Kinetic Studio and this site's trailer"
       }
+    }
+  },
+  "hub": {
+    "label": "Explore",
+    "title": "Pick where to go next.",
+    "more": "Learn more",
+    "cards": {
+      "work": {
+        "q": "What have I built?",
+        "d": "Four things I do well, the cases that prove them (each with its status) and six demos and prototypes from the lab."
+      },
+      "how": {
+        "q": "How do I work with agents?",
+        "d": "A six-step method and a system of 11 agents with separate roles. Nothing ships without a person who approves."
+      },
+      "skills": {
+        "q": "What technologies do I use?",
+        "d": "17 technologies and where each one comes from: work, my own projects or what I'm studying."
+      },
+      "business": {
+        "q": "How do I think about business?",
+        "d": "The Lean Startup, The Mom Test and Blue Ocean Strategy: the models I use and where I applied them."
+      },
+      "about": {
+        "q": "Who am I, and where do I come from?",
+        "d": "Self-taught, from Mar del Plata: the journey from my first product, at 17, to today."
+      }
+    },
+    "contactLead": "Fullstack with AI, in any industry. Write to me and let's talk.",
+    "allChannels": "All channels"
+  },
+  "pages": {
+    "work": {
+      "label": "Work",
+      "title": "What I've built.",
+      "lead": "Professional and personal cases, each with its status, and a lab of demos and prototypes.",
+      "metaTitle": "Work — Ignacio Gauna",
+      "metaDescription": "What I do, the cases that prove it with their status (CompliA, Tuenti, HandyX, Eclipse) and the lab: demos, prototypes and test benches."
+    },
+    "how": {
+      "label": "How I work",
+      "title": "A method and a system.",
+      "lead": "Six steps to create value and an agentic system, split into parts, where a person approves every delivery.",
+      "metaTitle": "How I work — Ignacio Gauna",
+      "metaDescription": "The six-step method, the system of 11 agents with separate roles and how a change travels from the request to production."
+    },
+    "skills": {
+      "metaTitle": "Skills — Ignacio Gauna",
+      "metaDescription": "The technologies I use and where each one comes from: work, my own projects or what I'm studying."
+    },
+    "about": {
+      "metaTitle": "About — Ignacio Gauna",
+      "metaDescription": "From Mar del Plata, self-taught: the journey from my first product at 17, and how to reach me."
     }
   },
   "business": {

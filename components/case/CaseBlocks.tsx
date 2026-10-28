@@ -112,7 +112,7 @@ function Block({ b, c, ui }: { b: BlockDef; c: Copy; ui: CaseUi }) {
       return (
         <><Prose c={c} />
           <figure className="case__video cs__wide">
-            <video controls muted playsInline preload="metadata" poster={asset(b.poster)} aria-label={c.caption}>
+            <video controls muted playsInline preload="none" width={960} height={464} poster={asset(b.poster)} aria-label={c.caption}>
               <source src={asset(b.src)} type="video/mp4" />
             </video>
             <figcaption className="note">{c.caption}</figcaption>

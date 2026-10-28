@@ -97,8 +97,32 @@ h3 { font-weight: 700; }
 .contact__list li { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--line); min-width: min(100%, 420px); }
 .contact__list a { word-break: break-word; min-height: 44px; display: inline-flex; align-items: center; }
 
-.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-block: 28px 48px; border-top: 1px solid var(--line); color: var(--muted); font: 13px var(--font-mono); }
-.foot a { color: var(--paper); min-height: 44px; display: inline-flex; align-items: center; }
+/* footer: the whole sitemap (pages, cases) and the channels */
+.foot { border-top: 1px solid var(--line); color: var(--muted); padding-top: clamp(32px, 5vw, 56px); background: #0e0e10cc; }
+.foot__grid { display: grid; gap: 28px; grid-template-columns: 1fr; }
+.foot__col ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.foot__col:not(:last-child) ul { columns: 2; column-gap: 16px; }
+.foot__col li { break-inside: avoid; }
+.foot__col a { display: inline-flex; align-items: center; min-height: 44px; color: var(--paper); text-decoration: none; font-size: 15px; overflow-wrap: anywhere; }
+.foot__col a:hover { color: var(--accent); }
+.foot__col h2 { font-weight: 400; }
+@media (min-width: 900px) {
+  .foot__grid { grid-template-columns: 1fr 2fr 1.3fr; gap: 40px; }
+  .foot__col:first-child ul { columns: 1; }
+}
+.foot__base { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: clamp(28px, 4vw, 44px); padding-block: 20px 40px; border-top: 1px solid var(--line); font: 13px var(--font-mono); }
+.foot__base a { color: var(--paper); min-height: 44px; display: inline-flex; align-items: center; }
+
+/* inner pages: an opening with the page's h1, then its sections */
+.page-hero { padding-block: clamp(40px, 8vw, 104px) clamp(4px, 2vw, 20px); display: grid; gap: 16px; justify-items: start; }
+.page-title { font-size: clamp(44px, 9vw, 120px); font-weight: 800; font-variation-settings: 'wdth' 125; line-height: 0.92; letter-spacing: -0.02em; max-width: 15ch; overflow-wrap: anywhere; }
+.page-hero__lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.4; max-width: 46ch; color: #e6e2d9; }
+.sec--page { border-top: 0; padding-top: clamp(40px, 8vw, 104px); }
+.sec__head--page { margin-bottom: clamp(32px, 5vw, 64px); }
+.sec__head--page .sec__lead { font-size: clamp(18px, 2vw, 22px); color: #e6e2d9; }
+
+/* long pages: sections below the fold skip style, layout and paint until they come near the viewport */
+.page > .sec:not(:first-child), .case__main > .cs, .bz-book { content-visibility: auto; contain-intrinsic-size: auto 1200px; }
 
 /* agents: one icon per agent */
 .sub-title { font: 13px var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 400; margin: 8px 0 16px; }

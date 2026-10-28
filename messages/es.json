@@ -93,21 +93,39 @@
   },
   "skipLink": "Saltar al contenido",
   "nav": {
-    "journey": "Recorrido",
-    "work": "Trabajo",
-    "lab": "Laboratorio",
-    "method": "Método",
-    "system": "Sistema",
-    "skills": "Capacidades",
-    "about": "Sobre mí",
+    "label": "Principal",
+    "menu": "Menú",
+    "close": "Cerrar el menú",
+    "dialog": "Menú del sitio",
+    "home": "Inicio",
+    "homeDesc": "El resumen, en una pantalla.",
     "contact": "Contacto",
-    "menu": "Secciones",
-    "label": "Secciones de la página",
-    "what": "Qué hago",
-    "business": "Negocio"
+    "elsewhere": "También en",
+    "pages": {
+      "work": {
+        "t": "Trabajo",
+        "d": "Casos con su estado y el laboratorio."
+      },
+      "how": {
+        "t": "Cómo trabajo",
+        "d": "El método y el sistema agéntico."
+      },
+      "skills": {
+        "t": "Capacidades",
+        "d": "Qué uso y de dónde sale cada cosa."
+      },
+      "business": {
+        "t": "Negocio",
+        "d": "Tres libros y dónde los apliqué."
+      },
+      "about": {
+        "t": "Sobre mí",
+        "d": "De Mar del Plata: el recorrido y el contacto."
+      }
+    }
   },
   "journey": {
-    "label": "03 · Recorrido",
+    "label": "Recorrido",
     "title": "Todo empezó en Mar del Plata.",
     "lead": "Una semilla y los caminos que fue abriendo. Hablo de desafíos, no de puestos; y de lo que se puede contar, sin datos internos de ningún cliente.",
     "items": [
@@ -154,7 +172,7 @@
     ]
   },
   "work": {
-    "label": "02 · Trabajo",
+    "label": "Casos",
     "title": "Casos con su estado.",
     "lead": "Cada caso dice qué es, qué hice yo y en qué punto está. Lo que no está probado, no se afirma.",
     "more": "Ver el caso",
@@ -202,7 +220,7 @@
     }
   },
   "lab": {
-    "label": "04 · Laboratorio",
+    "label": "Laboratorio",
     "title": "Donde pruebo cosas.",
     "lead": "Demos, prototipos y bancos de prueba. Todo lo ficticio lo dice.",
     "view": "Ver el código",
@@ -249,7 +267,7 @@
     "deep": "Ver el caso"
   },
   "method": {
-    "label": "05 · Método",
+    "label": "Método",
     "title": "Cómo genero valor.",
     "lead": "Seis pasos. Cada uno con algo que hice, no con una frase linda.",
     "steps": [
@@ -295,7 +313,7 @@
     "readsMore": "Ver los modelos y cómo los aplico"
   },
   "system": {
-    "label": "06 · Sistema",
+    "label": "Sistema",
     "title": "Un sistema agéntico, dividido en partes.",
     "lead": "Programo con agentes, pero cada uno tiene su parte y nada se entrega sin una persona que apruebe.",
     "points": [
@@ -437,7 +455,7 @@
     "deep": "Ver el sistema en detalle"
   },
   "skills": {
-    "label": "07 · Capacidades",
+    "label": "Capacidades",
     "title": "Qué uso, y de dónde sale cada cosa.",
     "lead": "Cada tecnología dice de dónde sale: del trabajo, de mis proyectos o de lo que estoy estudiando.",
     "cols": {
@@ -527,7 +545,7 @@
     ]
   },
   "about": {
-    "label": "08 · Sobre mí",
+    "label": "Sobre mí",
     "title": "De Mar del Plata.",
     "paragraphs": [
       "Todo empezó en Mar del Plata: con 17 años programé mi primer producto, una web de juegos, y ese camino no se cortó más.",
@@ -536,7 +554,7 @@
     ]
   },
   "contact": {
-    "label": "09 · Contacto",
+    "label": "Contacto",
     "title": "Abierto a nuevas oportunidades.",
     "lead": "Busco nuevos desafíos de desarrollo fullstack con IA: potenciar negocios y automatizar procesos difíciles. En cualquier rubro: startups, corporativas, agro, espacio, minería, oil & gas.",
     "email": "Escribime",
@@ -547,10 +565,13 @@
   },
   "footer": {
     "text": "© 2026 Ignacio Gauna · Mar del Plata, Argentina",
-    "top": "Volver arriba"
+    "top": "Volver arriba",
+    "sitemap": "Páginas",
+    "cases": "Casos",
+    "contact": "Contacto"
   },
   "caseUi": {
-    "back": "Volver al portafolio",
+    "back": "Todo el trabajo",
     "links": "Enlaces",
     "contactTitle": "¿Hablamos?",
     "contactText": "Abierto a nuevas oportunidades.",
@@ -570,7 +591,7 @@
     "aria": "Contacto: escribirle a Ignacio por mail"
   },
   "what": {
-    "label": "01 · Qué hago",
+    "label": "Qué hago",
     "title": "Cuatro cosas que hago bien, con pruebas.",
     "lead": "Cada una apunta a un caso donde se puede ver el trabajo.",
     "see": "Ver la prueba",
@@ -595,6 +616,59 @@
         "d": "Sistemas visuales, accesibilidad y motion en código: GSAP, WebGL y audio sintetizado.",
         "proof": "Kinetic Studio y el tráiler de este sitio"
       }
+    }
+  },
+  "hub": {
+    "label": "Explorar",
+    "title": "Elegí por dónde seguir.",
+    "more": "Conocer más",
+    "cards": {
+      "work": {
+        "q": "¿Qué construí?",
+        "d": "Cuatro cosas que hago bien, los casos que lo prueban —cada uno con su estado— y seis demos y prototipos del laboratorio."
+      },
+      "how": {
+        "q": "¿Cómo trabajo con agentes?",
+        "d": "Un método de seis pasos y un sistema de 11 agentes con roles separados. Nada se entrega sin una persona que apruebe."
+      },
+      "skills": {
+        "q": "¿Qué tecnologías uso?",
+        "d": "17 tecnologías y de dónde sale cada una: del trabajo, de mis proyectos o de lo que estoy estudiando."
+      },
+      "business": {
+        "q": "¿Cómo pienso el negocio?",
+        "d": "The Lean Startup, The Mom Test y Blue Ocean Strategy: los modelos que uso y dónde los apliqué."
+      },
+      "about": {
+        "q": "¿Quién soy y de dónde vengo?",
+        "d": "Autodidacta, de Mar del Plata: el recorrido desde mi primer producto, a los 17, hasta hoy."
+      }
+    },
+    "contactLead": "Fullstack con IA, en cualquier rubro. Escribime y lo hablamos.",
+    "allChannels": "Todos los canales"
+  },
+  "pages": {
+    "work": {
+      "label": "Trabajo",
+      "title": "Lo que construí.",
+      "lead": "Casos del trabajo y propios, cada uno con su estado, y un laboratorio de demos y prototipos.",
+      "metaTitle": "Trabajo — Ignacio Gauna",
+      "metaDescription": "Qué hago, los casos que lo prueban con su estado (CompliA, Tuenti, HandyX, Eclipse) y el laboratorio: demos, prototipos y bancos de prueba."
+    },
+    "how": {
+      "label": "Cómo trabajo",
+      "title": "Un método y un sistema.",
+      "lead": "Seis pasos para generar valor y un sistema agéntico, dividido en partes, donde una persona aprueba cada entrega.",
+      "metaTitle": "Cómo trabajo — Ignacio Gauna",
+      "metaDescription": "El método de seis pasos, el sistema de 11 agentes con roles separados y cómo viaja un cambio desde el pedido hasta producción."
+    },
+    "skills": {
+      "metaTitle": "Capacidades — Ignacio Gauna",
+      "metaDescription": "Las tecnologías que uso y de dónde sale cada una: del trabajo, de mis proyectos o de lo que estoy estudiando."
+    },
+    "about": {
+      "metaTitle": "Sobre mí — Ignacio Gauna",
+      "metaDescription": "De Mar del Plata, autodidacta: el recorrido desde mi primer producto a los 17 y cómo contactarme."
     }
   },
   "business": {

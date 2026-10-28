@@ -6,6 +6,9 @@
  *   no MSAA, 30 fps. A governor lowers the frame rate further when frames come slowly.
  * - Pauses while the tab is hidden and while the page is inert (boot screen, trailer).
  * - Reduced motion: one still frame per scene (again only if the canvas is resized, which clears it).
+ * - Touch screens (coarse pointer): the loop stops while the page scrolls and resumes 200 ms after it settles, so
+ *   scrolling never competes with a WebGL frame (the canvas keeps its last frame meanwhile). Scroll progress is
+ *   eased, so the picture glides to where the page is instead of jumping when it resumes.
  * - Per frame: one read of scrollY and the pointer cached by a passive listener. No layout reads.
  * - `window.__igScene` exposes the state and counters for QA (e2e test, perf script).
  */
@@ -62,9 +65,23 @@ type Debug = {
   memory: () => { geometries: number; textures: number; programs: number };
   /** QA: preview another scene over the current page */
   show: (id: SceneId) => Promise<void>;
+  /** how the scene behaves on this device: 'full', 'pause' (stops while scrolling) or 'still' (one frame) */
+  mode: SceneMode;
+  /** how many times the loop paused for a scroll */
+  scrollPauses: number;
 };
 
+export type SceneMode = 'full' | 'pause' | 'still';
+
 const isMobile = () => matchMedia('(pointer: coarse)').matches || innerWidth < 768;
+/** Touch screens pause the scene while scrolling (measured: docs in CLAUDE.md «Rendimiento»). QA may force a mode
+ * with `window.__igSceneMode` before the engine starts. */
+const modeFor = (): SceneMode => {
+  const forced = (window as unknown as { __igSceneMode?: SceneMode }).__igSceneMode;
+  if (forced === 'full' || forced === 'pause' || forced === 'still') return forced;
+  return matchMedia('(pointer: coarse)').matches ? 'pause' : 'full';
+};
+const SCROLL_IDLE_MS = 200;
 const FADE_OUT_MS = 320;
 // minimum ms between rendered frames per tier (a hair under 1000/fps so 60 and 120 Hz screens land on the cap)
 const TIER_GAP = [0, 31, 48, 64];
@@ -73,7 +90,11 @@ const TIER_LIMIT = [22, 40, 50];
 const WINDOW_MS = 2500;
 
 export function createEngine({ canvas, gl, software, reduced: reduced0, onState }: EngineOptions): Engine {
-  let reduced = reduced0;
+  const mode = modeFor();
+  let reduced = reduced0 || mode === 'still';
+  let scrolling = false;
+  let scrollTimer = 0;
+  let snap = true; // the first frame of a scene takes the scroll progress as is
   let mobile = isMobile();
   // the context comes from SceneBackground (its attributes: alpha, premultiplied, MSAA off on phones)
   const renderer = new WebGLRenderer({ canvas, context: gl, alpha: true, premultipliedAlpha: true, powerPreference: 'low-power' });
@@ -115,6 +136,8 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     software,
     memory: () => ({ geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, programs: renderer.info.programs?.length ?? 0 }),
     show: (id) => show(id),
+    mode,
+    scrollPauses: 0,
   };
   (window as unknown as { __igScene?: Debug }).__igScene = debug;
 
@@ -150,7 +173,9 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     input.dt = dt;
     input.t += dt;
     input.scroll = window.scrollY;
-    input.progress = Math.min(1, Math.max(0, input.scroll / maxScroll));
+    const target = Math.min(1, Math.max(0, input.scroll / maxScroll));
+    input.progress = snap ? target : input.progress + (target - input.progress) * (1 - Math.exp(-dt * 4));
+    snap = false;
     const k = 1 - Math.exp(-dt * 2.5);
     input.px += (tx - input.px) * k;
     input.py += (ty - input.py) * k;
@@ -166,7 +191,7 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
   const still = () => {
     if (!current) return;
     input.t = current.mod.still ?? 14;
-    input.progress = 0;
+    snap = true;
     render(0);
     setState('still');
   };
@@ -200,9 +225,16 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     if (!debug.hold && debug.tier < 3 && avg > TIER_LIMIT[debug.tier]) debug.tier++;
   };
 
-  const shouldRun = () => !disposed && !reduced && !hidden && !inert && !!current;
+  const shouldRun = () => !disposed && !reduced && !hidden && !inert && !!current && !scrolling;
 
   const kick = () => {
+    if (scrolling && !disposed && !reduced && !hidden && !inert && current) {
+      // a pause for scrolling only: the state stays 'running' (no React update per scroll)
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      debug.looping = false;
+      return;
+    }
     if (!shouldRun()) {
       if (raf) cancelAnimationFrame(raf);
       raf = 0;
@@ -228,6 +260,19 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
   const onVisibility = () => {
     hidden = document.visibilityState === 'hidden';
     kick();
+  };
+  const onScroll = () => {
+    if (mode !== 'pause') return;
+    if (!scrolling) {
+      scrolling = true;
+      if (raf) debug.scrollPauses++;
+      kick();
+    }
+    clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => {
+      scrolling = false;
+      kick();
+    }, SCROLL_IDLE_MS);
   };
   const measureScroll = () => {
     maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
@@ -259,6 +304,7 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     : null;
   mo?.observe(shell!, { attributes: true, attributeFilter: ['inert'] });
   addEventListener('pointermove', onPointer, { passive: true });
+  addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('visibilitychange', onVisibility);
   canvas.addEventListener('webglcontextlost', onLost);
   function onLost(e: Event) {
@@ -280,6 +326,7 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
   };
 
   const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+  const nextTask = () => wait(0);
 
   async function show(id: SceneId) {
     if (disposed) return;
@@ -311,10 +358,28 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     renderer.setPixelRatio(dprFor(mod));
     renderer.setSize(w, h, false);
     const ctx: SceneContext = { scene, camera, renderer, rng: mulberry32(seedOf(id)), mobile, reduced, w, h, dpr: dprFor(mod) };
+    await nextTask();
+    if (mine !== token || disposed) return;
     const inst = mod.create(ctx);
+    // build, compile and draw in separate tasks (no single long task when a scene starts); with
+    // KHR_parallel_shader_compile the programs link off the main thread
+    await nextTask();
+    if (mine === token && !disposed) await renderer.compileAsync(scene, camera).catch(() => {});
+    if (mine !== token || disposed) {
+      inst.dispose?.();
+      disposeTree(scene);
+      return;
+    }
+    await nextTask();
+    if (mine !== token || disposed) {
+      inst.dispose?.();
+      disposeTree(scene);
+      return;
+    }
     current = { id, mod, scene, inst, ctx };
     debug.id = id;
     input.t = 0;
+    snap = true;
     if (reduced) still();
     else {
       render(1 / 60);
@@ -323,7 +388,8 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     canvas.dataset.on = '1';
   }
 
-  function setReduced(r: boolean) {
+  function setReduced(r0: boolean) {
+    const r = r0 || mode === 'still';
     if (r === reduced) return;
     reduced = r;
     if (reduced) {
@@ -340,6 +406,8 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     ro.disconnect();
     mo?.disconnect();
     removeEventListener('pointermove', onPointer);
+    removeEventListener('scroll', onScroll);
+    clearTimeout(scrollTimer);
     document.removeEventListener('visibilitychange', onVisibility);
     canvas.removeEventListener('webglcontextlost', onLost);
   }

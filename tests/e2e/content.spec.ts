@@ -11,32 +11,60 @@ async function enter(page: Page, url: string, skip = 'Saltar', portfolio = 'Ver 
   await page.getByRole('button', { name: portfolio }).click();
 }
 
-test('home has its nine sections, each with its heading, and no console errors', async ({ page }) => {
+test('home: hero, one card per page with a real link, a short contact block; no console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await enter(page, '/es/');
-  for (const id of ['que-hago', 'trabajo', 'recorrido', 'laboratorio', 'metodo', 'sistema', 'capacidades', 'sobre-mi', 'contacto']) {
-    await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
-  }
-  await expect(page.locator('.journey__item')).toHaveCount(8);
-  await expect(page.locator('.method__step')).toHaveCount(6);
-  await expect(page.locator('.system__item')).toHaveCount(7);
-  await expect(page.locator('.agent')).toHaveCount(11);
-  await expect(page.locator('.agent svg')).toHaveCount(11);
-  await expect(page.locator('.pillar')).toHaveCount(4);
-  await expect(page.locator('.ledger tbody tr')).toHaveCount(17);
-  await expect(page.locator('#sistema figure.dg')).toHaveCount(1);
-  expect((await page.locator('main').innerText()).toLowerCase()).not.toContain('vibe coding');
-  // honesty: every project card/lab item carries a status, and the product name is spelled CompliA
-  await expect(page.locator('.work__card .status')).toHaveCount(4);
-  await expect(page.locator('.lab__item .status')).toHaveCount(6);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Ignacio');
+  const cards = page.locator('.hub__card');
+  await expect(cards).toHaveCount(5);
+  const hrefs = await cards.locator('a.hub__more').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
+  expect(hrefs).toEqual(['/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/sobre-mi/']);
+  await expect(page.getByRole('link', { name: 'Conocer más: Cómo trabajo' })).toBeVisible();
+  await expect(page.locator('section#contacto').getByRole('link', { name: 'Escribime' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   expect(await page.locator('main').innerText()).not.toContain('ComplIA');
   expect(errors).toEqual([]);
 });
 
-test('contact has email, LinkedIn and GitHub; external links open safely', async ({ page }) => {
+test('home cards lead to their pages, and every page renders its content with its headings', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
   await enter(page, '/es/');
+  await page.getByRole('link', { name: 'Conocer más: Trabajo' }).click();
+  await expect(page).toHaveURL(/\/es\/trabajo\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Lo que construí.');
+  for (const id of ['que-hago', 'trabajo', 'laboratorio']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
+  await expect(page.locator('.pillar')).toHaveCount(4);
+  // honesty: every project card/lab item carries a status
+  await expect(page.locator('.work__card .status')).toHaveCount(4);
+  await expect(page.locator('.lab__item .status')).toHaveCount(6);
+
+  await enter(page, '/es/como-trabajo/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Un método y un sistema.');
+  for (const id of ['metodo', 'sistema']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
+  await expect(page.locator('.method__step')).toHaveCount(6);
+  await expect(page.locator('.system__item')).toHaveCount(7);
+  await expect(page.locator('.agent')).toHaveCount(11);
+  await expect(page.locator('.agent svg')).toHaveCount(11);
+  await expect(page.locator('#sistema figure.dg')).toHaveCount(1);
+  await expect(page.locator('#sistema a[href$="/proyectos/agentes/"]')).toHaveCount(1);
+  expect((await page.locator('main').innerText()).toLowerCase()).not.toContain('vibe coding');
+
+  await enter(page, '/es/capacidades/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Qué uso, y de dónde sale cada cosa.');
+  await expect(page.locator('.ledger tbody tr')).toHaveCount(17);
+
+  await enter(page, '/es/sobre-mi/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('De Mar del Plata.');
+  await expect(page.locator('section#recorrido h2')).toHaveCount(1);
+  await expect(page.locator('.journey__item')).toHaveCount(8);
+  await expect(page.locator('section#contacto h2')).toHaveCount(1);
+  expect(errors).toEqual([]);
+});
+
+test('contact has email, LinkedIn and GitHub; external links open safely', async ({ page }) => {
+  await enter(page, '/es/sobre-mi/');
   const c = page.locator('section#contacto');
   await expect(c.getByRole('link', { name: 'ignaciogauna.developer@gmail.com' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await expect(c.getByRole('link', { name: /linkedin\.com\/in\/ignacio-emanuel-gauna/ })).toHaveAttribute('href', 'https://www.linkedin.com/in/ignacio-emanuel-gauna/');
@@ -62,35 +90,102 @@ test('CompliA case: clip with controls and caption; no internal data claims', as
   await expect(page.getByRole('heading', { name: 'Lo que no muestro' })).toBeVisible();
 });
 
-test('navigation: the section menu works on a phone and no horizontal scroll at 360 px', async ({ page }) => {
-  await page.setViewportSize({ width: 360, height: 800 });
+test('wide header: five page links on one row, the language switch and one Contacto; no menu button', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await enter(page, '/es/trabajo/');
+  const links = page.locator('.site-nav__links a');
+  await expect(links).toHaveCount(5);
+  const boxes = await links.evaluateAll((as) => as.map((a) => a.getBoundingClientRect()).map((r) => ({ top: Math.round(r.top), h: Math.round(r.height) })));
+  expect(new Set(boxes.map((b) => b.top)).size).toBe(1);
+  for (const b of boxes) expect(b.h).toBeLessThanOrEqual(48);
+  await expect(links.first()).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('.site-header').getByRole('link', { name: 'Contacto' })).toHaveAttribute('href', '/es/sobre-mi/#contacto');
+  await expect(page.getByRole('button', { name: 'Menú', exact: true })).toBeHidden();
+  // 1024 (an iPad in landscape): the menu button instead
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await expect(links.first()).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Menú', exact: true })).toBeVisible();
+});
+
+test('menu: opens as a dialog, keeps focus inside, closes with Escape and the close button, returns focus', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
   await enter(page, '/es/');
-  await page.getByText('Secciones', { exact: true }).click();
-  await page.locator('.site-header__menu').getByRole('link', { name: 'Método' }).click();
-  await expect(page).toHaveURL(/#metodo$/);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  const toggle = page.getByRole('button', { name: 'Menú', exact: true });
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(toggle).toHaveAttribute('aria-controls', 'site-menu');
+  await toggle.click();
+  const dialog = page.getByRole('dialog', { name: 'Menú del sitio' });
+  await expect(dialog).toBeVisible();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(dialog.getByRole('link', { name: /^Inicio/ })).toHaveAttribute('aria-current', 'page');
+  await expect(dialog.getByRole('link', { name: /^Inicio/ })).toBeFocused();
+  // the page under it does not take focus or scroll
+  await expect(page.locator('main')).toHaveAttribute('inert', '');
+  expect(await page.evaluate(() => getComputedStyle(document.body).position)).toBe('fixed');
+  // Tab cycles inside the dialog
+  for (let i = 0; i < 16; i++) {
+    await page.keyboard.press('Tab');
+    expect(await page.evaluate(() => !!document.activeElement?.closest('#site-menu'))).toBe(true);
+  }
+  await page.keyboard.press('Shift+Tab');
+  expect(await page.evaluate(() => !!document.activeElement?.closest('#site-menu'))).toBe(true);
+  // every target is at least 44 px tall
+  const small = await dialog.locator('a, button').evaluateAll((els) => els.filter((e) => e.getBoundingClientRect().height < 44).map((e) => e.textContent));
+  expect(small).toEqual([]);
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(toggle).toBeFocused();
+  await expect(page.locator('main')).not.toHaveAttribute('inert', '');
+  // the close button closes it too
+  await toggle.click();
+  await dialog.getByRole('button', { name: 'Cerrar el menú' }).click();
+  await expect(dialog).toBeHidden();
+  await expect(toggle).toBeFocused();
+  // and a page link navigates
+  await toggle.click();
+  await dialog.getByRole('link', { name: /Cómo trabajo/ }).click();
+  await expect(page).toHaveURL(/\/es\/como-trabajo\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Un método y un sistema.');
+  await expect(dialog).toBeHidden();
+  expect(await page.evaluate(() => getComputedStyle(document.body).position)).not.toBe('fixed');
 });
 
-test('English home mirrors the Spanish structure', async ({ page }) => {
-  await enter(page, '/en/', 'Skip', 'View portfolio');
+test('no horizontal scroll at 360 px on any page', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  for (const url of ['/es/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/sobre-mi/', '/en/', '/en/sobre-mi/']) {
+    await enter(page, url, url.startsWith('/en/') ? 'Skip' : 'Saltar', url.startsWith('/en/') ? 'View portfolio' : 'Ver portafolio');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), url).toBeLessThanOrEqual(0);
+  }
+});
+
+test('English pages mirror the Spanish structure', async ({ page }) => {
+  await enter(page, '/en/sobre-mi/', 'Skip', 'View portfolio');
   await expect(page.locator('section#recorrido h2')).toContainText('Mar del Plata');
+  await enter(page, '/en/como-trabajo/', 'Skip', 'View portfolio');
   await expect(page.locator('.method__step')).toHaveCount(6);
+  await enter(page, '/en/', 'Skip', 'View portfolio');
+  await expect(page.getByRole('link', { name: 'Learn more: How I work' })).toHaveAttribute('href', '/en/como-trabajo/');
 });
 
-test('phones get a floating contact button that steps aside near other contact actions', async ({ page }) => {
+test('below 1100 px a floating contact button steps aside near other contact actions', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await enter(page, '/es/');
   const fab = page.locator('.fab-contact');
   await expect(fab).toHaveAttribute('data-hidden', 'true'); // hero buttons are on screen
-  await page.locator('#metodo').scrollIntoViewIfNeeded();
+  await page.locator('.hub__card--skills').scrollIntoViewIfNeeded();
   await expect(fab).toHaveAttribute('data-hidden', 'false');
   await expect(page.getByRole('link', { name: /^Contacto/ }).last()).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await page.locator('#contacto').scrollIntoViewIfNeeded();
   await expect(fab).toHaveAttribute('data-hidden', 'true');
+  // after a client-side navigation it looks up the new page's contact actions
+  await page.locator('footer').getByRole('link', { name: 'Trabajo', exact: true }).click();
+  await expect(page).toHaveURL(/\/es\/trabajo\/$/);
+  await expect(fab).toHaveAttribute('data-hidden', 'false');
 });
 
 test('Tuenti and Eclipse cases: own page, Eclipse links to its site', async ({ page }) => {
-  await enter(page, '/es/');
+  await enter(page, '/es/trabajo/');
   await page.locator('.work__card', { hasText: 'Tuenti' }).getByRole('link').click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tuenti');
   await enter(page, '/es/proyectos/eclipse/');
@@ -110,7 +205,7 @@ test('portal screenshots: Eclipse and HandyX galleries load, with alt text and a
       await expect(items.nth(i).locator('figcaption')).not.toBeEmpty();
     }
   }
-  await enter(page, '/es/');
+  await enter(page, '/es/trabajo/');
   const covers = page.locator('.work__shot');
   await expect(covers).toHaveCount(4);
   // Tuenti: a drawn illustration, never a screenshot (confidentiality)

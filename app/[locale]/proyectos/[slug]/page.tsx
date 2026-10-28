@@ -58,60 +58,62 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
   const ui = { asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt'), play: u('play'), pause: u('pause') };
 
   return (
-    <main id="contenido" tabIndex={-1} className="case">
-      <header className="case__hero container-x">
-        <Link href="/#trabajo" className="case__back">← {u('back')}</Link>
-        <p className="case__kind label">{t('kind')}</p>
-        <h1 className="case__title">{t('title')}</h1>
-        <p className="status case__status">{t('status')}</p>
-        <p className="case__summary">{t('summary')}</p>
-        {facts.length > 0 && (
-          <dl className="facts">
-            {facts.map((f) => <div key={f.k}><dt className="label">{f.k}</dt><dd>{f.v}</dd></div>)}
-          </dl>
-        )}
-      </header>
-
-      {tldr.length > 0 && (
-        <section className="tldr container-x" aria-label={u('tldr')}>
-          {tldr.map((x, n) => (
-            <div key={x.k} className="tldr__item">
-              <p className="tldr__k"><span aria-hidden="true">{['A', 'B', 'C'][n]}</span>{x.k}</p>
-              <p className="tldr__v">{x.v}</p>
-            </div>
-          ))}
-        </section>
-      )}
-
-      <div className="case__grid container-x">
-        {toc.length > 2 && <aside className="case__aside"><CaseToc label={u('toc')} items={toc} /></aside>}
-        <div className="case__main">
-          <CaseSections blocks={def.blocks} copy={copy} ui={ui} />
-          {def.links && (
-            <section className="cs" aria-labelledby="h-links">
-              <h2 id="h-links" className="cs__h">{u('links')}</h2>
-              <div className="case__links">
-                {def.links.map((l) => <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗<span className="sr-only"> ({c('newTab')})</span></a>)}
-              </div>
-            </section>
+    <>
+      <main id="contenido" tabIndex={-1} className="case">
+        <header className="case__hero container-x">
+          <Link href="/trabajo" className="case__back">← {u('back')}</Link>
+          <p className="case__kind label">{t('kind')}</p>
+          <h1 className="case__title">{t('title')}</h1>
+          <p className="status case__status">{t('status')}</p>
+          <p className="case__summary">{t('summary')}</p>
+          {facts.length > 0 && (
+            <dl className="facts">
+              {facts.map((f) => <div key={f.k}><dt className="label">{f.k}</dt><dd>{f.v}</dd></div>)}
+            </dl>
           )}
-        </div>
-      </div>
+        </header>
 
-      <nav className="case__next container-x" aria-label={u('next')}>
-        <Link className="case__next-main" href={`/proyectos/${next}`}>
-          <span className="label">{u('nextCase')}</span>
-          <span className="case__next-name">{otherNames[others.indexOf(next)]} →</span>
-        </Link>
-        <div className="case__more">
-          <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
-          <span className="note">{u('contactText')}</span>
+        {tldr.length > 0 && (
+          <section className="tldr container-x" aria-label={u('tldr')}>
+            {tldr.map((x, n) => (
+              <div key={x.k} className="tldr__item">
+                <p className="tldr__k"><span aria-hidden="true">{['A', 'B', 'C'][n]}</span>{x.k}</p>
+                <p className="tldr__v">{x.v}</p>
+              </div>
+            ))}
+          </section>
+        )}
+
+        <div className="case__grid container-x">
+          {toc.length > 2 && <aside className="case__aside"><CaseToc label={u('toc')} items={toc} /></aside>}
+          <div className="case__main">
+            <CaseSections blocks={def.blocks} copy={copy} ui={ui} />
+            {def.links && (
+              <section className="cs" aria-labelledby="h-links">
+                <h2 id="h-links" className="cs__h">{u('links')}</h2>
+                <div className="case__links">
+                  {def.links.map((l) => <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗<span className="sr-only"> ({c('newTab')})</span></a>)}
+                </div>
+              </section>
+            )}
+          </div>
         </div>
-        <ul className="case__others">
-          {others.map((s, k) => <li key={s}><Link href={`/proyectos/${s}`}>{otherNames[k]}</Link></li>)}
-        </ul>
-      </nav>
-      <div className="container-x"><Footer /></div>
-    </main>
+
+        <nav className="case__next container-x" aria-label={u('next')}>
+          <Link className="case__next-main" href={`/proyectos/${next}`}>
+            <span className="label">{u('nextCase')}</span>
+            <span className="case__next-name">{otherNames[others.indexOf(next)]} →</span>
+          </Link>
+          <div className="case__more" data-contact="">
+            <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
+            <span className="note">{u('contactText')}</span>
+          </div>
+          <ul className="case__others">
+            {others.map((s, k) => <li key={s}><Link href={`/proyectos/${s}`}>{otherNames[k]}</Link></li>)}
+          </ul>
+        </nav>
+      </main>
+      <Footer />
+    </>
   );
 }
