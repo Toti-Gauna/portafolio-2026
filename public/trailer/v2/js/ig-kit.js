@@ -509,7 +509,7 @@
     gsap.ticker.add(() => {
       const t = D.tl.time(), want = from + (t - T) * rate, inside = t >= T && t < T + dur;
       if (inside && !D.tl.paused()) {
-        if (v.paused) { v.playbackRate = rate; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        if (v.paused) { v.defaultPlaybackRate = v.playbackRate = rate * D.tl.timeScale(); const p = v.play(); if (p && p.catch) p.catch(() => {}); }
         if (Math.abs(v.currentTime - want) > 0.25) v.currentTime = want;
       } else {
         if (!v.paused) v.pause();

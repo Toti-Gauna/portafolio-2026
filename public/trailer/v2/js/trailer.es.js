@@ -28,6 +28,7 @@ Trailer.run({
   fonts: { display: 'Archivo', mono: 'JetBrains Mono', serif: 'Archivo', stretch: true },
   music: PARTITURA,
   mix: { gain: 0.6 },   // the recipes' foley (whoosh, boom, key…) under the score
+  speed: 0.85,          // the film plays at 85 %: 130 s of film in ~153 s, so every line can be read (Ignacio, 28/10/2026)
   acts: ACTS,
   hudAt: 1.2,
 
