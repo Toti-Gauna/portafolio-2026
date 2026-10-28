@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { CASE_SLUGS, LAB, WORK_SHOT, type CaseSlug } from '@/lib/cases';
 import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
+import { BOOKS } from '@/lib/business';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
 import { Diagram } from '../diagrams/Diagram';
@@ -127,8 +128,8 @@ export function Lab() {
 
 export function Method() {
   const t = useTranslations('method');
+  const b = useTranslations('business');
   const steps = t.raw('steps') as Step[];
-  const reads = t.raw('reads') as { title: string; state: string }[];
   return (
     <section id="metodo" className="sec container-x" aria-labelledby="h-metodo">
       <Head id="h-metodo" label={t('label')} title={t('title')} lead={t('lead')} />
@@ -145,10 +146,19 @@ export function Method() {
       </ol>
       <div className="reads">
         <h3 className="reads__title">{t('readsTitle')}</h3>
-        <ul className="reads__list">
-          {reads.map((r) => <li key={r.title}><span>{r.title}</span> <span className="status">{r.state}</span></li>)}
+        <ul className="reads__books">
+          {BOOKS.map((id) => (
+            <li key={id}>
+              <Link href={`/negocio#${id}`} className="reads__book">
+                <span className="label">{b(`books.${id}.kicker`)}</span>
+                <b>{b(`books.${id}.title`)}</b>
+                <span className="reads__idea">{b(`books.${id}.idea`)}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
-        <p className="note">{t('readsNote')}</p>
+        <p className="reads__more"><Link className="card-link" href="/negocio">{t('readsMore')} →</Link></p>
+        <p className="note">{b('reading')}</p>
       </div>
     </section>
   );

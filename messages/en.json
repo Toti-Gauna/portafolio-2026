@@ -101,7 +101,8 @@
     "contact": "Contact",
     "menu": "Sections",
     "label": "Page sections",
-    "what": "What I do"
+    "what": "What I do",
+    "business": "Business"
   },
   "journey": {
     "label": "03 · Journey",
@@ -282,23 +283,9 @@
         "short": "Deliver"
       }
     ],
-    "readsTitle": "Influences",
-    "readsNote": "Reading and learning, not certifications. I don't count them as practice until I have an example.",
-    "reads": [
-      {
-        "title": "The Lean Startup",
-        "state": "Read"
-      },
-      {
-        "title": "The Mom Test",
-        "state": "Read"
-      },
-      {
-        "title": "SPIN Selling",
-        "state": "Reading"
-      }
-    ],
-    "cycle": "A loop, not a line: what I learn when delivering comes back in as the next problem."
+    "readsTitle": "Books I apply",
+    "cycle": "A loop, not a line: what I learn when delivering comes back in as the next problem.",
+    "readsMore": "See the models and how I apply them"
   },
   "system": {
     "label": "06 · System",
@@ -598,6 +585,239 @@
         "t": "Crafted interfaces",
         "d": "Visual systems, accessibility and motion in code: GSAP, WebGL and synthesised audio.",
         "proof": "Kinetic Studio and this site's trailer"
+      }
+    }
+  },
+  "business": {
+    "metaTitle": "How I think about business — Ignacio Gauna",
+    "metaDescription": "The models from The Lean Startup, The Mom Test and Blue Ocean Strategy that I use, and where I applied them: HandyX and Eclipse.",
+    "back": "Back to the portfolio",
+    "label": "Business",
+    "title": "How I think about business.",
+    "lead": "Three books that changed how I build. From each, the models I use most and where I applied them in my projects.",
+    "note": "The examples come from my projects. Where there is no data, I say so; I don't make up metrics.",
+    "toc": "Books",
+    "models": "The models",
+    "apply": "How I apply it",
+    "see": "See the case",
+    "reading": "Reading now: SPIN Selling, by Neil Rackham, on consultative selling.",
+    "books": {
+      "lean": {
+        "kicker": "Eric Ries · 2011",
+        "title": "The Lean Startup",
+        "idea": "A new product is an experiment. What you build matters less than what you learn, and the speed that counts is the speed of each loop.",
+        "models": [
+          {
+            "t": "Build · Measure · Learn",
+            "d": "The core loop: turn an idea into a product, measure how people respond and learn whether to keep going or change. You plan it backwards: what I want to learn, what I need to measure, and only then what to build."
+          },
+          {
+            "t": "Leap-of-faith assumptions",
+            "d": "Two assumptions hold everything up: value (does it help anyone?) and growth (how does it reach more people?). Test the riskiest one first."
+          },
+          {
+            "t": "Minimum viable product",
+            "d": "The smallest version that completes one full loop. Not a half-built product: an experiment with a goal."
+          },
+          {
+            "t": "Pivot or persevere",
+            "d": "With what you learned, decide: stay the course, or change one piece of the strategy without throwing away the rest."
+          },
+          {
+            "t": "Actionable metrics and small batches",
+            "d": "Measure what changes a decision, not what looks good. And ship in small batches so mistakes are cheap and early."
+          }
+        ],
+        "loop": {
+          "build": "Build",
+          "measure": "Measure",
+          "learn": "Learn",
+          "product": "Product",
+          "data": "Data",
+          "ideas": "Ideas",
+          "center": "less time per loop",
+          "caption": "The Build · Measure · Learn loop: what matters is how long each loop takes."
+        },
+        "fork": {
+          "go": "Persevere",
+          "pivot": "Pivot",
+          "learn": "What you learned",
+          "caption": "Pivot or persevere: what you learned picks the branch."
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Demand first, then the app",
+            "d": "Before building the app, a landing page with a waiting list and specialist pre-registration. Its only goal is real pre-registrations: the first experiment on the value hypothesis."
+          },
+          {
+            "where": "HandyX",
+            "t": "No vanity metrics",
+            "d": "The public counter only appears from 20 sign-ups and rounds down. I'd rather show a small, honest number than an inflated one."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Small batches with acceptance criteria",
+            "d": "Every change is a batch with its spec, its acceptance criteria and an approval gate. A mistake costs one batch, not a project."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Show before talking",
+            "d": "The site shows demos of the business working before proposing anything: the shortest way to learn whether it interests whoever is looking."
+          }
+        ]
+      },
+      "mom": {
+        "kicker": "Rob Fitzpatrick · 2013",
+        "title": "The Mom Test",
+        "idea": "How to talk to customers without them lying to you, even out of kindness: ask your mom whether your idea is good and she'll say yes.",
+        "models": [
+          {
+            "t": "The three rules",
+            "d": "Talk about their life, not your idea. Ask about specifics in the past, not opinions or the future. Talk less and listen more."
+          },
+          {
+            "t": "Data that misleads",
+            "d": "Compliments, generic claims («always», «would use», «would pay») and feature requests without the why. When they show up, go back to specifics."
+          },
+          {
+            "t": "Commitment and advancement",
+            "d": "A conversation is worth what the other person puts on the line: time, reputation or money. If it ends with no next step, it didn't advance."
+          }
+        ],
+        "swap": {
+          "bad": "Bad question",
+          "good": "Better question",
+          "items": [
+            {
+              "bad": "Would you use an app to get more jobs?",
+              "good": "How did you get your last three jobs?"
+            },
+            {
+              "bad": "Would you like to see the price before confirming?",
+              "good": "What happened the last time you were charged something you didn't expect?"
+            },
+            {
+              "bad": "Do you think it's a good idea?",
+              "good": "What did you try to solve this, and why did you stop?"
+            }
+          ],
+          "caption": "Example questions for a specialist or a resident. They illustrate the rule; they are not a real survey."
+        },
+        "ladder": {
+          "title": "The commitment ladder",
+          "steps": [
+            {
+              "t": "Compliment",
+              "d": "«What a great idea.» Commits to nothing."
+            },
+            {
+              "t": "Time",
+              "d": "A second meeting, a trial with a date."
+            },
+            {
+              "t": "Reputation",
+              "d": "An introduction to someone else or to the decision-maker."
+            },
+            {
+              "t": "Money",
+              "d": "A deposit, a pre-sale, a payment."
+            }
+          ]
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Commitment, not compliments",
+            "d": "In the internal portal an unanswered attempt doesn't change the state: only a real conversation moves it forward, and a specialist is «committed» only once a start date is agreed."
+          },
+          {
+            "where": "Work",
+            "t": "Listening on site",
+            "d": "In April 2026 I travelled to Buenos Aires for an in-person day with clients: demos, alignment and direct conversation about their real challenges."
+          }
+        ]
+      },
+      "blue": {
+        "kicker": "W. Chan Kim and Renée Mauborgne · 2005",
+        "title": "Blue Ocean Strategy",
+        "idea": "Instead of fighting over the same market (the red ocean), create a space where the competition stops mattering (the blue ocean).",
+        "models": [
+          {
+            "t": "Value innovation",
+            "d": "Raise value for the buyer and lower cost at the same time, by changing the factors the industry competes on."
+          },
+          {
+            "t": "The strategy canvas",
+            "d": "The factors an industry competes on and each offer's value curve. A different curve is a different strategy."
+          },
+          {
+            "t": "The four actions",
+            "d": "Eliminate, reduce, raise and create: the grid that forces you to stop copying the competition."
+          },
+          {
+            "t": "The strategic sequence",
+            "d": "First buyer utility, then an accessible price, then cost, and finally adoption."
+          }
+        ],
+        "errc": {
+          "title": "The four actions, applied to HandyX",
+          "eliminate": "Eliminate",
+          "reduce": "Reduce",
+          "raise": "Raise",
+          "create": "Create",
+          "items": {
+            "eliminate": [
+              "Surprise charges: nothing extra without your OK.",
+              "Handing out your phone number: it isn't shared."
+            ],
+            "reduce": [
+              "Calling people one by one for quotes: proposals arrive in one place."
+            ],
+            "raise": [
+              "Price clarity: labour, materials and fee, itemised.",
+              "Knowing where the job stands: live tracking."
+            ],
+            "create": [
+              "The specialist sets their price, with a suggested reference.",
+              "Extras that are proposed and accepted in the chat."
+            ]
+          },
+          "caption": "Taken from what HandyX's landing page and demo already show."
+        },
+        "canvas": {
+          "title": "A strategy canvas, qualitatively",
+          "low": "Low",
+          "high": "High",
+          "us": "HandyX",
+          "them": "The usual way",
+          "factors": [
+            "Clear price before confirming",
+            "Surprise charges",
+            "Comparing proposals",
+            "Tracking the job",
+            "Privacy of your phone"
+          ],
+          "caption": "A qualitative reading to think through the strategy; not measured data. «The usual way»: asking around or finding an ad."
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Competing on certainty",
+            "d": "Instead of competing only on the number of specialists, HandyX competes on certainty: see the price first, nothing extra without your OK, and your phone stays private."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Showing instead of promising",
+            "d": "Instead of promising in a meeting, Eclipse's site shows the business working and puts price, scope and maintenance in plain sight."
+          }
+        ],
+        "ocean": {
+          "red": "Red ocean",
+          "redD": "fighting over the same thing",
+          "blueO": "Blue ocean",
+          "blueD": "creating a new space"
+        }
       }
     }
   }

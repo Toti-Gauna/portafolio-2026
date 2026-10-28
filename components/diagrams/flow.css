@@ -15,7 +15,7 @@
 
 @container (min-width: 820px) {
   .fl__steps { grid-template-columns: repeat(var(--cols), 1fr); row-gap: 32px; }
-  .fl__step { grid-template-columns: 1fr; gap: 14px; padding: 0 18px 0 0; }
+  .fl__step { grid-template-columns: 1fr; gap: 14px; padding: 0 18px 0 0; align-content: start; }
   .fl__step:not(:last-child)::before { left: 48px; right: 8px; top: 19px; bottom: auto; width: auto; height: 2px; transform-origin: left; }
   .fl__step[data-end]::before { display: none; }
   .fl__body { padding-top: 0; }

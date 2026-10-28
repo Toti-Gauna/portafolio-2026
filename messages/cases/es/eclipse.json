@@ -1,36 +1,548 @@
 {
   "title": "Eclipse",
-  "kind": "En desarrollo",
+  "kind": "Producto propio",
   "status": "En desarrollo",
-  "summary": "Estudio propio de desarrollo, IA y automatización.",
-  "facts": [],
-  "tldr": [],
+  "summary": "Mi estudio de desarrollo, IA y automatización, construido como un sistema completo: una landing que vende mostrando demos primero, un portal de clientes, un backend propio, un portal interno de operación y un kit de emails de propuesta. Lo diseñé y lo construí yo, de punta a punta.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Única persona: producto, diseño y desarrollo"
+    },
+    {
+      "k": "Piezas",
+      "v": "Landing · portal de clientes · backend · portal interno · kit de emails"
+    },
+    {
+      "k": "Desde",
+      "v": "2 de octubre de 2026"
+    },
+    {
+      "k": "Estado",
+      "v": "Landing publicada · sin clientes todavía"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "El problema",
+      "v": "Una PyME pierde consultas, turnos y seguimientos por no tener web, CRM ni automatizaciones. Y no compra software por un discurso."
+    },
+    {
+      "k": "La idea",
+      "v": "Mostrarle primero su negocio funcionando. Detrás, un sistema propio lleva el pedido hasta un proyecto que el cliente sigue en cinco etapas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "La landing está publicada. El portal conectado, el backend y el portal interno están construidos y probados; todavía no hay clientes."
+    }
+  ],
   "blocks": {
-    "s1": {
+    "what": {
       "h": "Qué es",
       "p": [
-        "Eclipse es mi iniciativa para ofrecer desarrollo, IA y automatización. Su web muestra demos de negocios ficticios antes de proponer nada; todo lo ficticio dice «Demo»."
-      ]
-    },
-    "s2": {
-      "h": "Qué hay hoy",
+        "Eclipse es mi estudio de desarrollo, IA y automatización para dueños de PyMEs de Argentina, Brasil y el resto de Latinoamérica, que llegan casi siempre desde el celular. La web está en español rioplatense, inglés y portugués de Brasil.",
+        "La idea comercial es simple: antes de hablar, el visitante ve su rubro funcionando en una demo. Detrás de esa vidriera construí lo que un estudio necesita para vender, entregar y operar: cinco piezas en cuatro repos."
+      ],
       "list": [
-        "Una landing con selector de rubro y demos interactivas.",
-        "Un portal de clientes en modo demo y su modo conectado al backend.",
-        "Un backend propio, un portal interno y un kit de emails.",
-        "Pruebas automáticas y CI en los repositorios."
+        "Landing con demos (eclipse-business.com): publicada.",
+        "Portal de clientes: el modo demo está publicado; el modo conectado al backend, en desarrollo.",
+        "Backend propio: en desarrollo, completo hasta su fase 9 y listo para desplegar.",
+        "Portal interno de operación: publicado, sin uso real que mostrar todavía.",
+        "Kit de emails de propuesta: prototipo, y lo estoy rehaciendo."
       ]
     },
-    "s3": {
-      "h": "Cómo lo construyo",
+    "sell": {
+      "h": "Cómo vende: demo primero",
       "p": [
-        "Por lotes con especificación, puertas de aprobación y QA, como explico en «Sistema»."
+        "La landing tiene un solo objetivo: que el visitante vea su rubro funcionando y después escriba por WhatsApp. Los precios están a la vista, pero el primer botón de cada nivel es «Ver la demo».",
+        "Reglas que me puse: nada de testimonios ni logos de clientes que no existen, cada negocio ficticio dice «Demo» y no hay precios tachados.",
+        "El 28/10/2026 la home pasó a presentar un producto por rubro, y esta landing se mudó entera a /agency/, con las mismas secciones y sin borrar nada."
+      ],
+      "title": "Del primer clic a la propuesta",
+      "caption": "El embudo está diseñado, no medido: todavía no hay cifras de conversión.",
+      "steps": [
+        {
+          "actor": "En el sitio",
+          "t": "Elegir el rubro",
+          "d": "Inmobiliarias es el primero con demo y planes publicados; los demás rubros vienen después."
+        },
+        {
+          "actor": "En el sitio",
+          "t": "Ver la demo",
+          "d": "Con guía o por su cuenta: Lumen Propiedades, una inmobiliaria ficticia con sitio, chatbot, pipeline, visitas y seguimientos."
+        },
+        {
+          "actor": "En el sitio",
+          "t": "Ver el precio",
+          "d": "Seis niveles mensuales publicados. Primero «Ver la demo»; después, «Pedir este plan»."
+        },
+        {
+          "actor": "WhatsApp",
+          "t": "Escribir",
+          "d": "El mensaje ya lleva el plan elegido. No hay carrito ni pago en el sitio."
+        },
+        {
+          "actor": "Eclipse",
+          "t": "Demo de su negocio",
+          "d": "En 48 h y antes de cualquier llamada."
+        },
+        {
+          "actor": "Eclipse",
+          "t": "Propuesta y seña",
+          "d": "Alcance, precio y plazos por escrito. El proyecto arranca con la seña."
+        }
       ]
     },
-    "s4": {
-      "h": "Estado",
+    "landing": {
+      "h": "La landing por dentro",
       "p": [
-        "En construcción. No hay clientes ni resultados comerciales para mostrar, y no los invento."
+        "Casi todos llegan desde el celular, así que la landing es mobile-first: sin scroll horizontal a 360 px y con botones de al menos 44 px."
+      ],
+      "items": [
+        {
+          "t": "Una sola capa para ver la demo",
+          "d": "Un <dialog> nativo con su propio scroll: la página de atrás no se mueve. La apertura dura unos 2,4 s y se saltea con un clic o una tecla; Volver, Escape y el botón Atrás devuelven el scroll y el foco exactos."
+        },
+        {
+          "t": "Demos que no se mueven solas",
+          "d": "Nada se reproduce ni avanza por su cuenta: cada historia se juega con «Simular: …». Vista de escritorio y de celular lado a lado, con datos locales y sin red."
+        },
+        {
+          "t": "La URL como contrato",
+          "d": "?rubro, ?vista y ?area aceptan solo valores de una lista cerrada; uno de afuera limpia los parámetros. Un solo módulo escribe en el historial del navegador."
+        },
+        {
+          "t": "WebGL solo cuando conviene",
+          "d": "La corona del eclipse usa OGL y se carga solo si el equipo la aguanta, sin movimiento reducido ni ahorro de datos; si no, una corona en CSS. Y dibuja a demanda, no en bucle."
+        },
+        {
+          "t": "Tres idiomas y tres monedas",
+          "d": "Español, inglés y portugués, con un test que exige las mismas claves en los tres. Los precios están en dólares y el navegador los convierte a pesos y reales, con «≈» y tasas de respaldo."
+        },
+        {
+          "t": "Movimiento con reglas",
+          "d": "Solo transform, opacity y clip-path; nada animado fuera de pantalla; con movimiento reducido, todo quieto. El sonido arranca apagado."
+        }
+      ]
+    },
+    "arch": {
+      "h": "Arquitectura",
+      "p": [
+        "Cuatro repos que funcionan como un solo producto. Las webs son estáticas y nunca tocan la base: todo pasa por una API propia, con sesiones separadas para clientes y para administración."
+      ],
+      "diagram": {
+        "title": "Cuatro repos, un sistema",
+        "caption": "Las webs son estáticas (Hostinger y GitHub Pages). La API está pensada para Render y la base para Neon; el backend todavía no tiene despliegue automático. WhatsApp no aparece: son enlaces wa.me que abre una persona.",
+        "groups": {
+          "pub": "Público",
+          "be": "Backend",
+          "int": "Interno"
+        },
+        "nodes": {
+          "visitor": {
+            "label": "Dueño de PyME",
+            "sub": "desde el celular"
+          },
+          "web": {
+            "label": "Eclipse-Web",
+            "sub": "landing + portal",
+            "note": "Un solo código con dos builds: la demo, que nunca usa la red, y la conectada, en el mismo dominio que la API."
+          },
+          "api": {
+            "label": "API Eclipse-be",
+            "sub": "Express · Prisma",
+            "note": "Clientes y administradores con claves, audiencias y sesiones separadas. Los administradores existen solo en el entorno del servidor."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "datos y archivos",
+            "note": "Un proyecto no puede existir sin seña cobrada: un trigger lo rechaza al confirmar la transacción."
+          },
+          "mail": {
+            "label": "Emails",
+            "sub": "outbox → SMTP",
+            "note": "Se guardan cifrados y se intentan una sola vez. La interfaz dice «aceptado por SMTP», nunca «entregado»."
+          },
+          "ops": {
+            "label": "Operación",
+            "sub": "una persona"
+          },
+          "internal": {
+            "label": "Portal interno",
+            "sub": "HTML + JS"
+          },
+          "kit": {
+            "label": "Kit de emails",
+            "sub": "prototipo"
+          }
+        },
+        "edges": {
+          "visit": "HTTPS",
+          "client": "cookies + CSRF",
+          "tx": "transacción",
+          "mail": "encola",
+          "login": "login + TOTP",
+          "admin": "sesión de admin",
+          "kit": "compila, no envía"
+        }
+      }
+    },
+    "portal": {
+      "h": "El portal de clientes",
+      "p": [
+        "Cuando un proyecto arranca, el cliente lo sigue en un portal: etapa, próximo hito, cronograma, novedades, alcance y documentos. El portal tiene dos modos, y el modo se elige al compilar."
+      ],
+      "list": [
+        "Demo: ingreso de demostración, «Mis proyectos» (tabla en escritorio, tarjetas en el celular) y el detalle de cada proyecto, con una guía de primera visita. Datos de una empresa ficticia, rotulados «Demo», y cero llamadas de red.",
+        "Conectado: registro, verificación de email, recuperación de contraseña, proyectos, solicitudes y descarga de documentos contra el backend. El export estático no lleva nada privado: cada pantalla privada se arma en el navegador después de llamar a la API."
+      ],
+      "diagram": {
+        "title": "Demo o conectado: lo decide el build",
+        "caption": "El portal interno sigue la misma idea con un archivo de configuración validado: si está mal, muestra un error en vez de caer en la demo.",
+        "nodes": {
+          "code": {
+            "label": "Eclipse-Web",
+            "sub": "un solo código"
+          },
+          "build": {
+            "label": "next build",
+            "sub": "lee 2 variables",
+            "note": "Conectado solo si hay una URL de API válida y el modo dice live. Cualquier otra combinación da la demo: nunca un portal conectado a medias."
+          },
+          "demo": {
+            "label": "Build demo",
+            "sub": "GitHub Pages",
+            "note": "No hace ni una llamada de red: datos ficticios rotulados «Demo» y un aviso visible de vista de demostración."
+          },
+          "fixtures": {
+            "label": "Datos demo",
+            "sub": "ficticios"
+          },
+          "live": {
+            "label": "Conectado",
+            "sub": "Hostinger",
+            "note": "Las cookies son SameSite=Lax y solo viajan dentro del mismo sitio: por eso la versión conectada vive en el dominio de la API."
+          },
+          "api": {
+            "label": "API",
+            "sub": "Eclipse-be"
+          }
+        },
+        "edges": {
+          "compile": "compila",
+          "demo": "falta una",
+          "nonet": "cero red",
+          "live": "las dos",
+          "link": "mismo sitio"
+        }
+      }
+    },
+    "backend": {
+      "h": "El backend",
+      "p": [
+        "Una API propia en Node y Express, con PostgreSQL a través de Prisma. La construí en nueve fases, todas integradas:"
+      ],
+      "list": [
+        "Cuentas de clientes: registro, verificación de email, recuperación de contraseña y sesiones revocables.",
+        "Catálogo versionado, presupuestos y solicitudes de plan que se revisan.",
+        "Proyectos con seña obligatoria, hitos, novedades que se publican a mano, alcance versionado y una auditoría a la que solo se le agregan filas.",
+        "CRM interno: prospectos, embudo, lotes de contacto, agenda e indicadores; un prospecto pasa a proyecto en una sola transacción.",
+        "Comunicaciones manuales, documentos y una importación revisada del respaldo del portal interno.",
+        "Segundo factor TOTP para administradores, un servidor de pruebas de punta a punta y la preparación para desplegar."
+      ]
+    },
+    "journey": {
+      "p": [
+        "Enumeré en su OpenAPI 117 operaciones sobre 97 rutas; el esquema tiene 28 modelos y 7 migraciones. El flujo central es este: un pedido que llega desde la web y, si hay acuerdo, se convierte en un proyecto."
+      ],
+      "diagram": {
+        "title": "Del pedido al proyecto",
+        "caption": "Cada revisión viaja con la versión que vio el operador, y cada alta con una clave de idempotencia: un reintento no duplica nada.",
+        "groups": {
+          "before": "Antes del acuerdo",
+          "after": "Después de la seña"
+        },
+        "nodes": {
+          "order": {
+            "label": "Su pedido",
+            "sub": "en Eclipse-Web"
+          },
+          "req": {
+            "label": "Solicitud",
+            "sub": "API recalcula",
+            "note": "El navegador manda la selección, nunca precios. La API recalcula desde su catálogo congelado y rechaza un catálogo viejo."
+          },
+          "review": {
+            "label": "Revisión",
+            "sub": "portal interno"
+          },
+          "accepted": {
+            "label": "Aceptada",
+            "sub": "no crea nada",
+            "note": "Aceptar registra una decisión: no crea proyecto, cobro, email ni WhatsApp."
+          },
+          "deal": {
+            "label": "Acuerdo + seña",
+            "sub": "1 transacción",
+            "note": "Organización, proyecto, alcance v1, seña, miembros y auditoría nacen juntos. Si algo falla, no queda nada."
+          },
+          "project": {
+            "label": "Proyecto",
+            "sub": "5 etapas"
+          },
+          "ops": {
+            "label": "Portal interno",
+            "sub": "mueve y publica"
+          },
+          "client": {
+            "label": "Portal de clientes",
+            "sub": "solo lo publicado",
+            "note": "Ve etapa, alcance aprobado, hitos visibles y novedades publicadas. Nunca plata, notas internas ni nombres del equipo."
+          }
+        },
+        "edges": {
+          "deal": "propuesta escrita",
+          "born": "lo crea",
+          "write": "etapas, hitos, novedades",
+          "read": "lee"
+        }
+      }
+    },
+    "stages": {
+      "title": "Las cinco etapas",
+      "caption": "Mismas etapas y mismas definiciones en los dos portales, y cada una se dibuja como una fase del eclipse: la luna tapa el sol a medida que el proyecto avanza, y la totalidad es la entrega. Fuera de las cinco: Soporte (solo con mantenimiento), En pausa y Cerrado, siempre con su motivo.",
+      "steps": [
+        {
+          "actor": "Eclipse + cliente",
+          "t": "Preparación",
+          "d": "Arranca con la seña: insumos, accesos y plan de trabajo."
+        },
+        {
+          "actor": "Eclipse",
+          "t": "Construcción",
+          "d": "Lo que dice el alcance aprobado, en un entorno de prueba."
+        },
+        {
+          "actor": "Eclipse",
+          "t": "Revisión de Eclipse",
+          "d": "QA interno: celulares, velocidad, textos, formularios y enlaces."
+        },
+        {
+          "actor": "Cliente",
+          "t": "Revisión del cliente",
+          "d": "Aprueba o pide ajustes dentro del alcance; su aprobación queda registrada."
+        },
+        {
+          "actor": "Eclipse + cliente",
+          "t": "Entrega",
+          "d": "Publicación, accesos, documentación y capacitación."
+        }
+      ]
+    },
+    "ops": {
+      "h": "La operación interna",
+      "p": [
+        "Un portal para una sola persona: yo. HTML y JavaScript nativos, sin framework ni build, con el mismo sistema visual que el portal de clientes. Tiene modo demo, con datos en el navegador, y modo conectado al backend, con ingreso por contraseña y código TOTP. Cada sección se suma por un contrato de registro: id, navegación, permiso, render y mutaciones."
+      ],
+      "list": [
+        "Solicitudes: los pedidos que llegan desde la web, con su presupuesto provisorio, una respuesta pública y una nota interna. Crear el proyecto es un paso aparte y explícito.",
+        "Proyectos: las cinco etapas del cliente, pausa y cierre, hitos (mostrarle uno al cliente pide confirmación), novedades que nacen como borrador y se publican confirmando, alcance y pedidos de cambio.",
+        "Prospectos y lotes: un embudo que calcula la próxima acción (llamar el mismo día que responde, propuesta dentro de las 24 h, recordatorios a los 2, 5 y 9 días) y lotes de contacto con su cadencia. El sistema no envía nada solo.",
+        "Hoy y calendario: lo que vence hoy y el mes, con avisos cuando dos cosas chocan.",
+        "Comunicaciones: un editor por proyecto en tres idiomas, con la vista previa exacta del servidor. El email se sigue hasta «aceptado por SMTP»; WhatsApp es un enlace wa.me, y marcarlo como enviado es una declaración de una persona.",
+        "Documentos e importación: subir, mostrar u ocultar al cliente y descargar con verificación SHA-256; importar el respaldo del modo demo con una revisión registro por registro."
+      ]
+    },
+    "kit": {
+      "p": [
+        "El kit de emails es la pieza más chica: un compilador local de emails de propuesta para prospectos, en HTML con estilos en línea y en texto plano, con una galería estática y la identidad visual de la web. El build es determinista y sin rastreadores. Para exportar un email listo para enviar tiene que pasar varias puertas: remitente real, prospecto revisado y no ficticio, enlaces HTTPS verificados.",
+        "Es un prototipo: nunca envió nada, y decidí rehacerlo. Los emails del sistema (verificación, recuperación de contraseña, comunicaciones) no salen de acá: los arma el backend."
+      ]
+    },
+    "session": {
+      "h": "La sesión, paso a paso",
+      "p": [
+        "Clientes y administradores usan el mismo modelo, con claves separadas: la sesión vive en cookies HttpOnly que JavaScript no puede leer, y el token CSRF, solo en memoria. Si dos pedidos vencen a la vez, comparten un único refresh: rotar dos veces el mismo revocaría la sesión."
+      ],
+      "seq": {
+        "title": "Del login al refresh",
+        "caption": "Ni tokens, ni CSRF, ni contraseñas tocan localStorage, sessionStorage o la URL, y los tests lo verifican. Si el refresh se rechaza, vuelve al login; un corte de red durante el refresh no cierra la sesión. El administrador suma un código TOTP antes de recibir la sesión.",
+        "lanes": {
+          "portal": "Portal web",
+          "api": "API",
+          "db": "PostgreSQL"
+        },
+        "msgs": {
+          "csrf": "pide un token CSRF previo",
+          "login": "login + X-CSRF-Token",
+          "check": "Argon2id, límites por IP y email",
+          "store": "sesión + hash del refresh",
+          "cookies": "cookies HttpOnly + CSRF de sesión",
+          "call": "pedido + X-CSRF-Token",
+          "expired": "401: venció el acceso",
+          "refresh": "un refresh compartido y un reintento",
+          "rotate": "rota; si se reusa, revoca la familia"
+        }
+      }
+    },
+    "security": {
+      "h": "Seguridad",
+      "p": [
+        "Hay cuentas, documentos y datos de proyectos, así que la seguridad está en el diseño de cada capa, no agregada al final."
+      ],
+      "items": [
+        {
+          "t": "Credenciales fuera del alcance de JavaScript",
+          "d": "Sesión en cookies HttpOnly, Secure y SameSite=Lax; el CSRF vive en memoria. Ni Bearer ni tokens de sesión en storage, JSON o URLs."
+        },
+        {
+          "t": "Contraseñas y refresh",
+          "d": "Argon2id con parámetros fijos y un hash de relleno para cuentas que no existen. El refresh rota en cada uso, se guarda solo como hash, y reusar uno viejo revoca toda la familia."
+        },
+        {
+          "t": "Administradores fuera de la base",
+          "d": "Viven solo en el entorno del servidor, con claves y audiencias JWT propias, permisos granulares y TOTP implementado con node:crypto, sin dependencias. Cada código vale una sola vez."
+        },
+        {
+          "t": "Autorización por objeto",
+          "d": "Cada consulta del cliente filtra por dueño o miembro: un id ajeno y uno inexistente dan el mismo 404. Las respuestas salen de una lista blanca de campos."
+        },
+        {
+          "t": "Enlaces que un escáner no quema",
+          "d": "Verificación y recuperación con tokens aleatorios en el fragmento de la URL. La web los borra de la barra al instante, y solo los consume un POST cuando la persona hace clic."
+        },
+        {
+          "t": "Bordes del servidor",
+          "d": "Origin exacto, CORS sin comodín, límites por IP y por email, Helmet, no-store y validación estricta con Zod. Los logs excluyen cuerpos, cookies, SQL y queries."
+        },
+        {
+          "t": "Base de datos",
+          "d": "TLS verificado, un rol de runtime sin permisos de esquema, auditoría y alcance que solo admiten filas nuevas, y emails guardados con AES-256-GCM hasta que salen."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        {
+          "t": "Un código, dos modos elegidos al compilar",
+          "why": "GitHub Pages y la API quedan en sitios distintos, y las cookies SameSite=Lax no viajarían entre ellos. Por eso Pages publica la demo, sin red, y la versión conectada vive en el mismo dominio que la API.",
+          "alt": "Conectar el portal publicado en GitHub Pages: sería cross-site."
+        },
+        {
+          "t": "El navegador manda la selección, nunca precios",
+          "why": "La API recalcula el presupuesto en centavos desde un catálogo versionado y congelado. Un test exige que coincida con el de la web al centavo en 183 selecciones, y la web bloquea el envío si los dos catálogos difieren."
+        },
+        {
+          "t": "El proyecto nace con acuerdo y seña, y lo cuida la base",
+          "why": "Ningún paso comercial pasa de forma implícita: aceptar una solicitud no crea nada, y un trigger diferido de PostgreSQL rechaza un proyecto sin seña cobrada aunque alguien escriba SQL por fuera de la aplicación."
+        },
+        {
+          "t": "Administradores solo en el entorno del servidor",
+          "why": "Un registro en la base nunca autoriza administración, y un JWT de cliente bien firmado no sirve como admin. El costo asumido: sesiones de admin en memoria y una sola instancia; escalar pide un almacén compartido.",
+          "alt": "Roles o permisos de administración en la tabla de clientes."
+        },
+        {
+          "t": "Documentos dentro de PostgreSQL",
+          "why": "El disco de Render es efímero, y así el respaldo, la restauración y las transacciones quedan juntos. El formato de cada archivo se verifica por su firma.",
+          "alt": "Un almacén de objetos (S3 o R2) por ahora: queda como una decisión aparte."
+        },
+        {
+          "t": "Rendimiento medido, no supuesto",
+          "why": "Hidratación diferida debajo del pliegue y un solo IntersectionObserver compartido en lugar de unos 56 ScrollTriggers. Dos reglas de CSS (:has() sobre html y scroll-behavior global) se fueron porque, medidas, re-estilaban todo el documento.",
+          "alt": "Three.js para la corona del eclipse: OGL es unas diez veces más liviano."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "Cada repo tiene su CI. En cada PR, el backend corre npm audit, formato, lint, tipos, build, tests y una base PostgreSQL con un rol de mínimos privilegios. La web se publica en Hostinger con respaldo previo, pruebas de humo y vuelta atrás automática si algo falla."
+      ],
+      "items": [
+        {
+          "n": "463",
+          "u": "tests",
+          "d": "Eclipse-Web: landing y portal de clientes"
+        },
+        {
+          "n": "779",
+          "u": "tests",
+          "d": "Backend: unitarias y HTTP"
+        },
+        {
+          "n": "132",
+          "u": "tests",
+          "d": "Portal interno"
+        },
+        {
+          "n": "183",
+          "u": "casos",
+          "d": "Presupuestos que la web y la API tienen que calcular igual, al centavo"
+        }
+      ],
+      "note": "Corrí las tres suites el 28/10/2026: Eclipse-Web 463 en verde (más 1 que se omite a propósito), backend 779 y portal interno 132. Los 183 casos son un fixture que enumeré; corren dentro de los tests del backend. Las pruebas contra PostgreSQL y los recorridos en navegador los enumeré, pero no los corrí."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Web y portal de clientes",
+          "items": [
+            "TypeScript",
+            "Next.js 16 (export estático)",
+            "React 19",
+            "next-intl",
+            "Tailwind CSS 4",
+            "GSAP",
+            "OGL (WebGL)",
+            "Web Audio"
+          ]
+        },
+        {
+          "k": "Backend",
+          "items": [
+            "Node 22",
+            "Express 5",
+            "TypeScript",
+            "Prisma 7",
+            "PostgreSQL",
+            "Zod",
+            "Argon2id",
+            "JWT en cookies",
+            "Nodemailer",
+            "OpenAPI"
+          ]
+        },
+        {
+          "k": "Portal interno",
+          "items": [
+            "HTML",
+            "CSS",
+            "JavaScript (módulos ES)",
+            "sin build"
+          ]
+        },
+        {
+          "k": "Kit de emails",
+          "items": [
+            "Node",
+            "Zod",
+            "html-to-text"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Vitest",
+            "supertest",
+            "node:test",
+            "Playwright",
+            "axe-core",
+            "ESLint",
+            "Prettier",
+            "GitHub Actions"
+          ]
+        }
       ]
     },
     "gallery": {
@@ -65,6 +577,20 @@
           "caption": "Operación interna: el calendario y la agenda del día. Datos de ejemplo."
         }
       }
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "En desarrollo. La landing está publicada en eclipse-business.com; el resto sigue en construcción.",
+        "No hay clientes, usuarios ni resultados comerciales para mostrar, y no los invento. Cada negocio de las demos y de los datos de ejemplo es ficticio y lo dice.",
+        "El backend está completo hasta su fase 9 y listo para desplegar, pero no tiene despliegue automático: no afirmo que esté en producción.",
+        "El portal de clientes conectado no se usó con clientes reales. Registrarse necesita SMTP, que viene apagado por defecto.",
+        "La demo simula el chatbot y los seguimientos por WhatsApp con datos locales: no corren de verdad.",
+        "No hay pagos en el sitio, ni enlace de pago ni suscripciones. Los niveles mensuales todavía no se pueden pedir a través del backend.",
+        "Un email nunca figura como «entregado», solo como «aceptado por SMTP», y WhatsApp siempre lo abre una persona.",
+        "Todavía no hay una Content-Security-Policy en los sitios estáticos, ni analítica: hoy no se guarda ningún evento.",
+        "Soy la única persona en el proyecto: producto, diseño y desarrollo."
+      ]
     }
   }
 }

@@ -11,9 +11,11 @@ const LINKS = [
   ['recorrido', 'journey'],
   ['laboratorio', 'lab'],
   ['metodo', 'method'],
+  ['negocio', 'business'],
   ['sistema', 'system'],
   ['contacto', 'contact'],
 ] as const;
+const href = (id: string) => (id === 'negocio' ? '/negocio' : `/#${id}`);
 
 export function Header({ locale }: { locale: Locale }) {
   const t = useTranslations('header');
@@ -27,13 +29,13 @@ export function Header({ locale }: { locale: Locale }) {
           <Monogram className="site-header__mark" />
         </Link>
         <nav aria-label={n('label')} className="site-header__links">
-          {LINKS.map(([id, key]) => <Link key={id} href={`/#${id}`}>{n(key)}</Link>)}
+          {LINKS.map(([id, key]) => <Link key={id} href={href(id)}>{n(key)}</Link>)}
         </nav>
         <div className="site-header__nav">
           <details className="site-header__menu">
             <summary>{n('menu')}</summary>
             <nav aria-label={n('label')}>
-              {LINKS.map(([id, key]) => <Link key={id} href={`/#${id}`}>{n(key)}</Link>)}
+              {LINKS.map(([id, key]) => <Link key={id} href={href(id)}>{n(key)}</Link>)}
             </nav>
           </details>
           <LocaleSwitch current={locale} locales={routing.locales} label={t('language')} />

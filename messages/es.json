@@ -101,7 +101,8 @@
     "contact": "Contacto",
     "menu": "Secciones",
     "label": "Secciones de la página",
-    "what": "Qué hago"
+    "what": "Qué hago",
+    "business": "Negocio"
   },
   "journey": {
     "label": "03 · Recorrido",
@@ -282,23 +283,9 @@
         "short": "Entregar"
       }
     ],
-    "readsTitle": "Influencias",
-    "readsNote": "Lecturas y aprendizaje, no certificaciones. No las cuento como práctica hasta tener un ejemplo.",
-    "reads": [
-      {
-        "title": "The Lean Startup",
-        "state": "Leído"
-      },
-      {
-        "title": "The Mom Test",
-        "state": "Leído"
-      },
-      {
-        "title": "SPIN Selling",
-        "state": "Leyendo"
-      }
-    ],
-    "cycle": "Un ciclo, no una línea: lo que aprendo al entregar vuelve a entrar como problema."
+    "readsTitle": "Libros que aplico",
+    "cycle": "Un ciclo, no una línea: lo que aprendo al entregar vuelve a entrar como problema.",
+    "readsMore": "Ver los modelos y cómo los aplico"
   },
   "system": {
     "label": "06 · Sistema",
@@ -598,6 +585,239 @@
         "t": "Interfaces con oficio",
         "d": "Sistemas visuales, accesibilidad y motion en código: GSAP, WebGL y audio sintetizado.",
         "proof": "Kinetic Studio y el tráiler de este sitio"
+      }
+    }
+  },
+  "business": {
+    "metaTitle": "Cómo pienso el negocio — Ignacio Gauna",
+    "metaDescription": "Los modelos de The Lean Startup, The Mom Test y Blue Ocean Strategy que uso, y dónde los apliqué: HandyX y Eclipse.",
+    "back": "Volver al portafolio",
+    "label": "Negocio",
+    "title": "Cómo pienso el negocio.",
+    "lead": "Tres libros que cambiaron cómo construyo. De cada uno, los modelos que más uso y dónde los apliqué en mis proyectos.",
+    "note": "Los ejemplos salen de mis proyectos. Donde no hay datos, lo digo; no invento métricas.",
+    "toc": "Libros",
+    "models": "Los modelos",
+    "apply": "Cómo lo aplico",
+    "see": "Ver el caso",
+    "reading": "Leyendo ahora: SPIN Selling, de Neil Rackham, sobre ventas consultivas.",
+    "books": {
+      "lean": {
+        "kicker": "Eric Ries · 2011",
+        "title": "The Lean Startup",
+        "idea": "Un producto nuevo es un experimento. Lo que se construye importa menos que lo que se aprende, y la velocidad que importa es la de cada vuelta.",
+        "models": [
+          {
+            "t": "Construir · Medir · Aprender",
+            "d": "El ciclo central: convertir una idea en producto, medir cómo responde la gente y aprender si seguir o cambiar. Se planifica al revés: qué quiero aprender, qué tengo que medir y recién ahí qué construir."
+          },
+          {
+            "t": "Las hipótesis de fe",
+            "d": "Dos supuestos sostienen todo: el de valor (¿le sirve a alguien?) y el de crecimiento (¿cómo llega a más gente?). Primero se prueba el más riesgoso."
+          },
+          {
+            "t": "Producto mínimo viable",
+            "d": "La versión más chica que permite dar una vuelta completa del ciclo. No es un producto a medias: es un experimento con un objetivo."
+          },
+          {
+            "t": "Pivotar o perseverar",
+            "d": "Con lo aprendido se decide: seguir el camino o cambiar una pieza de la estrategia sin tirar todo lo demás."
+          },
+          {
+            "t": "Métricas accionables y lotes chicos",
+            "d": "Medir lo que cambia una decisión, no lo que se ve lindo. Y entregar en lotes chicos para equivocarse barato y temprano."
+          }
+        ],
+        "loop": {
+          "build": "Construir",
+          "measure": "Medir",
+          "learn": "Aprender",
+          "product": "Producto",
+          "data": "Datos",
+          "ideas": "Ideas",
+          "center": "menos tiempo por vuelta",
+          "caption": "El ciclo Construir · Medir · Aprender: lo que importa es cuánto tarda cada vuelta."
+        },
+        "fork": {
+          "go": "Perseverar",
+          "pivot": "Pivotar",
+          "learn": "Lo aprendido",
+          "caption": "Pivotar o perseverar: lo aprendido decide la rama."
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Primero la demanda, después la app",
+            "d": "Antes de construir la app, una landing con lista de espera y preregistro de especialistas. Su único objetivo son preregistros reales: es el primer experimento sobre la hipótesis de valor."
+          },
+          {
+            "where": "HandyX",
+            "t": "Nada de métricas de vanidad",
+            "d": "El contador público aparece recién desde 20 anotados y redondea hacia abajo. Prefiero un número chico y honesto a uno inflado."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Lotes chicos con criterio de aceptación",
+            "d": "Cada cambio es un lote con su especificación, su criterio de aceptación y una puerta de aprobación. Equivocarse cuesta un lote, no un proyecto."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Mostrar antes de hablar",
+            "d": "La web muestra demos del negocio funcionando antes de proponer nada: es la forma más corta de saber si le interesa a quien la ve."
+          }
+        ]
+      },
+      "mom": {
+        "kicker": "Rob Fitzpatrick · 2013",
+        "title": "The Mom Test",
+        "idea": "Cómo hablar con clientes sin que te mientan, aunque sea por cariño: si le preguntás a tu mamá si tu idea es buena, te va a decir que sí.",
+        "models": [
+          {
+            "t": "Las tres reglas",
+            "d": "Hablá de su vida, no de tu idea. Preguntá por hechos concretos del pasado, no por opiniones ni por el futuro. Hablá menos y escuchá más."
+          },
+          {
+            "t": "Datos que engañan",
+            "d": "Los cumplidos, las generalidades («siempre», «usaría», «pagaría») y los pedidos de funciones sin el porqué. Cuando aparecen, hay que volver a lo concreto."
+          },
+          {
+            "t": "Compromiso y avance",
+            "d": "Una conversación vale por lo que la otra persona pone en juego: tiempo, reputación o plata. Si termina sin un próximo paso, no avanzó."
+          }
+        ],
+        "swap": {
+          "bad": "Mala pregunta",
+          "good": "Mejor pregunta",
+          "items": [
+            {
+              "bad": "¿Usarías una app para conseguir más trabajos?",
+              "good": "¿Cómo conseguiste tus últimos tres trabajos?"
+            },
+            {
+              "bad": "¿Te gustaría ver el precio antes de confirmar?",
+              "good": "¿Qué pasó la última vez que te cobraron algo que no esperabas?"
+            },
+            {
+              "bad": "¿Te parece una buena idea?",
+              "good": "¿Qué probaste para resolver esto, y por qué lo dejaste?"
+            }
+          ],
+          "caption": "Preguntas de ejemplo para un especialista o un vecino. Ilustran la regla; no son una encuesta real."
+        },
+        "ladder": {
+          "title": "La escalera del compromiso",
+          "steps": [
+            {
+              "t": "Cumplido",
+              "d": "«Qué buena idea.» No compromete nada."
+            },
+            {
+              "t": "Tiempo",
+              "d": "Una segunda charla, una prueba con fecha."
+            },
+            {
+              "t": "Reputación",
+              "d": "Te presenta a otra persona o a quien decide."
+            },
+            {
+              "t": "Plata",
+              "d": "Una seña, una preventa, un pago."
+            }
+          ]
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Compromiso, no cumplidos",
+            "d": "En el portal interno un intento sin respuesta no cambia el estado: solo una conversación real avanza, y un especialista queda «comprometido» recién con una fecha de alta acordada."
+          },
+          {
+            "where": "Trabajo",
+            "t": "Escuchar en el lugar",
+            "d": "En abril de 2026 viajé a Buenos Aires para una jornada presencial con clientes: demos, alineación y conversación directa sobre sus desafíos reales."
+          }
+        ]
+      },
+      "blue": {
+        "kicker": "W. Chan Kim y Renée Mauborgne · 2005",
+        "title": "Blue Ocean Strategy",
+        "idea": "En vez de pelear por el mismo mercado (el océano rojo), crear un espacio donde la competencia deja de importar (el océano azul).",
+        "models": [
+          {
+            "t": "Innovación en valor",
+            "d": "Subir el valor para quien compra y bajar el costo al mismo tiempo, cambiando los factores en los que compite la industria."
+          },
+          {
+            "t": "El lienzo estratégico",
+            "d": "Los factores en los que compite una industria y la curva de valor de cada oferta. Una curva distinta es una estrategia distinta."
+          },
+          {
+            "t": "Las cuatro acciones",
+            "d": "Eliminar, reducir, incrementar y crear: la grilla que obliga a dejar de copiar a la competencia."
+          },
+          {
+            "t": "La secuencia estratégica",
+            "d": "Primero la utilidad para quien compra, después un precio accesible, después el costo y por último la adopción."
+          }
+        ],
+        "errc": {
+          "title": "Las cuatro acciones, aplicadas a HandyX",
+          "eliminate": "Eliminar",
+          "reduce": "Reducir",
+          "raise": "Incrementar",
+          "create": "Crear",
+          "items": {
+            "eliminate": [
+              "Los cobros sorpresa: nada extra sin tu OK.",
+              "Repartir tu teléfono: no se comparte."
+            ],
+            "reduce": [
+              "Llamar a uno por uno para pedir presupuestos: las propuestas llegan a un solo lugar."
+            ],
+            "raise": [
+              "La claridad del precio: mano de obra, materiales y tarifa, desglosados.",
+              "Saber en qué está el trabajo: seguimiento en curso."
+            ],
+            "create": [
+              "El especialista pone su precio, con una referencia sugerida.",
+              "Adicionales que se proponen y se aceptan en el chat."
+            ]
+          },
+          "caption": "Sale de lo que la landing y la demo de HandyX ya muestran."
+        },
+        "canvas": {
+          "title": "Un lienzo estratégico, en cualitativo",
+          "low": "Bajo",
+          "high": "Alto",
+          "us": "HandyX",
+          "them": "Lo de siempre",
+          "factors": [
+            "Precio claro antes de confirmar",
+            "Cobros sorpresa",
+            "Comparar propuestas",
+            "Seguimiento del trabajo",
+            "Privacidad de tu teléfono"
+          ],
+          "caption": "Lectura cualitativa para pensar la estrategia; no son datos medidos. «Lo de siempre»: preguntar a conocidos o buscar un aviso."
+        },
+        "apply": [
+          {
+            "where": "HandyX",
+            "t": "Competir en certeza",
+            "d": "En vez de competir solo por cantidad de especialistas, HandyX compite en certeza: ver el precio antes, nada extra sin tu OK y tu teléfono privado."
+          },
+          {
+            "where": "Eclipse",
+            "t": "Demostrar en vez de prometer",
+            "d": "En vez de prometer en una reunión, la web de Eclipse muestra el negocio funcionando y deja a la vista el precio, el alcance y el mantenimiento."
+          }
+        ],
+        "ocean": {
+          "red": "Océano rojo",
+          "redD": "competir por lo mismo",
+          "blueO": "Océano azul",
+          "blueD": "crear un espacio nuevo"
+        }
       }
     }
   }
