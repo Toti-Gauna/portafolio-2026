@@ -428,6 +428,38 @@
         "No hay pagos ni app móvil en estos repos. HandIA, en la demo, es un chat guionado, no un modelo de IA.",
         "Soy la única persona en el proyecto: producto, diseño y desarrollo."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "landing-recorrido": {
+          "alt": "Landing clara de Handyx con el celular de la app dibujado en código; el scroll recorre «Pedís», «Recibís propuestas claras y elegís» y «Seguís el trabajo en curso», y llega a HandIA.",
+          "caption": "Landing de Handyx: hero y «Cómo funciona» en tres pasos."
+        },
+        "portal-interno": {
+          "alt": "Portal interno con la banda «Muestra» de registros ficticios: el inicio con contadores, la lista de pre-registros filtrada por Plomería y la ficha de una especialista con su mensaje sugerido para WhatsApp.",
+          "caption": "Portal interno (muestra): inicio → pre-registros → una ficha."
+        },
+        "especialistas": {
+          "alt": "Hero azul de la página de especialistas con el título «Tus herramientas. Tu precio.», la cuenta regresiva al lanzamiento y la pantalla «Tu precio» de la app en un celular.",
+          "caption": "Página para especialistas: «Tus herramientas. Tu precio.»"
+        },
+        "app-pedido": {
+          "alt": "Pantalla de celular: se toca Plomería, Urgencia y «Pedir presupuestos»; el mapa de La Perla busca especialistas, llegan tres propuestas y se abre la lista con el total final de cada una.",
+          "caption": "Demo de la app (usuario): pedir una urgencia de plomería y recibir tres propuestas."
+        },
+        "app-turno": {
+          "alt": "Se elige la primera propuesta, se confirma el turno con confeti y el mapa muestra la ruta del especialista hasta que la llegada se marca sola.",
+          "caption": "Demo de la app (usuario): elegir una propuesta y seguir al especialista en camino."
+        },
+        "app-especialista": {
+          "alt": "Modo especialista: «Ponerme disponible», entra un pedido de plomería, se abre «Tu precio», se suman $ 2.000 al sugerido y se manda; el cliente lo elige.",
+          "caption": "Demo de la app (especialista): ponerse disponible y mandar «Tu precio»."
+        }
+      }
     }
   }
 }

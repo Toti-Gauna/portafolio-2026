@@ -6,6 +6,16 @@ import type { CaseDef } from './types';
 export const velmar: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'panel', kind: 'video', frame: 'browser', src: '/media/velmar/panel.mp4', poster: '/media/velmar/panel.jpg', w: 1280, h: 800, url: 'velmar · demo' },
+        { id: 'panel-calendario', kind: 'image', frame: 'browser', src: '/media/velmar/panel-calendario.webp', w: 1600, h: 1000, url: 'velmar · demo' },
+        { id: 'collar-en-vivo', kind: 'video', frame: 'phone', src: '/media/velmar/collar-en-vivo.mp4', poster: '/media/velmar/collar-en-vivo.jpg', w: 390, h: 844 },
+        { id: 'club-ruleta', kind: 'video', frame: 'phone', src: '/media/velmar/club-ruleta.mp4', poster: '/media/velmar/club-ruleta.jpg', w: 390, h: 844 },
+        { id: 'cupones', kind: 'image', frame: 'phone', src: '/media/velmar/cupones.webp', w: 780, h: 1688 },
+      ],
+    },
     { type: 'text', key: 'problem' },
     { type: 'checks', key: 'business' },
     {

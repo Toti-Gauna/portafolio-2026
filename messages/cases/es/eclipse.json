@@ -591,6 +591,38 @@
         "Todavía no hay una Content-Security-Policy en los sitios estáticos, ni analítica: hoy no se guarda ningún evento.",
         "Soy la única persona en el proyecto: producto, diseño y desarrollo."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "landing-recorrido": {
+          "alt": "Landing oscura de Eclipse con el eclipse animado del hero; la página baja con un scroll suave por «Cinco líneas, un solo equipo», «Empezá por lo que hoy te falta» y la sección de demos con la vista previa de Lumen Propiedades.",
+          "caption": "Landing de Eclipse: hero y recorrido por qué ofrecemos, PyME y demos."
+        },
+        "landing-proceso": {
+          "alt": "Sección «Cómo trabajamos» en fondo claro con las fases del proyecto; baja hasta preguntas y contacto y el puntero abre una pregunta del acordeón.",
+          "caption": "Cómo trabajamos y preguntas: el proceso y una respuesta desplegada."
+        },
+        "demo-lumen": {
+          "alt": "Clic en el chip «Inmobiliarias» del hero: la pantalla se oscurece, el eclipse pasa al centro y la luz abre la capa de demo; se elige «Ver por mi cuenta» y «Simular» trae una consulta nocturna a la bandeja, con la vista escritorio a la izquierda y la de celular a la derecha.",
+          "caption": "«Ver demo»: se abre la inmobiliaria Lumen (Demo) y llega una consulta simulada."
+        },
+        "portal-clientes": {
+          "alt": "Portal de clientes con el aviso de datos ficticios: la tabla «Mis proyectos» con etapas y próximos hitos; el puntero abre «Sitio web de ejemplo» y el detalle muestra etapa, próximo hito y cronograma.",
+          "caption": "Portal de clientes en modo demo: Mis proyectos → detalle de un proyecto."
+        },
+        "portal-interno": {
+          "alt": "Portal interno oscuro con datos de ejemplo: la lista de prospectos con su próxima acción, la de proyectos con sus cinco etapas y el calendario del mes; las columnas de montos están ocultas en la captura.",
+          "caption": "Portal interno en modo demostración: prospectos → proyectos → calendario."
+        },
+        "demo-lumen-visita": {
+          "alt": "Capa de demo de Lumen Propiedades (Demo) con la barra de eventos simulados arriba, el panel de escritorio y la vista de celular lado a lado, después de que el chatbot Lumi califica a la interesada y agenda la visita.",
+          "caption": "Demo Lumen después de tres eventos simulados: lead calificado y visita agendada."
+        }
+      }
     }
   }
 }

@@ -7,6 +7,17 @@ import type { CaseDef } from './types';
 export const eclipse: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'landing-recorrido', kind: 'video', frame: 'browser', src: '/media/eclipse/landing-recorrido.mp4', poster: '/media/eclipse/landing-recorrido.jpg', w: 1280, h: 800, url: 'eclipse-business.com' },
+        { id: 'landing-proceso', kind: 'video', frame: 'browser', src: '/media/eclipse/landing-proceso.mp4', poster: '/media/eclipse/landing-proceso.jpg', w: 1280, h: 800, url: 'eclipse-business.com' },
+        { id: 'demo-lumen', kind: 'video', frame: 'browser', src: '/media/eclipse/demo-lumen.mp4', poster: '/media/eclipse/demo-lumen.jpg', w: 1280, h: 800, url: 'eclipse-business.com' },
+        { id: 'portal-clientes', kind: 'video', frame: 'browser', src: '/media/eclipse/portal-clientes.mp4', poster: '/media/eclipse/portal-clientes.jpg', w: 1280, h: 800, url: 'eclipse-business.com' },
+        { id: 'portal-interno', kind: 'video', frame: 'browser', src: '/media/eclipse/portal-interno.mp4', poster: '/media/eclipse/portal-interno.jpg', w: 1280, h: 800, url: 'eclipse-business.com' },
+        { id: 'demo-lumen-visita', kind: 'image', frame: 'browser', src: '/media/eclipse/demo-lumen-visita.webp', w: 1600, h: 1000, url: 'eclipse-business.com' },
+      ],
+    },
     { type: 'flow', key: 'sell', cols: 3 },
     { type: 'checks', key: 'landing' },
     {

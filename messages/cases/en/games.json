@@ -4,15 +4,36 @@
   "status": "Test bench",
   "summary": "A test bench and catalogue of web games for live events: a projector is the screen and people's phones are the controllers. There are 18 registered, playable games out of 24 planned, in Canvas 2D, PixiJS and 3D, with deterministic physics and phone-to-projector networking without a game server.",
   "facts": [
-    { "k": "Games", "v": "18 playable out of 24 planned" },
-    { "k": "Engines", "v": "Canvas 2D · PixiJS · React Three Fiber" },
-    { "k": "Network", "v": "Star-shaped WebRTC, no game server" },
-    { "k": "Status", "v": "Test bench: not tried at a real event" }
+    {
+      "k": "Games",
+      "v": "18 playable out of 24 planned"
+    },
+    {
+      "k": "Engines",
+      "v": "Canvas 2D · PixiJS · React Three Fiber"
+    },
+    {
+      "k": "Network",
+      "v": "Star-shaped WebRTC, no game server"
+    },
+    {
+      "k": "Status",
+      "v": "Test bench: not tried at a real event"
+    }
   ],
   "tldr": [
-    { "k": "The problem", "v": "Checking whether a game looks and plays right shouldn't require opening a real session or generating a room code. With 24 games planned, that doesn't scale." },
-    { "k": "The solution", "v": "A bench that opens any game instantly, with seed, simulated latency and loss, «Force end» and FPS in view. Whatever happens is shown and thrown away." },
-    { "k": "Where it is", "v": "18 playable: 6 stable and 12 in beta, including the three 3D ones. The networked games haven't been tried on real phones yet." }
+    {
+      "k": "The problem",
+      "v": "Checking whether a game looks and plays right shouldn't require opening a real session or generating a room code. With 24 games planned, that doesn't scale."
+    },
+    {
+      "k": "The solution",
+      "v": "A bench that opens any game instantly, with seed, simulated latency and loss, «Force end» and FPS in view. Whatever happens is shown and thrown away."
+    },
+    {
+      "k": "Where it is",
+      "v": "18 playable: 6 stable and 12 in beta, including the three 3D ones. The networked games haven't been tried on real phones yet."
+    }
   ],
   "blocks": {
     "what": {
@@ -44,12 +65,34 @@
         "title": "A star-shaped match",
         "caption": "Each phone sends its input and receives state snapshots, delta-encoded against the last tick it confirmed, with interpolation and prediction. Networked play needs HTTPS: a phone won't open WebRTC on an insecure origin.",
         "nodes": {
-          "host": { "label": "Projector", "sub": "authoritative host", "note": "It simulates the match and shows the QR with room, seat and seed. The protocol drops anything that doesn't come from the host: that is game consistency, not authentication." },
-          "p1": { "label": "Phone 1", "sub": "controller" },
-          "p2": { "label": "Phone 2", "sub": "controller" },
-          "p3": { "label": "Phone 3", "sub": "runs the game", "note": "Depending on the game, the phone is a controller or runs the whole match on the device." },
-          "broker": { "label": "Signalling", "sub": "PeerJS", "note": "A public broker, only to connect: after that each phone talks directly to the projector over a DataChannel." },
-          "bc": { "label": "Local mode", "sub": "two tabs", "note": "During development, two tabs act as projector and phone over BroadcastChannel, with simulated latency and loss. The transport changes and no game notices." }
+          "host": {
+            "label": "Projector",
+            "sub": "authoritative host",
+            "note": "It simulates the match and shows the QR with room, seat and seed. The protocol drops anything that doesn't come from the host: that is game consistency, not authentication."
+          },
+          "p1": {
+            "label": "Phone 1",
+            "sub": "controller"
+          },
+          "p2": {
+            "label": "Phone 2",
+            "sub": "controller"
+          },
+          "p3": {
+            "label": "Phone 3",
+            "sub": "runs the game",
+            "note": "Depending on the game, the phone is a controller or runs the whole match on the device."
+          },
+          "broker": {
+            "label": "Signalling",
+            "sub": "PeerJS",
+            "note": "A public broker, only to connect: after that each phone talks directly to the projector over a DataChannel."
+          },
+          "bc": {
+            "label": "Local mode",
+            "sub": "two tabs",
+            "note": "During development, two tabs act as projector and phone over BroadcastChannel, with simulated latency and loss. The transport changes and no game notices."
+          }
         },
         "edges": {
           "ask": "asks to connect",
@@ -71,10 +114,26 @@
       ],
       "title": "From mount to finish",
       "steps": [
-        { "actor": "Container", "t": "Sets up the match", "d": "Room, seed, duration, seat, who is host and how the network travels. The container decides, not the game." },
-        { "actor": "Container", "t": "Mounts the game", "d": "It passes GameProps: that configuration, the settings with their defaults, the network and an abort signal. The game imports nothing from the shell." },
-        { "actor": "Game", "t": "Plays with its seed", "d": "A seeded PRNG and Rapier physics: the same seed replays the same match." },
-        { "actor": "Game", "t": "Reports exactly once", "d": "onFinish with {completed, points, durationMs, meta}. If the signal aborts, it hands over its partial result immediately." }
+        {
+          "actor": "Container",
+          "t": "Sets up the match",
+          "d": "Room, seed, duration, seat, who is host and how the network travels. The container decides, not the game."
+        },
+        {
+          "actor": "Container",
+          "t": "Mounts the game",
+          "d": "It passes GameProps: that configuration, the settings with their defaults, the network and an abort signal. The game imports nothing from the shell."
+        },
+        {
+          "actor": "Game",
+          "t": "Plays with its seed",
+          "d": "A seeded PRNG and Rapier physics: the same seed replays the same match."
+        },
+        {
+          "actor": "Game",
+          "t": "Reports exactly once",
+          "d": "onFinish with {completed, points, durationMs, meta}. If the signal aborts, it hands over its partial result immediately."
+        }
       ],
       "caption": "The three rules are in the contract's header (src/core/contract/game.ts). On the bench, the result is shown raw and thrown away."
     },
@@ -92,23 +151,62 @@
         "There is no backend and no accounts, so what matters is not to promise what isn't there."
       ],
       "items": [
-        { "t": "Nothing to store", "d": "No accounts, ranking or saved scores: the result is shown and thrown away. The day a score is worth something, it gets validated on the server, never on the client." },
-        { "t": "Authority isn't security", "d": "The projector owns the state, but anyone with the room's QR can join. I don't claim anti-cheat." },
-        { "t": "HTTPS required", "d": "WebRTC won't open on an insecure origin: Pages provides HTTPS, and locally there is a dev server with a certificate." },
-        { "t": "Wrapped localStorage", "d": "Private mode, a full quota or blocked site data throw errors, and the game still has to open." },
-        { "t": "Two third-party requests", "d": "The public signalling broker, to connect, and Google Fonts, for the typefaces." },
-        { "t": "Never published red", "d": "CI runs lint and tests before the build and the deploy: publishing with a red suite is worse than not publishing." }
+        {
+          "t": "Nothing to store",
+          "d": "No accounts, ranking or saved scores: the result is shown and thrown away. The day a score is worth something, it gets validated on the server, never on the client."
+        },
+        {
+          "t": "Authority isn't security",
+          "d": "The projector owns the state, but anyone with the room's QR can join. I don't claim anti-cheat."
+        },
+        {
+          "t": "HTTPS required",
+          "d": "WebRTC won't open on an insecure origin: Pages provides HTTPS, and locally there is a dev server with a certificate."
+        },
+        {
+          "t": "Wrapped localStorage",
+          "d": "Private mode, a full quota or blocked site data throw errors, and the game still has to open."
+        },
+        {
+          "t": "Two third-party requests",
+          "d": "The public signalling broker, to connect, and Google Fonts, for the typefaces."
+        },
+        {
+          "t": "Never published red",
+          "d": "CI runs lint and tests before the build and the deploy: publishing with a red suite is worse than not publishing."
+        }
       ]
     },
     "decisions": {
       "h": "Technical decisions",
       "items": [
-        { "t": "A minimal contract", "why": "A game receives GameProps, imports nothing from the shell, calls onFinish exactly once and, if aborted, hands over its partial result immediately." },
-        { "t": "Deterministic physics", "why": "A seeded PRNG and Rapier compiled to WASM: the same seed must give the same match, and that is what makes the netcode possible.", "alt": "Matter.js: easier to start with, but not deterministic." },
-        { "t": "Networking without a game server", "why": "WebRTC with PeerJS and the projector as host. The transport is swappable with BroadcastChannel; a TURN server only if needed.", "alt": "A game server of its own." },
-        { "t": "Test the degraded network", "why": "«A networked game that was only tested at 0 ms of latency is a game that wasn't tested»: the bench has adjustable latency and loss." },
-        { "t": "Each game in its own chunk", "why": "Rapier weighs 2.1 MB in 2D and 2.2 MB in 3D and can't be shrunk, so only whoever opens a game that uses it downloads it. Pixi and three are split out too." },
-        { "t": "Only pure-logic tests", "why": "«There are no render tests: they are expensive to maintain and don't catch the bugs that hurt in a game, which are about determinism and scoring.» The pure logic of each game, the engine and the network are tested.", "alt": "Render and e2e tests: they come in if the bench becomes critical." }
+        {
+          "t": "A minimal contract",
+          "why": "A game receives GameProps, imports nothing from the shell, calls onFinish exactly once and, if aborted, hands over its partial result immediately."
+        },
+        {
+          "t": "Deterministic physics",
+          "why": "A seeded PRNG and Rapier compiled to WASM: the same seed must give the same match, and that is what makes the netcode possible.",
+          "alt": "Matter.js: easier to start with, but not deterministic."
+        },
+        {
+          "t": "Networking without a game server",
+          "why": "WebRTC with PeerJS and the projector as host. The transport is swappable with BroadcastChannel; a TURN server only if needed.",
+          "alt": "A game server of its own."
+        },
+        {
+          "t": "Test the degraded network",
+          "why": "«A networked game that was only tested at 0 ms of latency is a game that wasn't tested»: the bench has adjustable latency and loss."
+        },
+        {
+          "t": "Each game in its own chunk",
+          "why": "Rapier weighs 2.1 MB in 2D and 2.2 MB in 3D and can't be shrunk, so only whoever opens a game that uses it downloads it. Pixi and three are split out too."
+        },
+        {
+          "t": "Only pure-logic tests",
+          "why": "«There are no render tests: they are expensive to maintain and don't catch the bugs that hurt in a game, which are about determinism and scoring.» The pure logic of each game, the engine and the network are tested.",
+          "alt": "Render and e2e tests: they come in if the bench becomes critical."
+        }
       ]
     },
     "quality": {
@@ -117,20 +215,72 @@
         "TypeScript, ESLint and a CI that runs lint, tests and the build on every push to main before publishing. Each game's definition of «done» asks for 60 fps, zero allocations per frame, reduced motion and pause: it is a goal, not a measurement of every game."
       ],
       "items": [
-        { "n": "814", "u": "tests", "d": "Pure-logic unit tests, all green" },
-        { "n": "39", "u": "files", "d": "19 for games and 20 for engines, network, contract and UI" },
-        { "n": "0", "u": "e2e", "d": "No e2e or render tests, on purpose" }
+        {
+          "n": "814",
+          "u": "tests",
+          "d": "Pure-logic unit tests, all green"
+        },
+        {
+          "n": "39",
+          "u": "files",
+          "d": "19 for games and 20 for engines, network, contract and UI"
+        },
+        {
+          "n": "0",
+          "u": "e2e",
+          "d": "No e2e or render tests, on purpose"
+        }
       ],
       "note": "I ran the unit tests with Vitest on 28/10/2026: 814 green, in 39 files. There are no e2e tests: that is a decision of the repo."
     },
     "stack": {
       "h": "Stack",
       "groups": [
-        { "k": "App", "items": ["React 19", "TypeScript", "Vite 7", "Tailwind CSS 4", "React Router (hash)"] },
-        { "k": "2D", "items": ["Canvas 2D", "PixiJS 8", "Rapier 2D (WASM)"] },
-        { "k": "3D", "items": ["three", "React Three Fiber", "drei", "Rapier 3D", "three-mesh-bvh"] },
-        { "k": "Network", "items": ["WebRTC (PeerJS)", "BroadcastChannel", "QR"] },
-        { "k": "Quality", "items": ["Vitest", "ESLint", "r3f-perf", "GitHub Actions"] }
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7",
+            "Tailwind CSS 4",
+            "React Router (hash)"
+          ]
+        },
+        {
+          "k": "2D",
+          "items": [
+            "Canvas 2D",
+            "PixiJS 8",
+            "Rapier 2D (WASM)"
+          ]
+        },
+        {
+          "k": "3D",
+          "items": [
+            "three",
+            "React Three Fiber",
+            "drei",
+            "Rapier 3D",
+            "three-mesh-bvh"
+          ]
+        },
+        {
+          "k": "Network",
+          "items": [
+            "WebRTC (PeerJS)",
+            "BroadcastChannel",
+            "QR"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "ESLint",
+            "r3f-perf",
+            "GitHub Actions"
+          ]
+        }
       ]
     },
     "gallery": {
@@ -152,6 +302,26 @@
         "No server, accounts, ranking or anti-cheat.",
         "Two problems in the network layer are still open."
       ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "ninja": {
+          "alt": "Full-screen game on a dark background: coloured shapes fly up from below and the slice trail splits them in halves while the score goes up.",
+          "caption": "Ninja (Canvas 2D): slices cutting fruit mid-air."
+        },
+        "arena-3d": {
+          "alt": "3D aerial view of a green valley with hills and houses under a sunset sky, the closing ring and the players, alive and time counters.",
+          "caption": "3D arena (React Three Fiber): aerial view of the valley with ten bot players."
+        },
+        "catalogo": {
+          "alt": "Dark \"Batería de experiencias\" catalogue with game cards (Snake, Flight, Jumper, Catapult, Ninja, Combinations, Invaders…), each with topology, engine and status, plus the side list by category.",
+          "caption": "Test bench: the game catalogue with category and topology filters."
+        }
+      }
     }
   }
 }

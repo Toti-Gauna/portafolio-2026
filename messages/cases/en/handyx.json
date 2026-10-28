@@ -428,6 +428,38 @@
         "There are no payments and no mobile app in these repos. HandIA, in the demo, is a scripted chat, not an AI model.",
         "I'm the only person on the project: product, design and development."
       ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "landing-recorrido": {
+          "alt": "Light Handyx landing with the app phone drawn in code; the scroll goes through \"Pedís\", \"Recibís propuestas claras y elegís\" and \"Seguís el trabajo en curso\", reaching HandIA.",
+          "caption": "Handyx landing: hero and the three-step \"How it works\"."
+        },
+        "portal-interno": {
+          "alt": "Internal portal with the \"Muestra\" band of fictional records: the home counters, the pre-registrations list filtered by plumbing and one specialist record with its suggested WhatsApp message.",
+          "caption": "Internal portal (sample): home → pre-registrations → a record."
+        },
+        "especialistas": {
+          "alt": "Blue hero of the specialists page with the headline \"Tus herramientas. Tu precio.\", the launch countdown and the app's \"Tu precio\" screen on a phone.",
+          "caption": "Specialists page: \"Your tools. Your price.\""
+        },
+        "app-pedido": {
+          "alt": "Phone screen: Plomería, Urgencia and \"Pedir presupuestos\" are tapped; the La Perla map searches, three proposals arrive and the list opens with each final total.",
+          "caption": "App demo (user): request an urgent plumbing job and get three proposals."
+        },
+        "app-turno": {
+          "alt": "The first proposal is picked, the booking is confirmed with confetti and the map shows the specialist's route until arrival is marked automatically.",
+          "caption": "App demo (user): pick a proposal and follow the specialist on the way."
+        },
+        "app-especialista": {
+          "alt": "Specialist mode: \"Ponerme disponible\", a plumbing request comes in, \"Tu precio\" opens, $2,000 is added to the suggestion and sent; the client picks it.",
+          "caption": "App demo (specialist): go available and send \"Tu precio\"."
+        }
+      }
     }
   }
 }

@@ -7,6 +7,14 @@ import type { CaseDef } from './types';
 export const games: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'ninja', kind: 'video', frame: 'browser', src: '/media/games/ninja.mp4', poster: '/media/games/ninja.jpg', w: 1280, h: 800, url: 'games-market · demo' },
+        { id: 'arena-3d', kind: 'video', frame: 'browser', src: '/media/games/arena-3d.mp4', poster: '/media/games/arena-3d.jpg', w: 1280, h: 800, url: 'games-market · demo' },
+        { id: 'catalogo', kind: 'image', frame: 'browser', src: '/media/games/catalogo.webp', w: 1600, h: 1000, url: 'games-market · demo' },
+      ],
+    },
     { type: 'text', key: 'plan' },
     {
       type: 'diagram', key: 'net',

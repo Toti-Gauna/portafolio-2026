@@ -322,6 +322,26 @@
         "No verifiqué que las tres presentaciones abran por su propia URL en la versión publicada.",
         "No describo sistemas, procesos ni datos internos de Telefónica."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "inscripcion": {
+          "alt": "App de eventos sobre un universo 3D violeta: «Anotarme» abre la inscripción de «Un respiro para vos», se confirma el lugar y aparece el pase con QR y el calendario; la marca del cliente y los datos de la empresa están ocultos.",
+          "caption": "Inscripción a un evento: elegir la función, confirmar y recibir el pase con QR."
+        },
+        "creador": {
+          "alt": "Tabla «Administrar experiencias»; «Crear experiencia» abre el paso 1, se elige la portada de Música y se escribe «Noche de vinilos», que aparece al instante en la tarjeta de vista previa.",
+          "caption": "Administración: el creador de eventos por pasos con vista previa en vivo."
+        },
+        "favoritos": {
+          "alt": "Página «Favoritos» con dos experiencias guardadas (Bienestar y Tecnología), buscador y un planeta 3D; la marca del cliente está oculta.",
+          "caption": "Favoritos: los eventos guardados del colaborador."
+        }
+      }
     }
   }
 }

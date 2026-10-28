@@ -6,6 +6,15 @@ import type { CaseDef } from './types';
 export const volta: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'panel', kind: 'video', frame: 'browser', src: '/media/volta/panel.mp4', poster: '/media/volta/panel.jpg', w: 1280, h: 800, url: 'volta · demo' },
+        { id: 'tienda', kind: 'video', frame: 'phone', src: '/media/volta/tienda.mp4', poster: '/media/volta/tienda.jpg', w: 390, h: 844 },
+        { id: 'club-ruleta', kind: 'video', frame: 'phone', src: '/media/volta/club-ruleta.mp4', poster: '/media/volta/club-ruleta.jpg', w: 390, h: 844 },
+        { id: 'regalar', kind: 'image', frame: 'phone', src: '/media/volta/regalar.webp', w: 780, h: 1688 },
+      ],
+    },
     { type: 'flow', key: 'loop', cols: 4 },
     {
       type: 'diagram', key: 'arch',

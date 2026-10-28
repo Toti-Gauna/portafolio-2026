@@ -7,6 +7,14 @@ export const supernova: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
     {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'inscripcion', kind: 'video', frame: 'browser', src: '/media/supernova/inscripcion.mp4', poster: '/media/supernova/inscripcion.jpg', w: 1280, h: 800, url: 'supernova-eventos · demo' },
+        { id: 'creador', kind: 'video', frame: 'browser', src: '/media/supernova/creador.mp4', poster: '/media/supernova/creador.jpg', w: 1280, h: 800, url: 'supernova-eventos · demo' },
+        { id: 'favoritos', kind: 'image', frame: 'browser', src: '/media/supernova/favoritos.webp', w: 1600, h: 1000, url: 'supernova-eventos · demo' },
+      ],
+    },
+    {
       type: 'diagram', key: 'journeys',
       spec: {
         id: 'supernova-journeys',

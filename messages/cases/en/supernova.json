@@ -322,6 +322,26 @@
         "I didn't check that the three presentations open from their own URL in the published version.",
         "I don't describe Telefónica's internal systems, processes or data."
       ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "inscripcion": {
+          "alt": "Events app over a purple 3D universe: \"Anotarme\" opens the sign-up for \"Un respiro para vos\", the place is confirmed and the pass appears with a QR code and calendar; the client's brand and company data are hidden.",
+          "caption": "Event sign-up: pick the session, confirm and get the QR pass."
+        },
+        "creador": {
+          "alt": "The \"Administrar experiencias\" table; \"Crear experiencia\" opens step 1, the Music cover is chosen and \"Noche de vinilos\" is typed, appearing at once on the preview card.",
+          "caption": "Admin: the step-by-step event creator with a live preview."
+        },
+        "favoritos": {
+          "alt": "\"Favoritos\" page with two saved experiences (wellbeing and technology), a search box and a 3D planet; the client's brand is hidden.",
+          "caption": "Favourites: the employee's saved events."
+        }
+      }
     }
   }
 }

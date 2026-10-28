@@ -4,15 +4,36 @@
   "status": "Demo",
   "summary": "El circuito administrativo de una clínica odontológica ficticia, Clínica Brisa: un portal para pacientes y un panel para recepción, profesionales y dirección, en 16 módulos. Solo frontend, con datos sintéticos: no envía mensajes, no hace llamadas ni cobra.",
   "facts": [
-    { "k": "Tipo", "v": "Demo solo frontend, sin red" },
-    { "k": "Módulos", "v": "16 (M01–M16), contados en el código" },
-    { "k": "Datos", "v": "Sintéticos, con un reloj de muestra fijo" },
-    { "k": "Estado", "v": "Demo · lotes 1 a 6 de 10 cerrados" }
+    {
+      "k": "Tipo",
+      "v": "Demo solo frontend, sin red"
+    },
+    {
+      "k": "Módulos",
+      "v": "16 (M01–M16), contados en el código"
+    },
+    {
+      "k": "Datos",
+      "v": "Sintéticos, con un reloj de muestra fijo"
+    },
+    {
+      "k": "Estado",
+      "v": "Demo · lotes 1 a 6 de 10 cerrados"
+    }
   ],
   "tldr": [
-    { "k": "El problema", "v": "En una clínica, un turno que se reprograma por WhatsApp pierde su recordatorio, un control de ortodoncia queda sin turno y un presupuesto queda sin respuesta." },
-    { "k": "Lo que muestra", "v": "Que cada consulta tenga un próximo paso: turnos que cambian sin perderse, recordatorios que se anulan y se reprograman, lista de espera y campañas con reglas." },
-    { "k": "Dónde está", "v": "Demo local, sin backend. No es software clínico: la amplitud de la demo no es una promesa de alcance." }
+    {
+      "k": "El problema",
+      "v": "En una clínica, un turno que se reprograma por WhatsApp pierde su recordatorio, un control de ortodoncia queda sin turno y un presupuesto queda sin respuesta."
+    },
+    {
+      "k": "Lo que muestra",
+      "v": "Que cada consulta tenga un próximo paso: turnos que cambian sin perderse, recordatorios que se anulan y se reprograman, lista de espera y campañas con reglas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Demo local, sin backend. No es software clínico: la amplitud de la demo no es una promesa de alcance."
+    }
   ],
   "blocks": {
     "what": {
@@ -35,12 +56,36 @@
       ],
       "title": "Reprogramar sin perder el turno",
       "steps": [
-        { "actor": "Paciente", "t": "Pide el cambio", "d": "«Quiero cambiar mi turno»: el chat reconoce la intención con reglas locales, sin IA." },
-        { "actor": "Dominio", "t": "Conserva el anterior", "d": "Si el horario elegido está ocupado, el turno original sigue en pie." },
-        { "actor": "Disponibilidad", "t": "Valida el nuevo cupo", "d": "Profesional, sillón, sede, duración, anticipación mínima y que no esté en el pasado." },
-        { "actor": "Paciente", "t": "Confirma", "d": "Ve el antes y el después. El turno A-0012 pasa a la versión 2, con el mismo ID." },
-        { "actor": "Outbox", "t": "Recordatorios", "d": "El recordatorio de la versión 1 se anula y se programa el de la 2." },
-        { "actor": "Recepción", "t": "Lo ve en la agenda", "d": "A-0012 v2 aparece en el panel, con su outbox y su auditoría." }
+        {
+          "actor": "Paciente",
+          "t": "Pide el cambio",
+          "d": "«Quiero cambiar mi turno»: el chat reconoce la intención con reglas locales, sin IA."
+        },
+        {
+          "actor": "Dominio",
+          "t": "Conserva el anterior",
+          "d": "Si el horario elegido está ocupado, el turno original sigue en pie."
+        },
+        {
+          "actor": "Disponibilidad",
+          "t": "Valida el nuevo cupo",
+          "d": "Profesional, sillón, sede, duración, anticipación mínima y que no esté en el pasado."
+        },
+        {
+          "actor": "Paciente",
+          "t": "Confirma",
+          "d": "Ve el antes y el después. El turno A-0012 pasa a la versión 2, con el mismo ID."
+        },
+        {
+          "actor": "Outbox",
+          "t": "Recordatorios",
+          "d": "El recordatorio de la versión 1 se anula y se programa el de la 2."
+        },
+        {
+          "actor": "Recepción",
+          "t": "Lo ve en la agenda",
+          "d": "A-0012 v2 aparece en el panel, con su outbox y su auditoría."
+        }
       ],
       "caption": "Todo pasa en el navegador: ningún mensaje sale de verdad."
     },
@@ -65,15 +110,46 @@
         "title": "Un solo estado, cambiado por comandos",
         "caption": "Sin backend, base de datos, IA, autenticación, mensajes, llamadas, cobros ni analytics. Se publica en GitHub Pages desde la CI.",
         "nodes": {
-          "portal": { "label": "Portal", "sub": "6 módulos" },
-          "panel": { "label": "Panel", "sub": "10 módulos" },
-          "store": { "label": "DemoStore", "sub": "un estado" },
-          "ls": { "label": "localStorage", "sub": "envelope", "note": "Versionado y validado al hidratar. Si está dañado se avisa y se puede restaurar; sin acceso, la demo sigue en memoria; si otra pestaña lo cambia, se avisa." },
-          "domain": { "label": "Dominio puro", "sub": "59 comandos", "note": "Cada comando se aplica sobre una copia del estado: si falla, la copia se descarta entera." },
-          "clock": { "label": "Reloj", "sub": "UTC−03:00", "note": "Un reloj de muestra inyectado: ESLint prohíbe Date.now y Math.random, así la demo se reproduce igual cada vez." },
-          "sched": { "label": "Cupos", "sub": "sin solapes" },
-          "outbox": { "label": "Outbox", "sub": "simulado", "note": "Recordatorios, ofertas y campañas con una clave por turno, versión y tipo: no se duplican y ninguno sale del navegador." },
-          "audit": { "label": "Auditoría", "sub": "commandId" }
+          "portal": {
+            "label": "Portal",
+            "sub": "6 módulos"
+          },
+          "panel": {
+            "label": "Panel",
+            "sub": "10 módulos"
+          },
+          "store": {
+            "label": "DemoStore",
+            "sub": "un estado"
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "envelope",
+            "note": "Versionado y validado al hidratar. Si está dañado se avisa y se puede restaurar; sin acceso, la demo sigue en memoria; si otra pestaña lo cambia, se avisa."
+          },
+          "domain": {
+            "label": "Dominio puro",
+            "sub": "59 comandos",
+            "note": "Cada comando se aplica sobre una copia del estado: si falla, la copia se descarta entera."
+          },
+          "clock": {
+            "label": "Reloj",
+            "sub": "UTC−03:00",
+            "note": "Un reloj de muestra inyectado: ESLint prohíbe Date.now y Math.random, así la demo se reproduce igual cada vez."
+          },
+          "sched": {
+            "label": "Cupos",
+            "sub": "sin solapes"
+          },
+          "outbox": {
+            "label": "Outbox",
+            "sub": "simulado",
+            "note": "Recordatorios, ofertas y campañas con una clave por turno, versión y tipo: no se duplican y ninguno sale del navegador."
+          },
+          "audit": {
+            "label": "Auditoría",
+            "sub": "commandId"
+          }
         },
         "edges": {
           "portalCmd": "dispatch",
@@ -122,23 +198,61 @@
         "Una demo de salud tiene que ser discreta aunque sus datos sean inventados. Los límites están en el build y en el linter, no solo en la documentación."
       ],
       "items": [
-        { "t": "Sin red", "d": "La CSP del build declara connect-src 'none', frame-src 'none' y form-action 'none', y ESLint prohíbe fetch." },
-        { "t": "Sin HTML arbitrario", "d": "ESLint prohíbe dangerouslySetInnerHTML, y el estado guardado se valida estructuralmente antes de usarse." },
-        { "t": "Sin datos personales", "d": "IDs de muestra en lugar de documentos. Sin fotos, radiografías, mapas, embeds, CDN ni tracking; fuentes e íconos locales." },
-        { "t": "Roles que son vistas", "d": "Cambiar de rol cambia la pantalla, no los permisos: no hay autenticación y no se presenta como seguridad." },
-        { "t": "Mensajes discretos", "d": "Las plantillas no llevan tratamientos, diagnósticos ni importes, y una regla rechaza el tono alarmista y el detalle clínico." },
-        { "t": "Límites clínicos", "d": "Sin diagnóstico, triage ni recomendaciones de tratamiento, y sin micrófono. El arte dental lleva «revisión odontológica pendiente»." }
+        {
+          "t": "Sin red",
+          "d": "La CSP del build declara connect-src 'none', frame-src 'none' y form-action 'none', y ESLint prohíbe fetch."
+        },
+        {
+          "t": "Sin HTML arbitrario",
+          "d": "ESLint prohíbe dangerouslySetInnerHTML, y el estado guardado se valida estructuralmente antes de usarse."
+        },
+        {
+          "t": "Sin datos personales",
+          "d": "IDs de muestra en lugar de documentos. Sin fotos, radiografías, mapas, embeds, CDN ni tracking; fuentes e íconos locales."
+        },
+        {
+          "t": "Roles que son vistas",
+          "d": "Cambiar de rol cambia la pantalla, no los permisos: no hay autenticación y no se presenta como seguridad."
+        },
+        {
+          "t": "Mensajes discretos",
+          "d": "Las plantillas no llevan tratamientos, diagnósticos ni importes, y una regla rechaza el tono alarmista y el detalle clínico."
+        },
+        {
+          "t": "Límites clínicos",
+          "d": "Sin diagnóstico, triage ni recomendaciones de tratamiento, y sin micrófono. El arte dental lleva «revisión odontológica pendiente»."
+        }
       ]
     },
     "decisions": {
       "h": "Decisiones técnicas",
       "items": [
-        { "t": "Solo frontend y sin red", "why": "Es una demo local: la CSP del build cierra las conexiones y una regla de ESLint prohíbe fetch, con el mensaje «Demo local: sin red.»." },
-        { "t": "Determinismo", "why": "Reloj inyectable y nada de Date.now ni Math.random; los juegos usan semilla. La misma demo cuenta la misma historia cada vez." },
-        { "t": "Un store de comandos propio", "why": "Comandos atómicos e idempotentes por commandId, sobre una copia del estado, con outbox y auditoría, y sin router ni librería de estado de terceros.", "alt": "Una librería de estado externa." },
-        { "t": "Persistencia defensiva", "why": "Envelope versionado y validado; dañado, se avisa y se ofrece restaurar o descargar una copia; sin acceso o sin cuota, modo memoria. Reiniciar borra solo su espacio." },
-        { "t": "Desarrollo guiado por especificación", "why": "Cada requisito tiene ID, fuente, escenario y evidencia, y un requisito especificado no cuenta como hecho hasta tener evidencia. Un PR por lote." },
-        { "t": "Asistentes sin LLM", "why": "El chat y el asistente de dirección son reglas: las cifras salen del estado y no hay respuestas precargadas que puedan contradecirlo.", "alt": "Un modelo de lenguaje." }
+        {
+          "t": "Solo frontend y sin red",
+          "why": "Es una demo local: la CSP del build cierra las conexiones y una regla de ESLint prohíbe fetch, con el mensaje «Demo local: sin red.»."
+        },
+        {
+          "t": "Determinismo",
+          "why": "Reloj inyectable y nada de Date.now ni Math.random; los juegos usan semilla. La misma demo cuenta la misma historia cada vez."
+        },
+        {
+          "t": "Un store de comandos propio",
+          "why": "Comandos atómicos e idempotentes por commandId, sobre una copia del estado, con outbox y auditoría, y sin router ni librería de estado de terceros.",
+          "alt": "Una librería de estado externa."
+        },
+        {
+          "t": "Persistencia defensiva",
+          "why": "Envelope versionado y validado; dañado, se avisa y se ofrece restaurar o descargar una copia; sin acceso o sin cuota, modo memoria. Reiniciar borra solo su espacio."
+        },
+        {
+          "t": "Desarrollo guiado por especificación",
+          "why": "Cada requisito tiene ID, fuente, escenario y evidencia, y un requisito especificado no cuenta como hecho hasta tener evidencia. Un PR por lote."
+        },
+        {
+          "t": "Asistentes sin LLM",
+          "why": "El chat y el asistente de dirección son reglas: las cifras salen del estado y no hay respuestas precargadas que puedan contradecirlo.",
+          "alt": "Un modelo de lenguaje."
+        }
       ]
     },
     "quality": {
@@ -147,18 +261,54 @@
         "La CI corre lint, typecheck, unitarios, build y los e2e antes de publicar. El repo documenta una falla e2e intermitente, una carrera con el reloj de un juego, que se encontró y se corrigió."
       ],
       "items": [
-        { "n": "190", "u": "tests", "d": "Unitarios: dominio, campañas, juegos, contraste WCAG y arte SVG" },
-        { "n": "6", "u": "archivos", "d": "De tests unitarios" },
-        { "n": "93", "u": "e2e", "d": "Playwright, listados en 13 archivos, sin ejecutar" }
+        {
+          "n": "190",
+          "u": "tests",
+          "d": "Unitarios: dominio, campañas, juegos, contraste WCAG y arte SVG"
+        },
+        {
+          "n": "6",
+          "u": "archivos",
+          "d": "De tests unitarios"
+        },
+        {
+          "n": "93",
+          "u": "e2e",
+          "d": "Playwright, listados en 13 archivos, sin ejecutar"
+        }
       ],
       "note": "Corrí los unitarios con Vitest el 28/10/2026: 190 en verde, en 6 archivos. Los 93 e2e los enumeré ese día con el listado de Playwright, en 13 archivos; no los ejecuté. Los 16 módulos y los 59 tipos de comando los conté en el código."
     },
     "stack": {
       "h": "Stack",
       "groups": [
-        { "k": "App", "items": ["React 19", "TypeScript", "Vite 7", "CSS propio con light-dark()"] },
-        { "k": "Propio", "items": ["Store con useSyncExternalStore", "Router por hash", "Web Audio"] },
-        { "k": "Calidad", "items": ["Vitest", "jsdom", "Playwright", "ESLint", "GitHub Actions"] }
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7",
+            "CSS propio con light-dark()"
+          ]
+        },
+        {
+          "k": "Propio",
+          "items": [
+            "Store con useSyncExternalStore",
+            "Router por hash",
+            "Web Audio"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Vitest",
+            "jsdom",
+            "Playwright",
+            "ESLint",
+            "GitHub Actions"
+          ]
+        }
       ]
     },
     "gallery": {
@@ -181,6 +331,30 @@
         "Cerrados los lotes 1 a 6 de 10. Pendientes: código y QR del turno, sonidos de la llamada, guía por roles, QA completo y rendimiento medido.",
         "Sin probar con un lector de pantalla real ni en Safari o Firefox. Los e2e los enumeré, pero no los corrí."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "recepcion": {
+          "alt": "Panel claro de la clínica ficticia: «Hoy y agenda» por profesional; se confirma un turno pendiente, se abre el turno de las 09:00 en un panel lateral y desde ahí la ficha administrativa de la persona.",
+          "caption": "Recepción de Clínica Brisa (Demo): agenda del día → turno → ficha del paciente."
+        },
+        "odontograma": {
+          "alt": "Odontograma ilustrado con las arcadas en U; el puntero selecciona las piezas 46 y 36 y la página baja a los registros vigentes y el historial.",
+          "caption": "Odontograma: vista oclusal y registros de cada pieza."
+        },
+        "ortodoncia": {
+          "alt": "Módulo de ortodoncia con la ilustración de brackets estéticos, el control indicado por la profesional con su turno reservado y el formulario para registrar una indicación.",
+          "caption": "Continuidad de ortodoncia: aparatología, controles indicados y línea de tiempo."
+        },
+        "campanas": {
+          "alt": "Módulo de campañas con contadores, cuatro segmentos administrativos (controles pendientes, presupuestos sin respuesta, consultas sin turno, turnos cancelados) y el editor de una campaña en borrador por pasos.",
+          "caption": "Campañas y seguimiento: segmentos calculados y campaña en borrador."
+        }
+      }
     }
   }
 }

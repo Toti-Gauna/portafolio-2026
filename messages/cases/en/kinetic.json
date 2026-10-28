@@ -393,6 +393,38 @@
         "The exporter is not in the repo, and the repo has no licence: it is not open source.",
         "The performance figures are lab numbers, in Chromium without a GPU."
       ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "kinetic-formas": {
+          "alt": "Excerpt of the KINETIC trailer: circle, square and triangle on cream paper changing colour and place, then red, blue and lime backgrounds.",
+          "caption": "KINETIC: basic shapes morphing, all generated in code."
+        },
+        "kinetic-ritmo": {
+          "alt": "Blue-to-orange gradient dot grid rippling and warping, with the word RHYTHM, ending in particles.",
+          "caption": "KINETIC: a dot grid pulsing with the word RHYTHM."
+        },
+        "kinetic-profundidad": {
+          "alt": "Particles forming MOTION and a neon polygon tunnel with the words DEPTH and SPEED rushing past.",
+          "caption": "KINETIC: geometric tunnel with DEPTH and SPEED."
+        },
+        "lab-bauhaus": {
+          "alt": "A Bauhaus composition drawing itself on blue (circle, square, triangle), then large type on yellow: \"Arte, oficio, letra y arquitectura\", \"una sola escuela\".",
+          "caption": "Lab trailer \"Bauhaus 100\", recorded from a local build."
+        },
+        "lab-data-story": {
+          "alt": "Area chart of world population 1800–2023 growing to 8,092 M, then life-expectancy-at-birth bars rising to highlight +26.8 years.",
+          "caption": "\"Data story\" trailer: world population and life expectancy from real data."
+        },
+        "lab-hyperspace": {
+          "alt": "A ringed blue planet turns in space with the title \"Nuevos mundos\", then the camera flies through an asteroid field to \"Navegar el caos\".",
+          "caption": "\"Hyperspace\" trailer: 3D scenes with Three.js."
+        }
+      }
     }
   }
 }

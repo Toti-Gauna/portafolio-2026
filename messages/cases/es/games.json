@@ -4,15 +4,36 @@
   "status": "Banco de pruebas",
   "summary": "Un banco de pruebas y catálogo de juegos web para eventos presenciales: un proyector es la pantalla y los celulares de la gente, el control. Hay 18 juegos registrados y jugables de 24 planificados, en Canvas 2D, PixiJS y 3D, con física determinista y red entre celulares sin servidor de juego.",
   "facts": [
-    { "k": "Juegos", "v": "18 jugables de 24 planificados" },
-    { "k": "Motores", "v": "Canvas 2D · PixiJS · React Three Fiber" },
-    { "k": "Red", "v": "WebRTC en estrella, sin servidor de juego" },
-    { "k": "Estado", "v": "Banco de pruebas: sin probar en un evento real" }
+    {
+      "k": "Juegos",
+      "v": "18 jugables de 24 planificados"
+    },
+    {
+      "k": "Motores",
+      "v": "Canvas 2D · PixiJS · React Three Fiber"
+    },
+    {
+      "k": "Red",
+      "v": "WebRTC en estrella, sin servidor de juego"
+    },
+    {
+      "k": "Estado",
+      "v": "Banco de pruebas: sin probar en un evento real"
+    }
   ],
   "tldr": [
-    { "k": "El problema", "v": "Ver si un juego se ve y se juega bien no debería exigir abrir una sesión real ni generar un código de sala. Con 24 juegos planificados, eso no escala." },
-    { "k": "La solución", "v": "Un banco que abre cualquier juego al instante, con semilla, latencia y pérdida simuladas, «Forzar fin» y los FPS a la vista. Lo que pasa se muestra y se descarta." },
-    { "k": "Dónde está", "v": "18 jugables: 6 estables y 12 en beta, incluidos los tres 3D. Los juegos en red todavía no se probaron con celulares reales." }
+    {
+      "k": "El problema",
+      "v": "Ver si un juego se ve y se juega bien no debería exigir abrir una sesión real ni generar un código de sala. Con 24 juegos planificados, eso no escala."
+    },
+    {
+      "k": "La solución",
+      "v": "Un banco que abre cualquier juego al instante, con semilla, latencia y pérdida simuladas, «Forzar fin» y los FPS a la vista. Lo que pasa se muestra y se descarta."
+    },
+    {
+      "k": "Dónde está",
+      "v": "18 jugables: 6 estables y 12 en beta, incluidos los tres 3D. Los juegos en red todavía no se probaron con celulares reales."
+    }
   ],
   "blocks": {
     "what": {
@@ -44,12 +65,34 @@
         "title": "Una partida en estrella",
         "caption": "Cada celular manda su input y recibe snapshots del estado con delta contra el último tick que confirmó, con interpolación y predicción. Para jugar en red hace falta HTTPS: el teléfono no abre WebRTC en un origen inseguro.",
         "nodes": {
-          "host": { "label": "Proyector", "sub": "host autoritativo", "note": "Simula la partida y muestra el QR con sala, asiento y semilla. El protocolo descarta lo que no venga del host: es consistencia del juego, no autenticación." },
-          "p1": { "label": "Celular 1", "sub": "mando" },
-          "p2": { "label": "Celular 2", "sub": "mando" },
-          "p3": { "label": "Celular 3", "sub": "corre el juego", "note": "Según el juego, el celular es un mando o corre la partida entera en el teléfono." },
-          "broker": { "label": "Señalización", "sub": "PeerJS", "note": "Un broker público, solo para conectar: después cada celular habla directo con el proyector por un DataChannel." },
-          "bc": { "label": "Modo local", "sub": "dos pestañas", "note": "En desarrollo, dos pestañas hacen de proyector y celular por BroadcastChannel, con latencia y pérdida simuladas. El transporte cambia y ningún juego se entera." }
+          "host": {
+            "label": "Proyector",
+            "sub": "host autoritativo",
+            "note": "Simula la partida y muestra el QR con sala, asiento y semilla. El protocolo descarta lo que no venga del host: es consistencia del juego, no autenticación."
+          },
+          "p1": {
+            "label": "Celular 1",
+            "sub": "mando"
+          },
+          "p2": {
+            "label": "Celular 2",
+            "sub": "mando"
+          },
+          "p3": {
+            "label": "Celular 3",
+            "sub": "corre el juego",
+            "note": "Según el juego, el celular es un mando o corre la partida entera en el teléfono."
+          },
+          "broker": {
+            "label": "Señalización",
+            "sub": "PeerJS",
+            "note": "Un broker público, solo para conectar: después cada celular habla directo con el proyector por un DataChannel."
+          },
+          "bc": {
+            "label": "Modo local",
+            "sub": "dos pestañas",
+            "note": "En desarrollo, dos pestañas hacen de proyector y celular por BroadcastChannel, con latencia y pérdida simuladas. El transporte cambia y ningún juego se entera."
+          }
         },
         "edges": {
           "ask": "pide conectar",
@@ -71,10 +114,26 @@
       ],
       "title": "De montar a terminar",
       "steps": [
-        { "actor": "Contenedor", "t": "Elige la partida", "d": "Sala, semilla, duración, asiento, quién es host y por dónde viaja la red. Lo decide el contenedor, no el juego." },
-        { "actor": "Contenedor", "t": "Monta el juego", "d": "Le pasa GameProps: esa configuración, los administrables con sus valores por defecto, la red y una señal de aborto. El juego no importa nada del shell." },
-        { "actor": "Juego", "t": "Juega con su semilla", "d": "PRNG sembrado y física Rapier: la misma semilla reproduce la misma partida." },
-        { "actor": "Juego", "t": "Avisa una sola vez", "d": "onFinish con {completed, points, durationMs, meta}. Si la señal aborta, emite el resultado parcial en el acto." }
+        {
+          "actor": "Contenedor",
+          "t": "Elige la partida",
+          "d": "Sala, semilla, duración, asiento, quién es host y por dónde viaja la red. Lo decide el contenedor, no el juego."
+        },
+        {
+          "actor": "Contenedor",
+          "t": "Monta el juego",
+          "d": "Le pasa GameProps: esa configuración, los administrables con sus valores por defecto, la red y una señal de aborto. El juego no importa nada del shell."
+        },
+        {
+          "actor": "Juego",
+          "t": "Juega con su semilla",
+          "d": "PRNG sembrado y física Rapier: la misma semilla reproduce la misma partida."
+        },
+        {
+          "actor": "Juego",
+          "t": "Avisa una sola vez",
+          "d": "onFinish con {completed, points, durationMs, meta}. Si la señal aborta, emite el resultado parcial en el acto."
+        }
       ],
       "caption": "Las tres reglas están en la cabecera del contrato (src/core/contract/game.ts). En el banco, el resultado se muestra crudo y se descarta."
     },
@@ -92,23 +151,62 @@
         "No hay backend ni cuentas, así que lo importante es no prometer lo que no hay."
       ],
       "items": [
-        { "t": "Nada que guardar", "d": "Sin cuentas, ranking ni puntajes persistidos: el resultado se muestra y se descarta. El día que un puntaje valga algo, se valida en el servidor, nunca en el cliente." },
-        { "t": "Autoridad no es seguridad", "d": "El proyector manda sobre el estado, pero cualquiera con el QR de la sala puede entrar. No afirmo anti-trampas." },
-        { "t": "HTTPS obligatorio", "d": "WebRTC no abre en un origen inseguro: Pages da HTTPS y en local hay un servidor de desarrollo con certificado." },
-        { "t": "localStorage envuelto", "d": "Modo incógnito, cuota llena o datos bloqueados tiran error, y el juego tiene que abrir igual." },
-        { "t": "Dos pedidos a terceros", "d": "El broker público de señalización, para conectar, y Google Fonts, para las fuentes." },
-        { "t": "No se publica en rojo", "d": "La CI corre lint y tests antes del build y del deploy: publicar con la suite en rojo es peor que no publicar." }
+        {
+          "t": "Nada que guardar",
+          "d": "Sin cuentas, ranking ni puntajes persistidos: el resultado se muestra y se descarta. El día que un puntaje valga algo, se valida en el servidor, nunca en el cliente."
+        },
+        {
+          "t": "Autoridad no es seguridad",
+          "d": "El proyector manda sobre el estado, pero cualquiera con el QR de la sala puede entrar. No afirmo anti-trampas."
+        },
+        {
+          "t": "HTTPS obligatorio",
+          "d": "WebRTC no abre en un origen inseguro: Pages da HTTPS y en local hay un servidor de desarrollo con certificado."
+        },
+        {
+          "t": "localStorage envuelto",
+          "d": "Modo incógnito, cuota llena o datos bloqueados tiran error, y el juego tiene que abrir igual."
+        },
+        {
+          "t": "Dos pedidos a terceros",
+          "d": "El broker público de señalización, para conectar, y Google Fonts, para las fuentes."
+        },
+        {
+          "t": "No se publica en rojo",
+          "d": "La CI corre lint y tests antes del build y del deploy: publicar con la suite en rojo es peor que no publicar."
+        }
       ]
     },
     "decisions": {
       "h": "Decisiones técnicas",
       "items": [
-        { "t": "Un contrato mínimo", "why": "Un juego recibe GameProps, no importa nada del shell, llama onFinish exactamente una vez y, si lo abortan, entrega su resultado parcial en el acto." },
-        { "t": "Física determinista", "why": "PRNG sembrado y Rapier compilado a WASM: la misma semilla tiene que dar la misma partida, y eso es lo que permite el netcode.", "alt": "Matter.js: más fácil de arrancar, pero no es determinista." },
-        { "t": "Red sin servidor de juego", "why": "WebRTC con PeerJS y el proyector como host. El transporte es intercambiable con BroadcastChannel; un servidor TURN, solo si hace falta.", "alt": "Un servidor de juego propio." },
-        { "t": "Probar la red degradada", "why": "«Un juego de red que solo se probó a 0 ms de latencia es un juego que no se probó»: el banco trae latencia y pérdida ajustables." },
-        { "t": "Cada juego en su chunk", "why": "Rapier pesa 2,1 MB en 2D y 2,2 MB en 3D y no se puede achicar, así que lo baja únicamente quien abre un juego que lo usa. Pixi y three también van aparte." },
-        { "t": "Solo tests de lógica pura", "why": "«No hay tests de render: son caros de mantener y no agarran los bugs que duelen en un juego, que son de determinismo y de puntaje.» Se testea la lógica pura de cada juego, el motor y la red.", "alt": "Tests de render y e2e: entran si el banco se vuelve crítico." }
+        {
+          "t": "Un contrato mínimo",
+          "why": "Un juego recibe GameProps, no importa nada del shell, llama onFinish exactamente una vez y, si lo abortan, entrega su resultado parcial en el acto."
+        },
+        {
+          "t": "Física determinista",
+          "why": "PRNG sembrado y Rapier compilado a WASM: la misma semilla tiene que dar la misma partida, y eso es lo que permite el netcode.",
+          "alt": "Matter.js: más fácil de arrancar, pero no es determinista."
+        },
+        {
+          "t": "Red sin servidor de juego",
+          "why": "WebRTC con PeerJS y el proyector como host. El transporte es intercambiable con BroadcastChannel; un servidor TURN, solo si hace falta.",
+          "alt": "Un servidor de juego propio."
+        },
+        {
+          "t": "Probar la red degradada",
+          "why": "«Un juego de red que solo se probó a 0 ms de latencia es un juego que no se probó»: el banco trae latencia y pérdida ajustables."
+        },
+        {
+          "t": "Cada juego en su chunk",
+          "why": "Rapier pesa 2,1 MB en 2D y 2,2 MB en 3D y no se puede achicar, así que lo baja únicamente quien abre un juego que lo usa. Pixi y three también van aparte."
+        },
+        {
+          "t": "Solo tests de lógica pura",
+          "why": "«No hay tests de render: son caros de mantener y no agarran los bugs que duelen en un juego, que son de determinismo y de puntaje.» Se testea la lógica pura de cada juego, el motor y la red.",
+          "alt": "Tests de render y e2e: entran si el banco se vuelve crítico."
+        }
       ]
     },
     "quality": {
@@ -117,20 +215,72 @@
         "TypeScript, ESLint y una CI que corre lint, tests y build en cada push a main antes de publicar. La definición de «listo» de cada juego pide 60 fps, cero asignaciones por cuadro, movimiento reducido y pausa: es una meta, no una medición de cada juego."
       ],
       "items": [
-        { "n": "814", "u": "tests", "d": "Unitarios de lógica pura, en verde" },
-        { "n": "39", "u": "archivos", "d": "19 de juegos y 20 de motores, red, contrato e interfaz" },
-        { "n": "0", "u": "e2e", "d": "Sin e2e ni tests de render, a propósito" }
+        {
+          "n": "814",
+          "u": "tests",
+          "d": "Unitarios de lógica pura, en verde"
+        },
+        {
+          "n": "39",
+          "u": "archivos",
+          "d": "19 de juegos y 20 de motores, red, contrato e interfaz"
+        },
+        {
+          "n": "0",
+          "u": "e2e",
+          "d": "Sin e2e ni tests de render, a propósito"
+        }
       ],
       "note": "Corrí los unitarios con Vitest el 28/10/2026: 814 en verde, en 39 archivos. No hay e2e: es una decisión del repo."
     },
     "stack": {
       "h": "Stack",
       "groups": [
-        { "k": "App", "items": ["React 19", "TypeScript", "Vite 7", "Tailwind CSS 4", "React Router (hash)"] },
-        { "k": "2D", "items": ["Canvas 2D", "PixiJS 8", "Rapier 2D (WASM)"] },
-        { "k": "3D", "items": ["three", "React Three Fiber", "drei", "Rapier 3D", "three-mesh-bvh"] },
-        { "k": "Red", "items": ["WebRTC (PeerJS)", "BroadcastChannel", "QR"] },
-        { "k": "Calidad", "items": ["Vitest", "ESLint", "r3f-perf", "GitHub Actions"] }
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7",
+            "Tailwind CSS 4",
+            "React Router (hash)"
+          ]
+        },
+        {
+          "k": "2D",
+          "items": [
+            "Canvas 2D",
+            "PixiJS 8",
+            "Rapier 2D (WASM)"
+          ]
+        },
+        {
+          "k": "3D",
+          "items": [
+            "three",
+            "React Three Fiber",
+            "drei",
+            "Rapier 3D",
+            "three-mesh-bvh"
+          ]
+        },
+        {
+          "k": "Red",
+          "items": [
+            "WebRTC (PeerJS)",
+            "BroadcastChannel",
+            "QR"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Vitest",
+            "ESLint",
+            "r3f-perf",
+            "GitHub Actions"
+          ]
+        }
       ]
     },
     "gallery": {
@@ -152,6 +302,26 @@
         "Sin servidor, cuentas, ranking ni anti-trampas.",
         "Dos problemas de la capa de red siguen abiertos."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "ninja": {
+          "alt": "Juego a pantalla completa sobre fondo oscuro: formas de colores saltan desde abajo y el trazo del corte las parte en mitades mientras sube el puntaje.",
+          "caption": "Ninja (Canvas 2D): cortes que parten frutas en pleno vuelo."
+        },
+        "arena-3d": {
+          "alt": "Vista aérea en 3D de un valle verde con colinas y casas bajo un cielo de atardecer, el anillo que se cierra y los marcadores de jugadores, vivos y tiempo.",
+          "caption": "Arena 3D (React Three Fiber): vista aérea del valle con diez jugadores bot."
+        },
+        "catalogo": {
+          "alt": "Catálogo oscuro «Batería de experiencias» con tarjetas de juegos (Serpiente, Vuelo, Saltarín, Catapulta, Ninja, Combinaciones, Invasores…), cada una con topología, motor y estado, y la lista lateral por categoría.",
+          "caption": "Banco de pruebas: el catálogo de juegos con filtros por categoría y topología."
+        }
+      }
     }
   }
 }

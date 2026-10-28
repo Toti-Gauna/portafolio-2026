@@ -6,6 +6,15 @@ import type { CaseDef } from './types';
 export const dentalos: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'recepcion', kind: 'video', frame: 'browser', src: '/media/dentalos/recepcion.mp4', poster: '/media/dentalos/recepcion.jpg', w: 1280, h: 800, url: 'dentalos · demo' },
+        { id: 'odontograma', kind: 'video', frame: 'browser', src: '/media/dentalos/odontograma.mp4', poster: '/media/dentalos/odontograma.jpg', w: 1280, h: 800, url: 'dentalos · demo' },
+        { id: 'ortodoncia', kind: 'image', frame: 'browser', src: '/media/dentalos/ortodoncia.webp', w: 1600, h: 1000, url: 'dentalos · demo' },
+        { id: 'campanas', kind: 'image', frame: 'browser', src: '/media/dentalos/campanas.webp', w: 1600, h: 1000, url: 'dentalos · demo' },
+      ],
+    },
     { type: 'flow', key: 'reschedule', cols: 3 },
     { type: 'text', key: 'ideas' },
     {

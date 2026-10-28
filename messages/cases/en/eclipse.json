@@ -591,6 +591,38 @@
         "There's no Content-Security-Policy on the static sites yet, and no analytics: no event is stored today.",
         "I'm the only person on the project: product, design and engineering."
       ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "landing-recorrido": {
+          "alt": "Dark Eclipse landing with the animated eclipse in the hero; the page scrolls smoothly through \"Cinco líneas, un solo equipo\", \"Empezá por lo que hoy te falta\" and the demos section with the Lumen Propiedades preview.",
+          "caption": "Eclipse landing: hero, then a scroll through services, SMBs and demos."
+        },
+        "landing-proceso": {
+          "alt": "The light \"Cómo trabajamos\" section with the project phases; it scrolls to FAQ and contact and the pointer opens one accordion question.",
+          "caption": "How we work and FAQ: the process, then one answer unfolds."
+        },
+        "demo-lumen": {
+          "alt": "Clicking the hero \"Inmobiliarias\" chip: the page darkens, the eclipse moves to the centre and light opens the demo layer; \"Ver por mi cuenta\" is chosen and \"Simular\" brings a late-night inquiry into the inbox, desktop view on the left and phone view on the right.",
+          "caption": "\"Ver demo\": the Lumen real-estate demo opens and a simulated inquiry arrives."
+        },
+        "portal-clientes": {
+          "alt": "Client portal with the fictional-data notice: the \"Mis proyectos\" table with stages and next milestones; the pointer opens \"Sitio web de ejemplo\" and the detail shows stage, next milestone and timeline.",
+          "caption": "Client portal in demo mode: My projects → a project detail."
+        },
+        "portal-interno": {
+          "alt": "Dark internal portal on sample data: the prospects list with each next action, the projects list with its five stages and the month calendar; amount columns are hidden for the capture.",
+          "caption": "Internal portal in demo mode: prospects → projects → calendar."
+        },
+        "demo-lumen-visita": {
+          "alt": "Lumen Propiedades demo layer (labelled Demo) with the simulated-events bar on top and the desktop and phone views side by side, after the Lumi chatbot qualifies the lead and books the visit.",
+          "caption": "Lumen demo after three simulated beats: lead qualified and visit booked."
+        }
+      }
     }
   }
 }

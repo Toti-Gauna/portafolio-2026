@@ -393,6 +393,38 @@
         "El exportador no está en el repo, y el repo no tiene licencia: no es código abierto.",
         "Las cifras de rendimiento son de laboratorio, en Chromium sin GPU."
       ]
+    },
+    "media": {
+      "h": "Cómo se ve",
+      "p": [
+        "El producto real, en movimiento. Datos ficticios o de muestra."
+      ],
+      "items": {
+        "kinetic-formas": {
+          "alt": "Fragmento del tráiler KINETIC: círculo, cuadrado y triángulo sobre papel crema que cambian de color y de lugar y pasan a fondos rojo, azul y lima.",
+          "caption": "KINETIC: formas básicas que se transforman, todo generado con código."
+        },
+        "kinetic-ritmo": {
+          "alt": "Grilla de puntos en degradé azul a naranja que ondula y se deforma, con la palabra RHYTHM, y termina en partículas.",
+          "caption": "KINETIC: una grilla de puntos que late con la palabra RHYTHM."
+        },
+        "kinetic-profundidad": {
+          "alt": "Partículas que forman MOTION y un túnel de polígonos de neón con las palabras DEPTH y SPEED pasando a gran velocidad.",
+          "caption": "KINETIC: túnel geométrico con DEPTH y SPEED."
+        },
+        "lab-bauhaus": {
+          "alt": "Composición Bauhaus que se dibuja sobre azul (círculo, cuadrado, triángulo) y pasa a tipografía grande en amarillo: «Arte, oficio, letra y arquitectura», «una sola escuela».",
+          "caption": "Tráiler del laboratorio «Bauhaus 100», grabado desde un build local."
+        },
+        "lab-data-story": {
+          "alt": "Gráfico de área de la población mundial 1800–2023 que crece hasta 8.092 M y luego barras de esperanza de vida al nacer que suben hasta destacar +26,8 años.",
+          "caption": "Tráiler «Data story»: población mundial y esperanza de vida con datos reales."
+        },
+        "lab-hyperspace": {
+          "alt": "Un planeta azul con anillos gira en el espacio con el título «Nuevos mundos» y la cámara atraviesa un campo de asteroides hasta «Navegar el caos».",
+          "caption": "Tráiler «Hyperspace»: escenas 3D con Three.js."
+        }
+      }
     }
   }
 }

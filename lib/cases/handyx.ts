@@ -7,6 +7,17 @@ const W = 250;
 export const handyx: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
+    {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'landing-recorrido', kind: 'video', frame: 'browser', src: '/media/handyx/landing-recorrido.mp4', poster: '/media/handyx/landing-recorrido.jpg', w: 1280, h: 800, url: 'handyc.com' },
+        { id: 'portal-interno', kind: 'video', frame: 'browser', src: '/media/handyx/portal-interno.mp4', poster: '/media/handyx/portal-interno.jpg', w: 1280, h: 800, url: 'handyc.com' },
+        { id: 'especialistas', kind: 'image', frame: 'browser', src: '/media/handyx/especialistas.webp', w: 1600, h: 1000, url: 'handyc.com' },
+        { id: 'app-pedido', kind: 'video', frame: 'phone', src: '/media/handyx/app-pedido.mp4', poster: '/media/handyx/app-pedido.jpg', w: 390, h: 844 },
+        { id: 'app-turno', kind: 'video', frame: 'phone', src: '/media/handyx/app-turno.mp4', poster: '/media/handyx/app-turno.jpg', w: 390, h: 844 },
+        { id: 'app-especialista', kind: 'video', frame: 'phone', src: '/media/handyx/app-especialista.mp4', poster: '/media/handyx/app-especialista.jpg', w: 390, h: 844 },
+      ],
+    },
     { type: 'split', key: 'money' },
     { type: 'checks', key: 'growth' },
     {

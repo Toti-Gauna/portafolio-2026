@@ -8,6 +8,17 @@ export const kinetic: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
     {
+      type: 'showcase', key: 'media',
+      items: [
+        { id: 'kinetic-formas', kind: 'video', frame: 'browser', src: '/media/kinetic/kinetic-formas.mp4', poster: '/media/kinetic/kinetic-formas.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+        { id: 'kinetic-ritmo', kind: 'video', frame: 'browser', src: '/media/kinetic/kinetic-ritmo.mp4', poster: '/media/kinetic/kinetic-ritmo.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+        { id: 'kinetic-profundidad', kind: 'video', frame: 'browser', src: '/media/kinetic/kinetic-profundidad.mp4', poster: '/media/kinetic/kinetic-profundidad.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+        { id: 'lab-bauhaus', kind: 'video', frame: 'browser', src: '/media/kinetic/lab-bauhaus.mp4', poster: '/media/kinetic/lab-bauhaus.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+        { id: 'lab-data-story', kind: 'video', frame: 'browser', src: '/media/kinetic/lab-data-story.mp4', poster: '/media/kinetic/lab-data-story.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+        { id: 'lab-hyperspace', kind: 'video', frame: 'browser', src: '/media/kinetic/lab-hyperspace.mp4', poster: '/media/kinetic/lab-hyperspace.jpg', w: 1280, h: 720, url: 'kinetic-studio' },
+      ],
+    },
+    {
       // One paused master timeline drives picture and sound; ?t= and the warm-up pass are both just seeks.
       type: 'diagram', key: 'engine',
       spec: {
