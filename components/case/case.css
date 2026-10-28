@@ -4,7 +4,7 @@
 .case__back { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; }
 .case__back:hover { color: var(--paper); }
 .case__kind { margin-top: 8px; }
-.case__title { font-size: clamp(56px, 13vw, 168px); line-height: 0.86; font-weight: 800; font-variation-settings: 'wdth' 125; letter-spacing: -0.02em; }
+.case__title { overflow-wrap: anywhere; hyphens: manual; font-size: clamp(48px, 13vw, 168px); line-height: 0.86; font-weight: 800; font-variation-settings: 'wdth' 125; letter-spacing: -0.02em; }
 .case__status { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #ff4d2e66; border-radius: 999px; padding: 7px 12px; }
 .case__status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .case__summary { font-size: clamp(19px, 2.3vw, 25px); line-height: 1.4; max-width: 50ch; color: #e6e2d9; }

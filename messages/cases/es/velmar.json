@@ -1,0 +1,227 @@
+{
+  "title": "Velmar",
+  "kind": "Demo para un cliente · tienda online y panel",
+  "status": "Demo · hecha para un cliente",
+  "summary": "Una demo clickeable de punta a punta de la tienda online y el panel de gestión de un taller de Mar del Plata que hace productos personalizados: collares con nombre, veladores con foto, velas y placas NFC. Tiene configurador en vivo, ruleta de cupones, club con misiones y regalos. Todo corre en el navegador, con datos de muestra.",
+  "facts": [
+    { "k": "Cliente", "v": "Un taller real de Mar del Plata" },
+    { "k": "Piezas", "v": "Tienda para el celular · panel de gestión" },
+    { "k": "Tamaño", "v": "65 pantallas: 24 de tienda y 41 de panel" },
+    { "k": "Estado", "v": "Demo: sin pagos ni pedidos reales" }
+  ],
+  "tldr": [
+    { "k": "El problema", "v": "Cada pedido nace en un chat, se anota en un Excel y se agenda en el celular. Comprobantes por chat, stock a mano y fechas de entrega a ojo." },
+    { "k": "La propuesta", "v": "Una tienda donde el comprador ve su producto antes de pagar, y un panel que lleva cada pedido del comprobante a la máquina y a la entrega." },
+    { "k": "Dónde está", "v": "Demo navegable con datos de muestra, hecha para mostrarla antes de arrancar el proyecto. No hay versión en producción ni resultados que mostrar." }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Velmar es un taller real de Mar del Plata. Le hice una demo de su tienda online y de su panel de gestión, para que vea su negocio funcionando antes de arrancar el proyecto."
+      ],
+      "list": [
+        "Tienda, pensada para el celular: 17 productos de muestra en 10 categorías, configurador del collar con vista previa en vivo, personalización con foto, carrito, checkout en cuatro pasos y seguimiento del pedido.",
+        "Club: ruleta de cupones, misiones encadenadas, billetera de premios, regalos con escena de apertura y 16 temáticas por fecha.",
+        "Panel: pedidos, pagos manuales, cola de producción, calendario de entregas con capacidad, insumos, costos y margen, emails automáticos simulados y un estudio de contenido para Instagram.",
+        "Cómo corre: todo en el navegador. No procesa pagos, no crea pedidos reales y no llama a servicios externos."
+      ]
+    },
+    "problem": {
+      "h": "El problema del taller",
+      "p": [
+        "El guion de la demo arranca de una escena conocida: cada pedido nace en un chat, se anota en un Excel y se agenda en el calendario del celular. De ahí salen los dolores que la demo ataca."
+      ],
+      "list": [
+        "Comprobantes que llegan por chat y avisos uno por uno a cada cliente.",
+        "Stock y precios a mano en una planilla.",
+        "No saber qué fecha de entrega prometer.",
+        "No saber si cada producto deja plata.",
+        "No saber qué publicar en Instagram."
+      ]
+    },
+    "business": {
+      "h": "La idea de negocio",
+      "p": [
+        "Lo que la demo propone, no resultados: no hay ventas reales que mostrar."
+      ],
+      "items": [
+        { "t": "Ver el producto antes de pagar", "d": "El configurador y la personalización con foto muestran el resultado en vivo, con un precio que cambia con cada opción." },
+        { "t": "Fechas que se pueden cumplir", "d": "«¿Cuándo llega?» cuenta días hábiles sin feriados y, si los primeros días están completos, ofrece la primera fecha con lugar según la capacidad del taller." },
+        { "t": "Razones para volver", "d": "Ruleta de cupones, misiones del club, 16 temáticas por fecha con su cupón, y recordatorios del cumpleaños de la mascota y de la recompra de velas y aromas." },
+        { "t": "Regalar sin mostrar el precio", "d": "Un código y un link de regalo: quien lo recibe nunca ve el precio y lo abre con una de 17 escenas según la fecha." },
+        { "t": "Cómo se vende el proyecto", "d": "La demo va con un guion de reunión de 10 minutos («No vendas funciones, vendé horas») y una lista de todo lo agregado fuera de la especificación, con un tamaño S, M o L para decidir qué entra. No es una cotización." }
+      ]
+    },
+    "loop": {
+      "h": "El ciclo de recompra",
+      "p": [
+        "Los incentivos de la tienda terminan en el mismo lugar: un cupón en «Mis cupones». Así el carrito valida todo con una sola regla, y el panel controla cada fuente."
+      ],
+      "diagram": {
+        "title": "Ruleta, club y cupones",
+        "caption": "Datos de muestra. En la demo todo pasa en el navegador; en producción, el sorteo, los cupones y el progreso de las misiones se calcularían en el servidor.",
+        "nodes": {
+          "buyer": { "label": "Comprador", "sub": "desde el celular" },
+          "cart": { "label": "Carrito", "sub": "«Ir a pagar»" },
+          "wheel": { "label": "Ruleta", "sub": "8 gajos", "note": "Un sorteo ponderado en una función pura, con el azar inyectable: la animación solo decide dónde frena. Se ofrece una vez por navegador." },
+          "wallet": { "label": "Mis cupones", "sub": "un solo lugar", "note": "Junta el cupón de la ruleta, los de la temática vigente y los de la tienda, primero los que se pueden usar ahora. Los premios son de un uso y vencen; los cupones de ruleta de otras personas nunca aparecen." },
+          "club": { "label": "Club Velmar", "sub": "misiones", "note": "Misiones encadenadas, como «Comprá 2 productos». El progreso es ilustrativo: en producción solo contarían pedidos pagados." },
+          "panel": { "label": "Panel", "sub": "pesos y misiones", "note": "Cada gajo con su premio y su peso, y la probabilidad que resulta. No se guarda una ruleta visible sin peso positivo. Las misiones tienen su simulador." }
+        },
+        "edges": {
+          "visit": "agrega",
+          "spin": "1.er «Ir a pagar»",
+          "win": "cupón de 1 uso",
+          "apply": "aplicar",
+          "buy": "cada compra",
+          "prize": "premio",
+          "weights": "gajos y pesos",
+          "rules": "misiones"
+        }
+      }
+    },
+    "orders": {
+      "h": "Del comprobante al taller",
+      "p": [
+        "Los estados del pedido son una máquina con reglas: cada cambio dice quién lo puede hacer. El panel solo ofrece las transiciones válidas, también en los cambios en lote."
+      ],
+      "diagram": {
+        "title": "Los estados de un pedido",
+        "caption": "Cada cambio deja un email en una bandeja de salida simulada. Fuera del dibujo: cancelar antes de pagar, y los reclamos y devoluciones.",
+        "nodes": {
+          "pending": { "label": "Pendiente de pago", "sub": "pedido creado" },
+          "review": { "label": "En revisión", "sub": "comprobante subido", "note": "Subir un comprobante nunca marca el pedido como pagado: lo deja en revisión. Aprobar pide confirmación y rechazar exige un motivo." },
+          "paid": { "label": "Pagado", "sub": "a fabricar", "note": "Hay dos caminos a «Pagado»: un admin que aprueba el comprobante o la confirmación del proveedor. En la demo, la de Mercado Pago es un botón que reemplaza al webhook." },
+          "prod": { "label": "En producción", "sub": "máquina, terminación", "note": "Al salir de «A fabricar» se descuentan los insumos de la receta, una sola vez. De terminación se puede volver a máquina; un pedido listo no vuelve a producción." },
+          "ready": { "label": "Listo", "sub": "retiro o envío", "note": "Con retiro en el taller pasa directo a entregado; con envío, primero a enviado." },
+          "shipped": { "label": "Enviado", "sub": "cadete o nacional" },
+          "delivered": { "label": "Entregado", "sub": "al comprador" }
+        },
+        "edges": {
+          "proof": "comprobante",
+          "approve": "aprueba",
+          "reject": "rechaza con motivo",
+          "provider": "Mercado Pago",
+          "start": "entra a máquina",
+          "done": "terminado",
+          "ship": "envío",
+          "pickup": "retiro",
+          "arrive": "entrega"
+        }
+      }
+    },
+    "collar": {
+      "h": "El configurador del collar",
+      "p": [
+        "Es el producto que mejor muestra la idea: el comprador arma su collar y ve el resultado antes de pagar. Detrás hay reglas puras que el taller, el carrito y los emails leen igual."
+      ],
+      "title": "De las opciones a la mesa del taller",
+      "caption": "Las opciones que el taller todavía no confirmó se marcan como «ejemplo de la demo», también en el pedido.",
+      "steps": [
+        { "actor": "Comprador", "t": "Elige", "d": "Estilo de letras, tipografía, color, cordón y patrón, material, dije y contorno de cuello. La vista previa SVG cambia en vivo." },
+        { "actor": "Regla", "t": "Vuelve coherente la combinación", "d": "Si el patrón usa un segundo color, contrasta con el cordón; un adorno que no va con ese estilo de letras se descarta." },
+        { "actor": "Regla", "t": "Suma los recargos", "d": "El precio cambia con cada opción, en pesos enteros." },
+        { "actor": "Regla", "t": "Elige el talle", "d": "Por contorno de cuello, con rangos sin huecos. Fuera de rango, se ofrece a medida por WhatsApp." },
+        { "actor": "Carrito", "t": "«Así lo quiero»", "d": "Agregar al carrito es aprobar el diseño: se guarda el momento de la aprobación con la configuración." },
+        { "actor": "Taller", "t": "Llega igual a todos lados", "d": "Una descripción corta viaja al carrito, al pedido, a la cola de producción y a los emails." }
+      ]
+    },
+    "arch": {
+      "h": "Arquitectura: hoy y lo planificado",
+      "p": [
+        "Hoy es una sola app de Next exportada a HTML estático: la tienda y el panel comparten un motor de reglas y los datos de este navegador. El plan para producción reemplaza el panel demo y mueve las reglas al servidor."
+      ],
+      "diagram": {
+        "title": "Una app estática, dos caras, un motor",
+        "caption": "Arriba, lo construido: un export estático en GitHub Pages, sin servidor ni base. Abajo, lo planificado en la documentación del repo, sin construir.",
+        "groups": { "today": "Hoy, en el navegador", "plan": "Planificado" },
+        "nodes": {
+          "shop": { "label": "Tienda", "sub": "24 pantallas" },
+          "admin": { "label": "Panel demo", "sub": "41, sin login", "note": "Sin login a propósito: no protege nada, lo avisa en pantalla y no se migra. El panel real lo reemplaza." },
+          "engine": { "label": "Motor de reglas", "sub": "22 módulos puros", "note": "Precios, cupones, estados, fechas de entrega y sorteos en funciones puras, con montos en pesos enteros. Se testean sin React." },
+          "data": { "label": "Datos de la demo", "sub": "localStorage", "note": "Datos de muestra más los cambios guardados en este navegador: lo que edita el panel se ve en la tienda del mismo navegador, y en ningún otro." },
+          "mp": { "label": "Mercado Pago", "sub": "Checkout Pro" },
+          "server": { "label": "Servidor Next", "sub": "Server Actions + Zod", "note": "Login con rol de administrador verificado en el servidor y una sola función de transición, en una transacción con su auditoría." },
+          "db": { "label": "PostgreSQL", "sub": "Prisma" }
+        },
+        "edges": {
+          "edit": "edita",
+          "read": "lee",
+          "quote": "cotiza y valida",
+          "trans": "transiciones",
+          "move": "pasa al servidor",
+          "webhook": "webhook firmado",
+          "tx": "transacción"
+        }
+      }
+    },
+    "security": {
+      "h": "Cuidados, aunque sea una demo",
+      "p": [
+        "Una demo no tiene que proteger nada, pero sí tiene que ser honesta sobre lo que no protege y no dejar malos hábitos para producción."
+      ],
+      "items": [
+        { "t": "Panel sin login, y lo dice", "d": "No hay login simulado: el panel avisa en pantalla que no es seguro y no se reutiliza como autorización. El panel real lleva login y rol verificado en el servidor." },
+        { "t": "Pagar no es subir un comprobante", "d": "Los estados solo cambian por transiciones válidas y un comprobante deja el pedido en revisión. El checkout avisa que no se cobra nada." },
+        { "t": "Tarjetas sin datos sensibles", "d": "Se validan el número, el vencimiento y el código para que el formulario se sienta real, pero solo se guardan la marca, los últimos 4 y el vencimiento. En producción, el taller nunca recibiría el número ni el código." },
+        { "t": "Fotos y textos del comprador", "d": "Las fotos se procesan en el navegador y no salen de ahí. El texto no acepta emoji y tiene largo máximo; las fotos, JPG, PNG o WebP de hasta 10 MB. En producción, las mismas reglas se repiten en el servidor." },
+        { "t": "Links de regalo a prueba de edición", "d": "El código lleva dígito verificador y el link está versionado: si se corta o se edita, no abre nada. Nunca lleva email ni precio." },
+        { "t": "Sin secretos ni indexación", "d": "La CI corre con permisos mínimos y sin secretos. La demo pide no ser indexada, porque muestra precios de muestra de un negocio real." }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        { "t": "Demo estática hoy, la misma app mañana", "why": "Se tenía que poder mostrar antes de arrancar, sin infraestructura ni datos reales: export estático, sin Server Actions, cookies ni middleware. Para producción, la demo se congela en su rama y en main se suman servidor, Prisma y login; los componentes se reutilizan porque solo reciben props." },
+        { "t": "Reglas puras, en pesos enteros", "why": "Precios, cupones, estados, fechas y sorteos viven en funciones sin React, con el azar inyectable. Se testean solas y, en producción, se mueven al servidor, que recalcula todo." },
+        { "t": "Agregar al carrito es aprobar el diseño", "why": "Es el momento en que el comprador está mirando su vista previa. La aprobación se guarda ahí y viaja con el pedido hasta el taller.", "alt": "Una casilla «Así lo quiero» aparte, como estaba en la especificación." },
+        { "t": "Lo que no estaba en la especificación, por escrito", "why": "Cada agregado (la ruleta, las temáticas, los emails, el estudio de contenido…) queda en una lista con lo que necesitaría en producción y un tamaño S, M o L. Así se decide con el cliente qué entra y a qué precio." },
+        { "t": "Un panel que habla Excel", "why": "Las tablas tienen «Ver en formato Excel» (teclado, rangos, copiar y pegar, deshacer), importación desde Excel o CSV con vista previa por fila, y exportación. Lo calculado y los estados son de solo lectura, y todo se guarda por una sola vía: la del motor." },
+        { "t": "Rendimiento pensado para el celular", "why": "Las escenas, la ruleta, el carrito y el buscador se descargan cuando hacen falta, y lo de abajo no se dibuja hasta acercarse. El registro de QA del repo anota, en un Pixel 7 emulado con CPU 4×, que el bloqueo del hilo (TBT) del inicio bajó de 3474 a 1727 ms. No lo volví a medir." }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "La CI del repo corre, en orden: lint, tipos, tests unitarios, build, una verificación del export y los e2e en un celular emulado. Publica solo desde main."
+      ],
+      "items": [
+        { "n": "256", "u": "tests", "d": "Unitarios con Vitest, en 33 archivos" },
+        { "n": "367", "u": "tests", "d": "E2E con Playwright en un Pixel 7 emulado, en 49 archivos" },
+        { "n": "65", "u": "pantallas", "d": "24 de tienda y 41 de panel" },
+        { "n": "22", "u": "módulos", "d": "Motor de reglas puro, sin React" }
+      ],
+      "note": "Corrí los 256 unitarios el 28/10/2026: todos pasaron. Los 367 de Playwright los enumeré con --list ese día y no los corrí. Las pantallas y los módulos los conté en el código."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "App", "items": ["Next.js 16 (export estático)", "React 19", "TypeScript", "Tailwind CSS 4", "Motion"] },
+        { "k": "Estado y formularios", "items": ["Zustand", "React Hook Form", "Zod"] },
+        { "k": "En el navegador", "items": ["Konva", "Canvas", "MediaRecorder", "WebAudio", "read-excel-file", "write-excel-file"] },
+        { "k": "Calidad", "items": ["Vitest", "Playwright", "ESLint", "GitHub Actions"] }
+      ]
+    },
+    "gallery": {
+      "h": "Captura",
+      "items": {
+        "velmar": {
+          "alt": "Inicio del panel demo de Velmar con datos ficticios: el aviso «Panel de demostración · datos ficticios · Sin login a propósito», el saludo del taller, tarjetas de ventas, pedidos en marcha y comprobantes a verificar, los pedidos por estado (de pendiente de pago a entregado) y el resumen del taller.",
+          "caption": "Inicio del panel demo, con datos ficticios y la fecha fija de la demo. Captura de un build local."
+        }
+      }
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Demo hecha para un cliente: un taller real de Mar del Plata. No procesa pagos, no crea pedidos reales y no llama a servicios externos.",
+        "No está en producción ni vende. No hay métricas de ventas ni de recompra: clientes, pedidos, mascotas, costos e insumos son inventados, y los precios son de muestra.",
+        "El panel no es seguro: no tiene login, a propósito.",
+        "Lo de producción (servidor, base de datos, login, cobros con webhook, emails reales y archivos privados) está planificado y no construido.",
+        "Pendiente: confirmar varios detalles en un iPhone y un iPad reales, y que el taller confirme qué estilos de collar fabrica.",
+        "Volta, otra demo del laboratorio, nació como copia de este repo: el panel, el checkout y los regalos se hicieron primero acá."
+      ]
+    }
+  }
+}

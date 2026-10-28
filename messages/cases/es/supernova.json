@@ -1,0 +1,327 @@
+{
+  "title": "Supernova Eventos",
+  "kind": "Trabajo profesional · Tsoft para Telefónica",
+  "status": "Prototipo",
+  "summary": "Un prototipo de micro-app de eventos internos que hice en Tsoft para Telefónica: los colaboradores descubren eventos, se inscriben y muestran un pase con QR; los organizadores crean eventos por pasos, eligen la audiencia y registran los ingresos. Corre entero en el navegador, con datos ficticios y sin backend.",
+  "facts": [
+    {
+      "k": "Cliente",
+      "v": "Telefónica, desde Tsoft"
+    },
+    {
+      "k": "Rol",
+      "v": "Desarrollo del prototipo, ya como Dev Ssr"
+    },
+    {
+      "k": "Tipo",
+      "v": "Micro-app de eventos internos"
+    },
+    {
+      "k": "Estado",
+      "v": "Prototipo: sin backend ni SSO"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "El problema",
+      "v": "Juntar en un solo lugar el descubrimiento de eventos internos, la inscripción con cupos por función, el pase de ingreso y las audiencias e invitaciones."
+    },
+    {
+      "k": "La propuesta",
+      "v": "Un catálogo que se ordena solo según el horario, inscripción con pase y QR, y un creador por pasos para organizar; sobre un universo 3D que nunca frena una acción."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Prototipo con datos ficticios y guardado local. Sin backend, SSO ni envío de emails: el contrato del backend quedó escrito como propuesta."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Una micro-app para que los colaboradores de una empresa grande encuentren eventos internos, se inscriban y entren con un pase. La hice en Tsoft para Telefónica, ya como Dev Ssr, como prototipo: corre entera en el navegador y usa datos ficticios."
+      ],
+      "list": [
+        "Colaborador: busca y filtra el catálogo, guarda favoritos, se inscribe en una función con acompañantes y recibe un pase con QR, calendario y archivo .ics.",
+        "Organizador: crea eventos por pasos (información, audiencia, plantilla de email y revisión), exporta los inscriptos y registra los ingresos leyendo el QR.",
+        "Tres presentaciones de la misma app, con los mismos datos: una clásica, un universo 3D navegable y una híbrida, con ilustraciones en planos 3D."
+      ]
+    },
+    "journeys": {
+      "h": "Dos recorridos, un estado",
+      "p": [
+        "El colaborador y el organizador usan la misma app y los mismos datos guardados. Lo que publica uno aparece en el catálogo del otro, y el pase de uno es lo que el otro valida en la puerta."
+      ],
+      "diagram": {
+        "title": "Del catálogo a la puerta",
+        "caption": "Prototipo con datos ficticios: todo se guarda en el navegador. La vista de administración se puede recorrer, pero no representa una autorización real.",
+        "groups": {
+          "collab": "Colaborador",
+          "org": "Organizador"
+        },
+        "nodes": {
+          "fav": {
+            "label": "Favoritos",
+            "sub": "opcional"
+          },
+          "catalog": {
+            "label": "Catálogo",
+            "sub": "búsqueda y filtros",
+            "note": "Activos, próximos y finalizados, en ese orden y de a tres por página. Se reordena solo cuando un evento empieza o termina."
+          },
+          "signup": {
+            "label": "Inscripción",
+            "sub": "función y cupo",
+            "note": "Cada función tiene su cupo; acompañantes y términos son opcionales. Unas guardas síncronas evitan reservar o cancelar dos veces."
+          },
+          "pass": {
+            "label": "Pase",
+            "sub": "QR y calendario"
+          },
+          "checkin": {
+            "label": "Registrar pase",
+            "sub": "cámara o código"
+          },
+          "create": {
+            "label": "Creador por pasos",
+            "sub": "4 pasos, autosave",
+            "note": "Información, audiencia, plantilla de email y revisión. El borrador se guarda solo, también al cerrar la pestaña. Al publicar, el evento aparece según su audiencia."
+          },
+          "invite": {
+            "label": "Invitación",
+            "sub": "solo vista previa",
+            "note": "La audiencia puede ser toda la compañía, una selección de una nómina ficticia o un Excel o CSV importado. La vista previa se personaliza y no envía nada."
+          }
+        },
+        "edges": {
+          "publish": "publica",
+          "save": "guarda",
+          "pick": "elige función",
+          "confirm": "confirma",
+          "show": "muestra el QR",
+          "mail": "plantilla"
+        }
+      }
+    },
+    "checkin": {
+      "h": "Registrar un ingreso con QR",
+      "p": [
+        "Es donde el prototipo decide si alguien entra, así que la validación es estricta aunque no haya servidor."
+      ],
+      "seq": {
+        "title": "De la cámara al ingreso",
+        "caption": "Un QR solo no da acceso: siempre se valida contra una reserva guardada. Si el navegador lo permite, el registro se hace bajo un candado (Web Locks), para que dos pestañas no anoten el mismo ingreso.",
+        "lanes": {
+          "org": "Organizador",
+          "app": "Registrar pase",
+          "ls": "localStorage"
+        },
+        "msgs": {
+          "choose": "elige evento y función",
+          "read": "QR: cámara, imagen o código",
+          "format": "tipo, versión y largo máximo",
+          "lookup": "busca la reserva",
+          "checks": "evento, función y vigencia",
+          "save": "relee y guarda el ingreso",
+          "result": "válido, ya usado o inválido"
+        }
+      }
+    },
+    "arch": {
+      "h": "Arquitectura",
+      "p": [
+        "Una SPA de React compilada con Vite y publicada en GitHub Pages, sin backend. Las tres presentaciones comparten la misma app, el mismo controlador de flujos y el mismo almacenamiento."
+      ],
+      "diagram": {
+        "title": "Una app, tres presentaciones, un estado",
+        "caption": "Todo corre en el navegador. La CI solo instala, compila con chequeo de tipos y publica.",
+        "nodes": {
+          "html": {
+            "label": "HTML inicial",
+            "sub": "primer cuadro",
+            "note": "La escena orbital ya está en el HTML, con CSS crítico; React y la intro la continúan con el mismo reloj. No hay pantalla de solo logo."
+          },
+          "router": {
+            "label": "Router",
+            "sub": "3 presentaciones"
+          },
+          "app": {
+            "label": "App de eventos",
+            "sub": "React 19",
+            "note": "Ninguna operación de negocio espera a que termine una animación."
+          },
+          "lazy": {
+            "label": "A pedido",
+            "sub": "QR · Excel",
+            "note": "La intro con GSAP, el QR y el lector de Excel se descargan aparte, cuando hacen falta. La presentación clásica no descarga Three.js."
+          },
+          "universe": {
+            "label": "Universo 3D",
+            "sub": "un solo Canvas",
+            "note": "Vive fuera de las vistas y los diálogos. Cada comando lleva un ID creciente: un viaje nuevo cancela el anterior. Nunca escribe datos."
+          },
+          "fallback": {
+            "label": "Fondo estático",
+            "sub": "la app sigue"
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "JSON"
+          }
+        },
+        "edges": {
+          "boot": "antes de React",
+          "route": "una por URL",
+          "lazy": "import diferido",
+          "cmd": "comandos",
+          "fail": "error de WebGL",
+          "data": "lee y escribe JSON"
+        }
+      }
+    },
+    "security": {
+      "h": "Seguridad y privacidad de un prototipo",
+      "p": [
+        "Sin servidor no hay seguridad real que mostrar. Lo que sí hay es cuidado con los datos y honestidad sobre lo que falta."
+      ],
+      "items": [
+        {
+          "t": "Sin autorización real, y lo dice",
+          "d": "Los permisos de la interfaz sirven para la demo; la autorización final le corresponde a un servidor. El localStorage se puede editar desde el navegador, así que no es fuente de autoridad."
+        },
+        {
+          "t": "QR con lo mínimo",
+          "d": "El pase lleva solo identificadores de demo: nombres, emails y audiencias nunca entran al QR. El JSON del pase no es un token seguro."
+        },
+        {
+          "t": "Importación con límites",
+          "d": "Excel o CSV de hasta 5 MB y 5.000 filas, con columnas requeridas, emails validados y duplicados detectados. Un CSV con comillas mal cerradas se rechaza."
+        },
+        {
+          "t": "Cámara solo con un clic",
+          "d": "Se pide recién después de una acción explícita, con un mensaje para cada tipo de error. Desde un celular necesita HTTPS."
+        },
+        {
+          "t": "Datos ficticios",
+          "d": "Dominios example.com y .test. El README pide no cargar datos reales de colaboradores."
+        },
+        {
+          "t": "CI con permisos mínimos",
+          "d": "Acciones fijadas por SHA, sin secretos y con los permisos justos para publicar."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        {
+          "t": "El primer cuadro no espera a React",
+          "why": "La escena orbital ya está en el HTML con CSS crítico, y la intro con GSAP la continúa con el mismo reloj. Un script del build mantiene sincronizados el HTML y la intro."
+        },
+        {
+          "t": "Un solo Canvas, que nunca frena a la app",
+          "why": "El universo vive fuera de las vistas y recibe comandos con un ID creciente. Inscribirse o registrar un ingreso no esperan a ninguna animación, y si falla la descarga, un shader o el contexto WebGL, queda un fondo estático y las acciones siguen andando."
+        },
+        {
+          "t": "El 3D se paga solo cuando se ve",
+          "why": "Se pausa fuera de pantalla, con la pestaña oculta o desde Mi perfil; el mouse no mueve la cámara; la densidad de píxeles está acotada y la híbrida recorta estrellas si el equipo va lento. La doc del repo anota cuadros medianos de 16 ms en Chrome local con gráficos integrados, y aclara que eso no equivale a FPS sostenidos. No lo volví a medir."
+        },
+        {
+          "t": "Datos guardados que no se rompen",
+          "why": "Las funciones por evento son opcionales: una reserva vieja sin función cae en la función principal, y la migración conserva los eventos que creó el usuario."
+        },
+        {
+          "t": "El backend, como propuesta",
+          "why": "El repo documenta el contrato que necesitaría: claves de idempotencia, revisión esperada, reserva, cancelación e ingreso atómicos, y un token opaco o firmado por reserva en lugar del QR de la demo. Y prohíbe inventar endpoints como si existieran."
+        },
+        {
+          "t": "Trabajo con agentes de IA",
+          "why": "Con Codex, en roles separados para el frontend y para el tráiler, cada uno con sus archivos. El universo 3D salió de un paquete de tres prompts, implementados y verificados en local."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "La calidad de este prototipo está en recorridos de punta a punta y en QA visual, no en tests unitarios: no tiene."
+      ],
+      "items": [
+        {
+          "n": "122",
+          "u": "tests",
+          "d": "E2E con Playwright, en 15 archivos"
+        },
+        {
+          "n": "42/42",
+          "u": "pruebas",
+          "d": "Última corrida documentada en el repo, el 13/10/2026"
+        },
+        {
+          "n": "18",
+          "u": "scripts",
+          "d": "QA visual con capturas por tema y ancho"
+        }
+      ],
+      "note": "Enumeré los 122 con --list el 28/10/2026 y no los corrí. La CI solo compila y publica: los e2e se corrieron en local. El README (32 casos, 7/10) y la doc de validación (112 en 13 archivos, 13/10) cuentan versiones anteriores."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7"
+          ]
+        },
+        {
+          "k": "3D y movimiento",
+          "items": [
+            "Three.js",
+            "React Three Fiber",
+            "Shaders propios",
+            "GSAP",
+            "Motion"
+          ]
+        },
+        {
+          "k": "En el navegador",
+          "items": [
+            "qrcode",
+            "jsQR",
+            "getUserMedia",
+            "read-excel-file"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Playwright",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Captura",
+      "items": {
+        "supernova": {
+          "alt": "Administración del prototipo Supernova Eventos con datos ficticios: buscador y filtros, contadores de publicadas, inscripciones, ocupación de cupos y borradores, y la tabla de experiencias con fecha, audiencia, inscripciones y estado.",
+          "caption": "Administrar experiencias, en la presentación 3D, con datos ficticios. Captura de un build local."
+        }
+      }
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Prototipo hecho en Tsoft para Telefónica, con datos ficticios y guardado local.",
+        "No hay backend, SSO, nómina real, envío de emails, control de cupos entre dispositivos ni autorización.",
+        "No está en producción y no hay métricas de uso: los cupos y los inscriptos son números de muestra.",
+        "El QR de la demo no es un token seguro: en producción lo tendría que emitir y validar un servidor.",
+        "No verifiqué que las tres presentaciones abran por su propia URL en la versión publicada.",
+        "No describo sistemas, procesos ni datos internos de Telefónica."
+      ]
+    }
+  }
+}
