@@ -15,6 +15,7 @@ import type { ArchSpec, SeqSpec } from '@/lib/diagrams/types';
  *   video      { h?, p?: string[], caption }
  *   gallery    { h?, p?: string[], items: { [shot]: { alt, caption } } }
  *   limits     { h, p?: string[], list?: string[] }
+ *   art        { h?, p?: string[], …the illustration's own copy } (drawn illustrations instead of screenshots)
  * A block with `h` opens a section (and a line in the page index); one without it continues the previous section.
  */
 export type BlockDef =
@@ -23,6 +24,7 @@ export type BlockDef =
   | { type: 'sequence'; key: string; spec: SeqSpec }
   | { type: 'flow'; key: string; cols?: number }
   | { type: 'video'; key: string; src: string; poster: string }
-  | { type: 'gallery'; key: string; dir: string; shots: readonly string[] };
+  | { type: 'gallery'; key: string; dir: string; shots: readonly string[] }
+  | { type: 'art'; key: string; art: 'tuenti' };
 
 export type CaseDef = { blocks: BlockDef[]; links?: { label: string; href: string }[] };

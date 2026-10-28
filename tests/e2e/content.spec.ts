@@ -19,7 +19,7 @@ test('home has its nine sections, each with its heading, and no console errors',
   for (const id of ['que-hago', 'trabajo', 'recorrido', 'laboratorio', 'metodo', 'sistema', 'capacidades', 'sobre-mi', 'contacto']) {
     await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
   }
-  await expect(page.locator('.journey__item')).toHaveCount(7);
+  await expect(page.locator('.journey__item')).toHaveCount(8);
   await expect(page.locator('.method__step')).toHaveCount(6);
   await expect(page.locator('.system__item')).toHaveCount(7);
   await expect(page.locator('.agent')).toHaveCount(11);
@@ -73,7 +73,7 @@ test('navigation: the section menu works on a phone and no horizontal scroll at 
 
 test('English home mirrors the Spanish structure', async ({ page }) => {
   await enter(page, '/en/', 'Skip', 'View portfolio');
-  await expect(page.locator('section#recorrido h2')).toContainText('One seed');
+  await expect(page.locator('section#recorrido h2')).toContainText('Mar del Plata');
   await expect(page.locator('.method__step')).toHaveCount(6);
 });
 

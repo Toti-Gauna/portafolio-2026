@@ -106,28 +106,33 @@
   },
   "journey": {
     "label": "03 · Journey",
-    "title": "One seed, many paths.",
-    "lead": "Seven moments, in order. What can be told, with no internal data from any client.",
+    "title": "It all started in Mar del Plata.",
+    "lead": "A seed and the paths it opened. I talk about challenges, not job titles; and only about what can be told, with no internal data from any client.",
     "items": [
       {
-        "when": "At 17",
-        "title": "I start studying",
-        "text": "I wanted to build a games website. That site doesn't exist, but it opened the road I'm on. I'm self-taught: I read a lot and study online."
+        "when": "Mar del Plata · at 17",
+        "title": "My first product: a games website",
+        "text": "At 17 I built my first product, a games website. It changed my life and opened the road I'm on. I'm self-taught: I read a lot and study online."
       },
       {
-        "when": "2021 – 2022",
-        "title": "TACH Argentina · Software Developer",
-        "text": "Remote software development: a virtual wallet, on web and mobile."
+        "when": "2021 – 2022 · TACH Argentina",
+        "title": "A digital wallet, end to end",
+        "text": "Working remotely, I built the back office, the landing page and the app of a digital wallet, on web and mobile."
       },
       {
-        "when": "2023 – 2024",
-        "title": "Ada ITW · Professor",
-        "text": "I taught the JavaScript and React course. Teaching helped me strengthen my basics and explain technical ideas clearly."
+        "when": "2023 – 2024 · Ada ITW",
+        "title": "Teaching people to code",
+        "text": "I taught JavaScript and React: projects, hello worlds and students starting from zero. Teaching strengthened my basics and taught me to explain technical ideas clearly."
       },
       {
-        "when": "2024 – 2026",
-        "title": "Tsoft · Jr Frontend Developer",
-        "text": "Tuenti and Telefónica products, focused on gamification: interactive and reward mechanics such as the Tuenti roulette and the referral system. React, React Native, TypeScript, Next.js, Tailwind, Node.js and SQL."
+        "when": "2024 · Tsoft",
+        "title": "Gamification at Tuenti",
+        "text": "I started working on Tuenti: interactive and reward mechanics, such as the Tuenti roulette and the referral system."
+      },
+      {
+        "when": "Tsoft",
+        "title": "Measuring what works",
+        "text": "I built a dashboard to measure Tuenti's data: referrals, recurrence and gamification."
       },
       {
         "when": "January 2026",
@@ -135,14 +140,14 @@
         "text": "An internal Special Recognition from Tsoft, with a message and a gesture from the People team."
       },
       {
-        "when": "2026",
-        "title": "Dev Ssr · day with clients",
-        "text": "Promoted to Dev Ssr. In April I travelled from Mar del Plata to Buenos Aires for an in-person day of demos, alignment and direct conversation with clients."
+        "when": "2026 · Tsoft",
+        "title": "AI products and a team that grows",
+        "text": "I designed and built CompliA, the RAG assistant of Telefónica's compliance portal, now in internal production; I built Supernova Eventos and trained colleagues to raise the team's level. In April, an in-person day with clients in Buenos Aires."
       },
       {
-        "when": "2026 – today",
-        "title": "Ssr AI Fullstack Developer · CompliA",
-        "text": "Frontend, backend, CI/CD, integrations and AI features. In the Tuenti app: top-up processes, internal flows, backend and deployments. In Telefónica's compliance portal I designed and built CompliA, a RAG assistant that now runs in internal production."
+        "when": "Today · my own paths",
+        "title": "Boosting businesses and automating the hard parts",
+        "text": "Eclipse, HandyX and a lab of demos and trailers: my own products, in any industry."
       }
     ]
   },
@@ -163,9 +168,9 @@
       "tuenti": {
         "name": "Tuenti",
         "status": "Professional work",
-        "text": "Gamification (the Tuenti roulette and the referral system), automatic top-up and a payments module, from Tsoft.",
+        "text": "Gamification (the Tuenti roulette and the referral system), a dashboard measuring referrals and recurrence, automatic top-up and a payments module, from Tsoft.",
         "shotAlt": "Illustration of a prize wheel, for the Tuenti gamification work. There are no screenshots of the product, for confidentiality.",
-        "role": "Jr Frontend → Ssr AI Fullstack · 2024 – today"
+        "role": "Gamification, metrics and AI products · 2024 – today"
       },
       "handyx": {
         "name": "HandyX",
@@ -523,15 +528,15 @@
     "label": "08 · About",
     "title": "From Mar del Plata.",
     "paragraphs": [
-      "I started studying at 17 with one idea: to build a games website. That site doesn't exist, but it opened the road I'm on.",
-      "I'm 100% self-taught: I like to read and study online. I taught JavaScript and React, and today I work as a Ssr AI Fullstack Developer.",
-      "I care about what happens between a business problem and a product people actually use."
+      "It all started in Mar del Plata: at 17 I built my first product, a games website, and that road never stopped.",
+      "I'm 100% self-taught: I like reading and studying online. I taught JavaScript and React, and today I build AI products end to end.",
+      "New challenges are what drive me: boosting businesses and automating hard processes. I'm not afraid of any industry: startups, corporates, agriculture, space, mining, oil & gas."
     ]
   },
   "contact": {
     "label": "09 · Contact",
     "title": "Open to new opportunities.",
-    "lead": "I'm looking for a Ssr or Sr fullstack role with AI.",
+    "lead": "I'm looking for new fullstack-with-AI challenges: boosting businesses and automating hard processes. In any industry: startups, corporates, agriculture, space, mining, oil & gas.",
     "email": "Write to me",
     "emailLabel": "Email",
     "linkedin": "LinkedIn",

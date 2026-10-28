@@ -106,28 +106,33 @@
   },
   "journey": {
     "label": "03 · Recorrido",
-    "title": "Una semilla, muchos caminos.",
-    "lead": "Siete momentos, en orden. Lo que se puede contar, sin datos internos de ningún cliente.",
+    "title": "Todo empezó en Mar del Plata.",
+    "lead": "Una semilla y los caminos que fue abriendo. Hablo de desafíos, no de puestos; y de lo que se puede contar, sin datos internos de ningún cliente.",
     "items": [
       {
-        "when": "A los 17",
-        "title": "Empiezo a estudiar",
-        "text": "Quería hacer una web de juegos. Esa web no existe, pero abrió el camino que sigo. Soy autodidacta: leo mucho y estudio por internet."
+        "when": "Mar del Plata · a los 17",
+        "title": "Mi primer producto: una web de juegos",
+        "text": "Con 17 años programé mi primer producto, una web de juegos. Me cambió la vida y abrió el camino que sigo. Soy autodidacta: leo mucho y estudio por internet."
       },
       {
-        "when": "2021 – 2022",
-        "title": "TACH Argentina · Software Developer",
-        "text": "Desarrollo de software en remoto: una billetera virtual, en web y móvil."
+        "when": "2021 – 2022 · TACH Argentina",
+        "title": "Una billetera virtual, de punta a punta",
+        "text": "En remoto, trabajé en el backoffice, la landing y la app de una billetera virtual, en web y móvil."
       },
       {
-        "when": "2023 – 2024",
-        "title": "Ada ITW · Profesor",
-        "text": "Dicté el curso de JavaScript y React. Enseñar me ayudó a afianzar las bases y a explicar ideas técnicas con claridad."
+        "when": "2023 – 2024 · Ada ITW",
+        "title": "Enseñar a programar",
+        "text": "Dicté JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero. Enseñar me ayudó a afianzar las bases y a explicar ideas técnicas con claridad."
       },
       {
-        "when": "2024 – 2026",
-        "title": "Tsoft · Jr Frontend Developer",
-        "text": "Productos de Tuenti y Telefónica, con foco en gamificación: mecánicas interactivas y de recompensa como la ruleta Tuenti y el sistema de referidos. React, React Native, TypeScript, Next.js, Tailwind, Node.js y SQL."
+        "when": "2024 · Tsoft",
+        "title": "Gamificación en Tuenti",
+        "text": "Entré trabajando en Tuenti: mecánicas interactivas y de recompensa, como la ruleta Tuenti y el sistema de referidos."
+      },
+      {
+        "when": "Tsoft",
+        "title": "Medir lo que funciona",
+        "text": "Construí un dashboard para medir los datos de Tuenti: referidos, recurrencia y gamificación."
       },
       {
         "when": "Enero 2026",
@@ -135,14 +140,14 @@
         "text": "Un Reconocimiento Especial interno de Tsoft, con un mensaje y un gesto del equipo de People."
       },
       {
-        "when": "2026",
-        "title": "Dev Ssr · jornada con clientes",
-        "text": "Recategorización a Dev Ssr. En abril viajé de Mar del Plata a Buenos Aires para una jornada presencial con demos, alineación y conversación directa con clientes."
+        "when": "2026 · Tsoft",
+        "title": "Productos con IA y un equipo que crece",
+        "text": "Diseñé y construí CompliA, el asistente con RAG del portal de compliance de Telefónica, hoy en producción interna; hice Supernova Eventos y capacité a compañeros para subir el nivel del equipo. En abril, una jornada presencial con clientes en Buenos Aires."
       },
       {
-        "when": "2026 – hoy",
-        "title": "Ssr AI Fullstack Developer · CompliA",
-        "text": "Frontend, backend, CI/CD, integraciones y funciones con IA. En la app de Tuenti: procesos de recarga, flujos internos, backend y despliegues. En el portal de compliance de Telefónica diseñé y construí CompliA, un asistente con RAG que hoy corre en producción interna."
+        "when": "Hoy · caminos propios",
+        "title": "Potenciar negocios y automatizar lo difícil",
+        "text": "Eclipse, HandyX y un laboratorio de demos y tráileres: productos propios, en cualquier rubro."
       }
     ]
   },
@@ -163,9 +168,9 @@
       "tuenti": {
         "name": "Tuenti",
         "status": "Trabajo profesional",
-        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), recarga automática y módulo de pagos, desde Tsoft.",
+        "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), un dashboard para medir referidos y recurrencia, recarga automática y módulo de pagos, desde Tsoft.",
         "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad.",
-        "role": "Jr Frontend → Ssr AI Fullstack · 2024 – hoy"
+        "role": "Gamificación, métricas y productos con IA · 2024 – hoy"
       },
       "handyx": {
         "name": "HandyX",
@@ -523,15 +528,15 @@
     "label": "08 · Sobre mí",
     "title": "De Mar del Plata.",
     "paragraphs": [
-      "Empecé a estudiar a los 17 con una idea: hacer una web de juegos. Esa web no existe, pero abrió el camino que sigo.",
-      "Soy 100% autodidacta: me gusta leer y estudiar por internet. Enseñé JavaScript y React, y hoy trabajo como Ssr AI Fullstack Developer.",
-      "Me interesa lo que pasa entre un problema de negocio y un producto que la gente usa."
+      "Todo empezó en Mar del Plata: con 17 años programé mi primer producto, una web de juegos, y ese camino no se cortó más.",
+      "Soy 100% autodidacta: me gusta leer y estudiar por internet. Enseñé JavaScript y React, y hoy construyo productos con IA de punta a punta.",
+      "Me mueven los desafíos nuevos: potenciar negocios y automatizar procesos difíciles. No le temo a ningún rubro: startups, corporativas, agro, espacio, minería, oil & gas."
     ]
   },
   "contact": {
     "label": "09 · Contacto",
     "title": "Abierto a nuevas oportunidades.",
-    "lead": "Busco un rol Ssr o Sr de desarrollo fullstack con IA.",
+    "lead": "Busco nuevos desafíos de desarrollo fullstack con IA: potenciar negocios y automatizar procesos difíciles. En cualquier rubro: startups, corporativas, agro, espacio, minería, oil & gas.",
     "email": "Escribime",
     "emailLabel": "Mail",
     "linkedin": "LinkedIn",

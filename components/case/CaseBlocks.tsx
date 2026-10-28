@@ -8,6 +8,7 @@ import { Flow, type FlowStep } from '@/components/diagrams/Flow';
 import { Readouts, type Readout } from '@/components/diagrams/Readouts';
 import { MoneySplit, type SplitCopy } from '@/components/diagrams/MoneySplit';
 import { Reveal } from '@/components/Reveal';
+import { TuentiArt, type TuentiArtCopy } from '@/components/art/TuentiArt';
 
 type Copy = {
   h?: string; p?: string[]; list?: string[];
@@ -116,6 +117,8 @@ function Block({ b, c, ui }: { b: BlockDef; c: Copy; ui: CaseUi }) {
           </figure>
         </>
       );
+    case 'art':
+      return <><Prose c={c} /><div className="cs__wide"><TuentiArt c={c as unknown as TuentiArtCopy} /></div></>;
     case 'gallery': {
       const items = (c.items ?? {}) as Record<string, { alt: string; caption: string }>;
       return (

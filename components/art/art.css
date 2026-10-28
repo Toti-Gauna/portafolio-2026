@@ -1,0 +1,26 @@
+/* Drawn illustrations for cases without screenshots (Tuenti). Decorative; every card has its text. */
+.art { margin: 0; display: grid; gap: 12px; }
+.art__grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .art__grid { grid-template-columns: repeat(3, 1fr); } }
+.art__card { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(circle at 1px 1px, #ffffff10 1px, transparent 1.4px) 0 0 / 22px 22px, #101013; }
+.art__svg { width: 100%; height: auto; font-family: var(--font-sans); }
+.art__t { font-size: 18px; font-variation-settings: 'wdth' 110; }
+.art__d { color: #cfcbc2; font-size: 15px; line-height: 1.5; }
+.art-ref__link { fill: none; stroke: #7fa3ff; stroke-width: 2.5; stroke-dasharray: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .art-wheel { transform-box: fill-box; transform-origin: center; animation: art-spin 6s cubic-bezier(0.2, 0.7, 0.1, 1) infinite paused; }
+  .art-confetti { transform-box: fill-box; transform-origin: center; animation: art-pop 6s ease-out infinite paused; animation-delay: calc(var(--k) * 60ms); }
+  .art-prize rect, .art-prize text { animation: art-show 6s ease-out infinite paused; }
+  .art-ref__link { animation: art-draw 5s var(--ease-expo) infinite paused; animation-delay: calc(var(--k) * 400ms); }
+  .art-ref__plus { transform-box: fill-box; transform-origin: center; animation: art-pop 5s ease-out infinite paused; animation-delay: calc(var(--k) * 400ms + 700ms); }
+  .art-line { animation: art-draw 6s var(--ease-expo) infinite paused; }
+  .art-bar { transform-box: fill-box; transform-origin: bottom; animation: art-grow 6s var(--ease-expo) infinite paused; animation-delay: calc(var(--k) * 90ms); }
+  .art-donut { animation: art-ring 6s var(--ease-expo) infinite paused; }
+  .art[data-live] :is(.art-wheel, .art-confetti, .art-prize rect, .art-prize text, .art-ref__link, .art-ref__plus, .art-line, .art-bar, .art-donut) { animation-play-state: running; }
+}
+@keyframes art-spin { 0% { transform: rotate(0deg); } 55%, 100% { transform: rotate(1102deg); } }
+@keyframes art-pop { 0%, 50% { opacity: 0; transform: scale(0.3); } 62% { opacity: 1; transform: scale(1.1); } 90% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+@keyframes art-show { 0%, 48% { opacity: 0.25; } 58%, 92% { opacity: 1; } 100% { opacity: 0.25; } }
+@keyframes art-draw { 0% { stroke-dashoffset: 1; } 40%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 1; } }
+@keyframes art-grow { 0% { transform: scaleY(0); } 35%, 85% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+@keyframes art-ring { 0% { stroke-dashoffset: 0.68; } 40%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0.68; } }
