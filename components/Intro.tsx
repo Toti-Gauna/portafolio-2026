@@ -74,12 +74,15 @@ export function Intro() {
   // While the boot screen or the trailer is up, the page is inert and does not scroll. iOS Safari ignores
   // overflow:hidden on <html> for touch scrolling, so the body is pinned in place (and restored after).
   const open = phase === 'loading' || phase === 'ready' || trailer; // the page is usable again as the boot screen fades
+  // Only what this screen pinned is undone here: the site menu may pin the body too, right after the gate.
+  const pinned = useRef(false);
   useEffect(() => {
     const shell = document.getElementById('app-shell');
     const root = document.documentElement, body = document.body;
     const unlock = () => {
       shell?.removeAttribute('inert');
-      if (body.style.position !== 'fixed') return;
+      if (!pinned.current) return;
+      pinned.current = false;
       const y = -parseInt(body.style.top || '0', 10);
       root.style.overflow = ''; body.style.position = ''; body.style.top = ''; body.style.width = '';
       window.scrollTo(0, y);
@@ -90,13 +93,19 @@ export function Intro() {
         const y = window.scrollY;
         root.style.overflow = 'hidden';
         body.style.position = 'fixed'; body.style.top = `-${y}px`; body.style.width = '100%';
+        pinned.current = true;
       }
-    } else {
-      unlock();
-      if (phase === 'closing' || phase === 'closed') document.getElementById('contenido')?.focus({ preventScroll: true });
+      return unlock;
     }
-    return unlock;
-  }, [open, phase]);
+    unlock();
+  }, [open]);
+
+  // Focus lands on the content once, as the screen starts to leave, unless the visitor already moved it (the menu).
+  useEffect(() => {
+    if (phase !== 'closing') return;
+    const a = document.activeElement;
+    if (!a || a === document.body || a.closest('#boot')) document.getElementById('contenido')?.focus({ preventScroll: true });
+  }, [phase]);
 
   // The hero's "watch the trailer" button asks for it through an event.
   useEffect(() => {
@@ -116,8 +125,10 @@ export function Intro() {
 
   const closeTrailer = useCallback(() => {
     setTrailer(false);
+    // opened from the page (the gate already gone): back to the content, as the gate's exit does
+    if (phase === 'closed') requestAnimationFrame(() => document.getElementById('contenido')?.focus({ preventScroll: true }));
     close();
-  }, [close]);
+  }, [close, phase]);
 
   return (
     <>
