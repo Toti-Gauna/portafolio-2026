@@ -36,6 +36,7 @@
       "January 2026: Special Recognition from Tsoft. 2026: Dev Ssr → Ssr AI Fullstack Developer.",
       "CompliA: a RAG assistant for Telefónica's compliance portal. I designed and built it. In internal production. (Demo clip, with sample data.)",
       "And my own branches: Eclipse (in development), HandyX (in development · launches Nov 10), Volta (demo), Velmar (demo made for a client), DentalOS (demo), Supernova Eventos (prototype), games-market (test bench), Kinetic Studio (32 trailers in code).",
+      "Technologies, by where I used them. At work: React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD and RAG with an LLM. In my projects: security (HttpOnly cookies, CSRF, 2FA, Argon2), Python, C, motion with GSAP and WebGL, and tests with Vitest and Playwright. Studying: machine learning fundamentals, AWS and Azure.",
       "An agentic system, split into parts: 11 agents with separate roles. Not a prompt: a system with roles.",
       "Specification first, code second. Every claim carries its level of evidence. Gates with human approval. Tested, not eyeballed.",
       "Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779, internal portal 132 and 14 browser journeys. Nothing ships without human approval.",
@@ -370,12 +371,16 @@
           "Motion graphics in code: GSAP, canvas, WebGL, WebAudio",
           "Next.js 16, Vitest and Playwright",
           "Interface design and visual systems",
-          "Agent-based systems: roles, specification, tests and gates"
+          "Agent-based systems: roles, specification, tests and gates",
+          "Python and C (study and own projects)",
+          "Security in what I build: HttpOnly cookies, CSRF, 2FA and Argon2"
         ]
       },
       "exploring": {
-        "title": "Exploring",
+        "title": "Studying",
         "items": [
+          "Machine learning fundamentals",
+          "Cloud: AWS and Azure",
           "Consultative selling (SPIN Selling)"
         ]
       }
@@ -560,7 +565,7 @@
         },
         {
           "h": "Where to see it",
-          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 16 scenes in 98 seconds, with synthesised music and real components of my projects rebuilt in code."
+          "p": "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 15 scenes in 112 seconds, with synthesised music and real components of my projects rebuilt in code."
         },
         {
           "h": "Known debt",

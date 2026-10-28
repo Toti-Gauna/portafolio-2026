@@ -36,6 +36,7 @@
       "Enero 2026: Reconocimiento Especial de Tsoft. 2026: Dev Ssr → Ssr AI Fullstack Developer.",
       "CompliA: un asistente con RAG para el portal de compliance de Telefónica. Lo diseñé y lo construí. En producción interna. (Recorte de la demo, con datos de ejemplo.)",
       "Y mis propias ramas: Eclipse (en desarrollo), HandyX (en desarrollo · lanza el 10/11), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), Supernova Eventos (prototipo), games-market (banco de pruebas), Kinetic Studio (32 tráileres en código).",
+      "Tecnologías, según dónde las usé. En el trabajo: React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD y RAG con LLM. En mis proyectos: seguridad (cookies HttpOnly, CSRF, 2FA, Argon2), Python, C, motion con GSAP y WebGL, y tests con Vitest y Playwright. Estudiando: fundamentos de machine learning, AWS y Azure.",
       "Un sistema agéntico, dividido en partes: 11 agentes con roles separados. No es un prompt: es un sistema con roles.",
       "Primero la especificación, después el código. Cada afirmación tiene su nivel de evidencia. Puertas con aprobación humana. Se prueba, no se mira a ojo.",
       "Corrida del 27/10/2026, todo en verde: Eclipse-Web 463 tests, backend de Eclipse 779, portal interno 132 y 14 recorridos en navegador. Nada se entrega sin aprobación humana.",
@@ -370,12 +371,16 @@
           "Motion graphics en código: GSAP, canvas, WebGL, WebAudio",
           "Next.js 16, Vitest y Playwright",
           "Diseño de interfaces y sistemas visuales",
-          "Sistemas con agentes: roles, especificación, pruebas y puertas"
+          "Sistemas con agentes: roles, especificación, pruebas y puertas",
+          "Python y C (estudio y proyectos propios)",
+          "Seguridad en lo que construyo: cookies HttpOnly, CSRF, 2FA y Argon2"
         ]
       },
       "exploring": {
-        "title": "Explorando",
+        "title": "Estudiando",
         "items": [
+          "Fundamentos de machine learning",
+          "Nube: AWS y Azure",
           "Ventas consultivas (SPIN Selling)"
         ]
       }
@@ -560,7 +565,7 @@
         },
         {
           "h": "Dónde se ve",
-          "p": "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 16 escenas en 98 segundos, con música sintetizada y componentes reales de mis proyectos reconstruidos en código."
+          "p": "El tráiler «Conocer a Ignacio» de este sitio está hecho con el kit de Kinetic Studio: 15 escenas en 112 segundos, con música sintetizada y componentes reales de mis proyectos reconstruidos en código."
         },
         {
           "h": "Deuda conocida",

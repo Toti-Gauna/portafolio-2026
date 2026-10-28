@@ -63,12 +63,10 @@ Trailer.run({
       ] },
 
     // ── ACTO 4 · CompliA (32–42) · DROP 2 ─────────────────────────────────────── azul noche · scan
-    { type: 'remixtitle', chroma: false, label: 'IA EN PRODUCCIÓN', duration: 4, foley: 0.45, title: 'CompliA', stamp: 'RAG',   // 32–36
-      colors: [NAVY, BLUE, ICE, PAPER, NAVY, CORAL],
-      cap: { at: 1.1, k: '2026 · Portal de compliance de Telefónica', t: 'Lo diseñé y lo construí.', d: 'Un asistente con RAG: validaciones, restricciones y recomendaciones.', w: 1500 } },
-    { type: 'igclip', label: 'DEMO · DATOS DE EJEMPLO', duration: 6, bg: NAVY,                                   // 36–42
-      src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'DATOS DE EJEMPLO',
-      cap: { pos: 'tr', w: 720, at: 0.6, k: 'En producción interna', t: 'Inteligencia artificial en producción, para compliance.', d: 'Recorte de la demo, con datos de ejemplo.' } },
+    { type: 'igcase', label: 'IA EN PRODUCCIÓN', duration: 10, bg: NAVY,                                                  // 32–42
+      kicker: '2026 · Portal de compliance de Telefónica', title: 'CompliA', sub: 'Inteligencia artificial en producción interna.',
+      facts: [{ k: 'Rol', t: 'Lo diseñé y lo construí.' }, { k: 'Cómo', t: 'Un asistente con RAG: validaciones, restricciones y recomendaciones.' }, { k: 'Demo', t: 'Recorte de la demo, con datos de ejemplo.' }],
+      src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'DATOS DE EJEMPLO' },
 
     // ── ACTO 5 · RAMAS PROPIAS (42–60) ────────────────────────────────────────── un color por proyecto · montaje
     // Cada proyecto muestra sus componentes reales, reconstruidos en código (js/shots/*): sin capturas ni video.
@@ -99,10 +97,20 @@ Trailer.run({
         { id: 'kinetic', dur: 1, tag: { name: 'Kinetic Studio', status: '32 tráileres', note: 'Tráileres hechos con código, como este' } },
       ] },
 
-    // ── ACTO 6 · EL SISTEMA (60–80) ───────────────────────────────────────────── coral / tinta · red
-    { type: 'igcut', de: 'typewriter', fit: 4, label: 'SISTEMA', speed: 1.3,                                     // 60–64
+    // ── ACTO 6 · TECNOLOGÍAS (60–78) ──────────────────────────────────────────── tinta · una animación por tecnología
+    // Agrupadas por dónde las usé: en el trabajo, en mis proyectos y estudiando.
+    { type: 'igstack', label: 'TECNOLOGÍAS', letterbox: 0,                                                    // 60–78
+      screens: [
+        { k: 'En el trabajo', t: 'Frontend y mobile', label: 'FRONTEND', tone: CORAL, bg: '#140f0f', dur: 4.5, tiles: ['react', 'typescript', 'nextjs', 'reactnative', 'tailwind'] },
+        { k: 'En el trabajo', t: 'Backend, datos e IA', label: 'BACKEND · IA', tone: CORAL, bg: '#0f1014', dur: 4.5, tiles: ['node', 'sql', 'cicd', 'rag'] },
+        { k: 'En mis proyectos', t: 'Seguridad, lenguajes y motion', label: 'PROYECTOS', tone: '#7fa3ff', bg: '#0d1020', dur: 4.5, tiles: ['security', 'python', 'c', 'motion', 'tests'] },
+        { k: 'Estudiando', t: 'Machine learning y nube', label: 'ESTUDIO', tone: YELLOW, bg: '#14130c', dur: 4.5, tiles: ['ml', 'aws', 'azure'] },
+      ] },
+
+    // ── ACTO 7 · EL SISTEMA (78–94) ───────────────────────────────────────────── coral / tinta · red
+    { type: 'igcut', de: 'typewriter', fit: 2, label: 'SISTEMA', speed: 1.3,                                     // 78–80
       lines: ['UN SISTEMA AGÉNTICO,', 'DIVIDIDO EN <em>PARTES</em>.'], bg: INK, to: CORAL },
-    { type: 'igagents', label: '11 AGENTES', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    // 64–70
+    { type: 'igagents', label: '11 AGENTES', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    // 80–86
       glyphs: GLYPHS,
       agents: [
         { id: 'chief', name: 'Dirección' }, { id: 'uxui', name: 'UX/UI' }, { id: 'design', name: 'Diseño' },
@@ -120,14 +128,14 @@ Trailer.run({
         { at: 1.95, to: 3.75, w: 1500, k: 'Arquitectos', t: 'Cada uno con su parte.' },
         { at: 3.75, w: 1500, k: 'Documentación · 11 agentes', t: 'No es un prompt: es un sistema con roles.' },
       ] },
-    { type: 'rules', label: 'REGLAS', step: 1, head: 'CÓMO TRABAJAN JUNTOS', unit: 'REGLA',                      // 70–74
+    { type: 'rules', label: 'REGLAS', step: 1, head: 'CÓMO TRABAJAN JUNTOS', unit: 'REGLA',                      // 86–90
       rules: [
         { text: 'Primero la especificación, después el código.', bg: PAPER, num: CORAL },
         { text: 'Cada afirmación tiene su nivel de evidencia.', bg: INK, num: CORAL },
         { text: 'Puertas con aprobación humana.', bg: BLUE, num: YELLOW },
         { text: 'Se prueba, no se mira a ojo.', bg: GH, num: GREEN },
       ] },
-    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           // 74–78
+    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           // 90–94
       window: 'ci · corrida del 27/10/2026', title: 'Corrida del 27/10/2026', sub: 'Tests automáticos, e2e con Playwright y CI',
       running: 'Corriendo', doneLabel: 'Todo en verde', total: 'Todo en verde', gap: 0.3, rowH: 58,
       cols: ['PROYECTO', 'PROGRESO', 'RESULTADO', ''],
@@ -141,22 +149,15 @@ Trailer.run({
         { name: 'Portal interno', value: '132 tests' },
         { name: 'Recorridos en navegador', value: '14' },
       ] },
-    { type: 'slam', label: 'APROBACIÓN HUMANA', beat: 0.5, maxWidth: 1400,                                                       // 78–80
-      words: [
-        { text: 'NADA', bg: INK, fg: PAPER },
-        { text: 'SE ENTREGA', bg: PAPER, fg: INK, shape: 'square', sc: CORAL },
-        { text: 'SIN APROBACIÓN', bg: GREEN, fg: INK, shape: 'circle', sc: PAPER },
-        { text: 'HUMANA.', bg: CORAL, fg: INK, shape: 'triangle', sc: INK },
-      ] },
 
-    // ── ACTO 7 · FINAL (80–98) · DROP 3 ───────────────────────────────────────── noche → tinta · sol
-    { type: 'igcut', de: 'title', fit: 5, label: 'IGNACIO GAUNA', bg: NIGHT, foley: 0.5,                         // 80–85
+    // ── ACTO 8 · FINAL (94–112) · DROP 3 ───────────────────────────────────────── noche → tinta · sol
+    { type: 'igcut', de: 'title', fit: 5, label: 'IGNACIO GAUNA', bg: NIGHT, foley: 0.5,                         // 94–99
       title: 'IGNACIO GAUNA', subtitle: 'SSR AI FULLSTACK DEVELOPER', colors: [CORAL, BLUE, YELLOW] },
-    { type: 'igcut', de: 'statement', fit: 3, label: 'PRODUCCIÓN', bg: NIGHT, accent: CORAL,                     // 85–88
+    { type: 'igcut', de: 'statement', fit: 3, label: 'PRODUCCIÓN', bg: NIGHT, accent: CORAL,                     // 99–102
       text: 'CONSTRUYO SOFTWARE CON IA<br><span>QUE LLEGA A PRODUCCIÓN.</span>' },
-    { type: 'igend', label: 'CONTACTO', duration: 10, handoff: 8, bg: INK, ink: PAPER, accent: CORAL,            // 88–98
+    { type: 'igend', label: 'CONTACTO', duration: 10, handoff: 8, bg: INK, ink: PAPER, accent: CORAL,            // 102–112
       mono: MONOGRAM, name: 'IGNACIO GAUNA', role: 'SSR AI FULLSTACK DEVELOPER',
       open: 'Abierto a nuevas oportunidades.', lead: 'Busco un rol Ssr o Sr de desarrollo fullstack con IA.',
-      email: 'ignaciogauna.developer@gmail.com' },
+      email: 'ignaciogauna.developer@gmail.com', link: 'linkedin.com/in/ignacio-emanuel-gauna' },
   ],
 });

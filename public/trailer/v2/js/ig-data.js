@@ -16,8 +16,9 @@ export const ACTS = [
   { id: 'carrera', from: 12, to: 32, kind: 'grid', tone: INK, alpha: 0.16 },
   { id: 'complia', from: 32, to: 42, kind: 'scan', tone: ICE, alpha: 0.12 },
   { id: 'ramas', from: 42, to: 60, kind: 'branches', tone: PAPER, alpha: 0.14 },
-  { id: 'sistema', from: 60, to: 80, kind: 'net', tone: PAPER, alpha: 0.12 },
-  { id: 'final', from: 80, to: 96, kind: 'sun', tone: CORAL, alpha: 0.32 },
+  { id: 'stack', from: 60, to: 78, kind: 'dots', tone: PAPER, alpha: 0.06 },
+  { id: 'sistema', from: 78, to: 94, kind: 'net', tone: PAPER, alpha: 0.12 },
+  { id: 'final', from: 94, to: 110, kind: 'sun', tone: CORAL, alpha: 0.32 },
 ];
 
 /** the engine palette (global): night/ink/paper + accents (a1 coral, a2 blue, a3 yellow, a4 origin <em>,

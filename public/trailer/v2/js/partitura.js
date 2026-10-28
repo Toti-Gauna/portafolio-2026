@@ -3,7 +3,7 @@
    lead / arp / sub / snare / duck / keys). Voices: js/audio.js (Handy copy + pluck, keys, sub, snare, duck).
    Full description: score.md.
 
-   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 49 bars = 98 s.
+   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 56 bars = 112 s.
    The hook ("the seed"): four bars in the A-minor pentatonic (A C D E G) that climb a step per bar and
    resolve on C. It enters at drop 1 on a warm pluck, returns at drop 2 over new harmony (F G Em Am) with
    a bell doubling, is whispered in the breakdown and comes back an octave-doubled in the last drop.
@@ -49,17 +49,21 @@ export const PARTITURA = {
     // ── ACT 5 · RAMAS (42–60): the product montage cuts on this groove; verse full under the last shots + the wall.
     { from: 54, to: 60, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
 
-    // ── ACT 6 · SISTEMA (60–80): breakdown (the hook on long bells, no kick) → the pulse grows as the
-    //    agents assemble → verse → 2 s build under "nothing ships without human approval".
-    { from: 60, to: 64, style: 'quiebre', chords: [Am, F], hook: HOOK, lead: 'bell', hookVol: 0.075 },
-    { from: 64, to: 72, style: 'latido', chords: [C, G, Am, F] },
-    { from: 72, to: 78, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
-    { from: 78, to: 80, style: 'subida', chords: [G] },
+    // ── ACT 6 · TECNOLOGÍAS (60–78): the hook again, on the pluck, over the full groove — one tile lands per beat.
+    { from: 60, to: 76, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.9 },
+    { from: 76, to: 78, style: 'subida', chords: [G] },
 
-    // ── DROP 3 · FINAL (80–96): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
-    { from: 80, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
-    { from: 80, to: 92, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 84, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
-    { from: 92, to: 96, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
-    // 96–98: silence. The picture fades to the portfolio's ink; nothing is scheduled at 96 or after.
+    // ── ACT 7 · SISTEMA (78–94): one bar of breakdown (the hook on bells) → the pulse grows as the agents
+    //    assemble → verse → 2 s build into the finale.
+    { from: 78, to: 80, style: 'quiebre', chords: [Am], hook: HOOK, lead: 'bell', hookVol: 0.075 },
+    { from: 80, to: 86, style: 'latido', chords: [C, G, Am] },
+    { from: 86, to: 92, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
+    { from: 92, to: 94, style: 'subida', chords: [G] },
+
+    // ── DROP 3 · FINAL (94–110): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
+    { from: 94, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
+    { from: 94, to: 106, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 98, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
+    { from: 106, to: 110, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
+    // 110–112: silence. The picture fades to the portfolio's ink; nothing is scheduled at 110 or after.
   ],
 };
