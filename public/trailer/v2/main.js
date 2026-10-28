@@ -1,5 +1,5 @@
 /* CONOCER A IGNACIO — entry point, served as plain ES modules (no bundler).
-   Kit from Kinetic Studio: GSAP (classic scripts, on window) → audio → engine → recipes → music → ig-kit → ig-shots + js/shots/* (act 5 views) → config.
+   Kit from Kinetic Studio: GSAP (classic scripts, on window) → audio → engine → recipes → music → ig-kit → ig-open, ig-fronts, ig-bloom (the story) → ig-case → ig-shots + js/shots/* (own path views) → ig-stack + js/stack/* → config.
    ?lang=en loads the English config. ?host = inside the portfolio overlay. ?t=<s> freezes a frame (QA).
    ?o=v = the 9:16 edition: the SAME film (scenes, timings, score, texts) on a 1080×1920 stage. The configs don't
    change: the stage is set here, and every recipe lays itself out for D.W < D.H (html.is-vertical for the CSS). */
@@ -14,7 +14,9 @@ import './js/recipes-shop.js';
 import './js/recipes-branch.js';
 import './js/recipes-music.js';
 import './js/ig-kit.js';
-import './js/ig-career.js';
+import './js/ig-open.js';
+import './js/ig-fronts.js';
+import './js/ig-bloom.js';
 import './js/ig-case.js';
 import './js/ig-shots.js';
 import './js/ig-stack.js';

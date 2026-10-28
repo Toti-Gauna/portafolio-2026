@@ -20,9 +20,9 @@
    RECIPE  { type: 'igshots', title, shots: [{ id, dur, tag: { name, status, note } }], mosaic, end, label }
      1 s title («Y mis propias ramas.») → one cut per shot, on the beat: the background wipes to the shot's
      colour, the frame whips in, its tag (name · status · note) wipes on, the view plays → the mosaic: every
-     frame flies into a 4×3 wall with its name, and the last cell says `end`.
+     frame flies into a 4×3 wall with its name, and the last cell says `end` (up to 7 shots: a 4×2 wall).
    9:16 (D.vertical): each frame keeps its own size and is scaled onto the stage (browsers to the stage's width,
-     phones larger), with its tag full width under it; the mosaic is 3 columns × 4 rows.
+     phones larger), with its tag full width under it; the mosaic is 3 columns × 4 rows (up to 7 shots: 2 × 4).
    ========================================================================== */
 (() => {
   'use strict';
@@ -122,7 +122,10 @@
     });
 
     // ── the mosaic: every frame flies into a 4×3 wall (9:16: 3×4; the 12th cell holds `end`)
-    const M = t, [COLS, X0, Y0, CW, GX, CH, GY] = v ? [3, 30, 412, 326, 21, 196, 104] : [4, 96, 128, 408, 32, 206, 66];
+    // up to 7 shots (8 cells): two rows of four (9:16: four rows of two), bigger cells
+    const few = shots.length + 1 <= 8;
+    const M = t, [COLS, X0, Y0, CW, GX, CH, GY] = v ? (few ? [2, 40, 240, 480, 40, 290, 110] : [3, 30, 412, 326, 21, 196, 104])
+      : (few ? [4, 96, 210, 408, 32, 250, 120] : [4, 96, 128, 408, 32, 206, 66]);
     D.wipeTo(o.mosaicBg || INK, M, 'up', 0.3);
     D.ink(PAPER, M);
     const cell = i => ({ x: X0 + (i % COLS) * (CW + GX), y: Y0 + Math.floor(i / COLS) * (CH + GY) });

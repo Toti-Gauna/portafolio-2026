@@ -1,12 +1,12 @@
 /* The case slide (js/ig-case.js): readable text ≥ 36 px on the stage. */
 .igk { position: absolute; inset: 0; }
 .igk-l { position: absolute; left: 120px; top: 170px; width: 760px; }
-.igk-k { min-height: 46px; font-size: 34px; letter-spacing: .12em; line-height: 1.3; color: #7fd4ff; }
+.igk-k { min-height: 46px; font-size: 36px; letter-spacing: .12em; line-height: 1.3; color: #7fd4ff; }
 .igk-t { display: inline-block; margin-top: 18px; font-family: var(--display); font-size: 170px; line-height: .9; font-variation-settings: "wdth" 112, "wght" 900; letter-spacing: -.02em; color: #eeeae3; white-space: nowrap; }
 .igk-s { margin-top: 18px; font: 600 50px/1.1 var(--display); color: #ff6a4d; }
 .igk-f { margin: 46px 0 0; display: grid; gap: 26px; }
 .igk-row { display: grid; grid-template-columns: 210px 1fr; gap: 24px; align-items: baseline; }
-.igk-row dt { padding: 6px 12px; border: 2px solid rgb(127 212 255 / .55); border-radius: 8px; font-size: 34px; letter-spacing: .14em; color: #7fd4ff; text-align: center; }
+.igk-row dt { padding: 6px 12px; border: 2px solid rgb(127 212 255 / .55); border-radius: 8px; font-size: 36px; letter-spacing: .14em; color: #7fd4ff; text-align: center; }
 .igk-row dd { margin: 0; font: 500 38px/1.2 var(--display); color: #e6e3dc; white-space: normal; }
 .igk-win { position: absolute; left: 930px; top: 270px; width: 880px; margin: 0; border-radius: 18px; overflow: hidden; background: #0b0f1d; box-shadow: 0 50px 140px rgb(0 0 0 / .5), 0 0 0 1px rgb(127 212 255 / .18); will-change: transform; }
 .igk-bar { position: relative; height: 48px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #11182b; border-bottom: 1px solid rgb(127 212 255 / .2); }

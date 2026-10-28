@@ -63,7 +63,7 @@
     const { tl } = D;
     const v = D.vertical, dur = o.duration || 6, r = rng(23);
     // map → stage: scale and offset so the city lands where the frame needs it
-    const S = v ? 1.32 : 1.18, at = v ? [470, 760] : [1010, 440];
+    const S = v ? 1.32 : 1.18, at = v ? [470, 760] : [1330, 410];
     const ox = at[0] - CITY[0] * S, oy = at[1] - CITY[1] * S;
     const coast = spline(COAST, 64);
     const land = `${coast.d}L-2600 1560L-2600 -520Z`;
@@ -84,8 +84,9 @@
     const grid = [], G = 26, NG = 9;
     for (let k = -NG; k <= NG; k++) {
       const a = (NG - Math.abs(k)) * G; // shorter towards the diamond's tips
-      grid.push(`<path d="M${CITY[0] + k * G * 0.7 - a * 0.7} ${CITY[1] + k * G * 0.7 + a * 0.7}l${(a * 1.4).toFixed(0)} ${(-a * 1.4).toFixed(0)}"/>`,
-        `<path d="M${CITY[0] - k * G * 0.7 - a * 0.7} ${CITY[1] + k * G * 0.7 - a * 0.7}l${(a * 1.4).toFixed(0)} ${(a * 1.4).toFixed(0)}"/>`);
+      const op = `style="opacity:${(0.18 * (1 - Math.abs(k) / (NG + 1))).toFixed(3)}"`; // fades out from the centre
+      grid.push(`<path ${op} d="M${CITY[0] + k * G * 0.7 - a * 0.7} ${CITY[1] + k * G * 0.7 + a * 0.7}l${(a * 1.4).toFixed(0)} ${(-a * 1.4).toFixed(0)}"/>`,
+        `<path ${op} d="M${CITY[0] - k * G * 0.7 - a * 0.7} ${CITY[1] + k * G * 0.7 - a * 0.7}l${(a * 1.4).toFixed(0)} ${(a * 1.4).toFixed(0)}"/>`);
     }
     const sx = at[0], sy = at[1];
     const s = D.scene('igcoast', `<div class="igo">
@@ -113,7 +114,7 @@
     const map = D.$('.igo-map', s), svg = D.$('.igo-svg', s), cl = D.$('.igo-coast', s), surf = D.$('.igo-surf', s), bws = D.$$('.igo-bw', s), gs = D.$$('.igo-gro', s);
     const wv = D.$('.igo-waves', s), gridG = D.$('.igo-grid', s), seed = D.$('.igo-seed', s), glow = D.$('.igo-glow', s), rings = D.$$('.igo-ring', s);
     const sea = D.$('.igo-sea', s), k = D.$('.igo-k', s), line = D.$('.igo-line', s), shade = D.$('.igo-shade', s);
-    if (v) sea.innerHTML = String(o.sea || '').replace(' ', '<br>');
+    sea.innerHTML = String(o.sea || '').split(' ').map(esc).join('<br>');
     D.fit(line, D.W - (v ? 140 : 240));
     const words = D.split(line, { type: 'words', mask: 'words' }).words;
 
@@ -166,8 +167,8 @@
     ['.X....X.', '..X..X..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', 'X.XXXX.X', 'X.X..X.X', '...XX...'],  // a space invader of its own
     ['...XX...', '...XX...', '..XXXX..', '.XXXXXX.', 'XXXXXXXX', 'XX.XX.XX', 'X......X', '........'],  // a ship
     ['........', '..XXXX..', '.X.XX.X.', 'XXXXXXXX', 'XXXXXXXX', '.X....X.', '.XX..XX.', '........'],  // a car
-    ['....XX..', '....XX..', '........', '........', '........', '........', 'XXXXXX..', '........'],  // ball and paddle
-    ['........', '.XXXX...', '.X......', '.XXXX.X.', '....X.X.', '.XXXX.X.', '......X.', '........'],  // a snake
+    ['XX.XX.XX', '........', 'XX.XX.XX', '........', '.....X..', '........', '..XXXX..', '........'],  // bricks, ball and paddle
+    ['.XX..XX.', 'XXXXXXXX', 'XXXXXXXX', 'XXXXXXXX', '.XXXXXX.', '..XXXX..', '...XX...', '........'],  // a heart (a life)
     ['...XX...', '..XXXX..', '.XXXXXX.', 'XXXXXXXX', '.XXXXXX.', '..XXXX..', '...XX...', '........'],  // a gem
   ];
   const TILE_BG = [CORAL, YELLOW, '#34d399', '#7fd4ff', '#ff2e88', '#c9b6ff'];
@@ -188,7 +189,7 @@
             <nav class="ig1-nav">${(site.nav || []).map((n, i) => `<span${i === 1 ? ' class="on"' : ''}>${esc(n)}</span>`).join('')}</nav></header>
           <div class="ig1-tick"><div class="ig1-tick-in">${Array.from({ length: 6 }, () => `<span>★ ${esc(site.ticker || '')}</span>`).join('')}</div></div>
           <div class="ig1-grid">${SPRITES.map((sp, i) => `<div class="ig1-tile${i === HIT ? ' hit' : ''}"><div class="ig1-art" style="background:${TILE_BG[i]}">${sprite(sp)}</div>
-            <div class="ig1-foot"><span class="ig1-stars">${'★'.repeat(5 - (i % 2))}${'☆'.repeat(i % 2)}</span><b class="ig1-play">${esc(site.play || '')}</b></div></div>`).join('')}</div>
+            <div class="ig1-foot"><span class="ig1-stars">${'★'.repeat(4 - (i % 2))}${'☆'.repeat(i % 2)}</span><b class="ig1-play">${esc(site.play || '')}</b></div></div>`).join('')}</div>
         </div>
         ${CURSOR}
       </figure>
@@ -207,7 +208,6 @@
     const btn = D.$$('.ig1-play', s)[HIT], hitTile = tiles[HIT], caret = D.$('.ig1-caret', s);
     const k = D.$('.ig1-k', s), a = D.$('.ig1-a', s), big = D.$('.ig1-big', s), txt = D.$('.ig1-txt', s), halo = D.$('.ig1-halo', s);
     const after = D.$('.ig1-after', s), at = D.$('.ig1-at', s), as = D.$('.ig1-as', s), seed = D.$('.ig1-seed', s), main = D.$('.ig1-main path', s);
-    D.fit(big, v ? D.W - 140 : 760);
     D.fit(at, v ? D.W - 140 : 1000);
     // where the click lands, on the stage (measured before any transform is set)
     const bb = D.box(btn), BX = bb.x + bb.w / 2, BY = bb.y + bb.h / 2;

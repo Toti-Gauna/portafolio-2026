@@ -8,11 +8,11 @@
 .igo-map { position: absolute; inset: 0; will-change: transform; }
 .igo-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .igo-svg path { vector-effect: non-scaling-stroke; fill: none; }
-.igo-svg .igo-land { fill: #121219; }
-.igo-grid path { stroke: #eeeae3; stroke-width: 1; opacity: .07; }
-.igo-waves path { stroke: #7fa3ff; stroke-width: 2; stroke-linecap: round; }
+.igo-svg .igo-land { fill: #16161e; }
+.igo-grid path { stroke: #eeeae3; stroke-width: 1; }
+.igo-waves path { stroke: #7fa3ff; stroke-width: 2.5; stroke-linecap: round; }
 .igo-surf { stroke: #7fa3ff; stroke-width: 2; stroke-dasharray: 2 10; opacity: .45; }
-.igo-coast { stroke: #eeeae3; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.igo-coast { stroke: #eeeae3; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .igo-bw { stroke: #eeeae3; stroke-width: 5; stroke-linecap: round; }
 .igo-gro { stroke: #eeeae3; stroke-width: 2.5; stroke-linecap: round; opacity: .8; }
 .igo-glow { position: absolute; width: 900px; height: 900px; border-radius: 50%;
@@ -20,11 +20,11 @@
 .igo-ring { position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 2px solid #ff4d2e; }
 .igo-seed { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: #ffd7c9;
   box-shadow: 0 0 0 9px rgb(255 77 46 / .55), 0 0 40px 14px rgb(255 77 46 / .75), 0 0 120px 40px rgb(255 77 46 / .35); }
-.igo-sea { position: absolute; left: 1330px; top: 236px; font-size: 36px; letter-spacing: .42em; line-height: 1.5; color: #7fa3ff; opacity: .75; white-space: nowrap; }
+.igo-sea { position: absolute; left: 1560px; top: 210px; font-size: 36px; letter-spacing: .3em; line-height: 1.5; color: #7fa3ff; opacity: .75; white-space: nowrap; }
 .igo-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 560px; background: linear-gradient(0deg, rgb(7 7 10 / .92) 18%, rgb(7 7 10 / 0)); }
 .igo-txt { position: absolute; left: 120px; bottom: 120px; }
 .igo-k { min-height: 46px; font-size: 36px; letter-spacing: .18em; color: #ff6a4d; }
-.igo-line { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 150px; line-height: .98;
+.igo-line { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 140px; line-height: .98;
   font-variation-settings: "wdth" 110, "wght" 880; letter-spacing: -.02em; color: #eeeae3; white-space: nowrap; }
 .igo-line em { font-style: normal; color: #ff4d2e; }
 
@@ -42,7 +42,7 @@
 .ig1-txt { position: absolute; left: 120px; top: 230px; width: 720px; }
 .ig1-k { min-height: 46px; font-size: 36px; letter-spacing: .18em; color: #ff6a4d; }
 .ig1-a { margin-top: 22px; font-family: var(--display); font-size: 66px; line-height: 1.08; font-variation-settings: "wdth" 100, "wght" 700; color: #eeeae3; }
-.ig1-big { display: inline-block; margin-top: 18px; font-family: var(--display); font-size: 104px; line-height: 1; white-space: nowrap;
+.ig1-big { margin-top: 20px; max-width: 720px; font-family: var(--display); font-size: 112px; line-height: .98; white-space: normal;
   font-variation-settings: "wdth" 110, "wght" 900; letter-spacing: -.02em; color: #eeeae3; }
 .ig1-big em, .ig1-at em { font-style: normal; color: #ff4d2e; }
 .ig1-after { position: absolute; left: 120px; top: 260px; width: 1100px; visibility: hidden; }
@@ -76,20 +76,20 @@
 .ig1-tile { border-radius: 14px; overflow: hidden; background: #151b55; box-shadow: 0 0 0 3px #0e0e10, 0 8px 0 #0e0e10; }
 .ig1-art { height: 136px; display: grid; place-items: center; }
 .ig1-px { width: 84px; height: 84px; fill: #0e0e10; overflow: visible; }
-.ig1-foot { height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
-.ig1-stars { font-size: 24px; letter-spacing: .04em; color: #ffc21a; }
-.ig1-play { padding: 10px 18px; border-radius: 10px; background: #ff4d2e; color: #fff; font: 900 26px/1 var(--display); font-variation-settings: "wdth" 115, "wght" 900; letter-spacing: .04em; box-shadow: 0 4px 0 #0e0e10; }
+.ig1-foot { height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 14px; }
+.ig1-stars { font-size: 24px; letter-spacing: -.06em; color: #ffc21a; }
+.ig1-play { padding: 9px 14px; border-radius: 10px; background: #ff4d2e; color: #fff; font: 900 24px/1 var(--display); font-variation-settings: "wdth" 115, "wght" 900; letter-spacing: .04em; box-shadow: 0 4px 0 #0e0e10; }
 .ig1-cur { position: absolute; left: 0; top: 0; width: 46px; height: 46px; transform-origin: 6px 4px; filter: drop-shadow(0 6px 10px rgb(0 0 0 / .5)); }
 
 /* ---------- 9:16 ---------- */
-.is-vertical .igo-sea { left: 760px; top: 330px; font-size: 36px; letter-spacing: .3em; }
+.is-vertical .igo-sea { left: 700px; top: 330px; font-size: 36px; letter-spacing: .3em; }
 .is-vertical .igo-shade { height: 900px; }
 .is-vertical .igo-txt { left: 70px; right: 70px; bottom: 210px; }
-.is-vertical .igo-line { font-size: 170px; line-height: .95; white-space: normal; }
+.is-vertical .igo-line { font-size: 136px; line-height: .96; white-space: normal; text-wrap: balance; }
 
 .is-vertical .ig1-txt { left: 70px; top: 190px; width: 940px; }
 .is-vertical .ig1-a { font-size: 72px; }
-.is-vertical .ig1-big { font-size: 120px; }
+.is-vertical .ig1-big { max-width: 940px; font-size: 124px; }
 .is-vertical .ig1-win { left: 70px; top: 820px; }
 .is-vertical .ig1-halo { left: -300px; top: 80px; width: 1700px; height: 1100px; }
 .is-vertical .ig1-after { left: 70px; top: 300px; width: 940px; }

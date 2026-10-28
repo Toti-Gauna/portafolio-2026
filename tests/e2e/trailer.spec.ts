@@ -34,7 +34,7 @@ test('the trailer plays fullscreen with no player bar; sound and skip work; no c
   await expect(dialog.getByRole('slider')).toHaveCount(0);
   const frame = page.frameLocator('iframe.tplayer__frame');
   await expect(frame.locator('#ui')).toBeHidden();
-  await expect(frame.locator('html')).toHaveAttribute('data-duration', '112.00');
+  await expect(frame.locator('html')).toHaveAttribute('data-duration', '120.00');
 
   // the controls step aside while the film plays, and come back when the pointer moves over it
   const player = page.locator('.tplayer');
@@ -60,7 +60,7 @@ test('the trailer plays fullscreen with no player bar; sound and skip work; no c
 });
 
 test('when the film ends it hands off to the portfolio', async ({ page }) => {
-  await openTrailer(page, '/es/?t=110.6'); // ?t= opens the film paused on that frame
+  await openTrailer(page, '/es/?t=118.6'); // ?t= opens the film paused on that frame
   await ready(page);
   await page.evaluate(() => document.querySelector('iframe')!.contentWindow!.postMessage({ type: 'trailer:play' }, location.origin));
   await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 8000 });
@@ -76,7 +76,7 @@ test('English film, and Escape leaves it', async ({ page }) => {
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
-test('portrait screens get the 9:16 edition: the same 112 s film on a tall stage, kept if the phone turns', async ({ page }) => {
+test('portrait screens get the 9:16 edition: the same 120 s film on a tall stage, kept if the phone turns', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openTrailer(page);
   await expect(film(page)).toHaveAttribute('src', /\/trailer\/v2\/index\.html\?host&lang=es&o=v$/);
@@ -84,7 +84,7 @@ test('portrait screens get the 9:16 edition: the same 112 s film on a tall stage
   const frame = page.frameLocator('iframe.tplayer__frame');
   await expect(frame.locator('html')).toHaveClass(/\bis-vertical\b/);
   await expect(frame.locator('html')).toHaveAttribute('data-stage', '1080x1920');
-  await expect(frame.locator('html')).toHaveAttribute('data-duration', '112.00');
+  await expect(frame.locator('html')).toHaveAttribute('data-duration', '120.00');
   // the tall stage fits the phone's width; nothing scrolls sideways
   const stage = await frame.locator('#stage').boundingBox();
   expect(stage!.width).toBeLessThanOrEqual(391);
@@ -106,7 +106,7 @@ test('reduced motion: text version instead of the film, with a way to watch it a
   const page = await ctx.newPage();
   await openTrailer(page, 'http://127.0.0.1:4173/es/');
   await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeVisible();
-  await expect(page.locator('.tplayer__list li')).toHaveCount(14);
+  await expect(page.locator('.tplayer__list li')).toHaveCount(15);
   await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeFocused(); // reading starts at the top
   await expect(page.locator('.tplayer__list li').first()).toBeInViewport();
   await expect(film(page)).toHaveCount(0);

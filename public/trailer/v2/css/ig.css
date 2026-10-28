@@ -40,7 +40,7 @@
 .igc-bl { left: 96px; bottom: 150px; } .igc-br { right: 96px; bottom: 150px; }
 .igc-tl { left: 96px; top: 140px; } .igc-tr { right: 96px; top: 150px; }
 .igc-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: var(--acc); }
-.igc-k { font-size: 34px; letter-spacing: .12em; line-height: 1.25; opacity: .8; margin-bottom: 10px; white-space: normal; }
+.igc-k { font-size: 36px; letter-spacing: .12em; line-height: 1.25; opacity: .8; margin-bottom: 10px; white-space: normal; }
 .igc-t { font-family: var(--display); font-size: 58px; line-height: 1.05; font-variation-settings: "wdth" 100, "wght" 800; letter-spacing: -.01em; white-space: normal; }
 .igc-d { font-family: var(--display); font-size: 40px; line-height: 1.22; font-variation-settings: "wdth" 100, "wght" 500; margin-top: 12px; opacity: .92; white-space: normal; }
 

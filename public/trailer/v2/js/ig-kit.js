@@ -30,7 +30,7 @@
      igclip     a real video clip in a floating window, kept in sync with the timeline (seekable).
      igprojects own projects as git branches off one main line, each with its name and status.
      igagents   the eleven agents, one glyph each, appearing group by group on the beat.
-     igend      the closing card: monogram, name, role, availability, e-mail; then it empties for the hand-off.
+     igend      the closing card: monogram, name, an optional mono line, availability, e-mail; then it empties for the hand-off.
 
    FORMATS — one film, two stages. main.js reads ?o=v and runs the SAME config on a 1080×1920 stage (cfg.stage);
    the engine sets D.W / D.H / D.CX / D.CY and html.is-vertical. How a recipe supports both:
@@ -599,8 +599,8 @@
 
   // ================================================================== IGEND
   // The closing card on the portfolio's own colours: the IG monogram draws itself and its seed drops in,
-  // the name rises, the role scrambles, a rule draws, "open to new opportunities" with a live dot that
-  // beats, the line about the role, then the e-mail types itself. Everything holds, then empties to the
+  // the name rises, the mono line scrambles (optional: `role`; no job title in this film), a rule draws,
+  // "open to new challenges" with a live dot that beats, the lead line, then the e-mail types itself. Everything holds, then empties to the
   // bare background: that empty frame is the hand-off to the portfolio (the parent closes on trailer:end).
   //   { name, role, open, lead, email, link, mono: { strokes, dot }, bg, ink, accent, handoff, duration }
   //   9:16: the column is centred on the stage and the name breaks in two lines, fitted to the width.
@@ -610,7 +610,7 @@
     const s = D.scene('igend', `<div class="ige" style="color:${ink};--acc:${acc}">
       <svg class="ige-mono" viewBox="0 0 64 64">${M.strokes.map(d => `<path d="${d}"/>`).join('')}<circle class="ige-dot" cx="${M.dot.cx}" cy="${M.dot.cy}" r="${M.dot.r}"/></svg>
       <div class="ige-name v">${v ? String(o.name).replace(' ', '<br>') : o.name}</div>
-      <div class="ige-role mono"></div>
+      ${o.role ? '<div class="ige-role mono"></div>' : ''}
       <i class="ige-rule"></i>
       <div class="ige-open"><i class="ige-live"></i><span>${o.open}</span></div>
       ${o.lead ? `<div class="ige-lead">${o.lead}</div>` : ''}
@@ -642,7 +642,7 @@
     D.hit(dot, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.7, ease: 'bounce.out' }, T + 0.95);
     D.sfx('boom', T + 1.15, 0.3);
     tl.to(nameCh, { yPercent: 0, duration: 0.8, ease: 'expo.out', stagger: 0.03 }, T + 0.55);
-    tl.to(role, { duration: 0.8, scrambleText: { text: o.role, chars: 'upperCase', speed: 0.8 }, ease: 'none' }, T + 1.2);
+    if (role) tl.to(role, { duration: 0.8, scrambleText: { text: o.role, chars: 'upperCase', speed: 0.8 }, ease: 'none' }, T + 1.2);
     tl.to(rule, { scaleX: 1, duration: 0.7, ease: 'expo.inOut' }, T + 1.5);
     tl.to(openW, { yPercent: 0, duration: 0.6, ease: 'expo.out', stagger: 0.05 }, T + 1.8);
     tl.set(live, { opacity: 1 }, T + 1.8);
@@ -654,6 +654,7 @@
     tl.to(P, { n: N, duration: N * per, ease: 'none', onUpdate: () => { mt.textContent = o.email.slice(0, Math.round(P.n)); } }, tm);
     for (let i = 0; i < N; i += 2) D.sfx('key', tm + i * per, 0.12);
     const link = D.$('.ige-link', s);
+    if (link) gsap.set(link, { opacity: 0 }); // hidden until the e-mail is typed
     if (link) D.hit(link, { opacity: 0, y: 12 }, { opacity: 0.85, y: 0, duration: 0.5, ease: 'power3.out' }, tm + N * per + 0.2);
     const th = T + (o.handoff ?? dur - 2);
     for (let t = tm + N * per + 0.25, k = 0; t < th - 0.1; t += 0.5, k++) tl.set(caret, { opacity: k % 2 ? 1 : 0 }, t);

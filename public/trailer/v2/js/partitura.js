@@ -3,10 +3,13 @@
    lead / arp / sub / snare / duck / keys). Voices: js/audio.js (Handy copy + pluck, keys, sub, snare, duck).
    Full description: score.md.
 
-   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 56 bars = 112 s.
+   120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 60 bars = 120 s.
    The hook ("the seed"): four bars in the A-minor pentatonic (A C D E G) that climb a step per bar and
-   resolve on C. It enters at drop 1 on a warm pluck, returns at drop 2 over new harmony (F G Em Am) with
-   a bell doubling, is whispered in the breakdown and comes back an octave-doubled in the last drop.
+   resolve on C. Its first notes echo over Mar del Plata; it is born on drop 1 (the click on the first
+   product, 10 s) on a warm pluck; returns on drop 2 (the zoom-out over every path, 52 s) over new harmony
+   (F G Em Am) with a bell doubling; answers on bells under the challenges (60 s); drives drop 3 (the
+   technologies, 68 s); is whispered in the system's breakdown (84 s) and comes back octave-doubled on drop 4
+   (the name, 100 s). The industries land on the kicks of a growing pulse (64–67 s).
    ========================================================================== */
 
 // chords as midi triads (same values as Trailer.music.ACORDES; defined here so the file needs no globals)
@@ -27,43 +30,55 @@ const FIRMA = [[0, 72, 1], [1, 74, 1], [2, 76, 1], [3, 79, 1], [4, 81, 2], [6, 8
 export const PARTITURA = {
   bpm: 120, volume: 0.74,
   parts: [
-    // ── ACT 1 · LA SEMILLA (0–8): A minor, cold. Pad + low heartbeat, the hook's first notes as an echo.
-    { from: 0, to: 4, style: 'frio', anchor: 0, chords: [Am, F, Dm, G], hook: ECO, hookVol: 0.05, lead: 'pluck' },
-    { from: 4, to: 7, style: 'latido', anchor: 0, chords: [Am, F, Dm, G], ligado: true },
-    { from: 7, to: 8, style: 'subida', chords: [G] },                       // 1 s riser into the coral flood
+    // ── MAR DEL PLATA (0–6): A minor, cold. Pad + a low heartbeat; the hook's first notes as an echo over the coast.
+    { from: 0, to: 6, style: 'frio', anchor: 0, chords: [Am, F, Dm], hook: ECO, hookVol: 0.05, lead: 'pluck' },
+    // ── THE FIRST PRODUCT (6–10): the pulse grows while the games site builds; a 1-bar build under the cursor.
+    { from: 6, to: 8, style: 'latido', anchor: 6, chords: [Em] },
+    { from: 8, to: 10, style: 'subida', chords: [G] },                      // the click lands on its last 16th
 
-    // ── DROP 1 · CAMINOS (8–16): the hook is born (pluck), F G Am C, light: no sub, no snare.
-    { from: 8, style: 'hit', chords: [F], volume: 0.9 },
-    { from: 8, to: 16, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', duck: true, volume: 0.78 },
+    // ── DROP 1 (10–18): «…que me cambió la vida.» The hook is born (pluck), F G Am C, light: no sub, no snare.
+    { from: 10, style: 'hit', chords: [F], volume: 0.9 },
+    { from: 10, to: 18, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', duck: true, volume: 0.78 },
 
-    // ── ACT 3 · CARRERA (12–32): the verse. C G Am F, keys + answers; it fills up at the wheel (24).
-    { from: 16, to: 24, style: 'verso', chords: [C, G, Am, F], answer: true, keys: true, duck: true },
-    { from: 24, to: 30, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
-    { from: 30, to: 32, style: 'subida', chords: [G] },                     // 2 s build under "2026 · SSR AI"
+    // ── THE FRONTS (18–42): the verse under TACH, the classroom and Tuenti; a lift for CompliA; the verse again for
+    //    Supernova Eventos and the team.
+    { from: 18, to: 26, style: 'verso', chords: [C, G, Am, F], answer: true, keys: true, duck: true },
+    { from: 26, to: 30, style: 'verso', chords: [C, G], full: true, keys: true, duck: true, arp: 'pluck' },
+    { from: 30, style: 'hit', chords: [F], volume: 0.7 },
+    { from: 30, to: 36, style: 'coro', chords: [F, G, Em], hook: false, arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.82 },
+    { from: 36, to: 42, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck', answer: true },
 
-    // ── DROP 2 · CompliA (32–48): the hook over new harmony (IV V iii vi), pluck + bell, sub, snare.
-    { from: 32, style: 'hit', chords: [F], volume: 0.8 },
-    { from: 32, to: 40, style: 'coro', chords: [F, G, Em, Am], hook: HOOK, lead: 'both', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.88 },
-    { from: 40, to: 54, style: 'coro', chords: [F, G, Am, C], hook: false, arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.86 },
+    // ── THE OWN PATH (42–52): the montage cuts on the groove; a 1-bar build under the mosaic.
+    { from: 42, to: 50, style: 'coro', chords: [F, G, Am, C], hook: false, arp: 'pluck', sub: true, duck: true, volume: 0.84 },
+    { from: 50, to: 52, style: 'subida', chords: [G] },
 
-    // ── ACT 5 · RAMAS (42–60): the product montage cuts on this groove; verse full under the last shots + the wall.
-    { from: 54, to: 60, style: 'verso', chords: [C, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
+    // ── DROP 2 (52–60): the zoom-out. The hook over IV–V–iii–vi, pluck + bell, sub, snare: «todo germina en lo mismo».
+    { from: 52, style: 'hit', chords: [F], volume: 0.85 },
+    { from: 52, to: 60, style: 'coro', chords: [F, G, Em, Am], hook: HOOK, lead: 'both', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.92 },
 
-    // ── ACT 6 · TECNOLOGÍAS (60–78): the hook again, on the pluck, over the full groove — one tile lands per beat.
-    { from: 60, to: 76, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.9 },
-    { from: 76, to: 78, style: 'subida', chords: [G] },
+    // ── CHALLENGES AND INDUSTRIES (60–68): the breakdown answers with the hook's second half on bells; then the pulse
+    //    grows and each industry lands on a kick (64–66.5); a 1-bar build into drop 3.
+    { from: 60, to: 64, style: 'quiebre', chords: [Am, F], hook: HOOK, hookBar: 2, lead: 'bell', hookVol: 0.075 },
+    { from: 64, to: 67, style: 'latido', anchor: 64, chords: [C, G] },
+    { from: 67, to: 68, style: 'subida', chords: [G] },
 
-    // ── ACT 7 · SISTEMA (78–94): one bar of breakdown (the hook on bells) → the pulse grows as the agents
-    //    assemble → verse → 2 s build into the finale.
-    { from: 78, to: 80, style: 'quiebre', chords: [Am], hook: HOOK, lead: 'bell', hookVol: 0.075 },
-    { from: 80, to: 86, style: 'latido', chords: [C, G, Am] },
-    { from: 86, to: 92, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
-    { from: 92, to: 94, style: 'subida', chords: [G] },
+    // ── DROP 3 (68–84): the technologies. The hook on the pluck over the full groove, then the groove alone.
+    { from: 68, style: 'hit', chords: [F], volume: 0.8 },
+    { from: 68, to: 76, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'pluck', arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.9 },
+    { from: 76, to: 82, style: 'coro', chords: [F, G, Am], hook: false, arp: 'pluck', sub: true, snare: true, duck: true, volume: 0.86 },
+    { from: 82, to: 84, style: 'subida', chords: [G] },
 
-    // ── DROP 3 · FINAL (94–110): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
-    { from: 94, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
-    { from: 94, to: 106, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 98, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
-    { from: 106, to: 110, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
-    // 110–112: silence. The picture fades to the portfolio's ink; nothing is scheduled at 110 or after.
+    // ── THE SYSTEM (84–100): one bar of breakdown (the hook on bells) → the pulse grows as the agents assemble →
+    //    verse under the rules and the CI run → a 2 s build into the finale.
+    { from: 84, to: 86, style: 'quiebre', chords: [Am], hook: HOOK, lead: 'bell', hookVol: 0.07 },
+    { from: 86, to: 92, style: 'latido', chords: [C, G, Am] },
+    { from: 92, to: 98, style: 'verso', chords: [F, G, Am], full: true, keys: true, duck: true, arp: 'pluck' },
+    { from: 98, to: 100, style: 'subida', chords: [G] },
+
+    // ── DROP 4 · THE NAME (100–116): the biggest — octave-doubled hook, pad in two octaves, galloping bass.
+    { from: 100, style: 'hit', chords: [F], volume: 0.8 },     // the title's braam carries this hit
+    { from: 100, to: 112, style: 'coro', chords: [F, G, Am, C], hook: HOOK, lead: 'both', hookOct: [0, 12], hookOctDesde: 104, arp: 'pluck', sub: true, snare: true, duck: true, lleno: true, volume: 1.3 },
+    { from: 112, to: 116, style: 'final', chords: [C], hook: FIRMA, hookVol: 0.06, lead: 'both' },
+    // 116–120: silence. The end card holds, then empties to the portfolio's ink; nothing is scheduled at 116 or after.
   ],
 };
