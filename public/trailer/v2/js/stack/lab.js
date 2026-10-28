@@ -229,7 +229,7 @@
         <text class="tn" x="52" y="${y + 7}">${esc(r)}</text>`; }).join('');
       return `<svg viewBox="0 0 540 226" class="tx">
           ${rows}
-          <rect class="tw" x="312" y="18" width="212" height="142" rx="10"/><path class="twl" d="M312 40 H524"/>
+          <rect class="twin" x="312" y="18" width="212" height="142" rx="10"/><path class="twl" d="M312 40 H524"/>
           <circle class="twd" cx="328" cy="29" r="4"/><circle class="twd" cx="342" cy="29" r="4"/><circle class="twd" cx="356" cy="29" r="4"/>
           <rect class="tin" x="328" y="52" width="180" height="26" rx="6"/><rect class="tin" x="328" y="86" width="180" height="26" rx="6"/>
           <rect class="tfl" x="340" y="62" width="96" height="6" rx="3"/><rect class="tfl" x="340" y="96" width="64" height="6" rx="3"/>

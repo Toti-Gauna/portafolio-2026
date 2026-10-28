@@ -159,14 +159,14 @@
         <g class="l1">${[58, 82, 106].map((y, i) => `<circle cx="17" cy="${y}" r="8" fill="${AV[i]}"/><rect class="b1" x="31" y="${y - 7}" width="${[50, 44, 52][i]}" height="7" rx="3.5"/><rect class="b2" x="31" y="${y + 3}" width="${[32, 40, 26][i]}" height="5" rx="2.5"/>`).join('')}</g>
         <g class="l2"><circle cx="46" cy="72" r="19" fill="#61dafb"/><rect class="b1" x="20" y="100" width="52" height="8" rx="4"/><rect class="b2" x="28" y="114" width="36" height="6" rx="3"/></g>
         <path class="tb" d="M0 128H92"/>${[18, 46, 74].map(x => `<rect class="ic" x="${x - 5}" y="134" width="10" height="10" rx="3"/>`).join('')}
-        <rect class="ind" x="10" y="149" width="16" height="3" rx="1.5"/>`;
+        <rect class="ind" x="10" y="148" width="16" height="3" rx="1.5"/>`;
       const phone = (x, ios, label) => `
         <g transform="translate(${x} 14)"><g class="ph">
-          <rect class="body" width="104" height="168" rx="18"/><rect class="scr" x="6" y="6" width="92" height="156" rx="13"/>
+          <rect class="body" width="104" height="166" rx="18"/><rect class="scr" x="6" y="6" width="92" height="154" rx="13"/>
           ${ios ? '<rect class="cam" x="40" y="11" width="24" height="7" rx="3.5"/>' : '<circle class="cam" cx="52" cy="15" r="3.5"/>'}
           <g transform="translate(6 6)"><g class="ui">${screen}</g></g>
         </g></g>
-        <text class="pl" x="${x + 52}" y="206">${label}</text>`;
+        <text class="pl" x="${x + 52}" y="204">${label}</text>`;
       return `<svg ${VB} class="rnx">
         <path class="ln" d="M208 98H140"/><path class="ln" d="M332 98H400"/>
         ${phone(30, true, 'iOS')}${phone(406, false, 'Android')}
@@ -180,13 +180,13 @@
       const { tl } = D, $ = s => D.$(s, el), $$ = s => D.$$(s, el);
       const ph = $$('.ph'), app = $('.app'), set = $('.set'), dt = $$('.dt');
       gsap.set([...ph, app, set, ...dt], { transformOrigin: '50% 50%' });
-      gsap.set([...$$('.t2'), ...$$('.l2'), ...dt, ...ph, app, set, $('.one')], { opacity: 0 });
+      gsap.set([...$$('.t2'), ...$$('.l2'), ...dt, ...ph, app, set, $('.one'), ...$$('.pl')], { opacity: 0 });
       gsap.set($$('.ln'), { drawSVG: '0%' });
       gsap.set($$('.ui'), { clipPath: 'inset(0% 0% 100% 0%)' });
       // one component, two phones
       D.hit(ph, { opacity: 0, scale: 0.92, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'expo.out' }, T);
       D.hit(app, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.2)' }, T + 0.12);
-      D.hit($('.one'), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, T + 0.2);
+      D.hit([$('.one'), ...$$('.pl')], { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, T + 0.2);
       D.hit($$('.ln'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.3, ease: 'power2.out' }, T + 0.3);
       // both screens render the same UI at once
       D.hit($$('.ui'), { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.45, ease: 'power2.inOut' }, T + 0.45);
@@ -312,7 +312,7 @@
         <rect class="tbl" x="258" y="16" width="266" height="194" rx="12"/>
         <text class="th" x="274" y="42">name</text><text class="th hp" x="432" y="42">price</text><text class="th hs" x="508" y="42">stock</text>
         <path class="sep" d="M258 54H524"/>
-        ${t.rows.split(',').map((n, i) => `<g transform="translate(0 ${77 + i * 30})"><g class="row">
+        ${t.rows.split(',').map((n, i) => `<g transform="translate(0 ${77 + i * 30})"><g class="row"><rect class="rb" x="264" y="-21" width="252" height="28" rx="6"/>
           <text x="274" y="0">${esc(n)}</text><text class="pr" x="432" y="0">${P[i]}</text><text class="${S[i] ? 'st' : 'st z'}" x="508" y="0">${S[i]}</text></g></g>`).join('')}
       </svg>`;
     },
@@ -332,8 +332,10 @@
       tl.to(hl, { y: 34, duration: 0.25, ease: 'power3.inOut' }, T + 1.2);
       tl.set($('.hs'), { attr: { class: 'th hs' } }, T + 1.2);
       tl.set($('.hp'), { attr: { class: 'th hp on' } }, T + 1.2);
+      tl.set(rows[3], { attr: { class: 'row lift' } }, T + 1.26); // the row that moves lifts over the others
       tl.to(rows[3], { y: -90, duration: 0.45, ease: 'power3.inOut' }, T + 1.28);
-      tl.to(rows[3], { keyframes: [{ x: 14, duration: 0.2, ease: 'power2.out' }, { x: 0, duration: 0.25, ease: 'power2.in' }] }, T + 1.28);
+      tl.to(rows[3], { keyframes: [{ x: 6, duration: 0.2, ease: 'power2.out' }, { x: 0, duration: 0.25, ease: 'power2.in' }] }, T + 1.28);
+      tl.set(rows[3], { attr: { class: 'row' } }, T + 1.78);
       tl.to(rows[0], { y: 30, duration: 0.45, ease: 'power3.inOut' }, T + 1.28);
       D.hit(res, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power3.out' }, T + 1.62);
       D.sfx('tick', T + 1.64, 0.03);
@@ -349,7 +351,7 @@
     html: t => {
       const X = [64, 196, 328, 460], S = t.stages.split(',');
       const cw = Math.round(58 + (8 + t.msg.length) * 11.4 + 16), rw = Math.round(44 + t.run.length * 11.4 + 18), dw = Math.round(44 + t.done.length * 11.4 + 18);
-      return `<svg ${VB} class="ci">
+      return `<svg ${VB} class="ci"><g transform="translate(0 8)">
         <g class="cm"><rect x="16" y="16" width="${cw}" height="40" rx="20"/><circle cx="40" cy="36" r="6"/><path d="M28 36h6M46 36h6"/>
           <text x="60" y="43"><tspan class="h">a3f9c2e</tspan> ${esc(t.msg)}</text></g>
         <g transform="translate(524 36)">
@@ -361,21 +363,22 @@
           <circle class="base" r="26"/><circle class="idle" r="5"/><circle class="spin" r="26"/>
           <circle class="ok" r="28"/><path class="ck" d="M-11 1l7 7 15-15"/></g></g>
           <text class="lb" x="${x}" y="184">${esc(S[i])}</text>`).join('')}
-      </svg>`;
+      </g></svg>`;
     },
     play(D, el, T) {
       const { tl } = D, $ = s => D.$(s, el), $$ = s => D.$$(s, el);
       const nd = $$('.nd'), spin = $$('.spin'), ok = $$('.ok'), ck = $$('.ck'), lb = $$('.lb'), idle = $$('.idle'), run = $('.run'), done = $('.done');
-      gsap.set([...nd, ...ok, ...spin, run, done], { transformOrigin: '50% 50%' });
+      gsap.set([...nd, ...ok, ...spin, run, done, $('.sp')], { transformOrigin: '50% 50%' });
       gsap.set(spin, { drawSVG: '0% 0%' });
       gsap.set(ok, { scale: 0 });
       gsap.set([...ck, $('.prog'), $('.rail')], { drawSVG: '0%' });
-      gsap.set([$('.cm'), run, done, ...nd], { opacity: 0 });
+      gsap.set([$('.cm'), run, done, ...nd, ...lb], { opacity: 0 });
       gsap.set($('.sp'), { drawSVG: '0% 70%' });
       // the commit enters the pipeline
       D.hit($('.cm'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' }, T);
       tl.to($('.rail'), { drawSVG: '100%', duration: 0.45, ease: 'power2.inOut' }, T + 0.05);
       D.hit(nd, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)', stagger: 0.06 }, T + 0.05);
+      D.hit(lb, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.06 }, T + 0.1);
       D.hit(run, { opacity: 0 }, { opacity: 1, duration: 0.2 }, T + 0.2);
       tl.to($('.sp'), { rotation: 900, duration: 1.4, ease: 'none' }, T + 0.2);
       const pass = (i, at) => {

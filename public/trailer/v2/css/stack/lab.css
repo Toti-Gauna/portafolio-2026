@@ -82,7 +82,7 @@
 .stk-tests .tob { fill: rgb(63 185 80 / .2); }
 .stk-tests .tck { fill: none; stroke: #3fb950; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 .stk-tests .tn { fill: #d8d5ce; font: 400 19px var(--mono); }
-.stk-tests .tw { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
+.stk-tests .twin { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
 .stk-tests .twl { fill: none; stroke: #2c2f38; stroke-width: 2; }
 .stk-tests .twd { fill: #3b3f4a; }
 .stk-tests .tin { fill: #17181d; stroke: #3b3f4a; stroke-width: 1.5; }
