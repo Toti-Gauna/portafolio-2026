@@ -49,6 +49,26 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
+  // The click asks for fullscreen on <html> and the dialog opens right after, but the browser grants it later
+  // (iPadOS Safari: after its zoom animation) and puts <html> into the top layer ABOVE the dialog: the film kept
+  // playing out of sight until fullscreen ended. Reopening the dialog puts it back on top; the iframe stays loaded,
+  // and the queued `close` event finds the dialog open again, so it is ignored.
+  useEffect(() => {
+    const onFs = () => {
+      const d = dialogRef.current;
+      if (!d?.open || done.current) return;
+      d.close();
+      d.showModal();
+      (d.querySelector<HTMLElement>('[data-autofocus]') ?? d).focus();
+    };
+    document.addEventListener('fullscreenchange', onFs);
+    document.addEventListener('webkitfullscreenchange', onFs);
+    return () => {
+      document.removeEventListener('fullscreenchange', onFs);
+      document.removeEventListener('webkitfullscreenchange', onFs);
+    };
+  }, []);
+
   // the film talks through postMessage (same origin, this frame only)
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
