@@ -9,13 +9,15 @@ type Cfg = Record<string, unknown>;
 type Shot = { frame?: string; text: { es: Record<string, unknown>; en: Record<string, unknown> }; html: (t: unknown) => string };
 const configs: Record<string, Cfg> = {};
 const shots: Record<string, Shot> = {};
+const tiles: Record<string, Shot> = {};
 beforeAll(async () => {
   (globalThis as unknown as { Trailer: unknown }).Trailer = {
     run: (c: Cfg) => { configs[c.lang as string] = c; },
     igShots: { add: (id: string, def: Shot) => { shots[id] = def; } },
+    igStack: { add: (id: string, def: Shot) => { tiles[id] = def; } },
   };
   const dir = '../../public/trailer/v2/js/'; // plain JS served as is: no types to check
-  for (const f of ['shots/eclipse.js', 'shots/handy.js', 'shots/lab.js', 'trailer.es.js', 'trailer.en.js']) await import(/* @vite-ignore */ `${dir}${f}`);
+  for (const f of ['shots/eclipse.js', 'shots/handy.js', 'shots/lab.js', 'stack/work.js', 'stack/lab.js', 'trailer.es.js', 'trailer.en.js']) await import(/* @vite-ignore */ `${dir}${f}`);
 });
 const montage = (c: Cfg) => (c.scenes as { type: string; shots?: { id: string }[] }[]).find((s) => s.type === 'igshots')!;
 // every string becomes a placeholder: what is left is the structure, timings and data
@@ -28,7 +30,7 @@ const strings = (x: unknown): string[] =>
 describe('trailer v2 configs', () => {
   it('es and en are the same film: scenes, timings and data match, only words change', () => {
     const { es: cEs, en: cEn } = configs;
-    expect((cEs.scenes as unknown[]).length).toBe(16);
+    expect((cEs.scenes as unknown[]).length).toBe(15);
     expect(shape(cEn.scenes)).toEqual(shape(cEs.scenes));
     expect(shape(cEn.ui)).toEqual(shape(cEs.ui));
   });
@@ -57,9 +59,26 @@ describe('trailer v2 configs', () => {
     }
   });
 
-  it('the text version has the same 13 moments in both languages', () => {
-    expect(es.trailer.transcript).toHaveLength(13);
-    expect(en.trailer.transcript).toHaveLength(13);
+  it('the technologies act: every tile exists, has a name and where it was used, in both languages', () => {
+    type Stack = { type: string; screens?: { tiles: string[] }[] };
+    const act = (c: Cfg) => (c.scenes as Stack[]).find((s) => s.type === 'igstack')!;
+    const ids = act(configs.es).screens!.flatMap((s) => s.tiles);
+    expect(ids).toHaveLength(17);
+    expect(act(configs.en).screens!.flatMap((s) => s.tiles)).toEqual(ids);
+    for (const id of ids) {
+      expect(tiles[id], id).toBeDefined();
+      expect(shape(tiles[id].text.en), id).toEqual(shape(tiles[id].text.es));
+      for (const lang of ['es', 'en'] as const) {
+        const t = tiles[id].text[lang] as { name?: string; note?: string };
+        expect(t.name && t.note, `${id} ${lang}`).toBeTruthy();
+        expect(tiles[id].html(t), `${id} ${lang}`).not.toMatch(/undefined|https?:\/\//);
+      }
+    }
+  });
+
+  it('the text version has the same 14 moments in both languages', () => {
+    expect(es.trailer.transcript).toHaveLength(14);
+    expect(en.trailer.transcript).toHaveLength(14);
     expect(es.trailer.transcript.at(-1)).toContain(CONTACT_EMAIL);
     expect(en.trailer.transcript.at(-1)).toContain(CONTACT_EMAIL);
   });

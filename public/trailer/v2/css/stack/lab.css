@@ -1,0 +1,146 @@
+/* Stack tiles — lab group: every rule under .stk-<id>. Code is JetBrains Mono (var(--mono)), names Archivo. */
+.stk-security svg, .stk-python svg, .stk-c svg, .stk-motion svg, .stk-tests svg, .stk-ml svg, .stk-aws svg, .stk-azure svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* ── Security ─────────────────────────────────────────────────────────── */
+.stk-security .sf { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
+.stk-security .son { fill: rgb(63 185 80 / .07); stroke: #3fb950; stroke-width: 2; }
+.stk-security .sck { fill: none; stroke: #3fb950; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-security .sd { fill: #e8e6e1; }
+.stk-security .sh { fill: #9fb6ff; font: 400 19px var(--mono); }
+.stk-security .stg { fill: #7fa3ff; font: 500 20px var(--mono); }
+.stk-security .sbx { fill: #17181d; stroke: #3b3f4a; stroke-width: 1.5; }
+.stk-security .sdg { fill: #eeeae3; font: 500 20px var(--mono); text-anchor: middle; }
+.stk-security .sco { fill: #c89a4b; }
+.stk-security .scd { fill: #5a3d1c; }
+.stk-security .sch rect { fill: rgb(255 194 26 / .12); stroke: #ffc21a; stroke-width: 1.5; }
+.stk-security .sch text { fill: #ffd25e; font: 500 19px var(--mono); text-anchor: middle; }
+.stk-security .stk { fill: #e8e6e1; font: 400 19px var(--mono); }
+.stk-security .ssh0, .stk-security .ssh1 { fill: none; stroke-width: 7; stroke-linecap: round; }
+.stk-security .ssh0 { stroke: #3b3f4a; }
+.stk-security .ssh1 { stroke: #3fb950; }
+.stk-security .sb0 { fill: #2a2d35; }
+.stk-security .sb1 { fill: #3fb950; }
+.stk-security .skh { fill: #0e0e10; }
+
+/* ── Python ───────────────────────────────────────────────────────────── */
+.stk-python .pg { position: absolute; left: 16px; width: 84px; font: 400 19px/28px var(--mono); white-space: pre; }
+.stk-python .pin { top: 24px; color: #7fa3ff; }
+.stk-python .pout { top: 96px; color: #ff6a4d; }
+.stk-python .pq { display: inline-grid; }
+.stk-python .pq i { grid-area: 1 / 1; font-style: normal; text-align: center; }
+.stk-python .pc { position: absolute; left: 104px; top: 16px; width: 420px; height: 72px; box-sizing: border-box; padding: 8px 0 0 14px; border-radius: 8px; background: #0e0e10; box-shadow: inset 0 0 0 2px #2c2f38; }
+.stk-python .pr { position: absolute; inset: 0; border-radius: 8px; box-shadow: inset 0 0 0 2px #3fb950; }
+.stk-python .pl { position: relative; height: 28px; font: 400 20px/28px var(--mono); color: #e8e6e1; white-space: pre; }
+.stk-python .pt { display: inline-block; }
+.stk-python .pc i { font-style: normal; }
+.stk-python .pc .o { color: #9a9da6; }
+.stk-python .pc .k { color: #ff7a5c; }
+.stk-python .pc .b { color: #7fa3ff; }
+.stk-python .pc .n { color: #ffc21a; }
+.stk-python .pk { position: absolute; left: 14px; top: 12px; width: 2px; height: 22px; background: #eeeae3; }
+.stk-python .pa { fill: none; stroke: #3b3f4a; stroke-width: 2; }
+.stk-python .pb { fill: #7fa3ff; }
+.stk-python .pv { fill: #eeeae3; font: 500 19px var(--mono); text-anchor: middle; }
+
+/* ── C ────────────────────────────────────────────────────────────────── */
+.stk-c .cl { position: relative; width: max-content; left: 18px; top: 16px; height: 28px; font: 400 20px/28px var(--mono); color: #e8e6e1; white-space: pre; }
+.stk-c .ct { display: inline-block; }
+.stk-c .cl i { font-style: normal; }
+.stk-c .cl .o { color: #9a9da6; }
+.stk-c .cl .k { color: #ff7a5c; }
+.stk-c .cl .ty { color: #7fa3ff; }
+.stk-c .cl .n { color: #ffc21a; }
+.stk-c .ch { position: relative; display: inline-block; }
+.stk-c .chb { position: absolute; inset: 1px -3px; border-radius: 5px; background: rgb(255 77 46 / .28); box-shadow: inset 0 0 0 1.5px rgb(255 106 77 / .7); }
+.stk-c .cn { fill: #7fa3ff; font: 500 22px var(--mono); }
+.stk-c .cm { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-c .cg { fill: none; stroke-dasharray: 6 5; stroke: #3b3f4a; }
+.stk-c .ca { fill: #8b8f98; font: 400 19px var(--mono); text-anchor: middle; }
+.stk-c .cgd { fill: #5b5f6a; }
+.stk-c .cq { fill: #4a4e58; font: 500 22px var(--mono); text-anchor: middle; }
+.stk-c .cv { fill: #ffc21a; font: 500 22px var(--mono); text-anchor: middle; }
+.stk-c .cp text { fill: #ff6a4d; font: 500 22px var(--mono); text-anchor: middle; }
+.stk-c .cpl { fill: none; stroke: #ff6a4d; stroke-width: 2.5; }
+.stk-c .cph { fill: #ff6a4d; }
+
+/* ── GSAP · WebGL ─────────────────────────────────────────────────────── */
+.stk-motion .max { fill: none; stroke: #3b3f4a; stroke-width: 2; }
+.stk-motion .mlin { fill: none; stroke: #3b3f4a; stroke-width: 1.5; stroke-dasharray: 5 6; }
+.stk-motion .mcu { fill: none; stroke: #88ce02; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-motion .md { fill: #eeeae3; }
+.stk-motion .mc { fill: #e8e6e1; font: 400 20px var(--mono); }
+.stk-motion .ms { fill: #88ce02; }
+.stk-motion .mtr { fill: none; stroke: #2c2f38; stroke-width: 2; }
+.stk-motion .mrl { fill: none; stroke: #4a4e58; stroke-width: 2; }
+.stk-motion .mkf { fill: #ffc21a; }
+.stk-motion .mpl { fill: none; stroke: #7fa3ff; stroke-width: 2; }
+.stk-motion .mpk { fill: #7fa3ff; }
+.stk-motion .mt { position: absolute; left: 236px; top: 64px; width: 52px; height: 46px; clip-path: polygon(50% 0%, 100% 100%, 0% 100%); background: conic-gradient(from 0deg at 50% 66.7%, #ff4d2e, #ffc21a 60deg, #3fb950 120deg, #2bb3c0 180deg, #2b50ff 240deg, #c0458f 300deg, #ff4d2e); }
+
+/* ── Vitest · Playwright ──────────────────────────────────────────────── */
+.stk-tests .tsa { fill: none; stroke: #7fa3ff; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 38 100; }
+.stk-tests .tob { fill: rgb(63 185 80 / .2); }
+.stk-tests .tck { fill: none; stroke: #3fb950; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.stk-tests .tn { fill: #d8d5ce; font: 400 19px var(--mono); }
+.stk-tests .twin { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
+.stk-tests .twl { fill: none; stroke: #2c2f38; stroke-width: 2; }
+.stk-tests .twd { fill: #3b3f4a; }
+.stk-tests .tin { fill: #17181d; stroke: #3b3f4a; stroke-width: 1.5; }
+.stk-tests .tfl { fill: #9a9da6; }
+.stk-tests .tbr { fill: #2b50ff; }
+.stk-tests .tbk { fill: #3fb950; }
+.stk-tests .tbl { fill: #eeeae3; font: 500 19px var(--display); text-anchor: middle; }
+.stk-tests .tbc { fill: none; stroke: #0e0e10; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-tests .tcu path { fill: #eeeae3; stroke: #0e0e10; stroke-width: 1.5; stroke-linejoin: round; }
+.stk-tests .tbar { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
+.stk-tests .tbf { fill: #3fb950; }
+.stk-tests .tps { fill: #0e0e10; font: 400 20px var(--mono); white-space: pre; }
+.stk-tests .tpb { font-weight: 500; font-size: 22px; }
+
+/* ── Machine learning ─────────────────────────────────────────────────── */
+.stk-ml .lf { fill: #0e0e10; stroke: #2c2f38; stroke-width: 2; }
+.stk-ml .lra { fill: rgb(127 163 255 / .13); }
+.stk-ml .lrb { fill: rgb(255 77 46 / .12); }
+.stk-ml .lln { fill: none; stroke: #eeeae3; stroke-width: 3; }
+.stk-ml .lpb { fill: #7fa3ff; }
+.stk-ml .lpa { fill: #ff6a4d; }
+.stk-ml .lfit { fill: #eeeae3; font: 500 22px var(--mono); }
+.stk-ml .lck { fill: none; stroke: #3fb950; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-ml .lax { fill: none; stroke: #3b3f4a; stroke-width: 2; }
+.stk-ml .lcu { fill: none; stroke: #ffc21a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-ml .llo { fill: #9a9da6; font: 400 19px var(--mono); text-anchor: end; }
+
+/* ── AWS ──────────────────────────────────────────────────────────────── */
+.stk-aws .abr { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-aws .abo { fill: rgb(255 194 26 / .07); stroke: #ffc21a; stroke-width: 2.5; }
+.stk-aws .an { fill: #eeeae3; font: 800 22px var(--display); font-variation-settings: "wdth" 92, "wght" 800; }
+.stk-aws .as { fill: #8b8f98; font: 400 19px var(--mono); }
+.stk-aws .ae { fill: none; stroke: #5b5f6a; stroke-width: 2.5; }
+.stk-aws .ah { fill: none; stroke: #5b5f6a; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-aws .arq rect { fill: #17181d; stroke: #3b3f4a; stroke-width: 1.5; }
+.stk-aws .arq text { fill: #e8e6e1; font: 400 19px var(--mono); white-space: pre; }
+.stk-aws .am { fill: #ffc21a; font-weight: 500; }
+.stk-aws .aob rect { fill: rgb(255 194 26 / .1); stroke: #ffc21a; stroke-width: 1.5; }
+.stk-aws .aob text { fill: #ffd25e; font: 400 19px var(--mono); }
+.stk-aws .afi { fill: none; stroke: #ffc21a; stroke-width: 1.8; stroke-linejoin: round; }
+.stk-aws .ad { fill: #ffc21a; }
+
+/* ── Azure ────────────────────────────────────────────────────────────── */
+.stk-azure .zbr { fill: #0e0e10; stroke: #2f3a5c; stroke-width: 2; }
+.stk-azure .zbo { fill: rgb(43 80 255 / .1); stroke: #7fa3ff; stroke-width: 2.5; }
+.stk-azure .zn { fill: #eeeae3; font: 800 22px var(--display); font-variation-settings: "wdth" 100, "wght" 760; }
+.stk-azure .zs { fill: #8b93ab; font: 400 19px var(--mono); white-space: pre; }
+.stk-azure .zsv { fill: #9fb6ff; }
+.stk-azure .zpg { fill: #17181d; stroke: #2f3a5c; stroke-width: 1.5; }
+.stk-azure .zln { fill: #3b4462; }
+.stk-azure .zl2 { fill: #2c3350; }
+.stk-azure .zbt rect { fill: #2b50ff; }
+.stk-azure .zbt text { fill: #eeeae3; font: 600 19px var(--display); text-anchor: middle; }
+.stk-azure .ze { fill: none; stroke: #4b5a85; stroke-width: 2.5; }
+.stk-azure .zh { fill: none; stroke: #4b5a85; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-azure .zfi path { fill: rgb(127 163 255 / .14); stroke: #7fa3ff; stroke-width: 1.8; stroke-linejoin: round; }
+.stk-azure .zfi .zfo { fill: none; }
+.stk-azure .zd { fill: #7fa3ff; }
+
+/* code reads character by character: no ligatures (after the rules above: the font shorthand resets them) */
+.stk-security .stk-art *, .stk-python .stk-art *, .stk-c .stk-art *, .stk-motion .stk-art *, .stk-tests .stk-art *, .stk-ml .stk-art *, .stk-aws .stk-art *, .stk-azure .stk-art * { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }

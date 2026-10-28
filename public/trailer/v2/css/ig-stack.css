@@ -1,0 +1,15 @@
+/* ============================================================================
+   The technologies act (js/ig-stack.js). A tile is 540×340 on the stage: the animation (540×226) and its
+   caption strip: the name (42 px) and where I used it (35 px: ≥ 12 px down to a 667×375 phone). Each tile's own styles: css/stack/*.css (.stk-<id>).
+   ========================================================================== */
+.stk { position: absolute; inset: 0; }
+.stk-screen { position: absolute; inset: 0; visibility: hidden; }
+.stk-head { position: absolute; left: 120px; top: 96px; }
+.stk-k { min-height: 46px; font-size: 36px; letter-spacing: .16em; color: var(--tone); }
+.stk-t { margin-top: 8px; font-family: var(--display); font-size: 92px; line-height: 1; font-variation-settings: "wdth" 110, "wght" 880; letter-spacing: -.015em; color: #eeeae3; white-space: nowrap; }
+.stk-tile { position: absolute; width: 540px; height: 340px; border-radius: 22px; overflow: hidden; background: #17181d; box-shadow: 0 0 0 2px rgb(255 255 255 / .06), 0 30px 80px rgb(0 0 0 / .35); will-change: transform; }
+.stk-art { position: relative; width: 540px; height: 226px; overflow: hidden; text-align: left; white-space: normal; }
+.stk-cap { position: absolute; left: 0; right: 0; bottom: 0; height: 114px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 0 26px; background: #0e0e10; border-top: 3px solid var(--tone); }
+.stk-cap b { font: 900 42px/1 var(--display); font-variation-settings: "wdth" 100, "wght" 880; color: #eeeae3; white-space: nowrap; }
+.stk-cap span { font: 500 35px/1.05 var(--display); font-variation-settings: "wdth" 88, "wght" 500; color: #bdb8ae; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stk-ph { position: absolute; inset: 0; display: grid; place-items: center; font: 900 54px/1 var(--display); color: rgb(255 255 255 / .2); background: repeating-linear-gradient(135deg, rgb(255 255 255 / .03) 0 20px, transparent 20px 40px); }

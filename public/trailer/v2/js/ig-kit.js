@@ -576,7 +576,7 @@
   // the name rises, the role scrambles, a rule draws, "open to new opportunities" with a live dot that
   // beats, the line about the role, then the e-mail types itself. Everything holds, then empties to the
   // bare background: that empty frame is the hand-off to the portfolio (the parent closes on trailer:end).
-  //   { name, role, open, lead, email, mono: { strokes, dot }, bg, ink, accent, handoff, duration }
+  //   { name, role, open, lead, email, link, mono: { strokes, dot }, bg, ink, accent, handoff, duration }
   recipe('igend', (D, T, o) => {
     const { tl } = D;
     const dur = o.duration || 10, bg = o.bg || INK, ink = o.ink || PAPER, acc = o.accent || CORAL, M = o.mono;
@@ -588,6 +588,7 @@
       <div class="ige-open"><i class="ige-live"></i><span>${o.open}</span></div>
       ${o.lead ? `<div class="ige-lead">${o.lead}</div>` : ''}
       <div class="ige-mail mono"><span class="ige-mt"></span><i class="ige-caret"></i></div>
+      ${o.link ? `<div class="ige-link mono">${o.link}</div>` : ''}
     </div>`);
     const box = D.$('.ige', s), strokes = D.$$('.ige-mono path', s), dot = D.$('.ige-dot', s), name = D.fit(D.$('.ige-name', s), 1500);
     const role = D.$('.ige-role', s), rule = D.$('.ige-rule', s), open = D.$('.ige-open span', s), live = D.$('.ige-live', s), lead = D.$('.ige-lead', s);
@@ -625,6 +626,8 @@
     tl.set(caret, { opacity: 1 }, tm - 0.1);
     tl.to(P, { n: N, duration: N * per, ease: 'none', onUpdate: () => { mt.textContent = o.email.slice(0, Math.round(P.n)); } }, tm);
     for (let i = 0; i < N; i += 2) D.sfx('key', tm + i * per, 0.12);
+    const link = D.$('.ige-link', s);
+    if (link) D.hit(link, { opacity: 0, y: 12 }, { opacity: 0.85, y: 0, duration: 0.5, ease: 'power3.out' }, tm + N * per + 0.2);
     const th = T + (o.handoff ?? dur - 2);
     for (let t = tm + N * per + 0.25, k = 0; t < th - 0.1; t += 0.5, k++) tl.set(caret, { opacity: k % 2 ? 1 : 0 }, t);
     tl.to(box, { scale: 1.02, duration: Math.max(0.1, th - T - 2), ease: 'none' }, T + 2);
