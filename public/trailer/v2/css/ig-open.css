@@ -1,0 +1,97 @@
+/* ============================================================================
+   The opening (js/ig-open.js): Mar del Plata at night (igcoast) and the first product (igfirst).
+   Readable text ≥ 36 px on the stage, in both formats. Inside the retro site the interface is a picture (≥ 24 px).
+   ========================================================================== */
+
+/* ---------- igcoast ---------- */
+.igo { position: absolute; inset: 0; overflow: hidden; }
+.igo-map { position: absolute; inset: 0; will-change: transform; }
+.igo-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.igo-svg path { vector-effect: non-scaling-stroke; fill: none; }
+.igo-svg .igo-land { fill: #121219; }
+.igo-grid path { stroke: #eeeae3; stroke-width: 1; opacity: .07; }
+.igo-waves path { stroke: #7fa3ff; stroke-width: 2; stroke-linecap: round; }
+.igo-surf { stroke: #7fa3ff; stroke-width: 2; stroke-dasharray: 2 10; opacity: .45; }
+.igo-coast { stroke: #eeeae3; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.igo-bw { stroke: #eeeae3; stroke-width: 5; stroke-linecap: round; }
+.igo-gro { stroke: #eeeae3; stroke-width: 2.5; stroke-linecap: round; opacity: .8; }
+.igo-glow { position: absolute; width: 900px; height: 900px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 77 46 / .42), rgb(255 77 46 / .12) 45%, rgb(255 77 46 / 0)); }
+.igo-ring { position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 2px solid #ff4d2e; }
+.igo-seed { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: #ffd7c9;
+  box-shadow: 0 0 0 9px rgb(255 77 46 / .55), 0 0 40px 14px rgb(255 77 46 / .75), 0 0 120px 40px rgb(255 77 46 / .35); }
+.igo-sea { position: absolute; left: 1330px; top: 236px; font-size: 36px; letter-spacing: .42em; line-height: 1.5; color: #7fa3ff; opacity: .75; white-space: nowrap; }
+.igo-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 560px; background: linear-gradient(0deg, rgb(7 7 10 / .92) 18%, rgb(7 7 10 / 0)); }
+.igo-txt { position: absolute; left: 120px; bottom: 120px; }
+.igo-k { min-height: 46px; font-size: 36px; letter-spacing: .18em; color: #ff6a4d; }
+.igo-line { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 150px; line-height: .98;
+  font-variation-settings: "wdth" 110, "wght" 880; letter-spacing: -.02em; color: #eeeae3; white-space: nowrap; }
+.igo-line em { font-style: normal; color: #ff4d2e; }
+
+/* ---------- igfirst ---------- */
+.ig1 { position: absolute; inset: 0; }
+.ig1-burst { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; will-change: transform; }
+.ig1-burst path { fill: none; stroke-width: 3; stroke-linecap: round; opacity: .8; }
+.ig1-main { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ig1-main path { fill: none; stroke: #eeeae3; stroke-width: 6; }
+.ig1-seed { position: absolute; width: 32px; height: 32px; border-radius: 50%; background: #ff4d2e;
+  box-shadow: 0 0 0 10px rgb(255 77 46 / .18), 0 0 60px 10px rgb(255 77 46 / .45); }
+.ig1-halo { position: absolute; left: -200px; top: 60px; width: 1500px; height: 760px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(14 14 16 / .94), rgb(14 14 16 / 0)); }
+
+.ig1-txt { position: absolute; left: 120px; top: 230px; width: 720px; }
+.ig1-k { min-height: 46px; font-size: 36px; letter-spacing: .18em; color: #ff6a4d; }
+.ig1-a { margin-top: 22px; font-family: var(--display); font-size: 66px; line-height: 1.08; font-variation-settings: "wdth" 100, "wght" 700; color: #eeeae3; }
+.ig1-big { display: inline-block; margin-top: 18px; font-family: var(--display); font-size: 104px; line-height: 1; white-space: nowrap;
+  font-variation-settings: "wdth" 110, "wght" 900; letter-spacing: -.02em; color: #eeeae3; }
+.ig1-big em, .ig1-at em { font-style: normal; color: #ff4d2e; }
+.ig1-after { position: absolute; left: 120px; top: 260px; width: 1100px; visibility: hidden; }
+.ig1-at { display: inline-block; font-family: var(--display); font-size: 150px; line-height: .98; white-space: nowrap;
+  font-variation-settings: "wdth" 110, "wght" 900; letter-spacing: -.02em; color: #eeeae3; }
+.ig1-as { margin-top: 30px; max-width: 900px; font: 500 44px/1.25 var(--display); color: #d6d1c7; }
+
+/* the browser and the retro site */
+.ig1-win { position: absolute; left: 870px; top: 150px; width: 940px; margin: 0; border-radius: 16px; overflow: hidden;
+  background: #0b0f3a; box-shadow: 0 50px 140px rgb(0 0 0 / .6), 0 0 0 2px rgb(255 255 255 / .08), 0 0 160px rgb(43 80 255 / .28); will-change: transform; }
+.ig1-bar { position: relative; height: 46px; display: flex; align-items: center; gap: 9px; padding: 0 18px; background: #1b1b1f; }
+.ig1-bar > i { width: 13px; height: 13px; border-radius: 50%; background: #ff5f57; }
+.ig1-bar > i:nth-child(2) { background: #febc2e; } .ig1-bar > i:nth-child(3) { background: #28c840; }
+.ig1-url { position: absolute; left: 120px; right: 120px; top: 9px; height: 28px; border-radius: 8px; background: rgb(255 255 255 / .08); }
+.ig1-caret { position: absolute; left: 14px; top: 5px; width: 3px; height: 18px; background: #b9b9c2; }
+.ig1-page { position: relative; height: 652px; overflow: hidden;
+  background: radial-gradient(circle, rgb(255 255 255 / .06) 1.5px, transparent 2px) 0 0 / 22px 22px, #0b0f3a; }
+.ig1-head { display: flex; align-items: center; justify-content: space-between; height: 116px; padding: 0 30px;
+  background: linear-gradient(180deg, #3a5cff, #1d34b8); border-bottom: 4px solid #0e0e10; }
+.ig1-logo { display: flex; align-items: center; gap: 16px; }
+.ig1-joy { width: 66px; height: 66px; }
+.ig1-logo b { display: flex; font-family: var(--display); font-size: 66px; line-height: 1; font-variation-settings: "wdth" 125, "wght" 900;
+  letter-spacing: .02em; color: #ffc21a; text-shadow: 4px 4px 0 #ff4d2e, 8px 8px 0 #0e0e10; }
+.ig1-logo b span { display: inline-block; }
+.ig1-nav { display: flex; gap: 10px; }
+.ig1-nav span { padding: 9px 16px; border-radius: 8px; background: rgb(255 255 255 / .14); color: #fff; font: 700 26px/1 var(--display); }
+.ig1-nav span.on { background: #ffc21a; color: #0e0e10; }
+.ig1-tick { height: 46px; overflow: hidden; background: #ffc21a; border-bottom: 4px solid #0e0e10; transform-origin: 0 50%; }
+.ig1-tick-in { display: flex; gap: 40px; padding-left: 20px; white-space: nowrap; font: 900 26px/46px var(--display); font-variation-settings: "wdth" 120, "wght" 900; color: #0e0e10; letter-spacing: .06em; }
+.ig1-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 22px 28px; }
+.ig1-tile { border-radius: 14px; overflow: hidden; background: #151b55; box-shadow: 0 0 0 3px #0e0e10, 0 8px 0 #0e0e10; }
+.ig1-art { height: 136px; display: grid; place-items: center; }
+.ig1-px { width: 84px; height: 84px; fill: #0e0e10; overflow: visible; }
+.ig1-foot { height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+.ig1-stars { font-size: 24px; letter-spacing: .04em; color: #ffc21a; }
+.ig1-play { padding: 10px 18px; border-radius: 10px; background: #ff4d2e; color: #fff; font: 900 26px/1 var(--display); font-variation-settings: "wdth" 115, "wght" 900; letter-spacing: .04em; box-shadow: 0 4px 0 #0e0e10; }
+.ig1-cur { position: absolute; left: 0; top: 0; width: 46px; height: 46px; transform-origin: 6px 4px; filter: drop-shadow(0 6px 10px rgb(0 0 0 / .5)); }
+
+/* ---------- 9:16 ---------- */
+.is-vertical .igo-sea { left: 760px; top: 330px; font-size: 36px; letter-spacing: .3em; }
+.is-vertical .igo-shade { height: 900px; }
+.is-vertical .igo-txt { left: 70px; right: 70px; bottom: 210px; }
+.is-vertical .igo-line { font-size: 170px; line-height: .95; white-space: normal; }
+
+.is-vertical .ig1-txt { left: 70px; top: 190px; width: 940px; }
+.is-vertical .ig1-a { font-size: 72px; }
+.is-vertical .ig1-big { font-size: 120px; }
+.is-vertical .ig1-win { left: 70px; top: 820px; }
+.is-vertical .ig1-halo { left: -300px; top: 80px; width: 1700px; height: 1100px; }
+.is-vertical .ig1-after { left: 70px; top: 300px; width: 940px; }
+.is-vertical .ig1-at { font-size: 150px; white-space: normal; }
+.is-vertical .ig1-as { font-size: 48px; }
