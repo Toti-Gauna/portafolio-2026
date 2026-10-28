@@ -129,7 +129,7 @@ test('phones get the light film: no stage-sized compositor layers anywhere in th
 test('reduced motion: text version instead of the film, with a way to watch it anyway', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await openTrailer(page, 'http://127.0.0.1:4173/es/');
+  await openTrailer(page, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
   await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeVisible();
   await expect(page.locator('.tplayer__list li')).toHaveCount(15);
   await expect(page.getByRole('heading', { name: 'Versión en texto' })).toBeFocused(); // reading starts at the top

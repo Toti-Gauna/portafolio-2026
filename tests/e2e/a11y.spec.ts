@@ -82,7 +82,7 @@ test('social and search metadata on home and a case page', async ({ page }) => {
 test('reduced motion: nothing stays hidden waiting for a scroll animation', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await enter(page, 'http://127.0.0.1:4173/es/');
+  await enter(page, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
   const hidden = await page.evaluate(() => Array.from(document.querySelectorAll('.reveal')).filter((e) => Number(getComputedStyle(e).opacity) < 1).length);
   expect(hidden).toBe(0);
   await ctx.close();
