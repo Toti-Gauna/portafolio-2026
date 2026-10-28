@@ -28,8 +28,8 @@
   .case__aside { display: block; position: sticky; top: calc(var(--header-h) + 24px); }
 }
 .toc ol { list-style: none; margin: 10px 0 0; padding: 0; display: grid; }
-.toc a { display: flex; gap: 10px; align-items: center; min-height: 40px; padding: 6px 0 6px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.25; }
-.toc a span { font: 12px var(--font-mono); color: #6f6c65; }
+.toc a { display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 6px 0 6px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.25; }
+.toc a span { font: 12px var(--font-mono); color: var(--muted); }
 .toc a:hover { color: var(--paper); }
 .toc a[aria-current='true'] { color: var(--paper); border-left-color: var(--accent); }
 .toc a[aria-current='true'] span { color: var(--accent); }
