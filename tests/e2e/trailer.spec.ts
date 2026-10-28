@@ -35,6 +35,8 @@ test('the trailer plays fullscreen with no player bar; sound and skip work; no c
   const frame = page.frameLocator('iframe.tplayer__frame');
   await expect(frame.locator('#ui')).toBeHidden();
   await expect(frame.locator('html')).toHaveAttribute('data-duration', '130.00');
+  // played at 85 % so every line can be read: 130 s of film in about 153 s
+  await expect(frame.locator('html')).toHaveAttribute('data-speed', '0.85');
 
   // the controls step aside while the film plays, and come back when the pointer moves over it
   const player = page.locator('.tplayer');

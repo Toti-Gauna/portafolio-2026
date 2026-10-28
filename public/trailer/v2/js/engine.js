@@ -232,6 +232,9 @@
     const rand = rng(cfg.seed);
     const rnd = (lo, hi) => lo + (hi - lo) * rand();
     const tl = gsap.timeline({ paused: true, onUpdate: tick, onComplete: ended });
+    // IG: cfg.speed plays the whole film slower (< 1) or faster: picture, score and clips together, since every note
+    // is a callback on this timeline. Times in the scripts, ?t= and data-duration stay in film seconds.
+    tl.timeScale(cfg.speed || 1);
 
     // ============================================================ DIRECTOR API (passed to recipes)
     let sceneCount = 0, labelCount = 0;
@@ -271,7 +274,7 @@
       },
       // HANDY: el callback corre en el primer cuadro del ticker después de `at` (0–17 ms tarde, distinto en
       // cada nota); SFX.play recibe ese atraso y arranca la voz en el reloj de audio con un adelanto fijo (js/audio.js)
-      sfx: (name, at, ...args) => tl.call(() => SFX.play(tl.time() - at, name, args), null, at),
+      sfx: (name, at, ...args) => tl.call(() => SFX.play((tl.time() - at) / tl.timeScale(), name, args), null, at),
       call: (fn, at) => tl.call(fn, null, at),
       show: (el, at) => tl.set(el, { autoAlpha: 1 }, at),
       hide: (el, at) => tl.set(el, { autoAlpha: 0 }, at),
@@ -677,6 +680,7 @@
     // instrumentation read by tools/shoot.mjs
     const root = document.documentElement;
     root.dataset.duration = tl.duration().toFixed(2);
+    root.dataset.speed = String(tl.timeScale());
     root.dataset.scenes = JSON.stringify(map);
     if (!String(root.dataset.trailer || '').startsWith('error')) root.dataset.trailer = 'ready';
     /** Every zero-length callback of the timeline (sounds, pads, cues) with its absolute time,
@@ -699,7 +703,7 @@
       window.trailer.ix = IX;
     }
 
-    introSub.innerHTML = `${cfg.meta.subtitle} <span>·</span> ${Math.round(interactive ? pathLen(branches[0]) : tl.duration())} ${UI.seconds} <span>·</span> ${UI.sound}`;
+    introSub.innerHTML = `${cfg.meta.subtitle} <span>·</span> ${Math.round((interactive ? pathLen(branches[0]) : tl.duration()) / tl.timeScale())} ${UI.seconds} <span>·</span> ${UI.sound}`;
     if (seekTo !== null) {
       intro.remove();
       started = true;

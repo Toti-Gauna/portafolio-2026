@@ -69,7 +69,7 @@
       if (!loaded) return;
       const end = (v.duration || 99) - 0.05;
       if (inside && !D.tl.paused() && want < end) {
-        if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        if (v.paused) { v.defaultPlaybackRate = v.playbackRate = D.tl.timeScale(); const p = v.play(); if (p && p.catch) p.catch(() => {}); }
         if (Math.abs(v.currentTime - want) > 0.25) v.currentTime = want;
       } else {
         if (!v.paused) v.pause();

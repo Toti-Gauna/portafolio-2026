@@ -17,6 +17,10 @@
 .igf-tip .igf-tip-halo { opacity: .2; }
 
 .igf-txt { position: absolute; width: 690px; }
+/* the company or project: a solid ink tag with the front's colour as a bar, so yellow and green read on paper too */
+.igf-name { display: inline-block; margin: 0 0 18px; padding: 10px 26px 12px 22px; border-left: 14px solid var(--c); background: #0e0e10; color: #f4f1ea;
+  font-family: var(--display); font-size: 56px; line-height: 1.05; font-variation-settings: "wdth" 104, "wght" 820; letter-spacing: -.01em; white-space: nowrap; }
+.is-vertical .igf-name { font-size: 68px; }
 .igf-k { min-height: 46px; font-size: 36px; line-height: 1.28; letter-spacing: .08em; color: #0e0e10; opacity: .78; }
 .igf-t { margin: 16px 0 0; max-width: 690px; font-family: var(--display); font-size: 88px; line-height: 1; white-space: normal; text-wrap: balance;
   font-variation-settings: "wdth" 104, "wght" 860; letter-spacing: -.02em; color: #0e0e10; }

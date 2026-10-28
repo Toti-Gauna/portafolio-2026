@@ -28,6 +28,7 @@ Trailer.run({
   fonts: { display: 'Archivo', mono: 'JetBrains Mono', serif: 'Archivo', stretch: true },
   music: PARTITURA,
   mix: { gain: 0.6 },   // the recipes' foley (whoosh, boom, key…) under the score
+  speed: 0.85,          // the film plays at 85 %: 130 s of film in ~153 s, so every line can be read (Ignacio, 28/10/2026)
   acts: ACTS,
   hudAt: 1.2,
 
@@ -48,12 +49,12 @@ Trailer.run({
       stops: [
         { year: '2021', label: 'TACH', color: FRONT.tach, vis: 'tach',
           lead: { text: 'And that was my first step toward new experiences, like working at…', dur: 4 }, stay: 5,
-          k: '2021 – 2022 · TACH Argentina',
+          name: 'TACH Argentina', k: '2021 – 2022',
           t: 'A digital wallet, end to end.', d: 'Remote: the back office, the landing page and the app, on web and mobile.',
           v: { tags: ['BACK OFFICE', 'LANDING', 'APP'], balance: 'Available balance', send: 'Send', receive: 'Receive' } },
         { year: '2023', label: 'ADA ITW', color: FRONT.ada, vis: 'class',
           lead: { text: 'Next, a new challenge: from code to the classroom, at…', dur: 3 }, stay: 5.5,
-          k: '2023 – 2024 · Ada ITW',
+          name: 'Ada ITW', k: '2023 – 2024',
           t: 'Teaching people to code.', d: 'JavaScript and React: projects, hello worlds and students starting from zero.',
           v: { out: 'Hello, world', click: 'Click', todo: ['HTML', 'CSS', 'JavaScript'], code: [
             '<span class="kw">const</span> greeting = <span class="st">"Hello, world"</span>;',
@@ -61,7 +62,7 @@ Trailer.run({
             '<span class="cm">// → Hello, world</span>'] } },
         { year: '2024', label: 'TSOFT · TUENTI', color: FRONT.tuenti, vis: 'tuenti',
           lead: { text: 'From teaching to a big company: Tsoft. First, on…', dur: 3 }, stay: 6.5,
-          k: '2024 · Tsoft · Tuenti',
+          name: 'Tsoft · Tuenti', k: '2024',
           t: 'Gamification you can measure.', d: 'The roulette and the referrals. Then a dashboard to measure them.',
           v: { tag: 'Illustration · fictional data', rec: 'Recurrence', ref: 'Referrals', game: 'Gamification', plus: '+1' } },
       ],
@@ -69,7 +70,7 @@ Trailer.run({
 
     // ── 4 · CompliA (42–48) ──────────────────────────────────────────────────── navy · the case with its demo
     { type: 'igcase', label: 'COMPLIA', duration: 6, bg: NAVY,                                                    //  42–48
-      kicker: "2026 · Telefónica's compliance portal", title: 'CompliA', sub: 'Artificial intelligence in internal production.',
+      kicker: "2026 · Tsoft · Telefónica's compliance portal", title: 'CompliA', sub: 'Artificial intelligence in internal production.',
       facts: [{ k: 'What I did', t: 'I designed and built it.' }, { k: 'How', t: 'A RAG assistant: validations, restrictions and recommendations.' }, { k: 'Demo', t: 'Demo clip, with sample data.' }],
       src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'SAMPLE DATA' },
 
@@ -79,11 +80,11 @@ Trailer.run({
       stops: [
         { year: '2026', label: 'SUPERNOVA EVENTOS', color: FRONT.supernova, vis: 'events',
           lead: { text: 'At Tsoft, more fronts: a prototype for…', dur: 3 }, stay: 2.6,
-          k: '2026 · Tsoft',
+          name: 'Supernova Eventos', k: '2026 · Tsoft',
           t: 'An events micro-app.', d: 'Supernova Eventos: a prototype, with fictional data.',
           v: { app: 'Events', cat: 'Wellness', title: 'A breather for you', date: 'Oct 28 · 09:00', cta: "I'm in", ok: 'Confirmed',
             steps: ['Details', 'Audience', 'Email', 'Review'], tag: 'Prototype · fictional data' } },
-        { year: '2026', label: 'TEAM', color: FRONT.team, vis: 'team', stay: 2.5, k: '2026 · Tsoft',
+        { year: '2026', label: 'TEAM', color: FRONT.team, vis: 'team', stay: 2.5, name: 'Tsoft', k: '2026 · The team',
           t: "Raising the team's level.", d: 'I trained colleagues.', v: { level: 'Level' } },
       ],
       exit: { text: 'And alongside, with what I learned on every front, I built…', dur: 3, color: CORAL } },

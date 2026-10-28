@@ -352,7 +352,7 @@
       ${stops.map((st, i) => `<div class="igf-yr mono" style="left:${X[i + 1] + NX}px;top:${LY + 36}px">${esc(st.year)}</div>`).join('')}
       ${leads.map(ld => `<p class="igf-lead">${ld.text}</p>`).join('')}
       ${stops.map((st, i) => `<article class="igf-txt" style="left:${X[i + 1] + TX}px;top:${TY}px;--c:${st.color}">
-          <div class="igf-k mono"></div><h3 class="igf-t">${st.t}</h3><p class="igf-d">${esc(st.d)}</p></article>
+          ${st.name ? `<div class="igf-name">${esc(st.name)}</div>` : ''}<div class="igf-k mono"></div><h3 class="igf-t">${st.t}</h3><p class="igf-d">${esc(st.d)}</p></article>
         <div class="igf-vis igf-vis--${st.vis}">${VIS[st.vis](st.v || {})}</div>`).join('')}
     </div></div>`);
     const track = D.$('.igf-track', s), main = D.$('.igf-main', s), brs = D.$$('.igf-br', s), nodes = D.$$('.igf-n:not(.igf-n-exit)', s), yrs = D.$$('.igf-yr', s);
@@ -410,7 +410,7 @@
 
     stops.forEach((st, i) => {
       const { t, L } = plan[i];
-      const tx = txts[i], k = D.$('.igf-k', tx), title = D.$('.igf-t', tx), desc = D.$('.igf-d', tx);
+      const tx = txts[i], k = D.$('.igf-k', tx), title = D.$('.igf-t', tx), desc = D.$('.igf-d', tx), name = D.$('.igf-name', tx);
       if (!L) { // a plain hop (no stretch): the old quick travel
         tl.to(track, { x: -X[i + 1], duration: 0.9, ease: 'expo.inOut' }, t);
         tl.to(main, { drawSVG: `0% ${frac(X[i + 1] + SW)}%`, duration: 1.1, ease: 'power2.inOut' }, t);
@@ -424,6 +424,8 @@
       const tw = D.split(title, { type: 'words', mask: 'words' }).words;
       gsap.set(tw, { yPercent: 110 });
       gsap.set(desc, { opacity: 0, y: 16 });
+      // who: the company or project, first and big (Ignacio, 28/10/2026: «no se tiene claro dónde trabajé»), then when
+      if (name) D.hit(name, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, t + 0.75);
       tl.to(k, { duration: 0.5, scrambleText: { text: st.k, chars: 'upperCase', speed: 1 }, ease: 'none' }, t + 0.95);
       tl.to(tw, { yPercent: 0, duration: 0.65, ease: 'expo.out', stagger: 0.045 }, t + 1.0);
       tl.to(desc, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, t + 1.3);
