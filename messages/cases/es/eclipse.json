@@ -1,0 +1,70 @@
+{
+  "title": "Eclipse",
+  "kind": "En desarrollo",
+  "status": "En desarrollo",
+  "summary": "Estudio propio de desarrollo, IA y automatización.",
+  "facts": [],
+  "tldr": [],
+  "blocks": {
+    "s1": {
+      "h": "Qué es",
+      "p": [
+        "Eclipse es mi iniciativa para ofrecer desarrollo, IA y automatización. Su web muestra demos de negocios ficticios antes de proponer nada; todo lo ficticio dice «Demo»."
+      ]
+    },
+    "s2": {
+      "h": "Qué hay hoy",
+      "list": [
+        "Una landing con selector de rubro y demos interactivas.",
+        "Un portal de clientes en modo demo y su modo conectado al backend.",
+        "Un backend propio, un portal interno y un kit de emails.",
+        "Pruebas automáticas y CI en los repositorios."
+      ]
+    },
+    "s3": {
+      "h": "Cómo lo construyo",
+      "p": [
+        "Por lotes con especificación, puertas de aprobación y QA, como explico en «Sistema»."
+      ]
+    },
+    "s4": {
+      "h": "Estado",
+      "p": [
+        "En construcción. No hay clientes ni resultados comerciales para mostrar, y no los invento."
+      ]
+    },
+    "gallery": {
+      "h": "Capturas",
+      "items": {
+        "eclipse-landing": {
+          "alt": "Portada de la landing de Eclipse sobre cielo negro: el titular «Potenciá y visibilizá tu negocio, y fidelizá clientes con Eclipse.», el botón ámbar «Quiero potenciar mi negocio» y, a la derecha, un eclipse total con su corona dentro de un dial con marcas.",
+          "caption": "La landing: el eclipse en totalidad y una sola acción."
+        },
+        "eclipse-landing-precios": {
+          "alt": "Sección de precios de la landing de Eclipse sobre fondo crema: el título «Cuánto cuesta y cómo se paga.», el selector de moneda en USD, las pestañas «Planes (6)» y «Pieza por pieza (18)» y el primer nivel, Contact, a US$ 30 por mes.",
+          "caption": "Precios: seis niveles mensuales y la lista de piezas, en dólares."
+        },
+        "eclipse-portal-proyectos": {
+          "alt": "Portal de clientes de Eclipse en modo demostración: el aviso «Vista de demostración — datos ficticios», el saludo «Hola, Lucía.», un resumen con «2 cosas esperan tu respuesta.» y la tabla de proyectos de una ferretería ficticia, con la etapa de cada uno marcada con el glifo de fase del eclipse.",
+          "caption": "Portal de clientes, «Mis proyectos», con datos ficticios."
+        },
+        "eclipse-portal-detalle": {
+          "alt": "Detalle de un proyecto ficticio en el portal de clientes de Eclipse: «Chatbot de consultas», la etapa actual «Revisión del cliente» (4 de 5) con su glifo de fase, el próximo hito «Tu aprobación de las respuestas» con su fecha estimada y la tarjeta «Tu acción» marcada «Te toca a vos».",
+          "caption": "Detalle de un proyecto: etapa, próximo hito y lo que te toca. Datos ficticios."
+        },
+        "eclipse-ops-prospectos": {
+          "alt": "Portal interno de Eclipse en modo oscuro y en modo demostración: la pantalla Prospectos, con el título «Del contacto a la seña.», los filtros por etapa y una lista de negocios ficticios con su etapa, su fuente y la próxima acción calculada, como «Llamar (mismo día que respondió)», con su vencimiento.",
+          "caption": "Operación interna: prospectos con la próxima acción calculada. Datos de ejemplo."
+        },
+        "eclipse-ops-proyectos": {
+          "alt": "Portal interno de Eclipse, pantalla Proyectos: el título «Proyectos en curso.», los contadores de proyectos activos (5) y de los que esperan al cliente (3), los filtros y la lista de proyectos ficticios con su etapa —las mismas cinco que ve el cliente—, su próximo hito y lo que se le pidió al cliente.",
+          "caption": "Operación interna: proyectos en las cinco etapas que ve el cliente. Datos de ejemplo."
+        },
+        "eclipse-ops-calendario": {
+          "alt": "Portal interno de Eclipse, pantalla Calendario: el título «Dale espacio a lo importante.», la grilla de octubre de 2026 y, a la derecha, la agenda del 27 de octubre con actividades de ejemplo como «10:00 Dejar listas las propuestas de hoy» y «15:00 Llamada de propuesta · Constructora».",
+          "caption": "Operación interna: el calendario y la agenda del día. Datos de ejemplo."
+        }
+      }
+    }
+  }
+}

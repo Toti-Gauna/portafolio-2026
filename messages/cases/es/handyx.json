@@ -1,0 +1,433 @@
+{
+  "title": "HandyX",
+  "kind": "Producto propio",
+  "status": "En desarrollo · lanza el 10 de noviembre de 2026",
+  "summary": "Un marketplace de especialistas del hogar en Mar del Plata: el vecino pide un arreglo desde el celular, recibe propuestas con el precio desglosado y elige. Antes del lanzamiento, una landing junta la lista de espera, un backend propio guarda cada preregistro cifrado y un portal interno lo trabaja por un embudo de contacto.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Única persona: producto, diseño y desarrollo"
+    },
+    {
+      "k": "Lanzamiento",
+      "v": "10 de noviembre de 2026, Mar del Plata"
+    },
+    {
+      "k": "Piezas",
+      "v": "Landing con demo · backend · portal interno"
+    },
+    {
+      "k": "Estado",
+      "v": "En desarrollo: nada desplegado todavía"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "El problema",
+      "v": "Cuando algo se rompe en casa no sabés cuánto va a costar, te suman cosas sin avisar y tenés que repartir tu teléfono."
+    },
+    {
+      "k": "La solución",
+      "v": "Propuestas con el precio desglosado, nada extra sin tu OK y el especialista pone su precio. La comisión se ve antes de confirmar."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Landing, backend y portal construidos y probados en local. Lanza el 10/11; todavía no hay usuarios ni métricas."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Handyx conecta a vecinos de Mar del Plata con especialistas independientes del hogar. Arranca con seis rubros: electricidad, plomería, gas, cerrajería, albañilería y aire acondicionado."
+      ],
+      "list": [
+        "Vecino: pide un arreglo (urgencia, programado u obra), recibe propuestas claras y elige. El total que ve es el que paga.",
+        "Especialista: recibe pedidos, pone su precio (Handyx solo sugiere uno de referencia) y cobra directo en su cuenta. Sin exclusividad ni penalización por rechazar.",
+        "Operación: antes de lanzar, un portal interno ordena a quién escribirle, en qué etapa está cada especialista y a quién avisarle."
+      ]
+    },
+    "money": {
+      "h": "Modelo de negocio",
+      "p": [
+        "Instalar y anotarse es gratis. Handyx cobra una comisión del 10 % a quien pide y del 10 % al especialista, sobre cada trabajo hecho. La plata del trabajo va a la cuenta del especialista; Handyx solo cobra su tarifa, que se ve antes de confirmar."
+      ],
+      "title": "Cómo se reparte un trabajo de $ 45.000",
+      "caption": "Ejemplo con el presupuesto de ejemplo de la landing. El mecanismo de cobro de la tarifa todavía no está construido.",
+      "rows": [
+        {
+          "label": "Paga el vecino",
+          "total": "$ 49.500",
+          "segs": [
+            {
+              "w": 45000,
+              "t": "Presupuesto $ 45.000",
+              "tone": "paper"
+            },
+            {
+              "w": 4500,
+              "t": "+10 %",
+              "tone": "coral"
+            }
+          ]
+        },
+        {
+          "label": "Recibe el especialista",
+          "total": "$ 40.500",
+          "segs": [
+            {
+              "w": 40500,
+              "t": "A su cuenta $ 40.500",
+              "tone": "paper"
+            },
+            {
+              "w": 4500,
+              "t": "−10 %",
+              "tone": "coral"
+            }
+          ]
+        },
+        {
+          "label": "Cobra Handyx",
+          "total": "$ 9.000",
+          "segs": [
+            {
+              "w": 4500,
+              "t": "10 %",
+              "tone": "coral"
+            },
+            {
+              "w": 4500,
+              "t": "10 %",
+              "tone": "coral"
+            },
+            {
+              "w": 40500,
+              "t": " ",
+              "tone": "muted"
+            }
+          ]
+        }
+      ]
+    },
+    "growth": {
+      "h": "Cómo llega a la gente",
+      "p": [
+        "El objetivo de la landing es uno solo: preregistros reales. Todo lo demás está al servicio de eso, sin trucos."
+      ],
+      "items": [
+        {
+          "t": "Dos entradas",
+          "d": "«Quiero usar Handyx» (lista de espera) y «Soy especialista» (preregistro), cada una con su página."
+        },
+        {
+          "t": "Compartir sin rastreo",
+          "d": "Un panel con QR generado en el navegador, enlace y WhatsApp. Sin códigos de referido ni parámetros de seguimiento."
+        },
+        {
+          "t": "Prueba social honesta",
+          "d": "El contador público aparece recién desde 20 anotados y redondea hacia abajo de a 5: nunca un número inflado."
+        },
+        {
+          "t": "Una demo para mostrar en persona",
+          "d": "La app de los dos roles con datos ficticios, con modo «stand» en bucle para un evento."
+        }
+      ]
+    },
+    "funnel": {
+      "h": "El embudo de preregistro",
+      "p": [
+        "Un preregistro no es una cuenta ni un especialista verificado: es alguien a quien hay que escribirle. El portal lo trabaja como una máquina de estados con reglas en el servidor, y abrir WhatsApp siempre es un clic de una persona."
+      ],
+      "diagram": {
+        "title": "Del preregistro al compromiso",
+        "caption": "Estados guardados en el backend. Cada cambio viaja con la versión que vio el operador y una clave de idempotencia, y se aplica en una transacción con su registro de auditoría.",
+        "groups": {
+          "pros": "Especialistas",
+          "users": "Lista de espera"
+        },
+        "nodes": {
+          "pre": {
+            "label": "Preregistrado",
+            "sub": "falta contactar",
+            "note": "Cada intento sin respuesta suma uno, pero no cambia el estado."
+          },
+          "talk": {
+            "label": "Contactado",
+            "sub": "hubo conversación"
+          },
+          "commit": {
+            "label": "Comprometido",
+            "sub": "alta acordada",
+            "note": "Exige una fecha de alta dentro de los próximos 90 días."
+          },
+          "later": {
+            "label": "Verificado · habilitado",
+            "sub": "sin construir todavía"
+          },
+          "wait": {
+            "label": "En espera",
+            "sub": "vecino anotado"
+          },
+          "told": {
+            "label": "Avisado",
+            "sub": "ya puede usarlo",
+            "note": "Solo se le avisa a quien es de Mar del Plata, que es donde arranca."
+          }
+        },
+        "edges": {
+          "try": "intento",
+          "conv": "conversación",
+          "deal": "compromiso",
+          "next": "después",
+          "notify": "aviso"
+        }
+      }
+    },
+    "arch": {
+      "h": "Arquitectura",
+      "p": [
+        "Tres piezas propias: una landing estática, un backend que sirve la captura pública y el CRM interno, y un portal para el equipo. El navegador nunca toca la base: todo pasa por la API."
+      ],
+      "diagram": {
+        "title": "El sistema, de punta a punta",
+        "caption": "Hosting previsto: Hostinger para las webs, Render para la API y Neon para PostgreSQL. Todavía no hay nada desplegado ni contratado.",
+        "nodes": {
+          "visitor": {
+            "label": "Vecino o especialista",
+            "sub": "desde el celular"
+          },
+          "landing": {
+            "label": "Landing + demo",
+            "sub": "Vite · TypeScript"
+          },
+          "api": {
+            "label": "API y CRM",
+            "sub": "Express · Prisma",
+            "note": "Una sola API para la captura pública y para el equipo, con CORS separados."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "datos cifrados",
+            "note": "Nombre, WhatsApp, ciudad y email se guardan cifrados; nunca en claro."
+          },
+          "ops": {
+            "label": "Operador",
+            "sub": "del equipo"
+          },
+          "portal": {
+            "label": "Portal interno",
+            "sub": "Vite · TypeScript",
+            "note": "Sesión en cookies HttpOnly; nada se guarda en el navegador."
+          },
+          "wa": {
+            "label": "WhatsApp",
+            "sub": "lo abre una persona"
+          },
+          "purge": {
+            "label": "Purga",
+            "sub": "vencidos a 12 meses"
+          }
+        },
+        "edges": {
+          "visit": "HTTPS",
+          "signup": "POST /preregistro",
+          "tx": "1 transacción",
+          "login": "contraseña + TOTP",
+          "admin": "cookies + CSRF",
+          "whatsapp": "clic humano",
+          "retention": "borra"
+        }
+      }
+    },
+    "signup": {
+      "h": "El viaje de un preregistro",
+      "p": [
+        "El alta es el único momento en que entra un dato personal, así que es el flujo más cuidado. El mismo schema valida en el navegador y en el servidor, y un duplicado recibe exactamente la misma respuesta que un alta, para que nadie pueda averiguar quién está anotado."
+      ],
+      "seq": {
+        "title": "Del formulario a la base",
+        "caption": "Si la base falla la respuesta es 503: nunca un éxito falso. La landing solo muestra éxito con un 201.",
+        "lanes": {
+          "landing": "Landing",
+          "api": "API",
+          "db": "PostgreSQL"
+        },
+        "msgs": {
+          "validate": "valida con el mismo schema",
+          "post": "POST /preregistro",
+          "guards": "límites, honeypot, schema",
+          "encrypt": "cifra los datos + HMAC",
+          "tx": "alta + consentimiento + auditoría",
+          "ok": "201 {ok:true}, también si ya estaba"
+        }
+      }
+    },
+    "security": {
+      "h": "Seguridad y privacidad",
+      "p": [
+        "Hay datos personales desde el primer día, así que la privacidad se diseñó antes que las pantallas."
+      ],
+      "items": [
+        {
+          "t": "Datos cifrados en la aplicación",
+          "d": "AES-256-GCM con la fila y la columna como datos autenticados; los duplicados se detectan con un HMAC de otra clave."
+        },
+        {
+          "t": "Nada que enumerar",
+          "d": "Un duplicado responde igual que un alta y el contador público es una cota inferior: no se puede saber si alguien ya se anotó."
+        },
+        {
+          "t": "Acceso del equipo",
+          "d": "Contraseñas con Argon2id, segundo factor TOTP en las cuentas que lo tienen, cookies HttpOnly, CSRF y Origin exacto. Las cuentas viven en el entorno del servidor: no hay signup ni tabla de administradores."
+        },
+        {
+          "t": "Cada pedido, con permiso",
+          "d": "Cada endpoint exige un permiso de una lista cerrada, y las lecturas de una ficha se auditan antes de responder."
+        },
+        {
+          "t": "Logs sin datos",
+          "d": "Una lista blanca de campos: nunca cuerpos, cookies, consultas SQL ni valores personales."
+        },
+        {
+          "t": "Retención real",
+          "d": "Cada preregistro vence a los 12 meses y se borra de verdad, con un procedimiento para los derechos del titular."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones técnicas",
+      "items": [
+        {
+          "t": "Un solo contrato, copiado byte a byte",
+          "why": "La landing y la API validan con el mismo schema, y un test verifica que los dos archivos sean idénticos. Así el navegador y el servidor no pueden divergir."
+        },
+        {
+          "t": "El contador redondea hacia abajo",
+          "why": "Un número exacto y público dejaría probar si una persona ya estaba anotada: mandás su contacto y mirás si sube."
+        },
+        {
+          "t": "Las cuentas del equipo, fuera de la base",
+          "why": "Sin signup ni tabla de administradores no hay nada que atacar por ese lado, y una baja rige en la petición siguiente, sin reiniciar."
+        },
+        {
+          "t": "Frontends sin framework",
+          "why": "La landing es multipágina estática generada en build desde JSON; el portal es una SPA liviana, elegida como opción reversible mientras se decide el stack de la app.",
+          "alt": "React en el portal: queda abierto hasta decidir el stack de la app."
+        },
+        {
+          "t": "Captura cerrada hasta el aviso definitivo",
+          "why": "No se juntan datos personales con un aviso de privacidad provisional: la landing muestra «Registro habilitado en breve» y la API responde 503."
+        },
+        {
+          "t": "Una sola instancia",
+          "why": "Sesiones y límites en memoria para un alcance acotado de cuatro fases. El costo asumido: reiniciar exige volver a entrar."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "Los tres repos tienen typecheck y CI. El backend corre además lint, formato, npm audit y una base PostgreSQL efímera en cada PR."
+      ],
+      "items": [
+        {
+          "n": "36",
+          "u": "tests",
+          "d": "Landing: plata, fechas, agenda, propuestas, schema y enlaces"
+        },
+        {
+          "n": "281",
+          "u": "tests",
+          "d": "Backend: unitarias y HTTP"
+        },
+        {
+          "n": "64",
+          "u": "tests",
+          "d": "Backend contra PostgreSQL: cifrado, concurrencia, privilegios y purga"
+        },
+        {
+          "n": "75",
+          "u": "tests",
+          "d": "Portal: sesión, contrato, reglas y permisos"
+        }
+      ],
+      "note": "Corrí los de la landing, el backend (unitarias y HTTP) y el portal el 28/10/2026: todo en verde. Los 64 de base de datos los enumeré; necesitan PostgreSQL y corren en la CI."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Landing",
+          "items": [
+            "TypeScript",
+            "Vite",
+            "GSAP",
+            "Zod"
+          ]
+        },
+        {
+          "k": "Backend",
+          "items": [
+            "Node 22",
+            "Express 5",
+            "Prisma 7",
+            "PostgreSQL",
+            "Zod",
+            "Argon2id",
+            "JWT en cookies"
+          ]
+        },
+        {
+          "k": "Portal",
+          "items": [
+            "TypeScript",
+            "Vite",
+            "Zod"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Vitest",
+            "node:test",
+            "ESLint",
+            "Prettier",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Capturas",
+      "items": {
+        "handy-landing": {
+          "alt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros.",
+          "caption": "Landing de Handyx: lista de espera y preregistro. Sale el 10/11 en Mar del Plata. Captura del 27/10/2026."
+        },
+        "handy-especialistas": {
+          "alt": "Página de Handyx para especialistas, sobre azul: «Tus herramientas. Tu precio.», los botones «Quiero sumarme» y «Cómo cobrás», y un celular con la pantalla «Tu precio», donde el especialista arma su presupuesto a partir del precio que sugiere Handyx.",
+          "caption": "Handyx Especialistas: el precio lo pone cada especialista; Handyx solo sugiere. Captura del 27/10/2026."
+        },
+        "handy-ops-inicio": {
+          "alt": "Inicio del portal interno de Handyx en modo muestra: aviso «Todos los registros son ficticios», contadores (9 para contactar, 14 especialistas anotados, 11 en lista de espera, 3 comprometidos), la cola «Para contactar» y los especialistas de Mar del Plata por rubro.",
+          "caption": "Portal interno de Handyx, vista de muestra con registros ficticios: a quién hay que escribirle hoy."
+        },
+        "handy-ops-registros": {
+          "alt": "Lista de pre-registros del portal interno de Handyx en modo muestra: pestañas por estado de contacto (sin contactar, con intentos, contactado, comprometido), filtros por rubro y ciudad, y especialistas ficticios ordenados por el seguimiento más próximo.",
+          "caption": "Pre-registros por etapa de contacto, con registros ficticios."
+        }
+      }
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "En desarrollo. El lanzamiento está previsto para el 10 de noviembre de 2026 en Mar del Plata.",
+        "Nada está desplegado y no hay datos reales: no hay usuarios, anotados ni métricas para mostrar.",
+        "Un especialista preregistrado no está verificado: la verificación todavía no está construida.",
+        "No hay pagos ni app móvil en estos repos. HandIA, en la demo, es un chat guionado, no un modelo de IA.",
+        "Soy la única persona en el proyecto: producto, diseño y desarrollo."
+      ]
+    }
+  }
+}

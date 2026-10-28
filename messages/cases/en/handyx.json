@@ -1,0 +1,433 @@
+{
+  "title": "HandyX",
+  "kind": "My own product",
+  "status": "In development · launches November 10, 2026",
+  "summary": "A marketplace of home-service specialists in Mar del Plata: residents ask for a repair from their phone, get proposals with an itemised price and choose. Ahead of launch, a landing page collects the waiting list, a purpose-built backend stores every pre-registration encrypted and an internal portal works it through a contact funnel.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "Sole person: product, design and development"
+    },
+    {
+      "k": "Launch",
+      "v": "November 10, 2026, Mar del Plata"
+    },
+    {
+      "k": "Pieces",
+      "v": "Landing with demo · backend · internal portal"
+    },
+    {
+      "k": "Status",
+      "v": "In development: nothing deployed yet"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The problem",
+      "v": "When something breaks at home you don't know what it will cost, extras appear without warning and you end up handing out your phone number."
+    },
+    {
+      "k": "The solution",
+      "v": "Proposals with an itemised price, nothing extra without your OK, and the specialist sets the price. The fee is shown before you confirm."
+    },
+    {
+      "k": "Where it is",
+      "v": "Landing, backend and portal built and tested locally. Launches on Nov 10; no users or metrics yet."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "Handyx connects Mar del Plata residents with independent home-service specialists. It starts with six trades: electrical, plumbing, gas, locksmith, masonry and air conditioning."
+      ],
+      "list": [
+        "Resident: asks for a repair (urgent, scheduled or a bigger job), gets clear proposals and chooses. The total they see is what they pay.",
+        "Specialist: receives requests, sets their own price (Handyx only suggests a reference) and is paid straight into their account. No exclusivity and no penalty for declining.",
+        "Operations: before launch, an internal portal sorts out who to message, what stage each specialist is at and who to notify."
+      ]
+    },
+    "money": {
+      "h": "Business model",
+      "p": [
+        "Installing and signing up are free. Handyx charges a 10 % fee to the person who asks and 10 % to the specialist, on every job done. The money for the job goes to the specialist's account; Handyx only charges its fee, which is shown before confirming."
+      ],
+      "title": "How a $45,000 job is split",
+      "caption": "Example with the sample quote from the landing page (Argentine pesos). The fee collection mechanism is not built yet.",
+      "rows": [
+        {
+          "label": "The resident pays",
+          "total": "$49,500",
+          "segs": [
+            {
+              "w": 45000,
+              "t": "Quote $45,000",
+              "tone": "paper"
+            },
+            {
+              "w": 4500,
+              "t": "+10 %",
+              "tone": "coral"
+            }
+          ]
+        },
+        {
+          "label": "The specialist receives",
+          "total": "$40,500",
+          "segs": [
+            {
+              "w": 40500,
+              "t": "To their account $40,500",
+              "tone": "paper"
+            },
+            {
+              "w": 4500,
+              "t": "−10 %",
+              "tone": "coral"
+            }
+          ]
+        },
+        {
+          "label": "Handyx keeps",
+          "total": "$9,000",
+          "segs": [
+            {
+              "w": 4500,
+              "t": "10 %",
+              "tone": "coral"
+            },
+            {
+              "w": 4500,
+              "t": "10 %",
+              "tone": "coral"
+            },
+            {
+              "w": 40500,
+              "t": " ",
+              "tone": "muted"
+            }
+          ]
+        }
+      ]
+    },
+    "growth": {
+      "h": "How it reaches people",
+      "p": [
+        "The landing page has a single goal: real pre-registrations. Everything else serves that, with no tricks."
+      ],
+      "items": [
+        {
+          "t": "Two doors",
+          "d": "«I want to use Handyx» (waiting list) and «I'm a specialist» (pre-registration), each with its own page."
+        },
+        {
+          "t": "Sharing without tracking",
+          "d": "A panel with a QR code generated in the browser, a link and WhatsApp. No referral codes or tracking parameters."
+        },
+        {
+          "t": "Honest social proof",
+          "d": "The public counter only appears from 20 sign-ups and rounds down in steps of 5: never an inflated number."
+        },
+        {
+          "t": "A demo to show in person",
+          "d": "The app for both roles with fictional data, with a looping «stand» mode for events."
+        }
+      ]
+    },
+    "funnel": {
+      "h": "The pre-registration funnel",
+      "p": [
+        "A pre-registration is not an account or a verified specialist: it is someone to get in touch with. The portal works it as a state machine with rules on the server, and opening WhatsApp is always a person's click."
+      ],
+      "diagram": {
+        "title": "From pre-registration to commitment",
+        "caption": "States stored in the backend. Every change travels with the version the operator saw and an idempotency key, and is applied in one transaction with its audit record.",
+        "groups": {
+          "pros": "Specialists",
+          "users": "Waiting list"
+        },
+        "nodes": {
+          "pre": {
+            "label": "Pre-registered",
+            "sub": "to be contacted",
+            "note": "Each unanswered attempt adds one, but doesn't change the state."
+          },
+          "talk": {
+            "label": "Contacted",
+            "sub": "a conversation"
+          },
+          "commit": {
+            "label": "Committed",
+            "sub": "start date agreed",
+            "note": "Requires a start date within the next 90 days."
+          },
+          "later": {
+            "label": "Verified · enabled",
+            "sub": "not built yet"
+          },
+          "wait": {
+            "label": "Waiting",
+            "sub": "resident signed up"
+          },
+          "told": {
+            "label": "Notified",
+            "sub": "can use it now",
+            "note": "Only people from Mar del Plata are notified, since that's where it starts."
+          }
+        },
+        "edges": {
+          "try": "attempt",
+          "conv": "conversation",
+          "deal": "commitment",
+          "next": "later",
+          "notify": "notice"
+        }
+      }
+    },
+    "arch": {
+      "h": "Architecture",
+      "p": [
+        "Three pieces of my own: a static landing page, a backend that serves both the public capture and the internal CRM, and a portal for the team. The browser never touches the database: everything goes through the API."
+      ],
+      "diagram": {
+        "title": "The system, end to end",
+        "caption": "Planned hosting: Hostinger for the websites, Render for the API and Neon for PostgreSQL. Nothing is deployed or contracted yet.",
+        "nodes": {
+          "visitor": {
+            "label": "Resident or specialist",
+            "sub": "on their phone"
+          },
+          "landing": {
+            "label": "Landing + demo",
+            "sub": "Vite · TypeScript"
+          },
+          "api": {
+            "label": "API and CRM",
+            "sub": "Express · Prisma",
+            "note": "One API for the public capture and for the team, with separate CORS."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "encrypted data",
+            "note": "Name, WhatsApp, city and email are stored encrypted; never in plain text."
+          },
+          "ops": {
+            "label": "Operator",
+            "sub": "on the team"
+          },
+          "portal": {
+            "label": "Internal portal",
+            "sub": "Vite · TypeScript",
+            "note": "Session in HttpOnly cookies; nothing is stored in the browser."
+          },
+          "wa": {
+            "label": "WhatsApp",
+            "sub": "opened by a person"
+          },
+          "purge": {
+            "label": "Purge",
+            "sub": "expired at 12 months"
+          }
+        },
+        "edges": {
+          "visit": "HTTPS",
+          "signup": "POST /preregistro",
+          "tx": "1 transaction",
+          "login": "password + TOTP",
+          "admin": "cookies + CSRF",
+          "whatsapp": "human click",
+          "retention": "deletes"
+        }
+      }
+    },
+    "signup": {
+      "h": "The journey of a pre-registration",
+      "p": [
+        "Sign-up is the only moment personal data comes in, so it is the most careful flow. The same schema validates in the browser and on the server, and a duplicate gets exactly the same answer as a new sign-up, so nobody can find out who has signed up."
+      ],
+      "seq": {
+        "title": "From the form to the database",
+        "caption": "If the database fails the answer is 503: never a false success. The landing page only shows success on a 201.",
+        "lanes": {
+          "landing": "Landing",
+          "api": "API",
+          "db": "PostgreSQL"
+        },
+        "msgs": {
+          "validate": "validates with the same schema",
+          "post": "POST /preregistro",
+          "guards": "limits, honeypot, schema",
+          "encrypt": "encrypts the data + HMAC",
+          "tx": "sign-up + consent + audit",
+          "ok": "201 {ok:true}, even if already in"
+        }
+      }
+    },
+    "security": {
+      "h": "Security and privacy",
+      "p": [
+        "There is personal data from day one, so privacy was designed before the screens."
+      ],
+      "items": [
+        {
+          "t": "Data encrypted in the application",
+          "d": "AES-256-GCM with the row and column as authenticated data; duplicates are detected with an HMAC under a different key."
+        },
+        {
+          "t": "Nothing to enumerate",
+          "d": "A duplicate gets the same answer as a sign-up and the public counter is a lower bound: you can't tell whether someone signed up."
+        },
+        {
+          "t": "Team access",
+          "d": "Argon2id passwords, a TOTP second factor for accounts that have one, HttpOnly cookies, CSRF and exact Origin. Accounts live in the server's environment: no sign-up and no admin table."
+        },
+        {
+          "t": "Every request, with a permission",
+          "d": "Each endpoint requires a permission from a closed list, and reading a record is audited before the answer goes out."
+        },
+        {
+          "t": "Logs without data",
+          "d": "An allow-list of fields: never bodies, cookies, SQL queries or personal values."
+        },
+        {
+          "t": "Real retention",
+          "d": "Every pre-registration expires after 12 months and is really deleted, with a procedure for data-subject rights."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "One contract, copied byte for byte",
+          "why": "The landing page and the API validate with the same schema, and a test checks that both files are identical. The browser and the server can't drift apart."
+        },
+        {
+          "t": "The counter rounds down",
+          "why": "An exact public number would let anyone test whether a person had signed up: send their contact and watch it go up."
+        },
+        {
+          "t": "Team accounts outside the database",
+          "why": "With no sign-up and no admin table there is nothing to attack on that side, and removing someone takes effect on the next request, without a restart."
+        },
+        {
+          "t": "Frontends without a framework",
+          "why": "The landing page is a static multi-page site generated at build time from JSON; the portal is a light SPA, chosen as a reversible option while the app's stack is decided.",
+          "alt": "React for the portal: still open until the app's stack is decided."
+        },
+        {
+          "t": "Capture closed until the final notice",
+          "why": "No personal data is collected under a provisional privacy notice: the landing page says «Sign-up opens soon» and the API answers 503."
+        },
+        {
+          "t": "A single instance",
+          "why": "Sessions and limits in memory, for a bounded four-phase scope. The accepted cost: a restart means signing in again."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "All three repos have type checks and CI. The backend also runs lint, formatting, npm audit and an ephemeral PostgreSQL database on every PR."
+      ],
+      "items": [
+        {
+          "n": "36",
+          "u": "tests",
+          "d": "Landing: money, dates, schedule, proposals, schema and links"
+        },
+        {
+          "n": "281",
+          "u": "tests",
+          "d": "Backend: unit and HTTP"
+        },
+        {
+          "n": "64",
+          "u": "tests",
+          "d": "Backend against PostgreSQL: encryption, concurrency, privileges and purge"
+        },
+        {
+          "n": "75",
+          "u": "tests",
+          "d": "Portal: session, contract, rules and permissions"
+        }
+      ],
+      "note": "I ran the landing, backend (unit and HTTP) and portal tests on 10/28/2026: all green. I listed the 64 database tests; they need PostgreSQL and run in CI."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Landing",
+          "items": [
+            "TypeScript",
+            "Vite",
+            "GSAP",
+            "Zod"
+          ]
+        },
+        {
+          "k": "Backend",
+          "items": [
+            "Node 22",
+            "Express 5",
+            "Prisma 7",
+            "PostgreSQL",
+            "Zod",
+            "Argon2id",
+            "JWT in cookies"
+          ]
+        },
+        {
+          "k": "Portal",
+          "items": [
+            "TypeScript",
+            "Vite",
+            "Zod"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "node:test",
+            "ESLint",
+            "Prettier",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshots",
+      "items": {
+        "handy-landing": {
+          "alt": "Hero of the Handyx landing: the headline «¿Se rompió algo en casa?» (Something broken at home?), the buttons to sign up as a user or as a specialist, the countdown to Nov 10 and a phone with the app's home screen and its six trades.",
+          "caption": "Handyx landing: waiting list and pre-registration. Launches Nov 10 in Mar del Plata. Captured on 10/27/2026."
+        },
+        "handy-especialistas": {
+          "alt": "Handyx page for specialists, on blue: «Tus herramientas. Tu precio.» (Your tools. Your price.), the buttons to join and to see how payment works, and a phone with the «Tu precio» screen, where the specialist builds the quote from the price Handyx suggests.",
+          "caption": "Handyx for specialists: each specialist sets the price; Handyx only suggests one. Captured on 10/27/2026."
+        },
+        "handy-ops-inicio": {
+          "alt": "Home of the Handyx internal portal in sample mode: a notice that every record is fictional, counters (9 to contact, 14 specialists signed up, 11 on the waiting list, 3 committed), the «Para contactar» queue and the Mar del Plata specialists by trade.",
+          "caption": "Handyx internal portal, sample view with fictional records: who to message today."
+        },
+        "handy-ops-registros": {
+          "alt": "Pre-registration list of the Handyx internal portal in sample mode: tabs by contact state (not contacted, with attempts, contacted, committed), filters by trade and city, and fictional specialists sorted by the nearest follow-up.",
+          "caption": "Pre-registrations by contact stage, with fictional records."
+        }
+      }
+    },
+    "status": {
+      "h": "Status, and what I don't claim",
+      "list": [
+        "In development. The launch is planned for November 10, 2026 in Mar del Plata.",
+        "Nothing is deployed and there is no real data: no users, sign-ups or metrics to show.",
+        "A pre-registered specialist is not verified: verification isn't built yet.",
+        "There are no payments and no mobile app in these repos. HandIA, in the demo, is a scripted chat, not an AI model.",
+        "I'm the only person on the project: product, design and development."
+      ]
+    }
+  }
+}

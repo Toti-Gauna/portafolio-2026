@@ -1,0 +1,77 @@
+/* Diagrams — a blueprint language: hairlines, mono labels, one coral packet. Motion: stroke-dashoffset, opacity, transform. */
+.dg { margin: 0; display: grid; gap: 14px; padding: clamp(12px, 3vw, 28px); border: 1px solid var(--line); border-radius: 14px;
+  background: radial-gradient(circle at 1px 1px, #ffffff10 1px, transparent 1.4px) 0 0 / 22px 22px, #101013; }
+.dg__head { display: grid; gap: 8px; justify-items: start; }
+.dg__badge { font: 12px/1 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: #ffc21a; padding: 6px 8px; border-radius: 4px; }
+.dg__title { font-size: clamp(20px, 2.4vw, 26px); font-variation-settings: 'wdth' 112; line-height: 1.15; }
+.dg__canvas { container-type: inline-size; }
+.dg__svg { width: 100%; height: auto; overflow: visible; font-family: var(--font-sans), system-ui, sans-serif; }
+.dg__svg--desktop { display: none; }
+.dg__svg--mobile { max-width: 560px; margin-inline: auto; }
+@container (min-width: 820px) {
+  .dg__svg--desktop { display: block; }
+  .dg__svg--mobile { display: none; }
+}
+
+.dg__group rect { fill: #ffffff05; stroke: #3a3a40; stroke-dasharray: 4 5; }
+.dg__group text { font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; fill: var(--muted); }
+.dg__edge { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.dg__edge[data-dashed] { stroke-dasharray: 5 6; }
+.dg__arrow { fill: none; stroke: transparent; }
+.dg__pkt { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 0.035 2; stroke-dashoffset: 0.035; }
+.dg__box { fill: #16161a; stroke: #3d3d44; stroke-width: 1.2; }
+.dg__label { fill: var(--paper); font-weight: 650; font-variation-settings: 'wdth' 104; }
+.dg__sub { fill: var(--muted); font-family: var(--font-mono); }
+.dg__badge-n circle { fill: var(--accent); }
+.dg__badge-n text { fill: var(--ink); font-family: var(--font-mono); font-weight: 700; }
+.dg__lbl rect { fill: #0e0e10; stroke: #2a2a2e; }
+.dg__lbl text { fill: #c9c5bc; font-family: var(--font-mono); }
+
+.dg__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: 1fr; }
+.dg__legend li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; color: #d6d2c9; font-size: 15px; line-height: 1.5; }
+.dg__n { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--ink); font: 700 13px/1 var(--font-mono); margin-top: 1px; }
+@media (min-width: 900px) { .dg__legend { grid-template-columns: repeat(2, 1fr); column-gap: 28px; } }
+.dg__text summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; font: 13px var(--font-mono); color: var(--muted); }
+.dg__text summary:hover { color: var(--paper); }
+.dg__text ol { margin: 4px 0 0; padding-left: 1.4em; display: grid; gap: 6px; color: #d6d2c9; font-size: 15px; }
+.dg__caption { max-width: none; }
+
+/* a legend line under the pointer lights its node */
+.dg__node { transition: opacity 250ms; }
+.dg:has(.dg__legend li:hover) .dg__node { opacity: 0.35; }
+.dg:has(.dg__legend li:hover) .dg__edges, .dg:has(.dg__legend li:hover) .dg__lbls { opacity: 0.5; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .dg .dg__edge:not([data-dashed]) { transition: stroke-dashoffset 1s var(--ease-expo) calc(250ms + var(--o) * 110ms); }
+  .js .dg:not([data-in]) .dg__edge:not([data-dashed]) { stroke-dashoffset: 1; }
+  .js .dg .dg__edge[data-dashed], .js .dg .dg__arrow, .js .dg .dg__lbl { transition: opacity 500ms ease calc(700ms + var(--o) * 110ms); }
+  .js .dg:not([data-in]) :is(.dg__edge[data-dashed], .dg__arrow, .dg__lbl) { opacity: 0; }
+  .js .dg .dg__node { transition: opacity 600ms var(--ease-expo) calc(var(--o) * 70ms), transform 700ms var(--ease-expo) calc(var(--o) * 70ms); }
+  .js .dg:not([data-in]) .dg__node { opacity: 0; transform: translateY(10px); }
+  .dg__pkt { animation: dg-pkt var(--cycle, 5s) linear infinite; animation-delay: calc(1.6s + var(--o) * 0.55s); animation-play-state: paused; }
+  .dg[data-live] .dg__pkt { animation-play-state: running; }
+}
+@keyframes dg-pkt { 0% { stroke-dashoffset: 0.035; } 32% { stroke-dashoffset: -1; } 100% { stroke-dashoffset: -1; } }
+
+/* Sequence: lanes and messages (desktop SVG), a numbered list on narrow screens */
+.sq__svg { display: none; }
+.sq__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: sq; }
+.sq__list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+.sq__list li:first-child { border-top: 0; }
+.sq__route { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: 12px/1.2 var(--font-mono); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+.sq__chip { border: 1px solid #3d3d44; border-radius: 4px; padding: 4px 6px; color: var(--paper); }
+.sq__msg { font: 14px/1.45 var(--font-mono); color: #e6e2d9; }
+@container (min-width: 820px) {
+  .sq__svg { display: block; }
+  .sq__list { display: none; }
+}
+.sq__lane line { stroke: #3a3a40; stroke-dasharray: 3 5; }
+.sq__msg-g line, .sq__msg-g path { fill: none; stroke-width: 1.6; }
+.sq__msg-g text { font-family: var(--font-mono); fill: #d6d2c9; }
+.sq__msg-g .sq__num { fill: var(--accent); font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .dg .sq__msg-g { transition: opacity 500ms ease calc(300ms + var(--o) * 160ms), transform 600ms var(--ease-expo) calc(300ms + var(--o) * 160ms); }
+  .js .dg:not([data-in]) .sq__msg-g { opacity: 0; transform: translateX(-12px); }
+  .js .dg .sq__list li { transition: opacity 500ms ease calc(var(--o) * 90ms), transform 600ms var(--ease-expo) calc(var(--o) * 90ms); }
+  .js .dg:not([data-in]) .sq__list li { opacity: 0; transform: translateY(8px); }
+}

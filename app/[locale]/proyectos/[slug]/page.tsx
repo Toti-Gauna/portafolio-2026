@@ -4,10 +4,13 @@ import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { routing, localeTags } from '@/i18n/routing';
-import { CASE_GALLERY, CASE_LINKS, CASE_SLUGS, type CaseSlug } from '@/lib/cases';
-import { CONTACT_EMAIL, absoluteUrl, asset } from '@/lib/site';
+import { CASES, CASE_SLUGS, type CaseSlug } from '@/lib/cases';
+import { CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
 import { Footer } from '@/components/sections/Sections';
+import { CaseSections, sectionsOf } from '@/components/case/CaseBlocks';
+import { CaseToc } from '@/components/case/CaseToc';
 import '@/components/sections.css';
+import '@/components/case/case.css';
 
 export const dynamicParams = false;
 
@@ -16,7 +19,7 @@ export function generateStaticParams() {
 }
 
 type Params = { locale: string; slug: string };
-type Section = { h: string; p?: string; list?: string[] };
+type KV = { k: string; v: string };
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -42,69 +45,73 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
   const t = await getTranslations({ locale, namespace: `cases.${slug}` });
   const u = await getTranslations({ locale, namespace: 'caseUi' });
   const c = await getTranslations({ locale, namespace: 'contact' });
-  const sections = t.raw('sections') as Section[];
-  const links = CASE_LINKS[slug as CaseSlug];
-  const gallery = CASE_GALLERY[slug as CaseSlug];
-  const others = CASE_SLUGS.filter((s) => s !== slug);
+  const def = CASES[slug as CaseSlug];
+  const copy = t.raw('blocks') as Record<string, { h?: string }>;
+  const facts = t.raw('facts') as KV[];
+  const tldr = t.raw('tldr') as KV[];
+  const toc = sectionsOf(def.blocks, copy).filter((s) => s.h).map((s) => ({ id: s.id, h: s.h }));
+  const i = CASE_SLUGS.indexOf(slug as CaseSlug);
+  const next = CASE_SLUGS[(i + 1) % CASE_SLUGS.length];
   const nameOf = async (s: string) => (await getTranslations({ locale, namespace: `cases.${s}` }))('title');
+  const others = CASE_SLUGS.filter((s) => s !== slug);
   const otherNames = await Promise.all(others.map(nameOf));
+  const ui = { asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt') };
 
   return (
-    <main id="contenido" tabIndex={-1} className="case container-x">
-      <Link href="/#trabajo" className="case__back">← {u('back')}</Link>
-      <p className="status">{t('status')}</p>
-      <h1 className="case__title">{t('title')}</h1>
-      <p className="case__summary">{t('summary')}</p>
-
-      <div className="case__body">
-        {sections.map((s) => (
-          <section key={s.h} className="case__sec">
-            <h2>{s.h}</h2>
-            {s.p && <p>{s.p}</p>}
-            {s.list && <ul>{s.list.map((li) => <li key={li}>{li}</li>)}</ul>}
-          </section>
-        ))}
-
-        {slug === 'complia' && (
-          <figure className="case__video">
-            <video controls muted playsInline preload="metadata" poster={asset('/media/complia-demo-poster.jpg')} aria-label={u('videoCaption')}>
-              <source src={asset('/media/complia-demo.mp4')} type="video/mp4" />
-            </video>
-            <figcaption className="note">{u('videoCaption')}</figcaption>
-          </figure>
+    <main id="contenido" tabIndex={-1} className="case">
+      <header className="case__hero container-x">
+        <Link href="/#trabajo" className="case__back">← {u('back')}</Link>
+        <p className="case__kind label">{t('kind')}</p>
+        <h1 className="case__title">{t('title')}</h1>
+        <p className="status case__status">{t('status')}</p>
+        <p className="case__summary">{t('summary')}</p>
+        {facts.length > 0 && (
+          <dl className="facts">
+            {facts.map((f) => <div key={f.k}><dt className="label">{f.k}</dt><dd>{f.v}</dd></div>)}
+          </dl>
         )}
+      </header>
 
-        {links && (
-          <section className="case__sec">
-            <h2>{u('links')}</h2>
-            <div className="case__links">
-              {links.map((l) => <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}<span className="sr-only"> ({c('newTab')})</span></a>)}
+      {tldr.length > 0 && (
+        <section className="tldr container-x" aria-label={u('tldr')}>
+          {tldr.map((x, n) => (
+            <div key={x.k} className="tldr__item">
+              <p className="tldr__k"><span aria-hidden="true">{['A', 'B', 'C'][n]}</span>{x.k}</p>
+              <p className="tldr__v">{x.v}</p>
             </div>
-          </section>
-        )}
-      </div>
-
-      {gallery && (
-        <section className="case__gallery" aria-labelledby="h-gallery">
-          <h2 id="h-gallery" className="case__gallery-h">{u('gallery')}</h2>
-          <div className="gallery">
-            {gallery.map((id) => (
-              <figure key={id} className="gallery__item">
-                <img src={asset(`/media/portals/${id}.webp`)} alt={t(`gallery.${id}.alt`)} width={1600} height={1000} loading="lazy" decoding="async" />
-                <figcaption className="note">{t(`gallery.${id}.caption`)}</figcaption>
-              </figure>
-            ))}
-          </div>
+          ))}
         </section>
       )}
 
-      <div className="case__more">
-        <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
-        <span className="note">{u('contactText')}</span>
-        <span className="label">{u('next')}</span>
-        {others.map((s, i) => <Link key={s} href={`/proyectos/${s}`}>{otherNames[i]}</Link>)}
+      <div className="case__grid container-x">
+        {toc.length > 2 && <aside className="case__aside"><CaseToc label={u('toc')} items={toc} /></aside>}
+        <div className="case__main">
+          <CaseSections blocks={def.blocks} copy={copy} ui={ui} />
+          {def.links && (
+            <section className="cs" aria-labelledby="h-links">
+              <h2 id="h-links" className="cs__h">{u('links')}</h2>
+              <div className="case__links">
+                {def.links.map((l) => <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗<span className="sr-only"> ({c('newTab')})</span></a>)}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
-      <Footer />
+
+      <nav className="case__next container-x" aria-label={u('next')}>
+        <Link className="case__next-main" href={`/proyectos/${next}`}>
+          <span className="label">{u('nextCase')}</span>
+          <span className="case__next-name">{otherNames[others.indexOf(next)]} →</span>
+        </Link>
+        <div className="case__more">
+          <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
+          <span className="note">{u('contactText')}</span>
+        </div>
+        <ul className="case__others">
+          {others.map((s, k) => <li key={s}><Link href={`/proyectos/${s}`}>{otherNames[k]}</Link></li>)}
+        </ul>
+      </nav>
+      <div className="container-x"><Footer /></div>
     </main>
   );
 }

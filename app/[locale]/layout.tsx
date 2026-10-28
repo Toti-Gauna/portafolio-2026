@@ -59,7 +59,9 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
-  const messages = await getMessages();
+  // only what client components read (Intro, TrailerOverlay); case and section copy stays on the server
+  const all = await getMessages();
+  const messages = { intro: all.intro, trailer: all.trailer };
   const t = await getTranslations('meta');
   const tf = await getTranslations('fab');
   const person = {

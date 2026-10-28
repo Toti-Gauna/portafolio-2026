@@ -1,0 +1,91 @@
+{
+  "title": "CompliA",
+  "kind": "Trabajo profesional · Tsoft para Telefónica",
+  "status": "En producción interna",
+  "summary": "Un asistente con IA dentro del portal de compliance de Telefónica: responde en lenguaje natural, analiza declaraciones y ayuda a dictaminar. Lo diseñé y construí: el RAG, las validaciones, las restricciones y las recomendaciones.",
+  "facts": [
+    { "k": "Rol", "v": "Diseño y desarrollo completo" },
+    { "k": "Período", "v": "2026 – hoy" },
+    { "k": "Tipo", "v": "Asistente con RAG sobre un modelo de lenguaje" },
+    { "k": "Estado", "v": "En producción interna" }
+  ],
+  "tldr": [
+    { "k": "El problema", "v": "Mucha información de compliance, histórica y nueva, y procesos que piden criterio: declaraciones, formularios, dictámenes y reportes." },
+    { "k": "La solución", "v": "Un asistente que busca en los documentos, responde con ese contexto y queda acotado por reglas: dice sus límites y deja el dictamen a una persona." },
+    { "k": "Dónde está", "v": "Corre en producción interna. No muestro métricas ni datos: son de Telefónica." }
+  ],
+  "blocks": {
+    "context": {
+      "h": "Contexto",
+      "p": [
+        "El portal de compliance de Telefónica digitaliza procesos internos, mejora la trazabilidad y sostiene flujos de punta a punta: declaraciones, formularios, interacciones y operaciones administrativas.",
+        "Trabajo en él desde Tsoft como Ssr AI Fullstack Developer. CompliA es su asistente conversacional."
+      ]
+    },
+    "problem": {
+      "h": "Qué hace",
+      "list": [
+        "Responde en lenguaje natural sobre los datos históricos y nuevos de compliance.",
+        "Analiza declaraciones juradas y señala posibles conflictos de interés e incumplimientos de las reglas del programa.",
+        "Ayuda a dictaminar, asigna formularios y arma los reportes del programa.",
+        "Dice sus límites: puede cometer errores y algunos procesos requieren acción humana."
+      ]
+    },
+    "how": {
+      "h": "Cómo funciona",
+      "p": [
+        "Un asistente con RAG no responde de memoria: primero busca lo relevante en los documentos y recién ahí el modelo de lenguaje redacta con ese contexto. Las reglas deciden qué puede responder y cuándo tiene que intervenir una persona."
+      ],
+      "diagram": {
+        "badge": "Esquema conceptual",
+        "title": "De una pregunta a una respuesta revisada",
+        "caption": "Esquema genérico de un asistente con RAG como CompliA. No es la arquitectura de Telefónica: no tiene nombres de sistemas, datos, controles ni proveedores.",
+        "nodes": {
+          "user": { "label": "Persona del equipo", "sub": "hace una consulta" },
+          "ui": { "label": "Asistente", "sub": "interfaz de chat" },
+          "search": { "label": "Búsqueda", "sub": "en los documentos", "note": "Trae solo los fragmentos que importan para esa consulta: eso es el RAG." },
+          "llm": { "label": "Modelo de lenguaje", "sub": "redacta", "note": "Es un componente más: redacta a partir de lo que se recuperó." },
+          "rules": { "label": "Validaciones", "sub": "y restricciones", "note": "Acotan qué puede responder y cuándo tiene que derivar a una persona." },
+          "answer": { "label": "Respuesta", "sub": "con sus fuentes" },
+          "human": { "label": "Revisión humana", "sub": "confirma", "note": "El asistente ayuda a dictaminar; el dictamen lo confirma una persona." }
+        },
+        "edges": { "ask": "consulta", "query": "busca", "ctx": "contexto", "draft": "borrador", "ok": "validada", "review": "revisar" }
+      }
+    },
+    "steps": {
+      "h": "Las cuatro piezas que diseñé",
+      "p": ["El modelo de lenguaje es un componente; lo que lo vuelve útil y seguro en compliance son estas cuatro piezas."],
+      "steps": [
+        { "actor": "RAG", "t": "Encontrar", "d": "Ubicar, en los datos de compliance, lo que hace falta para cada consulta." },
+        { "actor": "Validaciones", "t": "Comprobar", "d": "Que cada respuesta cumpla las reglas antes de mostrarse." },
+        { "actor": "Restricciones", "t": "Acotar", "d": "Lo que el asistente no hace solo: hay procesos que requieren acción humana." },
+        { "actor": "Recomendaciones", "t": "Ayudar a decidir", "d": "Dictaminar, asignar formularios y armar reportes." }
+      ]
+    },
+    "role": {
+      "h": "Mi aporte",
+      "p": [
+        "Lo diseñé y construí completo: el RAG, las validaciones, las restricciones y las recomendaciones.",
+        "En el mismo portal trabajo de punta a punta: frontend, backend, CI/CD e integraciones."
+      ]
+    },
+    "limitsByDesign": {
+      "h": "Límites por diseño",
+      "p": ["En compliance, un asistente que se equivoca con confianza es peor que no tener asistente. Por eso los límites son parte del producto."],
+      "items": [
+        { "t": "Dice sus límites", "d": "Avisa que puede cometer errores y que algunos procesos requieren acción humana." },
+        { "t": "Una persona confirma", "d": "Ayuda a dictaminar, pero el dictamen lo confirma una persona." },
+        { "t": "Responde con contexto", "d": "Redacta a partir de lo que encuentra en los documentos, no de memoria." },
+        { "t": "Reglas antes que respuesta", "d": "Las validaciones y las restricciones van antes de que algo llegue a la pantalla." }
+      ]
+    },
+    "demo": {
+      "h": "La demo",
+      "caption": "Recorte de la demo de CompliA. Datos de ejemplo."
+    },
+    "hidden": {
+      "h": "Lo que no muestro",
+      "p": ["Por confidencialidad no muestro arquitectura, datos, controles, métricas ni capturas internas de Telefónica o Tsoft. El esquema de arriba es conceptual y el video usa datos de ejemplo."]
+    }
+  }
+}

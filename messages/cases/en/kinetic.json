@@ -1,0 +1,36 @@
+{
+  "title": "Kinetic Studio",
+  "kind": "Lab · public",
+  "status": "Lab · public",
+  "summary": "32 motion-graphics trailers made with code: GSAP, canvas, WebGL and synthesised audio.",
+  "facts": [],
+  "tldr": [],
+  "blocks": {
+    "s1": {
+      "h": "What it is",
+      "p": [
+        "A lab where each trailer is a page drawn live in the browser. The audio is synthesised too (WebAudio): there is no recorded music."
+      ]
+    },
+    "s2": {
+      "h": "Techniques",
+      "list": [
+        "One paused master timeline per trailer: in the kit trailers, any frame can be frozen with ?t=.",
+        "Scores as data, synced with the image.",
+        "Particles in canvas and WebGL, text that turns into stars, simulations with a fixed seed."
+      ]
+    },
+    "s3": {
+      "h": "Where to see it",
+      "p": [
+        "The «Meet Ignacio» trailer on this site is made with the Kinetic Studio kit: 15 scenes in 112 seconds, with synthesised music and real components of my projects rebuilt in code."
+      ]
+    },
+    "s4": {
+      "h": "Known debt",
+      "p": [
+        "The kit is copied into every folder and has drifted apart. Unifying it is next."
+      ]
+    }
+  }
+}

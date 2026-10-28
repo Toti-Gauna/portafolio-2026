@@ -1,0 +1,61 @@
+{
+  "title": "Tuenti",
+  "kind": "Professional work · Tsoft",
+  "status": "Professional work",
+  "summary": "Gamification, top-ups and payments in Tuenti and Telefónica products, from Tsoft. From the frontend to backend logic and deployments.",
+  "facts": [
+    { "k": "Company", "v": "Tsoft, for Tuenti and Telefónica" },
+    { "k": "Period", "v": "2024 – today" },
+    { "k": "Role", "v": "Jr Frontend Developer → Ssr AI Fullstack Developer" },
+    { "k": "Focus", "v": "Gamification, top-ups and payments" }
+  ],
+  "tldr": [
+    { "k": "What I did", "v": "Reward mechanics such as the Tuenti roulette and the referral system, automatic top-up and the payments module." },
+    { "k": "How", "v": "With multidisciplinary teams, turning business requirements into technical solutions." },
+    { "k": "What I don't show", "v": "Architecture, data, metrics or screenshots: they are confidential." }
+  ],
+  "blocks": {
+    "context": {
+      "h": "Context",
+      "p": [
+        "Since 2024 I've worked at Tsoft on Tuenti and Telefónica products. I joined as a Jr Frontend Developer focused on gamification and in 2026 I became a Ssr AI Fullstack Developer."
+      ]
+    },
+    "path": {
+      "title": "How the role grew",
+      "steps": [
+        { "actor": "2024", "t": "Jr Frontend Developer", "d": "Gamification: interactive and reward mechanics, such as the Tuenti roulette and the referral system." },
+        { "actor": "January 2026", "t": "Special Recognition", "d": "An internal recognition from Tsoft, with a message and a gesture from the People team." },
+        { "actor": "2026", "t": "Dev Ssr", "d": "Promotion, and an in-person day with clients in Buenos Aires: demos, alignment and direct conversation." },
+        { "actor": "2026 – today", "t": "Ssr AI Fullstack Developer", "d": "In the Tuenti app: top-up processes, internal flows, backend and deployments. And CompliA, on another Telefónica product." }
+      ]
+    },
+    "did": {
+      "h": "What I did",
+      "items": [
+        { "t": "Gamification", "d": "Interactive and reward mechanics to improve engagement, such as the Tuenti roulette and the referral system." },
+        { "t": "Automatic top-up and payments", "d": "Automatic top-up and the payments module." },
+        { "t": "End to end in the app", "d": "Internal flows, backend logic, deployment pipelines and integrations." },
+        { "t": "From business to code", "d": "Turning business requirements into technical solutions, alongside multidisciplinary teams." }
+      ]
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "Frontend and mobile", "items": ["React", "React Native", "TypeScript", "Next.js", "Tailwind CSS"] },
+        { "k": "Backend and data", "items": ["Node.js", "SQL"] },
+        { "k": "Delivery", "items": ["CI/CD", "Deployment pipelines", "Integrations"] }
+      ]
+    },
+    "learned": {
+      "h": "What I take away",
+      "p": [
+        "Gamification is product, not decoration: every mechanic needs a reason for people to come back. And in a large company, the technical side moves faster once the business requirement is understood first."
+      ]
+    },
+    "hidden": {
+      "h": "What I don't show",
+      "p": ["For confidentiality I don't show architecture, data, metrics or internal screenshots from Tuenti, Telefónica or Tsoft. The roulette illustration on the cover is my own drawing, not a screenshot."]
+    }
+  }
+}

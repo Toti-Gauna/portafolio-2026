@@ -1,0 +1,61 @@
+{
+  "title": "Tuenti",
+  "kind": "Trabajo profesional · Tsoft",
+  "status": "Trabajo profesional",
+  "summary": "Gamificación, recargas y pagos en productos de Tuenti y Telefónica, desde Tsoft. Del frontend a la lógica de backend y los despliegues.",
+  "facts": [
+    { "k": "Empresa", "v": "Tsoft, para Tuenti y Telefónica" },
+    { "k": "Período", "v": "2024 – hoy" },
+    { "k": "Rol", "v": "Jr Frontend Developer → Ssr AI Fullstack Developer" },
+    { "k": "Foco", "v": "Gamificación, recargas y pagos" }
+  ],
+  "tldr": [
+    { "k": "Qué hice", "v": "Mecánicas de recompensa como la ruleta Tuenti y el sistema de referidos, la recarga automática y el módulo de pagos." },
+    { "k": "Cómo", "v": "Junto a equipos multidisciplinarios, traduciendo requisitos de negocio en soluciones técnicas." },
+    { "k": "Qué no muestro", "v": "Arquitectura, datos, métricas ni capturas: son confidenciales." }
+  ],
+  "blocks": {
+    "context": {
+      "h": "Contexto",
+      "p": [
+        "Desde 2024 trabajo en Tsoft en productos de Tuenti y Telefónica. Entré como Jr Frontend Developer con foco en gamificación y en 2026 pasé a Ssr AI Fullstack Developer."
+      ]
+    },
+    "path": {
+      "title": "Cómo fue creciendo el rol",
+      "steps": [
+        { "actor": "2024", "t": "Jr Frontend Developer", "d": "Gamificación: mecánicas interactivas y de recompensa, como la ruleta Tuenti y el sistema de referidos." },
+        { "actor": "Enero 2026", "t": "Reconocimiento Especial", "d": "Un reconocimiento interno de Tsoft, con un mensaje y un gesto del equipo de People." },
+        { "actor": "2026", "t": "Dev Ssr", "d": "Recategorización y una jornada presencial con clientes en Buenos Aires: demos, alineación y conversación directa." },
+        { "actor": "2026 – hoy", "t": "Ssr AI Fullstack Developer", "d": "En la app de Tuenti: procesos de recarga, flujos internos, backend y despliegues. Y CompliA, en otro producto de Telefónica." }
+      ]
+    },
+    "did": {
+      "h": "Qué hice",
+      "items": [
+        { "t": "Gamificación", "d": "Mecánicas interactivas y de recompensa para mejorar el engagement, como la ruleta Tuenti y el sistema de referidos." },
+        { "t": "Recarga automática y pagos", "d": "La recarga automática y el módulo de pagos." },
+        { "t": "De punta a punta en la app", "d": "Flujos internos, lógica de backend, pipelines de despliegue e integraciones." },
+        { "t": "Del negocio al código", "d": "Traducir requisitos de negocio en soluciones técnicas, junto a equipos multidisciplinarios." }
+      ]
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "Frontend y mobile", "items": ["React", "React Native", "TypeScript", "Next.js", "Tailwind CSS"] },
+        { "k": "Backend y datos", "items": ["Node.js", "SQL"] },
+        { "k": "Entrega", "items": ["CI/CD", "Pipelines de despliegue", "Integraciones"] }
+      ]
+    },
+    "learned": {
+      "h": "Qué me llevo",
+      "p": [
+        "La gamificación es producto, no decoración: cada mecánica tiene que tener un motivo para que la gente vuelva. Y en una empresa grande, la parte técnica avanza mejor cuando se entiende primero el requisito de negocio."
+      ]
+    },
+    "hidden": {
+      "h": "Lo que no muestro",
+      "p": ["Por confidencialidad no muestro arquitectura, datos, métricas ni capturas internas de Tuenti, Telefónica o Tsoft. La ilustración de la ruleta en la portada es un dibujo propio, no una captura."]
+    }
+  }
+}
