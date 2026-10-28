@@ -1,0 +1,477 @@
+{
+  "title": "Velmar",
+  "kind": "Demo for a client · online store and back office",
+  "status": "Demo · made for a client",
+  "summary": "An end-to-end clickable demo of the online store and back office of a Mar del Plata workshop that makes personalized goods: name collars, photo lamps, candles and NFC plaques. It has a live customizer, a coupon wheel, a club with missions, and gifting. Everything runs in the browser, on sample data.",
+  "facts": [
+    {
+      "k": "Client",
+      "v": "A real workshop in Mar del Plata"
+    },
+    {
+      "k": "Pieces",
+      "v": "Mobile-first store · back office"
+    },
+    {
+      "k": "Size",
+      "v": "65 screens: 24 in the store, 41 in the panel"
+    },
+    {
+      "k": "Status",
+      "v": "Demo: no real payments or orders"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The problem",
+      "v": "Every order starts in a chat, gets written into a spreadsheet and scheduled on a phone calendar. Payment receipts by chat, stock by hand, delivery dates by guesswork."
+    },
+    {
+      "k": "The proposal",
+      "v": "A store where buyers see their product before paying, and a panel that takes each order from the receipt to the machine to delivery."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A navigable demo on sample data, made to show before the project starts. There is no production version and no results to show."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "Velmar is a real workshop in Mar del Plata. I built a demo of its online store and its back office, so the owners could see their business working before the project starts."
+      ],
+      "list": [
+        "Store, built for phones: 17 sample products in 10 categories, a collar customizer with a live preview, photo personalization, cart, four-step checkout and order tracking.",
+        "Club: a coupon wheel, chained missions, a prize wallet, gifts with an opening scene, and 16 seasonal themes.",
+        "Panel: orders, manual payments, a production queue, a delivery calendar with daily capacity, supplies, costs and margins, simulated automatic emails, and a content studio for Instagram.",
+        "How it runs: entirely in the browser. It processes no payments, creates no real orders and calls no external services."
+      ]
+    },
+    "problem": {
+      "h": "The workshop's problem",
+      "p": [
+        "The demo script starts from a familiar scene: every order starts in a chat, gets written into a spreadsheet and scheduled on a phone calendar. That is where the pains the demo goes after come from."
+      ],
+      "list": [
+        "Payment receipts arriving by chat, and updates sent to each customer one by one.",
+        "Stock and prices kept by hand in a spreadsheet.",
+        "Not knowing which delivery date to promise.",
+        "Not knowing whether each product makes money.",
+        "Not knowing what to post on Instagram."
+      ]
+    },
+    "business": {
+      "h": "The business idea",
+      "p": [
+        "What the demo proposes, not results: there are no real sales to show."
+      ],
+      "items": [
+        {
+          "t": "See the product before paying",
+          "d": "The customizer and photo personalization show the result live, with a price that changes with each option."
+        },
+        {
+          "t": "Dates you can keep",
+          "d": "«When will it arrive?» counts working days without holidays and, if the first days are full, offers the first date with room in the workshop's capacity."
+        },
+        {
+          "t": "Reasons to come back",
+          "d": "A coupon wheel, club missions, 16 seasonal themes with their own coupon, and reminders for the pet's birthday and for re-buying candles and scents."
+        },
+        {
+          "t": "Gifts without the price",
+          "d": "A gift code and link: the recipient never sees the price and opens it with one of 17 scenes for the occasion."
+        },
+        {
+          "t": "How the project is sold",
+          "d": "The demo comes with a 10-minute meeting script («Don't sell features, sell hours») and a list of everything added beyond the spec, sized S, M or L, to decide what goes in. It is not a quote."
+        }
+      ]
+    },
+    "loop": {
+      "h": "The repeat-purchase loop",
+      "p": [
+        "The store's incentives all end up in one place: a coupon in «My coupons». The cart validates everything with a single rule, and the panel controls every source."
+      ],
+      "diagram": {
+        "title": "Wheel, club and coupons",
+        "caption": "Sample data. In the demo everything happens in the browser; in production, the draw, the coupons and mission progress would be computed on the server.",
+        "nodes": {
+          "buyer": {
+            "label": "Buyer",
+            "sub": "on a phone"
+          },
+          "cart": {
+            "label": "Cart",
+            "sub": "«Checkout»"
+          },
+          "wheel": {
+            "label": "Wheel",
+            "sub": "8 slices",
+            "note": "A weighted draw in a pure function with injectable randomness: the animation only decides where it stops. It is offered once per browser."
+          },
+          "wallet": {
+            "label": "My coupons",
+            "sub": "one place",
+            "note": "It gathers the wheel coupon, the current theme's coupons and the store's, usable ones first. Prizes are single-use and expire; other people's wheel coupons never show up."
+          },
+          "club": {
+            "label": "Velmar Club",
+            "sub": "missions",
+            "note": "Chained missions, such as «Buy 2 products». Progress is illustrative: in production only paid orders would count."
+          },
+          "panel": {
+            "label": "Panel",
+            "sub": "weights, missions",
+            "note": "Each slice with its prize and weight, and the resulting probability. A visible wheel can't be saved without a positive weight. Missions have their own simulator."
+          }
+        },
+        "edges": {
+          "visit": "adds",
+          "spin": "first checkout",
+          "win": "single-use coupon",
+          "apply": "apply",
+          "buy": "each purchase",
+          "prize": "prize",
+          "weights": "slices, weights",
+          "rules": "missions"
+        }
+      }
+    },
+    "orders": {
+      "h": "From receipt to workshop",
+      "p": [
+        "Order states are a state machine with rules: each change says who can make it. The panel only offers valid transitions, bulk changes included."
+      ],
+      "diagram": {
+        "title": "The states of an order",
+        "caption": "Every change leaves an email in a simulated outbox. Not drawn: cancelling before payment, and claims and returns.",
+        "nodes": {
+          "pending": {
+            "label": "Awaiting payment",
+            "sub": "order created"
+          },
+          "review": {
+            "label": "Under review",
+            "sub": "receipt uploaded",
+            "note": "Uploading a receipt never marks the order as paid: it puts it under review. Approving asks for confirmation; rejecting requires a reason."
+          },
+          "paid": {
+            "label": "Paid",
+            "sub": "to be made",
+            "note": "There are two ways to «Paid»: an admin approving the receipt, or the provider's confirmation. In the demo, Mercado Pago's is a button that stands in for the webhook."
+          },
+          "prod": {
+            "label": "In production",
+            "sub": "machine, finishing",
+            "note": "Leaving «To be made» deducts the recipe's supplies, exactly once. From finishing it can go back to the machine; a ready order never goes back to production."
+          },
+          "ready": {
+            "label": "Ready",
+            "sub": "pickup or shipping",
+            "note": "With pickup at the workshop it goes straight to delivered; with shipping, to shipped first."
+          },
+          "shipped": {
+            "label": "Shipped",
+            "sub": "courier or national"
+          },
+          "delivered": {
+            "label": "Delivered",
+            "sub": "to the buyer"
+          }
+        },
+        "edges": {
+          "proof": "receipt",
+          "approve": "approves",
+          "reject": "rejects with reason",
+          "provider": "Mercado Pago",
+          "start": "into the machine",
+          "done": "finished",
+          "ship": "shipping",
+          "pickup": "pickup",
+          "arrive": "delivery"
+        }
+      }
+    },
+    "collar": {
+      "h": "The collar customizer",
+      "p": [
+        "It is the product that best shows the idea: buyers build their collar and see the result before paying. Behind it are pure rules that the workshop, the cart and the emails all read the same way."
+      ],
+      "title": "From options to the workbench",
+      "caption": "Options the workshop hasn't confirmed yet are marked «demo example», in the order too.",
+      "steps": [
+        {
+          "actor": "Buyer",
+          "t": "Chooses",
+          "d": "Letter style, typeface, color, cord and pattern, material, charm and neck size. The SVG preview updates live."
+        },
+        {
+          "actor": "Rule",
+          "t": "Makes the combination coherent",
+          "d": "If the pattern uses a second color, it contrasts with the cord; an ornament that doesn't go with that letter style is dropped."
+        },
+        {
+          "actor": "Rule",
+          "t": "Adds the surcharges",
+          "d": "The price changes with each option, in whole pesos."
+        },
+        {
+          "actor": "Rule",
+          "t": "Picks the size",
+          "d": "By neck size, with ranges that leave no gaps. Out of range, it offers a made-to-measure order over WhatsApp."
+        },
+        {
+          "actor": "Cart",
+          "t": "«That's the one»",
+          "d": "Adding to the cart is approving the design: the moment of approval is saved with the configuration."
+        },
+        {
+          "actor": "Workshop",
+          "t": "Reads the same everywhere",
+          "d": "A short description travels to the cart, the order, the production queue and the emails."
+        }
+      ]
+    },
+    "arch": {
+      "h": "Architecture: today and the plan",
+      "p": [
+        "Today it is a single Next app exported to static HTML: the store and the panel share a rules engine and the data in this browser. The production plan replaces the demo panel and moves the rules to the server."
+      ],
+      "diagram": {
+        "title": "One static app, two faces, one engine",
+        "caption": "Top: what is built, a static export on GitHub Pages with no server or database. Bottom: what the repo's documentation plans, not built.",
+        "groups": {
+          "today": "Today, in the browser",
+          "plan": "Planned"
+        },
+        "nodes": {
+          "shop": {
+            "label": "Store",
+            "sub": "24 screens"
+          },
+          "admin": {
+            "label": "Demo panel",
+            "sub": "41, no login",
+            "note": "No login on purpose: it protects nothing, says so on screen and won't be migrated. The real panel replaces it."
+          },
+          "engine": {
+            "label": "Rules engine",
+            "sub": "22 pure modules",
+            "note": "Prices, coupons, states, delivery dates and draws in pure functions, with amounts in whole pesos. Tested without React."
+          },
+          "data": {
+            "label": "Demo data",
+            "sub": "localStorage",
+            "note": "Sample data plus the changes saved in this browser: what the panel edits shows up in the store of the same browser, and nowhere else."
+          },
+          "mp": {
+            "label": "Mercado Pago",
+            "sub": "Checkout Pro"
+          },
+          "server": {
+            "label": "Next server",
+            "sub": "Server Actions + Zod",
+            "note": "Login with an admin role checked on the server, and a single transition function inside a transaction with its audit trail."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "Prisma"
+          }
+        },
+        "edges": {
+          "edit": "edits",
+          "read": "reads",
+          "quote": "quotes, validates",
+          "trans": "transitions",
+          "move": "moves to server",
+          "webhook": "signed webhook",
+          "tx": "transaction"
+        }
+      }
+    },
+    "security": {
+      "h": "Care, even in a demo",
+      "p": [
+        "A demo doesn't have to protect anything, but it has to be honest about what it doesn't protect, and not leave bad habits for production."
+      ],
+      "items": [
+        {
+          "t": "A panel with no login, and it says so",
+          "d": "There is no fake login: the panel says on screen that it isn't secure, and it is never reused as authorization. The real panel has a login and a role checked on the server."
+        },
+        {
+          "t": "Paying isn't uploading a receipt",
+          "d": "States only change through valid transitions, and a receipt puts the order under review. Checkout says that nothing is charged."
+        },
+        {
+          "t": "Cards without sensitive data",
+          "d": "Number, expiry and code are validated so the form feels real, but only the brand, the last 4 digits and the expiry are stored. In production, the workshop would never receive the number or the code."
+        },
+        {
+          "t": "Buyers' photos and text",
+          "d": "Photos are processed in the browser and never leave it. Text takes no emoji and has a maximum length; photos are JPG, PNG or WebP up to 10 MB. In production, the same rules run again on the server."
+        },
+        {
+          "t": "Tamper-proof gift links",
+          "d": "The code has a check digit and the link is versioned: cut or edited, it opens nothing. It never carries an email or a price."
+        },
+        {
+          "t": "No secrets, no indexing",
+          "d": "CI runs with minimal permissions and no secrets. The demo asks not to be indexed, because it shows sample prices of a real business."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "A static demo today, the same app tomorrow",
+          "why": "It had to be shown before the project started, with no infrastructure or real data: a static export, with no Server Actions, cookies or middleware. For production, the demo is frozen on its branch and main gains a server, Prisma and login; components are reused because they only take props."
+        },
+        {
+          "t": "Pure rules, in whole pesos",
+          "why": "Prices, coupons, states, dates and draws live in functions without React, with injectable randomness. They are tested on their own and, in production, move to the server, which recomputes everything."
+        },
+        {
+          "t": "Adding to the cart approves the design",
+          "why": "That is the moment the buyer is looking at the preview. The approval is saved right there and travels with the order to the workshop.",
+          "alt": "A separate «That's the one» checkbox, as the spec had it."
+        },
+        {
+          "t": "Everything beyond the spec, in writing",
+          "why": "Every addition (the wheel, the themes, the emails, the content studio…) goes on a list with what it would need in production and an S, M or L size. That is how the client decides what goes in and at what price."
+        },
+        {
+          "t": "A panel that speaks spreadsheet",
+          "why": "Tables have «View as spreadsheet» (keyboard, ranges, copy and paste, undo), Excel or CSV import with a per-row preview, and export. Computed values and states are read-only, and everything is saved through one path: the engine's."
+        },
+        {
+          "t": "Performance built for phones",
+          "why": "Scenes, the wheel, the cart and search load when needed, and content further down isn't drawn until you get close. The repo's QA log records, on an emulated Pixel 7 with a 4× CPU, the home page's total blocking time (TBT) going from 3474 to 1727 ms. I didn't measure it again."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "The repo's CI runs, in order: lint, type checks, unit tests, build, an export check and the e2e tests on an emulated phone. It only deploys from main."
+      ],
+      "items": [
+        {
+          "n": "256",
+          "u": "tests",
+          "d": "Unit tests with Vitest, in 33 files"
+        },
+        {
+          "n": "367",
+          "u": "tests",
+          "d": "E2E with Playwright on an emulated Pixel 7, in 49 files"
+        },
+        {
+          "n": "65",
+          "u": "screens",
+          "d": "24 in the store and 41 in the panel"
+        },
+        {
+          "n": "22",
+          "u": "modules",
+          "d": "Pure rules engine, no React"
+        }
+      ],
+      "note": "I ran the 256 unit tests on 10/28/2026: all passed. I listed the 367 Playwright tests with --list that day and didn't run them. I counted the screens and modules in the code."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "Next.js 16 (static export)",
+            "React 19",
+            "TypeScript",
+            "Tailwind CSS 4",
+            "Motion"
+          ]
+        },
+        {
+          "k": "State and forms",
+          "items": [
+            "Zustand",
+            "React Hook Form",
+            "Zod"
+          ]
+        },
+        {
+          "k": "In the browser",
+          "items": [
+            "Konva",
+            "Canvas",
+            "MediaRecorder",
+            "WebAudio",
+            "read-excel-file",
+            "write-excel-file"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "Playwright",
+            "ESLint",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshot",
+      "items": {
+        "velmar": {
+          "alt": "Home of the Velmar demo panel with fictional data: the notice «Demo panel · fictional data · No login on purpose», a greeting for the workshop, cards for sales, orders in progress and receipts to check, orders by state (from awaiting payment to delivered) and the workshop summary.",
+          "caption": "Home of the demo panel, with fictional data and the demo's fixed date. Screenshot of a local build."
+        }
+      }
+    },
+    "status": {
+      "h": "Status, and what I don't claim",
+      "list": [
+        "A demo made for a client: a real workshop in Mar del Plata. It processes no payments, creates no real orders and calls no external services.",
+        "It is not in production and doesn't sell. There are no sales or repeat-purchase metrics: customers, orders, pets, costs and supplies are made up, and prices are samples.",
+        "The panel isn't secure: it has no login, on purpose.",
+        "The production pieces (server, database, login, payments with a webhook, real emails and private file storage) are planned, not built.",
+        "Pending: checking several details on a real iPhone and iPad, and the workshop confirming which collar styles it makes.",
+        "Volta, another demo in the lab, started as a copy of this repo: the panel, checkout and gifting were built here first."
+      ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "panel": {
+          "alt": "Light panel with KPIs and the order funnel; the pointer opens the production queue with To make, On machine, Finishing and Ready columns, and the page scrolls through the order cards.",
+          "caption": "Velmar panel: home → production queue by stage."
+        },
+        "panel-calendario": {
+          "alt": "October 2026 delivery calendar with orders per day, full days and holidays marked, plus counters for deliveries, late orders and capacity.",
+          "caption": "Delivery calendar with daily capacity."
+        },
+        "collar-en-vivo": {
+          "alt": "Name-collar product page on a phone: ROCCO is typed in the Name field and the illustrated collar preview shows the hanging letters.",
+          "caption": "Velmar: the collar configurator writes the name on the preview."
+        },
+        "club-ruleta": {
+          "alt": "Full-screen green-and-gold \"Girá y ganá\" wheel; the centre is tapped, it spins and shows \"¡Ganaste! Envío gratis\" with the wheel coupon.",
+          "caption": "Velmar club: the coupon wheel spins and gives a prize."
+        },
+        "cupones": {
+          "alt": "\"Mis cupones\" screen with sample coupons (10% on the first purchase, a $2,000 fair coupon, free shipping with an account), each with its code.",
+          "caption": "My coupons: sample coupons applied to the cart."
+        }
+      }
+    }
+  }
+}

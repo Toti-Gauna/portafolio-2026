@@ -1,0 +1,14 @@
+.ro__list { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 0; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.ro__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; padding: 18px 18px 16px; background: #111114; }
+.ro__n { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-size: clamp(34px, 5vw, 52px); font-weight: 800; font-variation-settings: 'wdth' 118; line-height: 1; font-variant-numeric: tabular-nums; }
+.ro__u { font: 13px var(--font-mono); color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
+.ro__d { color: #cfcbc2; font-size: 14px; line-height: 1.4; }
+.ro__note { margin-top: 10px; }
+.odo__digits { display: inline-flex; }
+.odo__d { display: inline-block; height: 1em; overflow: hidden; }
+.odo__d > span { display: block; transform: translateY(calc(var(--v) * -1em)); }
+.odo__d > span > span { display: block; height: 1em; line-height: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .ro .odo__d > span { transition: transform 1.4s var(--ease-expo) calc(150ms + var(--k) * 90ms); }
+  .js .ro:not([data-in]) .odo__d > span { transform: translateY(0); }
+}

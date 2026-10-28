@@ -1,0 +1,18 @@
+.ms__rows { display: grid; gap: 18px; margin: 0; }
+.ms__row { display: grid; gap: 8px; }
+.ms__label { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 15px; color: #d6d2c9; }
+.ms__total { font: 700 16px var(--font-mono); color: var(--paper); font-variant-numeric: tabular-nums; }
+.ms__bar { margin: 0; display: flex; gap: 3px; }
+.ms__seg { position: relative; min-width: 0; min-height: 44px; display: flex; align-items: center; padding: 0 10px; border-radius: 6px; overflow: hidden; }
+.ms__fill { position: absolute; inset: 0; transform-origin: left; border-radius: inherit; }
+.ms__seg[data-tone='paper'] .ms__fill { background: #e9e5dc; }
+.ms__seg[data-tone='coral'] .ms__fill { background: var(--accent); }
+.ms__seg[data-tone='muted'] .ms__fill { background: #2c2c33; }
+.ms__t { position: relative; font: 600 13px/1.2 var(--font-mono); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ms__seg[data-tone='muted'] .ms__t { color: var(--paper); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .ms .ms__fill { transition: transform 900ms var(--ease-expo) calc(200ms + var(--o) * 220ms); }
+  .js .ms:not([data-in]) .ms__fill { transform: scaleX(0); }
+  .js .ms .ms__t { transition: opacity 500ms ease calc(600ms + var(--o) * 220ms); }
+  .js .ms:not([data-in]) .ms__t { opacity: 0; }
+}

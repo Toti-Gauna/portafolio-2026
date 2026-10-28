@@ -1,0 +1,254 @@
+{
+  "title": "Sistema agéntico",
+  "kind": "Herramienta propia · cómo trabajo",
+  "status": "Sistema propio · en uso",
+  "summary": "Un sistema agéntico, dividido en partes: 11 agentes con roles separados, skills que se cargan según la tarea y puertas donde decide una persona. Es como trabajo en mis repos: los agentes especifican, construyen y revisan; mergear, publicar y gastar lo autorizo yo.",
+  "facts": [
+    { "k": "Rol", "v": "Lo diseñé y lo mantengo; apruebo cada puerta final" },
+    { "k": "Piezas", "v": "11 agentes · 79 skills · 3 formatos" },
+    { "k": "Dónde se usa", "v": "Backends de HandyX y Eclipse, Eclipse-Web y demos propias" },
+    { "k": "Licencia", "v": "Uso propio: no es código abierto" }
+  ],
+  "tldr": [
+    { "k": "El problema", "v": "Un asistente general, solo, mezcla alcance, diseño, seguridad y costo: tiende a suponer, a construir de más y a gastar." },
+    { "k": "La solución", "v": "Roles con un responsable por decisión, descubrimiento antes del código, supuestos por escrito y puertas con aprobación humana." },
+    { "k": "Dónde está", "v": "En uso en mis repos, con una forma distinta en cada uno. Los agentes no trabajan solos y nada está auditado por terceros." }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "No es un prompt largo. Cada agente es un archivo Markdown con su misión, lo que decide, lo que no, y una tabla que dice qué skill cargar para cada acción. Las skills son guías cortas (un SKILL.md cada una, algunas con referencias) que se cargan solo cuando la tarea las necesita.",
+        "Lo armé porque un asistente general, solo, mezcla decisiones de alcance, diseño, seguridad y costo. Acá cada decisión tiene un solo responsable, el descubrimiento va antes del código, los supuestos se escriben y hay puertas donde decide una persona."
+      ],
+      "list": [
+        "11 agentes: Dirección, UX/UI, Diseño, Marketing, Anuncios, Documentación y cinco arquitectos (frontend, backend, ciberseguridad, juegos y tráileres).",
+        "79 skills repartidas en 8 agentes. Dirección, UX/UI y Marketing no tienen skills propias; UX/UI reusa algunas de Frontend y de Tráileres.",
+        "Tres formatos: Claude Code (los 11), Codex (10) y GitHub Copilot (5)."
+      ]
+    },
+    "roles": {
+      "h": "Los roles",
+      "p": [
+        "Un responsable por decisión. UX/UI especifica flujos y estados, y Frontend los implementa; Diseño firma lo estético; Marketing decide oferta y canal, y Anuncios hace las piezas; Backend implementa y Ciberseguridad revisa. Dirección ordena el plan, el alcance y el costo, y le pasa cada tarea al rol que corresponde."
+      ],
+      "diagram": {
+        "title": "Once agentes, un responsable por decisión",
+        "caption": "Debajo de cada rol, sus skills propias (conté los SKILL.md el 28/10/2026). Las flechas son traspasos escritos en los archivos de los agentes o en los repos donde se usan; Dirección le pasa trabajo a cualquiera de ellos.",
+        "groups": { "product": "Producto", "arch": "Arquitectos" },
+        "nodes": {
+          "human": { "label": "Ignacio", "sub": "aprueba" },
+          "chief": { "label": "Dirección", "sub": "0 skills", "note": "No escribe ni modifica código: decide alcance, orden y costo, y corre las puertas." },
+          "docs": { "label": "Documentación", "sub": "10 skills" },
+          "uxui": { "label": "UX/UI", "sub": "0 skills" },
+          "design": { "label": "Diseño", "sub": "7 skills", "note": "Rúbrica de 7 ejes y tres defectos escritos antes de aceptar. Si el resultado queda peor que la línea base, no se mergea." },
+          "mkt": { "label": "Marketing", "sub": "0 skills" },
+          "ads": { "label": "Anuncios", "sub": "6 skills" },
+          "fe": { "label": "Frontend", "sub": "8 skills", "note": "Lo que necesita del backend lo entrega como requisito «a validar», nunca como algo que ya existe." },
+          "be": { "label": "Backend", "sub": "13 skills" },
+          "sec": { "label": "Seguridad", "sub": "13 skills", "note": "Pruebas activas solo contra dev o staging propio, con el alcance anotado. Si el objetivo es producción o un tercero, frena y pregunta." },
+          "game": { "label": "Juegos", "sub": "13 skills" },
+          "trailer": { "label": "Tráileres", "sub": "9 skills" }
+        },
+        "edges": {
+          "ask": "pedido",
+          "brief": "qué necesita OK",
+          "spec": "flujos y estados",
+          "look": "puerta estética",
+          "offer": "oferta y KPI",
+          "handoff": "«a validar»",
+          "review": "diff crítico"
+        }
+      }
+    },
+    "flow": {
+      "h": "Cómo fluye el trabajo",
+      "p": [
+        "Cada cambio sigue el mismo camino. Ningún código sin una especificación acotada, un lote por vez, y nada se mergea ni se publica sin mi OK.",
+        "Los agentes de rol cargan solo las skills que la acción necesita: una de descubrimiento al empezar, las de capa o de componente al construir, las de pruebas al cerrar. Si la revisión encuentra algo bloqueante, vuelve a construcción."
+      ],
+      "diagram": {
+        "title": "De un pedido a producción, con una puerta humana",
+        "caption": "Las etiquetas G0–G5 son las puertas del contrato con el que trabajo en Eclipse. En Eclipse los roles son pasos que una misma sesión aplica en secuencia, sin subagentes en paralelo.",
+        "groups": { "human": "Decide una persona" },
+        "nodes": {
+          "req": { "label": "Ignacio", "sub": "pide un cambio" },
+          "chief": { "label": "Dirección", "sub": "plan, alcance, costo" },
+          "spec": { "label": "Especificación", "sub": "corta y acotada", "note": "Problema, usuario, flujo, requisitos y lo que NO se hace, criterios de aceptación, cómo revertir, costo y responsable." },
+          "agents": { "label": "Agentes de rol", "sub": "uno por frente", "note": "Cada uno arranca con su skill de descubrimiento y declara sus supuestos en un bloque fijo antes de implementar." },
+          "skills": { "label": "Skills", "sub": "a demanda" },
+          "repo": { "label": "Rama + PR", "sub": "un lote por vez" },
+          "qa": { "label": "QA", "sub": "tests y revisión", "note": "Typecheck, lint, tests, build y capturas a 360 y 1440 px; después, otro revisor intenta refutar cada hallazgo." },
+          "gate": { "label": "Puerta humana", "sub": "OK de Ignacio", "note": "Mergear, desplegar, gastar, cambiar precios o publicar lo decido yo, con una autorización explícita y separada." },
+          "pub": { "label": "Publicar", "sub": "merge y deploy" }
+        },
+        "edges": {
+          "ask": "pedido",
+          "scope": "G0 · G1",
+          "pass": "G2 línea base",
+          "load": "carga",
+          "branch": "una rama",
+          "local": "G3 local",
+          "review": "G4 revisión",
+          "ok": "G5 OK",
+          "fix": "corrige"
+        }
+      }
+    },
+    "gates": {
+      "h": "Puertas y niveles de evidencia",
+      "p": [
+        "Las puertas y los niveles vienen del contrato con el que trabajo en Eclipse; el archivo de Dirección define las mismas seis puertas con otros nombres. Una puerta no se pasa con un título vacío, un costo inventado, un test no ejecutado o un dato ficticio sin rótulo, y un criterio crítico peor que la línea base bloquea aunque la puntuación estética sea alta."
+      ],
+      "title": "Seis puertas, y quién cierra cada una",
+      "caption": "El ejecutor es la sesión que escribe el código. La producción audiovisual suma sus propias puertas, de un storyboard aprobado a renders en secuencia.",
+      "steps": [
+        { "actor": "G0 · ejecutor", "t": "Fuentes y versión", "d": "¿Sé qué leí y sobre qué versión trabajo?" },
+        { "actor": "G1 · ejecutor + Dirección", "t": "Especificación y alcance", "d": "Alcance acotado, con exclusiones y aceptación binaria." },
+        { "actor": "G2 · ejecutor", "t": "Línea base y prueba de salida", "d": "Un «antes» comparable y un test de salida definidos antes de cambiar." },
+        { "actor": "G3 · ejecutor", "t": "Ejecución local", "d": "Tests, typecheck, lint, build y capturas a 360 y 1440 px, sin tocar producción." },
+        { "actor": "G4 · Dirección + revisión", "t": "QA y revisión adversarial", "d": "Ningún criterio crítico peor que la línea base." },
+        { "actor": "G5 · Ignacio", "t": "Merge y deploy", "d": "Una autorización explícita y separada. Ningún agente la da." }
+      ]
+    },
+    "evidence": {
+      "p": [
+        "Cada afirmación lleva su nivel de evidencia. Sin evidencia se rotula «no probado» o «simulado», y siempre se separa lo propuesto, lo implementado y lo probado. Un lote no está «hecho» por haber creado una página: pasa de especificado a verificado en local, y «aceptado» lo declaro yo."
+      ],
+      "title": "Cinco niveles de evidencia",
+      "caption": "Ejemplo real: una auditoría de Eclipse cierra en E0 y E1 y deja escrito que la prueba local (E2) está pendiente.",
+      "steps": [
+        { "actor": "E0", "t": "Documento", "d": "Lo dice un documento." },
+        { "actor": "E1", "t": "Código leído", "d": "Lo vi en el código." },
+        { "actor": "E2", "t": "Prueba local", "d": "Lo reproduje en local." },
+        { "actor": "E3", "t": "Entorno remoto", "d": "Lo verifiqué en un entorno desplegado." },
+        { "actor": "E4", "t": "Operación real", "d": "Funciona con uso real." }
+      ]
+    },
+    "review": {
+      "h": "Revisión adversarial",
+      "p": [
+        "La skill de QA de tráileres revisa con seis lentes independientes: corrección y ciclo de vida, rendimiento, accesibilidad, fidelidad y honestidad, nivel premium y consistencia con el repo.",
+        "Diseño usa una rúbrica de 7 ejes, de 0 a 2, con bloqueos binarios (foco, contraste, Atrás y Escape, movimiento reducido, honestidad): un puntaje alto no compensa un foco roto."
+      ],
+      "title": "Un hallazgo tiene que sobrevivir",
+      "caption": "De la skill trailer-qa. Seguridad aplica la misma idea: distingue siempre una vulnerabilidad confirmada de una sospecha.",
+      "steps": [
+        { "actor": "Revisor", "t": "Hallazgo", "d": "Con archivo, línea y severidad." },
+        { "actor": "Otro revisor", "t": "Intenta refutarlo", "d": "Si no se reproduce ni se demuestra leyendo el código, se descarta." },
+        { "actor": "Ejecutor", "t": "Arreglo mínimo", "d": "Solo lo bloqueante o alto." },
+        { "actor": "Ejecutor", "t": "Corre todo", "d": "tsc, lint, tests y build." },
+        { "actor": "Informe", "t": "Salida real", "d": "Una tabla por lente y la salida real de cada comando." }
+      ]
+    },
+    "usage": {
+      "h": "Dónde se usa de verdad",
+      "p": [
+        "Lo verifiqué repo por repo el 28/10/2026. En cada uno el sistema toma una forma distinta, y en ninguno trabaja solo."
+      ],
+      "items": [
+        {
+          "t": "Backend de HandyX",
+          "d": "Tres perfiles copiados (backend, ciberseguridad y frontend) y 19 skills, idénticos byte a byte salvo la línea del modelo, con el commit de origen y el SHA-256 de cada original. Dos skills quedaron afuera a propósito; una, porque modela Sequelize y ahí manda Prisma. Backend implementa, Ciberseguridad revisa el diff crítico de cada fase y Frontend revisa el contrato, en secuencia."
+        },
+        {
+          "t": "Backend de Eclipse",
+          "d": "Sigue los perfiles de backend y ciberseguridad en formato Codex. Su revisión de seguridad se hizo con pruebas locales aisladas, y deja escrito que no hubo escaneos de terceros, envíos reales, deploys ni migraciones."
+        },
+        {
+          "t": "Eclipse-Web",
+          "d": "No hay agentes instalados: los roles son pasos que una misma sesión aplica en secuencia. Lo que corre es el proceso: un responsable por decisión, las puertas y la política de modelos."
+        },
+        {
+          "t": "Demos propias",
+          "d": "Dos demos de e-commerce llevan copias adaptadas de los arquitectos de frontend, juegos y tráileres y del de documentación (40 skills cada una), más un agente del proyecto que les delega. La demo de juegos lleva frontend y juegos (21 skills)."
+        }
+      ]
+    },
+    "rules": {
+      "h": "Reglas que hace cumplir",
+      "p": [
+        "Están escritas en los agentes y se aplican al trabajo que sale de ellos."
+      ],
+      "items": [
+        { "t": "Pruebas de seguridad solo en lo propio", "d": "Objetivo, entorno y aislamiento se anotan antes de cualquier prueba activa. Los hallazgos llevan archivo y línea, severidad, impacto real y un arreglo concreto, con OWASP Top 10, API Top 10 y ASVS como marco." },
+        { "t": "Defaults de backend", "d": "Validación de entrada, consultas parametrizadas, cada mutación en una transacción y errores sin detalles internos." },
+        { "t": "Lo que tiene valor lo decide el servidor", "d": "En juegos, el cliente reporta una intención y el servidor decide el resultado." },
+        { "t": "Honestidad en lo creativo", "d": "Sin testimonios ni métricas inventadas; lo ficticio dice «Demo»; textos, precios y botones viven en HTML o SVG, nunca dentro de un video generado." },
+        { "t": "Nada por iniciativa propia", "d": "Ni gastos, ni instalaciones, ni publicaciones. Una herramienta paga necesita un techo en dólares y mi OK, y una skill externa se instala recién después de revisar autor, licencia, SHA y scripts." }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones de diseño",
+      "items": [
+        {
+          "t": "Un solo responsable por decisión",
+          "why": "Cada agente tiene su tabla de decisiones y hay una matriz de responsables. En la prueba en papel de la revisión, UX/UI también «implementaba» el header antes de la corrección: dos roles haciendo lo mismo."
+        },
+        {
+          "t": "Descubrimiento obligatorio y supuestos por escrito",
+          "why": "Backend, seguridad, tráileres y documentación arrancan con su skill de descubrimiento, para no construir sobre supuestos equivocados de rutas, modelos, transacciones o integraciones. Nada de decisiones silenciosas sobre lenguaje, carpetas, ORM o base de datos."
+        },
+        {
+          "t": "Skills a demanda",
+          "why": "Cada agente carga la skill que su tabla indica para la acción concreta. El contexto queda chico, y Dirección prohíbe revisar todo antes de una tarea localizada."
+        },
+        {
+          "t": "Sonnet por defecto, Opus con motivo",
+          "why": "El modelo grande va solo en hitos justificados, con motivo, entrega y criterio de salida registrados, y con puerta estética: si el resultado queda peor que la línea base, no se mergea. Viene de un proyecto anterior con mucho Opus y un resultado estético pobre."
+        },
+        {
+          "t": "Nada en paralelo sin presupuesto",
+          "why": "Sin subagentes ni workers en paralelo salvo encargo expreso: un lote, una rama y un PR por vez.",
+          "alt": "Un panel de tres direcciones creativas en paralelo, como pedía una skill de tráileres: en Eclipse se corren en secuencia."
+        },
+        {
+          "t": "Copias con procedencia",
+          "why": "Los perfiles llegan a cada repo por PR y revisión, para no pisar reglas que ya existen. En HandyX cada copia lleva el commit de origen y su SHA-256, y lo único que cambia está escrito."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Cómo lo verifiqué",
+      "p": [
+        "El repo de agentes es Markdown: no tiene tests ni CI. Su prueba fue una revisión documental en Eclipse-Web del primer PR de los agentes de Eclipse, con veredicto «adopción condicionada»; las correcciones se aplicaron después.",
+        "Lo que se prueba con tests es el código que sale de este proceso: en la corrida del 27/10/2026, Eclipse-Web pasó 463 tests, el backend de Eclipse 779 y el portal interno 132, más 14 recorridos completos en navegador."
+      ],
+      "items": [
+        { "n": "11", "u": "agentes", "d": "Una carpeta y un archivo de definición por rol" },
+        { "n": "79", "u": "skills", "d": "En 8 agentes, con 78 nombres distintos" },
+        { "n": "14", "u": "correcciones", "d": "En la revisión del primer PR de Eclipse" },
+        { "n": "5", "u": "rutas", "d": "Probadas en papel, con y sin las correcciones" }
+      ],
+      "note": "Conté el 28/10/2026 los SKILL.md de las variantes de Claude Code (69) más los 10 del paquete de documentación: 79 archivos y 78 nombres, porque project-analysis está en Frontend y en Documentación. Los 11 agentes, por carpeta y paquete."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "Definición", "items": ["Markdown", "YAML front-matter", "SKILL.md", "referencias"] },
+        { "k": "Formatos", "items": ["Claude Code", "Codex", "GitHub Copilot"] },
+        { "k": "Marcos", "items": ["OWASP Top 10", "OWASP API Top 10", "ASVS", "STRIDE"] },
+        { "k": "Escrito para", "items": ["Node", "Express", "TypeScript", "React", "Next.js", "GSAP", "WebAudio", "Playwright"] }
+      ]
+    },
+    "not": {
+      "h": "Qué no es",
+      "list": [
+        "No es autónomo. Dirección no escribe código, y mergear, desplegar, gastar, cambiar precios o publicar lo decido yo.",
+        "No son agentes «instalados» en Eclipse: ahí los roles son pasos que una misma sesión corre en secuencia.",
+        "No es código abierto: el repo no tiene licencia y es de uso propio.",
+        "No es una auditoría: el agente de seguridad puede correr una prueba en dev o staging propio, pero no hay un pentest hecho ni una revisión de terceros."
+      ]
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "En uso en mis repos: 11 agentes, 79 skills y tres formatos. Los agentes de Eclipse entraron por tres PR; el último se mergeó el 26/10/2026.",
+        "Abierto: antes de instalarlos falta comprobar que Claude Code acepte el alias del modelo y los campos del encabezado, y dos skills de tráileres chocan con el flujo actual.",
+        "Los perfiles declaran modelos distintos según la herramienta; en HandyX se quitó esa línea para que hereden el de la sesión.",
+        "Las cifras de tests son de los repos que produce el proceso, no del repo de agentes.",
+        "No afirmo que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho."
+      ]
+    }
+  }
+}

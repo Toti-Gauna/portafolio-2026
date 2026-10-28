@@ -6,12 +6,15 @@ import { asset } from '@/lib/site';
 import { primeTrailer, releaseTrailer, stopTrailerAudio } from '@/lib/trailer-prime';
 import './trailer.css';
 
-type Mode = 'film' | 'text' | 'rotate';
-const portraitPhone = () => window.innerWidth < 700 && window.innerHeight > window.innerWidth;
+type Mode = 'film' | 'text';
+/** A screen taller than wide gets the 9:16 edition of the film (same scenes, timings and score on a 1080×1920 stage). */
+const portrait = () => window.innerHeight > window.innerWidth;
 
 /**
  * «Conocer a Ignacio»: the Kinetic Studio trailer (public/trailer/v2) fullscreen, with no player bar.
  * Discreet buttons (sound, text version, skip) that hide while the film plays; when it ends, the portfolio.
+ * The format is chosen when the film starts (portrait → `&o=v`, landscape → 16:9) and kept until it closes:
+ * turning the phone mid-film never reloads it.
  */
 export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
   const t = useTranslations('trailer');
@@ -19,7 +22,8 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [mode, setMode] = useState<Mode>(() =>
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'text' : portraitPhone() ? 'rotate' : 'film');
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'text' : 'film');
+  const [vertical, setVertical] = useState(portrait);
   const [ready, setReady] = useState(false);
   const [muted, setMuted] = useState(false);
   const [ui, setUi] = useState(true);
@@ -64,14 +68,6 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
     (d?.querySelector<HTMLElement>('[data-autofocus]') ?? d)?.focus();
   }, [mode]);
 
-  // the rotate gate lets go by itself once the phone is horizontal
-  useEffect(() => {
-    if (mode !== 'rotate') return;
-    const onResize = () => { if (!portraitPhone()) setMode('film'); };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [mode]);
-
   // controls appear on any movement and hide after 2.5 s
   const poke = useCallback(() => {
     setUi(true);
@@ -82,7 +78,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
 
   const post = (msg: object) => frameRef.current?.contentWindow?.postMessage(msg, location.origin);
   const toggleSound = () => { const m = !muted; setMuted(m); post({ type: 'trailer:mute', muted: m }); poke(); };
-  const watch = () => { primeTrailer(true); setReady(false); setMuted(false); setMode('film'); };
+  const watch = () => { primeTrailer(true); setReady(false); setMuted(false); setVertical(portrait()); setMode('film'); };
   const toText = () => { stopTrailerAudio(); setMode('text'); };
   const onKeyDown = (e: React.KeyboardEvent) => {
     poke();
@@ -100,7 +96,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
   };
 
   const qaFrame = new URLSearchParams(window.location.search).get('t');
-  const src = `${asset('/trailer/v2/index.html')}?host&lang=${locale}${qaFrame ? `&t=${encodeURIComponent(qaFrame)}` : ''}`;
+  const src = `${asset('/trailer/v2/index.html')}?host&lang=${locale}${vertical ? '&o=v' : ''}${qaFrame ? `&t=${encodeURIComponent(qaFrame)}` : ''}`;
   const transcript = t.raw('transcript') as string[];
 
   return (
@@ -108,6 +104,7 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
       ref={dialogRef}
       className="tplayer"
       data-mode={mode}
+      data-format={vertical ? 'vertical' : 'landscape'}
       data-ui={ui}
       data-leaving={leaving}
       aria-label={t('title')}
@@ -138,21 +135,6 @@ export default function TrailerOverlay({ onClose }: { onClose: () => void }) {
             <button type="button" className="tplayer__btn tplayer__btn--skip" onClick={close}>{t('close')} <span aria-hidden="true">→</span></button>
           </div>
         </>
-      )}
-
-      {mode === 'rotate' && (
-        <div className="tplayer__panel">
-          <svg viewBox="0 0 48 48" width="56" height="56" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <rect x="15" y="6" width="18" height="30" rx="3" /><path d="M10 40c6 4 22 4 28-2" stroke="var(--accent)" /><path d="M35 34l3 4-5 1" stroke="var(--accent)" />
-          </svg>
-          <h2 className="tplayer__title">{t('rotateTitle')}</h2>
-          <p>{t('rotateText')}</p>
-          <div className="tplayer__actions">
-            <button type="button" className="btn btn-primary" data-autofocus onClick={watch}>{t('watchAnyway')}</button>
-            <button type="button" className="btn btn-ghost" onClick={toText}>{t('textVersion')}</button>
-            <button type="button" className="btn btn-ghost" onClick={close}>{t('close')}</button>
-          </div>
-        </div>
       )}
 
       {mode === 'text' && (

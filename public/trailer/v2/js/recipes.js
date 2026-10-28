@@ -4,6 +4,8 @@
    Every tween, sound and cut is placed on the master timeline D.tl at an
    absolute time, so the whole film stays seekable and deterministic.
    Musical grid: 120 BPM → 1 beat = 0.5 s. Cuts and hits land on the grid.
+   IG (Conocer a Ignacio): origin, title and statement read D.W / D.H instead of 1920 / 1080, so they also lay
+   out on the 9:16 stage (?o=v); on 1920×1080 every value is the same as before.
    ========================================================================== */
 (() => {
   'use strict';
@@ -22,7 +24,7 @@
       <div class="o-dot c"></div>
       ${lines.map(l => `<div class="o-line v c">${l}</div>`).join('')}`);
     const dot = D.$('.o-dot', s), rings = D.$$('.o-ring', s), glow = D.$('.o-glow', s);
-    const splits = D.$$('.o-line', s).map(el => D.split(D.fit(el, 1700), { type: 'chars', mask: 'chars' }));
+    const splits = D.$$('.o-line', s).map(el => D.split(D.fit(el, Math.min(1700, D.W - 160)), { type: 'chars', mask: 'chars' }));
     gsap.set(splits.flatMap(x => x.chars), { yPercent: 115 });
     gsap.set(dot, { scale: 0 });
     gsap.set(rings, { scale: 0.08, opacity: 0 });
@@ -31,7 +33,7 @@
     D.show(s, T);
     D.setBg(C.night, T);
     D.ink(C.paper, T);
-    tl.set(D.bars, { height: 540 }, T);
+    tl.set(D.bars, { height: D.H / 2 }, T);
     D.barsTo(110, T + 0.05, 1.8);
     D.call(() => SFX.pad('drone', [55, 82.41], 3, 0.07, 260), T + 0.02);
     if (o.label) D.label(T + 0.8, o.label);
@@ -59,11 +61,11 @@
 
     // the point becomes a line… and the line becomes a frame
     tl.to(glow, { opacity: 0, duration: 0.8 }, T + 4.2);
-    tl.to(dot, { width: 1700, height: 3, duration: 0.85, ease: 'expo.inOut' }, T + 4.2);
+    tl.to(dot, { width: D.W - 220, height: 3, duration: 0.85, ease: 'expo.inOut' }, T + 4.2);
     tl.to(dot, { backgroundColor: to, boxShadow: '0 0 0px rgba(255,255,255,0), 0 0 0px rgba(120,110,255,0)', duration: 0.3 }, T + 4.7);
     D.sfx('whoosh', T + 4.2, 0.9, 0.45);
     D.hide(dot, T + 5.0);
-    tl.set(D.wipe, { backgroundColor: to, clipPath: 'inset(538.5px 110px 538.5px 110px)', autoAlpha: 1 }, T + 5.0);
+    tl.set(D.wipe, { backgroundColor: to, clipPath: `inset(${D.CY - 1.5}px 110px ${D.CY - 1.5}px 110px)`, autoAlpha: 1 }, T + 5.0);
     tl.to(D.wipe, { clipPath: 'inset(0px 0px 0px 0px)', duration: 0.5, ease: 'expo.inOut' }, T + 5.0);
     D.barsTo(0, T + 5.0, 0.5);
     D.ink(D.contrast(to), T + 5.2);
@@ -550,10 +552,12 @@
     // o.bg: any background; a light one gives ink-on-paper (no letterbox unless o.bars)
     const bgc = o.bg || C.night, fg = D.contrast(bgc), light = fg !== C.paper;
     const R = 385; // orbit radius: shapes stay clear of the 110 px letterbox bars
+    // 9:16: a two-word title breaks into two lines (bigger than one squeezed line)
+    const tall = D.H > D.W, tRaw = o.title || D.cfg.meta.title, tText = tall ? String(tRaw).replace(' ', '<br>') : tRaw;
     const s = D.scene('title', `
       <div class="t-glow c"></div>
-      <svg class="t-svg" viewBox="0 0 1920 1080" aria-hidden="true">
-        <circle class="t-ring2" cx="960" cy="540" r="${R}"/><circle class="t-ring" cx="960" cy="540" r="415"/>
+      <svg class="t-svg" viewBox="0 0 ${D.W} ${D.H}" aria-hidden="true">
+        <circle class="t-ring2" cx="${D.CX}" cy="${D.CY}" r="${R}"/><circle class="t-ring" cx="${D.CX}" cy="${D.CY}" r="415"/>
       </svg>
       <div class="t-orbit c">${o.glyphs
         ? o.glyphs.slice(0, 3).map((g, k) => `<i class="t-o t-g v c" style="color:${colors[k]}">${g}</i>`).join('')
@@ -561,11 +565,12 @@
         <i class="t-o c" style="background:${colors[1]}"></i>
         <i class="t-o c" style="background:${colors[2]};clip-path:polygon(50% 0,100% 100%,0 100%)"></i>`}
       </div>
-      <h1 class="t-title v c">${o.title || D.cfg.meta.title}</h1>
-      <div class="t-title t-sheen v c" aria-hidden="true">${o.title || D.cfg.meta.title}</div>
+      <h1 class="t-title v c">${tText}</h1>
+      <div class="t-title t-sheen v c" aria-hidden="true">${tText}</div>
       <div class="t-sub mono c"></div>`);
-    const title = D.fit(D.$('.t-title', s), 1500), sheen = D.$('.t-sheen', s), sub = D.$('.t-sub', s);
+    const title = D.fit(D.$('.t-title', s), tall ? D.W - 200 : 1500), sheen = D.$('.t-sheen', s), sub = D.$('.t-sub', s);
     sheen.style.fontSize = title.style.fontSize;
+    if (tall) sub.style.top = Math.round(D.CY + title.offsetHeight / 2 + 80) + 'px'; // under the two lines
     const ring = D.$('.t-ring', s), ring2 = D.$('.t-ring2', s), orbit = D.$('.t-orbit', s), os = D.$$('.t-o', s), glow = D.$('.t-glow', s);
     const st = D.split(title, { type: 'chars' });
 
@@ -636,9 +641,11 @@
     const { tl, C, N } = D;
     const bgc = o.bg || C.night;
     const s = D.scene('statement', `<div class="st-text v c" style="--accent:${o.accent || C.a[0]}">${o.text || 'EVERYTHING <span>MOVES.</span>'}</div>`);
-    const el = D.fit(D.$('.st-text', s), 1700);
+    const el = D.fit(D.$('.st-text', s), Math.min(1700, D.W - 120));
+    D.$$('span', el).forEach(x => x.classList.add('st-acc')); // the accent words (smartWrap adds spans of its own)
     el.style.color = D.contrast(bgc);
-    const sg = D.split(el, { type: 'chars', mask: 'chars' });
+    // 9:16: the line wraps (css: .is-vertical .st-text); smartWrap keeps every word whole
+    const sg = D.split(el, { type: 'chars', mask: 'chars', smartWrap: D.H > D.W });
     gsap.set(sg.chars, { yPercent: 115 });
 
     D.show(s, T);

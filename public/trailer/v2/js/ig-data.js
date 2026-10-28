@@ -9,16 +9,19 @@ export const NIGHT = '#07070a', YELLOW = '#ffc21a';
 export const NAVY = '#071233', ICE = '#7fd4ff';            // act 4 · CompliA
 export const GH = '#0d1117', GREEN = '#3fb950';            // act 6 · proof (the dev module's GitHub dark)
 
-/** acts: one palette + one background treatment each (ig-kit.js · acts plugin). Times in seconds. */
+/** acts: one palette + one background treatment each (ig-kit.js · acts plugin). Times in seconds. The coast (0–6)
+ *  paints its own night; the fronts are on paper; the zoom-out and the industries on ink. */
 export const ACTS = [
-  { id: 'semilla', from: 0, to: 8, kind: 'dots', tone: PAPER, alpha: 0.10 },
-  { id: 'caminos', from: 8, to: 12, kind: 'rings', tone: PAPER, alpha: 0.16 },
-  { id: 'carrera', from: 12, to: 32, kind: 'grid', tone: INK, alpha: 0.16 },
-  { id: 'complia', from: 32, to: 42, kind: 'scan', tone: ICE, alpha: 0.12 },
-  { id: 'ramas', from: 42, to: 60, kind: 'branches', tone: PAPER, alpha: 0.14 },
-  { id: 'stack', from: 60, to: 78, kind: 'dots', tone: PAPER, alpha: 0.06 },
-  { id: 'sistema', from: 78, to: 94, kind: 'net', tone: PAPER, alpha: 0.12 },
-  { id: 'final', from: 94, to: 110, kind: 'sun', tone: CORAL, alpha: 0.32 },
+  { id: 'primero', from: 6, to: 12, kind: 'dots', tone: PAPER, alpha: 0.07 },
+  { id: 'frentes', from: 12, to: 30, kind: 'grid', tone: INK, alpha: 0.12 },
+  { id: 'complia', from: 30, to: 36, kind: 'scan', tone: ICE, alpha: 0.12 },
+  { id: 'tsoft', from: 36, to: 42, kind: 'grid', tone: INK, alpha: 0.12 },
+  { id: 'propio', from: 42, to: 52, kind: 'branches', tone: PAPER, alpha: 0.14 },
+  { id: 'germina', from: 52, to: 60, kind: 'dots', tone: PAPER, alpha: 0.05 },
+  { id: 'rubros', from: 60, to: 68, kind: 'rings', tone: PAPER, alpha: 0.12 },
+  { id: 'stack', from: 68, to: 84, kind: 'dots', tone: PAPER, alpha: 0.06 },
+  { id: 'sistema', from: 84, to: 100, kind: 'net', tone: PAPER, alpha: 0.12 },
+  { id: 'final', from: 100, to: 118, kind: 'sun', tone: CORAL, alpha: 0.32 },
 ];
 
 /** the engine palette (global): night/ink/paper + accents (a1 coral, a2 blue, a3 yellow, a4 origin <em>,
@@ -35,6 +38,9 @@ export const PROJECT = {
   eclipse: '#f5b942', handyx: '#4a8cff', volta: '#d4ff3a', velmar: '#d2ad69',
   dentalos: '#5ee6c8', supernova: '#ff2e88', games: '#34d399', kinetic: CORAL,
 };
+
+/** the fronts' colours (the git line of the fronts and the zoom-out) */
+export const FRONT = { first: '#ff9f87', tach: BLUE, ada: YELLOW, tuenti: CORAL, complia: ICE, supernova: '#ff2e88', team: '#34d399' };
 
 /** The eleven agents: the SAME glyphs as the portfolio (components/AgentIcon.tsx), 24×24, 1.5 stroke.
  *  `base` strokes in the glyph colour; `acc` is the one accent detail (class acc-s = stroke, acc-f = fill). */

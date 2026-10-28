@@ -36,3 +36,10 @@
 /* the placeholder view (until a project's module is in) */
 .shot-ph { position: absolute; inset: 0; display: grid; place-items: center; background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 24px, transparent 24px 48px); }
 .shot-ph b { font: 900 96px/1 var(--display); color: rgba(255, 255, 255, .5); }
+
+/* 9:16: the tag goes full width under the frame (its top is set per shot by js/ig-shots.js); mosaic names may wrap */
+.is-vertical .ish-tag { left: 40px; right: 40px; bottom: auto; min-width: 0; max-width: none; }
+.is-vertical .ish-cl { align-items: flex-start; white-space: normal; line-height: 1.05; }
+.is-vertical .ish-cl i { margin-top: 11px; }
+.is-vertical .ish-end-t { font-size: 64px; }
+.is-vertical .ish-none { border-radius: 32px; overflow: hidden; box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 0 2px rgba(255, 255, 255, .1); } /* the full-bleed view, framed as a screen on the tall stage */

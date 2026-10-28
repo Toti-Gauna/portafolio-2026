@@ -1,0 +1,87 @@
+/*
+ * Animated background (components/scene). One fixed layer under the content:
+ *   .scene          the scene's light as a CSS gradient (server HTML; the whole background with Save-Data or no WebGL)
+ *   .scene__canvas  WebGL light added on top of it (fades in once the scene is ready)
+ *   .scene__scrim   a veil over the canvas where text needs it
+ * Every scene stays dim and lit from one side: text keeps AA contrast against the real pixels.
+ */
+#app-shell { position: relative; z-index: 1; }
+
+.scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--scene-art, none), var(--scene-bg, none), var(--ink);
+  contain: strict;
+}
+.scene__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 300ms ease; }
+.scene__canvas[data-on='1'] { opacity: 1; transition-duration: 1400ms; }
+.scene[data-state='fallback'] .scene__canvas { display: none; }
+.scene__scrim { position: absolute; inset: 0; background: var(--scene-scrim, none); }
+
+/* ---- per-scene light (luminance kept ≤ ~0.012 so small coral and muted text stay AA) ---- */
+
+.scene[data-scene='home'] {
+  --scene-bg: radial-gradient(70% 55% at 6% 100%, #2a130d 0%, #1a0f0e 38%, #0e0e10 72%);
+}
+.scene[data-scene='complia'] {
+  --scene-bg: radial-gradient(60% 75% at 100% 38%, #0f1534 0%, #0e1020 42%, #0e0e10 74%);
+}
+.scene[data-scene='handyx'] {
+  --scene-bg: radial-gradient(70% 60% at 100% 100%, #0e1430 0%, #0d0f1d 45%, #0e0e10 75%), radial-gradient(30% 25% at 82% 92%, #1d160a 0%, transparent 70%);
+}
+.scene[data-scene='eclipse'] {
+  --scene-bg: radial-gradient(45% 55% at 80% 26%, #221808 0%, #16120c 42%, #0e0e10 75%);
+}
+@media (orientation: portrait) {
+  .scene[data-scene='eclipse'] { --scene-bg: radial-gradient(70% 40% at 80% 20%, #221808 0%, #16120c 42%, #0e0e10 75%); }
+}
+.scene[data-scene='kinetic'] {
+  --scene-bg: radial-gradient(90% 45% at 70% 100%, #2a120d 0%, #19100f 45%, #0e0e10 78%);
+}
+.scene[data-scene='agentes'] {
+  --scene-bg: radial-gradient(55% 60% at 88% 50%, #1b1410 0%, #141113 45%, #0e0e10 75%);
+}
+.scene[data-scene='tuenti'] {
+  --scene-bg: radial-gradient(55% 70% at 100% 55%, #1f1018 0%, #13101a 45%, #0e0e10 76%);
+}
+.scene[data-scene='volta'] {
+  --scene-bg: radial-gradient(55% 60% at 96% 12%, #0f1636 0%, #0e1020 44%, #0e0e10 75%);
+}
+.scene[data-scene='dentalos'] {
+  --scene-bg: radial-gradient(60% 65% at 98% 96%, #0b1c1c 0%, #0d1415 45%, #0e0e10 76%);
+}
+.scene[data-scene='games'] {
+  --scene-bg: radial-gradient(55% 65% at 92% 45%, #13132a 0%, #111018 45%, #0e0e10 76%);
+}
+.scene[data-scene='velmar'] {
+  --scene-bg: radial-gradient(60% 70% at 92% 0%, #261a0b 0%, #17120d 45%, #0e0e10 78%);
+}
+.scene[data-scene='supernova'] {
+  --scene-bg: radial-gradient(50% 55% at 84% 22%, #141433 0%, #0f0f1c 48%, #0b0b0e 80%);
+}
+.scene[data-scene='negocio'] {
+  --scene-bg: radial-gradient(90% 40% at 70% 100%, #1d1018 0%, #121019 50%, #0e0e10 80%);
+}
+.scene[data-scene='default'] {
+  --scene-bg: radial-gradient(60% 60% at 95% 10%, #17161d 0%, #0e0e10 70%);
+}
+
+/* without WebGL (or with Save-Data) a few scenes keep their subject in CSS */
+.scene[data-state='fallback'][data-scene='eclipse'] {
+  --scene-art: radial-gradient(circle at 80% 26%, #050506 0 calc(min(22vh, 30vw) - 1px), #6a4a14 min(22vh, 30vw), #2a1e0b calc(min(22vh, 30vw) + 3px), transparent calc(min(22vh, 30vw) + 60px));
+}
+.scene[data-state='fallback'][data-scene='negocio'] {
+  --scene-bg: linear-gradient(180deg, #0e0e10 40%, #1a0f12 70%, #0f1226 100%);
+}
+
+/* phones: text covers the whole width, so the two busiest scenes get a light veil */
+@media (max-width: 767px) {
+  .scene[data-scene='handyx'], .scene[data-scene='negocio'] { --scene-scrim: rgb(14 14 16 / 0.32); }
+}

@@ -2,6 +2,7 @@
    IG CASE — a case study in one slide (css/ig-case.css): what it is, my role, how it works and its status
    on the left; the real demo clip playing on the right, kept in sync with the timeline (seekable).
    { kicker, title, sub, facts: [{ k, t }], src, poster, from, window, tag, bg, duration }          10 s
+   9:16 (D.vertical): the text on top, the clip under it at the stage's width; the window rises in.
    ========================================================================== */
 (() => {
   'use strict';
@@ -11,7 +12,7 @@
 
   recipe('igcase', (D, T, o) => {
     const { tl } = D;
-    const dur = o.duration || 10, from = o.from ?? 0;
+    const dur = o.duration || 10, from = o.from ?? 0, tall = D.vertical;
     const s = D.scene('igcase', `<div class="igk">
       <div class="igk-l">
         <div class="igk-k mono"></div>
@@ -32,7 +33,7 @@
     D.wipeTo(o.bg || NAVY, T, 'up', 0.4);
     D.ink(PAPER, T);
     if (o.label) D.label(T, o.label);
-    D.fit(title, 760); // clear of the demo window
+    D.fit(title, tall ? D.W - 140 : 760); // clear of the demo window
     const chars = D.split(title, { type: 'chars', mask: 'chars' }).chars;
     gsap.set(chars, { yPercent: 110 });
     tl.to(k, { duration: 0.5, scrambleText: { text: o.kicker, chars: 'upperCase', speed: 1 }, ease: 'none' }, T + 0.1);
@@ -43,7 +44,8 @@
       D.hit(D.$('dt', r), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'expo.out' }, T + 1.5 + i * 0.55);
       D.sfx('tick', T + 1.5 + i * 0.55, 0.04);
     });
-    D.hit(win, { opacity: 0, x: 120, rotationY: -16, transformPerspective: 2000 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'expo.out' }, T + 0.6);
+    if (tall) D.hit(win, { opacity: 0, y: 140, rotationX: 14, transformPerspective: 2000 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.9, ease: 'expo.out' }, T + 0.6);
+    else D.hit(win, { opacity: 0, x: 120, rotationY: -16, transformPerspective: 2000 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'expo.out' }, T + 0.6);
     tl.to(win, { scale: 1.03, duration: dur - 1.8, ease: 'sine.inOut' }, T + 1.5);
     D.hit(tag, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2)' }, T + 1.2);
     D.sfx('whoosh', T + 0.6, 0.5, 0.25);

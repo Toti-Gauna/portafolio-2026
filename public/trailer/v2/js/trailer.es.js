@@ -1,18 +1,21 @@
 /* ============================================================================
-   CONOCER A IGNACIO — el tráiler (es-AR). 90 s · 21 escenas · 120 BPM (un compás = 2 s).
-   Kit: engine.js (copia de Handy) + recipes.js, recipes-type.js, recipes-glitch.js, recipes-ui.js,
-   recipes-dev.js, recipes-shop.js, recipes-branch.js (copias de bifurcacion) + recipes-music.js y audio.js
-   (Handy + parche IG) + ig-kit.js (nuevo). Ver engine-plan.md. Cada dato sale de portafolio-2026/messages/es.json.
+   CONOCER A IGNACIO — el tráiler (es-AR). 120 s · 17 escenas · 120 BPM (un compás = 2 s).
+   La historia que contó Ignacio (28/10/2026): Mar del Plata → a los 17, una web de juegos que le cambió la vida →
+   los frentes de trabajo (TACH, Ada ITW, Tsoft: Tuenti, CompliA, Supernova Eventos, el equipo) → un camino propio
+   → todos los caminos, que germinan en lo mismo: buscar nuevos desafíos → los rubros → lo que hace → el final.
+   Sin puestos en ningún lado: desafíos. Cada dato sale de portafolio-2026/messages/es.json (journey, about, contact).
+   Kit: engine.js (copia de Handy) + recipes*.js (copias de bifurcacion) + recipes-music.js y audio.js (Handy + parche IG)
+   + ig-kit.js, ig-open.js, ig-fronts.js, ig-bloom.js, ig-case.js, ig-shots.js, ig-stack.js.
    Mismas escenas y tiempos que trailer.en.js: solo cambian los textos.
    ========================================================================== */
 import { PARTITURA } from './partitura.js';
-import { INK, PAPER, CORAL, BLUE, NIGHT, YELLOW, NAVY, ICE, GH, GREEN, ACTS, PALETTE, PROJECT, GLYPHS, MONOGRAM, SHAPES, MEDIA } from './ig-data.js';
+import { INK, PAPER, CORAL, BLUE, NIGHT, YELLOW, NAVY, GH, GREEN, ACTS, PALETTE, PROJECT, FRONT, GLYPHS, MONOGRAM, MEDIA } from './ig-data.js';
 
 Trailer.run({
   lang: 'es',
   locale: 'es-AR',
   meta: {
-    title: 'IGNACIO GAUNA', subtitle: 'CONOCER A IGNACIO', hud: 'IGNACIO GAUNA — SSR AI FULLSTACK DEVELOPER',
+    title: 'IGNACIO GAUNA', subtitle: 'CONOCER A IGNACIO', hud: 'IGNACIO GAUNA — CONOCER A IGNACIO',
     pageTitle: 'Conocer a Ignacio — Ignacio Gauna',
   },
   ui: {
@@ -28,89 +31,111 @@ Trailer.run({
   hudAt: 1.2,
 
   scenes: [
-    // ── ACTO 1 · LA SEMILLA (0–8) ─────────────────────────────────────────────── noche · puntos
-    { type: 'igcut', de: 'origin', fit: 4, label: 'MAR DEL PLATA', foley: 0.3,                                   //  0–4
-      lines: ['MAR DEL PLATA', '17 <em>AÑOS</em>'], to: INK },
-    { type: 'igcut', de: 'typewriter', fit: 4, label: 'LA SEMILLA', speed: 1.3,                                  //  4–8
-      lines: ['QUERÍA HACER', 'UNA WEB DE <em>JUEGOS</em>.'], bg: INK, to: CORAL },
+    // ── 1 · MAR DEL PLATA (0–6) ──────────────────────────────────────────────── noche · la costa y una luz
+    { type: 'igcoast', label: 'MAR DEL PLATA', duration: 6, foley: 0.5,                                          //   0–6
+      kicker: '38°00′S · 57°33′O', line: 'Todo empezó en<br><em>Mar del Plata.</em>', sea: 'Océano Atlántico' },
 
-    // ── ACTO 2 · CAMINOS (8–12) · DROP 1 ──────────────────────────────────────── noche · ramas
-    { type: 'igburst', label: 'CAMINOS', word: 'CAMINOS', duration: 4, foley: 0.45,                           //  8–12
-      cap: { at: 1.1, k: 'Mar del Plata · a los 17', t: 'Ese año se abrieron todos los caminos.', d: 'Soy autodidacta: leo mucho y estudio por internet.', w: 1300 } },
+    // ── 2 · EL PRIMER PRODUCTO (6–12) · DROP 1 en el clic ─────────────────────── tinta · la web de juegos → ramas
+    { type: 'igfirst', label: 'EL PRIMER PRODUCTO', duration: 6, foley: 0.6,                                      //   6–12
+      kicker: 'Mar del Plata · a los 17', lines: ['Con 17 años programé', 'mi primer producto:'], big: 'una web de <em>juegos</em>.',
+      after: '…que me cambió<br><em>la vida.</em>', afterSub: 'Soy autodidacta: leo mucho y estudio por internet.',
+      site: { logo: 'JUEGOS', nav: ['Inicio', 'Juegos', 'Contacto'], play: 'JUGAR', ticker: '¡A JUGAR!' } },
 
-    // ── ACTO 3 · CARRERA (12–32) ──────────────────────────────────────────────── papel · una línea, una rama por trabajo
-    { type: 'igcareer', label: 'RECORRIDO', duration: 20, letterbox: 0, at: [2, 6, 10, 14], backAt: 18,
-      outro: 'De 2021 a hoy, <em>una sola línea</em>.',                 // 12–32
-      kicker: 'RECORRIDO', title: 'Una semilla,<br>muchos <em>caminos</em>.', span: '2021 → 2026', seed: 'A LOS 17',
+    // ── 3 · LOS FRENTES (12–30) ──────────────────────────────────────────────── papel · una línea, una rama por frente
+    { type: 'igfronts', label: 'FRENTES DE TRABAJO', duration: 18, at: [0, 5.5, 11.5], letterbox: 0,              //  12–30
+      origin: { year: 'A LOS 17', color: CORAL },
       stops: [
-        { year: '2021', label: 'TACH', color: BLUE, vis: 'wallet', k: '2021 – 2022 · TACH Argentina', t: 'Software Developer',
-          d: 'Desarrollo en remoto: una billetera virtual, en web y móvil.',
-          v: { balance: 'Saldo disponible', send: 'Enviar', receive: 'Recibir', mobile: 'MÓVIL' } },
-        { year: '2023', label: 'ADA ITW', color: YELLOW, vis: 'code', k: '2023 – 2024 · Ada ITW', t: 'Profesor',
-          d: 'Enseñé JavaScript y React. Enseñar me ayudó a explicar ideas técnicas con claridad.',
-          v: { file: 'Saludo.jsx', outLabel: 'Vista previa', out: 'Hola, mundo', lines: [
-            '<span class="kw">function</span> <span class="fn">Saludo</span>({ nombre }) {',
-            '  <span class="kw">return</span> <span class="tg">&lt;h1&gt;</span>Hola, {nombre}<span class="tg">&lt;/h1&gt;</span>;',
-            '}',
-            '<span class="tg">&lt;Saludo</span> nombre=<span class="st">"mundo"</span> <span class="tg">/&gt;</span>'] } },
-        { year: '2024', label: 'TSOFT · TUENTI', color: CORAL, vis: 'wheel', k: 'Desde 2024 · Tsoft · para Tuenti y Telefónica', t: 'Gamificación,', t2: 'recargas y pagos',
-          d: 'La ruleta Tuenti y el sistema de referidos (el juego volvió), la recarga automática y los pagos.',
-          v: { chips: ['Ruleta', 'Referidos', 'Recarga automática', 'Pagos'] } },
-        { year: '2026', label: '2026', color: GREEN, vis: 'stack', k: '2026 · Tsoft', t: 'Dev Ssr →', t2: 'Ssr AI Fullstack Developer',
-          d: 'En enero, un Reconocimiento Especial de Tsoft.',
-          v: { badgeK: 'Enero 2026 · Tsoft', badge: 'Reconocimiento Especial', stackK: 'El stack',
-            stack: ['React', 'React Native', 'TypeScript', 'Next.js', 'Tailwind', 'Node.js', 'SQL'] } },
+        { year: '2021', label: 'TACH', color: FRONT.tach, vis: 'tach', k: '2021 – 2022 · TACH Argentina',
+          t: 'Una billetera virtual, de punta a punta.', d: 'En remoto: el backoffice, la landing y la app, en web y móvil.',
+          v: { tags: ['BACKOFFICE', 'LANDING', 'APP'], balance: 'Saldo disponible', send: 'Enviar', receive: 'Recibir' } },
+        { year: '2023', label: 'ADA ITW', color: FRONT.ada, vis: 'class', k: '2023 – 2024 · Ada ITW',
+          t: 'Enseñar a programar.', d: 'JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero.',
+          v: { out: 'Hola, mundo', click: 'Clic', todo: ['HTML', 'CSS', 'JavaScript'], code: [
+            '<span class="kw">const</span> saludo = <span class="st">"Hola, mundo"</span>;',
+            '<span class="fn">console</span>.log(saludo);',
+            '<span class="cm">// → Hola, mundo</span>'] } },
+        { year: '2024', label: 'TSOFT · TUENTI', color: FRONT.tuenti, vis: 'tuenti', k: '2024 · Tsoft · Tuenti',
+          t: 'Gamificación que se mide.', d: 'La ruleta y los referidos. Después, un dashboard para medirlos.',
+          v: { tag: 'Ilustración · datos ficticios', rec: 'Recurrencia', ref: 'Referidos', game: 'Gamificación', plus: '+1' } },
       ] },
 
-    // ── ACTO 4 · CompliA (32–42) · DROP 2 ─────────────────────────────────────── azul noche · scan
-    { type: 'igcase', label: 'IA EN PRODUCCIÓN', duration: 10, bg: NAVY,                                                  // 32–42
+    // ── 4 · CompliA (30–36) ──────────────────────────────────────────────────── azul noche · el caso con su demo
+    { type: 'igcase', label: 'COMPLIA', duration: 6, bg: NAVY,                                                    //  30–36
       kicker: '2026 · Portal de compliance de Telefónica', title: 'CompliA', sub: 'Inteligencia artificial en producción interna.',
-      facts: [{ k: 'Rol', t: 'Lo diseñé y lo construí.' }, { k: 'Cómo', t: 'Un asistente con RAG: validaciones, restricciones y recomendaciones.' }, { k: 'Demo', t: 'Recorte de la demo, con datos de ejemplo.' }],
+      facts: [{ k: 'Qué hice', t: 'Lo diseñé y lo construí.' }, { k: 'Cómo', t: 'Un asistente con RAG: validaciones, restricciones y recomendaciones.' }, { k: 'Demo', t: 'Recorte de la demo, con datos de ejemplo.' }],
       src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'DATOS DE EJEMPLO' },
 
-    // ── ACTO 5 · RAMAS PROPIAS (42–60) ────────────────────────────────────────── un color por proyecto · montaje
+    // ── 5 · TSOFT, TAMBIÉN (36–42) ───────────────────────────────────────────── papel · la línea sigue
+    { type: 'igfronts', label: 'TSOFT', duration: 6, at: [0, 3], letterbox: 0,                                    //  36–42
+      origin: { year: 'COMPLIA', color: '#7fd4ff' },
+      stops: [
+        { year: '2026', label: 'SUPERNOVA EVENTOS', color: FRONT.supernova, vis: 'events', k: '2026 · Tsoft',
+          t: 'Una micro-app de eventos.', d: 'Supernova Eventos: un prototipo, con datos ficticios.',
+          v: { app: 'Eventos', cat: 'Bienestar', title: 'Un respiro para vos', date: '28 oct · 09:00', cta: 'Me sumo', ok: 'Confirmado',
+            steps: ['Información', 'Audiencia', 'Email', 'Revisión'], tag: 'Prototipo · datos ficticios' } },
+        { year: '2026', label: 'EQUIPO', color: FRONT.team, vis: 'team', k: '2026 · Tsoft',
+          t: 'Subir el nivel del equipo.', d: 'Capacité a compañeros.', v: { level: 'Nivel' } },
+      ] },
+
+    // ── 6 · UN CAMINO PROPIO (42–52) ─────────────────────────────────────────── un color por proyecto · montaje
     // Cada proyecto muestra sus componentes reales, reconstruidos en código (js/shots/*): sin capturas ni video.
-    { type: 'igprojects', label: 'RAMAS PROPIAS', duration: 3, step: 0.2, bg: INK,                                   // 42–45
+    { type: 'igprojects', label: 'CAMINO PROPIO', duration: 2, step: 0.15, bg: INK,                                 //  42–44
       items: [
         { name: 'Eclipse', status: 'En desarrollo', color: PROJECT.eclipse },
         { name: 'HandyX', status: 'En desarrollo · lanza el 10/11', color: PROJECT.handyx },
         { name: 'Volta', status: 'Demo', color: PROJECT.volta },
         { name: 'Velmar', status: 'Demo · para un cliente', color: PROJECT.velmar },
         { name: 'DentalOS', status: 'Demo', color: PROJECT.dentalos },
-        { name: 'Supernova Eventos', status: 'Prototipo', color: PROJECT.supernova },
         { name: 'games-market', status: 'Banco de pruebas', color: PROJECT.games },
         { name: 'Kinetic Studio', status: '32 tráileres en código', color: PROJECT.kinetic },
       ],
-      cap: { pos: 'tl', k: 'Proyectos propios', t: 'Y mis propias ramas.', d: 'Cada una dice en qué punto está.' } },
-    { type: 'igshots', label: 'RAMAS PROPIAS', title: 'Y mis propias ramas.', end: 'Todo, en código.', titleDur: 0, mosaic: 1.5,      // 45–60
+      cap: { pos: 'tl', k: 'Camino propio', t: 'Y un camino propio.', d: 'Cada proyecto dice en qué punto está.' } },
+    { type: 'igshots', label: 'CAMINO PROPIO', title: '', end: 'Todo, en código.', titleDur: 0, mosaic: 1.5,         //  44–52
       shots: [
         { id: 'eclipse-landing', dur: 1.5, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'La landing: demos, precios y el siguiente paso' } },
-        { id: 'eclipse-portal', dur: 1.5, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'Portal de clientes · datos ficticios' } },
-        { id: 'eclipse-ops', dur: 1.5, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'Operación interna · datos de ejemplo' } },
-        { id: 'handy-landing', dur: 1.5, tag: { name: 'HandyX', status: 'En desarrollo', note: 'La landing · lanza el 10/11' } },
-        { id: 'handy-ops', dur: 1.5, tag: { name: 'HandyX', status: 'En desarrollo', note: 'Portal interno · registros ficticios' } },
+        { id: 'eclipse-portal', dur: 1, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'Portal de clientes · datos ficticios' } },
+        { id: 'handy-landing', dur: 1, tag: { name: 'HandyX', status: 'En desarrollo', note: 'La landing · lanza el 10/11' } },
         { id: 'volta', dur: 1, tag: { name: 'Volta', status: 'Demo', note: 'Tienda de suplementos, con gamificación' } },
-        { id: 'velmar', dur: 1, tag: { name: 'Velmar', status: 'Demo', note: 'Tienda hecha para un cliente' } },
-        { id: 'dentalos', dur: 1, tag: { name: 'DentalOS', status: 'Demo', note: '15 módulos de una clínica ficticia' } },
-        { id: 'supernova', dur: 1, tag: { name: 'Supernova Eventos', status: 'Prototipo', note: 'Eventos, con datos ficticios' } },
-        { id: 'games', dur: 1, tag: { name: 'games-market', status: 'Banco de pruebas', note: '24 juegos web en el roadmap' } },
+        { id: 'dentalos', dur: 1, tag: { name: 'DentalOS', status: 'Demo', note: '16 módulos de una clínica ficticia' } },
         { id: 'kinetic', dur: 1, tag: { name: 'Kinetic Studio', status: '32 tráileres', note: 'Tráileres hechos con código, como este' } },
       ] },
 
-    // ── ACTO 6 · TECNOLOGÍAS (60–78) ──────────────────────────────────────────── tinta · una animación por tecnología
+    // ── 7 · TODOS LOS CAMINOS (52–60) · DROP 2 ─────────────────────────────────── tinta · el grafo entero germina
+    { type: 'igzoom', label: 'TODOS LOS CAMINOS', duration: 8,                                                     //  52–60
+      years: ['17', '2021', '2023', '2024', '2026', 'HOY'],
+      fronts: [
+        { name: 'Web de juegos', color: FRONT.first }, { name: 'TACH', color: FRONT.tach }, { name: 'Ada ITW', color: FRONT.ada },
+        { name: 'Tuenti', color: FRONT.tuenti }, { name: 'CompliA', color: FRONT.complia }, { name: 'Supernova Eventos', color: FRONT.supernova },
+        { name: 'Equipo', color: FRONT.team },
+      ],
+      own: [
+        { name: 'Eclipse', color: PROJECT.eclipse }, { name: 'HandyX', color: PROJECT.handyx }, { name: 'Volta', color: PROJECT.volta },
+        { name: 'Velmar', color: PROJECT.velmar }, { name: 'DentalOS', color: PROJECT.dentalos }, { name: 'games-market', color: PROJECT.games },
+        { name: 'Kinetic Studio', color: PROJECT.kinetic },
+      ],
+      line: 'Todo germina en lo mismo:', line2: 'buscar <em>nuevos desafíos</em>.' },
+
+    // ── 8 · DESAFÍOS Y RUBROS (60–68) ────────────────────────────────────────── coral → tinta · un rubro por tiempo
+    { type: 'igrubros', label: 'DESAFÍOS', duration: 8, split: 3.5,                                                  //  60–68
+      kicker: 'Me mueven los desafíos nuevos', lines: ['Potenciar negocios.', 'Automatizar procesos<br>difíciles.'],
+      head: 'No le temo a ningún rubro:',
+      rubros: [{ id: 'startups', name: 'Startups' }, { id: 'corporate', name: 'Corporativas' }, { id: 'agro', name: 'Agro' },
+        { id: 'space', name: 'Espacio' }, { id: 'mining', name: 'Minería' }, { id: 'oilgas', name: 'Oil & gas' }] },
+
+    // ── 9 · TECNOLOGÍAS (68–84) · DROP 3 ──────────────────────────────────────── tinta · una animación por tecnología
     // Agrupadas por dónde las usé: en el trabajo, en mis proyectos y estudiando.
-    { type: 'igstack', label: 'TECNOLOGÍAS', letterbox: 0,                                                    // 60–78
+    { type: 'igstack', label: 'TECNOLOGÍAS', letterbox: 0,                                                        //  68–84
       screens: [
-        { k: 'En el trabajo', t: 'Frontend y mobile', label: 'FRONTEND', tone: CORAL, bg: '#140f0f', dur: 4.5, tiles: ['react', 'typescript', 'nextjs', 'reactnative', 'tailwind'] },
-        { k: 'En el trabajo', t: 'Backend, datos e IA', label: 'BACKEND · IA', tone: CORAL, bg: '#0f1014', dur: 4.5, tiles: ['node', 'sql', 'cicd', 'rag'] },
-        { k: 'En mis proyectos', t: 'Seguridad, lenguajes y motion', label: 'PROYECTOS', tone: '#7fa3ff', bg: '#0d1020', dur: 4.5, tiles: ['security', 'python', 'c', 'motion', 'tests'] },
-        { k: 'Estudiando', t: 'Machine learning y nube', label: 'ESTUDIO', tone: YELLOW, bg: '#14130c', dur: 4.5, tiles: ['ml', 'aws', 'azure'] },
+        { k: 'En el trabajo', t: 'Frontend y mobile', label: 'FRONTEND', tone: CORAL, bg: '#140f0f', dur: 4, tiles: ['react', 'typescript', 'nextjs', 'reactnative', 'tailwind'] },
+        { k: 'En el trabajo', t: 'Backend, datos e IA', label: 'BACKEND · IA', tone: CORAL, bg: '#0f1014', dur: 4, tiles: ['node', 'sql', 'cicd', 'rag'] },
+        { k: 'En mis proyectos', t: 'Seguridad, lenguajes y motion', label: 'PROYECTOS', tone: '#7fa3ff', bg: '#0d1020', dur: 4, tiles: ['security', 'python', 'c', 'motion', 'tests'] },
+        { k: 'Estudiando', t: 'Machine learning y nube', label: 'ESTUDIO', tone: YELLOW, bg: '#14130c', dur: 4, tiles: ['ml', 'aws', 'azure'] },
       ] },
 
-    // ── ACTO 7 · EL SISTEMA (78–94) ───────────────────────────────────────────── coral / tinta · red
-    { type: 'igcut', de: 'typewriter', fit: 2, label: 'SISTEMA', speed: 1.3,                                     // 78–80
+    // ── 10 · EL SISTEMA (84–100) ──────────────────────────────────────────────── coral / tinta · red
+    { type: 'igcut', de: 'typewriter', fit: 2, label: 'SISTEMA', speed: 1.3,                                     //  84–86
       lines: ['UN SISTEMA AGÉNTICO,', 'DIVIDIDO EN <em>PARTES</em>.'], bg: INK, to: CORAL },
-    { type: 'igagents', label: '11 AGENTES', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    // 80–86
+    { type: 'igagents', label: '11 AGENTES', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    //  86–92
       glyphs: GLYPHS,
       agents: [
         { id: 'chief', name: 'Dirección' }, { id: 'uxui', name: 'UX/UI' }, { id: 'design', name: 'Diseño' },
@@ -128,14 +153,14 @@ Trailer.run({
         { at: 1.95, to: 3.75, w: 1500, k: 'Arquitectos', t: 'Cada uno con su parte.' },
         { at: 3.75, w: 1500, k: 'Documentación · 11 agentes', t: 'No es un prompt: es un sistema con roles.' },
       ] },
-    { type: 'rules', label: 'REGLAS', step: 1, head: 'CÓMO TRABAJAN JUNTOS', unit: 'REGLA',                      // 86–90
+    { type: 'rules', label: 'REGLAS', step: 1, head: 'CÓMO TRABAJAN JUNTOS', unit: 'REGLA',                      //  92–96
       rules: [
         { text: 'Primero la especificación, después el código.', bg: PAPER, num: CORAL },
         { text: 'Cada afirmación tiene su nivel de evidencia.', bg: INK, num: CORAL },
         { text: 'Puertas con aprobación humana.', bg: BLUE, num: YELLOW },
         { text: 'Se prueba, no se mira a ojo.', bg: GH, num: GREEN },
       ] },
-    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           // 90–94
+    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           //  96–100
       window: 'ci · corrida del 27/10/2026', title: 'Corrida del 27/10/2026', sub: 'Tests automáticos, e2e con Playwright y CI',
       running: 'Corriendo', doneLabel: 'Todo en verde', total: 'Todo en verde', gap: 0.3, rowH: 58,
       cols: ['PROYECTO', 'PROGRESO', 'RESULTADO', ''],
@@ -150,14 +175,14 @@ Trailer.run({
         { name: 'Recorridos en navegador', value: '14' },
       ] },
 
-    // ── ACTO 8 · FINAL (94–112) · DROP 3 ───────────────────────────────────────── noche → tinta · sol
-    { type: 'igcut', de: 'title', fit: 5, label: 'IGNACIO GAUNA', bg: NIGHT, foley: 0.5,                         // 94–99
-      title: 'IGNACIO GAUNA', subtitle: 'SSR AI FULLSTACK DEVELOPER', colors: [CORAL, BLUE, YELLOW] },
-    { type: 'igcut', de: 'statement', fit: 3, label: 'PRODUCCIÓN', bg: NIGHT, accent: CORAL,                     // 99–102
+    // ── 11 · FINAL (100–120) · DROP 4 ───────────────────────────────────────── noche → tinta · sol
+    { type: 'igcut', de: 'title', fit: 5, label: 'IGNACIO GAUNA', bg: NIGHT, foley: 0.5,                         // 100–105
+      title: 'IGNACIO GAUNA', subtitle: 'MAR DEL PLATA · ARGENTINA', colors: [CORAL, BLUE, YELLOW] },
+    { type: 'igcut', de: 'statement', fit: 3, label: 'PRODUCCIÓN', bg: NIGHT, accent: CORAL,                     // 105–108
       text: 'CONSTRUYO SOFTWARE CON IA<br><span>QUE LLEGA A PRODUCCIÓN.</span>' },
-    { type: 'igend', label: 'CONTACTO', duration: 10, handoff: 8, bg: INK, ink: PAPER, accent: CORAL,            // 102–112
-      mono: MONOGRAM, name: 'IGNACIO GAUNA', role: 'SSR AI FULLSTACK DEVELOPER',
-      open: 'Abierto a nuevas oportunidades.', lead: 'Busco un rol Ssr o Sr de desarrollo fullstack con IA.',
+    { type: 'igend', label: 'CONTACTO', duration: 12, handoff: 10, bg: INK, ink: PAPER, accent: CORAL,            // 108–120
+      mono: MONOGRAM, name: 'IGNACIO GAUNA',
+      open: 'Abierto a nuevos desafíos.', lead: 'Startups, corporativas, agro, espacio, minería, oil & gas.',
       email: 'ignaciogauna.developer@gmail.com', link: 'linkedin.com/in/ignacio-emanuel-gauna' },
   ],
 });

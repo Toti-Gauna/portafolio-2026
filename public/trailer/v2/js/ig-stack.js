@@ -13,6 +13,8 @@
    RECIPE  { type: 'igstack', screens: [{ k, t, tone, bg, dur, tiles: [ids] }], label }
      Each screen: the kicker (where) and the title (what) at the top, 3–5 tiles in a grid. The tiles arrive
      one after the other and each plays its animation as it lands; then the screen clears for the next.
+   9:16 (D.vertical): two columns of narrower tiles (the art scaled to fit, the caption at full size, css/ig-stack.css);
+     the header and the grid are centred together on the tall stage.
    ========================================================================== */
 (() => {
   'use strict';
@@ -23,6 +25,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   const TW = 540, TH = 340, GX = 30, GY = 30, TOP = 300;
+  const VTW = 490, VTH = 345, VGX = 20, VGY = 24; // 9:16 tile (css/ig-stack.css) and gaps: two columns
   /** tile positions on the stage for 3, 4 or 5 tiles (rows centred under the header) */
   function grid(n) {
     const rows = n <= 3 ? [n] : n === 4 ? [2, 2] : [3, 2];
@@ -47,6 +50,16 @@
             <div class="stk-cap"><b>${esc(t.name)}</b><span>${esc(t.note)}</span></div></div>`; }).join('')}
       </div>`).join('')}</div>`);
     const scr = D.$$('.stk-screen', s);
+    if (D.vertical) scr.forEach(el => { // 9:16: rows of two under the header, the whole block centred on the stage
+      const head = D.$('.stk-head', el), tiles = D.$$('.stk-tile', el), n = tiles.length, rows = Math.ceil(n / 2);
+      const hh = head.offsetHeight, gh = rows * VTH + (rows - 1) * VGY, top = Math.max(150, Math.round((D.H - hh - 70 - gh) / 2) - 30);
+      head.style.top = top + 'px';
+      tiles.forEach((tile, j) => {
+        const r = Math.floor(j / 2), cnt = Math.min(2, n - r * 2), x0 = (D.W - (cnt * VTW + (cnt - 1) * VGX)) / 2;
+        tile.style.left = x0 + (j % 2) * (VTW + VGX) + 'px';
+        tile.style.top = top + hh + 70 + r * (VTH + VGY) + 'px';
+      });
+    });
     D.show(s, T);
     D.ink(PAPER, T);
     if (o.label) D.label(T, o.label);

@@ -1,0 +1,372 @@
+{
+  "title": "Volta",
+  "kind": "Lab · sales demo",
+  "status": "Demo",
+  "summary": "A sports-supplement online store you can click through end to end, with a made-up brand: catalogue, stack builder, a tiered club, a game that gives coupons, gifts and a panel for the owner. It all runs in the browser on sample data: it processes no payments and creates no real orders.",
+  "facts": [
+    {
+      "k": "Type",
+      "v": "Clickable demo, no server"
+    },
+    {
+      "k": "Screens",
+      "v": "29 in the store · 60 in the panel"
+    },
+    {
+      "k": "Data",
+      "v": "Fictional brand, products and orders"
+    },
+    {
+      "k": "Status",
+      "v": "Demo: it charges and ships nothing"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The problem",
+      "v": "A small supplement shop takes orders over WhatsApp, chases price lists that keep changing, has tubs expiring on the shelf and doesn't know when each customer is about to run out."
+    },
+    {
+      "k": "What it shows",
+      "v": "A store that works out when to reorder, sells lots by expiry date and turns games into coupons, plus a panel where the owner sees what to do today."
+    },
+    {
+      "k": "Where it is",
+      "v": "A clickable demo with no backend, payments or customers. The production version is described in the repo, not built."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "Volta is a demo to show a supplement shop owner how they could sell online. The brand, the sample city (Mar del Plata), the catalogue and the orders are made up."
+      ],
+      "list": [
+        "Buyer: product sheets with price per serving, «how long will it last?», lot and expiry date; a search that knows the trade, a comparer, a stack builder, a quiz and a three-step checkout.",
+        "Club: levels by total spend, missions, a prize wheel and Shaker Rush, a canvas game that turns the score into a coupon.",
+        "Gifts: a code with a check digit and a link; whoever receives it never sees the price.",
+        "Owner: a panel with nine sections (Today, Counter, Orders, Stock, Purchasing, Customers, Promos, Campaigns and Settings), with lots that go out by expiry date and the supplier's price list imported from Excel."
+      ]
+    },
+    "loop": {
+      "h": "The business idea",
+      "p": [
+        "The demo is built for a meeting with the owner, and its script opens with their pains. The core answer is reordering: getting the customer back before they buy somewhere else."
+      ],
+      "title": "The reorder loop",
+      "steps": [
+        {
+          "actor": "Store",
+          "t": "Buys",
+          "d": "The product sheet works out how long the tub lasts, and the customer can ask for a heads-up before it runs out."
+        },
+        {
+          "actor": "Panel",
+          "t": "Running out",
+          "d": "From the variant's servings and the delivery date, the panel lists who runs out this week."
+        },
+        {
+          "actor": "Owner",
+          "t": "Writes to them",
+          "d": "A ready-made WhatsApp message, with a link that loads the bag."
+        },
+        {
+          "actor": "Buyer",
+          "t": "Comes back",
+          "d": "Opens the link with the bag ready; if they played in the Club, they have a coupon to use."
+        }
+      ],
+      "loop": "And the loop starts again. It is the concept the demo shows: there are no real customers or metrics to measure it.",
+      "caption": "Other ideas in the demo: 10 % off when three categories are combined (an editable rule), 17 dated campaigns with their coupon, and a brand sheet that turns it into another demo for another prospect."
+    },
+    "arch": {
+      "h": "Architecture",
+      "p": [
+        "A single Next.js app exported as a static site: there is no server and no database. Pages don't compute anything; they hand off to containers that join the state with a pure rules engine."
+      ],
+      "diagram": {
+        "title": "One app, all in the browser",
+        "caption": "Published on GitHub Pages from CI. The only thing outside the browser is the server at the bottom: it is described in the repo and does not exist.",
+        "nodes": {
+          "shop": {
+            "label": "Store",
+            "sub": "29 pages"
+          },
+          "admin": {
+            "label": "Panel",
+            "sub": "60 pages",
+            "note": "No login on purpose, with the «Demo» sign in view: it is not secure and is not presented as such."
+          },
+          "features": {
+            "label": "Containers",
+            "sub": "src/features"
+          },
+          "engine": {
+            "label": "Pure engine",
+            "sub": "no React",
+            "note": "Pricing, coupons, stock, order states and the game are pure, tested functions, with no React."
+          },
+          "stores": {
+            "label": "Stores",
+            "sub": "Zustand",
+            "note": "They rehydrate after the first render so the static HTML doesn't break, with versioned migrations of what was saved."
+          },
+          "fixtures": {
+            "label": "Catalogue",
+            "sub": "sample data"
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "per brand"
+          },
+          "prod": {
+            "label": "Server",
+            "sub": "planned",
+            "note": "In production the engine moves into server services and the components are reused. Described, not built."
+          }
+        },
+        "edges": {
+          "calc": "computes",
+          "state": "state",
+          "read": "reads",
+          "persist": "JSON",
+          "later": "planned"
+        }
+      }
+    },
+    "orders": {
+      "h": "The order as a state machine",
+      "p": [
+        "An order's life is what most needs to be right, so it lives in a single function that decides which transition is valid and with which trigger. The screen cannot skip a step."
+      ],
+      "diagram": {
+        "title": "From pending to delivered",
+        "caption": "Every transition goes through canTransition. From payment on, each step is taken by someone in the panel, and the changes drop an email into a simulated outbox.",
+        "nodes": {
+          "cancelled": {
+            "label": "Cancelled"
+          },
+          "pending": {
+            "label": "Pending",
+            "sub": "payment"
+          },
+          "review": {
+            "label": "In review",
+            "sub": "receipt",
+            "note": "A receipt never pays by itself: the panel approves it, or rejects it with a reason and the order goes back to pending."
+          },
+          "paid": {
+            "label": "Paid",
+            "note": "It can also be reached directly when the payment provider confirms (a simulation) or the owner was paid in hand. In production that would be a signed webhook, with the server checking amount, currency and reference."
+          },
+          "prep": {
+            "label": "Preparing"
+          },
+          "ready": {
+            "label": "Ready",
+            "sub": "lot checked"
+          },
+          "shipped": {
+            "label": "Shipped"
+          },
+          "delivered": {
+            "label": "Delivered"
+          },
+          "claim": {
+            "label": "In claim",
+            "note": "It opens from any paid state and ends in a return or goes back to the previous state."
+          },
+          "returned": {
+            "label": "Returned"
+          }
+        },
+        "edges": {
+          "proof": "receipt",
+          "reject": "rejected",
+          "approve": "approved",
+          "provider": "provider or in hand",
+          "cancel": "cancel",
+          "prepare": "prepare",
+          "pack": "packed",
+          "ship": "ship",
+          "pickup": "pickup",
+          "deliver": "deliver",
+          "complain": "claim",
+          "refund": "return"
+        }
+      }
+    },
+    "security": {
+      "h": "Security: what is there and what isn't",
+      "p": [
+        "A demo with no server can't be secure in the production sense, and it doesn't pretend to be. What it does is not ask for or send anything it shouldn't."
+      ],
+      "items": [
+        {
+          "t": "No external services",
+          "d": "No secrets and no API: WhatsApp is a link with the text filled in, and a receipt photo is processed on a canvas in the browser. Nothing is uploaded."
+        },
+        {
+          "t": "A receipt doesn't pay",
+          "d": "Only the panel's approval or the provider's confirmation lead to Paid. The confirmation is simulated and says so on screen."
+        },
+        {
+          "t": "Validated forms",
+          "d": "Zod with React Hook Form: lengths, emoji, phone and postcode. Files: only JPG, PNG or WebP."
+        },
+        {
+          "t": "Error-proof gifts",
+          "d": "Codes carry a check digit, and the link opens nothing if it is cut or edited."
+        },
+        {
+          "t": "Least-privilege CI",
+          "d": "Read-only across CI; writing to Pages only in the deploy step."
+        },
+        {
+          "t": "Kept out of search engines",
+          "d": "noindex and robots.txt, because it shows sample prices and brands."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "Static export, no server at this stage",
+          "why": "To publish it on GitHub Pages: the repo forbids in writing Server Actions, Route Handlers that read the request, cookies, middleware and ISR.",
+          "alt": "A server from day one: left for production, described but not built."
+        },
+        {
+          "t": "Business rules in a pure engine",
+          "why": "Pricing, stock, payments and missions live outside the components, so they are tested without a browser and can move to the server in production without rebuilding the screens."
+        },
+        {
+          "t": "Start from another lab demo",
+          "why": "Volta is a fork of an earlier store demo, which had already solved the hard, tested parts. Rebuilding them from scratch would have taken weeks.",
+          "alt": "Starting from scratch."
+        },
+        {
+          "t": "White label through a brand sheet",
+          "why": "One demo per prospect by changing a sheet: name, colours and its own storage prefix, so two demos on the same domain don't mix. A test forbids writing the brand name outside the sheets."
+        },
+        {
+          "t": "Rehydrate after the first render",
+          "why": "The static HTML doesn't know what the visitor saved: rehydrating afterwards avoids hydration errors. Saved state has versioned migrations."
+        },
+        {
+          "t": "A Canvas 2D game with a single loop",
+          "why": "One requestAnimationFrame with a capped delta and the pixel ratio capped at 2. Whatever shows before hydration is CSS."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "Strict TypeScript and ESLint. Before publishing, CI runs lint, typecheck, unit tests, the build, a check of the export and the e2e suite on an emulated phone."
+      ],
+      "items": [
+        {
+          "n": "988",
+          "u": "tests",
+          "d": "Unit: pricing, orders, lots, reordering, game and brand"
+        },
+        {
+          "n": "117",
+          "u": "files",
+          "d": "Of unit tests"
+        },
+        {
+          "n": "893",
+          "u": "e2e",
+          "d": "Playwright, listed in 93 files, not run"
+        }
+      ],
+      "note": "I ran the unit tests with Vitest on 28/10/2026: 988 green, in 117 files. I listed the 893 e2e tests that day with Playwright's list mode, in 93 files; I didn't run them."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "Next.js 16 (static export)",
+            "React 19",
+            "TypeScript",
+            "Tailwind CSS 4"
+          ]
+        },
+        {
+          "k": "State and forms",
+          "items": [
+            "Zustand",
+            "React Hook Form",
+            "Zod"
+          ]
+        },
+        {
+          "k": "Motion and media",
+          "items": [
+            "motion",
+            "Canvas 2D",
+            "WebAudio",
+            "GSAP (trailer)"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "Playwright",
+            "axe-core",
+            "ESLint",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshot",
+      "items": {
+        "volta": {
+          "alt": "Front page of the Volta sample store on desktop: the «Demo · nothing is charged» bar, the featured product «5 g que se notan», a creatine from the fictional house brand, with its sample price and price per serving, and the product carousel below.",
+          "caption": "The store's front page. Screenshot of a local build, with sample data."
+        }
+      }
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "Demo. The brand, catalogue, customers and orders are fictional.",
+        "There is no backend, database, authentication, payments, real email or WhatsApp API. The production version is described in the repo, not built.",
+        "It has no customers or sales. I don't claim that reordering or gamification increase anything: there is no real data.",
+        "The duration and dosage calculators are indicative: they are not health advice.",
+        "Pending: splitting the panel's data from the store's, and testing on real iPhone and Android phones.",
+        "I listed the e2e tests, but didn't run them."
+      ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "panel": {
+          "alt": "Dark \"Hoy en tu tienda\" panel with the to-do list by urgency; the pointer opens Products and stock with batches and expiry dates, then Promos with the wheel settings.",
+          "caption": "Demo admin panel: Today → Stock → Promos and wheel."
+        },
+        "tienda": {
+          "alt": "Dark store with lime accents on a phone: the Protein category, the Ionic Whey sheet with price per serving, 5 lb is chosen and added to the bag, which opens with shipping and the stack discount.",
+          "caption": "VOLTA store (Demo): protein catalogue → product → cart."
+        },
+        "club-ruleta": {
+          "alt": "Club page with the weight-plate wheel; it opens full screen, the centre is tapped, it spins and shows \"¡Ganaste!\" with a single-use coupon.",
+          "caption": "VOLTA club: the \"Disco olímpico\" wheel spins and gives a coupon."
+        },
+        "regalar": {
+          "alt": "Phone screen of VOLTA's gift section with the headline \"Regalá energía\", tabs for a product, a stack or a gift card, and a pot of the house-brand creatine.",
+          "caption": "Gifts: \"Regalá energía\" with a product, stack or gift card."
+        }
+      }
+    }
+  }
+}

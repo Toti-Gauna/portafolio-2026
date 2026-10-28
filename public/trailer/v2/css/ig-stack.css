@@ -13,3 +13,12 @@
 .stk-cap b { font: 900 42px/1 var(--display); font-variation-settings: "wdth" 100, "wght" 880; color: #eeeae3; white-space: nowrap; }
 .stk-cap span { font: 500 35px/1.05 var(--display); font-variation-settings: "wdth" 88, "wght" 500; color: #bdb8ae; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stk-ph { position: absolute; inset: 0; display: grid; place-items: center; font: 900 54px/1 var(--display); color: rgb(255 255 255 / .2); background: repeating-linear-gradient(135deg, rgb(255 255 255 / .03) 0 20px, transparent 20px 40px); }
+
+/* 9:16 (positions from js/ig-stack.js): two columns of 490 px tiles — the art scaled to fit, the caption at full size */
+.is-vertical .stk-head { left: 70px; width: 940px; }
+.is-vertical .stk-t { font-size: 96px; white-space: normal; text-wrap: balance; }
+.is-vertical .stk-tile { width: 490px; height: 345px; }
+.is-vertical .stk-art { transform: scale(calc(490 / 540)); transform-origin: 0 0; }
+.is-vertical .stk-cap { height: 140px; gap: 8px; padding: 0 20px; }
+.is-vertical .stk-cap b { font-size: 44px; }
+.is-vertical .stk-cap span { font-size: 36px; white-space: normal; text-wrap: balance; } /* a long note takes a second line */

@@ -1,0 +1,37 @@
+.fl__wrap { container-type: inline-size; }
+.fl__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.fl__step { position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding-bottom: 22px; }
+.fl__step:last-child { padding-bottom: 0; }
+/* the line that joins one step with the next (column layout: vertical) */
+.fl__step:not(:last-child)::before { content: ''; position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: #3a3a40; transform-origin: top; }
+.fl__node { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #4a4a52; background: #16161a; font: 700 13px/1 var(--font-mono); color: var(--paper); z-index: 1; }
+.fl__node::after { content: ''; position: absolute; inset: -1.5px; border-radius: 50%; background: var(--accent); opacity: 0; transform: scale(0.6); }
+.fl__node span { position: relative; z-index: 1; }
+.fl__actor { font: 12px/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.fl__t { font-size: 17px; line-height: 1.25; font-variation-settings: 'wdth' 106; }
+.fl__d { margin-top: 4px; color: #cfcbc2; font-size: 15px; line-height: 1.5; }
+.fl__body { padding-top: 8px; }
+.fl__loop { font: 13px var(--font-mono); color: var(--muted); }
+
+@container (min-width: 820px) {
+  .fl__steps { grid-template-columns: repeat(var(--cols), 1fr); row-gap: 32px; }
+  .fl__step { grid-template-columns: 1fr; gap: 14px; padding: 0 18px 0 0; align-content: start; }
+  .fl__step:not(:last-child)::before { left: 48px; right: 8px; top: 19px; bottom: auto; width: auto; height: 2px; transform-origin: left; }
+  .fl__step[data-end]::before { display: none; }
+  .fl__body { padding-top: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .fl .fl__step::before { transition: transform 700ms var(--ease-expo) calc(200ms + var(--o) * 140ms); }
+  .js .fl:not([data-in]) .fl__step::before { transform: scaleY(0); }
+  .js .fl .fl__body, .js .fl .fl__node { transition: opacity 600ms ease calc(var(--o) * 120ms), transform 700ms var(--ease-expo) calc(var(--o) * 120ms); }
+  .js .fl:not([data-in]) :is(.fl__body, .fl__node) { opacity: 0; transform: translateY(10px); }
+  .fl__node::after { animation: fl-pulse var(--cycle) ease-out infinite; animation-delay: calc(1.2s + var(--o) * 0.7s); animation-play-state: paused; }
+  .fl[data-live] .fl__node::after { animation-play-state: running; }
+}
+@container (min-width: 820px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js .fl:not([data-in]) .fl__step::before { transform: scaleX(0); }
+  }
+}
+@keyframes fl-pulse { 0% { opacity: 0; transform: scale(0.6); } 6% { opacity: 1; transform: scale(1); } 22% { opacity: 0; transform: scale(1.5); } 100% { opacity: 0; transform: scale(1.5); } }

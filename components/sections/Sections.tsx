@@ -1,14 +1,24 @@
+import type { CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
-import { LAB, WORK_SHOT, type CaseSlug } from '@/lib/cases';
+import { CASE_SLUGS, LAB, WORK_SHOT, type CaseSlug } from '@/lib/cases';
+import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
+import { BOOKS } from '@/lib/business';
+import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
+import { Diagram } from '../diagrams/Diagram';
+import { TechIcon } from '../diagrams/TechIcon';
+import { PillarArt } from '../home/PillarArt';
+import { MethodCycle } from '../home/MethodCycle';
+import { InView } from '../diagrams/InView';
 import { MethodIcon } from '../MethodIcon';
 import { AgentIcon, type AgentId } from '../AgentIcon';
 import '../sections.css';
+import '../home/home.css';
 
 type Item = { when: string; title: string; text: string };
-type Step = { name: string; text: string; example: string };
+type Step = { name: string; short: string; text: string; example: string };
 type Point = { title: string; text: string };
 
 function Head({ id, label, title, lead }: { id: string; label: string; title: string; lead?: string }) {
@@ -25,6 +35,25 @@ const Ext = ({ href, children, label }: { href: string; children: React.ReactNod
   <a href={href} target="_blank" rel="noopener noreferrer">{children}<span className="sr-only"> ({label})</span></a>
 );
 
+export function WhatIDo() {
+  const t = useTranslations('what');
+  return (
+    <section id="que-hago" className="sec container-x" aria-labelledby="h-que-hago">
+      <Head id="h-que-hago" label={t('label')} title={t('title')} lead={t('lead')} />
+      <ul className="pillars">
+        {PILLARS.map((p, i) => (
+          <InView as="li" live key={p.id} className="pillar" style={{ '--o': i } as CSSProperties}>
+            <PillarArt id={p.id} />
+            <h3 className="pillar__t">{t(`items.${p.id}.t`)}</h3>
+            <p className="pillar__d">{t(`items.${p.id}.d`)}</p>
+            <Link className="pillar__proof" href={`/proyectos/${p.slug}`}><span className="label">{t('see')}</span> {t(`items.${p.id}.proof`)} →</Link>
+          </InView>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function Journey() {
   const t = useTranslations('journey');
   const items = t.raw('items') as Item[];
@@ -34,6 +63,7 @@ export function Journey() {
       <ol className="journey">
         {items.map((it, i) => (
           <Reveal as="li" key={i} className="journey__item">
+            <svg className="journey__fork" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 0V40" /><path d="M8 6C8 22 30 14 30 30" pathLength={1} /><circle cx="30" cy="30" r="5" /></svg>
             <p className="journey__when">{it.when}</p>
             <div>
               <h3 className="journey__title">{it.title}</h3>
@@ -59,8 +89,10 @@ export function Work() {
             {WORK_SHOT[k] && <img className="work__shot" src={asset(WORK_SHOT[k])} alt={t(`cards.${k}.shotAlt`)} width={1600} height={1000} loading="lazy" decoding="async" />}
             {tag(t(`cards.${k}.status`))}
             <h3 className="work__name">{t(`cards.${k}.name`)}</h3>
+            <p className="work__role">{t(`cards.${k}.role`)}</p>
             <p>{t(`cards.${k}.text`)}</p>
             {k === 'tuenti' && <p className="note">{t('tuentiNote')}</p>}
+            <p className="work__inside"><span className="label">{t('inside.label')}</span>{WORK_INSIDE[k].map((x) => <span key={x} className="chip">{t(`inside.${x}`)}</span>)}</p>
             {link(k)}
           </Reveal>
         ))}
@@ -83,8 +115,8 @@ export function Lab() {
             <h3 className="lab__name">{t(`items.${it.id}.name`)}</h3>
             <p>{t(`items.${it.id}.text`)}</p>
             <p className="lab__links">
-              {'page' in it && <Link href={`/proyectos/${it.page}`}>{t('open')} →</Link>}
-              {'href' in it && !('page' in it) && <Ext href={it.href} label={nt}>{t('open')} ↗</Ext>}
+              {(CASE_SLUGS as readonly string[]).includes(it.id) && <Link href={`/proyectos/${it.id}`}>{t('deep')} →</Link>}
+              {'href' in it && <Ext href={it.href} label={nt}>{t('open')} ↗</Ext>}
               <Ext href={it.code} label={nt}>{t('view')} ↗</Ext>
             </p>
           </Reveal>
@@ -96,11 +128,12 @@ export function Lab() {
 
 export function Method() {
   const t = useTranslations('method');
+  const b = useTranslations('business');
   const steps = t.raw('steps') as Step[];
-  const reads = t.raw('reads') as { title: string; state: string }[];
   return (
     <section id="metodo" className="sec container-x" aria-labelledby="h-metodo">
       <Head id="h-metodo" label={t('label')} title={t('title')} lead={t('lead')} />
+      <MethodCycle names={steps.map((s) => s.short)} caption={t('cycle')} />
       <ol className="method">
         {steps.map((s, i) => (
           <Reveal as="li" key={i} className="method__step">
@@ -113,10 +146,19 @@ export function Method() {
       </ol>
       <div className="reads">
         <h3 className="reads__title">{t('readsTitle')}</h3>
-        <ul className="reads__list">
-          {reads.map((r) => <li key={r.title}><span>{r.title}</span> <span className="status">{r.state}</span></li>)}
+        <ul className="reads__books">
+          {BOOKS.map((id) => (
+            <li key={id}>
+              <Link href={`/negocio#${id}`} className="reads__book">
+                <span className="label">{b(`books.${id}.kicker`)}</span>
+                <b>{b(`books.${id}.title`)}</b>
+                <span className="reads__idea">{b(`books.${id}.idea`)}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
-        <p className="note">{t('readsNote')}</p>
+        <p className="reads__more"><Link className="card-link" href="/negocio">{t('readsMore')} →</Link></p>
+        <p className="note">{b('reading')}</p>
       </div>
     </section>
   );
@@ -124,10 +166,13 @@ export function Method() {
 
 export function System() {
   const t = useTranslations('system');
+  const u = useTranslations('caseUi');
   const points = t.raw('points') as Point[];
   return (
     <section id="sistema" className="sec container-x" aria-labelledby="h-sistema">
       <Head id="h-sistema" label={t('label')} title={t('title')} lead={t('lead')} />
+      <Diagram spec={SYSTEM_FLOW} copy={t.raw('flow') as ArchCopy} ui={{ asText: u('asText'), legend: u('legend') }} className="system__flow" />
+      {(CASE_SLUGS as readonly string[]).includes('agentes') && <p className="system__deep"><Link className="card-link" href="/proyectos/agentes">{t('deep')} →</Link></p>}
       <h3 className="sub-title">{t('agentsTitle')}</h3>
       <ul className="agents">
         {(t.raw('agents') as { id: AgentId; name: string; role: string }[]).map((a) => (
@@ -159,16 +204,37 @@ export function System() {
 
 export function Skills() {
   const t = useTranslations('skills');
+  const cols = ['work', 'own', 'study'] as const;
   return (
     <section id="capacidades" className="sec container-x" aria-labelledby="h-capacidades">
       <Head id="h-capacidades" label={t('label')} title={t('title')} lead={t('lead')} />
-      <div className="skills">
-        {(['pro', 'own', 'exploring'] as const).map((k) => (
-          <Reveal key={k} className="skills__col">
-            <h3 className="skills__title">{t(`layers.${k}.title`)}</h3>
-            <ul>{(t.raw(`layers.${k}.items`) as string[]).map((s) => <li key={s}>{s}</li>)}</ul>
-          </Reveal>
-        ))}
+      <InView className="ledger">
+        <table className="ledger__table">
+          <thead>
+            <tr><th scope="col">{t('tech')}</th>{cols.map((c) => <th key={c} scope="col" className="ledger__col">{t(`cols.${c}`)}</th>)}</tr>
+          </thead>
+          <tbody>
+            {SKILL_ROWS.map((r, i) => (
+              <tr key={r.id} style={{ '--o': i } as CSSProperties}>
+                <th scope="row">
+                  <span className="ledger__tech">
+                    <TechIcon id={r.id} className="ledger__icon" />
+                    <span><b>{t(`rows.${r.id}.name`)}</b><span className="ledger__note">{t(`rows.${r.id}.note`)}</span></span>
+                  </span>
+                </th>
+                {cols.map((c) => (
+                  <td key={c} className="ledger__cell" data-col={c} data-on={r.at.includes(c) || undefined}>
+                    {r.at.includes(c) ? <><span className="ledger__dot" aria-hidden="true" /><span className="ledger__lab">{t(`cols.${c}`)}</span></> : null}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </InView>
+      <div className="also">
+        <h3 className="sub-title">{t('also')}</h3>
+        <ul className="also__list">{(t.raw('alsoItems') as string[]).map((x) => <li key={x}>{x}</li>)}</ul>
       </div>
     </section>
   );

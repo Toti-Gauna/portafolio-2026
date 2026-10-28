@@ -1,0 +1,91 @@
+{
+  "title": "CompliA",
+  "kind": "Professional work · Tsoft for Telefónica",
+  "status": "In internal production",
+  "summary": "An AI assistant inside Telefónica's compliance portal: it answers in natural language, analyses declarations and helps issue rulings. I designed and built it: the RAG, the validations, the restrictions and the recommendations.",
+  "facts": [
+    { "k": "Role", "v": "Design and development, end to end" },
+    { "k": "Period", "v": "2026 – today" },
+    { "k": "Type", "v": "RAG assistant on top of a language model" },
+    { "k": "Status", "v": "In internal production" }
+  ],
+  "tldr": [
+    { "k": "The problem", "v": "A lot of compliance information, old and new, and processes that need judgement: declarations, forms, rulings and reports." },
+    { "k": "The solution", "v": "An assistant that searches the documents, answers with that context and stays bounded by rules: it states its limits and leaves the ruling to a person." },
+    { "k": "Where it is", "v": "It runs in internal production. I don't show metrics or data: they belong to Telefónica." }
+  ],
+  "blocks": {
+    "context": {
+      "h": "Context",
+      "p": [
+        "Telefónica's compliance portal digitalises internal processes, improves traceability and supports end-to-end flows: declarations, forms, interactions and administrative operations.",
+        "I work on it at Tsoft as a Ssr AI Fullstack Developer. CompliA is its conversational assistant."
+      ]
+    },
+    "problem": {
+      "h": "What it does",
+      "list": [
+        "Answers in natural language about historical and new compliance data.",
+        "Analyses sworn declarations and flags possible conflicts of interest and breaches of the programme's rules.",
+        "Helps issue rulings, assigns forms and builds the programme's reports.",
+        "States its limits: it can make mistakes and some processes need human action."
+      ]
+    },
+    "how": {
+      "h": "How it works",
+      "p": [
+        "A RAG assistant doesn't answer from memory: first it finds what matters in the documents, and only then does the language model write with that context. Rules decide what it may answer and when a person has to step in."
+      ],
+      "diagram": {
+        "badge": "Conceptual scheme",
+        "title": "From a question to a reviewed answer",
+        "caption": "Generic scheme of a RAG assistant like CompliA. It is not Telefónica's architecture: no system names, data, controls or providers.",
+        "nodes": {
+          "user": { "label": "Team member", "sub": "asks a question" },
+          "ui": { "label": "Assistant", "sub": "chat interface" },
+          "search": { "label": "Search", "sub": "in the documents", "note": "Brings only the passages that matter for that question: that is the RAG." },
+          "llm": { "label": "Language model", "sub": "writes", "note": "Just one component: it writes from what was retrieved." },
+          "rules": { "label": "Validations", "sub": "and restrictions", "note": "They bound what it may answer and when it must hand over to a person." },
+          "answer": { "label": "Answer", "sub": "with its sources" },
+          "human": { "label": "Human review", "sub": "confirms", "note": "The assistant helps issue the ruling; a person confirms it." }
+        },
+        "edges": { "ask": "question", "query": "search", "ctx": "context", "draft": "draft", "ok": "validated", "review": "review" }
+      }
+    },
+    "steps": {
+      "h": "The four pieces I designed",
+      "p": ["The language model is one component; what makes it useful and safe in compliance are these four pieces."],
+      "steps": [
+        { "actor": "RAG", "t": "Find", "d": "Locate, in the compliance data, what each question needs." },
+        { "actor": "Validations", "t": "Check", "d": "Every answer meets the rules before it is shown." },
+        { "actor": "Restrictions", "t": "Bound", "d": "What the assistant doesn't do alone: some processes need human action." },
+        { "actor": "Recommendations", "t": "Help decide", "d": "Issue rulings, assign forms and build reports." }
+      ]
+    },
+    "role": {
+      "h": "My contribution",
+      "p": [
+        "I designed and built all of it: the RAG, the validations, the restrictions and the recommendations.",
+        "On the same portal I work end to end: frontend, backend, CI/CD and integrations."
+      ]
+    },
+    "limitsByDesign": {
+      "h": "Limits by design",
+      "p": ["In compliance, an assistant that is confidently wrong is worse than no assistant. That's why the limits are part of the product."],
+      "items": [
+        { "t": "It states its limits", "d": "It warns that it can make mistakes and that some processes need human action." },
+        { "t": "A person confirms", "d": "It helps issue the ruling, but a person confirms it." },
+        { "t": "It answers with context", "d": "It writes from what it finds in the documents, not from memory." },
+        { "t": "Rules before answers", "d": "Validations and restrictions run before anything reaches the screen." }
+      ]
+    },
+    "demo": {
+      "h": "The demo",
+      "caption": "Clip from the CompliA demo. Sample data."
+    },
+    "hidden": {
+      "h": "What I don't show",
+      "p": ["For confidentiality I don't show architecture, data, controls, metrics or internal screenshots from Telefónica or Tsoft. The scheme above is conceptual and the video uses sample data."]
+    }
+  }
+}

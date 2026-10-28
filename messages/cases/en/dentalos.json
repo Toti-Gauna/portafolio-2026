@@ -1,0 +1,360 @@
+{
+  "title": "DentalOS",
+  "kind": "Lab · pre-sales demo",
+  "status": "Demo",
+  "summary": "The administrative workflow of a fictional dental clinic, Clínica Brisa: a portal for patients and a panel for the front desk, clinicians and management, in 16 modules. Frontend only, with synthetic data: it sends no messages, makes no calls and charges nothing.",
+  "facts": [
+    {
+      "k": "Type",
+      "v": "Frontend-only demo, no network"
+    },
+    {
+      "k": "Modules",
+      "v": "16 (M01–M16), counted in the code"
+    },
+    {
+      "k": "Data",
+      "v": "Synthetic, with a fixed sample clock"
+    },
+    {
+      "k": "Status",
+      "v": "Demo · batches 1 to 6 of 10 closed"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The problem",
+      "v": "In a clinic, an appointment rescheduled over WhatsApp loses its reminder, an orthodontic check-up never gets booked and an estimate gets no answer."
+    },
+    {
+      "k": "What it shows",
+      "v": "Every visit has a next step: appointments that change without getting lost, reminders that are voided and rescheduled, a waitlist and rule-bound recall campaigns."
+    },
+    {
+      "k": "Where it is",
+      "v": "A local demo with no backend. It is not clinical software: the breadth of the demo is not a promise of scope."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "A demo to show a general dentistry and orthodontics clinic how it could organise its administrative workflow. Clínica Brisa, its patients and its clinicians are made up, and patients are identified by sample IDs (P-001…), never by ID documents."
+      ],
+      "list": [
+        "Patient or responsible adult: books on a calendar with the free slots, sees their appointments and estimates, and tries a simulated WhatsApp chat and phone call. There is an educational section for children, with games.",
+        "Front desk: schedule by day, week or clinician, message inbox, people and families, waitlist and reminders.",
+        "Clinician: an odontogram with five surfaces per tooth and orthodontic follow-up.",
+        "Management: estimates with a fictional till, reports that show their denominator, campaigns and a simulator with 12 scenarios.",
+        "The role picker is a view for the demo, not a login."
+      ]
+    },
+    "reschedule": {
+      "h": "The idea: every visit has a next step",
+      "p": [
+        "The demo's 90-second script shows the most common and most fragile case: a patient who changes their appointment over WhatsApp."
+      ],
+      "title": "Rescheduling without losing the appointment",
+      "steps": [
+        {
+          "actor": "Patient",
+          "t": "Asks to change",
+          "d": "«I want to change my appointment»: the chat recognises the intent with local rules, no AI."
+        },
+        {
+          "actor": "Domain",
+          "t": "Keeps the old one",
+          "d": "If the chosen time is taken, the original appointment stands."
+        },
+        {
+          "actor": "Availability",
+          "t": "Checks the new slot",
+          "d": "Clinician, chair, site, duration, minimum notice and that it isn't in the past."
+        },
+        {
+          "actor": "Patient",
+          "t": "Confirms",
+          "d": "Sees before and after. Appointment A-0012 becomes version 2, with the same ID."
+        },
+        {
+          "actor": "Outbox",
+          "t": "Reminders",
+          "d": "The version 1 reminder is voided and the version 2 one is scheduled."
+        },
+        {
+          "actor": "Front desk",
+          "t": "Sees it on the schedule",
+          "d": "A-0012 v2 shows up in the panel, with its outbox and its audit trail."
+        }
+      ],
+      "caption": "It all happens in the browser: no message is really sent."
+    },
+    "ideas": {
+      "p": [
+        "The rest of the demo follows the same idea:"
+      ],
+      "list": [
+        "Waitlist: when a slot frees up, it is offered to someone waiting for a compatible one.",
+        "Estimates: a minor can't accept one, and neither can an adult who isn't their guardian. Accepting is not paying.",
+        "Recall campaigns: segments computed from the state (pending check-ups, unanswered estimates), with opt-out, exclusions and a cap of 2 messages in 30 days per person.",
+        "Economics before launch: contribution and break-even; if a figure is missing, the campaign stays a draft.",
+        "Projected, simulated and observed results, kept apart: booking is not treating or charging, and attribution does not prove causation."
+      ]
+    },
+    "arch": {
+      "h": "Architecture",
+      "p": [
+        "A React SPA built with Vite into static files, with its own hash router and store. Screens don't modify the state: they send commands to a pure domain layer, with no React."
+      ],
+      "diagram": {
+        "title": "One state, changed by commands",
+        "caption": "No backend, database, AI, authentication, messages, calls, payments or analytics. CI publishes it on GitHub Pages.",
+        "nodes": {
+          "portal": {
+            "label": "Portal",
+            "sub": "6 modules"
+          },
+          "panel": {
+            "label": "Panel",
+            "sub": "10 modules"
+          },
+          "store": {
+            "label": "DemoStore",
+            "sub": "one state"
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "envelope",
+            "note": "Versioned and validated on hydration. If it is damaged the demo says so and offers a restore; with no access it runs in memory; if another tab changes it, it warns."
+          },
+          "domain": {
+            "label": "Pure domain",
+            "sub": "59 commands",
+            "note": "Each command is applied to a copy of the state: if it fails, the whole copy is thrown away."
+          },
+          "clock": {
+            "label": "Clock",
+            "sub": "UTC−03:00",
+            "note": "An injected sample clock: ESLint forbids Date.now and Math.random, so the demo plays out the same every time."
+          },
+          "sched": {
+            "label": "Slots",
+            "sub": "no overlaps"
+          },
+          "outbox": {
+            "label": "Outbox",
+            "sub": "simulated",
+            "note": "Reminders, offers and campaigns keyed by appointment, version and type: they don't duplicate and none leaves the browser."
+          },
+          "audit": {
+            "label": "Audit",
+            "sub": "commandId"
+          }
+        },
+        "edges": {
+          "portalCmd": "dispatch",
+          "panelCmd": "dispatch",
+          "exec": "execute",
+          "slot": "check slot",
+          "msg": "schedule / void",
+          "log": "records",
+          "time": "time",
+          "save": "saves"
+        }
+      }
+    },
+    "command": {
+      "h": "One command, end to end",
+      "p": [
+        "This is the central technical piece: every change is atomic and idempotent. A double click doesn't book twice and an error leaves nothing half done."
+      ],
+      "seq": {
+        "title": "From the click to the saved state",
+        "caption": "If the handler fails with a domain error (PASADO, SERVICIO_INCOMPATIBLE…), the copy is thrown away and the original state stays intact. It is a local transaction, not a distributed guarantee.",
+        "lanes": {
+          "ui": "Screen",
+          "store": "DemoStore",
+          "domain": "Domain",
+          "outbox": "Outbox"
+        },
+        "msgs": {
+          "dispatch": "dispatch(command)",
+          "id": "assigns a commandId",
+          "exec": "execute(state, command)",
+          "seen": "seen → same result",
+          "clone": "copy: structuredClone",
+          "slot": "checks the slot",
+          "msgs": "schedules or voids",
+          "audit": "writes the audit entry",
+          "result": "new state, or an error",
+          "save": "saves to localStorage",
+          "render": "notifies, re-renders"
+        }
+      }
+    },
+    "privacy": {
+      "h": "Privacy and limits by design",
+      "p": [
+        "A health demo has to be discreet even when its data is made up. The limits live in the build and the linter, not only in the docs."
+      ],
+      "items": [
+        {
+          "t": "No network",
+          "d": "The build's CSP declares connect-src 'none', frame-src 'none' and form-action 'none', and ESLint forbids fetch."
+        },
+        {
+          "t": "No arbitrary HTML",
+          "d": "ESLint forbids dangerouslySetInnerHTML, and the saved state is structurally validated before it is used."
+        },
+        {
+          "t": "No personal data",
+          "d": "Sample IDs instead of ID documents. No photos, X-rays, maps, embeds, CDNs or tracking; fonts and icons are local."
+        },
+        {
+          "t": "Roles are views",
+          "d": "Switching role changes the screen, not the permissions: there is no authentication and it is not presented as security."
+        },
+        {
+          "t": "Discreet messages",
+          "d": "Templates carry no treatments, diagnoses or amounts, and a rule rejects alarmist tone and clinical detail."
+        },
+        {
+          "t": "Clinical limits",
+          "d": "No diagnosis, triage or treatment advice, and no microphone. The dental artwork is marked as pending review by a dentist."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "Frontend only, no network",
+          "why": "It is a local demo: the build's CSP closes connections and an ESLint rule forbids fetch."
+        },
+        {
+          "t": "Determinism",
+          "why": "An injectable clock and no Date.now or Math.random; the games use a seed. The same demo tells the same story every time."
+        },
+        {
+          "t": "A home-made command store",
+          "why": "Atomic, idempotent commands keyed by commandId, applied to a copy of the state, with an outbox and an audit trail, and no third-party router or state library.",
+          "alt": "An external state library."
+        },
+        {
+          "t": "Defensive persistence",
+          "why": "A versioned, validated envelope; if damaged, a warning plus restore or download a copy; with no access or no quota, memory mode. Resetting only clears its own namespace."
+        },
+        {
+          "t": "Specification-driven development",
+          "why": "Each requirement has an ID, source, scenario and evidence, and a specified requirement doesn't count as done until there is evidence. One PR per batch."
+        },
+        {
+          "t": "Assistants without an LLM",
+          "why": "The chat and the management assistant are rules: the figures come from the state and there are no canned answers that could contradict it.",
+          "alt": "A language model."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "Before publishing, CI runs lint, typecheck, unit tests, the build and the e2e suite. The repo documents an intermittent e2e failure, a race with a game's clock, that was found and fixed."
+      ],
+      "items": [
+        {
+          "n": "190",
+          "u": "tests",
+          "d": "Unit: domain, campaigns, games, WCAG contrast and SVG artwork"
+        },
+        {
+          "n": "6",
+          "u": "files",
+          "d": "Of unit tests"
+        },
+        {
+          "n": "93",
+          "u": "e2e",
+          "d": "Playwright, listed in 13 files, not run"
+        }
+      ],
+      "note": "I ran the unit tests with Vitest on 28/10/2026: 190 green, in 6 files. I listed the 93 e2e tests that day with Playwright's list mode, in 13 files; I didn't run them. I counted the 16 modules and the 59 command types in the code."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7",
+            "Own CSS with light-dark()"
+          ]
+        },
+        {
+          "k": "Home-made",
+          "items": [
+            "Store on useSyncExternalStore",
+            "Hash router",
+            "Web Audio"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "jsdom",
+            "Playwright",
+            "ESLint",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshot",
+      "items": {
+        "dentalos": {
+          "alt": "Panel of the fictional Clínica Brisa in the front desk's «Hoy y agenda» (today and schedule) view: the day's indicators (active, to confirm, confirmed), a day picker, the schedule by clinician with versioned appointments such as «A-0003 v1», and the «Por confirmar» (to confirm) column.",
+          "caption": "M04 · Today and schedule, with the sample clock fixed on a Monday in October. Screenshot of a local build, with synthetic data."
+        }
+      }
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "Pre-sales demo. Clínica Brisa, its patients and its clinicians are fictional.",
+        "It is not clinical software or a medical record, no clinic uses it, and the odontogram has no medical precision.",
+        "It doesn't send WhatsApp messages or make calls, and the assistants are rules, not AI.",
+        "Roles are views: there is no authentication or access control.",
+        "It has no price and no defined business model.",
+        "Batches 1 to 6 of 10 are closed. Pending: appointment code and QR, call sounds, a guide by role, full QA and measured performance.",
+        "Not tested with a real screen reader or in Safari or Firefox. I listed the e2e tests, but didn't run them."
+      ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "recepcion": {
+          "alt": "Light panel of the fictional clinic: \"Hoy y agenda\" by clinician; a pending appointment is confirmed, the 09:00 appointment opens in a side panel and from there the person's administrative record.",
+          "caption": "Clínica Brisa front desk (Demo): today's schedule → appointment → patient record."
+        },
+        "odontograma": {
+          "alt": "Illustrated odontogram with U-shaped arches; the pointer selects teeth 46 and 36 and the page scrolls to the current records and history.",
+          "caption": "Odontogram: occlusal view and each tooth's records."
+        },
+        "ortodoncia": {
+          "alt": "Orthodontics module with the aesthetic-brackets illustration, the check-up indicated by the clinician with its booked appointment, and the form to record an indication.",
+          "caption": "Orthodontic continuity: appliance, indicated check-ups and timeline."
+        },
+        "campanas": {
+          "alt": "Campaigns module with counters, four administrative segments (pending check-ups, unanswered estimates, enquiries without appointment, cancelled appointments) and a step-by-step draft campaign editor.",
+          "caption": "Campaigns and follow-up: computed segments and a draft campaign."
+        }
+      }
+    }
+  }
+}

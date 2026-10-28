@@ -1,0 +1,254 @@
+{
+  "title": "Agentic system",
+  "kind": "Own tooling · how I work",
+  "status": "Own system · in use",
+  "summary": "An agentic system, split into parts: 11 agents with separate roles, skills that load depending on the task, and gates where a person decides. It is how I work in my repos: the agents specify, build and review; merging, publishing and spending are mine to authorise.",
+  "facts": [
+    { "k": "Role", "v": "I designed it and maintain it; I approve every final gate" },
+    { "k": "Pieces", "v": "11 agents · 79 skills · 3 formats" },
+    { "k": "Where it is used", "v": "HandyX and Eclipse backends, Eclipse-Web and my own demos" },
+    { "k": "Licence", "v": "For my own use: not open source" }
+  ],
+  "tldr": [
+    { "k": "The problem", "v": "A general-purpose assistant on its own mixes scope, design, security and cost: it tends to assume, over-build and spend." },
+    { "k": "The solution", "v": "Roles with one owner per decision, discovery before code, written assumptions and gates with human approval." },
+    { "k": "Where it is", "v": "In use in my repos, in a different shape in each one. The agents don't work on their own and nothing has been audited by a third party." }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "It is not a long prompt. Each agent is a Markdown file with its mission, what it decides, what it doesn't, and a table that says which skill to load for each action. Skills are short guides (one SKILL.md each, some with references) that load only when the task needs them.",
+        "I built it because a general-purpose assistant on its own mixes decisions about scope, design, security and cost. Here each decision has a single owner, discovery comes before code, assumptions are written down and there are gates where a person decides."
+      ],
+      "list": [
+        "11 agents: Direction, UX/UI, Design, Marketing, Ads, Documentation and five architects (frontend, backend, cybersecurity, games and trailers).",
+        "79 skills spread across 8 agents. Direction, UX/UI and Marketing have no skills of their own; UX/UI reuses some from Frontend and Trailers.",
+        "Three formats: Claude Code (all 11), Codex (10) and GitHub Copilot (5)."
+      ]
+    },
+    "roles": {
+      "h": "The roles",
+      "p": [
+        "One owner per decision. UX/UI specifies flows and states, and Frontend implements them; Design signs off the aesthetics; Marketing decides offer and channel, and Ads makes the pieces; Backend implements and Cybersecurity reviews. Direction owns the plan, the scope and the cost, and hands each task to the right role."
+      ],
+      "diagram": {
+        "title": "Eleven agents, one owner per decision",
+        "caption": "Under each role, its own skills (I counted the SKILL.md files on 10/28/2026). The arrows are hand-offs written in the agents' files or in the repos where they are used; Direction can hand work to any of them.",
+        "groups": { "product": "Product", "arch": "Architects" },
+        "nodes": {
+          "human": { "label": "Ignacio", "sub": "approves" },
+          "chief": { "label": "Direction", "sub": "0 skills", "note": "Writes and changes no code: decides scope, order and cost, and runs the gates." },
+          "docs": { "label": "Documentation", "sub": "10 skills" },
+          "uxui": { "label": "UX/UI", "sub": "0 skills" },
+          "design": { "label": "Design", "sub": "7 skills", "note": "A 7-axis rubric and three written defects before accepting. If the result looks worse than the baseline, it is not merged." },
+          "mkt": { "label": "Marketing", "sub": "0 skills" },
+          "ads": { "label": "Ads", "sub": "6 skills" },
+          "fe": { "label": "Frontend", "sub": "8 skills", "note": "Whatever it needs from the backend it hands over as a requirement «to validate», never as something that already exists." },
+          "be": { "label": "Backend", "sub": "13 skills" },
+          "sec": { "label": "Security", "sub": "13 skills", "note": "Active tests only against our own dev or staging, with the scope written down. If the target is production or a third party, it stops and asks." },
+          "game": { "label": "Games", "sub": "13 skills" },
+          "trailer": { "label": "Trailers", "sub": "9 skills" }
+        },
+        "edges": {
+          "ask": "request",
+          "brief": "what needs an OK",
+          "spec": "flows and states",
+          "look": "aesthetic gate",
+          "offer": "offer and KPI",
+          "handoff": "«to validate»",
+          "review": "critical diff"
+        }
+      }
+    },
+    "flow": {
+      "h": "How work flows",
+      "p": [
+        "Every change follows the same path. No code without a bounded specification, one batch at a time, and nothing is merged or published without my OK.",
+        "Role agents load only the skills the action needs: a discovery one to start, layer or component ones to build, testing ones to close. If the review finds something blocking, it goes back to building."
+      ],
+      "diagram": {
+        "title": "From a request to production, through a human gate",
+        "caption": "The G0–G5 labels are the gates of the working contract I use at Eclipse. At Eclipse the roles are steps that one session applies in sequence, with no parallel sub-agents.",
+        "groups": { "human": "A person decides" },
+        "nodes": {
+          "req": { "label": "Ignacio", "sub": "asks for a change" },
+          "chief": { "label": "Direction", "sub": "plan, scope, cost" },
+          "spec": { "label": "Specification", "sub": "short and bounded", "note": "Problem, user, flow, requirements and what is NOT done, acceptance criteria, how to roll back, cost and owner." },
+          "agents": { "label": "Role agents", "sub": "one per front", "note": "Each one starts with its discovery skill and states its assumptions in a fixed block before implementing." },
+          "skills": { "label": "Skills", "sub": "on demand" },
+          "repo": { "label": "Branch + PR", "sub": "one batch at a time" },
+          "qa": { "label": "QA", "sub": "tests and review", "note": "Type check, lint, tests, build and captures at 360 and 1440 px; then another reviewer tries to refute each finding." },
+          "gate": { "label": "Human gate", "sub": "Ignacio's OK", "note": "Merging, deploying, spending, changing prices or publishing is my call, with an explicit, separate authorisation." },
+          "pub": { "label": "Publish", "sub": "merge and deploy" }
+        },
+        "edges": {
+          "ask": "request",
+          "scope": "G0 · G1",
+          "pass": "G2 baseline",
+          "load": "loads",
+          "branch": "one branch",
+          "local": "G3 local",
+          "review": "G4 review",
+          "ok": "G5 OK",
+          "fix": "fixes"
+        }
+      }
+    },
+    "gates": {
+      "h": "Gates and evidence levels",
+      "p": [
+        "The gates and the levels come from the working contract I use at Eclipse; Direction's file defines the same six gates under other names. A gate is not passed with an empty title, an invented cost, a test that was not run or unlabelled fictional data, and a critical criterion worse than the baseline blocks even if the aesthetic score is high."
+      ],
+      "title": "Six gates, and who closes each one",
+      "caption": "The executor is the session that writes the code. Audiovisual production adds its own gates, from an approved storyboard to renders made in sequence.",
+      "steps": [
+        { "actor": "G0 · executor", "t": "Sources and version", "d": "Do I know what I read and which version I'm working on?" },
+        { "actor": "G1 · executor + Direction", "t": "Specification and scope", "d": "Bounded scope, with exclusions and binary acceptance." },
+        { "actor": "G2 · executor", "t": "Baseline and exit test", "d": "A comparable «before» and an exit test defined before changing anything." },
+        { "actor": "G3 · executor", "t": "Local run", "d": "Tests, type check, lint, build and captures at 360 and 1440 px, without touching production." },
+        { "actor": "G4 · Direction + review", "t": "QA and adversarial review", "d": "No critical criterion worse than the baseline." },
+        { "actor": "G5 · Ignacio", "t": "Merge and deploy", "d": "An explicit, separate authorisation. No agent gives it." }
+      ]
+    },
+    "evidence": {
+      "p": [
+        "Every claim carries its evidence level. Without evidence it is labelled «not tested» or «simulated», and what is proposed, implemented and tested are always kept apart. A batch is not «done» because a page exists: it goes from specified to verified locally, and I am the one who declares it «accepted»."
+      ],
+      "title": "Five evidence levels",
+      "caption": "A real example: an Eclipse audit closes at E0 and E1 and states that the local test (E2) is still pending.",
+      "steps": [
+        { "actor": "E0", "t": "Document", "d": "A document says so." },
+        { "actor": "E1", "t": "Code read", "d": "I saw it in the code." },
+        { "actor": "E2", "t": "Local test", "d": "I reproduced it locally." },
+        { "actor": "E3", "t": "Remote environment", "d": "I verified it in a deployed environment." },
+        { "actor": "E4", "t": "Real operation", "d": "It works under real use." }
+      ]
+    },
+    "review": {
+      "h": "Adversarial review",
+      "p": [
+        "The trailer QA skill reviews through six independent lenses: correctness and lifecycle, performance, accessibility, fidelity and honesty, premium level, and consistency with the repo.",
+        "Design uses a 7-axis rubric, scored 0 to 2, with binary blockers (focus, contrast, Back and Escape, reduced motion, honesty): a high score does not make up for a broken focus ring."
+      ],
+      "title": "A finding has to survive",
+      "caption": "From the trailer-qa skill. Security applies the same idea: it always tells a confirmed vulnerability apart from a suspicion.",
+      "steps": [
+        { "actor": "Reviewer", "t": "Finding", "d": "With file, line and severity." },
+        { "actor": "Another reviewer", "t": "Tries to refute it", "d": "If it can't be reproduced or shown by reading the code, it is dropped." },
+        { "actor": "Executor", "t": "Minimal fix", "d": "Only what is blocking or high." },
+        { "actor": "Executor", "t": "Runs everything", "d": "tsc, lint, tests and build." },
+        { "actor": "Report", "t": "Real output", "d": "One table per lens and the real output of each command." }
+      ]
+    },
+    "usage": {
+      "h": "Where it is really used",
+      "p": [
+        "I checked it repo by repo on 10/28/2026. In each one the system takes a different shape, and in none of them does it work alone."
+      ],
+      "items": [
+        {
+          "t": "HandyX backend",
+          "d": "Three copied profiles (backend, cybersecurity and frontend) and 19 skills, identical byte for byte except the model line, with the source commit and the SHA-256 of each original. Two skills were left out on purpose; one because it models Sequelize and Prisma rules there. Backend implements, Cybersecurity reviews each phase's critical diff and Frontend reviews the contract, in sequence."
+        },
+        {
+          "t": "Eclipse backend",
+          "d": "It follows the backend and cybersecurity profiles in Codex format. Its security review was done with isolated local tests, and it states that there were no third-party scans, real sends, deploys or migrations."
+        },
+        {
+          "t": "Eclipse-Web",
+          "d": "No agents are installed: the roles are steps that one session applies in sequence. What runs is the process: one owner per decision, the gates and the model policy."
+        },
+        {
+          "t": "My own demos",
+          "d": "Two e-commerce demos carry adapted copies of the frontend, games and trailer architects and the documentation agent (40 skills each), plus a project agent that delegates to them. The games demo carries frontend and games (21 skills)."
+        }
+      ]
+    },
+    "rules": {
+      "h": "Rules it enforces",
+      "p": [
+        "They are written into the agents and apply to the work that comes out of them."
+      ],
+      "items": [
+        { "t": "Security tests only on our own systems", "d": "Target, environment and isolation are written down before any active test. Findings carry file and line, severity, real impact and a concrete fix, framed by the OWASP Top 10, API Top 10 and ASVS." },
+        { "t": "Backend defaults", "d": "Input validation, parameterised queries, every mutation in a transaction and errors without internal details." },
+        { "t": "Whatever has value is decided by the server", "d": "In games, the client reports an intent and the server decides the outcome." },
+        { "t": "Honesty in creative work", "d": "No invented testimonials or metrics; anything fictional says «Demo»; text, prices and buttons live in HTML or SVG, never inside a generated video." },
+        { "t": "Nothing on its own initiative", "d": "No spending, installing or publishing. A paid tool needs a dollar ceiling and my OK, and an external skill is installed only after checking its author, licence, SHA and scripts." }
+      ]
+    },
+    "decisions": {
+      "h": "Design decisions",
+      "items": [
+        {
+          "t": "One owner per decision",
+          "why": "Each agent has its decision table and there is an ownership matrix. In the review's paper test, UX/UI was also «implementing» the header before the fix: two roles doing the same thing."
+        },
+        {
+          "t": "Mandatory discovery and written assumptions",
+          "why": "Backend, security, trailers and documentation start with their discovery skill, so nothing is built on wrong assumptions about routes, models, transactions or integrations. No silent decisions about language, folders, ORM or database."
+        },
+        {
+          "t": "Skills on demand",
+          "why": "Each agent loads the skill its table names for the concrete action. Context stays small, and Direction forbids reviewing everything before a localised task."
+        },
+        {
+          "t": "Sonnet by default, Opus with a reason",
+          "why": "The larger model is used only at justified milestones, with its reason, deliverable and exit criterion recorded, and behind an aesthetic gate: if the result looks worse than the baseline, it is not merged. It comes from an earlier project with heavy Opus use and a poor aesthetic result."
+        },
+        {
+          "t": "Nothing in parallel without a budget",
+          "why": "No parallel sub-agents or workers unless explicitly requested: one batch, one branch and one PR at a time.",
+          "alt": "A panel of three creative directions in parallel, as one trailer skill asked for: at Eclipse they run in sequence."
+        },
+        {
+          "t": "Copies with provenance",
+          "why": "Profiles reach each repo through a PR and a review, so existing rules are not overwritten. In HandyX each copy records its source commit and its SHA-256, and the only change is written down."
+        }
+      ]
+    },
+    "quality": {
+      "h": "How I checked it",
+      "p": [
+        "The agents repo is Markdown: it has no tests and no CI. Its test was a documentary review in Eclipse-Web of the first PR of the Eclipse agents, with the verdict «conditional adoption»; the corrections were applied afterwards.",
+        "What gets tested is the code this process produces: in the run of 10/27/2026, Eclipse-Web passed 463 tests, the Eclipse backend 779 and the internal portal 132, plus 14 complete browser journeys."
+      ],
+      "items": [
+        { "n": "11", "u": "agents", "d": "One folder and one definition file per role" },
+        { "n": "79", "u": "skills", "d": "Across 8 agents, with 78 distinct names" },
+        { "n": "14", "u": "corrections", "d": "In the review of the first Eclipse PR" },
+        { "n": "5", "u": "routes", "d": "Tested on paper, with and without the corrections" }
+      ],
+      "note": "On 10/28/2026 I counted the SKILL.md files in the Claude Code variants (69) plus the 10 in the documentation package: 79 files and 78 names, because project-analysis is in both Frontend and Documentation. The 11 agents, by folder and package."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        { "k": "Definition", "items": ["Markdown", "YAML front matter", "SKILL.md", "references"] },
+        { "k": "Formats", "items": ["Claude Code", "Codex", "GitHub Copilot"] },
+        { "k": "Frameworks", "items": ["OWASP Top 10", "OWASP API Top 10", "ASVS", "STRIDE"] },
+        { "k": "Written for", "items": ["Node", "Express", "TypeScript", "React", "Next.js", "GSAP", "WebAudio", "Playwright"] }
+      ]
+    },
+    "not": {
+      "h": "What it is not",
+      "list": [
+        "It is not autonomous. Direction writes no code, and merging, deploying, spending, changing prices or publishing is my call.",
+        "They are not agents «installed» at Eclipse: there the roles are steps that one session runs in sequence.",
+        "It is not open source: the repo has no licence and is for my own use.",
+        "It is not an audit: the security agent can run a test against our own dev or staging, but no pentest has been done and there is no third-party review."
+      ]
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "In use in my repos: 11 agents, 79 skills and three formats. The Eclipse agents came in through three PRs; the last one was merged on 10/26/2026.",
+        "Open: before installing them, I still need to check that Claude Code accepts the model alias and the header fields, and two trailer skills clash with the current flow.",
+        "The profiles declare different models depending on the tool; in HandyX that line was removed so they inherit the session's model.",
+        "The test figures belong to the repos the process produces, not to the agents repo.",
+        "I don't claim that the agents work on their own, that the system has been audited or that a pentest has been done."
+      ]
+    }
+  }
+}

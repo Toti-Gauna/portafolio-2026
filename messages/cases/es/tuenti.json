@@ -1,0 +1,167 @@
+{
+  "title": "Tuenti",
+  "kind": "Trabajo profesional · Tsoft",
+  "status": "Trabajo profesional",
+  "summary": "Gamificación, recargas y pagos en productos de Tuenti y Telefónica, desde Tsoft. Del frontend a la lógica de backend y los despliegues.",
+  "facts": [
+    {
+      "k": "Empresa",
+      "v": "Tsoft, para Tuenti y Telefónica"
+    },
+    {
+      "k": "Período",
+      "v": "2024 – hoy"
+    },
+    {
+      "k": "Desafío",
+      "v": "De la gamificación a productos con IA"
+    },
+    {
+      "k": "Foco",
+      "v": "Gamificación, recargas y pagos"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "Qué hice",
+      "v": "Mecánicas de recompensa como la ruleta Tuenti y el sistema de referidos, un dashboard para medirlas, la recarga automática y el módulo de pagos."
+    },
+    {
+      "k": "Cómo",
+      "v": "Junto a equipos multidisciplinarios, traduciendo requisitos de negocio en soluciones técnicas."
+    },
+    {
+      "k": "Qué no muestro",
+      "v": "Arquitectura, datos, métricas ni capturas: son confidenciales."
+    }
+  ],
+  "blocks": {
+    "context": {
+      "h": "Contexto",
+      "p": [
+        "Desde 2024 trabajo en Tsoft en productos de Tuenti y Telefónica. Entré como Jr Frontend Developer con foco en gamificación y en 2026 pasé a Ssr AI Fullstack Developer."
+      ]
+    },
+    "path": {
+      "title": "Cómo fueron creciendo los desafíos",
+      "steps": [
+        {
+          "actor": "2024",
+          "t": "Gamificación y métricas",
+          "d": "Gamificación: mecánicas interactivas y de recompensa, como la ruleta Tuenti y el sistema de referidos. Después, un dashboard para medir referidos, recurrencia y gamificación."
+        },
+        {
+          "actor": "Enero 2026",
+          "t": "Reconocimiento Especial",
+          "d": "Un reconocimiento interno de Tsoft, con un mensaje y un gesto del equipo de People."
+        },
+        {
+          "actor": "2026",
+          "t": "Más responsabilidad",
+          "d": "Recategorización y una jornada presencial con clientes en Buenos Aires: demos, alineación y conversación directa."
+        },
+        {
+          "actor": "2026 – hoy",
+          "t": "Productos con IA y un equipo",
+          "d": "Diseñé y construí CompliA, hice Supernova Eventos y capacité a compañeros para subir el nivel del equipo. En la app de Tuenti: procesos de recarga, flujos internos, backend y despliegues."
+        }
+      ]
+    },
+    "did": {
+      "h": "Qué hice",
+      "items": [
+        {
+          "t": "Gamificación",
+          "d": "Mecánicas interactivas y de recompensa para mejorar el engagement, como la ruleta Tuenti y el sistema de referidos."
+        },
+        {
+          "t": "Un dashboard para medir",
+          "d": "Construí un dashboard para medir los datos de Tuenti: referidos, recurrencia y gamificación."
+        },
+        {
+          "t": "Recarga automática y pagos",
+          "d": "La recarga automática y el módulo de pagos."
+        },
+        {
+          "t": "De punta a punta en la app",
+          "d": "Flujos internos, lógica de backend, pipelines de despliegue e integraciones."
+        },
+        {
+          "t": "Del negocio al código",
+          "d": "Traducir requisitos de negocio en soluciones técnicas, junto a equipos multidisciplinarios."
+        }
+      ]
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "Frontend y mobile",
+          "items": [
+            "React",
+            "React Native",
+            "TypeScript",
+            "Next.js",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "k": "Backend y datos",
+          "items": [
+            "Node.js",
+            "SQL"
+          ]
+        },
+        {
+          "k": "Entrega",
+          "items": [
+            "CI/CD",
+            "Pipelines de despliegue",
+            "Integraciones"
+          ]
+        }
+      ]
+    },
+    "learned": {
+      "h": "Qué me llevo",
+      "p": [
+        "La gamificación es producto, no decoración: cada mecánica tiene que tener un motivo para que la gente vuelva. Y en una empresa grande, la parte técnica avanza mejor cuando se entiende primero el requisito de negocio."
+      ]
+    },
+    "hidden": {
+      "h": "Lo que no muestro",
+      "p": [
+        "Por confidencialidad no muestro arquitectura, datos, métricas ni capturas internas de Tuenti, Telefónica o Tsoft. Las ilustraciones de esta página son dibujos propios, con datos ficticios."
+      ]
+    },
+    "drawn": {
+      "h": "Cómo se ve, dibujado",
+      "p": [
+        "No muestro capturas de Tuenti por confidencialidad. Estas ilustraciones son mías: explican las tres piezas sin mostrar el producto ni sus datos."
+      ],
+      "items": {
+        "wheel": {
+          "t": "La ruleta",
+          "d": "Una mecánica de recompensa: girás, ganás un premio y tenés un motivo para volver."
+        },
+        "referrals": {
+          "t": "Los referidos",
+          "d": "Invitás a alguien; cuando se suma, los dos reciben algo. Así crece la base."
+        },
+        "dashboard": {
+          "t": "El dashboard",
+          "d": "Medir referidos, recurrencia y gamificación para saber qué mecánica funciona."
+        },
+        "labels": {
+          "prize": "Premio",
+          "invite": "invita",
+          "joined": "se suman",
+          "recurrence": "recurrencia",
+          "referrals": "referidos",
+          "game": "juego"
+        }
+      },
+      "caption": "Ilustraciones propias: no son capturas del producto y los datos son ficticios."
+    }
+  }
+}

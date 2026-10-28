@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import es from '@/messages/es.json';
 import en from '@/messages/en.json';
@@ -30,23 +31,34 @@ const strings = (x: unknown): string[] =>
 describe('trailer v2 configs', () => {
   it('es and en are the same film: scenes, timings and data match, only words change', () => {
     const { es: cEs, en: cEn } = configs;
-    expect((cEs.scenes as unknown[]).length).toBe(15);
+    expect((cEs.scenes as unknown[]).length).toBe(17);
     expect(shape(cEn.scenes)).toEqual(shape(cEs.scenes));
     expect(shape(cEn.ui)).toEqual(shape(cEs.ui));
   });
 
-  it('says nothing the site does not: no «vibe coding», the approved roles and the contact', () => {
+  it('says nothing the site does not: no «vibe coding», no job titles (challenges, not positions), the contact', () => {
     for (const lang of ['es', 'en'] as const) {
-      const text = strings(configs[lang].scenes).join(' ');
+      const text = strings([configs[lang].scenes, configs[lang].meta]).join(' ');
       expect(text).not.toMatch(/vibe/i);
-      expect(text).toContain('Ssr AI Fullstack Developer');
+      expect(text).not.toMatch(/\bSsr\b|\bSr\b|Fullstack Developer|Software Developer|Profesor|Professor|\bjr\b/i);
       expect(text).toContain(CONTACT_EMAIL);
     }
   });
 
+  it('the story: Mar del Plata, the first product, the fronts, every path, the industries', () => {
+    type Scene = { type: string; stops?: { vis: string }[]; rubros?: { id: string }[]; own?: unknown[]; fronts?: unknown[] };
+    const sc = configs.es.scenes as Scene[];
+    expect(sc.slice(0, 3).map((s) => s.type)).toEqual(['igcoast', 'igfirst', 'igfronts']);
+    expect(sc.filter((s) => s.type === 'igfronts').flatMap((s) => s.stops!.map((x) => x.vis))).toEqual(['tach', 'class', 'tuenti', 'events', 'team']);
+    const zoom = sc.find((s) => s.type === 'igzoom')!;
+    expect(zoom.fronts).toHaveLength(7);
+    expect(zoom.own).toHaveLength(7);
+    expect(sc.find((s) => s.type === 'igrubros')!.rubros!.map((r) => r.id)).toEqual(['startups', 'corporate', 'agro', 'space', 'mining', 'oilgas']);
+  });
+
   it('act 5: every shot of the montage exists, and its view has the same texts in both languages', () => {
     const ids = montage(configs.es).shots!.map((s) => s.id);
-    expect(ids).toHaveLength(11);
+    expect(ids).toHaveLength(6);
     expect(montage(configs.en).shots!.map((s) => s.id)).toEqual(ids);
     for (const id of ids) {
       expect(shots[id], id).toBeDefined();
@@ -55,6 +67,12 @@ describe('trailer v2 configs', () => {
         const html = shots[id].html(shots[id].text[lang]);
         expect(html, `${id} ${lang}`).not.toMatch(/undefined|https?:\/\//);
         expect(strings(shots[id].text[lang]).join(' '), `${id} ${lang}`).not.toMatch(/28\/10|\b5 ?%|vibe/i);
+      }
+    }
+    // no client brand inside the rebuilt views (only the project's own name, in the tag)
+    for (const id of ['supernova', 'games']) {
+      for (const lang of ['es', 'en'] as const) {
+        expect(shots[id].html(shots[id].text[lang]), `${id} ${lang}`).not.toMatch(/supernova/i);
       }
     }
   });
@@ -76,9 +94,16 @@ describe('trailer v2 configs', () => {
     }
   });
 
-  it('the text version has the same 14 moments in both languages', () => {
-    expect(es.trailer.transcript).toHaveLength(14);
-    expect(en.trailer.transcript).toHaveLength(14);
+  it('one film, two formats: the configs carry no stage; ?o=v (main.js) sets the 1080×1920 one', () => {
+    for (const lang of ['es', 'en'] as const) expect(configs[lang].stage, lang).toBeUndefined();
+    const main = readFileSync(new URL('../../public/trailer/v2/main.js', import.meta.url), 'utf8');
+    expect(main).toMatch(/get\('o'\) === 'v'/);
+    expect(main).toMatch(/stage: \{ w: 1080, h: 1920 \}/);
+  });
+
+  it('the text version has the same 15 moments in both languages', () => {
+    expect(es.trailer.transcript).toHaveLength(15);
+    expect(en.trailer.transcript).toHaveLength(15);
     expect(es.trailer.transcript.at(-1)).toContain(CONTACT_EMAIL);
     expect(en.trailer.transcript.at(-1)).toContain(CONTACT_EMAIL);
   });

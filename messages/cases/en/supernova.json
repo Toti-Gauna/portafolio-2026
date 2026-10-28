@@ -1,0 +1,347 @@
+{
+  "title": "Supernova Eventos",
+  "kind": "Professional work · Tsoft for Telefónica",
+  "status": "Prototype",
+  "summary": "A prototype of an internal events micro-app I built at Tsoft for Telefónica: employees discover events, sign up and show a pass with a QR code; organizers create events step by step, choose the audience and check people in. It runs entirely in the browser, with fictional data and no backend.",
+  "facts": [
+    {
+      "k": "Client",
+      "v": "Telefónica, through Tsoft"
+    },
+    {
+      "k": "Role",
+      "v": "Built the prototype, already as a mid-level dev"
+    },
+    {
+      "k": "Type",
+      "v": "Internal events micro-app"
+    },
+    {
+      "k": "Status",
+      "v": "Prototype: no backend, no SSO"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The problem",
+      "v": "Bring together discovering internal events, signing up with per-session capacity, the entry pass, and audiences and invitations."
+    },
+    {
+      "k": "The proposal",
+      "v": "A catalog that orders itself by schedule, sign-up with a pass and QR code, and a step-by-step creator for organizers; set in a 3D universe that never holds an action back."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A prototype with fictional data and local storage. No backend, SSO or email sending: the backend contract was written down as a proposal."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "A micro-app for a large company's employees to find internal events, sign up and get in with a pass. I built it at Tsoft for Telefónica, already as a mid-level (Ssr) developer, as a prototype: it runs entirely in the browser on fictional data."
+      ],
+      "list": [
+        "Employee: searches and filters the catalog, saves favourites, signs up for a session with guests and gets a pass with a QR code, a calendar and an .ics file.",
+        "Organizer: creates events step by step (details, audience, email template and review), exports sign-ups and checks people in by reading the QR code.",
+        "Three presentations of the same app, with the same data: a classic one, a navigable 3D universe and a hybrid one, with illustrations on 3D planes."
+      ]
+    },
+    "journeys": {
+      "h": "Two journeys, one state",
+      "p": [
+        "The employee and the organizer use the same app and the same saved data. What one publishes shows up in the other's catalog, and one's pass is what the other validates at the door."
+      ],
+      "diagram": {
+        "title": "From the catalog to the door",
+        "caption": "A prototype with fictional data: everything is saved in the browser. The admin view can be explored, but it isn't real authorization.",
+        "groups": {
+          "collab": "Employee",
+          "org": "Organizer"
+        },
+        "nodes": {
+          "fav": {
+            "label": "Favourites",
+            "sub": "optional"
+          },
+          "catalog": {
+            "label": "Catalog",
+            "sub": "search, filters",
+            "note": "Active, upcoming and finished, in that order, three per page. It reorders itself when an event starts or ends."
+          },
+          "signup": {
+            "label": "Sign-up",
+            "sub": "session, seats",
+            "note": "Each session has its own capacity; guests and terms are optional. Synchronous guards prevent booking or cancelling twice."
+          },
+          "pass": {
+            "label": "Pass",
+            "sub": "QR and calendar"
+          },
+          "checkin": {
+            "label": "Check-in",
+            "sub": "camera or code"
+          },
+          "create": {
+            "label": "Event creator",
+            "sub": "4 steps, autosave",
+            "note": "Details, audience, email template and review. The draft saves itself, including when the tab closes. Once published, the event appears for its audience."
+          },
+          "invite": {
+            "label": "Invitation",
+            "sub": "preview only",
+            "note": "The audience can be the whole company, a pick from a fictional staff list, or an imported Excel or CSV file. The preview is personalized and sends nothing."
+          }
+        },
+        "edges": {
+          "publish": "publishes",
+          "save": "saves",
+          "pick": "picks session",
+          "confirm": "confirms",
+          "show": "shows the QR",
+          "mail": "template"
+        }
+      }
+    },
+    "checkin": {
+      "h": "Checking someone in with a QR code",
+      "p": [
+        "This is where the prototype decides whether someone gets in, so validation is strict even without a server."
+      ],
+      "seq": {
+        "title": "From the camera to the check-in",
+        "caption": "A QR code alone never grants entry: it is always checked against a saved booking. When the browser supports it, the check-in runs under a lock (Web Locks), so two tabs can't record the same entry.",
+        "lanes": {
+          "org": "Organizer",
+          "app": "Check-in",
+          "ls": "localStorage"
+        },
+        "msgs": {
+          "choose": "picks event and session",
+          "read": "QR: camera, image or code",
+          "format": "type, version, max length",
+          "lookup": "looks up the booking",
+          "checks": "event, session, still valid",
+          "save": "re-reads, saves the entry",
+          "result": "valid, already used or invalid"
+        }
+      }
+    },
+    "arch": {
+      "h": "Architecture",
+      "p": [
+        "A React SPA built with Vite and published on GitHub Pages, with no backend. The three presentations share the same app, the same flow controller and the same storage."
+      ],
+      "diagram": {
+        "title": "One app, three presentations, one state",
+        "caption": "Everything runs in the browser. CI only installs, builds with type checks and publishes.",
+        "nodes": {
+          "html": {
+            "label": "Initial HTML",
+            "sub": "first frame",
+            "note": "The orbital scene is already in the HTML, with critical CSS; React and the intro carry it on with the same clock. There is no logo-only splash screen."
+          },
+          "router": {
+            "label": "Router",
+            "sub": "3 presentations"
+          },
+          "app": {
+            "label": "Events app",
+            "sub": "React 19",
+            "note": "No business operation waits for an animation to finish."
+          },
+          "lazy": {
+            "label": "On demand",
+            "sub": "QR · Excel",
+            "note": "The GSAP intro, the QR code library and the Excel reader download separately, when needed. The classic presentation never downloads Three.js."
+          },
+          "universe": {
+            "label": "3D universe",
+            "sub": "a single Canvas",
+            "note": "It lives outside views and dialogs. Each command carries an increasing ID: a new journey cancels the previous one. It never writes data."
+          },
+          "fallback": {
+            "label": "Static backdrop",
+            "sub": "app keeps working"
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "JSON"
+          }
+        },
+        "edges": {
+          "boot": "before React",
+          "route": "one per URL",
+          "lazy": "deferred import",
+          "cmd": "commands",
+          "fail": "WebGL error",
+          "data": "reads, writes JSON"
+        }
+      }
+    },
+    "security": {
+      "h": "Security and privacy in a prototype",
+      "p": [
+        "Without a server there is no real security to show. What there is: care with data, and honesty about what's missing."
+      ],
+      "items": [
+        {
+          "t": "No real authorization, and it says so",
+          "d": "Interface permissions are for the demo; final authorization belongs to a server. localStorage can be edited from the browser, so it is not a source of authority."
+        },
+        {
+          "t": "A QR code with the minimum",
+          "d": "The pass carries only demo identifiers: names, emails and audiences never go into the QR code. The pass JSON is not a secure token."
+        },
+        {
+          "t": "Imports with limits",
+          "d": "Excel or CSV up to 5 MB and 5,000 rows, with required columns, validated emails and duplicate detection. A CSV with unclosed quotes is rejected."
+        },
+        {
+          "t": "Camera only after a click",
+          "d": "It is requested only after an explicit action, with a message for each kind of error. On a phone it needs HTTPS."
+        },
+        {
+          "t": "Fictional data",
+          "d": "example.com and .test domains. The README asks not to load real employee data."
+        },
+        {
+          "t": "CI with minimal permissions",
+          "d": "Actions pinned by SHA, no secrets, and only the permissions needed to publish."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Technical decisions",
+      "items": [
+        {
+          "t": "The first frame doesn't wait for React",
+          "why": "The orbital scene is already in the HTML with critical CSS, and the GSAP intro carries it on with the same clock. A build script keeps the HTML and the intro in sync."
+        },
+        {
+          "t": "One Canvas that never holds the app back",
+          "why": "The universe lives outside the views and takes commands with an increasing ID. Signing up or checking someone in never waits for an animation, and if the download, a shader or the WebGL context fails, a static backdrop remains and the actions keep working."
+        },
+        {
+          "t": "Pay for 3D only when it's seen",
+          "why": "It pauses off-screen, when the tab is hidden or from My profile; the mouse doesn't move the camera; pixel density is capped and the hybrid version trims stars if the device is slow. The repo's docs record median frames of 16 ms in local Chrome on integrated graphics, and note that this isn't sustained FPS. I didn't measure it again."
+        },
+        {
+          "t": "Saved data that doesn't break",
+          "why": "Per-event sessions are optional: an old booking without a session falls into the main session, and the migration keeps the events the user created."
+        },
+        {
+          "t": "The backend, as a proposal",
+          "why": "The repo documents the contract it would need: idempotency keys, expected revision, atomic booking, cancellation and check-in, and an opaque or signed token per booking instead of the demo's QR code. And it forbids inventing endpoints as if they existed."
+        },
+        {
+          "t": "Working with AI agents",
+          "why": "With Codex, in separate roles for the front end and for the trailer, each with its own files. The 3D universe came out of a pack of three prompts, implemented and checked locally."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "This prototype's quality lives in end-to-end journeys and visual QA, not in unit tests: it has none."
+      ],
+      "items": [
+        {
+          "n": "122",
+          "u": "tests",
+          "d": "E2E with Playwright, in 15 files"
+        },
+        {
+          "n": "42/42",
+          "u": "tests",
+          "d": "Last run documented in the repo, on 10/13/2026"
+        },
+        {
+          "n": "18",
+          "u": "scripts",
+          "d": "Visual QA with screenshots per theme and width"
+        }
+      ],
+      "note": "I listed the 122 with --list on 10/28/2026 and didn't run them. CI only builds and publishes: the e2e tests were run locally. The README (32 cases, 10/7) and the validation doc (112 in 13 files, 10/13) count earlier versions."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 7"
+          ]
+        },
+        {
+          "k": "3D and motion",
+          "items": [
+            "Three.js",
+            "React Three Fiber",
+            "Custom shaders",
+            "GSAP",
+            "Motion"
+          ]
+        },
+        {
+          "k": "In the browser",
+          "items": [
+            "qrcode",
+            "jsQR",
+            "getUserMedia",
+            "read-excel-file"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Playwright",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "gallery": {
+      "h": "Screenshot",
+      "items": {
+        "supernova": {
+          "alt": "Admin view of the Supernova Eventos prototype with fictional data: search and filters, counters for published events, sign-ups, seat occupancy and drafts, and the table of experiences with date, audience, sign-ups and status.",
+          "caption": "Managing experiences, in the 3D presentation, with fictional data. Screenshot of a local build."
+        }
+      }
+    },
+    "status": {
+      "h": "Status, and what I don't claim",
+      "list": [
+        "A prototype built at Tsoft for Telefónica, with fictional data and local storage.",
+        "There is no backend, SSO, real staff list, email sending, cross-device capacity control or authorization.",
+        "It isn't in production and there are no usage metrics: capacities and sign-ups are sample numbers.",
+        "The demo's QR code isn't a secure token: in production a server would have to issue and validate it.",
+        "I didn't check that the three presentations open from their own URL in the published version.",
+        "I don't describe Telefónica's internal systems, processes or data."
+      ]
+    },
+    "media": {
+      "h": "What it looks like",
+      "p": [
+        "The real product, in motion. Fictional or sample data."
+      ],
+      "items": {
+        "inscripcion": {
+          "alt": "Events app over a purple 3D universe: \"Anotarme\" opens the sign-up for \"Un respiro para vos\", the place is confirmed and the pass appears with a QR code and calendar; the client's brand and company data are hidden.",
+          "caption": "Event sign-up: pick the session, confirm and get the QR pass."
+        },
+        "creador": {
+          "alt": "The \"Administrar experiencias\" table; \"Crear experiencia\" opens step 1, the Music cover is chosen and \"Noche de vinilos\" is typed, appearing at once on the preview card.",
+          "caption": "Admin: the step-by-step event creator with a live preview."
+        },
+        "favoritos": {
+          "alt": "\"Favoritos\" page with two saved experiences (wellbeing and technology), a search box and a 3D planet; the client's brand is hidden.",
+          "caption": "Favourites: the employee's saved events."
+        }
+      }
+    }
+  }
+}

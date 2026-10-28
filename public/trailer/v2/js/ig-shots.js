@@ -20,7 +20,9 @@
    RECIPE  { type: 'igshots', title, shots: [{ id, dur, tag: { name, status, note } }], mosaic, end, label }
      1 s title («Y mis propias ramas.») → one cut per shot, on the beat: the background wipes to the shot's
      colour, the frame whips in, its tag (name · status · note) wipes on, the view plays → the mosaic: every
-     frame flies into a 4×3 wall with its name, and the last cell says `end`.
+     frame flies into a 4×3 wall with its name, and the last cell says `end` (up to 7 shots: a 4×2 wall).
+   9:16 (D.vertical): each frame keeps its own size and is scaled onto the stage (browsers to the stage's width,
+     phones larger), with its tag full width under it; the mosaic is 3 columns × 4 rows (up to 7 shots: 2 × 4).
    ========================================================================== */
 (() => {
   'use strict';
@@ -31,9 +33,16 @@
 
   // frame boxes on the 1920×1080 stage (the tag plate sits over the bottom-left corner)
   const BOX = {
-    browser: { x: 240, y: 104, w: 1440, h: 860 },
-    phone: { x: 1150, y: 100, w: 420, h: 860 },
-    none: { x: 0, y: 0, w: 1920, h: 1080 },
+    browser: { x: 240, y: 104, w: 1440, h: 860, s: 1 },
+    phone: { x: 1150, y: 100, w: 420, h: 860, s: 1 },
+    none: { x: 0, y: 0, w: 1920, h: 1080, s: 1 },
+  };
+  // 9:16: the same frames (same w × h), centred on (cx, cy) and scaled by s; the tag goes under the frame
+  const place = (w, h, s, cx, cy) => ({ x: cx - w / 2, y: cy - h / 2, w, h, s });
+  const BOX_V = {
+    browser: place(1440, 860, 1000 / 1440, 540, 800),
+    phone: place(420, 860, 1.2, 540, 790),
+    none: place(1920, 1080, 1060 / 1920, 540, 820),
   };
   // how a frame arrives on its cut, in turn
   const ENTER = [
@@ -56,7 +65,7 @@
     const { tl } = D;
     const lang = D.cfg.lang === 'en' ? 'en' : 'es';
     const shots = (o.shots || []).filter(s => SHOTS[s.id]);
-    const TITLE = o.titleDur ?? 1, MOS = o.mosaic ?? 1.5;
+    const TITLE = o.titleDur ?? 1, MOS = o.mosaic ?? 1.5, v = D.vertical, BOXES = v ? BOX_V : BOX;
     const s = D.scene('igshots', `<div class="ish">
       <div class="ish-title"><div class="ish-title-t">${esc(o.title)}</div></div>
       ${shots.map(sh => frameHtml(sh.id, SHOTS[sh.id], SHOTS[sh.id].text[lang] || SHOTS[sh.id].text.es)).join('')}
@@ -90,13 +99,14 @@
     let t = T + TITLE;
     shots.forEach((sh, i) => {
       const def = SHOTS[sh.id], f = frames[i], tag = tags[i], dur = sh.dur || 1, bg = def.bg || INK;
-      const box = BOX[def.frame || 'browser'];
+      const box = BOXES[def.frame || 'browser'], en = ENTER[i % ENTER.length];
       gsap.set(f, { left: box.x, top: box.y, width: box.w, height: box.h });
+      if (v) gsap.set(tag, { top: box.y + box.h / 2 + (box.h * box.s) / 2 + 44 });
       D.wipeTo(bg, t, WIPE[i % WIPE.length], 0.3);
       D.ink(D.contrast(bg), t);
       D.show(f, t);
-      D.hit(f, { x: 0, y: 0, scale: 1, rotationY: 0, ...ENTER[i % ENTER.length] }, { x: 0, y: 0, scale: 1, rotationY: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t);
-      tl.to(f, { scale: 1.035, duration: Math.max(0.1, dur - 0.5), ease: 'sine.inOut' }, t + 0.5);
+      D.hit(f, { x: 0, y: 0, rotationY: 0, ...en, scale: box.s * (en.scale ?? 1) }, { x: 0, y: 0, scale: box.s, rotationY: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t);
+      tl.to(f, { scale: box.s * 1.035, duration: Math.max(0.1, dur - 0.5), ease: 'sine.inOut' }, t + 0.5);
       // the tag: plate wipes on, name rises
       D.show(tag, t + 0.1);
       D.hit(tag, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.35, ease: 'expo.out' }, t + 0.1);
@@ -111,19 +121,23 @@
       t += dur;
     });
 
-    // ── the mosaic: every frame flies into a 4×3 wall (the 12th cell holds `end`)
-    const M = t, COLS = 4, X0 = 96, Y0 = 128, CW = 408, GX = 32, CH = 206, GY = 66;
+    // ── the mosaic: every frame flies into a 4×3 wall (9:16: 3×4; the 12th cell holds `end`)
+    // up to 7 shots (8 cells): two rows of four (9:16: four rows of two), bigger cells
+    const few = shots.length + 1 <= 8;
+    const M = t, [COLS, X0, Y0, CW, GX, CH, GY] = v ? (few ? [2, 40, 240, 480, 40, 290, 110] : [3, 30, 412, 326, 21, 196, 104])
+      : (few ? [4, 96, 210, 408, 32, 250, 120] : [4, 96, 128, 408, 32, 206, 66]);
     D.wipeTo(o.mosaicBg || INK, M, 'up', 0.3);
     D.ink(PAPER, M);
     const cell = i => ({ x: X0 + (i % COLS) * (CW + GX), y: Y0 + Math.floor(i / COLS) * (CH + GY) });
     shots.forEach((sh, i) => {
-      const def = SHOTS[sh.id], box = BOX[def.frame || 'browser'], c = cell(i);
+      const def = SHOTS[sh.id], box = BOXES[def.frame || 'browser'], c = cell(i);
       const k = Math.min(CW / box.w, CH / box.h);
       const x = c.x + CW / 2 - (box.x + box.w / 2), y = c.y + CH / 2 - (box.y + box.h / 2);
       const at = M + 0.05 + i * 0.04;
       D.show(frames[i], at);
       D.hit(frames[i], { x: x * 0.6, y: y * 0.6 + 120, scale: k * 0.7, rotationY: 0, opacity: 0 }, { x, y, scale: k, opacity: 1, duration: 0.6, ease: 'expo.out' }, at);
       // under the frame's left edge; pulled back inside the cell when the name is wider than the frame (phones)
+      if (v) labels[i].style.maxWidth = CW + 'px'; // 9:16: a long name takes two lines inside its cell
       const fl = c.x + (CW - box.w * k) / 2;
       gsap.set(labels[i], { left: Math.max(c.x, Math.min(fl, c.x + CW - labels[i].offsetWidth)), top: c.y + CH + 12 });
       D.hit(labels[i], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, at + 0.2);
