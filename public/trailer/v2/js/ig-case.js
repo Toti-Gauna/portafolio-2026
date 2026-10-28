@@ -48,7 +48,6 @@
     const tilt = D.lite ? {} : tall ? { rotationX: 14, transformPerspective: 2000 } : { rotationY: -16, transformPerspective: 2000 }; // lite: flat (no 3D layer)
     if (tall) D.hit(win, { opacity: 0, y: 140, ...tilt }, { opacity: 1, y: 0, ...(D.lite ? {} : { rotationX: 0 }), duration: 0.9, ease: 'expo.out' }, T + 0.6);
     else D.hit(win, { opacity: 0, x: 120, ...tilt }, { opacity: 1, x: 0, ...(D.lite ? {} : { rotationY: 0 }), duration: 0.9, ease: 'expo.out' }, T + 0.6);
-    tl.to(win, { scale: 1.03, duration: dur - 1.8, ease: 'sine.inOut' }, T + 1.5);
     D.hit(tag, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2)' }, T + 1.2);
     D.sfx('whoosh', T + 0.6, 0.5, 0.25);
     tl.to(s.firstElementChild, { opacity: 0, duration: 0.3, ease: 'power2.in' }, T + dur - 0.3);

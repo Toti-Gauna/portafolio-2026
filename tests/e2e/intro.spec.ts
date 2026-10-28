@@ -64,7 +64,7 @@ test('no horizontal overflow at 360px', async ({ page }) => {
 test('reduced motion: boot screen still works and finishes quickly', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await page.goto('http://127.0.0.1:4173/es/');
+  await page.goto(`http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
   await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeVisible({ timeout: 2000 });
   await ctx.close();
 });

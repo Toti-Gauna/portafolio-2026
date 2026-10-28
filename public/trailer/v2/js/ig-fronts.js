@@ -5,7 +5,13 @@
              at each stop a branch forks off, climbs into the stop's text (dates · place, the challenge, one
              line) and a small animated scene of that front plays beside it — drawn in SVG/HTML, never a
              screenshot. Several igfronts scenes can follow each other (another scene in between).
-             { origin: { year, color }, stops: [{ year, label, color, vis, k, t, d, v }], at: [s], duration }
+             { origin: { year, color }, stops: [{ year, label, color, vis, k, t, d, v, stay, lead }], exit }
+     lead  { text, dur }: before the stop, the camera travels a LONG stretch of the line (two screens) while the
+           sentence is written along it — fast out of the last front, nearly still in the middle (the reading),
+           fast again into the next — and lands as the branch forks off. Without a lead: a quick 0.9 s hop.
+     stay  seconds from the arrival to the next stretch / hop (the stop's own time)
+     exit  { text, dur, color }: one more stretch after the last stop, into the next scene (a node waits there)
+     The scene lasts Σ (lead or 0.9) + stay, plus the exit.
      vis  tach    three panels assemble: the back office, the landing page and the wallet app on a phone
           class   a classroom: the board types «Hola, mundo», students with laptops, mini projects pop up,
                   notes are taken
@@ -219,7 +225,7 @@
       for (let m = 1; m * 45 <= total; m++) {
         let lo = 0, hi = 1; for (let it = 0; it < 26; it++) { const mid = (lo + hi) / 2; if (ease(mid) < m * 45 / total) lo = mid; else hi = mid; }
         const tt = t + 0.1 + hi * spin;
-        if (tt - last < 0.07) continue;
+        if (tt - last < 0.125) continue; // a flick (0.03 + 0.09 s) ends before the next one starts
         last = tt;
         D.tl.to(ptr, { rotation: -14, duration: 0.03, ease: 'none' }, tt);
         D.tl.to(ptr, { rotation: 0, duration: 0.09, ease: 'power2.out' }, tt + 0.03);
@@ -292,36 +298,73 @@
   };
 
   // ================================================================== IGFRONTS
+  /** the camera's ease along a stretch: still at both ends; a fast lobe in the first and the last quarter (out of
+   *  the last front, into the next one) and a long, slow middle where the sentence is read (≈ 15 % of the way in half
+   *  the time). Velocity = H·(lobe at the start + lobe at the end) + √sin(πp), integrated into a lookup table. */
+  const slowMid = (W = 0.25, H = 19.8) => {
+    const N = 400, c = [0], lobe = u => (u > 0 && u < 1 ? Math.sin(Math.PI * u) ** 2 : 0);
+    let acc = 0;
+    for (let i = 1; i <= N; i++) { const p = (i - 0.5) / N; acc += H * (lobe(p / W) + lobe((1 - p) / W)) + Math.sqrt(Math.sin(Math.PI * p)); c.push(acc); }
+    for (let i = 0; i <= N; i++) c[i] /= acc;
+    return p => { if (p <= 0) return 0; if (p >= 1) return 1; const x = p * N, i = Math.floor(x); return c[i] + (c[i + 1] - c[i]) * (x - i); };
+  };
+  const EASE = slowMid();
+  /** the drawn line's end along a stretch: it rides a little inside the screen (a pen with its light), never backwards */
+  const penEase = (SW, span) => {
+    const N = 200, c = [];
+    let m = 0;
+    for (let i = 0; i <= N; i++) { const p = i / N; m = Math.max(m, EASE(p) - (0.16 * SW * Math.sin(Math.PI * p) ** 2) / span); c.push(m); }
+    return p => { if (p <= 0) return 0; if (p >= 1) return 1; const x = p * N, i = Math.floor(x); return c[i] + (c[i + 1] - c[i]) * (x - i); };
+  };
+
   recipe('igfronts', (D, T, o) => {
     const { tl } = D;
     const v = D.vertical, SW = D.W, SH = D.H, LY = LINE.y(v), NX = LINE.x(v);
-    const stops = o.stops || [], n = stops.length, dur = o.duration || 6 * n, at = o.at || stops.map((_, i) => i * (dur / n));
-    const TX = v ? 140 : 230, TY = v ? 186 : 214, BY = TY + 26, TW = SW * (n + 1);
-    const X = i => SW * i; // stop i ≥ 1 sits at X(i); X(0) is where the scene starts (origin)
+    const stops = o.stops || [], n = stops.length, exit = o.exit || null;
+    const TX = v ? 140 : 230, TY = v ? 186 : 214, BY = TY + 26;
+    const GAP = SW; // a stretch adds a whole screen of line between two panels: 2 screens of travel, and the sentence
+    //                 gets that empty screen to itself (the last front is just off the left edge when it is read)
+    // the track: panel 0 = where the scene starts (origin); panel i + 1 = stop i, after its stretch when it has one
+    const X = [0];
+    stops.forEach((st, i) => X.push(X[i] + SW + (st.lead ? GAP : 0)));
+    const XE = exit ? X[n] + SW + GAP : X[n], TW = XE + SW;
+    // the timing: [lead] → arrival → stay, for every stop; then the exit stretch
+    const plan = [];
+    let cur = T;
+    stops.forEach(st => {
+      const L = st.lead ? st.lead.dur : 0, A = cur + (L || 0.9);
+      plan.push({ from: cur, L, A, t: A - 0.9 });
+      cur = A + (st.stay ?? 4);
+    });
+    const exitAt = cur, dur = cur + (exit ? exit.dur : 0) - T;
+    const leads = [...stops.map((st, i) => st.lead ? { ...st.lead, i, x0: X[i], x1: X[i + 1], from: plan[i].from } : null), exit ? { ...exit, i: n, x0: X[n], x1: XE, from: exitAt } : null].filter(Boolean);
     const origin = o.origin || {};
     const s = D.scene('igfronts', `<div class="igf"><div class="igf-track" style="width:${TW}px;height:${SH}px">
       <svg class="igf-g" viewBox="0 0 ${TW} ${SH}" width="${TW}" height="${SH}">
         <path class="igf-main" d="M-40 ${LY}H${TW + 40}"/>
-        ${stops.map((st, i) => { const x = X(i + 1) + NX; return `<path class="igf-br" d="M${x} ${LY}V${BY + 40}Q${x} ${BY} ${x + 40} ${BY}H${X(i + 1) + TX - 26}" style="stroke:${st.color}"/>`; }).join('')}
+        ${stops.map((st, i) => { const x = X[i + 1] + NX; return `<path class="igf-br" d="M${x} ${LY}V${BY + 40}Q${x} ${BY} ${x + 40} ${BY}H${X[i + 1] + TX - 26}" style="stroke:${st.color}"/>`; }).join('')}
         <circle class="igf-n" cx="${NX}" cy="${LY}" r="15" style="fill:${origin.color || INK}"/>
-        ${stops.map((st, i) => `<circle class="igf-n" cx="${X(i + 1) + NX}" cy="${LY}" r="15" style="fill:${st.color}"/>`).join('')}
+        ${stops.map((st, i) => `<circle class="igf-n" cx="${X[i + 1] + NX}" cy="${LY}" r="15" style="fill:${st.color}"/>`).join('')}
+        ${exit ? `<circle class="igf-n igf-n-exit" cx="${XE + NX}" cy="${LY}" r="15" style="fill:${exit.color || INK}"/>` : ''}
+        ${leads.map(() => '<g class="igf-tip"><circle class="igf-tip-halo" r="30"/><circle r="12"/></g>').join('')}
       </svg>
       <div class="igf-yr mono" style="left:${NX}px;top:${LY + 36}px">${esc(origin.year)}</div>
-      ${stops.map((st, i) => `<div class="igf-yr mono" style="left:${X(i + 1) + NX}px;top:${LY + 36}px">${esc(st.year)}</div>`).join('')}
-      ${stops.map((st, i) => `<article class="igf-txt" style="left:${X(i + 1) + TX}px;top:${TY}px;--c:${st.color}">
+      ${stops.map((st, i) => `<div class="igf-yr mono" style="left:${X[i + 1] + NX}px;top:${LY + 36}px">${esc(st.year)}</div>`).join('')}
+      ${leads.map(ld => `<p class="igf-lead">${ld.text}</p>`).join('')}
+      ${stops.map((st, i) => `<article class="igf-txt" style="left:${X[i + 1] + TX}px;top:${TY}px;--c:${st.color}">
           <div class="igf-k mono"></div><h3 class="igf-t">${st.t}</h3><p class="igf-d">${esc(st.d)}</p></article>
         <div class="igf-vis igf-vis--${st.vis}">${VIS[st.vis](st.v || {})}</div>`).join('')}
     </div></div>`);
-    const track = D.$('.igf-track', s), main = D.$('.igf-main', s), brs = D.$$('.igf-br', s), nodes = D.$$('.igf-n', s), yrs = D.$$('.igf-yr', s);
-    const txts = D.$$('.igf-txt', s), vis = D.$$('.igf-vis', s);
+    const track = D.$('.igf-track', s), main = D.$('.igf-main', s), brs = D.$$('.igf-br', s), nodes = D.$$('.igf-n:not(.igf-n-exit)', s), yrs = D.$$('.igf-yr', s);
+    const txts = D.$$('.igf-txt', s), vis = D.$$('.igf-vis', s), leadEls = D.$$('.igf-lead', s), tips = D.$$('.igf-tip', s), exitNode = D.$('.igf-n-exit', s);
     // the scene's box: 16:9 right of the text; 9:16 under the text, scaled into the room above the line
     vis.forEach((el, i) => {
       let x, y, k;
       if (v) {
         const h = txts[i].offsetHeight, top = TY + h + 56, room = LY - 96 - top;
         k = Math.min((SW - 100) / 900, room / 720);
-        x = X(i + 1) + (SW - 900 * k) / 2; y = top + (room - 720 * k) / 2;
-      } else { k = 1; x = X(i + 1) + 950; y = 150; }
+        x = X[i + 1] + (SW - 900 * k) / 2; y = top + (room - 720 * k) / 2;
+      } else { k = 1; x = X[i + 1] + 950; y = 150; }
       gsap.set(el, { left: x, top: y, scale: k, transformOrigin: '0 0' });
     });
     D.show(s, T);
@@ -331,19 +374,48 @@
     const frac = x => Math.min(100, ((x + 40) / (TW + 80)) * 100);
     gsap.set(main, { drawSVG: `0% ${frac(SW)}%` });
     gsap.set(brs, { drawSVG: '0%' });
-    gsap.set(nodes.slice(1), { scale: 0, transformOrigin: '50% 50%' });
+    gsap.set([...nodes.slice(1), exitNode].filter(Boolean), { scale: 0, transformOrigin: '50% 50%' });
     gsap.set(nodes[0], { transformOrigin: '50% 50%' });
     gsap.set(yrs, { opacity: 0, y: 14, xPercent: v ? 0 : -50, x: v ? -15 : 0 });
+    gsap.set(tips, { autoAlpha: 0 });
     gsap.set(track, { x: 0 });
     D.hit(nodes[0], { scale: 0.6 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, T);
     tl.to(yrs[0], { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, T + 0.05);
 
+    // ── the stretches: the camera travels a long piece of the line while one sentence is written along it,
+    //    and lands where the next front branches off (or, for the exit, where the next scene begins)
+    leads.forEach((ld, j) => {
+      const el = leadEls[j], tip = tips[j], L = ld.dur, span = ld.x1 - ld.x0, a = ld.from;
+      // the sentence sits on the line, centred on the screen when the camera is halfway (it is nearly still there)
+      const words = D.split(el, { type: 'words', mask: 'words' }).words;
+      // its real width (the box keeps its max-width when the lines are balanced): from the words themselves
+      const box = el.getBoundingClientRect(), k = box.width / el.offsetWidth || 1;
+      const w = Math.max(...words.map(wd => wd.getBoundingClientRect().right)) / k - box.left / k, h = el.offsetHeight;
+      const mid = ld.x0 + span / 2 + SW / 2; // never over the last front's scene, which ends inside its own panel
+      gsap.set(el, { left: Math.min(Math.max(ld.x0 + SW + 60, mid - w / 2), ld.x1 - 60 - w), top: LY - 46 - h });
+      gsap.set(words, { yPercent: 110 });
+      tl.to(track, { x: -ld.x1, duration: L, ease: EASE }, a);
+      tl.to(main, { drawSVG: `0% ${frac(ld.x1 + SW)}%`, duration: L, ease: penEase(SW, span) }, a);
+      tl.set(tip, { x: ld.x0 + SW, y: LY, autoAlpha: 1 }, a);
+      tl.to(tip, { x: ld.x1 + SW, duration: L, ease: penEase(SW, span) }, a);
+      tl.set(tip, { autoAlpha: 0 }, a + L);
+      D.sfx('whoosh', a, 0.45, 0.2);
+      // the words rise in reading order while the sentence glides in, then it is read standing almost still
+      const r0 = a + L * 0.2, r1 = a + L * 0.48;
+      tl.to(words, { yPercent: 0, duration: 0.45, ease: 'expo.out', stagger: (r1 - r0) / Math.max(1, words.length - 1) }, r0);
+      D.sfx('whoosh', a + L - 0.6, 0.35, 0.16);
+      (D.cfg.warmAt ||= []).push(a + L * 0.5);
+    });
+    if (exit && exitNode) { D.hit(exitNode, { scale: 0 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' }, exitAt + exit.dur - 0.45); D.sfx('tick', exitAt + exit.dur - 0.45, 0.05); }
+
     stops.forEach((st, i) => {
-      const t = T + at[i], next = i + 1 < n ? T + at[i + 1] : T + dur;
+      const { t, L } = plan[i];
       const tx = txts[i], k = D.$('.igf-k', tx), title = D.$('.igf-t', tx), desc = D.$('.igf-d', tx);
-      tl.to(track, { x: -X(i + 1), duration: 0.9, ease: 'expo.inOut' }, t);
-      tl.to(main, { drawSVG: `0% ${frac(X(i + 1) + SW)}%`, duration: 1.1, ease: 'power2.inOut' }, t);
-      D.sfx('whoosh', t, 0.5, 0.22);
+      if (!L) { // a plain hop (no stretch): the old quick travel
+        tl.to(track, { x: -X[i + 1], duration: 0.9, ease: 'expo.inOut' }, t);
+        tl.to(main, { drawSVG: `0% ${frac(X[i + 1] + SW)}%`, duration: 1.1, ease: 'power2.inOut' }, t);
+        D.sfx('whoosh', t, 0.5, 0.22);
+      }
       D.hit(nodes[i + 1], { scale: 0 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' }, t + 0.55);
       D.sfx('tick', t + 0.55, 0.05);
       tl.to(yrs[i + 1], { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, t + 0.6);
@@ -358,8 +430,10 @@
       if (st.label) D.label(t + 0.6, st.label);
       // the scene of the front
       try { PLAY[st.vis](D, D.$('[class^="fv-"]', vis[i]), t + 1.0, T); } catch (e) { console.error(`[igfronts] ${st.vis}`, e); }
-      D.hit(vis[i].firstElementChild, { scale: 1 }, { scale: 1.025, duration: Math.max(0.1, next - t - 1), ease: 'sine.inOut' }, t + 1);
       (D.cfg.warmAt ||= []).push(t + 1.6, t + 3);
+      // once the camera has landed on the next stop, this one is off the screen for good: skip it (no paint, and none
+      // of its leftovers can drag the stage into a compositor layer — the 9:16 layer test caught one at 58 s)
+      if (i + 1 < n) tl.set([vis[i], tx], { visibility: 'hidden' }, plan[i + 1].A);
     });
     tl.to(track, { opacity: 0, duration: 0.25, ease: 'power2.in' }, T + dur - 0.25);
     D.hide(s, T + dur);

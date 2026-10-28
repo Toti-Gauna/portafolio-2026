@@ -246,6 +246,7 @@
     const texts = D.$$('.ru-text', s), bars = D.$$('.ru-prog b', s), prog = D.$('.ru-prog', s);
     const splits = texts.map(el => D.split(el, { type: 'lines', mask: 'lines' }));
     splits.forEach(sp => gsap.set(sp.lines, { yPercent: 110 }));
+    gsap.set(texts, { autoAlpha: 0 });
     gsap.set(bars, { scaleX: 0, transformOrigin: '0% 50%' });
 
     D.show(s, T);
@@ -260,8 +261,14 @@
       const tr = Math.max(T, t - 0.15);
       tl.to(ones, { yPercent: -(v % 10) * 10, duration: 0.7, ease: 'expo.inOut' }, tr);
       tl.to(tens, { yPercent: -Math.floor(v / 10) * 10, duration: 0.7, ease: 'expo.inOut' }, tr);
-      tl.to(splits[i].lines, { yPercent: 0, duration: 0.8, ease: 'expo.out', stagger: 0.08 }, t + 0.05);
-      tl.to(splits[i].lines, { yPercent: -110, duration: 0.35, ease: 'expo.in', stagger: 0.03 }, t + step - 0.42);
+      // IG: the rise must END before the exit starts. With step 1 and a three-line rule the rise (0.8 s + 2 × 0.08)
+      // outlived the exit by 20 ms, so in playback its last frame put the last line back on screen, under the next
+      // rule (seeking renders in start order and hid it: only playback showed it). Then a hard cut: one rule at a time.
+      const ln = splits[i].lines, out = t + step - 0.42, inDur = Math.min(0.8, out - (t + 0.05) - 0.08 * (ln.length - 1) - 0.02);
+      tl.set(texts[i], { autoAlpha: 1 }, t);
+      tl.to(ln, { yPercent: 0, duration: inDur, ease: 'expo.out', stagger: 0.08 }, t + 0.05);
+      tl.to(ln, { yPercent: -110, duration: 0.35, ease: 'expo.in', stagger: 0.03 }, out);
+      tl.set(texts[i], { autoAlpha: 0 }, t + step);
       tl.to(bars[i], { scaleX: 1, duration: step, ease: 'none' }, t);
       tl.to(head, { duration: 0.45, scrambleText: { text: `${title} · ${unit} ${pad2(v)} / ${pad2(n)}`, chars: '0123456789', speed: 1 }, ease: 'none' }, t);
 

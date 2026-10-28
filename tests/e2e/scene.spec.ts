@@ -43,7 +43,7 @@ test('home: the canvas is behind the content and the scene runs after the intro'
 test('reduced motion: one still frame, no RAF loop', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await enter(page, 'http://127.0.0.1:4173/es/');
+  await enter(page, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
   await expect.poll(async () => (await read(page)).attr, { timeout: 15000 }).toMatch(/^(still|fallback)$/);
   const a = await read(page);
   if (a.attr === 'still') {

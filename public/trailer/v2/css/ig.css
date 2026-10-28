@@ -19,6 +19,9 @@
 .is-lite #stage *, .is-lite #stage *::before, .is-lite #stage *::after { will-change: auto !important; filter: none !important; }
 .is-lite #grain, .is-lite #vignette { display: none; } /* two full-stage overlays (the grain one animated forever) */
 #stage, #viewport { overflow: clip; } /* `hidden` makes them scroll containers, which Chromium composites (where supported) */
+/* the grain holds still everywhere (round 3): animated, it was a stage-sized layer redrawn 10× a second forever, and it
+   kept the compositor busy on every frame of the film, even on a still card */
+#grain { animation: none; inset: 0; }
 
 /* ---------- the film's HUD, trimmed: name and role top-left, the chapter top-right (no REC / timecode / fps) ---------- */
 #hud .hud-bl, #hud .hud-br, #hud .rec { display: none; }
@@ -28,7 +31,6 @@
 /* ---------- act backgrounds (#ig-acts sits between #wipe and #camera) ---------- */
 #ig-acts { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .igb { position: absolute; inset: 0; visibility: hidden; }
-.igb > * { will-change: transform, opacity; } /* each background moves on the compositor, not by repainting */
 .igb-dots { position: absolute; left: -240px; top: -240px; width: 2400px; height: 1560px;
   background: radial-gradient(circle, currentColor 1.9px, transparent 2.7px) 0 0 / 32px 32px; }
 .igb-ring { position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%; border: 2px solid currentColor; }
@@ -36,7 +38,6 @@
 .igb-svg line, .igb-svg circle, .igb-svg path { fill: none; stroke: currentColor; stroke-width: 2; }
 .igb-svg .n { fill: currentColor; stroke: none; }
 .igb-lines { position: absolute; left: 0; right: 0; top: 0; height: 1560px; background: repeating-linear-gradient(0deg, currentColor 0 2px, transparent 2px 12px); opacity: .55; }
-.igb-band { position: absolute; left: 0; right: 0; top: 0; height: 300px; background: linear-gradient(180deg, transparent, currentColor 50%, transparent); opacity: .6; }
 .igb-sun { position: absolute; left: 50%; top: 42%; width: 1700px; height: 1700px; margin: -850px 0 0 -850px; border-radius: 50%;
   background: radial-gradient(circle, currentColor 0%, color-mix(in srgb, currentColor 45%, transparent) 24%, transparent 62%); }
 

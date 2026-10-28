@@ -17,10 +17,15 @@
                                               use D.hit(el, from, to, at) for from→to so seeking works
      });
 
-   RECIPE  { type: 'igshots', title, shots: [{ id, dur, tag: { name, status, note } }], mosaic, end, label }
+   RECIPE  { type: 'igshots', title, shots: [{ id, dur, tag: { name, status, note } }], mosaic, end, label, wall }
      1 s title («Y mis propias ramas.») → one cut per shot, on the beat: the background wipes to the shot's
-     colour, the frame whips in, its tag (name · status · note) wipes on, the view plays → the mosaic: every
-     frame flies into a 4×3 wall with its name, and the last cell says `end` (up to 7 shots: a 4×2 wall).
+     colour, the frame whips in, its tag (name · status · note) wipes on, the view plays → the mosaic: a STILL of
+     every view (media/wall/<lang>/<id>.webp, made from these very views by tools/wall.mjs — re-run it when a view
+     changes) flies into a 4×3 wall with its name, and the last cell says `end` (up to 7 shots: a 4×2 wall). Six
+     live views flying at once re-rastered all of them on every frame: the wall stuttered (round 3). `wall: false`
+     flies the live frames instead.
+   LITE (tablets, phones): every cut is a hard cut on the beat (no whip, no colour wipe): without a layer of its own
+     a whipping frame is the whole view rastered again on every frame.
    9:16 (D.vertical): each frame keeps its own size and is scaled onto the stage (browsers to the stage's width,
      phones larger), with its tag full width under it; the mosaic is 3 columns × 4 rows (up to 7 shots: 2 × 4).
    ========================================================================== */
@@ -45,11 +50,12 @@
     none: place(1920, 1080, 1060 / 1920, 540, 820),
   };
   // how a frame arrives on its cut, in turn
+  // (2D only since round 3: a 3D tilt made every frame of the whip a perspective-warped draw of the whole view)
   const ENTER = [
-    { x: 300, rotationY: -16, opacity: 0 },
+    { x: 300, opacity: 0 },
     { y: 220, opacity: 0 },
     { scale: 1.18, opacity: 0 },
-    { x: -300, rotationY: 16, opacity: 0 },
+    { x: -300, opacity: 0 },
   ];
   const WIPE = ['right', 'up', 'left', 'down'];
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -66,16 +72,18 @@
     const lang = D.cfg.lang === 'en' ? 'en' : 'es';
     const shots = (o.shots || []).filter(s => SHOTS[s.id]);
     const TITLE = o.titleDur ?? 1, MOS = o.mosaic ?? 1.5, v = D.vertical, BOXES = v ? BOX_V : BOX;
+    const wall = o.wall === false ? '' : o.wall || 'media/wall'; // the wall's still pictures of each view (tools/wall.mjs)
     const s = D.scene('igshots', `<div class="ish">
       <div class="ish-title"><div class="ish-title-t">${esc(o.title)}</div></div>
       ${shots.map(sh => frameHtml(sh.id, SHOTS[sh.id], SHOTS[sh.id].text[lang] || SHOTS[sh.id].text.es)).join('')}
       ${shots.map(sh => `<div class="ish-tag" style="--c:${SHOTS[sh.id].color || CORAL}"><i class="ish-tag-bar"></i>
         <div class="ish-tag-top"><b>${esc(sh.tag.name)}</b><span class="ish-tag-st mono">${esc(sh.tag.status)}</span></div>
         ${sh.tag.note ? `<div class="ish-tag-nt">${esc(sh.tag.note)}</div>` : ''}</div>`).join('')}
+      ${wall ? shots.map(sh => `<img class="ish-snap ish-snap--${SHOTS[sh.id].frame || 'browser'}" src="${wall}/${lang}/${sh.id}.webp" alt="" decoding="async">`).join('') : ''}
       <div class="ish-labels">${shots.map(sh => `<div class="ish-cl" style="--c:${SHOTS[sh.id].color || CORAL}"><i></i>${esc(sh.tag.name)}</div>`).join('')}</div>
       <div class="ish-end"><div class="ish-end-t">${esc(o.end)}</div></div>
     </div>`);
-    const frames = D.$$('.ish-frame', s), tags = D.$$('.ish-tag', s), labels = D.$$('.ish-cl', s);
+    const frames = D.$$('.ish-frame', s), tags = D.$$('.ish-tag', s), labels = D.$$('.ish-cl', s), snaps = D.$$('.ish-snap', s);
     const titleBox = D.$('.ish-title', s), title = D.$('.ish-title-t', s), end = D.$('.ish-end', s), endT = D.$('.ish-end-t', s);
     D.show(s, T);
     if (o.label) D.label(T, o.label);
@@ -88,26 +96,28 @@
       D.ink(PAPER, T);
       D.show(titleBox, T);
       tl.to(words, { yPercent: 0, duration: 0.5, ease: 'expo.out', stagger: 0.06 }, T + 0.02);
-      tl.to(title, { scale: 1.05, duration: TITLE, ease: 'none' }, T);
       D.hide(titleBox, T + TITLE);
       D.sfx('whoosh', T, 0.6, 0.25);
     }
 
     // ── the cuts
-    // lite (phones): flat entrances — a 3D tilt would give every frame its own full-size layer (6 at once in the mosaic)
-    gsap.set(frames, { autoAlpha: 0, transformOrigin: '50% 50%', ...(D.lite ? {} : { transformPerspective: 2000 }) });
+    gsap.set(frames, { autoAlpha: 0, transformOrigin: '50% 50%' });
     gsap.set(tags, { autoAlpha: 0 });
     let t = T + TITLE;
     shots.forEach((sh, i) => {
       const def = SHOTS[sh.id], f = frames[i], tag = tags[i], dur = sh.dur || 1, bg = def.bg || INK;
-      const box = BOXES[def.frame || 'browser'], en = D.lite ? { ...ENTER[i % ENTER.length], rotationY: 0 } : ENTER[i % ENTER.length];
+      const box = BOXES[def.frame || 'browser'], en = ENTER[i % ENTER.length];
       gsap.set(f, { left: box.x, top: box.y, width: box.w, height: box.h });
       if (v) gsap.set(tag, { top: box.y + box.h / 2 + (box.h * box.s) / 2 + 44 });
-      D.wipeTo(bg, t, WIPE[i % WIPE.length], 0.3);
       D.ink(D.contrast(bg), t);
       D.show(f, t);
-      D.hit(f, { x: 0, y: 0, rotationY: 0, ...en, scale: box.s * (en.scale ?? 1) }, { x: 0, y: 0, scale: box.s, rotationY: 0, opacity: 1, duration: 0.5, ease: 'expo.out' }, t);
-      tl.to(f, { scale: box.s * 1.035, duration: Math.max(0.1, dur - 0.5), ease: 'sine.inOut' }, t + 0.5);
+      if (D.lite) { // lite: a hard cut on the beat. Without a layer of its own, a frame that whips in is the whole view
+        D.setBg(bg, t); // re-rastered on every frame of the whip (and a wipe behind it re-rasters it again)
+        D.tl.set(f, { x: 0, y: 0, scale: box.s, opacity: 1 }, t);
+      } else {
+        D.wipeTo(bg, t, WIPE[i % WIPE.length], 0.3);
+        D.hit(f, { x: 0, y: 0, ...en, scale: box.s * (en.scale ?? 1) }, { x: 0, y: 0, scale: box.s, opacity: 1, duration: 0.5, ease: 'expo.out' }, t);
+      }
       // the tag: plate wipes on, name rises
       D.show(tag, t + 0.1);
       D.hit(tag, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.35, ease: 'expo.out' }, t + 0.1);
@@ -135,8 +145,12 @@
       const k = Math.min(CW / box.w, CH / box.h);
       const x = c.x + CW / 2 - (box.x + box.w / 2), y = c.y + CH / 2 - (box.y + box.h / 2);
       const at = M + 0.05 + i * 0.04;
-      D.show(frames[i], at);
-      D.hit(frames[i], { x: x * 0.6, y: y * 0.6 + 120, scale: k * 0.7, rotationY: 0, opacity: 0 }, { x, y, scale: k, opacity: 1, duration: 0.6, ease: 'expo.out' }, at);
+      // a still of the view (same box as its frame) flies into its cell; the live views stay hidden (6 live views
+      // flying at once re-rastered every one of them on every frame: the wall stuttered, worst on tablets)
+      const el = snaps[i] || frames[i];
+      if (snaps[i]) gsap.set(el, { left: box.x, top: box.y, width: box.w, height: box.h, transformOrigin: '50% 50%' });
+      D.show(el, at);
+      D.hit(el, { x: x * 0.6, y: y * 0.6 + 120, scale: k * 0.7, opacity: 0 }, { x, y, scale: k, opacity: 1, duration: 0.6, ease: 'expo.out' }, at);
       // under the frame's left edge; pulled back inside the cell when the name is wider than the frame (phones)
       if (v) labels[i].style.maxWidth = CW + 'px'; // 9:16: a long name takes two lines inside its cell
       const fl = c.x + (CW - box.w * k) / 2;

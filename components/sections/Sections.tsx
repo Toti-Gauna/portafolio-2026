@@ -2,8 +2,9 @@ import type { CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
-import { CASE_SLUGS, LAB, WORK_SHOT, type CaseSlug } from '@/lib/cases';
+import { CASE_SLUGS, LAB, WORK_SHOT, WORK_SHOT_800, type CaseSlug } from '@/lib/cases';
 import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
+import { CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
@@ -14,6 +15,7 @@ import { MethodCycle } from '../home/MethodCycle';
 import { InView } from '../diagrams/InView';
 import { MethodIcon } from '../MethodIcon';
 import { AgentIcon, type AgentId } from '../AgentIcon';
+import { HubArt } from '../home/HubArt';
 import '../sections.css';
 import '../home/home.css';
 
@@ -21,12 +23,27 @@ type Item = { when: string; title: string; text: string };
 type Step = { name: string; short: string; text: string; example: string };
 type Point = { title: string; text: string };
 
-function Head({ id, label, title, lead }: { id: string; label: string; title: string; lead?: string }) {
+/** 1: the section is the page (its title is the page's h1). 2: one section of a page. */
+type Level = 1 | 2;
+
+function Head({ id, label, title, lead, level = 2 }: { id: string; label: string; title: string; lead?: string; level?: Level }) {
+  const H = level === 1 ? 'h1' : 'h2';
   return (
-    <header className="sec__head">
+    <header className={`sec__head${level === 1 ? ' sec__head--page' : ''}`}>
       <p className="label">{label}</p>
-      <h2 id={id} className="sec__title">{title}</h2>
+      <H id={id} className={level === 1 ? 'page-title' : 'sec__title'}>{title}</H>
       {lead && <p className="sec__lead">{lead}</p>}
+    </header>
+  );
+}
+
+/** The opening of a page that holds several sections: label, h1 and a lead. */
+export function PageHead({ label, title, lead }: { label: string; title: string; lead: string }) {
+  return (
+    <header className="page-hero container-x">
+      <p className="label">{label}</p>
+      <h1 className="page-title">{title}</h1>
+      <p className="page-hero__lead">{lead}</p>
     </header>
   );
 }
@@ -54,12 +71,12 @@ export function WhatIDo() {
   );
 }
 
-export function Journey() {
+export function Journey({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('journey');
   const items = t.raw('items') as Item[];
   return (
-    <section id="recorrido" className="sec container-x" aria-labelledby="h-recorrido">
-      <Head id="h-recorrido" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="recorrido" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-recorrido">
+      <Head id="h-recorrido" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <ol className="journey">
         {items.map((it, i) => (
           <Reveal as="li" key={i} className="journey__item">
@@ -76,17 +93,22 @@ export function Journey() {
   );
 }
 
-export function Work() {
+export function Work({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('work');
   const tag = (s: string) => <p className="status">{s}</p>;
   const link = (slug: CaseSlug) => <Link className="card-link" href={`/proyectos/${slug}`}>{t('more')} →</Link>;
   return (
-    <section id="trabajo" className="sec container-x" aria-labelledby="h-trabajo">
-      <Head id="h-trabajo" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="trabajo" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-trabajo">
+      <Head id="h-trabajo" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <div className="work">
         {(['complia', 'tuenti', 'handyx', 'eclipse'] as const).map((k) => (
           <Reveal as="article" key={k} className="work__card">
-            {WORK_SHOT[k] && <img className="work__shot" src={asset(WORK_SHOT[k])} alt={t(`cards.${k}.shotAlt`)} width={1600} height={1000} loading="lazy" decoding="async" />}
+            {WORK_SHOT[k] && (
+              <img
+                className="work__shot" src={asset(WORK_SHOT[k])} alt={t(`cards.${k}.shotAlt`)} width={1600} height={1000} loading="lazy" decoding="async"
+                {...(WORK_SHOT_800[k] ? { srcSet: `${asset(WORK_SHOT_800[k])} 800w, ${asset(WORK_SHOT[k])} 1600w`, sizes: '(min-width: 1200px) 552px, (min-width: 760px) 46vw, 92vw' } : {})}
+              />
+            )}
             {tag(t(`cards.${k}.status`))}
             <h3 className="work__name">{t(`cards.${k}.name`)}</h3>
             <p className="work__role">{t(`cards.${k}.role`)}</p>
@@ -101,12 +123,12 @@ export function Work() {
   );
 }
 
-export function Lab() {
+export function Lab({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('lab');
   const nt = useTranslations('contact')('newTab');
   return (
-    <section id="laboratorio" className="sec container-x" aria-labelledby="h-laboratorio">
-      <Head id="h-laboratorio" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="laboratorio" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-laboratorio">
+      <Head id="h-laboratorio" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <ul className="lab">
         {LAB.map((it) => (
           <Reveal as="li" key={it.id} className="lab__item">
@@ -126,13 +148,13 @@ export function Lab() {
   );
 }
 
-export function Method() {
+export function Method({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('method');
   const b = useTranslations('business');
   const steps = t.raw('steps') as Step[];
   return (
-    <section id="metodo" className="sec container-x" aria-labelledby="h-metodo">
-      <Head id="h-metodo" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="metodo" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-metodo">
+      <Head id="h-metodo" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <MethodCycle names={steps.map((s) => s.short)} caption={t('cycle')} />
       <ol className="method">
         {steps.map((s, i) => (
@@ -164,13 +186,13 @@ export function Method() {
   );
 }
 
-export function System() {
+export function System({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('system');
   const u = useTranslations('caseUi');
   const points = t.raw('points') as Point[];
   return (
-    <section id="sistema" className="sec container-x" aria-labelledby="h-sistema">
-      <Head id="h-sistema" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="sistema" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-sistema">
+      <Head id="h-sistema" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <Diagram spec={SYSTEM_FLOW} copy={t.raw('flow') as ArchCopy} ui={{ asText: u('asText'), legend: u('legend') }} className="system__flow" />
       {(CASE_SLUGS as readonly string[]).includes('agentes') && <p className="system__deep"><Link className="card-link" href="/proyectos/agentes">{t('deep')} →</Link></p>}
       <h3 className="sub-title">{t('agentsTitle')}</h3>
@@ -202,12 +224,12 @@ export function System() {
   );
 }
 
-export function Skills() {
+export function Skills({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('skills');
   const cols = ['work', 'own', 'study'] as const;
   return (
-    <section id="capacidades" className="sec container-x" aria-labelledby="h-capacidades">
-      <Head id="h-capacidades" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="capacidades" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-capacidades">
+      <Head id="h-capacidades" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <InView className="ledger">
         <table className="ledger__table">
           <thead>
@@ -240,21 +262,21 @@ export function Skills() {
   );
 }
 
-export function About() {
+export function About({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('about');
   return (
-    <section id="sobre-mi" className="sec container-x" aria-labelledby="h-sobre-mi">
-      <Head id="h-sobre-mi" label={t('label')} title={t('title')} />
+    <section id="sobre-mi" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-sobre-mi">
+      <Head id="h-sobre-mi" label={t('label')} title={t('title')} level={level} />
       <div className="about">{(t.raw('paragraphs') as string[]).map((p) => <p key={p}>{p}</p>)}</div>
     </section>
   );
 }
 
-export function Contact() {
+export function Contact({ level = 2 }: { level?: Level } = {}) {
   const t = useTranslations('contact');
   return (
-    <section id="contacto" className="sec sec--contact container-x" aria-labelledby="h-contacto">
-      <Head id="h-contacto" label={t('label')} title={t('title')} lead={t('lead')} />
+    <section id="contacto" className={`sec sec--contact container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-contacto" data-contact="">
+      <Head id="h-contacto" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <div className="contact">
         <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t('email')}</a>
         <ul className="contact__list">
@@ -267,12 +289,81 @@ export function Contact() {
   );
 }
 
+/** Home: one card per page (a question, a short brief, a small drawing from that page, a real link). */
+export function Hub() {
+  const t = useTranslations('hub');
+  const n = useTranslations('nav');
+  return (
+    <section id="explorar" className="sec container-x" aria-labelledby="h-explorar">
+      <Head id="h-explorar" label={t('label')} title={t('title')} />
+      <ul className="hub">
+        {PAGES.map((p, i) => (
+          <li key={p.key} className={`hub__card hub__card--${p.key}`}>
+            <HubArt id={p.key} />
+            <div className="hub__body">
+              <p className="label hub__n"><span>{String(i + 1).padStart(2, '0')}</span> {n(`pages.${p.key}.t`)}</p>
+              <h3 className="hub__q">{t(`cards.${p.key}.q`)}</h3>
+              <p className="hub__d">{t(`cards.${p.key}.d`)}</p>
+              <Link className="hub__more" href={p.href} aria-label={`${t('more')}: ${n(`pages.${p.key}.t`)}`}>
+                {t('more')} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** Home: a short contact block (the full one, with every channel, is on «Sobre mí»). */
+export function HomeContact() {
+  const t = useTranslations('contact');
+  const h = useTranslations('hub');
+  return (
+    <section id="contacto" className="sec sec--contact container-x home-contact" aria-labelledby="h-contacto" data-contact="">
+      <Head id="h-contacto" label={t('label')} title={t('title')} lead={h('contactLead')} />
+      <div className="home-contact__actions">
+        <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t('email')}</a>
+        <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> ({t('newTab')})</span></a>
+        <Link className="card-link" href={CONTACT_HREF}>{h('allChannels')} →</Link>
+      </div>
+    </section>
+  );
+}
+
+/** Every page ends here: the full sitemap (pages and cases) and the contact channels. */
 export function Footer() {
   const t = useTranslations('footer');
+  const n = useTranslations('nav');
+  const c = useTranslations('contact');
+  const cases = useTranslations('cases');
   return (
-    <footer className="foot container-x">
-      <p>{t('text')}</p>
-      <a href="#inicio">{t('top')}</a>
+    <footer className="foot">
+      <div className="container-x foot__grid">
+        <nav className="foot__col" aria-labelledby="foot-pages">
+          <h2 id="foot-pages" className="label">{t('sitemap')}</h2>
+          <ul>
+            <li><Link href="/">{n('home')}</Link></li>
+            {PAGES.map((p) => <li key={p.key}><Link href={p.href}>{n(`pages.${p.key}.t`)}</Link></li>)}
+          </ul>
+        </nav>
+        <nav className="foot__col foot__col--cases" aria-labelledby="foot-cases">
+          <h2 id="foot-cases" className="label">{t('cases')}</h2>
+          <ul>{CASE_SLUGS.map((s) => <li key={s}><Link href={`/proyectos/${s}`}>{cases(`${s}.title`)}</Link></li>)}</ul>
+        </nav>
+        <div className="foot__col">
+          <h2 className="label">{t('contact')}</h2>
+          <ul>
+            <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
+            <li><Ext href={LINKEDIN_URL} label={c('newTab')}>LinkedIn ↗</Ext></li>
+            <li><Ext href={GITHUB_URL} label={c('newTab')}>GitHub ↗</Ext></li>
+          </ul>
+        </div>
+      </div>
+      <div className="container-x foot__base">
+        <p>{t('text')}</p>
+        <a href="#contenido">{t('top')}</a>
+      </div>
     </footer>
   );
 }

@@ -34,6 +34,15 @@ describe('route → background scene', () => {
     expect(sceneForPath('/es/proyectos/games-market/')).toBe('games');
   });
 
+  it('the inner pages of the site', () => {
+    expect(sceneForPath('/es/como-trabajo/')).toBe('agentes');
+    expect(sceneForPath('/en/como-trabajo/')).toBe('agentes');
+    expect(sceneForPath('/es/sobre-mi/')).toBe('home');
+    expect(sceneForPath('/es/sobre-mi/#contacto')).toBe('home');
+    expect(sceneForPath('/es/trabajo/')).toBe('default');
+    expect(sceneForPath('/en/capacidades/')).toBe('default');
+  });
+
   it('anything else falls back to the dot field', () => {
     for (const p of ['/es/proyectos/', '/es/otra-cosa/', '/en/proyectos/unknown/', '/es/home/', '/es/default/']) expect(sceneForPath(p)).toBe('default');
   });

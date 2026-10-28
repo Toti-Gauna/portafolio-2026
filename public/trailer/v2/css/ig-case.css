@@ -28,3 +28,6 @@
 .is-vertical .igk-bar span { font-size: 30px; }
 /* lite (phones): the window holds the video, so it gets a layer; its 140 px shadow would make that layer twice as big */
 .is-lite .igk-win { box-shadow: 0 0 0 1px rgb(127 212 255 / .18); }
+/* the «sample data» tag sits over the playing video, which always has a layer: as a small layer of its own it is not
+   squashed into a stage-sized overlap layer (75 MB at DPR 3 on an iPhone; tests/e2e/trailer.spec.ts) */
+.is-lite #stage .igk-tag { will-change: transform !important; }

@@ -35,4 +35,9 @@ export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclips
   eclipse: '/media/portals/eclipse-landing.webp',
 };
 
-export const SECTION_IDS = ['que-hago', 'trabajo', 'recorrido', 'laboratorio', 'metodo', 'sistema', 'capacidades', 'sobre-mi', 'contacto'] as const;
+/** 800 px copies of the 1600 px covers (same picture), for small slots: `srcset` on the cards, the home hub. */
+export const WORK_SHOT_800: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', string>> = {
+  handyx: '/media/portals/handy-landing-800.webp',
+  eclipse: '/media/portals/eclipse-landing-800.webp',
+};
+

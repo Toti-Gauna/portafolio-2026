@@ -74,7 +74,7 @@
 @media (min-width: 760px) { .stackl > div { grid-template-columns: 200px 1fr; align-items: center; } }
 
 .case__video { margin: 0; display: grid; gap: 8px; }
-.case__video video { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #0b0b0d; }
+.case__video video { width: 100%; height: auto; aspect-ratio: 960 / 464; border-radius: 12px; border: 1px solid var(--line); background: #0b0b0d; }
 .case__links { display: grid; gap: 4px; }
 .case__links a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; }
 .gallery { display: grid; gap: 28px; grid-template-columns: 1fr; }

@@ -56,72 +56,74 @@ export default async function BusinessPage({ params }: { params: Promise<Params>
   };
 
   return (
-    <main id="contenido" tabIndex={-1} className="case bz">
-      <header className="case__hero container-x">
-        <Link href="/#metodo" className="case__back">← {t('back')}</Link>
-        <p className="case__kind label">{t('label')}</p>
-        <h1 className="case__title bz__title">{t('title')}</h1>
-        <p className="case__summary">{t('lead')}</p>
-        <p className="note">{t('note')}</p>
-        <nav className="bz-books" aria-label={t('toc')}>
-          {BOOKS.map((id, i) => (
-            <a key={id} href={`#${id}`} className="bz-books__item" style={{ '--o': i } as CSSProperties}>
-              <span className="label">{t(`books.${id}.kicker`)}</span>
-              <b>{t(`books.${id}.title`)}</b>
-              <span className="bz-books__go" aria-hidden="true">↓</span>
-            </a>
-          ))}
-        </nav>
-      </header>
+    <>
+      <main id="contenido" tabIndex={-1} className="case bz">
+        <header className="case__hero container-x">
+          <Link href="/" className="case__back">← {t('back')}</Link>
+          <p className="case__kind label">{t('label')}</p>
+          <h1 className="case__title bz__title">{t('title')}</h1>
+          <p className="case__summary">{t('lead')}</p>
+          <p className="note">{t('note')}</p>
+          <nav className="bz-books" aria-label={t('toc')}>
+            {BOOKS.map((id, i) => (
+              <a key={id} href={`#${id}`} className="bz-books__item" style={{ '--o': i } as CSSProperties}>
+                <span className="label">{t(`books.${id}.kicker`)}</span>
+                <b>{t(`books.${id}.title`)}</b>
+                <span className="bz-books__go" aria-hidden="true">↓</span>
+              </a>
+            ))}
+          </nav>
+        </header>
 
-      {BOOKS.map((id, n) => (
-        <section key={id} id={id} className="bz-book container-x" aria-labelledby={`h-${id}`} data-book={id}>
-          <header className="bz-book__head">
-            <p className="label"><span className="bz-book__n">{String(n + 1).padStart(2, '0')}</span> {t(`books.${id}.kicker`)}</p>
-            <h2 id={`h-${id}`} className="bz-book__title">{t(`books.${id}.title`)}</h2>
-            <p className="bz-book__idea">{t(`books.${id}.idea`)}</p>
-          </header>
-          <div className="bz-book__body">
-            <div className="bz-models">
-              <h3 className="sub-title">{t('models')}</h3>
-              <ol>
-                {(b(id, 'models') as Model[]).map((m, i) => (
-                  <Reveal as="li" key={m.t} className="bz-model">
-                    <span className="bz-model__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                    <div><h4 className="bz-model__t">{m.t}</h4><p>{m.d}</p></div>
-                  </Reveal>
-                ))}
-              </ol>
+        {BOOKS.map((id, n) => (
+          <section key={id} id={id} className="bz-book container-x" aria-labelledby={`h-${id}`} data-book={id}>
+            <header className="bz-book__head">
+              <p className="label"><span className="bz-book__n">{String(n + 1).padStart(2, '0')}</span> {t(`books.${id}.kicker`)}</p>
+              <h2 id={`h-${id}`} className="bz-book__title">{t(`books.${id}.title`)}</h2>
+              <p className="bz-book__idea">{t(`books.${id}.idea`)}</p>
+            </header>
+            <div className="bz-book__body">
+              <div className="bz-models">
+                <h3 className="sub-title">{t('models')}</h3>
+                <ol>
+                  {(b(id, 'models') as Model[]).map((m, i) => (
+                    <Reveal as="li" key={m.t} className="bz-model">
+                      <span className="bz-model__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                      <div><h4 className="bz-model__t">{m.t}</h4><p>{m.d}</p></div>
+                    </Reveal>
+                  ))}
+                </ol>
+              </div>
+              <div className="bz-figs">{figures[id]}</div>
             </div>
-            <div className="bz-figs">{figures[id]}</div>
-          </div>
-          <div className="bz-apply">
-            <h3 className="sub-title">{t('apply')}</h3>
-            <ul className="bz-apply__list">
-              {(b(id, 'apply') as Apply[]).map((a, i) => {
-                const slug = APPLY_LINKS[id][i];
-                return (
-                  <Reveal as="li" key={a.t} className="bz-apply__item">
-                    <p className="status">{a.where}</p>
-                    <h4 className="bz-apply__t">{a.t}</h4>
-                    <p>{a.d}</p>
-                    {slug && <Link className="card-link" href={`/proyectos/${slug}`}>{t('see')} →</Link>}
-                  </Reveal>
-                );
-              })}
-            </ul>
-          </div>
-        </section>
-      ))}
+            <div className="bz-apply">
+              <h3 className="sub-title">{t('apply')}</h3>
+              <ul className="bz-apply__list">
+                {(b(id, 'apply') as Apply[]).map((a, i) => {
+                  const slug = APPLY_LINKS[id][i];
+                  return (
+                    <Reveal as="li" key={a.t} className="bz-apply__item">
+                      <p className="status">{a.where}</p>
+                      <h4 className="bz-apply__t">{a.t}</h4>
+                      <p>{a.d}</p>
+                      {slug && <Link className="card-link" href={`/proyectos/${slug}`}>{t('see')} →</Link>}
+                    </Reveal>
+                  );
+                })}
+              </ul>
+            </div>
+          </section>
+        ))}
 
-      <div className="case__next container-x">
-        <p className="note">{t('reading')}</p>
-        <div className="case__more">
-          <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
-          <span className="note">{u('contactText')}</span>
+        <div className="case__next container-x">
+          <p className="note">{t('reading')}</p>
+          <div className="case__more" data-contact="">
+            <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{u('contactTitle')}</a>
+            <span className="note">{u('contactText')}</span>
+          </div>
         </div>
-      </div>
-      <div className="container-x"><Footer /></div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

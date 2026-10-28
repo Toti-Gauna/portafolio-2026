@@ -13,8 +13,8 @@
        and hud: false | true (hide / show the film HUD at the scene start).
      · acts — cfg.acts = [{ from, to, kind, tone, alpha }]: one background treatment per act, in a layer
        between the colour wipes and the scenes (so it survives wipes and shows through transparent scenes):
-       dots · rings · grid · scan · branches · net · sun. Transform/opacity only; they pulse on every bar of
-       cfg.music.bpm. All tweens live on the master timeline (seekable).
+       dots · rings · grid · scan · branches · net · sun. They draw in once and hold still (a texture that moves
+       for a whole act costs a full repaint on every frame). All tweens live on the master timeline (seekable).
      · cap — per scene  cap: { k, t, d, at, to, pos, tone, w, accent }  (or an array of them): the chapter
        caption — kicker (mono), title, one-line description — on a plate that wipes in and out.
        at / to: seconds from the scene start (default 0.15 → the scene's end); pos: bl | br | tl | tr;
@@ -82,96 +82,64 @@
   }
 
   // ================================================================== ACT BACKGROUNDS
-  /** opacity pulse of `el` on every bar of the act: 1 on the downbeat → `lo` */
-  function pulse(D, el, a, bar, lo) {
-    gsap.set(el, { opacity: lo });
-    for (let t = a.from; t < a.to - 0.05; t += bar) D.hit(el, { opacity: 1 }, { opacity: lo, duration: bar * 0.8, ease: 'power2.out' }, t);
-  }
+  // STILL since round 3 (28/10/2026): they used to drift for the whole act and pulse on every bar. A texture that
+  // moves forever is a full-stage repaint on every frame (lite) or a stage-sized quad redrawn every frame (desktop),
+  // and that alone kept the end card at 40+ ms a frame on a throttled CPU. Now each background draws in once (a
+  // second or two at the act's start) and holds; the act fades it in and out.
   const KINDS = {
-    // the portfolio's dot grid, drifting diagonally
-    dots(D, el, a, bar) {
-      el.innerHTML = '<i class="igb-dots"></i>';
-      const d = el.firstChild;
-      D.tl.set(d, { x: 0, y: 0, scale: 1 }, a.from);
-      D.tl.to(d, { x: -192, y: -96, scale: 1.05, duration: a.to - a.from, ease: 'none' }, a.from);
-      pulse(D, d, a, bar, 0.6);
-    },
-    // a ring leaves the centre on every bar (the seed's heartbeat)
-    rings(D, el, a, bar) {
+    // the portfolio's dot grid
+    dots(D, el) { el.innerHTML = '<i class="igb-dots"></i>'; },
+    // four rings around the centre (the seed's heartbeat, frozen)
+    rings(D, el, a) {
       el.innerHTML = '<i class="igb-ring"></i>'.repeat(4);
       const rs = Array.from(el.children);
-      gsap.set(rs, { scale: 0.15, opacity: 0 });
-      let b = 0;
-      for (let t = a.from; t < a.to - 0.05; t += bar, b++) D.hit(rs[b % 4], { scale: 0.15, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: bar * 1.7, ease: 'power2.out' }, t);
+      rs.forEach((r, i) => gsap.set(r, { scale: 0.45 + i * 0.5, opacity: 0.9 - i * 0.18 }));
+      D.hit(rs, { scale: 0.15 }, { scale: i => 0.45 + i * 0.5, duration: 1.6, ease: 'expo.out', stagger: 0.12 }, a.from);
     },
-    // Bauhaus construction lines that draw in and drift (the career act, on paper)
-    grid(D, el, a, bar) {
+    // Bauhaus construction lines that draw in (the career act, on paper)
+    grid(D, el, a) {
       const v = D.vertical, W = D.W, Hs = D.H;
       const H = v ? [240, 480, 720, 960, 1200, 1440, 1680] : [180, 360, 540, 720, 900], V = v ? [180, 360, 540, 720, 900, 1080] : [240, 480, 720, 960, 1200, 1440, 1680];
       const O = v ? [[760, 520, 300], [300, 1380, 190]] : [[1440, 360, 300], [480, 760, 190]];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${W} ${Hs}"><g class="g">${H.map(y => `<line x1="-300" y1="${y}" x2="${W + 300}" y2="${y}"/>`).join('')}${V.map(x => `<line x1="${x}" y1="-60" x2="${x}" y2="${Hs + 60}"/>`).join('')}${O.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join('')}</g></svg>`;
-      const g = el.querySelector('.igb-svg'), parts = el.querySelectorAll('line, circle');
+      const parts = el.querySelectorAll('line, circle');
       gsap.set(parts, { drawSVG: '0%' });
       D.hit(parts, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.4, ease: 'expo.inOut', stagger: 0.05 }, a.from);
-      D.tl.set(g, { x: 0 }, a.from);
-      D.tl.to(g, { x: -240, duration: a.to - a.from, ease: 'none' }, a.from);
-      pulse(D, g, a, bar, 0.65);
     },
-    // scanlines rolling up + a light band that sweeps down on every bar (the AI act)
-    scan(D, el, a, bar) {
-      el.innerHTML = '<i class="igb-lines"></i><i class="igb-band"></i>';
-      const [ln, band] = el.children;
-      gsap.set(band, { y: -320 });
-      D.tl.set(ln, { y: 0 }, a.from);
-      D.tl.to(ln, { y: -240, duration: a.to - a.from, ease: 'none' }, a.from);
-      for (let t = a.from; t < a.to - 0.05; t += bar) D.hit(band, { y: -320 }, { y: D.H + 320, duration: bar * 0.9, ease: 'power1.inOut' }, t);
-    },
+    // scanlines (the AI act)
+    scan(D, el) { el.innerHTML = '<i class="igb-lines"></i>'; },
     // git branches leaving a main line, one after another (own projects)
     branches(D, el, a) {
       const v = D.vertical, M = D.H - 180, E = D.W + 200;
       const fk = v ? [[40, 1300], [190, 820], [340, 1520], [490, 420], [640, 1080], [790, 640]] : [[100, 700], [380, 520], [700, 800], [980, 360], [1260, 620], [1540, 460]];
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${D.W} ${D.H}"><g class="g"><path d="M-100 ${M}H${E}"/>${fk.map(([x, y]) => `<path d="M${x} ${M}C${x + 130} ${M} ${x + 130} ${y} ${x + 260} ${y}H${E}"/>`).join('')}${fk.map(([x]) => `<circle class="n" cx="${x}" cy="${M}" r="8"/>`).join('')}</g></svg>`;
-      const g = el.querySelector('.igb-svg'), paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
-      const span = a.to - a.from;
+      const paths = el.querySelectorAll('path'), nodes = el.querySelectorAll('.n');
       gsap.set(paths, { drawSVG: '0%' });
       gsap.set(nodes, { scale: 0, transformOrigin: '50% 50%' });
       D.hit(paths[0], { drawSVG: '0%' }, { drawSVG: '100%', duration: 1, ease: 'power2.inOut' }, a.from);
       fk.forEach((_, i) => {
-        const t = a.from + 0.4 + i * (span - 2) / fk.length;
+        const t = a.from + 0.3 + i * 0.12;
         D.hit(nodes[i], { scale: 0 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' }, t);
-        D.hit(paths[i + 1], { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.4, ease: 'power2.inOut' }, t);
+        D.hit(paths[i + 1], { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.2, ease: 'power2.inOut' }, t);
       });
-      D.tl.set(g, { x: 0 }, a.from);
-      D.tl.to(g, { x: -200, duration: span, ease: 'none' }, a.from);
     },
-    // a slow network of nodes (the agents' system): it turns, its nodes pulse with the bar
-    net(D, el, a, bar) {
+    // a network of nodes (the agents' system)
+    net(D, el) {
       const r = rng(11), N = 18, pts = Array.from({ length: N }, () => [120 + r() * (D.W - 240), 90 + r() * (D.H - 180)]);
       const links = [];
       pts.forEach((p, i) => pts.map((q, j) => [j, (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2]).filter(([j]) => j !== i).sort((x, y) => x[1] - y[1]).slice(0, 2)
         .forEach(([j]) => { if (!links.some(([u, v]) => (u === j && v === i))) links.push([i, j]); }));
       el.innerHTML = `<svg class="igb-svg" viewBox="0 0 ${D.W} ${D.H}"><g class="g">${links.map(([i, j]) => `<line x1="${pts[i][0].toFixed(0)}" y1="${pts[i][1].toFixed(0)}" x2="${pts[j][0].toFixed(0)}" y2="${pts[j][1].toFixed(0)}"/>`).join('')}${pts.map(([x, y]) => `<circle class="n" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="5"/>`).join('')}</g></svg>`;
-      const g = el.querySelector('.igb-svg'), nodes = Array.from(el.querySelectorAll('.n'));
-      gsap.set(g, { transformOrigin: '50% 50%' });
-      D.tl.set(g, { rotation: 0 }, a.from);
-      D.tl.to(g, { rotation: 14, duration: a.to - a.from, ease: 'none' }, a.from);
-      gsap.set(nodes, { transformOrigin: '50% 50%' });
-      let b = 0;
-      for (let t = a.from; t < a.to - 0.05; t += bar, b++) D.hit(nodes.filter((_, i) => i % 3 === b % 3), { scale: 2.4 }, { scale: 1, duration: bar * 0.6, ease: 'power2.out' }, t);
     },
-    // the coral sun rising behind the finale (dawn)
-    sun(D, el, a, bar) {
+    // the coral sun behind the finale (dawn), already up: a rising 1700 px gradient repainted the end card on every frame
+    sun(D, el) {
       el.innerHTML = '<i class="igb-sun"></i>';
-      const s = el.firstChild;
-      D.tl.set(s, { y: 560, scale: 0.7 }, a.from);
-      D.tl.to(s, { y: 40, scale: 1.2, duration: a.to - a.from, ease: 'power1.out' }, a.from);
-      pulse(D, s, a, bar, 0.8);
+      gsap.set(el.firstChild, { y: 40, scale: 1.2 });
     },
   };
   function buildActs(D, cfg) {
     const acts = cfg.acts || [];
     if (!acts.length) return;
-    const bar = 240 / ((cfg.music && cfg.music.bpm) || 120);
     const layer = document.createElement('div');
     layer.id = 'ig-acts';
     D.camera.before(layer); // over #bg and #wipe, under the scenes
@@ -181,7 +149,10 @@
       el.style.color = a.tone || PAPER;
       layer.appendChild(el);
       gsap.set(el, { autoAlpha: 0 });
-      (KINDS[a.kind] || KINDS.dots)(D, el, a, bar);
+      // lite: no draw-in and no fade — the texture is there from the act's first frame (it starts on a cut) and goes
+      // with its last one: any change to a stage-sized texture is a full re-raster of the stage on every frame
+      (KINDS[a.kind] || KINDS.dots)(D.lite ? { ...D, hit: (t, from, { duration, ease, stagger, ...to }) => gsap.set(t, to) } : D, el, a);
+      if (D.lite) { D.tl.set(el, { autoAlpha: a.alpha ?? 0.14 }, a.from); D.tl.set(el, { autoAlpha: 0 }, a.to); return; }
       D.tl.to(el, { autoAlpha: a.alpha ?? 0.14, duration: 0.45, ease: 'power2.out' }, a.from);
       D.tl.to(el, { autoAlpha: 0, duration: 0.3, ease: 'power2.in' }, a.to - 0.3);
     });
@@ -233,6 +204,29 @@
     cover.remove();
   }
 
+  // ================================================================== NESTING (playback cost)
+  /** The recipes write thousands of tweens, sets and sound calls straight onto the master timeline, and GSAP
+   *  walks EVERY started child of a timeline on every frame (finished ones included; each zero-length set is
+   *  re-evaluated): near the end of the film that walk alone cost ≈ 5 ms a frame on a phone-class CPU. Once the
+   *  film is sequenced, its children move into one sub-timeline per `width` seconds of start time (in their
+   *  order, at their exact times): a frame walks ≈ 130 buckets and only the children of the few that are live. */
+  function nest(tl, width = 1) {
+    const kids = tl.getChildren(false, true, true), buckets = new Map();
+    for (const c of kids) {
+      const at = c.startTime(), b = Math.floor(at / width) * width;
+      if (!buckets.has(b)) buckets.set(b, []);
+      buckets.get(b).push([c, at]);
+    }
+    const subs = [];
+    for (const [b, list] of [...buckets].sort((x, y) => x[0] - y[0])) {
+      const sub = gsap.timeline({ paused: false });
+      for (const [c, at] of list) { tl.remove(c); sub.add(c, at - b); }
+      subs.push([sub, b]);
+    }
+    subs.forEach(([sub, b]) => tl.add(sub, b));
+    return subs.length;
+  }
+
   // ================================================================== HOST MODE (inside the portfolio)
   const host = cfg => !!cfg.host || Q.has('host');
   const post = (type, extra = {}) => { try { if (parent !== window) parent.postMessage({ type, ...extra }, location.origin); } catch (e) { /* no parent */ } };
@@ -245,6 +239,9 @@
       D.lite = Q.has('lite') ? Q.get('lite') !== '0' : (matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600);
       document.documentElement.classList.toggle('is-lite', D.lite);
       if (D.lite) gsap.config({ force3D: false }); // no translate3d while a tween runs: the element stays in its parent's layer
+      // lite: a colour wipe is a cut. The wipe is a stage-sized panel under the scenes; while it travels, the whole stage
+      // (and every scene painted over it) is rastered again on every frame — the cuts stuttered on tablets
+      if (D.lite) D.wipeTo = (color, at) => D.setBg(color, at);
       // finished and future scenes are skipped, not just invisible: no layout, no paint, no layers (and their
       // rendering state is kept, so the cut does not redo the warm-up's work)
       const rawShow = D.show, rawHide = D.hide, managed = new Set();
@@ -308,6 +305,9 @@
     },
 
     done(D, cfg) {
+      const dur0 = D.tl.duration();
+      nest(D.tl);
+      if (Math.abs(D.tl.duration() - dur0) > 1e-3) console.error('[ig-kit] nesting changed the film length', dur0, D.tl.duration());
       // every managed scene that is not on screen at the playhead starts skipped (D.show / D.hide above toggle it)
       D.igScenes.forEach(s => { if (getComputedStyle(s).visibility === 'hidden') s.style.contentVisibility = 'hidden'; });
       if (!host(cfg)) return;
@@ -501,7 +501,6 @@
     D.ink(o.ink || PAPER, T);
     if (o.label) D.label(T, o.label);
     D.hit(win, { opacity: 0, scale: 1.14, rotationY: -18, rotationX: 7, transformPerspective: 1800 }, { opacity: 1, scale: 1, rotationY: 0, rotationX: 0, duration: 0.9, ease: 'expo.out' }, T);
-    tl.to(win, { scale: 1.04, duration: Math.max(0.1, dur - 1.25), ease: 'sine.inOut' }, T + 0.9);
     D.hit(tag, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2)' }, T + 0.45);
     tl.to(win, { opacity: 0, scale: 0.97, duration: 0.3, ease: 'power2.in' }, T + dur - 0.3);
     D.sfx('whoosh', T, 0.7, 0.3);
@@ -569,8 +568,6 @@
       D.sfx('tick', t + 0.25, 0.05);
     });
     gsap.set(cam, { transformOrigin: v ? `${D.CX}px 800px` : '960px 640px' });
-    tl.set(cam, { x: 0, scale: 1 }, T);
-    tl.to(cam, { x: -24, scale: 1.03, duration: dur - 0.4, ease: 'sine.inOut' }, T + 0.2);
     tl.to(cam, { opacity: 0, duration: 0.3, ease: 'power2.in' }, T + dur - 0.3);
     D.hide(s, T + dur);
     return dur;
@@ -686,7 +683,6 @@
     if (link) D.hit(link, { opacity: 0, y: 12 }, { opacity: 0.85, y: 0, duration: 0.5, ease: 'power3.out' }, tm + N * per + 0.2);
     const th = T + (o.handoff ?? dur - 2);
     for (let t = tm + N * per + 0.25, k = 0; t < th - 0.1; t += 0.5, k++) tl.set(caret, { opacity: k % 2 ? 1 : 0 }, t);
-    tl.to(box, { scale: 1.02, duration: Math.max(0.1, th - T - 2), ease: 'none' }, T + 2);
     // the hand-off: everything leaves, the bare background remains (the portfolio's)
     tl.to(box, { opacity: 0, duration: 0.8, ease: 'power2.inOut' }, th);
     return dur;

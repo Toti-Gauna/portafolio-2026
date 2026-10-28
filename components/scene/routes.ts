@@ -42,6 +42,12 @@ const ALIASES: Record<string, SceneId> = {
   'games-market': 'games',
   'supernova-eventos': 'supernova',
   handy: 'handyx',
+  // inner pages of the site: «Cómo trabajo» is the agentic system's graph; «Sobre mí» grows from the home's seed.
+  // «Trabajo» and «Capacidades» keep the quiet dot field (default).
+  'como-trabajo': 'agentes',
+  'how-i-work': 'agentes',
+  'sobre-mi': 'home',
+  about: 'home',
 };
 
 const NAMED = new Set<string>(SCENE_IDS.filter((id) => id !== 'home' && id !== 'default'));

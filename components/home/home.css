@@ -141,3 +141,59 @@
 .also { margin-top: clamp(28px, 5vw, 48px); }
 .also__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .also__list li { padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 15px; color: #d6d2c9; }
+
+/* home hub: one card per page, asymmetric (the work gets the big one) */
+.hub { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; }
+.hub__card { position: relative; display: grid; gap: 20px; align-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: #121215; overflow: hidden; transition: border-color 200ms; }
+.hub__card:hover { border-color: #ff4d2e99; }
+.hub__body { display: grid; gap: 10px; align-content: start; }
+.hub__n span { color: var(--accent); margin-right: 4px; }
+.hub__q { font-size: clamp(24px, 2.6vw, 34px); font-weight: 800; font-variation-settings: 'wdth' 115; line-height: 1.05; letter-spacing: -0.005em; max-width: 20ch; }
+.hub__d { color: #cfcbc2; font-size: 16px; line-height: 1.55; max-width: 52ch; }
+.hub__more { justify-self: start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--accent); font-weight: 700; text-decoration: none; }
+/* the whole card is the link's target (the link itself keeps the focus ring) */
+.hub__more::after { content: ''; position: absolute; inset: 0; border-radius: 14px; }
+.hub__more:hover { text-decoration: underline; }
+@media (min-width: 700px) {
+  .hub { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub__card--work { grid-column: 1 / -1; }
+}
+@media (min-width: 1000px) {
+  .hub { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+  .hub__card--work { grid-column: span 4; grid-row: span 2; padding: 28px; }
+  .hub__card--how, .hub__card--skills { grid-column: span 2; }
+  .hub__card--business, .hub__card--about { grid-column: span 3; }
+  .hub__card--work .hub__q { font-size: clamp(34px, 3.6vw, 48px); }
+  .hub__card--work { grid-template-rows: minmax(0, 1fr) auto; }
+  .hub__card--work .ha--work { aspect-ratio: auto; height: 100%; min-height: 320px; }
+}
+
+/* hub drawings: static, decorative */
+.ha { width: 100%; }
+.ha--svg { height: auto; max-height: 150px; font-family: var(--font-mono); }
+.ha__track { fill: none; stroke: #3a3a40; stroke-width: 2; }
+.ha__arc { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+.ha__st circle, .ha__node { fill: #16161a; stroke: var(--paper); stroke-width: 1.5; }
+.ha__st text { fill: var(--paper); }
+.ha__st--on circle, .ha__node--on { stroke: var(--accent); }
+.ha__st--on text { fill: var(--accent); }
+.ha__sea { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+.ha__sea--red { stroke: var(--accent); }
+.ha__sea--blue { stroke: #7fa3ff; }
+.ha__main { stroke: var(--paper); stroke-opacity: 0.5; stroke-width: 2; }
+.ha__branch { fill: none; stroke: var(--accent); stroke-width: 2; }
+.ha__commit { fill: var(--ink); stroke: var(--accent); stroke-width: 2; }
+.ha__seed { fill: var(--paper); }
+.ha__end { fill: #4fc76a; }
+.ha--work { position: relative; aspect-ratio: 16 / 9; }
+.ha__shot { position: absolute; width: 68%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid #3a3a40; background: #0b0b0d; box-shadow: 0 14px 34px #000a; left: calc(32% - var(--i) * 16%); top: calc(var(--i) * 12%); }
+.ha--skills { display: grid; gap: 8px; justify-content: start; }
+.ha__row { display: grid; grid-template-columns: 30px repeat(3, 26px); align-items: center; justify-items: center; }
+.ha__icon { width: 24px; height: 24px; color: var(--paper); }
+.ha__dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #3a3a40; }
+.ha__dot[data-on] { border: 0; background: var(--paper); }
+.ha__dot[data-on][data-col='work'] { background: var(--accent); }
+.ha__dot[data-on][data-col='study'] { background: transparent; border: 2px solid #7fa3ff; }
+
+/* home: the short contact block */
+.home-contact__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }

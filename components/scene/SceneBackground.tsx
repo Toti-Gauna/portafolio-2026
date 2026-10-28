@@ -90,6 +90,8 @@ export function SceneBackground() {
       setState('loading');
       try {
         const { createEngine } = await import('./engine');
+        // the chunk's evaluation and the renderer's setup run as separate tasks
+        await new Promise((r) => setTimeout(r, 0));
         if (signal.cancelled) return;
         const engine = createEngine({ canvas, gl, software, reduced: motion.matches, onState: setState });
         engineRef.current = engine;

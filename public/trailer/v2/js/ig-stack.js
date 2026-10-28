@@ -78,7 +78,8 @@
       // tiles: each lands, then plays
       tiles.forEach((tile, j) => {
         const at = t + 0.3 + j * 0.22, id = sc.tiles[j];
-        D.hit(tile, { y: 60, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: 'expo.out' }, at);
+        // no scale: a scaling ancestor makes Chromium lay out every SVG <text> inside the tile again on each frame
+        D.hit(tile, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: 'expo.out' }, at);
         D.hit(D.$('.stk-cap', tile), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.45, ease: 'expo.out' }, at + 0.15);
         D.sfx('tick', at + 0.1, 0.035);
         try { TILES[id].play(D, D.$('.stk-art', tile), at + 0.25, tx(id)); } catch (e) { console.error(`[igstack] ${id}`, e); }

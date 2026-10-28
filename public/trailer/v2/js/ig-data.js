@@ -13,15 +13,15 @@ export const GH = '#0d1117', GREEN = '#3fb950';            // act 6 · proof (th
  *  paints its own night; the fronts are on paper; the zoom-out and the industries on ink. */
 export const ACTS = [
   { id: 'primero', from: 6, to: 12, kind: 'dots', tone: PAPER, alpha: 0.07 },
-  { id: 'frentes', from: 12, to: 30, kind: 'grid', tone: INK, alpha: 0.12 },
-  { id: 'complia', from: 30, to: 36, kind: 'scan', tone: ICE, alpha: 0.12 },
-  { id: 'tsoft', from: 36, to: 42, kind: 'grid', tone: INK, alpha: 0.12 },
-  { id: 'propio', from: 42, to: 52, kind: 'branches', tone: PAPER, alpha: 0.14 },
-  { id: 'germina', from: 52, to: 60, kind: 'dots', tone: PAPER, alpha: 0.05 },
-  { id: 'rubros', from: 60, to: 68, kind: 'rings', tone: PAPER, alpha: 0.12 },
-  { id: 'stack', from: 68, to: 84, kind: 'dots', tone: PAPER, alpha: 0.06 },
-  { id: 'sistema', from: 84, to: 100, kind: 'net', tone: PAPER, alpha: 0.12 },
-  { id: 'final', from: 100, to: 118, kind: 'sun', tone: CORAL, alpha: 0.32 },
+  { id: 'frentes', from: 12, to: 42, kind: 'grid', tone: INK, alpha: 0.12 },
+  { id: 'complia', from: 42, to: 48, kind: 'scan', tone: ICE, alpha: 0.12 },
+  { id: 'tsoft', from: 48, to: 60, kind: 'grid', tone: INK, alpha: 0.12 },
+  { id: 'propio', from: 60, to: 70, kind: 'branches', tone: PAPER, alpha: 0.14 },
+  { id: 'germina', from: 70, to: 78, kind: 'dots', tone: PAPER, alpha: 0.05 },
+  { id: 'rubros', from: 78, to: 86, kind: 'rings', tone: PAPER, alpha: 0.12 },
+  { id: 'stack', from: 86, to: 102, kind: 'dots', tone: PAPER, alpha: 0.06 },
+  { id: 'sistema', from: 102, to: 118, kind: 'net', tone: PAPER, alpha: 0.12 },
+  { id: 'final', from: 118, to: 128, kind: 'sun', tone: CORAL, alpha: 0.32 },
 ];
 
 /** the engine palette (global): night/ink/paper + accents (a1 coral, a2 blue, a3 yellow, a4 origin <em>,

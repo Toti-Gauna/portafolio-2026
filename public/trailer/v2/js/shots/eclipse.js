@@ -188,19 +188,22 @@
       // start: the moon is still sliding in from the lower left (MOON_DIR), the sun peeks at the upper right
       const off = R * 1.05 * 0.7071;
       tl.set(moon, { x: -off, y: off }, T);
-      tl.set(lit, { opacity: 0.12, scale: 0.9 }, T);
+      // lite (tablets, phones): the corona only brightens and the dial holds still — with no layers, scaling and turning
+      // those conic gradients re-rastered the whole eclipse on every frame of the cut (on desktop Chromium gives the
+      // moving corona a layer of its own, and holding it still made the cut slower there: measured, so desktop keeps it)
+      tl.set(lit, { opacity: 0.12, scale: D.lite ? 1 : 0.9 }, T);
+      tl.set(bezel, { rotation: D.lite ? 0 : -14 }, T);
       tl.set(glow, { opacity: 0.35 }, T);
       tl.set(ring, { opacity: 0, scale: 0.2 }, T);
-      tl.set(bezel, { rotation: -14 }, T);
       tl.set(words, { yPercent: 110 }, T);
       tl.set([q('.el-mark'), q('.el-sub')], { opacity: 0, y: 14 }, T);
       tl.set(cta, { opacity: 0, y: 18 }, T);
       tl.set(glint, { x: 0, opacity: 0 }, T);
       // 1 · totality: the moon slides home, the corona lights up, the bezel settles
       tl.to(moon, { x: 0, y: 0, duration: 0.72, ease: 'power3.inOut' }, T + 0.04);
-      tl.to(lit, { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, T + 0.5);
+      tl.to(lit, { opacity: 1, ...(D.lite ? {} : { scale: 1 }), duration: 0.6, ease: 'power2.out' }, T + 0.5);
+      if (!D.lite) tl.to(bezel, { rotation: 0, duration: 1.1, ease: 'expo.out' }, T + 0.05);
       tl.to(glow, { opacity: 1, duration: 0.6, ease: 'power2.out' }, T + 0.5);
-      tl.to(bezel, { rotation: 0, duration: 1.1, ease: 'expo.out' }, T + 0.05);
       // 2 · the diamond ring fires at the limb, under the dial's pointer, and settles to a glint
       tl.to(ring, { opacity: 1, scale: 1.25, duration: 0.16, ease: 'power2.out' }, T + 0.66);
       tl.to(ring, { scale: 1, opacity: 0.9, duration: 0.5, ease: 'power2.out' }, T + 0.82);

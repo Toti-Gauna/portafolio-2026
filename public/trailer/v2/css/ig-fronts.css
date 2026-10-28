@@ -8,6 +8,13 @@
 .igf-main { fill: none; stroke: #0e0e10; stroke-width: 6; }
 .igf-br { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
 .igf-yr { position: absolute; font-size: 40px; letter-spacing: .08em; color: #0e0e10; white-space: nowrap; }
+/* the stretches between fronts: one sentence written along the line, and the light at the pen's tip */
+.igf-lead { position: absolute; left: 0; top: 0; width: max-content; max-width: 1480px; margin: 0; font-family: var(--display); font-size: 84px; line-height: 1.04;
+  font-variation-settings: "wdth" 104, "wght" 820; letter-spacing: -.02em; color: #0e0e10; white-space: normal; text-wrap: balance; }
+.igf-lead em { font-style: normal; color: #e23a1c; }
+.is-vertical .igf-lead { max-width: 940px; font-size: 80px; }
+.igf-tip circle { fill: #ff4d2e; }
+.igf-tip .igf-tip-halo { opacity: .2; }
 
 .igf-txt { position: absolute; width: 690px; }
 .igf-k { min-height: 46px; font-size: 36px; line-height: 1.28; letter-spacing: .08em; color: #0e0e10; opacity: .78; }
