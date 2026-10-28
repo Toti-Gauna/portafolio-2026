@@ -1,7 +1,8 @@
 /* ============================================================================
-   MEET IGNACIO — the trailer (en). 120 s · 17 scenes · 120 BPM (one bar = 2 s).
+   MEET IGNACIO — the trailer (en). 130 s · 15 scenes · 120 BPM (one bar = 2 s).
    The story Ignacio told (10/28/2026): Mar del Plata → at 17, a games website that changed his life → the work
-   fronts (TACH, Ada ITW, Tsoft: Tuenti, CompliA, Supernova Eventos, the team) → a path of his own → every path,
+   fronts (TACH, Ada ITW, Tsoft: Tuenti, CompliA, Supernova Eventos, the team), with one sentence along the line
+   before each of them (`lead`, `exit`) → a path of his own → every path,
    all growing into the same thing: seeking new challenges → the industries → what he does → the end.
    No job titles anywhere: challenges. Every fact comes from portafolio-2026/messages/en.json (journey, about, contact).
    Kit: engine.js (the Handy copy) + recipes*.js (bifurcacion copies) + recipes-music.js and audio.js (Handy + IG patch)
@@ -41,45 +42,55 @@ Trailer.run({
       after: '…that changed<br><em>my life.</em>', afterSub: "I'm self-taught: I read a lot and study online.",
       site: { logo: 'GAMES', nav: ['Home', 'Games', 'Contact'], play: 'PLAY', ticker: "LET'S PLAY!" } },
 
-    // ── 3 · THE FRONTS (12–30) ───────────────────────────────────────────────── paper · one line, one branch per front
-    { type: 'igfronts', label: 'WORK FRONTS', duration: 18, at: [0, 5.5, 11.5], letterbox: 0,              //  12–30
+    // ── 3 · THE FRONTS (12–42) ───────────────────────────────────────────────── paper · one line, one branch per front
+    { type: 'igfronts', label: 'WORK FRONTS', letterbox: 0,                                     //  12–42
       origin: { year: 'AT 17', color: CORAL },
       stops: [
-        { year: '2021', label: 'TACH', color: FRONT.tach, vis: 'tach', k: '2021 – 2022 · TACH Argentina',
+        { year: '2021', label: 'TACH', color: FRONT.tach, vis: 'tach',
+          lead: { text: 'And that was my first step toward new experiences, like working at…', dur: 4 }, stay: 5,
+          k: '2021 – 2022 · TACH Argentina',
           t: 'A digital wallet, end to end.', d: 'Remote: the back office, the landing page and the app, on web and mobile.',
           v: { tags: ['BACK OFFICE', 'LANDING', 'APP'], balance: 'Available balance', send: 'Send', receive: 'Receive' } },
-        { year: '2023', label: 'ADA ITW', color: FRONT.ada, vis: 'class', k: '2023 – 2024 · Ada ITW',
+        { year: '2023', label: 'ADA ITW', color: FRONT.ada, vis: 'class',
+          lead: { text: 'Next, a new challenge: from code to the classroom, at…', dur: 3 }, stay: 5.5,
+          k: '2023 – 2024 · Ada ITW',
           t: 'Teaching people to code.', d: 'JavaScript and React: projects, hello worlds and students starting from zero.',
           v: { out: 'Hello, world', click: 'Click', todo: ['HTML', 'CSS', 'JavaScript'], code: [
             '<span class="kw">const</span> greeting = <span class="st">"Hello, world"</span>;',
             '<span class="fn">console</span>.log(greeting);',
             '<span class="cm">// → Hello, world</span>'] } },
-        { year: '2024', label: 'TSOFT · TUENTI', color: FRONT.tuenti, vis: 'tuenti', k: '2024 · Tsoft · Tuenti',
+        { year: '2024', label: 'TSOFT · TUENTI', color: FRONT.tuenti, vis: 'tuenti',
+          lead: { text: 'From teaching to a big company: Tsoft. First, on…', dur: 3 }, stay: 6.5,
+          k: '2024 · Tsoft · Tuenti',
           t: 'Gamification you can measure.', d: 'The roulette and the referrals. Then a dashboard to measure them.',
           v: { tag: 'Illustration · fictional data', rec: 'Recurrence', ref: 'Referrals', game: 'Gamification', plus: '+1' } },
-      ] },
+      ],
+      exit: { text: 'Then came AI: taking it to production with…', dur: 3, color: '#7fd4ff' } },
 
-    // ── 4 · CompliA (30–36) ──────────────────────────────────────────────────── navy · the case with its demo
-    { type: 'igcase', label: 'COMPLIA', duration: 6, bg: NAVY,                                                    //  30–36
+    // ── 4 · CompliA (42–48) ──────────────────────────────────────────────────── navy · the case with its demo
+    { type: 'igcase', label: 'COMPLIA', duration: 6, bg: NAVY,                                                    //  42–48
       kicker: "2026 · Telefónica's compliance portal", title: 'CompliA', sub: 'Artificial intelligence in internal production.',
       facts: [{ k: 'What I did', t: 'I designed and built it.' }, { k: 'How', t: 'A RAG assistant: validations, restrictions and recommendations.' }, { k: 'Demo', t: 'Demo clip, with sample data.' }],
       src: MEDIA.complia, poster: MEDIA.compliaPoster, from: 0.3, window: 'CompliA · demo', tag: 'SAMPLE DATA' },
 
-    // ── 5 · TSOFT, TOO (36–42) ───────────────────────────────────────────────── paper · the line goes on
-    { type: 'igfronts', label: 'TSOFT', duration: 6, at: [0, 3], letterbox: 0,                                    //  36–42
+    // ── 5 · TSOFT, TOO (48–60) ───────────────────────────────────────────────── paper · the line goes on
+    { type: 'igfronts', label: 'TSOFT', letterbox: 0,                                                //  48–60
       origin: { year: 'COMPLIA', color: '#7fd4ff' },
       stops: [
-        { year: '2026', label: 'SUPERNOVA EVENTOS', color: FRONT.supernova, vis: 'events', k: '2026 · Tsoft',
+        { year: '2026', label: 'SUPERNOVA EVENTOS', color: FRONT.supernova, vis: 'events',
+          lead: { text: 'At Tsoft, more fronts: a prototype for…', dur: 3 }, stay: 2.6,
+          k: '2026 · Tsoft',
           t: 'An events micro-app.', d: 'Supernova Eventos: a prototype, with fictional data.',
           v: { app: 'Events', cat: 'Wellness', title: 'A breather for you', date: 'Oct 28 · 09:00', cta: "I'm in", ok: 'Confirmed',
             steps: ['Details', 'Audience', 'Email', 'Review'], tag: 'Prototype · fictional data' } },
-        { year: '2026', label: 'TEAM', color: FRONT.team, vis: 'team', k: '2026 · Tsoft',
+        { year: '2026', label: 'TEAM', color: FRONT.team, vis: 'team', stay: 2.5, k: '2026 · Tsoft',
           t: "Raising the team's level.", d: 'I trained colleagues.', v: { level: 'Level' } },
-      ] },
+      ],
+      exit: { text: 'And alongside, with what I learned on every front, I built…', dur: 3, color: CORAL } },
 
-    // ── 6 · A PATH OF MY OWN (42–52) ─────────────────────────────────────────── one colour per project · montage
+    // ── 6 · A PATH OF MY OWN (60–70) ─────────────────────────────────────────── one colour per project · montage
     // Each project shows its real components, rebuilt in code (js/shots/*): no screenshots, no video.
-    { type: 'igprojects', label: 'MY OWN PATH', duration: 2, step: 0.15, bg: INK,                                 //  42–44
+    { type: 'igprojects', label: 'MY OWN PATH', duration: 2, step: 0.15, bg: INK,                                 //  60–62
       items: [
         { name: 'Eclipse', status: 'In development', color: PROJECT.eclipse },
         { name: 'HandyX', status: 'In development · launches Nov 10', color: PROJECT.handyx },
@@ -89,8 +100,8 @@ Trailer.run({
         { name: 'games-market', status: 'Test bench', color: PROJECT.games },
         { name: 'Kinetic Studio', status: '32 trailers in code', color: PROJECT.kinetic },
       ],
-      cap: { pos: 'tl', k: 'My own path', t: 'And a path of my own.', d: 'Each project says where it stands.' } },
-    { type: 'igshots', label: 'MY OWN PATH', title: '', end: 'All of it, in code.', titleDur: 0, mosaic: 1.5,         //  44–52
+      cap: { pos: 'tl', k: 'My own path', t: 'A path of my own.', d: 'Each project says where it stands.' } },
+    { type: 'igshots', label: 'MY OWN PATH', title: '', end: 'All of it, in code.', titleDur: 0, mosaic: 1.5,         //  62–70
       shots: [
         { id: 'eclipse-landing', dur: 1.5, tag: { name: 'Eclipse', status: 'In development', note: 'The landing: demos, prices and the next step' } },
         { id: 'eclipse-portal', dur: 1, tag: { name: 'Eclipse', status: 'In development', note: 'Client portal · fictional data' } },
@@ -100,8 +111,8 @@ Trailer.run({
         { id: 'kinetic', dur: 1, tag: { name: 'Kinetic Studio', status: '32 trailers', note: 'Trailers made with code, like this one' } },
       ] },
 
-    // ── 7 · EVERY PATH (52–60) · DROP 2 ──────────────────────────────────────── ink · the whole graph germinates
-    { type: 'igzoom', label: 'EVERY PATH', duration: 8,                                                     //  52–60
+    // ── 7 · EVERY PATH (70–78) · DROP 2 ──────────────────────────────────────── ink · the whole graph germinates
+    { type: 'igzoom', label: 'EVERY PATH', duration: 8,                                                     //  70–78
       years: ['17', '2021', '2023', '2024', '2026', 'TODAY'],
       fronts: [
         { name: 'Games website', color: FRONT.first }, { name: 'TACH', color: FRONT.tach }, { name: 'Ada ITW', color: FRONT.ada },
@@ -115,16 +126,16 @@ Trailer.run({
       ],
       line: 'It all grows into the same thing:', line2: 'seeking <em>new challenges</em>.' },
 
-    // ── 8 · CHALLENGES AND INDUSTRIES (60–68) ─────────────────────────────────── coral → ink · one industry per beat
-    { type: 'igrubros', label: 'CHALLENGES', duration: 8, split: 3.5,                                                  //  60–68
+    // ── 8 · CHALLENGES AND INDUSTRIES (78–86) ─────────────────────────────────── coral → ink · one industry per beat
+    { type: 'igrubros', label: 'CHALLENGES', duration: 8, split: 3.5,                                                  //  78–86
       kicker: 'New challenges are what drive me', lines: ['Boosting businesses.', 'Automating hard<br>processes.'],
       head: "I'm not afraid of any industry:",
       rubros: [{ id: 'startups', name: 'Startups' }, { id: 'corporate', name: 'Corporates' }, { id: 'agro', name: 'Agriculture' },
         { id: 'space', name: 'Space' }, { id: 'mining', name: 'Mining' }, { id: 'oilgas', name: 'Oil & gas' }] },
 
-    // ── 9 · TECHNOLOGIES (68–84) · DROP 3 ─────────────────────────────────────── ink · one animation per technology
+    // ── 9 · TECHNOLOGIES (86–102) · DROP 3 ─────────────────────────────────────── ink · one animation per technology
     // Grouped by where I used them: at work, in my projects and studying.
-    { type: 'igstack', label: 'TECHNOLOGIES', letterbox: 0,                                                        //  68–84
+    { type: 'igstack', label: 'TECHNOLOGIES', letterbox: 0,                                                        //  86–102
       screens: [
         { k: 'At work', t: 'Frontend and mobile', label: 'FRONTEND', tone: CORAL, bg: '#140f0f', dur: 4, tiles: ['react', 'typescript', 'nextjs', 'reactnative', 'tailwind'] },
         { k: 'At work', t: 'Backend, data and AI', label: 'BACKEND · AI', tone: CORAL, bg: '#0f1014', dur: 4, tiles: ['node', 'sql', 'cicd', 'rag'] },
@@ -132,10 +143,10 @@ Trailer.run({
         { k: 'Studying', t: 'Machine learning and cloud', label: 'STUDY', tone: YELLOW, bg: '#14130c', dur: 4, tiles: ['ml', 'aws', 'azure'] },
       ] },
 
-    // ── 10 · THE SYSTEM (84–100) ──────────────────────────────────────────────── coral / ink · network
-    { type: 'igcut', de: 'typewriter', fit: 2, label: 'SYSTEM', speed: 1.3,                                     //  84–86
+    // ── 10 · THE SYSTEM (102–118) ──────────────────────────────────────────────── coral / ink · network
+    { type: 'igcut', de: 'typewriter', fit: 2, label: 'SYSTEM', speed: 1.3,                                     // 102–104
       lines: ['AN AGENTIC SYSTEM,', 'SPLIT INTO <em>PARTS</em>.'], bg: INK, to: CORAL },
-    { type: 'igagents', label: '11 AGENTS', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    //  86–92
+    { type: 'igagents', label: '11 AGENTS', duration: 6, bg: CORAL, ink: INK, accent: PAPER,                    // 104–110
       glyphs: GLYPHS,
       agents: [
         { id: 'chief', name: 'Direction' }, { id: 'uxui', name: 'UX/UI' }, { id: 'design', name: 'Design' },
@@ -153,14 +164,14 @@ Trailer.run({
         { at: 1.95, to: 3.75, w: 1500, k: 'Architects', t: 'Each one with its own part.' },
         { at: 3.75, w: 1500, k: 'Documentation · 11 agents', t: 'Not a prompt: a system with roles.' },
       ] },
-    { type: 'rules', label: 'RULES', step: 1, head: 'HOW THEY WORK TOGETHER', unit: 'RULE',                      //  92–96
+    { type: 'rules', label: 'RULES', step: 1, head: 'HOW THEY WORK TOGETHER', unit: 'RULE',                      // 110–114
       rules: [
         { text: 'Specification first, code second.', bg: PAPER, num: CORAL },
         { text: 'Every claim carries its level of evidence.', bg: INK, num: CORAL },
         { text: 'Gates with human approval.', bg: BLUE, num: YELLOW },
         { text: 'Tested, not eyeballed.', bg: GH, num: GREEN },
       ] },
-    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           //  96–100
+    { type: 'igcut', de: 'pipeline', fit: 4, duration: 5, cls: 'ig-pipe', label: 'CI',                           // 114–118
       window: 'ci · run of 10/27/2026', title: 'Run of 10/27/2026', sub: 'Automated tests, Playwright e2e and CI',
       running: 'Running', doneLabel: 'All green', total: 'All green', gap: 0.3, rowH: 58,
       cols: ['PROJECT', 'PROGRESS', 'RESULT', ''],
@@ -175,12 +186,8 @@ Trailer.run({
         { name: 'Browser journeys', value: '14' },
       ] },
 
-    // ── 11 · FINALE (100–120) · DROP 4 ──────────────────────────────────────── night → ink · sun
-    { type: 'igcut', de: 'title', fit: 5, label: 'IGNACIO GAUNA', bg: NIGHT, foley: 0.5,                         // 100–105
-      title: 'IGNACIO GAUNA', subtitle: 'MAR DEL PLATA · ARGENTINA', colors: [CORAL, BLUE, YELLOW] },
-    { type: 'igcut', de: 'statement', fit: 3, label: 'SHIPS', bg: NIGHT, accent: CORAL,                     // 105–108
-      text: 'I BUILD AI SOFTWARE<br><span>THAT SHIPS.</span>' },
-    { type: 'igend', label: 'CONTACT', duration: 12, handoff: 10, bg: INK, ink: PAPER, accent: CORAL,            // 108–120
+    // ── 11 · FINALE (118–130) · DROP 4 ──────────────────────────────────────── ink · sun
+    { type: 'igend', label: 'CONTACT', duration: 12, handoff: 10, bg: INK, ink: PAPER, accent: CORAL,            // 118–130
       mono: MONOGRAM, name: 'IGNACIO GAUNA',
       open: 'Open to new challenges.', lead: 'Startups, corporates, agriculture, space, mining, oil & gas.',
       email: 'ignaciogauna.developer@gmail.com', link: 'linkedin.com/in/ignacio-emanuel-gauna' },

@@ -474,7 +474,6 @@
       enter(D, T, qa(v, '.kn-h > span > span'), { yPercent: 135 }, { yPercent: 0, duration: 0.55, ease: 'expo.out', stagger: 0.07 }, T + 0.04);
       enter(D, T, q(v, '.kn-sel'), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' }, T + 0.6);
       D.hit(cards[0], { scale: 1 }, { scale: 1.04, duration: 0.4, ease: 'expo.out' }, T + 0.6);
-      D.hit(q(v, '.kn-stage'), { x: 0 }, { x: -70, duration: dur, ease: 'sine.inOut' }, T);
     },
   });
 })();

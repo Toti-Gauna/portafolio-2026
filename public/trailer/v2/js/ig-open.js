@@ -119,7 +119,7 @@
       <div class="igo-txt"><div class="igo-k mono"></div><div class="igo-line">${o.line || ''}</div></div>
     </div>`);
     const map = D.$('.igo-map', s), svg = D.$('.igo-svg', s), cl = D.$('.igo-coast', s), surf = D.$('.igo-surf', s), bws = D.$$('.igo-bw', s), gs = D.$$('.igo-gro', s);
-    const wv = D.$('.igo-waves', s), gridG = D.$('.igo-grid', s), seed = D.$('.igo-seed', s), glow = D.$('.igo-glow', s), rings = D.$$('.igo-ring', s);
+    const wvG = D.$('.igo-waves', s), gridG = D.$('.igo-grid', s), seed = D.$('.igo-seed', s), glow = D.$('.igo-glow', s), rings = D.$$('.igo-ring', s);
     const sea = D.$('.igo-sea', s), k = D.$('.igo-k', s), line = D.$('.igo-line', s), shade = D.$('.igo-shade', s);
     sea.innerHTML = String(o.sea || '').split(' ').map(esc).join('<br>');
     D.fit(line, D.W - (v ? 140 : 240));
@@ -134,13 +134,14 @@
     gsap.set(seed, { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 }); // the light comes on at L0, not before
     gsap.set([glow, ...rings], { svgOrigin: `${cx} ${cy}` });
     gsap.set(glow, { scale: 0.3, opacity: 0 });
-    gsap.set(gridG, { opacity: 0 });
+    gsap.set(gridG, { attr: { 'stroke-opacity': 0 } }); // not `opacity`: a fading <g> under the land's clip got the map composited (layers)
     gsap.set(rings, { scale: 0.2, opacity: 0 });
     gsap.set(words, { yPercent: 115 });
     // the night comes up; the coast draws itself north → south; the groynes follow the pen
-    D.hit(svg, { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, T);
-    D.hit(wv, { x: -18 }, { x: 26, duration: dur, ease: 'none' }, T);
-    D.hit(gridG, { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.out' }, T + 1.6);
+    // lite: the map is simply there (its land is barely lighter than the night); fading the whole map in re-rastered the
+    // stage on every frame of the film's first second — the coast still draws itself
+    if (!D.lite) D.hit(svg, { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, T);
+    D.hit(gridG, { attr: { 'stroke-opacity': 0 } }, { attr: { 'stroke-opacity': 1 }, duration: 1.4, ease: 'power2.out' }, T + 1.6);
     const DRAW = 2.4;
     tl.to(cl, { drawSVG: '100%', duration: DRAW, ease: 'power2.inOut' }, T + 0.15);
     tl.to(surf, { drawSVG: '100%', duration: DRAW, ease: 'power2.inOut' }, T + 0.3);
@@ -160,8 +161,12 @@
     D.hit(shade, { opacity: 0 }, { opacity: 1, duration: 1, ease: 'power2.out' }, T + 2.2);
     if (o.kicker) tl.to(k, { duration: 0.6, scrambleText: { text: o.kicker, chars: 'upperCase', speed: 1 }, ease: 'none' }, T + 2.4);
     tl.to(words, { yPercent: 0, duration: 0.8, ease: 'expo.out', stagger: 0.07 }, T + 2.6);
-    // the camera pushes in, then dives into the light (the next scene opens from it)
-    tl.fromTo(map, { scale: 1 }, { scale: 1.08, duration: dur - 0.7, ease: 'sine.inOut' }, T);
+    // the camera dives into the light (the next scene opens from it)
+    // (round 3: no slow push-in or drifting waves any more — the whole map was re-rastered on every frame)
+    tl.set(map, { scale: 1 }, T);
+    // lite: the fine detail (waves, street grid, rings, groynes, surf) leaves just before the dive, so each frame of the
+    // zoom rasters the land, the coast and the light only
+    if (D.lite) tl.set([wvG, gridG, ...rings, ...gs, surf], { autoAlpha: 0 }, T + dur - 0.72);
     tl.to(map, { scale: 5, duration: 0.7, ease: 'power3.in' }, T + dur - 0.7);
     tl.to(svg, { opacity: 0, duration: 0.5, ease: 'power2.in' }, T + dur - 0.55);
     tl.to([line, k, shade, sea], { opacity: 0, y: -24, duration: 0.4, ease: 'power2.in' }, T + dur - 0.75);
@@ -305,7 +310,7 @@
     D.flash(DROP, 0.3, 0.4, CORAL);
     D.hit(root, { scale: 0, opacity: 1 }, { scale: 1, duration: 0.45, ease: 'expo.out' }, DROP - 0.05);
     D.hit(seed, { scale: 0, opacity: 1, left: BX, top: BY }, { scale: 1, duration: 0.35, ease: 'expo.out' }, DROP - 0.05);
-    tl.to(win, { opacity: 0.16, scale: 0.97, duration: 0.5, ease: 'power2.out' }, DROP);
+    tl.to(win, { opacity: 0.16, ...(D.lite ? {} : { scale: 0.97 }), duration: 0.5, ease: 'power2.out' }, DROP);
     tl.to(cur, { opacity: 0, duration: 0.2 }, DROP);
     const GROW = 1.0, ease = 'power1.inOut', ride = { p: 0 };
     tl.to([road, roadGlow], { drawSVG: '100%', duration: GROW, ease }, DROP);
@@ -313,8 +318,11 @@
     D.hit(ride, { p: 0 }, { p: 1, duration: GROW, ease, onUpdate: () => { const [x, y] = along(ride.p); seed.style.left = x.toFixed(1) + 'px'; seed.style.top = y.toFixed(1) + 'px'; } }, DROP);
     tl.to(seed, { scale: 0.62, duration: 0.3, ease: 'power2.out' }, DROP + GROW - 0.15);
     // the camera leans after the tip, then settles where the next scene starts
-    D.hit(cam, { x: 0, scale: 1.05 }, { keyframes: [{ x: Math.min(90, (BX - NX) * 0.08), duration: GROW * 0.75, ease: 'sine.out' }, { x: 0, duration: 0.5, ease: 'power2.inOut' }] }, DROP);
-    tl.to(cam, { scale: 1, duration: GROW + 0.4, ease: 'power2.inOut' }, DROP);
+    // (lite: the camera holds — leaning the whole scene, the games site included, re-rastered all of it on every frame)
+    if (!D.lite) {
+      D.hit(cam, { x: 0, scale: 1.05 }, { keyframes: [{ x: Math.min(90, (BX - NX) * 0.08), duration: GROW * 0.75, ease: 'sine.out' }, { x: 0, duration: 0.5, ease: 'power2.inOut' }] }, DROP);
+      tl.to(cam, { scale: 1, duration: GROW + 0.4, ease: 'power2.inOut' }, DROP);
+    }
     D.sfx('whoosh', DROP, 0.6, 0.35);
     // only then the other branches: thin, dim, short-lived
     tl.to(paths, { drawSVG: '100%', duration: 0.45, ease: 'expo.out', stagger: { each: 0.02, from: 'random' } }, DROP + 0.35);

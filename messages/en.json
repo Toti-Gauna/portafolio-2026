@@ -31,19 +31,18 @@
     "transcript": [
       "It all started in Mar del Plata.",
       "At 17 I built my first product: a games website, which changed my life. I'm self-taught: I read a lot and study online.",
-      "2021 – 2022 · TACH Argentina: a digital wallet, end to end. Remote: the back office, the landing page and the app, on web and mobile.",
-      "2023 – 2024 · Ada ITW: teaching people to code. JavaScript and React: projects, hello worlds and students starting from zero.",
-      "2024 · Tsoft, on Tuenti: gamification you can measure. The roulette and the referrals; then a dashboard to measure referrals, recurrence and gamification. (Illustration with fictional data.)",
-      "2026 · CompliA, the RAG assistant of Telefónica's compliance portal: artificial intelligence in internal production. I designed and built it. (Demo clip, with sample data.)",
-      "Also at Tsoft: Supernova Eventos, an events micro-app (prototype, with fictional data), and raising the team's level: I trained colleagues.",
-      "And a path of my own: Eclipse (in development), HandyX (in development · launches Nov 10), Volta (demo), Velmar (demo made for a client), DentalOS (demo), games-market (test bench) and Kinetic Studio (32 trailers in code). All of it, in code.",
+      "And that was my first step toward new experiences, like working at TACH Argentina (2021 – 2022): a digital wallet, end to end. Remote: the back office, the landing page and the app, on web and mobile.",
+      "Next, a new challenge: from code to the classroom, at Ada ITW (2023 – 2024): teaching people to code. JavaScript and React: projects, hello worlds and students starting from zero.",
+      "From teaching to a big company: Tsoft. First, on Tuenti (2024): gamification you can measure. The roulette and the referrals; then a dashboard to measure referrals, recurrence and gamification. (Illustration with fictional data.)",
+      "Then came AI: taking it to production with CompliA (2026), the RAG assistant of Telefónica's compliance portal: artificial intelligence in internal production. I designed and built it. (Demo clip, with sample data.)",
+      "At Tsoft, more fronts: a prototype for Supernova Eventos, an events micro-app (with fictional data), and raising the team's level: I trained colleagues.",
+      "And alongside, with what I learned on every front, I built a path of my own: Eclipse (in development), HandyX (in development · launches Nov 10), Volta (demo), Velmar (demo made for a client), DentalOS (demo), games-market (test bench) and Kinetic Studio (32 trailers in code). All of it, in code.",
       "Every path opened since I was 17. It all grows into the same thing: seeking new challenges.",
       "New challenges are what drive me: boosting businesses and automating hard processes. I'm not afraid of any industry: startups, corporates, agriculture, space, mining, oil & gas.",
       "Technologies, by where I used them. At work: React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD and RAG with an LLM. In my projects: security (HttpOnly cookies, CSRF, 2FA, Argon2), Python, C, motion with GSAP and WebGL, and tests with Vitest and Playwright. Studying: machine learning fundamentals, AWS and Azure.",
       "An agentic system, split into parts: 11 agents with separate roles. Not a prompt: a system with roles. Specification first, code second; every claim carries its level of evidence; gates with human approval; tested, not eyeballed.",
       "Run of 10/27/2026, all green: Eclipse-Web 463 tests, Eclipse backend 779, internal portal 132 and 14 browser journeys.",
-      "Ignacio Gauna, from Mar del Plata, Argentina. I build AI software that ships.",
-      "Open to new challenges: startups, corporates, agriculture, space, mining, oil & gas. ignaciogauna.developer@gmail.com · linkedin.com/in/ignacio-emanuel-gauna"
+      "Ignacio Gauna. Open to new challenges: startups, corporates, agriculture, space, mining, oil & gas. ignaciogauna.developer@gmail.com · linkedin.com/in/ignacio-emanuel-gauna"
     ]
   },
   "header": {

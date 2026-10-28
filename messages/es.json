@@ -31,19 +31,18 @@
     "transcript": [
       "Todo empezó en Mar del Plata.",
       "Con 17 años programé mi primer producto: una web de juegos, que me cambió la vida. Soy autodidacta: leo mucho y estudio por internet.",
-      "2021 – 2022 · TACH Argentina: una billetera virtual, de punta a punta. En remoto: el backoffice, la landing y la app, en web y móvil.",
-      "2023 – 2024 · Ada ITW: enseñar a programar. JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero.",
-      "2024 · Tsoft, en Tuenti: gamificación que se mide. La ruleta y los referidos; después, un dashboard para medir referidos, recurrencia y gamificación. (Ilustración con datos ficticios.)",
-      "2026 · CompliA, el asistente con RAG del portal de compliance de Telefónica: inteligencia artificial en producción interna. Lo diseñé y lo construí. (Recorte de la demo, con datos de ejemplo.)",
-      "También en Tsoft: Supernova Eventos, una micro-app de eventos (prototipo, con datos ficticios), y subir el nivel del equipo: capacité a compañeros.",
-      "Y un camino propio: Eclipse (en desarrollo), HandyX (en desarrollo · lanza el 10/11), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), games-market (banco de pruebas) y Kinetic Studio (32 tráileres en código). Todo, en código.",
+      "Y ese fue mi primer paso hacia nuevas experiencias, como trabajar en TACH Argentina (2021 – 2022): una billetera virtual, de punta a punta. En remoto: el backoffice, la landing y la app, en web y móvil.",
+      "Después, otro desafío: del código al aula, en Ada ITW (2023 – 2024): enseñar a programar. JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero.",
+      "De enseñar, a una empresa grande: Tsoft. Primero, en Tuenti (2024): gamificación que se mide. La ruleta y los referidos; después, un dashboard para medir referidos, recurrencia y gamificación. (Ilustración con datos ficticios.)",
+      "Y llegó la IA: llevarla a producción con CompliA (2026), el asistente con RAG del portal de compliance de Telefónica: inteligencia artificial en producción interna. Lo diseñé y lo construí. (Recorte de la demo, con datos de ejemplo.)",
+      "En Tsoft, más frentes: un prototipo para Supernova Eventos, una micro-app de eventos (con datos ficticios), y subir el nivel del equipo: capacité a compañeros.",
+      "Y en paralelo, con lo aprendido en cada frente, armé un camino propio: Eclipse (en desarrollo), HandyX (en desarrollo · lanza el 10/11), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), games-market (banco de pruebas) y Kinetic Studio (32 tráileres en código). Todo, en código.",
       "Todos los caminos que se abrieron desde los 17. Todo germina en lo mismo: buscar nuevos desafíos.",
       "Me mueven los desafíos nuevos: potenciar negocios y automatizar procesos difíciles. No le temo a ningún rubro: startups, corporativas, agro, espacio, minería, oil & gas.",
       "Tecnologías, según dónde las usé. En el trabajo: React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD y RAG con LLM. En mis proyectos: seguridad (cookies HttpOnly, CSRF, 2FA, Argon2), Python, C, motion con GSAP y WebGL, y tests con Vitest y Playwright. Estudiando: fundamentos de machine learning, AWS y Azure.",
       "Un sistema agéntico, dividido en partes: 11 agentes con roles separados. No es un prompt: es un sistema con roles. Primero la especificación, después el código; cada afirmación tiene su nivel de evidencia; puertas con aprobación humana; se prueba, no se mira a ojo.",
       "Corrida del 27/10/2026, todo en verde: Eclipse-Web 463 tests, backend de Eclipse 779, portal interno 132 y 14 recorridos en navegador.",
-      "Ignacio Gauna, de Mar del Plata, Argentina. Construyo software con IA que llega a producción.",
-      "Abierto a nuevos desafíos: startups, corporativas, agro, espacio, minería, oil & gas. ignaciogauna.developer@gmail.com · linkedin.com/in/ignacio-emanuel-gauna"
+      "Ignacio Gauna. Abierto a nuevos desafíos: startups, corporativas, agro, espacio, minería, oil & gas. ignaciogauna.developer@gmail.com · linkedin.com/in/ignacio-emanuel-gauna"
     ]
   },
   "header": {

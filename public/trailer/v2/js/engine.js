@@ -589,11 +589,17 @@
     let started = false, autoPaused = false, idleTimer;
     const UI = cfg.ui, KEYS = UI.keys;
 
+    // IG: the timecode and the progress bar are written only while they are shown (in the portfolio both are
+    // hidden): a text change on every frame cost a style + layout + paint pass on every frame of the film
+    const shown = el => !!(el && el.getClientRects().length);
+    let tcOn = null, barOn = null;
+    addEventListener('resize', () => { tcOn = barOn = null; });
     function tick() {
+      if (tcOn === null) { tcOn = shown(hudTC); barOn = shown(progressBar); }
       const tt = IX ? IX.time() : tl.time(), s = Math.floor(tt), f = Math.floor((tt - s) * 24);
       const mm = Math.floor(s / 60);
-      hudTC.textContent = `00:${String(mm).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
-      progressBar.style.transform = `scaleX(${IX ? IX.progress() : tl.progress()})`;
+      if (tcOn) hudTC.textContent = `00:${String(mm).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
+      if (barOn) progressBar.style.transform = `scaleX(${IX ? IX.progress() : tl.progress()})`;
     }
     let loopFrom = 0;
     function ended() {
