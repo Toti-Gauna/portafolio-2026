@@ -8,3 +8,159 @@
 .stk-react .rl rect { fill: rgb(255 77 46 / .15); stroke: #ff4d2e; stroke-width: 2; }
 .stk-react .rl text { fill: #ff6a4d; font: 600 20px var(--mono); text-anchor: middle; }
 
+
+/* TypeScript — editor line, type error, fix */
+.stk-typescript .ts { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-typescript .tab { fill: #0e0e10; }
+.stk-typescript .file { fill: #bdb8ae; font: 400 19px var(--mono); }
+.stk-typescript .rule { stroke: #2a2c33; stroke-width: 2; }
+.stk-typescript .tabl { fill: #3178c6; }
+.stk-typescript .ln { fill: #5a5e6a; font: 400 22px var(--mono); }
+.stk-typescript .code text { font: 500 24px var(--mono); }
+.stk-typescript .k { fill: #7fa3ff; }
+.stk-typescript .id { fill: #eeeae3; }
+.stk-typescript .p { fill: #8a8f9c; }
+.stk-typescript .ty { fill: #4ec9b0; }
+.stk-typescript .s { fill: #ffc21a; }
+.stk-typescript .sq { fill: none; stroke: #ff4d2e; stroke-width: 2.5; stroke-linecap: round; }
+.stk-typescript .pop rect { fill: #241719; stroke: rgb(255 77 46 / .5); stroke-width: 2; }
+.stk-typescript .pop .pbar { fill: #ff4d2e; stroke: none; }
+.stk-typescript .pop text { fill: #f3d9d2; font: 400 19px var(--mono); }
+.stk-typescript .ok rect { fill: rgb(63 185 80 / .14); stroke: #3fb950; stroke-width: 2; }
+.stk-typescript .ok path { fill: none; stroke: #3fb950; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-typescript .ok text { fill: #3fb950; font: 500 22px var(--mono); }
+
+/* Next.js — app/ tree → routes in a browser → SSG */
+.stk-nextjs .nx { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-nextjs .dir0 { fill: #8a8f9c; font: 400 19px var(--mono); }
+.stk-nextjs .tree { fill: none; stroke: #3b3f4a; stroke-width: 2; }
+.stk-nextjs .hl rect { fill: rgb(238 234 227 / .08); stroke: rgb(238 234 227 / .28); stroke-width: 1.5; }
+.stk-nextjs .hl path { fill: none; stroke: #eeeae3; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-nextjs .f { fill: #8a8f9c; font: 400 19px var(--mono); }
+.stk-nextjs .f .d { fill: #5f6370; }
+.stk-nextjs .f.on { fill: #eeeae3; }
+.stk-nextjs .f.on .d { fill: #bdb8ae; }
+.stk-nextjs .win { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-nextjs .rule { stroke: #2a2c33; stroke-width: 2; }
+.stk-nextjs .dot { fill: #3b3f4a; }
+.stk-nextjs .urlb { fill: #1d1f25; }
+.stk-nextjs .url { fill: #eeeae3; font: 400 19px var(--mono); }
+.stk-nextjs .b1 { fill: #eeeae3; opacity: .9; }
+.stk-nextjs .b2 { fill: #eeeae3; opacity: .35; }
+.stk-nextjs .b3 { fill: #eeeae3; opacity: .2; }
+.stk-nextjs .cd { fill: #262931; }
+.stk-nextjs .ac { fill: #ff4d2e; }
+.stk-nextjs .stamp rect { fill: #ff4d2e; }
+.stk-nextjs .stamp text { fill: #0e0e10; font: 900 26px var(--display); letter-spacing: .06em; text-anchor: middle; }
+
+/* React Native — one <App/>, two phones */
+.stk-reactnative .rnx { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-reactnative .body { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-reactnative .scr { fill: #1d1f25; }
+.stk-reactnative .cam { fill: #0e0e10; }
+.stk-reactnative .h { fill: #eeeae3; font: 700 19px var(--display); }
+.stk-reactnative .b1 { fill: #eeeae3; opacity: .8; }
+.stk-reactnative .b2 { fill: #eeeae3; opacity: .3; }
+.stk-reactnative .tb { stroke: #2f323a; stroke-width: 1.5; }
+.stk-reactnative .ic { fill: #4a4e5a; }
+.stk-reactnative .ind { fill: #61dafb; }
+.stk-reactnative .ln { fill: none; stroke: #61dafb; stroke-width: 3; opacity: .55; }
+.stk-reactnative .app rect { fill: #0e0e10; stroke: #61dafb; stroke-width: 2; }
+.stk-reactnative .app text { fill: #e8e6e1; font: 500 22px var(--mono); text-anchor: middle; }
+.stk-reactnative .set rect { fill: rgb(255 77 46 / .15); stroke: #ff4d2e; stroke-width: 2; }
+.stk-reactnative .set text { fill: #ff6a4d; font: 500 20px var(--mono); text-anchor: middle; }
+.stk-reactnative .dt { fill: #ff4d2e; }
+.stk-reactnative .one { fill: #8a8f9c; font: 500 19px var(--display); text-anchor: middle; }
+.stk-reactnative .pl { fill: #8a8f9c; font: 400 19px var(--mono); text-anchor: middle; }
+
+/* Tailwind — classes typed, the button restyles */
+.stk-tailwind .twx { position: absolute; inset: 0; }
+.stk-tailwind .l0, .stk-tailwind .cl { position: absolute; left: 20px; height: 32px; font: 400 20px/32px var(--mono); white-space: pre; color: #bdb8ae; }
+.stk-tailwind .l0 { top: 16px; }
+.stk-tailwind .l0 i, .stk-tailwind .cl i { font-style: normal; color: #8a8f9c; }
+.stk-tailwind .cl { left: 50px; color: #7dd3fc; }
+.stk-tailwind .cl span { display: inline-block; }
+.stk-tailwind .sw { position: absolute; left: -24px; top: 9px; width: 14px; height: 14px; border-radius: 4px; outline: 1px solid rgb(255 255 255 / .22); }
+.stk-tailwind .view { position: absolute; left: 260px; top: 16px; width: 264px; height: 194px; border-radius: 14px; overflow: hidden; background: #eeeae3 radial-gradient(rgb(14 14 16 / .13) 1.2px, transparent 1.6px) 0 0 / 16px 16px; }
+.stk-tailwind .btn { position: absolute; left: 34px; top: 67px; width: 196px; height: 60px; }
+.stk-tailwind .bg { position: absolute; inset: 0; background: #0ea5e9; }
+.stk-tailwind .sh { position: absolute; left: -10px; right: -10px; top: 26px; height: 60px; background: radial-gradient(closest-side, rgb(8 47 73 / .42), rgb(8 47 73 / 0)); }
+.stk-tailwind .out { position: absolute; left: 46px; right: 46px; top: 14px; bottom: 14px; border: 2px dashed #9a968d; }
+.stk-tailwind .tx { position: absolute; inset: 0; display: grid; place-items: center; font: 600 24px/1 var(--display); color: #0e0e10; white-space: nowrap; }
+.stk-tailwind .tx.wt { color: #fff; }
+
+/* Node.js — request → Express + event loop → 200 JSON */
+.stk-node .nd { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-node .req rect { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-node .req text, .stk-node .res text { fill: #eeeae3; font: 400 19px var(--mono); }
+.stk-node .m { fill: #3fb950; font-weight: 500; }
+.stk-node .lane, .stk-node .hd { fill: none; stroke: #4a4e5a; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.stk-node .pk { fill: #3fb950; }
+.stk-node .srv { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-node .srv.on { stroke: #3fb950; }
+.stk-node .ex { fill: #eeeae3; font: 700 22px var(--display); text-anchor: middle; }
+.stk-node .trk { fill: none; stroke: #2a2c33; stroke-width: 6; }
+.stk-node .arc { fill: none; stroke: #3fb950; stroke-width: 6; stroke-linecap: round; }
+.stk-node .orb circle { fill: #eeeae3; }
+.stk-node .lp { fill: #8a8f9c; font: 400 19px var(--mono); text-anchor: middle; }
+.stk-node .res rect { fill: rgb(63 185 80 / .12); stroke: #3fb950; stroke-width: 2; }
+.stk-node .js rect { fill: #0e0e10; stroke: #2a2c33; stroke-width: 2; }
+.stk-node .js text { font: 400 19px var(--mono); }
+.stk-node .js .p { fill: #8a8f9c; }
+.stk-node .js .k { fill: #7fa3ff; }
+.stk-node .js .nu { fill: #ffc21a; }
+
+/* SQL — query, filter, sort */
+.stk-sql .sq { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-sql .q { fill: #eeeae3; font: 400 20px var(--mono); }
+.stk-sql .q .k { fill: #7fa3ff; font-weight: 500; }
+.stk-sql .q .nu { fill: #ffc21a; }
+.stk-sql .hl { fill: rgb(127 163 255 / .14); stroke: rgb(127 163 255 / .4); stroke-width: 1.5; }
+.stk-sql .res rect { fill: rgb(63 185 80 / .14); stroke: #3fb950; stroke-width: 2; }
+.stk-sql .res path { fill: none; stroke: #3fb950; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-sql .res text { fill: #3fb950; font: 500 20px var(--mono); }
+.stk-sql .tbl { fill: #0e0e10; stroke: #2a2c33; stroke-width: 2; }
+.stk-sql .th { fill: #8a8f9c; font: 400 19px var(--mono); }
+.stk-sql .hp, .stk-sql .hs, .stk-sql .pr, .stk-sql .st { text-anchor: end; }
+.stk-sql .hs.on, .stk-sql .z.on { fill: #ff6a4d; }
+.stk-sql .hp.on { fill: #7fa3ff; }
+.stk-sql .sep { stroke: #2a2c33; stroke-width: 2; }
+.stk-sql .row text { fill: #eeeae3; font: 400 19px var(--mono); }
+.stk-sql .row .pr { fill: #ffc21a; }
+
+/* CI/CD — commit → build → test → deploy */
+.stk-cicd .ci { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.stk-cicd .cm rect { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 2; }
+.stk-cicd .cm circle, .stk-cicd .cm path { fill: none; stroke: #ffc21a; stroke-width: 2.5; stroke-linecap: round; }
+.stk-cicd .cm text { fill: #eeeae3; font: 400 19px var(--mono); }
+.stk-cicd .cm .h { fill: #ffc21a; }
+.stk-cicd .run rect { fill: rgb(255 194 26 / .12); stroke: #ffc21a; stroke-width: 2; }
+.stk-cicd .run .sp { fill: none; stroke: #ffc21a; stroke-width: 3; stroke-linecap: round; }
+.stk-cicd .run text { fill: #ffc21a; font: 500 19px var(--mono); }
+.stk-cicd .done rect { fill: rgb(63 185 80 / .14); stroke: #3fb950; stroke-width: 2; }
+.stk-cicd .done path { fill: none; stroke: #3fb950; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stk-cicd .done text { fill: #3fb950; font: 500 19px var(--mono); }
+.stk-cicd .rail { fill: none; stroke: #2a2c33; stroke-width: 4; }
+.stk-cicd .prog { fill: none; stroke: #3fb950; stroke-width: 4; stroke-linecap: round; }
+.stk-cicd .base { fill: #0e0e10; stroke: #3b3f4a; stroke-width: 3; }
+.stk-cicd .idle { fill: #4a4e5a; }
+.stk-cicd .spin { fill: none; stroke: #ffc21a; stroke-width: 3.5; stroke-linecap: round; }
+.stk-cicd .ok { fill: #3fb950; }
+.stk-cicd .ck { fill: none; stroke: #0e0e10; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.stk-cicd .lb { fill: #8a8f9c; font: 400 19px var(--mono); text-anchor: middle; }
+.stk-cicd .lb.on { fill: #eeeae3; }
+
+/* RAG — question → retrieved passages → cited answer */
+.stk-rag .rg { position: absolute; inset: 0; }
+.stk-rag .q { position: absolute; right: 16px; top: 14px; height: 42px; padding: 0 18px; border-radius: 21px 21px 6px 21px; background: #2a2c33; font: 500 20px/42px var(--display); color: #eeeae3; white-space: nowrap; }
+.stk-rag .ch { position: absolute; left: 16px; right: 16px; height: 26px; padding: 0 8px; display: flex; align-items: center; border-radius: 6px; font: 400 19px/1 var(--mono); color: #bdb8ae; white-space: nowrap; }
+.stk-rag .ch.on { background: rgb(127 163 255 / .12); color: #eeeae3; }
+.stk-rag .ch b { width: 44px; font-weight: 500; color: #7fa3ff; }
+.stk-rag .ch span { width: 206px; }
+.stk-rag .ch i { position: relative; width: 160px; height: 8px; border-radius: 4px; background: #2a2c33; overflow: hidden; }
+.stk-rag .ch u { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: #7fa3ff; }
+.stk-rag .ch em { margin-left: auto; font-style: normal; color: #eeeae3; }
+.stk-rag .a { position: absolute; left: 16px; right: 16px; top: 162px; height: 48px; padding-left: 16px; display: flex; align-items: center; border-left: 3px solid #7fa3ff; }
+.stk-rag .a p { font: 600 22px/1 var(--display); color: #eeeae3; white-space: nowrap; }
+.stk-rag .a span { display: inline-block; }
+.stk-rag .a b { display: inline-block; margin-left: 6px; padding: 4px 6px; border-radius: 6px; background: rgb(127 163 255 / .18); color: #a9c0ff; font: 500 19px/1 var(--mono); vertical-align: 2px; }

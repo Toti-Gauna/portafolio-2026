@@ -29,7 +29,7 @@
     const out = [];
     rows.forEach((cnt, r) => {
       const w = cnt * TW + (cnt - 1) * GX, x0 = (1920 - w) / 2;
-      for (let c = 0; c < cnt; c++) out.push({ x: x0 + c * (TW + GX), y: (n <= 3 ? TOP + 120 : TOP) + r * (TH + GY) });
+      for (let c = 0; c < cnt; c++) out.push({ x: x0 + c * (TW + GX), y: (n <= 3 ? TOP + 170 : TOP) + r * (TH + GY) });
     });
     return out;
   }
