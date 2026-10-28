@@ -43,3 +43,7 @@
 .is-vertical .ish-cl i { margin-top: 11px; }
 .is-vertical .ish-end-t { font-size: 64px; }
 .is-vertical .ish-none { border-radius: 32px; overflow: hidden; box-shadow: 0 50px 140px rgba(0, 0, 0, .55), 0 0 0 2px rgba(255, 255, 255, .1); } /* the full-bleed view, framed as a screen on the tall stage */
+/* lite (phones): the frames move on every frame; their 140 px blurred shadow would be repainted each time */
+.is-lite .ish-browser { box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 18px 0 -8px rgba(0, 0, 0, .45); }
+.is-lite .ish-phone { box-shadow: 0 0 0 2px rgba(255, 255, 255, .12) inset; }
+.is-lite.is-vertical .ish-none { box-shadow: 0 0 0 2px rgba(255, 255, 255, .1); }

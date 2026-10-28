@@ -33,7 +33,7 @@ Trailer.run({
   scenes: [
     // ── 1 · MAR DEL PLATA (0–6) ──────────────────────────────────────────────── noche · la costa y una luz
     { type: 'igcoast', label: 'MAR DEL PLATA', duration: 6, foley: 0.5,                                          //   0–6
-      kicker: '38°00′S · 57°33′O', line: 'Todo empezó en<br><em>Mar del Plata.</em>', sea: 'Océano Atlántico' },
+      kicker: 'Mar del Plata · Argentina', line: 'Todo empezó en<br><em>Mar del Plata.</em>', sea: 'Océano Atlántico' },
 
     // ── 2 · EL PRIMER PRODUCTO (6–12) · DROP 1 en el clic ─────────────────────── tinta · la web de juegos → ramas
     { type: 'igfirst', label: 'EL PRIMER PRODUCTO', duration: 6, foley: 0.6,                                      //   6–12

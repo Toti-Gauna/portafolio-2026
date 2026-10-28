@@ -94,12 +94,13 @@
     }
 
     // ── the cuts
-    gsap.set(frames, { autoAlpha: 0, transformPerspective: 2000, transformOrigin: '50% 50%' });
+    // lite (phones): flat entrances — a 3D tilt would give every frame its own full-size layer (6 at once in the mosaic)
+    gsap.set(frames, { autoAlpha: 0, transformOrigin: '50% 50%', ...(D.lite ? {} : { transformPerspective: 2000 }) });
     gsap.set(tags, { autoAlpha: 0 });
     let t = T + TITLE;
     shots.forEach((sh, i) => {
       const def = SHOTS[sh.id], f = frames[i], tag = tags[i], dur = sh.dur || 1, bg = def.bg || INK;
-      const box = BOXES[def.frame || 'browser'], en = ENTER[i % ENTER.length];
+      const box = BOXES[def.frame || 'browser'], en = D.lite ? { ...ENTER[i % ENTER.length], rotationY: 0 } : ENTER[i % ENTER.length];
       gsap.set(f, { left: box.x, top: box.y, width: box.w, height: box.h });
       if (v) gsap.set(tag, { top: box.y + box.h / 2 + (box.h * box.s) / 2 + 44 });
       D.wipeTo(bg, t, WIPE[i % WIPE.length], 0.3);

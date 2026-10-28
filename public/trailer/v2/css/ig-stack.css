@@ -22,3 +22,5 @@
 .is-vertical .stk-cap { height: 140px; gap: 8px; padding: 0 20px; }
 .is-vertical .stk-cap b { font-size: 44px; }
 .is-vertical .stk-cap span { font-size: 36px; white-space: normal; text-wrap: balance; } /* a long note takes a second line */
+/* lite (phones): no 80 px blur under tiles that move (repainted every frame) */
+.is-lite .stk-tile { box-shadow: 0 0 0 2px rgb(255 255 255 / .06), 0 14px 0 -6px rgb(0 0 0 / .3); }

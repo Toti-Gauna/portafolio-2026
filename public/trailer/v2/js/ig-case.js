@@ -3,6 +3,7 @@
    on the left; the real demo clip playing on the right, kept in sync with the timeline (seekable).
    { kicker, title, sub, facts: [{ k, t }], src, poster, from, window, tag, bg, duration }          10 s
    9:16 (D.vertical): the text on top, the clip under it at the stage's width; the window rises in.
+   The clip loads 2 s before its scene and is unloaded 0.5 s after it (memory on phones); lite: a flat entrance.
    ========================================================================== */
 (() => {
   'use strict';
@@ -22,7 +23,7 @@
       </div>
       <figure class="igk-win">
         <div class="igk-bar"><i></i><i></i><i></i><span>${esc(o.window)}</span></div>
-        <div class="igk-media"><video muted playsinline preload="auto"${o.poster ? ` poster="${o.poster}"` : ''}><source src="${o.src}" type="video/mp4"></video></div>
+        <div class="igk-media"><video muted playsinline preload="none"${o.poster ? ` poster="${o.poster}"` : ''}></video></div>
         <figcaption class="igk-tag mono">${esc(o.tag)}</figcaption>
       </figure>
     </div>`);
@@ -44,8 +45,9 @@
       D.hit(D.$('dt', r), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'expo.out' }, T + 1.5 + i * 0.55);
       D.sfx('tick', T + 1.5 + i * 0.55, 0.04);
     });
-    if (tall) D.hit(win, { opacity: 0, y: 140, rotationX: 14, transformPerspective: 2000 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.9, ease: 'expo.out' }, T + 0.6);
-    else D.hit(win, { opacity: 0, x: 120, rotationY: -16, transformPerspective: 2000 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'expo.out' }, T + 0.6);
+    const tilt = D.lite ? {} : tall ? { rotationX: 14, transformPerspective: 2000 } : { rotationY: -16, transformPerspective: 2000 }; // lite: flat (no 3D layer)
+    if (tall) D.hit(win, { opacity: 0, y: 140, ...tilt }, { opacity: 1, y: 0, ...(D.lite ? {} : { rotationX: 0 }), duration: 0.9, ease: 'expo.out' }, T + 0.6);
+    else D.hit(win, { opacity: 0, x: 120, ...tilt }, { opacity: 1, x: 0, ...(D.lite ? {} : { rotationY: 0 }), duration: 0.9, ease: 'expo.out' }, T + 0.6);
     tl.to(win, { scale: 1.03, duration: dur - 1.8, ease: 'sine.inOut' }, T + 1.5);
     D.hit(tag, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2)' }, T + 1.2);
     D.sfx('whoosh', T + 0.6, 0.5, 0.25);
@@ -54,8 +56,18 @@
     (D.cfg.warmAt ||= []).push(T + 2);
     // the clip follows the playhead: plays while inside, holds its frame outside (seekable with ?t=)
     const t0 = T + 0.8, len = dur - 0.8;
+    // the clip is only loaded around its scene (2 s before → 0.5 s after) and unloaded after it: no decoder,
+    // no buffered frames and no video layer for the rest of the film
+    let loaded = false;
     gsap.ticker.add(() => {
       const t = D.tl.time(), want = from + (t - t0), inside = t >= t0 && t < T + dur;
+      const near = t >= T - 2 && t < T + dur + 0.5;
+      if (near !== loaded) {
+        loaded = near;
+        if (near) { v.preload = 'auto'; v.src = o.src; v.load(); }
+        else { v.pause(); v.removeAttribute('src'); v.preload = 'none'; v.load(); }
+      }
+      if (!loaded) return;
       const end = (v.duration || 99) - 0.05;
       if (inside && !D.tl.paused() && want < end) {
         if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }

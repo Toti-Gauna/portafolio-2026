@@ -43,6 +43,20 @@
      · 9:16: readable text ≥ 36 stage px (a 390×844 phone shows the stage at ≈ 0.36); `cap` captions go full width
        at the bottom whatever their pos (css/ig.css).
    QA: index.html?host&o=v&lang=es&t=<s> freezes a 9:16 frame.
+
+   MEMORY (iPhone crashes, 28/10/2026) — the stage is 1920×1080 / 1080×1920 scaled down with a transform, and iOS
+   Safari backs each compositor layer at its own CSS size × the screen density, scale-downs included: one full-stage
+   layer = 75 MB at DPR 3. The film had 6–11 of them alive at once (will-change on act backgrounds, views and tracks,
+   the animated grain, the FX canvas, GSAP's translate3d while tweening, 3D tilts, and everything painted over them
+   promoted by overlap): ≈ 0.6–1 GB, and the tab died (also when iOS takes a screenshot). Now:
+     · every scene off the playhead is skipped (content-visibility: hidden, toggled by D.show / D.hide on scenes);
+     · the FX canvas only exists if a scene draws on it (engine.js); the CompliA clip only loads around its scene;
+     · LITE — D.lite, html.is-lite: coarse pointer or a short side < 600 px (?lite / ?lite=0 force it): no
+       will-change and no filters inside the stage, no grain or vignette overlay, GSAP force3D off, flat entrances
+       instead of 3D tilts, crisp shadows instead of big blurs on moving panels, a lighter warm-up. Nothing in the
+       stage gets a layer of its own: it is all painted, at the screen's real size, into the page's layer.
+   A recipe must not add will-change, 3D transforms or filters that matter on phones; check with the layer scan
+   (Chromium CDP LayerTree, 390×844 at DPR 3) described in CLAUDE.md.
    ========================================================================== */
 (() => {
   'use strict';
@@ -204,14 +218,15 @@
    *  view): the cuts stuttered there. Before playing, walk the film once, a frame every 1.5 s plus the
    *  moments recipes ask for (`extra`: e.g. each montage view once it is visible — a layer at opacity 0 is
    *  never painted), behind a cover, so the playback only repeats work already done. Seeking suppresses
-   *  callbacks: no sound. */
-  async function warm(tl, extra = []) {
+   *  callbacks: no sound. Lite (phones): a frame every 3 s plus the same moments — it keeps no layer (nothing is
+   *  composited and the scenes off the playhead are skipped), it only leaves styles, text and layout ready. */
+  async function warm(tl, extra = [], step = 1.5) {
     const cover = document.createElement('div');
     cover.id = 'ig-warm';
     document.body.appendChild(cover);
     const frame = () => new Promise(r => requestAnimationFrame(() => r()));
     const at = [];
-    for (let t = 0; t < tl.duration(); t += 1.5) at.push(t);
+    for (let t = 0; t < tl.duration(); t += step) at.push(t);
     for (const t of [...at, ...extra].sort((a, b) => a - b)) { tl.seek(t, true); await frame(); }
     tl.seek(0, true);
     await frame();
@@ -226,6 +241,17 @@
   plugin({
     setup(D, cfg) {
       D.vertical = D.H > D.W; // the 9:16 edition (see FORMATS above): every recipe branches on this
+      // LITE (see MEMORY above): phones and tablets get a film without big compositor layers
+      D.lite = Q.has('lite') ? Q.get('lite') !== '0' : (matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600);
+      document.documentElement.classList.toggle('is-lite', D.lite);
+      if (D.lite) gsap.config({ force3D: false }); // no translate3d while a tween runs: the element stays in its parent's layer
+      // finished and future scenes are skipped, not just invisible: no layout, no paint, no layers (and their
+      // rendering state is kept, so the cut does not redo the warm-up's work)
+      const rawShow = D.show, rawHide = D.hide, managed = new Set();
+      const isScene = el => el && el.nodeType === 1 && el.classList.contains('scene');
+      D.show = (el, at) => (isScene(el) ? (managed.add(el), D.tl.set(el, { autoAlpha: 1, contentVisibility: 'visible' }, at)) : rawShow(el, at));
+      D.hide = (el, at) => (isScene(el) ? (managed.add(el), D.tl.set(el, { autoAlpha: 0, contentVisibility: 'hidden' }, at)) : rawHide(el, at));
+      D.igScenes = managed;
       // HUD label numbers for igcut (D.label returns "07" synchronously; igcut defers the call)
       const rawLabel = D.label;
       let labels = 0;
@@ -282,6 +308,8 @@
     },
 
     done(D, cfg) {
+      // every managed scene that is not on screen at the playhead starts skipped (D.show / D.hide above toggle it)
+      D.igScenes.forEach(s => { if (getComputedStyle(s).visibility === 'hidden') s.style.contentVisibility = 'hidden'; });
       if (!host(cfg)) return;
       const tl = D.tl, prev = tl.eventCallback('onComplete');
       tl.eventCallback('onComplete', () => { if (prev) prev(); post('trailer:end'); });
@@ -296,7 +324,7 @@
         // the engine enables #play at the very end of its build: start on the next task (not in ?t= / ?embed)
         if (!Q.has('t') && !Q.has('embed')) setTimeout(() => { const b = document.getElementById('play'); if (b && !b.disabled) b.click(); }, 0);
       };
-      if (Q.has('t') || Q.has('embed')) go(); else warm(tl, cfg.warmAt).then(go, go);
+      if (Q.has('t') || Q.has('embed')) go(); else warm(tl, cfg.warmAt, D.lite ? 3 : 1.5).then(go, go);
     },
   });
 
