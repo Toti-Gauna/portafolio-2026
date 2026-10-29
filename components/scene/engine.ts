@@ -22,7 +22,6 @@ ColorManagement.enabled = false;
 const LOADERS: Record<SceneId, () => Promise<SceneModule>> = {
   home: () => import('./scenes/home'),
   complia: () => import('./scenes/complia'),
-  handyx: () => import('./scenes/handyx'),
   eclipse: () => import('./scenes/eclipse'),
   kinetic: () => import('./scenes/kinetic'),
   agentes: () => import('./scenes/agentes'),

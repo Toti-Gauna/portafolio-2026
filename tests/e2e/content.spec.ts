@@ -37,7 +37,7 @@ test('home cards lead to their pages, and every page renders its content with it
   for (const id of ['que-hago', 'trabajo', 'laboratorio']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
   await expect(page.locator('.pillar')).toHaveCount(4);
   // honesty: every project card/lab item carries a status
-  await expect(page.locator('.work__card .status')).toHaveCount(4);
+  await expect(page.locator('.work__card .status')).toHaveCount(3);
   await expect(page.locator('.lab__item .status')).toHaveCount(6);
 
   await enter(page, '/es/como-trabajo/');
@@ -192,8 +192,8 @@ test('Tuenti and Eclipse cases: own page, Eclipse links to its site', async ({ p
   await expect(page.getByRole('link', { name: /eclipse-business\.com/ })).toHaveAttribute('href', 'https://eclipse-business.com/');
 });
 
-test('portal screenshots: Eclipse and HandyX galleries load, with alt text and a caption; work cards have covers', async ({ page }) => {
-  for (const [slug, n] of [['eclipse', 7], ['handyx', 4]] as const) {
+test('portal screenshots: the Eclipse gallery loads, with alt text and a caption; work cards have covers', async ({ page }) => {
+  for (const [slug, n] of [['eclipse', 7]] as const) {
     await enter(page, `/es/proyectos/${slug}/`);
     const items = page.locator('.gallery__item');
     await expect(items).toHaveCount(n);
@@ -207,7 +207,7 @@ test('portal screenshots: Eclipse and HandyX galleries load, with alt text and a
   }
   await enter(page, '/es/trabajo/');
   const covers = page.locator('.work__shot');
-  await expect(covers).toHaveCount(4);
+  await expect(covers).toHaveCount(3);
   // Tuenti: a drawn illustration, never a screenshot (confidentiality)
   await expect(page.locator('.work__card').filter({ hasText: 'Tuenti' }).locator('img')).toHaveAttribute('src', /tuenti-cover\.svg$/);
 });
@@ -233,15 +233,6 @@ test('case pages: index, numbered sections, diagrams readable as text, no horizo
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), slug).toBeLessThanOrEqual(0);
   }
   expect(errors).toEqual([]);
-});
-
-test('HandyX case explains the business: the money split and the pre-registration funnel', async ({ page }) => {
-  await enter(page, '/es/proyectos/handyx/');
-  await expect(page.locator('.ms__row')).toHaveCount(3);
-  await expect(page.getByText('$ 49.500')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Del preregistro al compromiso' })).toBeVisible();
-  // honesty block: nothing deployed, no users
-  await expect(page.getByText(/Nada está desplegado/)).toBeVisible();
 });
 
 test('CompliA diagram is labelled as a conceptual scheme, not Telefónica architecture', async ({ page }) => {

@@ -441,12 +441,12 @@
       es: {
         brand: 'Kinetic Studio', eyebrow: 'Trailer hub — motion graphics 100% código', h1: ['TRAILER', 'HUB'],
         lede: 'Cada tráiler se genera en vivo en el navegador: sin videos, sin imágenes y sin audio grabado.', badge: 'Disponible',
-        posters: [['01', 'KINETIC'], ['02', 'MANIFIESTO'], ['03', 'GLITCH'], ['04', 'BAUHAUS 100'], ['05', 'LIQUID'], ['08', 'HYPERSPACE'], ['09', 'PAPER CITY'], ['06', 'BIG BANG'], ['23', 'SYNTHWAVE'], ['10', 'DATA STORY'], ['21', 'NOIR'], ['16', 'VELMAR'], ['31', 'HANDY · ANUNCIO'], ['19', 'COUNTDOWN'], ['27', 'BIFURCACIÓN'], ['24', 'BEAT']],
+        posters: [['01', 'KINETIC'], ['02', 'MANIFIESTO'], ['03', 'GLITCH'], ['04', 'BAUHAUS 100'], ['05', 'LIQUID'], ['08', 'HYPERSPACE'], ['09', 'PAPER CITY'], ['06', 'BIG BANG'], ['23', 'SYNTHWAVE'], ['10', 'DATA STORY'], ['21', 'NOIR'], ['16', 'VELMAR'], ['20', 'ENJAMBRE'], ['19', 'COUNTDOWN'], ['27', 'BIFURCACIÓN'], ['24', 'BEAT']],
       },
       en: {
         brand: 'Kinetic Studio', eyebrow: 'Trailer hub — motion graphics, 100% code', h1: ['TRAILER', 'HUB'],
         lede: 'Every trailer is generated live in the browser: no video, no images and no recorded audio.', badge: 'Available',
-        posters: [['01', 'KINETIC'], ['02', 'MANIFIESTO'], ['03', 'GLITCH'], ['04', 'BAUHAUS 100'], ['05', 'LIQUID'], ['08', 'HYPERSPACE'], ['09', 'PAPER CITY'], ['06', 'BIG BANG'], ['23', 'SYNTHWAVE'], ['10', 'DATA STORY'], ['21', 'NOIR'], ['16', 'VELMAR'], ['31', 'HANDY · ANUNCIO'], ['19', 'COUNTDOWN'], ['27', 'BIFURCACIÓN'], ['24', 'BEAT']],
+        posters: [['01', 'KINETIC'], ['02', 'MANIFIESTO'], ['03', 'GLITCH'], ['04', 'BAUHAUS 100'], ['05', 'LIQUID'], ['08', 'HYPERSPACE'], ['09', 'PAPER CITY'], ['06', 'BIG BANG'], ['23', 'SYNTHWAVE'], ['10', 'DATA STORY'], ['21', 'NOIR'], ['16', 'VELMAR'], ['20', 'ENJAMBRE'], ['19', 'COUNTDOWN'], ['27', 'BIFURCACIÓN'], ['24', 'BEAT']],
       },
     },
     html: t => `<i class="kn-fade"></i>

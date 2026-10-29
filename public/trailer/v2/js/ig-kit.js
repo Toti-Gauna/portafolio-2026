@@ -1,5 +1,5 @@
 /* ============================================================================
-   IG KIT — what "Conocer a Ignacio" adds to the Kinetic Studio kit (engine.js = the Handy copy, unchanged).
+   IG KIT — what "Conocer a Ignacio" adds to the Kinetic Studio kit (engine.js = the kit copy, unchanged).
    Load it after engine.js and the recipe modules (recipes.js, -type, -glitch, -ui, -dev, -shop, -branch);
    the order against recipes-music.js does not matter. CSS: css/ig.css.
 

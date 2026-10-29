@@ -6,7 +6,7 @@
   "facts": [
     { "k": "Rol", "v": "Lo diseñé y lo mantengo; apruebo cada puerta final" },
     { "k": "Piezas", "v": "11 agentes · 79 skills · 3 formatos" },
-    { "k": "Dónde se usa", "v": "Backends de HandyX y Eclipse, Eclipse-Web y demos propias" },
+    { "k": "Dónde se usa", "v": "Backend de Eclipse, Eclipse-Web y demos propias" },
     { "k": "Licencia", "v": "Uso propio: no es código abierto" }
   ],
   "tldr": [
@@ -148,10 +148,6 @@
       ],
       "items": [
         {
-          "t": "Backend de HandyX",
-          "d": "Tres perfiles copiados (backend, ciberseguridad y frontend) y 19 skills, idénticos byte a byte salvo la línea del modelo, con el commit de origen y el SHA-256 de cada original. Dos skills quedaron afuera a propósito; una, porque modela Sequelize y ahí manda Prisma. Backend implementa, Ciberseguridad revisa el diff crítico de cada fase y Frontend revisa el contrato, en secuencia."
-        },
-        {
           "t": "Backend de Eclipse",
           "d": "Sigue los perfiles de backend y ciberseguridad en formato Codex. Su revisión de seguridad se hizo con pruebas locales aisladas, y deja escrito que no hubo escaneos de terceros, envíos reales, deploys ni migraciones."
         },
@@ -204,7 +200,7 @@
         },
         {
           "t": "Copias con procedencia",
-          "why": "Los perfiles llegan a cada repo por PR y revisión, para no pisar reglas que ya existen. En HandyX cada copia lleva el commit de origen y su SHA-256, y lo único que cambia está escrito."
+          "why": "Los perfiles llegan a cada repo por PR y revisión, para no pisar reglas que ya existen."
         }
       ]
     },
@@ -245,7 +241,6 @@
       "list": [
         "En uso en mis repos: 11 agentes, 79 skills y tres formatos. Los agentes de Eclipse entraron por tres PR; el último se mergeó el 26/10/2026.",
         "Abierto: antes de instalarlos falta comprobar que Claude Code acepte el alias del modelo y los campos del encabezado, y dos skills de tráileres chocan con el flujo actual.",
-        "Los perfiles declaran modelos distintos según la herramienta; en HandyX se quitó esa línea para que hereden el de la sesión.",
         "Las cifras de tests son de los repos que produce el proceso, no del repo de agentes.",
         "No afirmo que los agentes trabajen solos, que el sistema esté auditado o que haya un pentest hecho."
       ]

@@ -101,7 +101,7 @@ export function Work({ level = 2 }: { level?: Level } = {}) {
     <section id="trabajo" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-trabajo">
       <Head id="h-trabajo" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
       <div className="work">
-        {(['complia', 'tuenti', 'handyx', 'eclipse'] as const).map((k) => (
+        {(['complia', 'tuenti', 'eclipse'] as const).map((k) => (
           <Reveal as="article" key={k} className="work__card">
             {WORK_SHOT[k] && (
               <img

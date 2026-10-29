@@ -15,7 +15,7 @@ export function HubArt({ id }: { id: PageKey }) {
     case 'work':
       return (
         <div className="ha ha--work" aria-hidden="true">
-          {(['eclipse', 'handyx', 'complia'] as const).map((k, i) => (
+          {(['eclipse', 'complia', 'tuenti'] as const).map((k, i) => (
             <img key={k} className="ha__shot" style={{ '--i': i } as CSSProperties} src={asset(WORK_SHOT_800[k] ?? WORK_SHOT[k]!)} alt="" width={800} height={500} loading="lazy" decoding="async" />
           ))}
         </div>

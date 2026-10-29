@@ -2,7 +2,6 @@
 import type { CaseDef } from './types';
 import { complia } from './complia';
 import { tuenti } from './tuenti';
-import { handyx } from './handyx';
 import { eclipse } from './eclipse';
 import { kinetic } from './kinetic';
 import { volta } from './volta';
@@ -12,11 +11,11 @@ import { agentes } from './agentes';
 import { velmar } from './velmar';
 import { supernova } from './supernova';
 
-export const CASE_SLUGS = ['complia', 'tuenti', 'handyx', 'eclipse', 'agentes', 'kinetic', 'volta', 'velmar', 'dentalos', 'supernova', 'games'] as const;
+export const CASE_SLUGS = ['complia', 'tuenti', 'eclipse', 'agentes', 'kinetic', 'volta', 'velmar', 'dentalos', 'supernova', 'games'] as const;
 export type CaseSlug = (typeof CASE_SLUGS)[number];
 
 /** Each case page: its blocks (copy in messages/cases/<locale>/<slug>.json) and its public links. */
-export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, handyx, eclipse, agentes, kinetic, volta, velmar, dentalos, supernova, games };
+export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, eclipse, agentes, kinetic, volta, velmar, dentalos, supernova, games };
 
 export const LAB = [
   { id: 'kinetic', href: 'https://toti-gauna.github.io/motion-animations/', code: 'https://github.com/Toti-Gauna/kinetic-studio', page: 'kinetic' },
@@ -28,16 +27,14 @@ export const LAB = [
 ] as const;
 
 /** Cover of a work card (its alt text in work.cards.<k>.shotAlt). */
-export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', string>> = {
+export const WORK_SHOT: Partial<Record<'complia' | 'tuenti' | 'eclipse', string>> = {
   complia: '/media/complia-cover.webp',
   tuenti: '/media/tuenti-cover.svg',
-  handyx: '/media/portals/handy-landing.webp',
   eclipse: '/media/portals/eclipse-landing.webp',
 };
 
 /** 800 px copies of the 1600 px covers (same picture), for small slots: `srcset` on the cards, the home hub. */
-export const WORK_SHOT_800: Partial<Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', string>> = {
-  handyx: '/media/portals/handy-landing-800.webp',
+export const WORK_SHOT_800: Partial<Record<'complia' | 'tuenti' | 'eclipse', string>> = {
   eclipse: '/media/portals/eclipse-landing-800.webp',
 };
 

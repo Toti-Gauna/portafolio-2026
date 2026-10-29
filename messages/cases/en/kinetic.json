@@ -46,7 +46,7 @@
         "A hub with the library: generative SVG posters with a fixed seed (identical on every load) and a live, silent preview on hover.",
         "31 trailers in the hub (32 folders): 29 are made with the kit alone and 2 are commercials that animate real captures of a demo.",
         "Adding up the catalogue: 1,430 seconds of film and 272 scenes.",
-        "I use it for pieces of my own products (four HandyX spots) and for this site's «Meet Ignacio» trailer."
+        "I use it for this site's «Meet Ignacio» trailer."
       ]
     },
     "engine": {
@@ -162,7 +162,7 @@
       "p": [
         "The most demanding use of the kit is the «Meet Ignacio» trailer that opens this site. It uses the Kinetic engine with a single two-line change (inside the portfolio there are no single-letter shortcuts, per WCAG 2.1.4) and adds its own recipes, a mode to live inside the page and the warm-up pass.",
         "In act 5, eleven views of real components from my projects are rebuilt in code (HTML, CSS and SVG animated with GSAP), with no screenshots. In act 6, each of the 17 technologies is an animation that shows what it does, with a fixed note on where I used it.",
-        "It is not all code: act 4 plays a recorded clip of the CompliA demo, and the HandyX views use four brand illustrations."
+        "It is not all code: act 4 plays a recorded clip of the CompliA demo."
       ]
     },
     "acts": {
@@ -288,7 +288,7 @@
         },
         {
           "t": "Guards at build time and at run time",
-          "why": "A Vite plugin stops the build if a page loads a local classic <script>. In the HandyX spots, ?⁠audit walks every tween and flags any property other than transform or opacity, and a scene that lasts differently from its storyboard stops the film from being built."
+          "why": "A Vite plugin stops the build if a page loads a local classic <script>."
         }
       ]
     },

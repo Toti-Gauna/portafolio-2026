@@ -23,7 +23,6 @@ import './js/ig-stack.js';
 import './js/stack/work.js';
 import './js/stack/lab.js';
 import './js/shots/eclipse.js';
-import './js/shots/handy.js';
 import './js/shots/lab.js';
 
 const query = new URLSearchParams(location.search);

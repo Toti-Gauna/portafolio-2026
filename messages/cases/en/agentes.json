@@ -6,7 +6,7 @@
   "facts": [
     { "k": "Role", "v": "I designed it and maintain it; I approve every final gate" },
     { "k": "Pieces", "v": "11 agents · 79 skills · 3 formats" },
-    { "k": "Where it is used", "v": "HandyX and Eclipse backends, Eclipse-Web and my own demos" },
+    { "k": "Where it is used", "v": "Eclipse backend, Eclipse-Web and my own demos" },
     { "k": "Licence", "v": "For my own use: not open source" }
   ],
   "tldr": [
@@ -148,10 +148,6 @@
       ],
       "items": [
         {
-          "t": "HandyX backend",
-          "d": "Three copied profiles (backend, cybersecurity and frontend) and 19 skills, identical byte for byte except the model line, with the source commit and the SHA-256 of each original. Two skills were left out on purpose; one because it models Sequelize and Prisma rules there. Backend implements, Cybersecurity reviews each phase's critical diff and Frontend reviews the contract, in sequence."
-        },
-        {
           "t": "Eclipse backend",
           "d": "It follows the backend and cybersecurity profiles in Codex format. Its security review was done with isolated local tests, and it states that there were no third-party scans, real sends, deploys or migrations."
         },
@@ -204,7 +200,7 @@
         },
         {
           "t": "Copies with provenance",
-          "why": "Profiles reach each repo through a PR and a review, so existing rules are not overwritten. In HandyX each copy records its source commit and its SHA-256, and the only change is written down."
+          "why": "Profiles reach each repo through a PR and a review, so existing rules are not overwritten."
         }
       ]
     },
@@ -245,7 +241,6 @@
       "list": [
         "In use in my repos: 11 agents, 79 skills and three formats. The Eclipse agents came in through three PRs; the last one was merged on 10/26/2026.",
         "Open: before installing them, I still need to check that Claude Code accepts the model alias and the header fields, and two trailer skills clash with the current flow.",
-        "The profiles declare different models depending on the tool; in HandyX that line was removed so they inherit the session's model.",
         "The test figures belong to the repos the process produces, not to the agents repo.",
         "I don't claim that the agents work on their own, that the system has been audited or that a pentest has been done."
       ]

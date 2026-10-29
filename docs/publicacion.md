@@ -22,6 +22,5 @@ Estado al 27/10/2026: el sitio está completo en la rama `claude/ignacio-portfol
 - [ ] Agregar el enlace del portafolio al perfil de LinkedIn y a GitHub.
 
 ## Mantenimiento con fecha
-- **10/11/2026:** HandyX dice «lanza el 10 de noviembre». Después de esa fecha, actualizar el estado en `messages/*.json` (tarjeta, caso y tráiler).
 - **Números de tests** (corrida del 27/10/2026): si cambian, volver a correr y actualizar cifra y fecha.
 - **CV:** cuando exista, sumarlo a Contacto.

@@ -21,7 +21,7 @@
    Chords default to C – G – Am – F (one per bar). Everything is placed on the master
    timeline at build time (the plugin's `done` hook), so it scrubs with the film.
 
-   HANDY — lo que agrega esta copia del módulo (js/partitura.js lo usa):
+   KIT — lo que agrega esta copia del módulo (js/partitura.js lo usa):
    Cada parte puede pisar la armonía y la melodía de la partitura: `chords` (una tríada midi por
    compás, p.chords || M.chords || CHORDS) y `riff` (corcheas, p.riff || M.riff || RIFF; los estilos de
    arriba). Los acordes con nombre están en Trailer.music.ACORDES (C G Am F Dm Em).
@@ -51,7 +51,7 @@
    arranca uno propio en `from` (solo en los compases) y la parte de esos estilos que termina en ese `from` no
    apaga el suyo (events() le pone `sigue`; 'subida' y 'final' apagan siempre el suyo). Sirve cuando el cambio
    de parte cae a mitad de compás con el mismo acorde: sin hueco en el pad.
-   El gancho ("cinco Handys, cinco notas"): Trailer.music.HOOK, cuatro compases sobre C – G – Am – F hechos
+   El gancho ("cinco notas"): Trailer.music.HOOK, cuatro compases sobre C – G – Am – F hechos
    con las cinco notas de la pentatónica de Do (C D E G A): sube por las cinco, contesta bajando, vuelve a
    subir más alto y cierra en Do. Formato: [[semicorchea, midi, largo en semicorcheas], …]; se repite cada
    tantos compases como ocupe. Lo tocan 'coro', 'quiebre', 'frio' y 'final' si la parte lo pide:
@@ -64,7 +64,7 @@
    'final', también G4–F#5), arpegio C4–D5, gancho C5–C6 (HOOK; doblado con hookOct [0, 12] llega a C7; la
    firma del final, C6–A6). Así el bajo queda abajo y en el centro, y las campanas arriba.
 
-   CONOCER A IGNACIO — opciones nuevas por parte (marcadas "IG"; sin ellas suena igual que Handy):
+   CONOCER A IGNACIO — opciones nuevas por parte (marcadas "IG"; sin ellas suena igual que el kit):
      lead   la voz del gancho: 'bell' (default) | 'pluck' (lead cálido de js/audio.js) | 'both' (pluck + campana una
             octava arriba a 0,45 del volumen: el brillo de los drops)
      arp    'pluck': el arpegio en semicorcheas de 'coro' y el de corcheas de 'verso' con pluck en vez de campana
@@ -82,11 +82,11 @@
   const MINOR = [[45, 48, 52], [41, 45, 48], [48, 52, 55], [43, 47, 50]]; // Am · F · C · G
   const RIFF_MINOR = [76, null, 79, 81, 79, null, 76, 74, 72, null, 74, 76, null, 72, 69, null];
 
-  // ── HANDY ────────────────────────────────────────────────────────────────────────────────────
+  // ── KIT ──────────────────────────────────────────────────────────────────────────────────────
   const ACORDES = {
     C: [48, 52, 55], G: [43, 47, 50], Am: [45, 48, 52], F: [41, 45, 48], Dm: [50, 53, 57], Em: [52, 55, 59],
   };
-  // el gancho: "cinco Handys, cinco notas" (C5 = 72). [semicorchea, midi, largo en semicorcheas]
+  // el gancho: "cinco notas" (C5 = 72). [semicorchea, midi, largo en semicorcheas]
   const HOOK = [
     [0, 72, 2], [2, 74, 2], [4, 76, 2], [6, 79, 2], [8, 81, 6], [14, 79, 6],      // C: do re mi sol LA~ · sol~
     [20, 81, 2], [22, 79, 2], [24, 76, 2], [26, 74, 6],                          // G: (sol) la sol mi RE~
@@ -98,10 +98,10 @@
   const enRango = (ch, lo) => ch.map(n => lo + mod(n - lo, 12)).sort((a, b) => a - b);
   const PENTA = [0, 2, 4, 7, 9]; // pentatónica mayor desde la raíz del acorde, para las campanitas de la subida
   const grado = g => 12 * Math.floor(g / 5) + PENTA[mod(g, 5)];
-  const ESTILOS_HANDY = new Set(['coro', 'verso', 'quiebre', 'subida', 'frio', 'latido', 'final']);
+  const ESTILOS_KIT = new Set(['coro', 'verso', 'quiebre', 'subida', 'frio', 'latido', 'final']);
 
   /** los estilos nuevos: una parte, nota por nota, en semicorcheas desde su `anchor` (default `from`) */
-  function estiloHandy(p, st, v, chords, beat, sfx) {
+  function estiloKit(p, st, v, chords, beat, sfx) {
     const s16 = beat / 4, bar = 16 * s16, a0 = p.anchor ?? p.from, to = p.to ?? p.from;
     const acorde = k => chords[mod(k, chords.length)];
     const grave = ch => 33 + mod(ch[0] - 33, 12);              // raíz del bajo: A1 … G#2
@@ -238,12 +238,12 @@
     const beat = 60 / (M.bpm || 120), e8 = beat / 2, V = M.volume ?? 1;
     const list = [];
     const sfx = (name, at, ...a) => { list.push({ t: at, voice: name, a }); };
-    // HANDY: los tiempos donde arranca una parte `ligado`: la parte que termina ahí no apaga su pad
+    // KIT: los tiempos donde arranca una parte `ligado`: la parte que termina ahí no apaga su pad
     const clave = x => Math.round(x * 1e6), ligados = new Set((M.parts || []).filter(p => p.ligado).map(p => clave(p.from)));
     (M.parts || []).forEach(p => {
       const st = p.style || 'groove', v = V * (p.volume ?? 1), anchor = p.anchor ?? (M.anchor || 0); // bars count from here
       const chords = p.chords || M.chords || CHORDS, riff = p.riff || M.riff || RIFF; // la parte puede pisar armonía y riff
-      if (ESTILOS_HANDY.has(st)) return estiloHandy(p.to != null && ligados.has(clave(p.to)) ? { ...p, sigue: true } : p, st, v, chords, beat, sfx);
+      if (ESTILOS_KIT.has(st)) return estiloKit(p.to != null && ligados.has(clave(p.to)) ? { ...p, sigue: true } : p, st, v, chords, beat, sfx);
       if (st === 'synth' && p.to) sfx('padStop', p.to, 'synpad', 0.6);
       if (st === 'hit') {
         sfx('crash', p.from, 0.3 * v);

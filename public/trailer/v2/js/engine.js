@@ -8,7 +8,7 @@
    Everything is deterministic and seekable: open index.html?t=SECONDS to freeze
    any frame. Docs: ~/.claude/trailer-kit/README.md
 
-   HANDY — lo único que cambia esta copia: D.sfx. En vivo, un tl.call corre en el primer cuadro del
+   KIT — lo único que cambia esta copia: D.sfx. En vivo, un tl.call corre en el primer cuadro del
    ticker después de su tiempo (0–17 ms tarde, distinto en cada nota: ensucia un groove en semicorcheas). Ahora
    el callback le pasa a SFX.play(atraso, voz, args) cuánto pasó el cabezal de `at` (tl.time() − at) y la voz
    arranca en el reloj de audio: ahora + 0,03 s − atraso (nunca antes de ahora), así cada nota queda a la misma
@@ -272,7 +272,7 @@
         if (w > maxW) el.style.fontSize = (parseFloat(getComputedStyle(el).fontSize) * maxW / w).toFixed(1) + 'px';
         return el;
       },
-      // HANDY: el callback corre en el primer cuadro del ticker después de `at` (0–17 ms tarde, distinto en
+      // KIT: el callback corre en el primer cuadro del ticker después de `at` (0–17 ms tarde, distinto en
       // cada nota); SFX.play recibe ese atraso y arranca la voz en el reloj de audio con un adelanto fijo (js/audio.js)
       sfx: (name, at, ...args) => tl.call(() => SFX.play((tl.time() - at) / tl.timeScale(), name, args), null, at),
       call: (fn, at) => tl.call(fn, null, at),

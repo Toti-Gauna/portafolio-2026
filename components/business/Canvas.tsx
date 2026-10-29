@@ -5,7 +5,7 @@ import { CANVAS_LEVELS } from '@/lib/business';
 type Copy = { title: string; low: string; high: string; us: string; them: string; factors: string[]; caption: string };
 
 /**
- * A strategy canvas, transposed so it reads on a phone: one row per factor, the usual offer and HandyX as two dots
+ * A strategy canvas, transposed so it reads on a phone: one row per factor, the usual offer and Eclipse as two dots
  * on the same low→high track, joined by a line (a dumbbell). Qualitative, and it says so.
  */
 export function Canvas({ c }: { c: Copy }) {

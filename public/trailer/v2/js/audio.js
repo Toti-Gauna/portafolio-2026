@@ -4,7 +4,7 @@
    SFX.render() plays the same score into an OfflineAudioContext (faster than real time) for
    exports: every voice reads its start time from now(), which is the event's time offline.
 
-   HANDY — lo que cambia esta copia:
+   KIT — lo que cambia esta copia:
    - SFX.play(atraso, voz, args): el timeline llama a cada voz por acá (D.sfx en js/engine.js). En vivo pone el
      reloj de la voz (vt) en ctx.currentTime + ADELANTO (0,03 s) − atraso, nunca antes de ctx.currentTime: el
      atraso del ticker (0–17 ms, distinto en cada nota) se descuenta y todas las notas quedan corridas lo mismo,

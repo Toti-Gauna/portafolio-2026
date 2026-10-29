@@ -1,6 +1,6 @@
 /* ============================================================================
-   CONOCER A IGNACIO — the score (cfg.music). Styles: js/recipes-music.js (Handy copy + the IG patch:
-   lead / arp / sub / snare / duck / keys). Voices: js/audio.js (Handy copy + pluck, keys, sub, snare, duck).
+   CONOCER A IGNACIO — the score (cfg.music). Styles: js/recipes-music.js (kit copy + the IG patch:
+   lead / arp / sub / snare / duck / keys). Voices: js/audio.js (kit copy + pluck, keys, sub, snare, duck).
    Full description: score.md.
 
    120 BPM · 1 bar = 2 s · 16ths = 0.125 s · C major / A minor · 65 bars = 130 s.
