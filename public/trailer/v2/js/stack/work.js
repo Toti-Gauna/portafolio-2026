@@ -42,8 +42,8 @@
   // `number` and the check passes.
   add('typescript', {
     text: {
-      es: { name: 'TypeScript', note: 'Tsoft, Eclipse y HandyX', file: 'carrito.ts', err1: "No se puede asignar 'string'", err2: "al tipo 'number'.", ok: '0 errores' },
-      en: { name: 'TypeScript', note: 'Tsoft, Eclipse and HandyX', file: 'cart.ts', err1: "Type 'string' is not assignable", err2: "to type 'number'.", ok: '0 errors' },
+      es: { name: 'TypeScript', note: 'Tsoft y Eclipse', file: 'carrito.ts', err1: "No se puede asignar 'string'", err2: "al tipo 'number'.", ok: '0 errores' },
+      en: { name: 'TypeScript', note: 'Tsoft and Eclipse', file: 'cart.ts', err1: "Type 'string' is not assignable", err2: "to type 'number'.", ok: '0 errors' },
     },
     html: t => {
       const x = c => (56 + c * 14.4).toFixed(1), tab = Math.round(t.file.length * 11.4 + 34), ok = Math.round(50 + t.ok.length * 13.2 + 20);

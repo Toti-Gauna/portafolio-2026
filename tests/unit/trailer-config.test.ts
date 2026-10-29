@@ -18,7 +18,7 @@ beforeAll(async () => {
     igStack: { add: (id: string, def: Shot) => { tiles[id] = def; } },
   };
   const dir = '../../public/trailer/v2/js/'; // plain JS served as is: no types to check
-  for (const f of ['shots/eclipse.js', 'shots/handy.js', 'shots/lab.js', 'stack/work.js', 'stack/lab.js', 'trailer.es.js', 'trailer.en.js']) await import(/* @vite-ignore */ `${dir}${f}`);
+  for (const f of ['shots/eclipse.js', 'shots/lab.js', 'stack/work.js', 'stack/lab.js', 'trailer.es.js', 'trailer.en.js']) await import(/* @vite-ignore */ `${dir}${f}`);
 });
 const montage = (c: Cfg) => (c.scenes as { type: string; shots?: { id: string }[] }[]).find((s) => s.type === 'igshots')!;
 // every string becomes a placeholder: what is left is the structure, timings and data
@@ -52,7 +52,7 @@ describe('trailer v2 configs', () => {
     expect(sc.filter((s) => s.type === 'igfronts').flatMap((s) => s.stops!.map((x) => x.vis))).toEqual(['tach', 'class', 'tuenti', 'events', 'team']);
     const zoom = sc.find((s) => s.type === 'igzoom')!;
     expect(zoom.fronts).toHaveLength(7);
-    expect(zoom.own).toHaveLength(7);
+    expect(zoom.own).toHaveLength(6);
     expect(sc.find((s) => s.type === 'igrubros')!.rubros!.map((r) => r.id)).toEqual(['startups', 'corporate', 'agro', 'space', 'mining', 'oilgas']);
   });
 

@@ -38,6 +38,13 @@ h3 { font-weight: 700; }
 .card-link { color: var(--accent); font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .card-link:hover { text-decoration: underline; }
 @media (min-width: 760px) { .work { grid-template-columns: repeat(2, 1fr); } }
+/* three cases: three columns when they fit; in two columns the odd last card takes the row, picture beside the text */
+@media (min-width: 760px) and (max-width: 1099px) {
+  .work__card:last-child:nth-child(odd) { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 24px; }
+  .work__card:last-child:nth-child(odd) > * { grid-column: 2; }
+  .work__card:last-child:nth-child(odd) > .work__shot { grid-column: 1; grid-row: 1 / span 8; margin: 0; }
+}
+@media (min-width: 1100px) { .work { grid-template-columns: repeat(3, 1fr); } }
 
 /* 03 lab */
 .lab { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }

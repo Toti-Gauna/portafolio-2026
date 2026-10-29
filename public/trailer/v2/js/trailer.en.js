@@ -5,7 +5,7 @@
    before each of them (`lead`, `exit`) → a path of his own → every path,
    all growing into the same thing: seeking new challenges → the industries → what he does → the end.
    No job titles anywhere: challenges. Every fact comes from portafolio-2026/messages/en.json (journey, about, contact).
-   Kit: engine.js (the Handy copy) + recipes*.js (bifurcacion copies) + recipes-music.js and audio.js (Handy + IG patch)
+   Kit: engine.js (the Kinetic kit copy) + recipes*.js (bifurcacion copies) + recipes-music.js and audio.js (Kinetic kit + IG patch)
    + ig-kit.js, ig-open.js, ig-fronts.js, ig-bloom.js, ig-case.js, ig-shots.js, ig-stack.js.
    Same scenes and timings as trailer.es.js: only the copy changes.
    ========================================================================== */
@@ -94,7 +94,6 @@ Trailer.run({
     { type: 'igprojects', label: 'MY OWN PATH', duration: 2, step: 0.15, bg: INK,                                 //  60–62
       items: [
         { name: 'Eclipse', status: 'In development', color: PROJECT.eclipse },
-        { name: 'HandyX', status: 'In development · launches Nov 10', color: PROJECT.handyx },
         { name: 'Volta', status: 'Demo', color: PROJECT.volta },
         { name: 'Velmar', status: 'Demo · made for a client', color: PROJECT.velmar },
         { name: 'DentalOS', status: 'Demo', color: PROJECT.dentalos },
@@ -106,8 +105,8 @@ Trailer.run({
       shots: [
         { id: 'eclipse-landing', dur: 1.5, tag: { name: 'Eclipse', status: 'In development', note: 'The landing: demos, prices and the next step' } },
         { id: 'eclipse-portal', dur: 1, tag: { name: 'Eclipse', status: 'In development', note: 'Client portal · fictional data' } },
-        { id: 'handy-landing', dur: 1, tag: { name: 'HandyX', status: 'In development', note: 'The landing · launches Nov 10' } },
         { id: 'volta', dur: 1, tag: { name: 'Volta', status: 'Demo', note: 'Supplements store, with gamification' } },
+        { id: 'velmar', dur: 1, tag: { name: 'Velmar', status: 'Demo · made for a client', note: 'A store with coupons, a club and a roulette' } },
         { id: 'dentalos', dur: 1, tag: { name: 'DentalOS', status: 'Demo', note: '16 modules of a fictional clinic' } },
         { id: 'kinetic', dur: 1, tag: { name: 'Kinetic Studio', status: '32 trailers', note: 'Trailers made with code, like this one' } },
       ] },
@@ -121,7 +120,7 @@ Trailer.run({
         { name: 'Team', color: FRONT.team },
       ],
       own: [
-        { name: 'Eclipse', color: PROJECT.eclipse }, { name: 'HandyX', color: PROJECT.handyx }, { name: 'Volta', color: PROJECT.volta },
+        { name: 'Eclipse', color: PROJECT.eclipse }, { name: 'Volta', color: PROJECT.volta },
         { name: 'Velmar', color: PROJECT.velmar }, { name: 'DentalOS', color: PROJECT.dentalos }, { name: 'games-market', color: PROJECT.games },
         { name: 'Kinetic Studio', color: PROJECT.kinetic },
       ],

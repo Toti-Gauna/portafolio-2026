@@ -36,7 +36,7 @@
       "De enseñar, a una empresa grande: Tsoft. Primero, en Tuenti (2024): gamificación que se mide. La ruleta y los referidos; después, un dashboard para medir referidos, recurrencia y gamificación. (Ilustración con datos ficticios.)",
       "Y llegó la IA: llevarla a producción con CompliA (2026), el asistente con RAG del portal de compliance de Telefónica: inteligencia artificial en producción interna. Lo diseñé y lo construí. (Recorte de la demo, con datos de ejemplo.)",
       "En Tsoft, más frentes: un prototipo para Supernova Eventos, una micro-app de eventos (con datos ficticios), y subir el nivel del equipo: capacité a compañeros.",
-      "Y en paralelo, con lo aprendido en cada frente, armé un camino propio: Eclipse (en desarrollo), HandyX (en desarrollo · lanza el 10/11), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), games-market (banco de pruebas) y Kinetic Studio (32 tráileres en código). Todo, en código.",
+      "Y en paralelo, con lo aprendido en cada frente, armé un camino propio: Eclipse (en desarrollo), Volta (demo), Velmar (demo para un cliente), DentalOS (demo), games-market (banco de pruebas) y Kinetic Studio (32 tráileres en código). Todo, en código.",
       "Todos los caminos que se abrieron desde los 17. Todo germina en lo mismo: buscar nuevos desafíos.",
       "Me mueven los desafíos nuevos: potenciar negocios y automatizar procesos difíciles. No le temo a ningún rubro: startups, corporativas, agro, espacio, minería, oil & gas.",
       "Tecnologías, según dónde las usé. En el trabajo: React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD y RAG con LLM. En mis proyectos: seguridad (cookies HttpOnly, CSRF, 2FA, Argon2), Python, C, motion con GSAP y WebGL, y tests con Vitest y Playwright. Estudiando: fundamentos de machine learning, AWS y Azure.",
@@ -166,7 +166,7 @@
       {
         "when": "Hoy · caminos propios",
         "title": "Potenciar negocios y automatizar lo difícil",
-        "text": "Eclipse, HandyX y un laboratorio de demos y tráileres: productos propios, en cualquier rubro."
+        "text": "Eclipse y un laboratorio de demos y tráileres: productos propios, en cualquier rubro."
       }
     ]
   },
@@ -190,13 +190,6 @@
         "text": "Gamificación (la ruleta Tuenti y el sistema de referidos), un dashboard para medir referidos y recurrencia, recarga automática y módulo de pagos, desde Tsoft.",
         "shotAlt": "Ilustración de una ruleta, por la gamificación de Tuenti. No hay capturas del producto, por confidencialidad.",
         "role": "Gamificación, métricas y productos con IA · 2024 – hoy"
-      },
-      "handyx": {
-        "name": "HandyX",
-        "status": "En desarrollo · lanza el 10 de noviembre",
-        "text": "Marketplace de especialistas del hogar en Mar del Plata. Producto propio: soy la única persona en el proyecto.",
-        "shotAlt": "Portada de la landing de Handyx: el título «¿Se rompió algo en casa?», los botones «Quiero usar Handyx» y «Soy especialista», la cuenta regresiva al 10/11 y un celular con la pantalla de inicio de la app y sus seis rubros.",
-        "role": "Única persona: producto, diseño y desarrollo"
       },
       "eclipse": {
         "name": "Eclipse",
@@ -487,7 +480,7 @@
       },
       "node": {
         "name": "Node.js",
-        "note": "Trabajo y los backends de Eclipse y HandyX"
+        "note": "Trabajo y el backend de Eclipse"
       },
       "sql": {
         "name": "SQL y PostgreSQL",
@@ -603,12 +596,12 @@
       "full": {
         "t": "Fullstack, de la interfaz a la base",
         "d": "Frontends, APIs, datos y despliegues. Diseño el sistema completo y lo construyo por etapas.",
-        "proof": "HandyX y Eclipse"
+        "proof": "Eclipse: la web, el portal y el backend"
       },
       "quality": {
         "t": "Seguridad y calidad desde el diseño",
-        "d": "Datos cifrados, segundo factor, cookies HttpOnly y CSRF; tests automáticos y CI en cada cambio.",
-        "proof": "Los backends de HandyX y Eclipse"
+        "d": "Contraseñas con Argon2id, segundo factor, cookies HttpOnly y CSRF; tests automáticos y CI en cada cambio.",
+        "proof": "El backend de Eclipse"
       },
       "motion": {
         "t": "Interfaces con oficio",
@@ -652,7 +645,7 @@
       "title": "Lo que construí.",
       "lead": "Casos del trabajo y propios, cada uno con su estado, y un laboratorio de demos y prototipos.",
       "metaTitle": "Trabajo — Ignacio Gauna",
-      "metaDescription": "Qué hago, los casos que lo prueban con su estado (CompliA, Tuenti, HandyX, Eclipse) y el laboratorio: demos, prototipos y bancos de prueba."
+      "metaDescription": "Qué hago, los casos que lo prueban con su estado (CompliA, Tuenti, Eclipse) y el laboratorio: demos, prototipos y bancos de prueba."
     },
     "how": {
       "label": "Cómo trabajo",
@@ -672,7 +665,7 @@
   },
   "business": {
     "metaTitle": "Cómo pienso el negocio — Ignacio Gauna",
-    "metaDescription": "Los modelos de The Lean Startup, The Mom Test y Blue Ocean Strategy que uso, y dónde los apliqué: HandyX y Eclipse.",
+    "metaDescription": "Los modelos de The Lean Startup, The Mom Test y Blue Ocean Strategy que uso, y dónde los apliqué.",
     "back": "Volver al portafolio",
     "label": "Negocio",
     "title": "Cómo pienso el negocio.",
@@ -728,16 +721,6 @@
         },
         "apply": [
           {
-            "where": "HandyX",
-            "t": "Primero la demanda, después la app",
-            "d": "Antes de construir la app, una landing con lista de espera y preregistro de especialistas. Su único objetivo son preregistros reales: es el primer experimento sobre la hipótesis de valor."
-          },
-          {
-            "where": "HandyX",
-            "t": "Nada de métricas de vanidad",
-            "d": "El contador público aparece recién desde 20 anotados y redondea hacia abajo. Prefiero un número chico y honesto a uno inflado."
-          },
-          {
             "where": "Eclipse",
             "t": "Lotes chicos con criterio de aceptación",
             "d": "Cada cambio es un lote con su especificación, su criterio de aceptación y una puerta de aprobación. Equivocarse cuesta un lote, no un proyecto."
@@ -772,19 +755,19 @@
           "good": "Mejor pregunta",
           "items": [
             {
-              "bad": "¿Usarías una app para conseguir más trabajos?",
-              "good": "¿Cómo conseguiste tus últimos tres trabajos?"
+              "bad": "¿Usarías una app para conseguir más clientes?",
+              "good": "¿Cómo conseguiste tus últimos tres clientes?"
             },
             {
-              "bad": "¿Te gustaría ver el precio antes de confirmar?",
-              "good": "¿Qué pasó la última vez que te cobraron algo que no esperabas?"
+              "bad": "¿Te gustaría ver tus ventas en un tablero?",
+              "good": "¿Qué hiciste la última vez que necesitaste saber cuánto vendiste?"
             },
             {
               "bad": "¿Te parece una buena idea?",
               "good": "¿Qué probaste para resolver esto, y por qué lo dejaste?"
             }
           ],
-          "caption": "Preguntas de ejemplo para un especialista o un vecino. Ilustran la regla; no son una encuesta real."
+          "caption": "Preguntas de ejemplo para el dueño de un negocio. Ilustran la regla; no son una encuesta real."
         },
         "ladder": {
           "title": "La escalera del compromiso",
@@ -808,11 +791,6 @@
           ]
         },
         "apply": [
-          {
-            "where": "HandyX",
-            "t": "Compromiso, no cumplidos",
-            "d": "En el portal interno un intento sin respuesta no cambia el estado: solo una conversación real avanza, y un especialista queda «comprometido» recién con una fecha de alta acordada."
-          },
           {
             "where": "Trabajo",
             "t": "Escuchar en el lugar",
@@ -843,51 +821,46 @@
           }
         ],
         "errc": {
-          "title": "Las cuatro acciones, aplicadas a HandyX",
+          "title": "Las cuatro acciones, aplicadas a Eclipse",
           "eliminate": "Eliminar",
           "reduce": "Reducir",
           "raise": "Incrementar",
           "create": "Crear",
           "items": {
             "eliminate": [
-              "Los cobros sorpresa: nada extra sin tu OK.",
-              "Repartir tu teléfono: no se comparte."
+              "Precios tachados y ofertas de «antes $X».",
+              "Testimonios, logos y clientes que no existen."
             ],
             "reduce": [
-              "Llamar a uno por uno para pedir presupuestos: las propuestas llegan a un solo lugar."
+              "Reuniones para entender qué se compra: la demo lo muestra antes."
             ],
             "raise": [
-              "La claridad del precio: mano de obra, materiales y tarifa, desglosados.",
-              "Saber en qué está el trabajo: seguimiento en curso."
+              "La claridad: precio, alcance y mantenimiento a la vista, nunca detrás de un botón.",
+              "La velocidad para entender qué ofrece: en unos 30 segundos."
             ],
             "create": [
-              "El especialista pone su precio, con una referencia sugerida.",
-              "Adicionales que se proponen y se aceptan en el chat."
+              "Ver tu negocio funcionando antes de hablar: una demo por rubro.",
+              "Un siguiente paso concreto: pedir la demo o el plan por WhatsApp."
             ]
           },
-          "caption": "Sale de lo que la landing y la demo de HandyX ya muestran."
+          "caption": "Sale de las reglas de la web de Eclipse."
         },
         "canvas": {
           "title": "Un lienzo estratégico, en cualitativo",
           "low": "Bajo",
           "high": "Alto",
-          "us": "HandyX",
+          "us": "Eclipse",
           "them": "Lo de siempre",
           "factors": [
-            "Precio claro antes de confirmar",
-            "Cobros sorpresa",
-            "Comparar propuestas",
-            "Seguimiento del trabajo",
-            "Privacidad de tu teléfono"
+            "Ver el producto antes de hablar",
+            "Precio y alcance a la vista",
+            "Promesas sin respaldo",
+            "Mantenimiento explicado",
+            "Siguiente paso claro"
           ],
-          "caption": "Lectura cualitativa para pensar la estrategia; no son datos medidos. «Lo de siempre»: preguntar a conocidos o buscar un aviso."
+          "caption": "Lectura cualitativa para pensar la estrategia; no son datos medidos. «Lo de siempre»: una reunión, una propuesta y un precio a pedido."
         },
         "apply": [
-          {
-            "where": "HandyX",
-            "t": "Competir en certeza",
-            "d": "En vez de competir solo por cantidad de especialistas, HandyX compite en certeza: ver el precio antes, nada extra sin tu OK y tu teléfono privado."
-          },
           {
             "where": "Eclipse",
             "t": "Demostrar en vez de prometer",

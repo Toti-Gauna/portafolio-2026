@@ -35,7 +35,7 @@ export const PALETTE = {
 
 /** project colours (act 5): one accent per own project. Not brand colours of anyone else. */
 export const PROJECT = {
-  eclipse: '#f5b942', handyx: '#4a8cff', volta: '#d4ff3a', velmar: '#d2ad69',
+  eclipse: '#f5b942', volta: '#d4ff3a', velmar: '#d2ad69',
   dentalos: '#5ee6c8', supernova: '#ff2e88', games: '#34d399', kinetic: CORAL,
 };
 

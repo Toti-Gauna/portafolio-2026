@@ -9,7 +9,6 @@
 export const SCENE_IDS = [
   'home',
   'complia',
-  'handyx',
   'eclipse',
   'kinetic',
   'agentes',
@@ -41,7 +40,6 @@ const ALIASES: Record<string, SceneId> = {
   'velmar-ecommerce': 'velmar',
   'games-market': 'games',
   'supernova-eventos': 'supernova',
-  handy: 'handyx',
   // inner pages of the site: «Cómo trabajo» is the agentic system's graph; «Sobre mí» grows from the home's seed.
   // «Trabajo» and «Capacidades» keep the quiet dot field (default).
   'como-trabajo': 'agentes',

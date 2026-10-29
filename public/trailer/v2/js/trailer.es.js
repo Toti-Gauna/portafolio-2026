@@ -5,7 +5,7 @@
    largo de la línea antes de cada uno (`lead`, `exit`) → un camino propio
    → todos los caminos, que germinan en lo mismo: buscar nuevos desafíos → los rubros → lo que hace → el final.
    Sin puestos en ningún lado: desafíos. Cada dato sale de portafolio-2026/messages/es.json (journey, about, contact).
-   Kit: engine.js (copia de Handy) + recipes*.js (copias de bifurcacion) + recipes-music.js y audio.js (Handy + parche IG)
+   Kit: engine.js (copia del kit de Kinetic) + recipes*.js (copias de bifurcacion) + recipes-music.js y audio.js (kit de Kinetic + parche IG)
    + ig-kit.js, ig-open.js, ig-fronts.js, ig-bloom.js, ig-case.js, ig-shots.js, ig-stack.js.
    Mismas escenas y tiempos que trailer.en.js: solo cambian los textos.
    ========================================================================== */
@@ -94,7 +94,6 @@ Trailer.run({
     { type: 'igprojects', label: 'CAMINO PROPIO', duration: 2, step: 0.15, bg: INK,                                 //  60–62
       items: [
         { name: 'Eclipse', status: 'En desarrollo', color: PROJECT.eclipse },
-        { name: 'HandyX', status: 'En desarrollo · lanza el 10/11', color: PROJECT.handyx },
         { name: 'Volta', status: 'Demo', color: PROJECT.volta },
         { name: 'Velmar', status: 'Demo · para un cliente', color: PROJECT.velmar },
         { name: 'DentalOS', status: 'Demo', color: PROJECT.dentalos },
@@ -106,8 +105,8 @@ Trailer.run({
       shots: [
         { id: 'eclipse-landing', dur: 1.5, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'La landing: demos, precios y el siguiente paso' } },
         { id: 'eclipse-portal', dur: 1, tag: { name: 'Eclipse', status: 'En desarrollo', note: 'Portal de clientes · datos ficticios' } },
-        { id: 'handy-landing', dur: 1, tag: { name: 'HandyX', status: 'En desarrollo', note: 'La landing · lanza el 10/11' } },
         { id: 'volta', dur: 1, tag: { name: 'Volta', status: 'Demo', note: 'Tienda de suplementos, con gamificación' } },
+        { id: 'velmar', dur: 1, tag: { name: 'Velmar', status: 'Demo · para un cliente', note: 'Tienda con cupones, club y ruleta' } },
         { id: 'dentalos', dur: 1, tag: { name: 'DentalOS', status: 'Demo', note: '16 módulos de una clínica ficticia' } },
         { id: 'kinetic', dur: 1, tag: { name: 'Kinetic Studio', status: '32 tráileres', note: 'Tráileres hechos con código, como este' } },
       ] },
@@ -121,7 +120,7 @@ Trailer.run({
         { name: 'Equipo', color: FRONT.team },
       ],
       own: [
-        { name: 'Eclipse', color: PROJECT.eclipse }, { name: 'HandyX', color: PROJECT.handyx }, { name: 'Volta', color: PROJECT.volta },
+        { name: 'Eclipse', color: PROJECT.eclipse }, { name: 'Volta', color: PROJECT.volta },
         { name: 'Velmar', color: PROJECT.velmar }, { name: 'DentalOS', color: PROJECT.dentalos }, { name: 'games-market', color: PROJECT.games },
         { name: 'Kinetic Studio', color: PROJECT.kinetic },
       ],

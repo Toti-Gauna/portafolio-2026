@@ -33,9 +33,6 @@
 .scene[data-scene='complia'] {
   --scene-bg: radial-gradient(60% 75% at 100% 38%, #0f1534 0%, #0e1020 42%, #0e0e10 74%);
 }
-.scene[data-scene='handyx'] {
-  --scene-bg: radial-gradient(70% 60% at 100% 100%, #0e1430 0%, #0d0f1d 45%, #0e0e10 75%), radial-gradient(30% 25% at 82% 92%, #1d160a 0%, transparent 70%);
-}
 .scene[data-scene='eclipse'] {
   --scene-bg: radial-gradient(45% 55% at 80% 26%, #221808 0%, #16120c 42%, #0e0e10 75%);
 }
@@ -81,7 +78,7 @@
   --scene-bg: linear-gradient(180deg, #0e0e10 40%, #1a0f12 70%, #0f1226 100%);
 }
 
-/* phones: text covers the whole width, so the two busiest scenes get a light veil */
+/* phones: text covers the whole width, so the busiest scene gets a light veil */
 @media (max-width: 767px) {
-  .scene[data-scene='handyx'], .scene[data-scene='negocio'] { --scene-scrim: rgb(14 14 16 / 0.32); }
+  .scene[data-scene='negocio'] { --scene-scrim: rgb(14 14 16 / 0.32); }
 }

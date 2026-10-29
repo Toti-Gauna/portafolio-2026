@@ -46,7 +46,7 @@
         "Un hub con la biblioteca: afiches SVG generativos con semilla fija (salen iguales en cada carga) y una vista previa en vivo, sin sonido, al pasar el mouse.",
         "31 tráileres en el hub (32 carpetas): 29 se hacen solo con el kit y 2 son comerciales que animan capturas reales de una demo.",
         "Sumando el catálogo: 1.430 segundos de película y 272 escenas.",
-        "Lo uso para piezas de mis productos (cuatro spots de HandyX) y para el tráiler «Conocer a Ignacio» de este sitio."
+        "Lo uso para el tráiler «Conocer a Ignacio» de este sitio."
       ]
     },
     "engine": {
@@ -162,7 +162,7 @@
       "p": [
         "El uso más exigente del kit es el tráiler «Conocer a Ignacio» que abre este sitio. Usa el motor de Kinetic con un solo cambio de dos líneas (dentro del portafolio no hay atajos de una letra, por WCAG 2.1.4) y le suma recetas propias, un modo para vivir dentro de la página y la pasada de calentamiento.",
         "En el acto 5, once vistas de componentes reales de mis proyectos están reconstruidas en código (HTML, CSS y SVG animados con GSAP), sin capturas. En el acto 6, cada una de las 17 tecnologías es una animación que muestra qué hace, con una nota fija de dónde la usé.",
-        "No es todo código: el acto 4 reproduce un recorte grabado de la demo de CompliA, y las vistas de HandyX usan cuatro ilustraciones de la marca."
+        "No es todo código: el acto 4 reproduce un recorte grabado de la demo de CompliA."
       ]
     },
     "acts": {
@@ -288,7 +288,7 @@
         },
         {
           "t": "Guardias en el build y en ejecución",
-          "why": "Un plugin de Vite frena el build si una página carga un <script> clásico local. En los spots de HandyX, ?⁠audit recorre cada tween y marca cualquier propiedad que no sea transform u opacity, y una escena que dura distinto que su storyboard frena el armado de la película."
+          "why": "Un plugin de Vite frena el build si una página carga un <script> clásico local."
         }
       ]
     },

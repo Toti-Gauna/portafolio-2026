@@ -6,17 +6,16 @@ import type { CaseSlug } from '@/lib/cases';
 /** «Qué hago»: each pillar points to the case that proves it. */
 export const PILLARS: { id: 'ai' | 'full' | 'quality' | 'motion'; slug: CaseSlug }[] = [
   { id: 'ai', slug: 'complia' },
-  { id: 'full', slug: 'handyx' },
+  { id: 'full', slug: 'eclipse' },
   { id: 'quality', slug: 'eclipse' },
   { id: 'motion', slug: 'kinetic' },
 ];
 
 /** What a work card says is inside its case page (labels in work.inside.*). */
 export type InsideTag = 'diagram' | 'flow' | 'business' | 'security' | 'quality' | 'decisions' | 'video' | 'limits';
-export const WORK_INSIDE: Record<'complia' | 'tuenti' | 'handyx' | 'eclipse', InsideTag[]> = {
+export const WORK_INSIDE: Record<'complia' | 'tuenti' | 'eclipse', InsideTag[]> = {
   complia: ['diagram', 'flow', 'video', 'limits'],
   tuenti: ['limits'],
-  handyx: ['business', 'diagram', 'flow', 'security', 'decisions', 'quality'],
   eclipse: ['diagram', 'flow', 'security', 'decisions', 'quality'],
 };
 
