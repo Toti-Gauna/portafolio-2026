@@ -12,7 +12,12 @@
     "trailer": "Meet Ignacio",
     "portfolio": "View portfolio",
     "dialog": "Welcome",
-    "trailerLoading": "Loading the trailer…"
+    "trailerLoading": "Loading the trailer…",
+    "fig": "Fig. 00 — Portfolio 2026",
+    "place": "Mar del Plata · Argentina",
+    "soundHint": "Both turn the sound on. Switch it off at the top.",
+    "first": "Ignacio",
+    "last": "Gauna"
   },
   "trailer": {
     "title": "Meet Ignacio",
@@ -50,7 +55,9 @@
     "language": "Language",
     "contact": "Contact",
     "newTab": "opens in a new tab",
-    "nav": "Main"
+    "nav": "Main",
+    "soundOn": "Turn the sound on",
+    "soundOff": "Turn the sound off"
   },
   "hero": {
     "role": "Ssr AI Fullstack Developer",

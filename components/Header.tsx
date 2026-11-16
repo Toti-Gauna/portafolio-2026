@@ -7,8 +7,8 @@ import { Monogram } from './Monogram';
 import { SiteNav, type NavItem } from './SiteNav';
 
 /**
- * Wide screens (≥ 1100 px): monogram, five page links, the language switch and one «Contacto» button.
- * Below that: monogram and a menu button that opens the full-screen menu (components/SiteNav.tsx).
+ * From 768 px: monogram, five numbered page links, the sound button and the language switch (+ one «Contacto» button from 1100 px).
+ * Below 768: monogram, the sound button and a menu button that opens the full-screen menu (components/SiteNav.tsx).
  */
 export function Header({ locale }: { locale: Locale }) {
   const t = useTranslations('header');
@@ -39,6 +39,8 @@ export function Header({ locale }: { locale: Locale }) {
             dialog: n('dialog'),
             contact: n('contact'),
             elsewhere: n('elsewhere'),
+            soundOn: t('soundOn'),
+            soundOff: t('soundOff'),
             language: t('language'),
             newTab: t('newTab'),
             home: t('home'),

@@ -5,18 +5,19 @@ import { Link, usePathname } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { LocaleSwitch } from './LocaleSwitch';
 import { Monogram } from './Monogram';
+import { SoundToggle } from './SoundToggle';
 import './header.css';
 
 export type NavItem = { key: string; href: string; label: string; desc: string };
-type Strings = { nav: string; menu: string; close: string; dialog: string; contact: string; elsewhere: string; language: string; newTab: string; home: string };
+type Strings = { soundOn: string; soundOff: string; nav: string; menu: string; close: string; dialog: string; contact: string; elsewhere: string; language: string; newTab: string; home: string };
 
 const norm = (p: string) => p.replace(/[?#].*$/, '').replace(/\/+$/, '') || '/';
 const FOCUSABLE = 'a[href], button:not([disabled])';
 
 /**
  * The site navigation (strings come as props: the `nav` namespace stays on the server).
- * ≥ 1100 px: the page links, the language switch and «Contacto» in the header row.
- * Below: a «Menú» button that opens a full-screen menu (a modal dialog): focus moves in and stays there, Escape or
+ * ≥ 768 px: the numbered page links, the sound button and the language switch (+ «Contacto» from 1100 px, where the
+ * floating contact button of smaller screens is gone). Below 768: the sound button and a «Menú» button that opens a full-screen menu (a modal dialog): focus moves in and stays there, Escape or
  * the close button close it and focus returns to the button; the page under it is inert and pinned (iOS ignores
  * overflow:hidden on <html> for touch scrolling, so the body is fixed in place, as in Intro.tsx). Motion: opacity
  * and transform only; instant with reduced motion (globals.css).
@@ -37,9 +38,9 @@ export function SiteNav({ items, locale, locales, contactHref, email, linkedin, 
 
   useEffect(() => setOpen(false), [pathname]);
 
-  // the menu does not exist on wide screens: growing past 1100 px closes it
+  // the menu does not exist on wide screens: growing past 768 px closes it
   useEffect(() => {
-    const wide = matchMedia('(min-width: 1100px)');
+    const wide = matchMedia('(min-width: 768px)');
     const onWide = () => wide.matches && setOpen(false);
     wide.addEventListener('change', onWide);
     return () => wide.removeEventListener('change', onWide);
@@ -94,10 +95,14 @@ export function SiteNav({ items, locale, locales, contactHref, email, linkedin, 
   return (
     <div className="site-nav">
       <nav aria-label={s.nav} className="site-nav__links">
-        {items.slice(1).map((it) => (
-          <Link key={it.key} href={it.href} aria-current={current(it.href)}>{it.label}</Link>
+        {items.slice(1).map((it, i) => (
+          <Link key={it.key} href={it.href} aria-current={current(it.href)}>
+            <span className="site-nav__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            {it.label}
+          </Link>
         ))}
       </nav>
+      <SoundToggle on={s.soundOn} off={s.soundOff} />
       <div className="site-nav__end">
         <LocaleSwitch current={locale} locales={locales} label={s.language} />
         <Link className="btn btn-ghost site-nav__contact" href={contactHref}>{s.contact}</Link>

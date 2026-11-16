@@ -12,7 +12,12 @@
     "trailer": "Conocer a Ignacio",
     "portfolio": "Ver portafolio",
     "dialog": "Bienvenida",
-    "trailerLoading": "Cargando el tráiler…"
+    "trailerLoading": "Cargando el tráiler…",
+    "fig": "Fig. 00 — Portafolio 2026",
+    "place": "Mar del Plata · Argentina",
+    "soundHint": "Las dos encienden el sonido. Lo apagás desde arriba.",
+    "first": "Ignacio",
+    "last": "Gauna"
   },
   "trailer": {
     "title": "Conocer a Ignacio",
@@ -50,7 +55,9 @@
     "language": "Idioma",
     "contact": "Contacto",
     "newTab": "se abre en una pestaña nueva",
-    "nav": "Principal"
+    "nav": "Principal",
+    "soundOn": "Encender el sonido",
+    "soundOff": "Apagar el sonido"
   },
   "hero": {
     "role": "Ssr AI Fullstack Developer",

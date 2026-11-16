@@ -62,7 +62,7 @@ img, svg { display: block; max-width: 100%; }
 .site-header__row { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
 .site-header__brand { display: grid; place-items: center; width: 44px; height: 44px; }
 .site-header__mark { width: 36px; height: 36px; color: var(--paper); }
-.locale-switch { display: flex; border: 1px solid #6f6f77; border-radius: var(--r-ctl); overflow: hidden; }
+.locale-switch { display: flex; border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); border-radius: var(--r-ctl); overflow: hidden; }
 .locale-switch a { display: grid; place-items: center; min-width: 44px; min-height: 44px; font: 600 12px var(--font-mono); letter-spacing: 0.08em; text-decoration: none; color: var(--muted); }
 .locale-switch a[aria-current='true'] { background: var(--paper); color: var(--ink); }
 

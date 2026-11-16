@@ -69,9 +69,24 @@ test('reduced motion: boot screen still works and finishes quickly', async ({ br
   await ctx.close();
 });
 
-test('the gate opens into two branches and fits a short phone in landscape', async ({ page }) => {
+test('the gate shows the halftone eclipse and fits a short phone in landscape', async ({ page }) => {
   await page.setViewportSize({ width: 568, height: 320 });
   await page.goto('/es/');
   await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeInViewport();
-  await expect(page.locator('.boot__fork path')).toHaveCount(2);
+  await expect(page.getByRole('button', { name: 'Conocer a Ignacio' })).toBeInViewport();
+  await expect(page.locator('.boot__eclipse svg')).toHaveCount(2);
+});
+
+test('both doors turn the sound on; a visitor who switched it off stays off', async ({ page }) => {
+  await page.goto('/es/');
+  const gate = page.getByRole('button', { name: 'Ver portafolio' });
+  await expect(gate).toBeVisible();
+  const heard = page.evaluate(() => new Promise<boolean>((r) => window.addEventListener('ig:sound', (e) => r((e as CustomEvent).detail.on), { once: true })));
+  await gate.click();
+  expect(await heard).toBe(true);
+  await page.evaluate(() => localStorage.setItem('ig-sound', 'off'));
+  await page.reload();
+  await page.getByRole('button', { name: 'Ver portafolio' }).click();
+  await expect(page.locator('#boot')).toHaveCount(0);
+  expect(await page.evaluate(() => localStorage.getItem('ig-sound'))).toBe('off');
 });

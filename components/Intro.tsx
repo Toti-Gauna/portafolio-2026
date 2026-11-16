@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Monogram } from './Monogram';
 import { OPEN_TRAILER_EVENT } from './TrailerButton';
 import { primeTrailer } from '@/lib/trailer-prime';
+import { enableSoundFromGate, playCue } from '@/lib/sound';
 import './intro.css';
 
 // The trailer (engine + audio + scenes) is a separate chunk: it downloads only when asked for.
@@ -17,8 +18,8 @@ const MIN_MS_REDUCED = 300;
 const SAFETY_MS = 4000;
 
 /**
- * Boot screen shown on EVERY load: a seed of light and a line that grows with the real load,
- * then the gate (trailer / portfolio). The server HTML already contains it (no flash) and the
+ * Boot screen shown on EVERY load (system «Cartel suizo»): a coral halftone eclipse that lights up with the real load,
+ * then the gate (trailer / portfolio); both doors turn the sound on (lib/sound.ts). The server HTML already contains it (no flash) and the
  * page content stays in the DOM underneath (SEO, screen readers) but inert until it closes.
  */
 export function Intro() {
@@ -130,6 +131,17 @@ export function Intro() {
     close();
   }, [close, phase]);
 
+  const enterPortfolio = () => {
+    if (enableSoundFromGate()) playCue('open');
+    close();
+  };
+  const enterTrailer = () => {
+    enableSoundFromGate(); // the film brings its own music; the site keeps the sound on afterwards
+    primeTrailer();
+    setTrailer(true);
+  };
+  const lit = phase === 'loading' ? progress : 1;
+
   return (
     <>
       {(phase !== 'closed' || trailer) && (
@@ -143,39 +155,63 @@ export function Intro() {
           aria-hidden={trailer || undefined}
           data-trailer={trailer || undefined}
         >
+          {/* the brand image: a coral halftone eclipse. Its dots light up from the centre with the real load,
+              and the moon slides in to complete it when the site is ready. */}
+          <div className="boot__eclipse" aria-hidden="true">
+            <div className="boot__dots" style={{ clipPath: `circle(${Math.round(8 + lit * 42)}% at 50% 50%)` }}>
+              <svg viewBox="0 0 640 640">
+                <defs>
+                  <pattern id="boot-d1" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.6" fill="var(--accent)" /></pattern>
+                  <pattern id="boot-d2" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="3.4" fill="var(--accent)" /></pattern>
+                  <pattern id="boot-d3" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="5.6" fill="var(--accent)" /></pattern>
+                </defs>
+                <circle cx="320" cy="320" r="318" fill="url(#boot-d1)" />
+                <circle cx="320" cy="320" r="236" fill="var(--ink)" />
+                <circle cx="320" cy="320" r="236" fill="url(#boot-d2)" />
+                <circle cx="320" cy="320" r="150" fill="var(--ink)" />
+                <circle cx="320" cy="320" r="150" fill="url(#boot-d3)" />
+              </svg>
+            </div>
+            <svg className="boot__moon" viewBox="0 0 640 640">
+              <circle cx="368" cy="290" r="128" fill="var(--ink)" />
+            </svg>
+          </div>
+
+          <p className="boot__meta" aria-hidden="true">
+            <span>{t('fig')}</span>
+            <span>{t('place')}</span>
+          </p>
+
           <div className="boot__inner">
             <Monogram className="boot__mark" />
-            <p className="boot__name">{t('name')}</p>
+            <p className="boot__name">
+              <span className="boot__first">{t('first')}</span>
+              <span className="boot__last">{t('last')}</span>
+            </p>
             <p className="boot__role">{t('role')}</p>
 
             {trailer ? (
               <p role="status" className="boot__status">{t('trailerLoading')}</p>
             ) : phase === 'loading' ? (
-              <>
-                <svg className="boot__line" viewBox="0 0 320 24" fill="none" aria-hidden="true">
-                  <path d="M16 12h288" stroke="currentColor" strokeOpacity=".25" strokeWidth="2" strokeLinecap="round" />
-                  <path className="boot__fill" d="M16 12h288" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" pathLength="1" style={{ strokeDashoffset: 1 - progress }} />
-                  <circle cx="16" cy="12" r="6" fill="var(--accent)" />
-                </svg>
-                <p role="status" className="boot__status">{t('loading')}…</p>
+              <div className="boot__load">
+                <p role="status" className="boot__status">
+                  {t('loading')} <span className="boot__pct">{Math.round(progress * 100)}&nbsp;%</span>
+                </p>
                 <button type="button" className="btn btn-ghost boot__skip" onClick={() => setPhase('ready')}>
                   {t('skip')}
                 </button>
-              </>
+              </div>
             ) : (
               <div className="boot__gate">
-                {/* the seed opens into two branches: one per path */}
-                <svg className="boot__fork" viewBox="0 0 40 136" fill="none" aria-hidden="true">
-                  <path d="M12 4V34C12 46 20 52 36 52" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" pathLength="1" />
-                  <path d="M12 34V96C12 106 20 112 36 112" stroke="var(--paper)" strokeOpacity=".6" strokeWidth="2" strokeLinecap="round" pathLength="1" />
-                  <circle cx="12" cy="6" r="5" fill="var(--accent)" />
-                </svg>
-                <button ref={trailerBtn} type="button" className="btn btn-primary" onClick={() => { primeTrailer(); setTrailer(true); }}>
-                  {t('trailer')}
-                </button>
-                <button ref={portfolioBtn} type="button" className="btn btn-ghost" onClick={close}>
-                  {t('portfolio')}
-                </button>
+                <div className="boot__doors">
+                  <button ref={trailerBtn} type="button" className="btn btn-primary boot__door" onClick={enterTrailer}>
+                    {t('trailer')} <span aria-hidden="true">▶</span>
+                  </button>
+                  <button ref={portfolioBtn} type="button" className="btn btn-ghost boot__door" onClick={enterPortfolio}>
+                    {t('portfolio')} <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+                <p className="boot__hint">{t('soundHint')}</p>
               </div>
             )}
           </div>
