@@ -4,8 +4,8 @@ Cada pantalla: **qué contiene** (sale del sitio actual salvo lo marcado como nu
 
 ## 0. Puerta de entrada (rehecha, Ola 2)
 
-- Contenido: monograma IG en cromo con su punto coral, «Ignacio / Gauna», rol, dos botones: **Conocer a Ignacio** (coral, ▶) y **Ver portafolio**.
-- Fondo: noche violeta con el eclipse de puntos detrás del nombre; halo que respira una vez al cargar.
+- Contenido: monograma IG con su punto coral, «Ignacio / Gauna», rol, dos botones: **Conocer a Ignacio** (coral, ▶) y **Ver portafolio**.
+- Fondo: tinta con la grilla suiza y el eclipse de puntos coral detrás del nombre.
 - Carga: el eclipse se completa como barra de progreso (los puntos se encienden desde el centro).
 - Interacción: cualquiera de los dos botones **enciende el sonido** (es el gesto que el navegador exige). «Conocer a Ignacio» abre el tráiler; «Ver portafolio» funde al inicio.
 - Sonido: ninguno antes del clic. Al clic, un acorde corto y la música de fondo entra en 2 s.
@@ -20,20 +20,20 @@ Cada pantalla: **qué contiene** (sale del sitio actual salvo lo marcado como nu
 
 | Scroll | Qué pasa |
 |---|---|
-| 0 % | Hero: «Ignacio» / «Gauna», titular con «llega a producción.» en cromo, dos botones, cuatro cifras. Eclipse de puntos a la derecha con halo violeta. |
-| 0–25 % | El eclipse gira y se acerca; los puntos crecen (trama más gruesa). El fondo pasa de tinta a noche. |
-| 25–50 % | Aparece la primera isla (Work & Projects) desde abajo; texto corto a la izquierda: «¿Qué construí?». |
-| 50–80 % | Las otras cuatro entradas (Cómo trabajo, Capacidades, Negocio, Sobre mí) llegan como islas chicas en fila, cada una con su pregunta y un dibujo. |
+| 0 % | Hero: «Ignacio» / «Gauna», titular, dos botones, cuatro cifras. Eclipse de puntos coral a la derecha. |
+| 0–25 % | El eclipse gira y se acerca; los puntos crecen (trama más gruesa). La grilla se acerca levemente. |
+| 25–50 % | Aparece el primer edificio (Work & Projects) desde abajo; texto corto a la izquierda: «¿Qué construí?». |
+| 50–80 % | Las otras cuatro entradas (Cómo trabajo, Capacidades, Negocio, Sobre mí) llegan como dioramas chicos en fila, cada uno con su número de sección, cada una con su pregunta y un dibujo. |
 | 80–100 % | Contacto corto: «Abierto a nuevas oportunidades», mail, LinkedIn. |
 
-Fondos: placa Higgsfield `hero-noche` (cielo) y clip `hero-eclipse` (giro del eclipse) — ver prompts. En celular: placas fijas, sin clip.
+Fondos: placa Higgsfield `hero-tinta` (fondo) y clip `hero-eclipse` (giro del eclipse) — ver prompts. En celular: placas fijas, sin clip.
 
 ## 3. Work & Projects (Olas 4–6)
 
-- **El camino:** vista isométrica de islas flotantes unidas por un puente de luz. Orden: semilla en Mar del Plata (a los 17) → TACH (startup) → Ada ITW (academia) → Tsoft (corporativa, con Telefónica y Tuenti) → caminos propios (Eclipse, HandyX, Lucero, Trazo, Kinetic, laboratorio) → roadmap (islas en contorno punteado, «Planeado»).
-- **Interacción:** clic o foco en una isla → sube, brilla y abre su ficha (estado, fechas, rol, 3 cifras con fuente, stack, «Ver el caso»). Stepper al pie con las etapas; flechas del teclado avanzan.
+- **El camino:** vista isométrica de edificios con trama halftone unidos por un camino coral. Orden: semilla en Mar del Plata (a los 17) → TACH (startup) → Ada ITW (academia) → Tsoft (corporativa, con Telefónica y Tuenti) → caminos propios (Eclipse, HandyX, Lucero, Trazo, Kinetic, laboratorio) → roadmap (edificios en contorno punteado, «Planeado»).
+- **Interacción:** clic o foco en un edificio → sube y abre su ficha (estado, fechas, rol, 3 cifras con fuente, stack, «Ver el caso»). Stepper al pie con las etapas; flechas del teclado avanzan.
 - **Alternativa:** botón «Ver como lista» con lo mismo en HTML.
-- **Roadmap:** las 4 etapas (Núcleo, Ciberseguridad, Quant, Aeroespacial) como archipiélagos; las ventanas de matemática como puentes con su «nivel de salida»; certificaciones como faros, sin precio.
+- **Roadmap:** las 4 etapas (Núcleo, Ciberseguridad, Quant, Aeroespacial) como barrios; las ventanas de matemática como cruces con su «nivel de salida»; certificaciones como faros, sin precio.
 
 ## 4. Casos (Olas 7a/7b)
 
