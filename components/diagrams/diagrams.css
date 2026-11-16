@@ -1,5 +1,5 @@
 /* Diagrams — a blueprint language: hairlines, mono labels, one coral packet. Motion: stroke-dashoffset, opacity, transform. */
-.dg { margin: 0; display: grid; gap: 14px; padding: clamp(12px, 3vw, 28px); border: 1px solid var(--line); border-radius: 14px;
+.dg { margin: 0; display: grid; gap: 14px; padding: clamp(12px, 3vw, 28px); border: 1px solid var(--line); border-radius: var(--r-card);
   background: radial-gradient(circle at 1px 1px, #ffffff10 1px, transparent 1.4px) 0 0 / 22px 22px, #101013; }
 .dg__head { display: grid; gap: 8px; justify-items: start; }
 .dg__badge { font: 12px/1 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: #ffc21a; padding: 6px 8px; border-radius: 4px; }
@@ -24,7 +24,7 @@
 .dg__sub { fill: var(--muted); font-family: var(--font-mono); }
 .dg__badge-n circle { fill: var(--accent); }
 .dg__badge-n text { fill: var(--ink); font-family: var(--font-mono); font-weight: 700; }
-.dg__lbl rect { fill: #0e0e10; stroke: #2a2a2e; }
+.dg__lbl rect { fill: #0a0a0c; stroke: #26262b; }
 .dg__lbl text { fill: #c9c5bc; font-family: var(--font-mono); }
 
 .dg__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: 1fr; }

@@ -19,7 +19,7 @@
 /* the menu button: a mono label and two lines */
 .menu-toggle {
   display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; padding: 0 12px 0 14px;
-  border: 1px solid #6f6f77; border-radius: 8px; background: transparent; color: var(--paper); cursor: pointer;
+  border: 1px solid #6f6f77; border-radius: var(--r-ctl); background: transparent; color: var(--paper); cursor: pointer;
   font: 500 12px var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase;
 }
 .menu-toggle:hover { border-color: var(--paper); }
