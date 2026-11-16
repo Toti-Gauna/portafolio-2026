@@ -64,7 +64,7 @@
 .bz-ladder__steps b { font-size: 16px; font-variation-settings: 'wdth' 108; }
 .bz-ladder__d { color: #bdb9b0; font-size: 13px; line-height: 1.4; }
 .bz-ladder__bar { display: block; height: 120px; position: relative; }
-.bz-ladder__bar span { position: absolute; left: 0; right: 0; bottom: 0; height: var(--h); border-radius: var(--r-ctl) 6px 2px 2px; background: linear-gradient(#ffc21a, #ff4d2e); transform-origin: bottom; }
+.bz-ladder__bar span { position: absolute; left: 0; right: 0; bottom: 0; height: var(--h); border-radius: 0; background: linear-gradient(#ffc21a, #ff4d2e); transform-origin: bottom; }
 .bz-ladder__steps li:first-child .bz-ladder__bar span { background: #3a3a40; }
 @media (max-width: 520px) {
   .bz-ladder__steps { grid-template-columns: 1fr; }
