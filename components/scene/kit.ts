@@ -46,7 +46,7 @@ export function seedOf(text: string) {
 export const gauss = (rng: () => number) => (rng() + rng() + rng() - 1.5) * 2;
 
 export const PALETTE = {
-  ink: '#0e0e10',
+  ink: '#0a0a0c',
   paper: '#eeeae3',
   coral: '#ff4d2e',
   blue: '#2b50ff',

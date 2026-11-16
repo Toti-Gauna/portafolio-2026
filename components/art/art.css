@@ -2,7 +2,7 @@
 .art { margin: 0; display: grid; gap: 12px; }
 .art__grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
 @media (min-width: 900px) { .art__grid { grid-template-columns: repeat(3, 1fr); } }
-.art__card { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(circle at 1px 1px, #ffffff10 1px, transparent 1.4px) 0 0 / 22px 22px, #101013; }
+.art__card { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid var(--line); border-radius: var(--r-card); background: radial-gradient(circle at 1px 1px, #ffffff10 1px, transparent 1.4px) 0 0 / 22px 22px, #101013; }
 .art__svg { width: 100%; height: auto; font-family: var(--font-sans); }
 .art__t { font-size: 18px; font-variation-settings: 'wdth' 110; }
 .art__d { color: #cfcbc2; font-size: 15px; line-height: 1.5; }

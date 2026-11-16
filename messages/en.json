@@ -875,5 +875,15 @@
         }
       }
     }
+  },
+  "status": {
+    "produccion": "Internal production",
+    "desarrollo": "In development",
+    "mvp": "MVP",
+    "demo": "Demo",
+    "prototipo": "Prototype",
+    "banco": "Test bench",
+    "planeado": "Planned",
+    "ejercicio": "Brand exercise"
   }
 }

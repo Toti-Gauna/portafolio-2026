@@ -15,9 +15,9 @@
 @media (min-width: 1100px) { .facts { grid-template-columns: repeat(4, 1fr); } }
 
 .tldr { display: grid; gap: 1px; grid-template-columns: 1fr; margin-block: 8px clamp(40px, 6vw, 72px); }
-.tldr__item { padding: 20px; background: #131316; border: 1px solid var(--line); border-radius: 12px; display: grid; gap: 8px; align-content: start; }
+.tldr__item { padding: 20px; background: #141418; border: 1px solid var(--line); border-radius: var(--r-card); display: grid; gap: 8px; align-content: start; }
 .tldr__k { display: flex; align-items: center; gap: 10px; font: 12px/1 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.tldr__k span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: var(--paper); color: var(--ink); font-weight: 700; letter-spacing: 0; }
+.tldr__k span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: var(--r-ctl); background: var(--paper); color: var(--ink); font-weight: 700; letter-spacing: 0; }
 .tldr__v { font-size: 17px; line-height: 1.5; color: #e6e2d9; }
 @media (min-width: 900px) { .tldr { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
 
@@ -56,7 +56,7 @@
 
 /* checks (security, limits): shield + text, two columns on wide screens */
 .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
-.checks__item { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: #121215; }
+.checks__item { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-card); background: #121215; }
 .checks__icon { width: 28px; height: 28px; fill: none; stroke: var(--paper); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .checks__icon path:last-child { stroke: var(--accent); stroke-dasharray: 12; stroke-dashoffset: 0; }
 .checks__t { font-size: 17px; font-variation-settings: 'wdth' 106; margin-bottom: 4px; }
@@ -74,17 +74,17 @@
 @media (min-width: 760px) { .stackl > div { grid-template-columns: 200px 1fr; align-items: center; } }
 
 .case__video { margin: 0; display: grid; gap: 8px; }
-.case__video video { width: 100%; height: auto; aspect-ratio: 960 / 464; border-radius: 12px; border: 1px solid var(--line); background: #0b0b0d; }
+.case__video video { width: 100%; height: auto; aspect-ratio: 960 / 464; border-radius: var(--r-card); border: 1px solid var(--line); background: #0b0b0d; }
 .case__links { display: grid; gap: 4px; }
 .case__links a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; }
 .gallery { display: grid; gap: 28px; grid-template-columns: 1fr; }
 .gallery__item { margin: 0; display: grid; gap: 8px; }
-.gallery__item img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); background: #131316; }
+.gallery__item img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: var(--r-card); border: 1px solid var(--line); background: #141418; }
 @media (min-width: 900px) { .gallery { grid-template-columns: repeat(2, 1fr); } .gallery > :only-child { grid-column: 1 / -1; } }
 
 /* next case */
 .case__next { margin-top: clamp(40px, 6vw, 80px); display: grid; gap: 24px; }
-.case__next-main { display: grid; gap: 8px; padding: clamp(22px, 4vw, 40px); border: 1px solid var(--line); border-radius: 16px; background: #131316; text-decoration: none; transition: border-color 200ms; }
+.case__next-main { display: grid; gap: 8px; padding: clamp(22px, 4vw, 40px); border: 1px solid var(--line); border-radius: 16px; background: #141418; text-decoration: none; transition: border-color 200ms; }
 .case__next-main:hover { border-color: var(--accent); }
 .case__next-name { font-size: clamp(36px, 7vw, 88px); font-weight: 800; font-variation-settings: 'wdth' 125; line-height: 0.95; }
 .case__more { display: flex; gap: 16px 24px; flex-wrap: wrap; align-items: center; }
