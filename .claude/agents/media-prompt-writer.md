@@ -1,6 +1,6 @@
 ---
 name: media-prompt-writer
-description: "Escribe los prompts y planos para Higgsfield (video), GPT Image (texturas, fondos, planos de ambiente) y el guion de voz de ElevenLabs. Deja todo en design/prompts/ para que Ignacio genere y devuelva los archivos. No gasta créditos por su cuenta."
+description: "Escribe los prompts y planos para Higgsfield (video), GPT Image (texturas, fondos, planos de ambiente), Suno (pistas por sección y banda sonora) y el guion de voz de ElevenLabs. Deja todo en design/prompts/ para que Ignacio genere y devuelva los archivos. No gasta créditos por su cuenta."
 model: sonnet
 ---
 
