@@ -22,3 +22,10 @@ Single continuous camera move, no cuts, in a stippled engraving and halftone scr
 
 ## Orden de prioridad (198 créditos de Higgsfield, 16/11/2026)
 1. origen → recorrido (8 s) · 2. recorrido → hangar (8 s) · 3. lanzamiento → faro (5 s) · 4. taller → origen (5 s) · 5. observatorio → telescopio (queda en código). Mirar el precio del botón antes de generar cada una; 1 variante.
+
+## 6 (extra, 81 créditos) · `transicion-imprenta-negocio.mp4` · `escena-6.png` → `escena-7.png`
+Seedance 2.0 · 720p · 8 s · Standard · sonido apagado · sin preset de cámara · 1 variante.
+
+Single continuous camera move, no cuts, in a stippled engraving and halftone screen-print style on black starry space. The camera follows the printed sheets as they leave the industrial press; the sheets lift off the stone floor one by one and break apart into small stippled star dots that drift out into space and begin to spiral together, while the printing house recedes and a circular stone hall appears, its center opening into a funnel of concentric dotted rings spiralling down; the star dots fall in, condense, and a single coral cube settles at the bottom, with a ramp leading into the hall. The motion settles exactly into the final frame. Crisp stipple dots and fine hatching, no gradients, no glow. Smooth, slow, graceful. No text.
+
+Si sobran créditos después: `escena-5.png` → `escena-6.png` (telescopio → imprenta).
