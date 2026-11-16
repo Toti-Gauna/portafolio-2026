@@ -12,7 +12,12 @@
     "trailer": "Conocer a Ignacio",
     "portfolio": "Ver portafolio",
     "dialog": "Bienvenida",
-    "trailerLoading": "Cargando el tráiler…"
+    "trailerLoading": "Cargando el tráiler…",
+    "fig": "Fig. 00 — Portafolio 2026",
+    "place": "Mar del Plata · Argentina",
+    "soundHint": "Las dos encienden el sonido. Lo apagás desde arriba.",
+    "first": "Ignacio",
+    "last": "Gauna"
   },
   "trailer": {
     "title": "Conocer a Ignacio",
