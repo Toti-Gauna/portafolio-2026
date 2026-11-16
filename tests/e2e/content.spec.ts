@@ -101,10 +101,35 @@ test('wide header: five page links on one row, the language switch and one Conta
   await expect(links.first()).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('.site-header').getByRole('link', { name: 'Contacto' })).toHaveAttribute('href', '/es/sobre-mi/#contacto');
   await expect(page.getByRole('button', { name: 'Menú', exact: true })).toBeHidden();
-  // 1024 (an iPad in landscape): the menu button instead
+  // 1024 (an iPad in landscape): the links stay on one row (no Contacto: the floating button covers it), no menu button
   await page.setViewportSize({ width: 1024, height: 768 });
+  await expect(links.first()).toBeVisible();
+  const rows = await links.evaluateAll((as) => new Set(as.map((a) => Math.round(a.getBoundingClientRect().top))).size);
+  expect(rows).toBe(1);
+  await expect(page.locator('.site-nav__contact')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Menú', exact: true })).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  // 768 (an iPad in portrait): still the links, nothing overflowing
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await expect(links.first()).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  // below 768: the menu button instead
+  await page.setViewportSize({ width: 700, height: 900 });
   await expect(links.first()).toBeHidden();
   await expect(page.getByRole('button', { name: 'Menú', exact: true })).toBeVisible();
+});
+
+test('the sound button is in the header, the gate turned it on, and it toggles', async ({ page }) => {
+  await enter(page, '/es/trabajo/');
+  const btn = page.locator('.site-header').getByRole('button', { name: /sonido/i });
+  await expect(btn).toBeVisible();
+  const box = await btn.boundingBox();
+  expect(box!.width).toBeGreaterThanOrEqual(44);
+  await expect(btn).toHaveAttribute('aria-pressed', 'true'); // «Ver portafolio» turned it on
+  await btn.click();
+  await expect(btn).toHaveAttribute('aria-pressed', 'false');
+  await btn.click();
+  await expect(btn).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('menu: opens as a dialog, keeps focus inside, closes with Escape and the close button, returns focus', async ({ page }) => {

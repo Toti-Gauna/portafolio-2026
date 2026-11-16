@@ -55,7 +55,9 @@
     "language": "Language",
     "contact": "Contact",
     "newTab": "opens in a new tab",
-    "nav": "Main"
+    "nav": "Main",
+    "soundOn": "Turn the sound on",
+    "soundOff": "Mute the sound"
   },
   "hero": {
     "role": "Ssr AI Fullstack Developer",
