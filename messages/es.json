@@ -892,5 +892,101 @@
     "banco": "Banco de pruebas",
     "planeado": "Planeado",
     "ejercicio": "Ejercicio de marca"
+  },
+  "taller": {
+    "label": "El Taller cósmico",
+    "credit": "Ilustraciones generadas con GPT Image y transiciones con Higgsfield, con dirección de arte propia.",
+    "soon": "Próximamente",
+    "fig": "Fig.",
+    "ch": {
+      "hero": {
+        "title": "El taller",
+        "alt": "Un taller flotando en el espacio: una plataforma de piedra con una torre, una academia, un hangar, un observatorio, una imprenta, un cine y un faro, unidos por caminos coral, frente a un eclipse."
+      },
+      "origin": {
+        "title": "El origen",
+        "heading": "Todo empezó en Mar del Plata.",
+        "text": "Con 17 años programé mi primer producto, una web de juegos. Me cambió la vida. Soy autodidacta: leo mucho y estudio por internet.",
+        "cta": "Mi historia",
+        "alt": "Un escritorio frente a una ventana abierta, de noche: una laptop con la pantalla coral y, afuera, el mar con una luna coral."
+      },
+      "path": {
+        "title": "El recorrido",
+        "heading": "Una startup, una academia y una corporativa.",
+        "text": "Desafíos, no puestos. Cada lugar me enseñó algo distinto.",
+        "items": [
+          "TACH Argentina · 2021 – 2022 · una billetera virtual: backoffice, landing y app",
+          "Ada ITW · 2023 – 2024 · enseñar JavaScript y React",
+          "Tsoft · 2024 – hoy · Tuenti, CompliA y Supernova Eventos"
+        ],
+        "cta": "Ver el recorrido",
+        "alt": "Tres edificios unidos por un camino coral: un estudio con antena, una academia con un pizarrón y una torre coral."
+      },
+      "work": {
+        "title": "Work & Projects",
+        "heading": "Lo que construí.",
+        "text": "Casos del trabajo y propios, cada uno con su estado. Lo que no está probado, no se afirma.",
+        "items": [
+          "CompliA · asistente con IA para el portal de compliance de Telefónica",
+          "Eclipse · estudio propio de desarrollo, IA y automatización",
+          "Volta · tienda de suplementos con panel y gamificación"
+        ],
+        "cta": "Ver el trabajo",
+        "alt": "Un hangar de techo abierto con mesas de trabajo; de su techo suben paneles flotantes, uno coral."
+      },
+      "how": {
+        "title": "Cómo trabajo",
+        "heading": "Un sistema de agentes, y una persona que decide.",
+        "text": "Programo con 11 agentes con roles separados: especifican, construyen y revisan. Publicar y gastar lo autorizo yo.",
+        "cta": "Ver cómo trabajo",
+        "alt": "Un observatorio rodeado por once módulos unidos con líneas coral; una persona frente a la consola central."
+      },
+      "skills": {
+        "title": "Capacidades",
+        "heading": "Qué uso, y de dónde sale.",
+        "text": "Cada tecnología dice de dónde viene: el trabajo, mis proyectos o lo que estoy estudiando.",
+        "cta": "Ver las capacidades",
+        "alt": "Un observatorio con un escritorio y un telescopio que apunta a una constelación de símbolos."
+      },
+      "brand": {
+        "title": "Brand Lab",
+        "heading": "Cómo doy marca.",
+        "text": "Tableros de marca hechos a mano: logo, paleta, tipografía y aplicaciones. Esta sección se está armando.",
+        "alt": "Una imprenta con una prensa industrial que imprime tableros de marca; uno de ellos es coral."
+      },
+      "business": {
+        "title": "Negocio",
+        "heading": "Cómo pienso el negocio.",
+        "text": "The Lean Startup, The Mom Test y Blue Ocean Strategy: los modelos que uso y dónde los apliqué.",
+        "cta": "Ver cómo pienso el negocio",
+        "alt": "Un anfiteatro circular cuyo centro se hunde en un embudo de puntos hasta un cubo coral."
+      },
+      "video": {
+        "title": "Video y tráileres",
+        "heading": "Tráileres hechos con código.",
+        "text": "En Kinetic Studio hago tráileres de motion graphics que se generan en el navegador: GSAP, canvas, WebGL y audio sintetizado. El tráiler de este sitio sale de ahí.",
+        "cta": "Ver Kinetic Studio",
+        "alt": "Un cine sobre una plataforma de piedra proyecta un haz coral sobre una pantalla flotante."
+      },
+      "roadmap": {
+        "title": "Roadmap",
+        "heading": "Lo que viene.",
+        "text": "Un plan de varios años en cuatro etapas, con proyectos en energía, agro, salud, espacio y finanzas. Todo está planeado: nada de esto está hecho todavía.",
+        "items": [
+          "Núcleo",
+          "Ciberseguridad",
+          "Quant",
+          "Aeroespacial"
+        ],
+        "alt": "Un campo de lanzamiento con maquetas punteadas de un pozo, un cultivo, una antena, un servidor y un cohete que despega."
+      },
+      "contact": {
+        "title": "Contacto",
+        "heading": "Abierto a nuevos desafíos.",
+        "text": "Fullstack con IA, en cualquier rubro. Escribime y lo hablamos.",
+        "all": "Todos los canales",
+        "alt": "Un faro en el borde de la plataforma emite ondas coral hacia el espacio, bajo un eclipse."
+      }
+    }
   }
 }

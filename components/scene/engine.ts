@@ -4,7 +4,8 @@
  *
  * - DPR ≤ 1.5 on desktop, 1 on phones; phones render at ≤ 30 fps. Software GL (no GPU): DPR 1 at 3/4 resolution,
  *   no MSAA, 30 fps. A governor lowers the frame rate further when frames come slowly.
- * - Pauses while the tab is hidden and while the page is inert (boot screen, trailer).
+ * - Pauses while the tab is hidden, while the page is inert (boot screen, trailer) and while the home's walk covers
+ *   the screen (html[data-scene-covered]).
  * - Reduced motion: one still frame per scene (again only if the canvas is resized, which clears it).
  * - Touch screens (coarse pointer): the loop stops while the page scrolls and resumes 200 ms after it settles, so
  *   scrolling never competes with a WebGL frame (the canvas keeps its last frame meanwhile). Scroll progress is
@@ -115,6 +116,8 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
   let hidden = document.visibilityState === 'hidden';
   const shell = document.getElementById('app-shell');
   let inert = !!shell?.hasAttribute('inert');
+  // the home's walk (components/taller) covers the whole screen with its stage: nothing to draw under it
+  let covered = document.documentElement.hasAttribute('data-scene-covered');
   const input: SceneInput = { t: 0, dt: 0, scroll: 0, progress: 0, px: 0, py: 0 };
   let tx = 0;
   let ty = 0;
@@ -224,10 +227,10 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     if (!debug.hold && debug.tier < 3 && avg > TIER_LIMIT[debug.tier]) debug.tier++;
   };
 
-  const shouldRun = () => !disposed && !reduced && !hidden && !inert && !!current && !scrolling;
+  const shouldRun = () => !disposed && !reduced && !hidden && !inert && !covered && !!current && !scrolling;
 
   const kick = () => {
-    if (scrolling && !disposed && !reduced && !hidden && !inert && current) {
+    if (scrolling && !disposed && !reduced && !hidden && !inert && !covered && current) {
       // a pause for scrolling only: the state stays 'running' (no React update per scroll)
       if (raf) cancelAnimationFrame(raf);
       raf = 0;
@@ -302,6 +305,13 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
       })
     : null;
   mo?.observe(shell!, { attributes: true, attributeFilter: ['inert'] });
+  const coverMo = new MutationObserver(() => {
+    const c = document.documentElement.hasAttribute('data-scene-covered');
+    if (c === covered) return;
+    covered = c;
+    kick();
+  });
+  coverMo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-scene-covered'] });
   addEventListener('pointermove', onPointer, { passive: true });
   addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('visibilitychange', onVisibility);
@@ -408,6 +418,7 @@ export function createEngine({ canvas, gl, software, reduced: reduced0, onState 
     removeEventListener('scroll', onScroll);
     clearTimeout(scrollTimer);
     document.removeEventListener('visibilitychange', onVisibility);
+    coverMo.disconnect();
     canvas.removeEventListener('webglcontextlost', onLost);
   }
 

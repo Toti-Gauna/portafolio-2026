@@ -892,5 +892,101 @@
     "banco": "Test bench",
     "planeado": "Planned",
     "ejercicio": "Brand exercise"
+  },
+  "taller": {
+    "label": "The cosmic workshop",
+    "credit": "Illustrations generated with GPT Image and transitions with Higgsfield, with my own art direction.",
+    "soon": "Coming soon",
+    "fig": "Fig.",
+    "ch": {
+      "hero": {
+        "title": "The workshop",
+        "alt": "A workshop floating in space: a stone platform with a tower, an academy, a hangar, an observatory, a printing house, a cinema and a lighthouse, linked by coral paths, in front of an eclipse."
+      },
+      "origin": {
+        "title": "The origin",
+        "heading": "It all started in Mar del Plata.",
+        "text": "At 17 I built my first product, a games website. It changed my life. I'm self-taught: I read a lot and study online.",
+        "cta": "My story",
+        "alt": "A desk by an open window at night: a laptop with a coral screen and, outside, the sea under a coral moon."
+      },
+      "path": {
+        "title": "The path",
+        "heading": "A startup, an academy and a corporation.",
+        "text": "Challenges, not job titles. Each place taught me something different.",
+        "items": [
+          "TACH Argentina · 2021 – 2022 · a digital wallet: back office, landing and app",
+          "Ada ITW · 2023 – 2024 · teaching JavaScript and React",
+          "Tsoft · 2024 – today · Tuenti, CompliA and Supernova Eventos"
+        ],
+        "cta": "See the path",
+        "alt": "Three buildings joined by a coral path: a studio with an antenna, an academy with a board and a coral tower."
+      },
+      "work": {
+        "title": "Work & Projects",
+        "heading": "What I built.",
+        "text": "Work and personal cases, each with its status. What isn't proven isn't claimed.",
+        "items": [
+          "CompliA · AI assistant for Telefónica's compliance portal",
+          "Eclipse · my own development, AI and automation studio",
+          "Volta · supplements store with an admin panel and gamification"
+        ],
+        "cta": "See the work",
+        "alt": "An open-roof hangar with workbenches; floating panels rise from its roof, one of them coral."
+      },
+      "how": {
+        "title": "How I work",
+        "heading": "A system of agents, and a person who decides.",
+        "text": "I code with 11 agents with separate roles: they specify, build and review. Publishing and spending are my call.",
+        "cta": "See how I work",
+        "alt": "An observatory ringed by eleven modules joined by coral lines; a person stands at the central console."
+      },
+      "skills": {
+        "title": "Skills",
+        "heading": "What I use, and where it comes from.",
+        "text": "Each technology says where it comes from: work, my own projects or what I'm studying.",
+        "cta": "See the skills",
+        "alt": "An observatory with a desk and a telescope pointing at a constellation of symbols."
+      },
+      "brand": {
+        "title": "Brand Lab",
+        "heading": "How I build brands.",
+        "text": "Hand-made brand boards: logo, palette, type and applications. This section is being built.",
+        "alt": "A printing house with an industrial press printing brand boards; one of them is coral."
+      },
+      "business": {
+        "title": "Business",
+        "heading": "How I think about business.",
+        "text": "The Lean Startup, The Mom Test and Blue Ocean Strategy: the models I use and where I applied them.",
+        "cta": "See how I think about business",
+        "alt": "A circular amphitheater whose center sinks into a funnel of dots down to a coral cube."
+      },
+      "video": {
+        "title": "Video and trailers",
+        "heading": "Trailers made with code.",
+        "text": "At Kinetic Studio I make motion-graphics trailers that are generated in the browser: GSAP, canvas, WebGL and synthesized audio. This site's trailer comes from there.",
+        "cta": "See Kinetic Studio",
+        "alt": "A cinema on a stone platform projects a coral beam onto a floating screen."
+      },
+      "roadmap": {
+        "title": "Roadmap",
+        "heading": "What's next.",
+        "text": "A multi-year plan in four stages, with projects in energy, agriculture, health, space and finance. All of it is planned: none of it is done yet.",
+        "items": [
+          "Core",
+          "Cybersecurity",
+          "Quant",
+          "Aerospace"
+        ],
+        "alt": "A launch field with dotted mock-ups of a pumpjack, a crop field, a dish, a server and a rocket taking off."
+      },
+      "contact": {
+        "title": "Contact",
+        "heading": "Open to new challenges.",
+        "text": "Fullstack with AI, in any industry. Write to me and let's talk.",
+        "all": "All channels",
+        "alt": "A lighthouse at the edge of the platform sends coral waves into space, under an eclipse."
+      }
+    }
   }
 }
