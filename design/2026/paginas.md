@@ -16,17 +16,23 @@ Cada pantalla: **qué contiene** (sale del sitio actual salvo lo marcado como nu
 - 768–1099 px: monograma · los cinco enlaces en una fila compacta · sonido · Contacto (antes era solo «Menú»).
 - < 768 px: monograma · sonido · «Menú» (diálogo a pantalla completa, como hoy).
 
-## 2. Inicio (Ola 3)
+## 2. Inicio: el recorrido por el Taller cósmico (Ola 3; Ignacio, 16/11/2026)
 
-| Scroll | Qué pasa |
-|---|---|
-| 0 % | Hero: «Ignacio» / «Gauna», titular, dos botones, cuatro cifras. Eclipse de puntos coral a la derecha. |
-| 0–25 % | El eclipse gira y se acerca; los puntos crecen (trama más gruesa). La grilla se acerca levemente. |
-| 25–50 % | Aparece el primer edificio (Work & Projects) desde abajo; texto corto a la izquierda: «¿Qué construí?». |
-| 50–80 % | Las otras cuatro entradas (Cómo trabajo, Capacidades, Negocio, Sobre mí) llegan como dioramas chicos en fila, cada uno con su número de sección, cada una con su pregunta y un dibujo. |
-| 80–100 % | Contacto corto: «Abierto a nuevas oportunidades», mail, LinkedIn. |
+La home es un recorrido por **el Taller cósmico**: un mundo flotante en el espacio, dibujado como grabado punteado y trama de puntos (piedra clara, coral solo de acento, negro con órbitas). Cada capítulo es un edificio distinto, ocupa una pantalla y tiene una frase, un dato y un botón a su página. Imágenes: `design/2026/taller/` (hoja de referencia y recortes) y las escenas generadas `escena-0…10`. Texto, rótulos «Fig. 0X», logos y botones van en código encima. En celulares: imágenes fijas con fundido. Movimiento reducido: imagen fija.
 
-Fondos: placa Higgsfield `hero-tinta` (fondo) y clip `hero-eclipse` (giro del eclipse) — ver prompts. En celular: placas fijas, sin clip.
+| # | Capítulo | Edificio | Qué muestra | Lleva a |
+|---|---|---|---|---|
+| 0 | Hero | El taller entero con el eclipse | Nombre, titular, las dos puertas | — |
+| 1 | El origen | Escritorio frente al mar, la primera web | «Todo empezó en Mar del Plata, a los 17» | Sobre mí |
+| 2 | El recorrido | Estudio-cubo, academia y torre sobre el camino coral | TACH → Ada ITW → Tsoft, con fechas | Sobre mí |
+| 3 | Work & Projects | Hangar donde se arman los productos | 3–4 proyectos destacados con su estado | Work & Projects |
+| 4 | Cómo trabajo | Observatorio con 11 módulos | Sistema agéntico, una persona aprueba | Cómo trabajo |
+| 5 | Capacidades | Telescopio hacia una constelación | Stack por origen | Capacidades |
+| 6 | Brand Lab | Imprenta de serigrafía | Cómo doy marca | Brand Lab |
+| 7 | Negocio y marketing | Sala con el agujero negro (embudo) | Modelos y embudos | Negocio |
+| 8 | Video y tráileres | Cine que proyecta | Kinetic, CompliA, Remotion | Video |
+| 9 | Roadmap | Campo de lanzamiento con maquetas punteadas | 4 etapas, «Planeado» | Roadmap |
+| 10 | Contacto | Faro-antena con señal coral | Reclutadores, Upwork, mail, LinkedIn | Contacto |
 
 ## 3. Work & Projects (Olas 4–6)
 

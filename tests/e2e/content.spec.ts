@@ -11,27 +11,65 @@ async function enter(page: Page, url: string, skip = 'Saltar', portfolio = 'Ver 
   await page.getByRole('button', { name: portfolio }).click();
 }
 
-test('home: hero, one card per page with a real link, a short contact block; no console errors', async ({ page }) => {
+test('home: the cosmic workshop walk, one chapter per building, each page reachable; no console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await enter(page, '/es/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Ignacio');
-  const cards = page.locator('.hub__card');
-  await expect(cards).toHaveCount(5);
-  const hrefs = await cards.locator('a.hub__more').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
-  expect(hrefs).toEqual(['/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/sobre-mi/']);
-  await expect(page.getByRole('link', { name: 'Conocer más: Cómo trabajo' })).toBeVisible();
-  await expect(page.locator('section#contacto').getByRole('link', { name: 'Escribime' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
+  await expect(page.locator('article.tch')).toHaveCount(11);
+  // every page of the menu is reachable from a chapter
+  const hrefs = await page.locator('a.tch__go').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
+  for (const p of ['/es/sobre-mi/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/']) expect(hrefs, p).toContain(p);
+  // honesty: featured projects and the roadmap carry their status; unbuilt sections say so
+  await expect(page.locator('.tch--work .stag')).toHaveCount(3);
+  await expect(page.locator('.tch--roadmap .stag[data-kind="planeado"]')).toHaveCount(4);
+  await expect(page.locator('.tch--brand .tch__soon')).toHaveCount(1);
+  await expect(page.locator('#contacto').getByRole('link', { name: 'Escribime' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
+  await expect(page.locator('#contacto')).toContainText('GPT Image');
   expect(await page.locator('main').innerText()).not.toContain('ComplIA');
   expect(errors).toEqual([]);
+});
+
+test('home walk: the stage pins, the scene changes with the scroll and the camera video is scrubbed', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await enter(page, '/es/');
+  const root = page.locator('[data-taller]');
+  await expect(root).toHaveAttribute('data-mode', 'scroll');
+  const tops = await page.locator('article.tch').evaluateAll((as) => as.map((a) => ({ top: a.getBoundingClientRect().top + scrollY, h: (a as HTMLElement).offsetHeight })));
+  // chapter 3 (the hangar) is fully in place after its pin starts
+  await page.evaluate((y) => scrollTo(0, y), tops[3].top + 10);
+  await expect.poll(() => page.evaluate(() => Number((document.querySelector('.taller__scene[data-scene="3"]') as HTMLElement).style.opacity))).toBe(1);
+  // the move from chapter 1 to 2 uses its video, scrubbed (paused, its time follows the scroll)
+  await page.evaluate((y) => scrollTo(0, y), tops[1].top + 10);
+  await expect.poll(() => page.evaluate(() => (document.querySelector('.taller__video') as HTMLVideoElement | null)?.readyState ?? 0), { timeout: 15000 }).toBeGreaterThanOrEqual(2);
+  await page.evaluate((y) => scrollTo(0, y), tops[1].top + 0.8 * (tops[1].h - 900));
+  await expect.poll(() => page.evaluate(() => (document.querySelector('.taller__video') as HTMLVideoElement).currentTime)).toBeGreaterThan(2);
+  expect(await page.evaluate(() => (document.querySelector('.taller__video') as HTMLVideoElement).paused)).toBe(true);
+  // the three.js background rests while the stage covers the screen
+  expect(await page.evaluate(() => document.documentElement.hasAttribute('data-scene-covered'))).toBe(true);
+});
+
+test('home on a phone and with reduced motion: pictures and text, no stage, no videos', async ({ browser }) => {
+  for (const opts of [{ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, { viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' as const }]) {
+    const ctx = await browser.newContext(opts);
+    const page = await ctx.newPage();
+    await enter(page, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
+    await expect(page.locator('[data-taller]')).not.toHaveAttribute('data-mode', 'scroll');
+    await expect(page.locator('.taller__stage')).toBeHidden();
+    await expect(page.locator('.tch__pic').first()).toBeVisible();
+    await page.locator('#contacto').scrollIntoViewIfNeeded();
+    await expect(page.locator('.taller__video')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+    await ctx.close();
+  }
 });
 
 test('home cards lead to their pages, and every page renders its content with its headings', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await enter(page, '/es/');
-  await page.getByRole('link', { name: 'Conocer más: Trabajo' }).click();
+  await page.locator('.tch--work a.tch__go').click();
   await expect(page).toHaveURL(/\/es\/trabajo\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Lo que construí.');
   for (const id of ['que-hago', 'trabajo', 'laboratorio']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
@@ -190,7 +228,7 @@ test('English pages mirror the Spanish structure', async ({ page }) => {
   await enter(page, '/en/como-trabajo/', 'Skip', 'View portfolio');
   await expect(page.locator('.method__step')).toHaveCount(6);
   await enter(page, '/en/', 'Skip', 'View portfolio');
-  await expect(page.getByRole('link', { name: 'Learn more: How I work' })).toHaveAttribute('href', '/en/como-trabajo/');
+  await expect(page.getByRole('link', { name: /See how I work/ })).toHaveAttribute('href', '/en/como-trabajo/');
 });
 
 test('below 1100 px a floating contact button steps aside near other contact actions', async ({ page }) => {
@@ -198,7 +236,7 @@ test('below 1100 px a floating contact button steps aside near other contact act
   await enter(page, '/es/');
   const fab = page.locator('.fab-contact');
   await expect(fab).toHaveAttribute('data-hidden', 'true'); // hero buttons are on screen
-  await page.locator('.hub__card--skills').scrollIntoViewIfNeeded();
+  await page.locator('.tch--skills .tch__go').scrollIntoViewIfNeeded();
   await expect(fab).toHaveAttribute('data-hidden', 'false');
   await expect(page.getByRole('link', { name: /^Contacto/ }).last()).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await page.locator('#contacto').scrollIntoViewIfNeeded();

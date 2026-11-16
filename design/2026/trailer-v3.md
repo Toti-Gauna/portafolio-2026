@@ -1,16 +1,21 @@
-# Tráiler v3 · borrador (Ola 9)
+# Tráiler v3 · la película del Taller cósmico (Ola 9; Ignacio, 16/11/2026)
 
-Objetivo: más corto y rápido que el actual (130 s de película a 0,85 → ~153 s reales). Meta: **~85 s reales**, misma historia, menos texto en pantalla porque la voz lo cuenta.
+**~90 s** (hoy ~153 s reales). Mismo mundo y orden que la home (`paginas.md` § 2): el tráiler es la película guiada, la home la maqueta para recorrer. Termina en el taller entero con el eclipse = el hero de la home, así entra sin corte.
 
-| Tiempo | Acto | Imagen | Voz (borrador, es) |
-|---|---|---|---|
-| 0–6 | Mar del Plata | costa nocturna (2D actual) sobre placa Higgsfield de mar | «Todo empezó en Mar del Plata.» |
-| 6–12 | El primer producto | web de juegos + clic → camino de luz | «A los 17 programé mi primera web. Me cambió la vida.» |
-| 12–36 | Los frentes | edificios isométricos con trama halftone: TACH, Ada ITW, Tsoft (Tuenti), CompliA, Supernova | «Una billetera virtual. Enseñar a programar. Una empresa grande. Llevar IA a producción.» |
-| 36–50 | Camino propio | montaje de vistas reales (Eclipse, HandyX, Lucero, Trazo, Velmar, Volta, Kinetic) | «Y en paralelo, productos propios.» |
-| 50–60 | Todos los caminos | zoom-out al camino completo + roadmap punteado | «Todo germina en lo mismo: buscar nuevos desafíos.» |
-| 60–72 | Cómo trabajo | tecnologías y sistema agéntico, rápido | «Con un sistema de agentes, y una persona que aprueba.» |
-| 72–80 | Cómo se hizo | rótulos: voz clonada con ElevenLabs, placas con Higgsfield, música con Suno, código con GSAP y three.js | «Este tráiler también es código.» |
-| 80–85 | Final | monograma, nombre, «Abierto a nuevos desafíos.», contacto | — |
+| Tiempo | Edificio | Imagen y voz (borrador, es) |
+|---|---|---|
+| 0–6 | Eclipse | «Todo empezó en Mar del Plata.» |
+| 6–12 | El origen | Primera web a los 17; el clic en «Jugar» dispara la línea coral (como hoy). |
+| 12–26 | El recorrido | TACH, Ada ITW, Tsoft · Tuenti (rótulos en código); en la torre, el recorte de la demo de CompliA. |
+| 26–38 | El hangar | Paneles: Eclipse, HandyX, Lucero, Trazo, Velmar, Volta, DentalOS, Kinetic, cada uno con su estado. |
+| 38–46 | El observatorio | «Un sistema de agentes, y una persona que decide.» |
+| 46–52 | El telescopio | Tecnologías como constelación. |
+| 52–58 | La imprenta | Un tablero de marca que se arma. |
+| 58–64 | El agujero negro | Negocio y embudos. |
+| 64–72 | El cine | «Este tráiler también es código.» Rótulos: voz clonada con ElevenLabs, imágenes con Higgsfield, música con Suno, GSAP y three.js. |
+| 72–80 | Campo de lanzamiento | Roadmap en maquetas punteadas, «Planeado». |
+| 80–90 | El faro | Monograma, nombre, «Abierto a nuevos desafíos.», contacto; funde al hero. |
 
-Reglas: el 2D actual se mantiene y se apoya en placas y capas 3D; textos en código; voz ES e EN con la misma duración por escena; versión 9:16; versión en texto en `messages/`. El guion final necesita aprobación de Ignacio.
+**Video solo en 5 momentos** (créditos): eclipse → origen, origen → recorrido, recorrido → hangar, observatorio → telescopio, campo de lanzamiento → faro. El resto de los cambios de escena, en código (cortes y fundidos a tempo). Prompts: `../prompts/taller/`.
+
+Sonido: pista de Suno a 120 BPM (drops en eclipse, hangar y faro) + voz clonada ES/EN con ducking. 9:16: misma película con imágenes y código, sin videos verticales. Lo bueno del v2 se mantiene encima: nombres de empresas, vistas reales de proyectos rehechas en código, animaciones de tecnologías. El guion de voz necesita aprobación de Ignacio.
