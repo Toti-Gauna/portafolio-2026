@@ -1109,21 +1109,26 @@
         "spots": {
           "energy": {
             "name": "Energy",
-            "text": "An energy project on the roadmap. It's a dotted model: it doesn't exist yet."
+            "text": "An energy project on the roadmap. It's a dotted model: it doesn't exist yet.",
+            "cta": "See it on the roadmap"
           },
           "agro": {
             "name": "Agro",
-            "text": "An agriculture project on the roadmap. It's a dotted model: it doesn't exist yet."
+            "text": "An agriculture project on the roadmap. It's a dotted model: it doesn't exist yet.",
+            "cta": "See it on the roadmap"
           },
           "finance": {
             "name": "Finance",
-            "text": "A finance project on the roadmap. It's a dotted model: it doesn't exist yet."
+            "text": "A finance project on the roadmap. It's a dotted model: it doesn't exist yet.",
+            "cta": "See it on the roadmap"
           },
           "space": {
             "name": "Space",
-            "text": "An aerospace project on the roadmap. It's a dotted model: it doesn't exist yet."
+            "text": "An aerospace project on the roadmap. It's a dotted model: it doesn't exist yet.",
+            "cta": "See it on the roadmap"
           }
-        }
+        },
+        "cta": "See the roadmap"
       },
       "contact": {
         "title": "Contact",
@@ -1422,6 +1427,329 @@
       "space": {
         "name": "Aerospace",
         "text": "A stage of the roadmap. It's a plot marked out with stakes: nothing is built yet."
+      }
+    },
+    "toRoadmap": "See it on the roadmap"
+  },
+  "roadmap": {
+    "metaTitle": "Roadmap — Ignacio Gauna",
+    "metaDescription": "My plan from November 2026 to August 2030: four stages, each project with its technology, the maths windows and the certifications. All planned.",
+    "label": "Roadmap",
+    "title": "What comes next.",
+    "lead": "My plan up to August 2030, in four stages. It is a plan: apart from this month's consolidation, none of it is done yet.",
+    "rule": "In each maths window (W) I stop programming and study pure maths. I only come out with 85 % or more in that stretch's tests; if I don't, the window runs over and is taken from the buffer.",
+    "stages": "Stages",
+    "kinds": {
+      "project": "Project",
+      "window": "Maths window",
+      "cert": "Certification",
+      "pause": "Pause"
+    },
+    "weeks": "{n, plural, one {# week} other {# weeks}}",
+    "tech": "With",
+    "exit": "Exit level",
+    "opens": "Opens",
+    "proposed": "Proposed",
+    "cut": "Can be cut",
+    "figure": "Model of the roadmap: a surveyed site marked with stakes, where each project is a dotted model on its plot, each maths window a level crossing and each certification a signal tower.",
+    "loading": "Loading the model…",
+    "asList": "View as a list",
+    "asMap": "View the model",
+    "readout": "Stage {n} of {total}",
+    "count": "{p} projects · {w} windows · {c} certifications",
+    "back": "Back to the work",
+    "st": {
+      "core": {
+        "name": "Core",
+        "when": "Nov 2026 – Feb 2028",
+        "text": "The base projects: data, AI, security and infrastructure on real problems in energy, health, agriculture and space."
+      },
+      "cyber": {
+        "name": "Cybersecurity",
+        "when": "Feb – Aug 2028",
+        "text": "Cryptography, pentesting and detection, with the certifications that back them."
+      },
+      "quant": {
+        "name": "Quant",
+        "when": "Aug 2028 – Jun 2029",
+        "text": "Quantitative finance: backtesting, options, order books and risk, up to a gate before trading real capital."
+      },
+      "space": {
+        "name": "Aerospace",
+        "when": "Jun 2029 – Aug 2030",
+        "text": "Flight simulation, structures, fluids, control and orbits, up to a digital twin."
+      }
+    },
+    "items": {
+      "p0": {
+        "name": "Consolidation",
+        "tech": "No new technology",
+        "what": "This portfolio with the 3D map of projects, Trazo as a case, RAG for businesses, three automations and portfolio-mcp v0 in TypeScript."
+      },
+      "p1": {
+        "name": "Faro v1",
+        "tech": "Spring Boot, Spring Security and OIDC, Postgres with pgvector, RAG in Python (FastAPI), DuckDB",
+        "what": "Questions about Vaca Muerta wells answered with a citation to the data, a percentile-based «type well», a compliance checker and a 3D viewer of the field."
+      },
+      "pausa-1": {
+        "name": "Break",
+        "what": "A week without a project."
+      },
+      "p2": {
+        "name": "Escudo",
+        "tech": "A Go gateway with role-based access and auditing, an FHIR layer in .NET, a local model with vLLM and LoRA",
+        "what": "De-identification of clinical data and an attack bench compared with existing tools."
+      },
+      "w1": {
+        "name": "Functions and statistics",
+        "what": "Functions, inequalities, exponents and logarithms, descriptive statistics.",
+        "exit": "Solve equations and inequalities unaided, graph functions, compute variance, percentiles and quantiles.",
+        "opens": "P3"
+      },
+      "p3": {
+        "name": "Surco v1",
+        "tech": "Python, pandas, scikit-learn, gradient boosting, MLflow, Dagster, Rails for the back office",
+        "what": "Yield prediction with conformal intervals and a simulator by sowing date."
+      },
+      "c1": {
+        "name": "AWS Solutions Architect Associate",
+        "what": "Certification."
+      },
+      "p4": {
+        "name": "Estación v1",
+        "tech": "Rust, SGP4, MQTT with mTLS, OTA, WebAssembly",
+        "what": "A telemetry decoder and a pass planner with link quality."
+      },
+      "p5": {
+        "name": "Faro v2",
+        "tech": "Hardened Kubernetes, GitOps, signed artifacts, eBPF with Falco, a collector in Go",
+        "what": "Detection on simulated industrial traffic with MITRE ATT&CK for ICS."
+      },
+      "c2": {
+        "name": "CompTIA Security+",
+        "what": "Certification, in the version current when I sit it."
+      },
+      "w2": {
+        "name": "Calculus and linear algebra",
+        "what": "Derivatives, the chain rule, vectors and matrices.",
+        "exit": "Differentiate composite functions, multiply matrices and work out by hand the backpropagation of a 2-layer network.",
+        "opens": "P6"
+      },
+      "p6": {
+        "name": "Lupa v1",
+        "tech": "PyTorch, GPU, Blender for synthetic data, autograd from scratch",
+        "what": "An automatic inspection report with the defect located in 3D."
+      },
+      "p7": {
+        "name": "Surco v2",
+        "tech": "MLOps, PostGIS, STAC, serving on Kubernetes",
+        "what": "Management zones and crop-stress alerts."
+      },
+      "c3": {
+        "name": "AWS Machine Learning Engineer Associate",
+        "what": "Certification."
+      },
+      "w3": {
+        "name": "Probability, ODEs and optimisation",
+        "what": "Probability (distributions, expectation, Bayes), ODEs (Euler, RK4) and basic convex optimisation.",
+        "exit": "Solve Stat 110-style problems, implement RK4 and set up a convex problem.",
+        "opens": "P8; the base for quant and aerospace"
+      },
+      "p8": {
+        "name": "Agent red teaming",
+        "tech": "garak and PyRIT, mapped to the OWASP LLM Top 10",
+        "what": "Proposed: attacking AI agents systematically. The alternative was an educational reactor twin."
+      },
+      "p9": {
+        "name": "Lupa v2",
+        "tech": "ONNX Runtime and quantisation",
+        "what": "Proposed: inference on CPU. The alternative was C++ on a Jetson."
+      },
+      "p10": {
+        "name": "Estación v2",
+        "tech": "Kafka, autoencoders, NASA SMAP and MSL data, SLOs, multi-tenant with Go and Spring",
+        "what": "Anomaly triage with an explanation."
+      },
+      "colchon": {
+        "name": "Buffer",
+        "what": "Two weeks of slack: a window that runs over is taken from here."
+      },
+      "w4": {
+        "name": "Number theory and cryptography",
+        "what": "Modular arithmetic, number theory, RSA, elliptic curves.",
+        "exit": "Implement toy RSA and Diffie-Hellman and explain why nonce reuse breaks.",
+        "opens": "S1"
+      },
+      "s1": {
+        "name": "Cripta",
+        "tech": "Go or Rust, AWS KMS, Vault, SPIFFE, mTLS",
+        "what": "Envelope encryption, rotation, artifact signing and a secrets scanner."
+      },
+      "pausa-2": {
+        "name": "Break",
+        "what": "A week without a project."
+      },
+      "s2": {
+        "name": "Bastión",
+        "tech": "STRIDE, Burp Suite, fuzzing, Semgrep, SAST, DAST and SCA in CI",
+        "what": "A pentest of my own projects, a CVSS report and automatic retesting."
+      },
+      "c4": {
+        "name": "PNPT",
+        "what": "Hands-on certification: a 5-day exam plus 2 days for the report."
+      },
+      "c5": {
+        "name": "CKA",
+        "what": "Kubernetes certification."
+      },
+      "c6": {
+        "name": "CKS",
+        "what": "Kubernetes security certification; requires the CKA."
+      },
+      "s3": {
+        "name": "Centinela",
+        "tech": "Sigma, MITRE ATT&CK, OpenSearch as a SIEM, osquery",
+        "what": "Purple teaming, playbooks with approval and measured time to detect."
+      },
+      "c7": {
+        "name": "AWS Security Specialty",
+        "what": "Certification."
+      },
+      "cierre-1": {
+        "name": "Closing the stage",
+        "what": "A week to wrap up 18 months of work."
+      },
+      "wq1": {
+        "name": "Applied statistics and portfolios",
+        "what": "Inference, regression, time series, portfolios.",
+        "exit": "Hypothesis testing, AR/ARMA and the efficient frontier.",
+        "opens": "Q1 and Q2"
+      },
+      "q1": {
+        "name": "Ábaco",
+        "tech": "Rust, Polars, Arrow, PyO3",
+        "what": "A backtester with costs, walk-forward validation and an experiment log."
+      },
+      "q2": {
+        "name": "Paper replication",
+        "tech": "Quarto",
+        "what": "Proposed: replicate 3 papers, with a report."
+      },
+      "descanso-1": {
+        "name": "Rest",
+        "what": "A week without a project."
+      },
+      "wq2": {
+        "name": "Stochastic calculus",
+        "what": "Wiener, Itô, martingales, Black–Scholes, Monte Carlo.",
+        "exit": "Derive Black–Scholes, simulate a geometric Brownian motion and compute the Greeks.",
+        "opens": "Q3 and Q4"
+      },
+      "q3": {
+        "name": "Prisma",
+        "tech": "C++ or Rust with Python bindings, validated against QuantLib",
+        "what": "Options portfolio risk and a 3D volatility surface."
+      },
+      "q4": {
+        "name": "Libro",
+        "tech": "C++ or Rust, the FIX protocol",
+        "what": "An order book, market making and cost analysis."
+      },
+      "wq3": {
+        "name": "Optimisation and financial ML",
+        "what": "Convex optimisation, duality, financial ML with purged validation.",
+        "opens": "Q5 and Q6"
+      },
+      "q5": {
+        "name": "Tablero",
+        "tech": ".NET",
+        "what": "An order and risk manager, paper trading with a kill switch and position reconciliation."
+      },
+      "pausa-3": {
+        "name": "Break",
+        "what": "A week without a project."
+      },
+      "q6": {
+        "name": "Market data",
+        "tech": "ClickHouse",
+        "what": "Proposed: a market data pipeline."
+      },
+      "cierre-2": {
+        "name": "Closing, and the real-capital gate",
+        "what": "Two weeks to close the stage before deciding whether to trade real capital."
+      },
+      "wa1": {
+        "name": "Classical mechanics",
+        "what": "Classical mechanics and applied ODEs.",
+        "exit": "Simulate a rigid body and check RK4 against the analytic solution.",
+        "opens": "A1"
+      },
+      "a1": {
+        "name": "Trayectoria",
+        "tech": "Rust or C++, quaternions, Julia as a cross-check",
+        "what": "A six-degrees-of-freedom simulator with Monte Carlo dispersion."
+      },
+      "wa2": {
+        "name": "Structures",
+        "what": "Statics, stresses, beams, numerical linear algebra.",
+        "opens": "A2"
+      },
+      "a2": {
+        "name": "Cuerda",
+        "tech": "Finite elements, Gmsh and CalculiX to validate",
+        "what": "Structural analysis with finite elements."
+      },
+      "descanso-2": {
+        "name": "Rest",
+        "what": "A week without a project."
+      },
+      "wa3": {
+        "name": "Thermodynamics and fluids",
+        "what": "Thermodynamics, fluids, finite differences and stability (CFL).",
+        "opens": "A3"
+      },
+      "a3": {
+        "name": "Túnel",
+        "tech": "Panel methods, vortex lattice, 2D Euler against OpenFOAM or SU2",
+        "what": "A numerical wind tunnel. Can be cut short if time is needed."
+      },
+      "wa4": {
+        "name": "Control",
+        "what": "Transfer functions, stability, PID, LQR, Kalman.",
+        "opens": "A4"
+      },
+      "a4": {
+        "name": "Rumbo",
+        "tech": "ROS 2, PX4 or ArduPilot in simulation",
+        "what": "Reinforcement-learning control compared with LQR, and a fault bench."
+      },
+      "wa5": {
+        "name": "Orbital mechanics",
+        "what": "Kepler, Lambert, delta-v, the rocket equation.",
+        "opens": "A5 and A6"
+      },
+      "a5": {
+        "name": "Órbita",
+        "tech": "Orekit (Java)",
+        "what": "A propagator with J2 and conjunction screening."
+      },
+      "a6": {
+        "name": "Open-source contributions",
+        "tech": "PX4, Orekit or F Prime",
+        "what": "Proposed: contribute to one of those projects. Can be cut."
+      },
+      "pausa-4": {
+        "name": "Break",
+        "what": "A week without a project."
+      },
+      "a7": {
+        "name": "Horizonte",
+        "tech": "F Prime or cFS, an RTOS with embedded Rust or Ada/SPARK",
+        "what": "A digital twin with an assisted operator."
+      },
+      "cierre-3": {
+        "name": "Closing",
+        "what": "Two weeks to close the plan."
       }
     }
   }
