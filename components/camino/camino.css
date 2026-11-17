@@ -1,0 +1,39 @@
+/* «El camino» (design/2026/camino.md): the figure's own tokens over the anatomy kit (lib/iso/iso.css).
+   A warm paper model on the dark page, like the islands of the home's workshop; coral only on the line and the handcar. */
+.camino .iso[data-theme="light"], .iso[data-theme="light"] {
+--anatomy-paper:#eeeae3;
+  --anatomy-card:#eeeae3;
+  --anatomy-face:#f7f4ee;
+  --anatomy-top:#f7f4ee;
+  --anatomy-shade-0:#cfc9be;
+  --anatomy-shade-1:#d9d4ca;
+  --anatomy-shade-2:#e2ddd4;
+  --anatomy-shade-3:#e9e5dd;
+  --anatomy-lit-top:#fffdf8;
+  --anatomy-lit-shade:#f1ede6;
+  --anatomy-hi:#0a0a0c;
+  --anatomy-mid:#6e6a63;
+  --anatomy-lo:#a7a196;
+  --anatomy-faint:#cbc5ba;
+  --anatomy-halo:#000;
+  --anatomy-halo-opacity:.5;
+  --anatomy-lit:#ff4d2e;
+  --anatomy-dot:#3a362f
+}
+
+.cam-ballast{fill:#ddd8ce}
+.cam-sleeper{fill:#8d877c}
+.cam-sleeper--plan{fill:#cfc9be}
+.cam-rail{fill:none;stroke:#ff4d2e;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+.cam-glass{fill:#3a3833}
+.cam-sea{fill:#262c30}
+.cam-wave{stroke:#6f7a80}
+.cam-chalk{stroke:#e8e4da}
+.cam-tree__fill{fill:#c9c3b6}
+.cam-tree__shade{fill:#aaa396}
+.cam-dark{fill:#1d1c1a}
+.cam-board{fill:#2f3a33}
+.cam-coral,.cam-flag{fill:#ff4d2e}
+.cam-plate{fill:#0a0a0c}
+.cam-plate+.iso-face-text,.iso-face-text{fill:#eeeae3;font-weight:700;letter-spacing:.08em}

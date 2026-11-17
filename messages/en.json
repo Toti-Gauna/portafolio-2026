@@ -1139,5 +1139,289 @@
       "goScene": "Go to the scene",
       "close": "Close"
     }
+  },
+  "career": {
+    "label": "The path",
+    "title": "The path, station by station.",
+    "lead": "A model of what I've done: where I worked, what I built alongside and what comes next. Pick a station or tap a building.",
+    "figure": "Isometric model of the path: a coral track joins Mar del Plata, TACH, Ada ITW and Tsoft; a branch leads to my own projects and the track goes on, without rails, to the roadmap plots.",
+    "stations": "Stations",
+    "buildings": "Buildings at this station",
+    "prev": "Previous station",
+    "next": "Next station",
+    "readout": "Station {n} of {total}",
+    "asList": "View as a list",
+    "asMap": "View the model",
+    "case": "See the case",
+    "soon": "Coming soon",
+    "loading": "Loading the model…",
+    "logos": "The brands on the signs are stand-ins: the official logos are coming.",
+    "st": {
+      "origin": {
+        "name": "Mar del Plata",
+        "when": "At 17"
+      },
+      "tach": {
+        "name": "TACH Argentina",
+        "when": "2021 – 2022"
+      },
+      "ada": {
+        "name": "Ada ITW",
+        "when": "2023 – 2024"
+      },
+      "tsoft": {
+        "name": "Tsoft",
+        "when": "2024 – today"
+      },
+      "own": {
+        "name": "My own path",
+        "when": "Alongside"
+      },
+      "next": {
+        "name": "What comes next",
+        "when": "Planned"
+      }
+    },
+    "b": {
+      "seed": {
+        "name": "The first website",
+        "state": "The beginning",
+        "text": "At 17 I built a games website: my first product. I'm self-taught: I read a lot and study online."
+      },
+      "tach": {
+        "name": "TACH Argentina",
+        "state": "Professional work · startup",
+        "text": "A digital wallet, end to end and remote: the back office, the landing page and the app, on web and mobile."
+      },
+      "ada": {
+        "name": "Ada ITW",
+        "state": "Professional work · academy",
+        "text": "From code to the classroom: teaching JavaScript and React through projects, to students starting from zero."
+      },
+      "tsoft": {
+        "name": "Tsoft",
+        "state": "Professional work · corporation",
+        "text": "A big company: from here I work for Tuenti and Telefónica, from gamification to AI products."
+      },
+      "tuenti": {
+        "name": "Tuenti",
+        "text": "Gamification, top-ups and payments in Tuenti and Telefónica products: from the frontend to backend logic and deployments.",
+        "facts": [
+          {
+            "k": "Company",
+            "v": "Tsoft, for Tuenti and Telefónica"
+          },
+          {
+            "k": "Period",
+            "v": "2024 – today"
+          },
+          {
+            "k": "Challenge",
+            "v": "From gamification to AI products"
+          }
+        ],
+        "state": "Professional work"
+      },
+      "complia": {
+        "name": "CompliA",
+        "text": "An AI assistant inside Telefónica's compliance portal. I designed and built it: the RAG, the validations and the recommendations.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "Design and development, end to end"
+          },
+          {
+            "k": "Period",
+            "v": "2026 – today"
+          },
+          {
+            "k": "Type",
+            "v": "RAG assistant on top of a language model"
+          }
+        ],
+        "state": "In internal production"
+      },
+      "supernova": {
+        "name": "Supernova Eventos",
+        "text": "A prototype of an internal events micro-app for Telefónica: discover events, sign up and show a QR pass.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "Telefónica, through Tsoft"
+          },
+          {
+            "k": "Role",
+            "v": "Built the prototype, already as a mid-level dev"
+          },
+          {
+            "k": "Type",
+            "v": "Internal events micro-app"
+          }
+        ],
+        "state": "Prototype"
+      },
+      "eclipse": {
+        "name": "Eclipse",
+        "text": "My own development, AI and automation studio, built as one complete system: landing page, client portal, backend and internal portal.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "Sole person: product, design and engineering"
+          },
+          {
+            "k": "Pieces",
+            "v": "Landing · client portal · backend · internal portal · email kit"
+          },
+          {
+            "k": "Since",
+            "v": "October 2, 2026"
+          }
+        ],
+        "state": "In development"
+      },
+      "agentes": {
+        "name": "Agentic system",
+        "text": "An agentic system, split into parts: 11 agents with separate roles and gates where a person decides.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "I designed it and maintain it; I approve every final gate"
+          },
+          {
+            "k": "Pieces",
+            "v": "11 agents · 79 skills · 3 formats"
+          },
+          {
+            "k": "Where it is used",
+            "v": "Eclipse backend, Eclipse-Web and my own demos"
+          }
+        ],
+        "state": "Own system · in use"
+      },
+      "kinetic": {
+        "name": "Kinetic Studio",
+        "text": "My lab of motion-graphics trailers made in code. This portfolio's trailer comes from its kit.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "My own project, built with a trailer agent"
+          },
+          {
+            "k": "Period",
+            "v": "September and October 2026 · 51 commits"
+          },
+          {
+            "k": "Pieces",
+            "v": "Hub · 31 trailers · engine, recipes and sound"
+          }
+        ],
+        "state": "Lab · public"
+      },
+      "volta": {
+        "name": "Volta",
+        "text": "A supplements store under an invented brand: catalogue, tiered club, a game that gives coupons and a panel for the owner.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Clickable demo, no server"
+          },
+          {
+            "k": "Screens",
+            "v": "29 in the store · 60 in the panel"
+          },
+          {
+            "k": "Data",
+            "v": "Fictional brand, products and orders"
+          }
+        ],
+        "state": "Demo"
+      },
+      "velmar": {
+        "name": "Velmar",
+        "text": "The online store and back office of a Mar del Plata workshop that makes personalised goods, clickable end to end.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "A real workshop in Mar del Plata"
+          },
+          {
+            "k": "Pieces",
+            "v": "Mobile-first store · back office"
+          },
+          {
+            "k": "Size",
+            "v": "65 screens: 24 in the store, 41 in the panel"
+          }
+        ],
+        "state": "Demo · made for a client"
+      },
+      "dentalos": {
+        "name": "DentalOS",
+        "text": "The admin workflow of a fictional dental clinic: patient portal and management panel, in 16 modules.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Frontend-only demo, no network"
+          },
+          {
+            "k": "Modules",
+            "v": "16 (M01–M16), counted in the code"
+          },
+          {
+            "k": "Data",
+            "v": "Synthetic, with a fixed sample clock"
+          }
+        ],
+        "state": "Demo"
+      },
+      "games": {
+        "name": "games-market",
+        "text": "Web games for live events: a projector is the screen and people's phones are the controllers.",
+        "facts": [
+          {
+            "k": "Games",
+            "v": "18 playable out of 24 planned"
+          },
+          {
+            "k": "Engines",
+            "v": "Canvas 2D · PixiJS · React Three Fiber"
+          },
+          {
+            "k": "Network",
+            "v": "Star-shaped WebRTC, no game server"
+          }
+        ],
+        "state": "Test bench"
+      },
+      "handyx": {
+        "name": "HandyX",
+        "text": "Home specialists in Mar del Plata: one app for whoever needs a job done and another for the specialist. Today they run on test data."
+      },
+      "lucero": {
+        "name": "Lucero",
+        "text": "An invented restaurant-bar to show the digital menu: ordering from the table, the kitchen and a character that keeps you company. Fictional data."
+      },
+      "trazo": {
+        "name": "Trazo",
+        "state": "Personal product · in use",
+        "text": "My personal tracker: the day in hours, study with its own review engine, goals, training and weight. A PWA I use every day."
+      },
+      "core": {
+        "name": "Core",
+        "text": "The first stage of the roadmap. It's a plot marked out with stakes: nothing is built yet."
+      },
+      "cyber": {
+        "name": "Cybersecurity",
+        "text": "A stage of the roadmap. It's a plot marked out with stakes: nothing is built yet."
+      },
+      "quant": {
+        "name": "Quant",
+        "text": "A stage of the roadmap. It's a plot marked out with stakes: nothing is built yet."
+      },
+      "space": {
+        "name": "Aerospace",
+        "text": "A stage of the roadmap. It's a plot marked out with stakes: nothing is built yet."
+      }
+    }
   }
 }
