@@ -135,6 +135,10 @@
       "roadmap": {
         "t": "Roadmap",
         "d": "My plan up to August 2030, in four stages."
+      },
+      "video": {
+        "t": "Video",
+        "d": "Trailers with code, walk-throughs of my demos and how I edit them."
       }
     }
   },
@@ -1137,8 +1141,8 @@
       "video": {
         "title": "Video and trailers",
         "heading": "Trailers made with code.",
-        "text": "At Kinetic Studio I make motion-graphics trailers that are generated in the browser: GSAP, canvas, WebGL and synthesized audio. This site's trailer comes from there.",
-        "cta": "See Kinetic Studio",
+        "text": "Trailers made with code, recorded walk-throughs of my demos, how I edit them and a Remotion test.",
+        "cta": "See video and trailers",
         "alt": "A cinema on a stone platform projects a coral beam onto a floating screen.",
         "spots": {
           "kinetic": {
@@ -2847,5 +2851,158 @@
       "cta": "See the models and where I applied them"
     },
     "reading": "Reading now: SPIN Selling, by Neil Rackham, on consultative selling."
+  },
+  "video": {
+    "metaTitle": "Video and trailers — Ignacio Gauna",
+    "metaDescription": "The trailers I make with code, the recorded walk-throughs of my demos, how I edit them and in which formats, and a Remotion test.",
+    "label": "Video",
+    "title": "Video and trailers.",
+    "lead": "Trailers drawn with code and recorded walk-throughs of my projects, with how I edit them and in which formats. They play on their own when they reach the screen, without sound, and can be paused.",
+    "note": "Everything shown is demos with sample or fictional data; client brands and money screens are covered.",
+    "toc": "Sections",
+    "case": "See the case",
+    "back": "Back to the portfolio",
+    "groupLabel": "Walk-through of",
+    "code": {
+      "label": "Trailers made with code",
+      "title": "No video editor",
+      "idea": "Kinetic Studio is my trailer lab: no video editor, no stock footage and no recorded audio. Every piece is code; picture and sound are generated live in the browser.",
+      "facts": [
+        {
+          "n": "31",
+          "d": "trailers in the hub"
+        },
+        {
+          "n": "1,430 s",
+          "d": "of film adding up the catalogue"
+        },
+        {
+          "n": "272",
+          "d": "scenes"
+        }
+      ],
+      "trailer": "Watch «Meet Ignacio»",
+      "trailerNote": "This portfolio's trailer: 130 seconds made with the Kinetic kit.",
+      "caseCta": "See the Kinetic Studio case",
+      "hub": "Open the Kinetic hub"
+    },
+    "products": {
+      "label": "Product walk-throughs",
+      "title": "The demos, in motion",
+      "idea": "Recordings of my projects' demos running on a local build, with sample data. The still captures and the detail of each are in its case."
+    },
+    "groups": {
+      "eclipse": "The landing page, the demos by industry and the client and operations portals.",
+      "complia": "A clip of the demo, with sample data and no brands.",
+      "volta": "The shop, the club with its wheel and the panel of an invented store.",
+      "velmar": "The panel, the collar configurator and the club: the demo I made for a client.",
+      "dentalos": "The front desk and the odontogram of a fictional clinic.",
+      "supernova": "Signing up to an event and the event creator of a prototype.",
+      "games": "Two games from the test bench."
+    },
+    "formats": {
+      "label": "Editing and formats",
+      "title": "One film, several frames",
+      "idea": "What code lets me do with video, and what I still do not claim.",
+      "items": [
+        {
+          "t": "One trailer, two formats",
+          "d": "The portfolio trailer is the same film (same scenes, timings, music and texts) in 16:9 and in a vertical 9:16 edition of 1080×1920. The player picks by screen."
+        },
+        {
+          "t": "A frame at any second",
+          "d": "The timeline is paused and drives picture and sound, so the film can be opened frozen at any second with ?t=. It is what I use to review frame by frame."
+        },
+        {
+          "t": "A content studio for social media",
+          "d": "In the Volta and Velmar demos, the panel builds a 1:1 post, a 9:16 story and a carousel as PNG or video with synthesised music, with a suggested caption. In the demo it is simulated: it publishes nothing."
+        },
+        {
+          "t": "Export to MP4, with its limit",
+          "d": "Kinetic has an MP4 exporter, outside the repo. The test gave 2 of 4 identical moments and 2 with a one-level colour difference: I do not claim a bit-exact deterministic export."
+        }
+      ]
+    },
+    "remotion": {
+      "label": "Remotion",
+      "title": "The Remotion test",
+      "idea": "Remotion builds video from React components. I tried it to see whether it works as a second path, the one that delivers an MP4.",
+      "facts": [
+        {
+          "k": "What I tried",
+          "v": "A 2-second React composition, at 1280×720 and 30 frames per second, rendered to MP4 (H.264) with Chromium."
+        },
+        {
+          "k": "Result",
+          "v": "It works: 60 frames, from bundle to MP4, in about 20 seconds, with the type and the animation as I planned them."
+        },
+        {
+          "k": "When",
+          "v": "11/17/2026, in a separate folder."
+        },
+        {
+          "k": "Status",
+          "v": "Only a test. Remotion is not in this repository nor in any published piece."
+        },
+        {
+          "k": "Licence",
+          "v": "It is free for individuals and organisations of up to 3 people; a larger company needs a licence. Before using it in a project I have to confirm it falls under the free one."
+        }
+      ],
+      "kinetic": {
+        "title": "Kinetic: a film that lives in the page",
+        "caption": "It plays live in the browser and can be frozen at any second.",
+        "steps": [
+          {
+            "actor": "Code",
+            "t": "Scene recipes",
+            "d": "Each scene returns its duration."
+          },
+          {
+            "actor": "Engine",
+            "t": "One timeline",
+            "d": "Paused: it drives picture and sound."
+          },
+          {
+            "actor": "Browser",
+            "t": "Drawn live",
+            "d": "Canvas, SVG and synthesised audio."
+          },
+          {
+            "actor": "Viewer",
+            "t": "Watches it there",
+            "d": "The MP4 comes from a separate exporter."
+          }
+        ]
+      },
+      "remo": {
+        "title": "Remotion: a video that comes out of React",
+        "caption": "What I tried: the path to the MP4.",
+        "steps": [
+          {
+            "actor": "Code",
+            "t": "React components",
+            "d": "A composition with its duration and frames per second."
+          },
+          {
+            "actor": "Remotion",
+            "t": "Bundles and opens",
+            "d": "A headless browser walks through the frames."
+          },
+          {
+            "actor": "Render",
+            "t": "One frame at a time",
+            "d": "Each frame comes out the same: it depends only on its number."
+          },
+          {
+            "actor": "File",
+            "t": "MP4",
+            "d": "Ready to upload or cut into shorts."
+          }
+        ]
+      },
+      "criterion": "My criterion: Kinetic for pieces that live on a page; Remotion, if I add it, for MP4 deliverables such as shorts and cuts for social media."
+    },
+    "next": "Contact"
   }
 }
