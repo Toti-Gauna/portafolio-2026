@@ -1,8 +1,13 @@
 import type { CaseDef } from './types';
+import { gridLayouts } from './grid';
 
 /** Volta: a clickable store demo with a pure rules engine and no server (Demo).
  *  Facts: scratchpad facts/volta.md (repo Toti-Gauna/supplements-ecommerce, read on 28/10/2026). Public repo.
  *  Never quote the Eclipse price list that lives in its sales trailer. */
+
+/** «How it would really be built» (Ola 7b): the design planned in the repo's docs, as a grid diagram + a sequence. */
+const g = gridLayouts([['shop', 'admin'], ['services', 'app', 'mp'], ['db', 'files', 'mail']]);
+
 export const volta: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
@@ -142,12 +147,70 @@ export const volta: CaseDef = {
         },
       },
     },
+    { type: 'text', key: 'real' },
+    {
+      type: 'diagram', key: 'realArch',
+      spec: {
+        id: 'volta-real-arch',
+        nodes: [
+          { id: 'shop', kind: 'client' },
+          { id: 'admin', kind: 'client', tone: 'yellow' },
+          { id: 'app', kind: 'server' },
+          { id: 'services', kind: 'code', tone: 'coral' },
+          { id: 'mp', kind: 'external', tone: 'yellow' },
+          { id: 'db', kind: 'db', tone: 'blue' },
+          { id: 'files', kind: 'doc' },
+          { id: 'mail', kind: 'external' },
+        ],
+        edges: [
+          { id: 'ask', from: 'shop', to: 'app' },
+          { id: 'session', from: 'admin', to: 'app', tone: 'yellow' },
+          { id: 'calls', from: 'app', to: 'services', tone: 'coral' },
+          { id: 'hook', from: 'mp', to: 'app', tone: 'yellow' },
+          { id: 'tx', from: 'services', to: 'db', tone: 'blue' },
+          { id: 'proof', from: 'app', to: 'files' },
+          { id: 'send', from: 'app', to: 'mail', dashed: true },
+        ],
+        desktop: g.desktop,
+        mobile: g.mobile,
+      },
+    },
+    {
+      type: 'sequence', key: 'realFlow',
+      spec: {
+        id: 'volta-real-flow',
+        lanes: [{ id: 'buyer', kind: 'person' }, { id: 'mp', kind: 'external' }, { id: 'app', kind: 'server' }, { id: 'db', kind: 'db' }],
+        msgs: [
+          { id: 'order', from: 'buyer', to: 'app' },
+          { id: 'check', from: 'app', to: 'app' },
+          { id: 'save', from: 'app', to: 'db' },
+          { id: 'topay', from: 'app', to: 'buyer', back: true },
+          { id: 'pay', from: 'buyer', to: 'mp' },
+          { id: 'hook', from: 'mp', to: 'app', tone: 'yellow' },
+          { id: 'verify', from: 'app', to: 'app' },
+          { id: 'paid', from: 'app', to: 'db' },
+          { id: 'mail', from: 'app', to: 'buyer', back: true },
+        ],
+      },
+    },
+    { type: 'text', key: 'realData' },
+    { type: 'checks', key: 'realSec' },
     { type: 'checks', key: 'security' },
     { type: 'decisions', key: 'decisions' },
     { type: 'readouts', key: 'quality' },
     { type: 'stack', key: 'stack' },
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['volta'] },
     { type: 'limits', key: 'status' },
+  ],
+  steps: [
+    { id: 'what', blocks: ['what', 'loop'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['arch', 'orders'] },
+    { id: 'real', blocks: ['real', 'realArch', 'realFlow', 'realData', 'realSec'] },
+    { id: 'security', blocks: ['security'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
   ],
   links: [{ label: 'github.com/Toti-Gauna/supplements-ecommerce', href: 'https://github.com/Toti-Gauna/supplements-ecommerce' }],
 };

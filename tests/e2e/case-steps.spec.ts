@@ -119,3 +119,28 @@ test.describe('without JavaScript', () => {
     await expect(side(page).locator('a[href^="#paso-"]')).toHaveCount(6);
   });
 });
+
+test('real step (Ola 7b): the demos say what is in the repo and what is a proposal, with their diagram', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const badges: Record<string, RegExp> = {
+    volta: /Diseño planificado/i, velmar: /Diseño planificado/i, dentalos: /Propuesta mía/i,
+    supernova: /Ejemplo de backend/i, games: /Propuesta mía/i, lucero: /Diseño planificado/i, handyx: /Diseño decidido/i,
+  };
+  for (const [slug, badge] of Object.entries(badges)) {
+    await enter(page, `/es/proyectos/${slug}/#paso-real`);
+    await expect(page.locator('#paso-real')).toBeVisible();
+    await expect(page.locator('#paso-real .dg__badge').first(), slug).toHaveText(badge);
+    await expect(page.locator('#paso-real figure.dg').first(), slug).toBeVisible();
+    await expect(side(page).locator('a[aria-current="step"]'), slug).toContainText('Cómo se implementa de verdad');
+  }
+});
+
+test('new cases: HandyX, Lucero and Trazo exist; Trazo has no «real» step and none links to a repo', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  for (const slug of ['handyx', 'lucero', 'trazo']) {
+    await enter(page, `/es/proyectos/${slug}/`);
+    await expect(page.locator('main h1')).toBeVisible();
+    await expect(page.locator('main a[href*="github.com/Toti-Gauna"]'), slug).toHaveCount(0);
+  }
+  await expect(side(page).locator('a[href="#paso-real"]')).toHaveCount(0);
+});

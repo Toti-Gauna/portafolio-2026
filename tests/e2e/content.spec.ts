@@ -287,6 +287,7 @@ test('portal screenshots: the Eclipse gallery loads, with alt text and a caption
 });
 
 test('case pages: index, numbered sections, diagrams readable as text, no horizontal scroll on a phone', async ({ page }) => {
+  test.setTimeout(150_000); // 13 cases, each step opened at two widths
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   for (const slug of CASE_SLUGS) {

@@ -1448,16 +1448,58 @@
       "handyx": {
         "name": "HandyX",
         "text": "Especialistas del hogar en Mar del Plata: una app para quien pide un trabajo y otra para el especialista. Hoy se recorren con datos de prueba.",
-        "note": "Proyecto propio"
+        "note": "Proyecto propio",
+        "facts": [
+          {
+            "k": "Piezas",
+            "v": "Dos PWA: usuario y especialista"
+          },
+          {
+            "k": "Hoy",
+            "v": "Mockup navegable con servidor simulado"
+          },
+          {
+            "k": "Contratos",
+            "v": "v1 de 54 endpoints · OpenAPI de 42 rutas"
+          }
+        ]
       },
       "lucero": {
         "name": "Lucero",
-        "text": "Un restó-bar inventado para mostrar la carta digital: el pedido desde la mesa, la cocina y un personaje que acompaña. Datos ficticios."
+        "text": "Un restó-bar inventado para mostrar la carta digital: el pedido desde la mesa, la cocina y un personaje que acompaña. Datos ficticios.",
+        "facts": [
+          {
+            "k": "Tipo",
+            "v": "Demo de un producto propio"
+          },
+          {
+            "k": "Piezas",
+            "v": "Carta con Gus · mozo · cocina · CRM"
+          },
+          {
+            "k": "Datos",
+            "v": "Ficticios, sin cobros ni local real"
+          }
+        ]
       },
       "trazo": {
         "name": "Trazo",
         "state": "Producto personal · en uso",
-        "text": "Mi tracker personal: el día en horas, el estudio con su propio repaso, las metas, el entreno y el peso. Una PWA que uso todos los días."
+        "text": "Mi tracker personal: el día en horas, el estudio con su propio repaso, las metas, el entreno y el peso. Una PWA que uso todos los días.",
+        "facts": [
+          {
+            "k": "Tipo",
+            "v": "PWA personal, local primero"
+          },
+          {
+            "k": "Datos",
+            "v": "En el navegador, sin servidor ni cuentas"
+          },
+          {
+            "k": "Repaso",
+            "v": "Motor propio con FSRS-5"
+          }
+        ]
       },
       "core": {
         "name": "Núcleo",

@@ -1,0 +1,311 @@
+{
+  "title": "HandyX",
+  "kind": "Own project · home specialists",
+  "status": "MVP · own project",
+  "summary": "Home specialists in Mar del Plata, as two PWAs: one for whoever asks for the job and one for the specialist. Today both can be walked through end to end with a simulated server and test data. The backend and the database are not connected yet.",
+  "facts": [
+    {
+      "k": "Parts",
+      "v": "Two PWAs: user and specialist"
+    },
+    {
+      "k": "Today",
+      "v": "Clickable mockup, simulated server"
+    },
+    {
+      "k": "Contracts",
+      "v": "v1 with 54 endpoints · OpenAPI with 42 routes"
+    },
+    {
+      "k": "Status",
+      "v": "MVP · backend not connected"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The idea",
+      "v": "Bring together, in one place, whoever needs a home job done and the specialists who do it, with proposals from both sides and a deal that nobody treats as done until it is accepted."
+    },
+    {
+      "k": "What exists today",
+      "v": "Both apps with clickable screens and a simulated server that applies the business rules to test data."
+    },
+    {
+      "k": "Where it stands",
+      "v": "MVP. The backend and the database are still to be connected, and there are no real payments. What I tell about the server comes from the frontends' contracts and docs."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "What it is",
+      "p": [
+        "HandyX connects people who need a home job done in Mar del Plata with specialists in that trade. It is two PWAs: one for whoever asks for the job (the user) and one for the specialist. It is an MVP and my own project: it is under construction and today it is walked through with test data."
+      ],
+      "list": [
+        "The user builds a request, receives proposals, can counter-offer and accepts one: only then does the job exist.",
+        "The specialist sees the requests that fit them, sends proposals, agrees on a time slot, reports which stage the job is at and closes it.",
+        "Both sides talk in a chat from the first proposal.",
+        "Payments are direct between the parties: Handy is not a recipient of that money.",
+        "There are claims and support, and internal staff review specialist sign-ups."
+      ]
+    },
+    "today": {
+      "h": "What exists today",
+      "p": [
+        "According to each repo's README, both apps are in phase 2: a complete mockup with no backend connected. This is what has been built."
+      ],
+      "items": [
+        {
+          "t": "Two PWAs on Next.js",
+          "d": "Next.js 16, React 19 and strict TypeScript, with static export: there is no Node server in the frontend (ADR-0001 of the user app)."
+        },
+        {
+          "t": "A simulated server",
+          "d": "An in-memory «server» applies the business rules (ownership, versions, idempotency, expirations, a single acceptance) to test data. The user app ships 18 scenarios and a test panel; reloading goes back to the starting point."
+        },
+        {
+          "t": "Data source: mock or http",
+          "d": "Without an API URL the apps use the mock and label it («Test view», «Test data»). With an API they use HTTP and, if it fails, show the error: they never fall back to test data. A production build without an API fails on purpose."
+        },
+        {
+          "t": "A contract with Zod",
+          "d": "Every body, query and response is validated with the schema the server would use; a response outside the contract is an error and is not patched up. The user app's v1 contract has 54 endpoints."
+        },
+        {
+          "t": "HTTP adapter already written",
+          "d": "Session cookie, a CSRF token requested before writing and sent in X-CSRF-Token, an Idempotency-Key on the writes that ask for it, redirects forbidden and a 15 s timeout. It was tested with a simulated fetch; against a real backend there is only a local test of two calls (user app handoff, 29/10/2026)."
+        },
+        {
+          "t": "Screens",
+          "d": "The user app has 33 screens on its map and a modal, almost all with an interface (the offline one is missing). The end-to-end walkthroughs run in a real browser, outside CI (according to its QA doc)."
+        }
+      ]
+    },
+    "real": {
+      "h": "The backend: designed, not connected yet",
+      "p": [
+        "This part tells how the real server is meant to work. Today none is connected: both apps talk to a simulated server and phase 4 of the plan, «BE and DB connected», is pending. HandyX is an MVP.",
+        "Where each thing comes from: the repos of the two backends (handyx-client-be and handyx-specialist-be) are private and I did not read them. Everything below comes from the contracts and documents of the two frontends. «It is in the repo» means those documents treat it as decided; «My proposal, to be validated» would be what I add myself, and in this case I add none: where the documents leave something undefined, I say it is pending.",
+        "The specialist frontend's plan proposes for the backend Node 22, TypeScript, Express 5 and Prisma 7 on PostgreSQL at Neon, in routes, controllers, services and repositories layers, with Zod."
+      ]
+    },
+    "realArch": {
+      "h": "Two apps and two APIs",
+      "p": [
+        "It is in the repo: one API per side, with shared identity and transactions, and a single database."
+      ],
+      "diagram": {
+        "badge": "Designed, not connected yet",
+        "title": "Two apps, two APIs, one database",
+        "caption": "Each app talks to its own API; both share identity and a PostgreSQL database. Private backends, not read: this comes from the frontends' docs.",
+        "nodes": {
+          "appU": {
+            "label": "User",
+            "sub": "PWA client-fe"
+          },
+          "appE": {
+            "label": "Specialist",
+            "sub": "PWA specialist-fe"
+          },
+          "apiU": {
+            "label": "User API",
+            "sub": "client-be · v1"
+          },
+          "apiE": {
+            "label": "Specialist API",
+            "sub": "specialist-be"
+          },
+          "pay": {
+            "label": "Payments",
+            "sub": "MP · inactive",
+            "note": "Handy neither receives nor splits the money: payments are direct between the parties. Checkout is inactive until the route is approved, and reporting a payment does not verify it."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "Neon · shared",
+            "note": "A single migration history: handyx-client-be owns the schema and the specialist API consumes that version, with no migrations of its own."
+          },
+          "media": {
+            "label": "Files",
+            "sub": "private",
+            "note": "Photos of requests and chats and sign-up documents: private, with a signed URL on the real server. The repo does not say which service stores them."
+          },
+          "portal": {
+            "label": "Ops portal",
+            "sub": "Operations"
+          }
+        },
+        "edges": {
+          "uCall": "cookie+CSRF",
+          "eCall": "cookie+CSRF",
+          "shared": "identity",
+          "uSql": "SQL",
+          "eSql": "SQL",
+          "checkout": "checkout",
+          "photos": "documents",
+          "review": "reviews"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "A request, end to end",
+      "p": [
+        "It is the central path of the product, the one that separates what each side decides from what the server decides."
+      ],
+      "seq": {
+        "title": "From the request to the job's close",
+        "caption": "I put the order together from the state machines of the two repos. Payment is left out: a report is not a verification.",
+        "lanes": {
+          "usr": "User",
+          "apiU": "User API",
+          "db": "PostgreSQL",
+          "apiE": "Specialist API",
+          "spec": "Specialist"
+        },
+        "msgs": {
+          "order": "creates it, with a key",
+          "saveOrder": "saves: searching",
+          "eligible": "sees the eligible requests",
+          "offer": "sends their proposal",
+          "saveOffer": "saves the proposal",
+          "accept": "accepts that version",
+          "tx": "transaction: creates the job",
+          "events": "reports each stage",
+          "close": "confirms it is finished"
+        }
+      }
+    },
+    "realData": {
+      "h": "The data",
+      "p": [
+        "The tables are named in the frontends' shared contract (docs/contracts.md). I did not see the real schema."
+      ],
+      "list": [
+        "Accounts and sessions: accounts, account_roles and sessions. One person can hold both roles with a single account.",
+        "Profiles: user_profiles, specialist_profiles, specialist_categories and specialist_credentials, plus the specialist's availability and coverage.",
+        "The job: service_requests and request_media; each side creates its own proposals (proposals) and, when one is accepted, the job (jobs) is born with an immutable snapshot of the deal and its job_events.",
+        "Conversations and support: conversations, messages, support_cases and support_events.",
+        "Payments and fee: payment_records, where reported and verified are different states, plus fee_policies, fee_acceptances and commission_entries.",
+        "Account and traceability: consents, account_deletion_requests, audit_events and analytics_events, the latter without personal data.",
+        "One table, one writer per domain: the contract says which API writes each one."
+      ]
+    },
+    "realSec": {
+      "h": "Security, as it has been decided",
+      "p": [
+        "It is in docs/auth-permissions.md of the specialist frontend, as «decided to be implemented in 4.2». None of this is implemented in a backend yet."
+      ],
+      "items": [
+        {
+          "t": "Session",
+          "d": "Passwords with Argon2id. A host-only, HttpOnly, Secure, SameSite=Lax cookie; sessions in a table, with the token stored as a hash and revocable. Rotating refresh, with reuse detection."
+        },
+        {
+          "t": "CSRF and origins",
+          "d": "A token in the client's memory and X-CSRF-Token on every write; an exact Origin and CORS with a closed list. No JWT in the JSON, and no session in localStorage, sessionStorage, IndexedDB or the URL."
+        },
+        {
+          "t": "Authorization on the server",
+          "d": "Role, sign-up status, eligibility and counterpart are checked on the server, and ownership goes in the WHERE: someone else's id answers 404, just like one that does not exist."
+        },
+        {
+          "t": "What the client does not decide",
+          "d": "States, verification, expirations, fee and derived amounts are not accepted from the client: strict schemas reject extra fields. Critical writes carry an idempotency key and a version; a conflict answers 409."
+        },
+        {
+          "t": "Rate limits",
+          "d": "Progressive lockout on sign-in and recovery, with neutral answers that do not reveal whether the account exists."
+        },
+        {
+          "t": "Privacy",
+          "d": "The exact address and the user's name are only visible with an agreed job. Analytics carry no personal data or chat or document content. No data or document goes to an AI provider, and background checks are not uploaded as a file."
+        },
+        {
+          "t": "Payments",
+          "d": "Handy is not a recipient of the money. A manual report is not a charge: whoever reports never verifies, and coming back from checkout confirms nothing."
+        }
+      ]
+    },
+    "sec": {
+      "h": "What is already tested",
+      "p": [
+        "With no backend yet, what is tested today is the frontend: that it stores nothing it should not and that it cannot be published with test data. These are tests in the repo that I read; I did not run them."
+      ],
+      "items": [
+        {
+          "t": "No session in the browser",
+          "d": "tests/seguridad.test.ts walks all of src/ in the user app and fails if localStorage, sessionStorage, indexedDB or document.cookie shows up. The specialist app has its equivalent in src/security/no-storage.test.ts."
+        },
+        {
+          "t": "Screens do not touch the network or the test data",
+          "d": "Another test in the same file fails if a screen or a component uses fetch() or imports the test data: everything goes through the data client."
+        },
+        {
+          "t": "Public variables under control",
+          "d": "A third test requires that the only NEXT_PUBLIC_ variables are the documented ones (the API URL and the environment): nothing secret travels in the bundle."
+        },
+        {
+          "t": "No test data in production",
+          "d": "The production configuration without an API throws an error (tests/entorno.test.ts), and the specialist app's build looks for test-data markers in the generated site and fails if it finds any."
+        },
+        {
+          "t": "The contract, an exact copy",
+          "d": "When the backend repo sits next to it, a test compares the v1 contract byte by byte with the original. If it is not there, that test does not run."
+        },
+        {
+          "t": "The simulator's rules",
+          "d": "tests/servidor-mock.test.ts covers idempotency, a single acceptance (another key gets 409), the race between devices, the 404 for someone else's chat or job and that a cash payment stays reported, not verified. It tests the simulator, not a real backend."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisions",
+      "items": [
+        {
+          "t": "Next.js with static export",
+          "why": "Hostinger serves static files: no Node server in production, and logic and security live in the backend. Cost: a strict CSP is not enough because Next injects inline scripts; it is left for a later phase.",
+          "alt": "Vite with React, which was the initial recommendation (ADR-0001)."
+        },
+        {
+          "t": "A single owner of the schema",
+          "why": "handyx-client-be is the only owner of the migrations: the specialist API consumes that version, to avoid creating a parallel schema."
+        },
+        {
+          "t": "One account, two roles",
+          "why": "Identity is shared (accounts and account_roles): one person can be both user and specialist without duplicating their account."
+        },
+        {
+          "t": "A contract validated at both ends",
+          "why": "The Zod schemas are strict and copied byte by byte between repos with a sync test; a new field requires updating the consumers first."
+        },
+        {
+          "t": "An in-memory world, nothing in the browser",
+          "why": "The simulator stores nothing in the browser and reloading goes back to the scenario's starting point. It is reversible and documented as a handoff decision."
+        },
+        {
+          "t": "Ids go in the query, not in the route",
+          "why": "A static export cannot generate ids at build time that it does not know, so screens use ?id= instead of a dynamic route."
+        },
+        {
+          "t": "A deal does not change by itself",
+          "why": "Accepting creates the job with an immutable snapshot of the deal; changing amount, scope or schedule requires a new proposal that the other side accepts, and it stays in the history."
+        }
+      ]
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "MVP and own project. Two PWAs with all their screens clickable, a simulated server and test data (phase 2).",
+        "There is no backend or database connected: phase 4, «BE and DB connected», is pending. What I tell about the server is a design, not a working system.",
+        "The backend repos are private and I did not read them. What I say about the server comes from the frontends' contracts and documents.",
+        "There are no real payments: Mercado Pago sits behind a switched-off gate and nothing is charged. Payments are direct between the parties.",
+        "The strict CSP is pending (Next injects inline scripts), planned for phase 5 of the plan.",
+        "The legal and privacy texts are provisional, and the minimum age of 18 is an assumption to confirm with Legal.",
+        "Still open, according to the 29/10/2026 handoff: the email provider for password recovery, the approved payment route and access to the final database and hosting.",
+        "Each frontend carries a different version of the contract (v1 in the user app, v0.2.0 in the specialist app): I notice this from reading both, and reconciling them is pending.",
+        "The specialist frontend's state machine leaves the user's confirmation at the end of a job pending, while the user contract does have it (confirmar-fin). That point still has to be closed.",
+        "The numbers (54 endpoints, 42 routes, 18 scenarios, 33 screens) come from reading the repos on 17/11/2026. I did not run the tests."
+      ]
+    }
+  }
+}

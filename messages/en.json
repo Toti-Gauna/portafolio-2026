@@ -1448,16 +1448,58 @@
       "handyx": {
         "name": "HandyX",
         "text": "Home specialists in Mar del Plata: one app for whoever needs a job done and another for the specialist. Today they run on test data.",
-        "note": "Own project"
+        "note": "Own project",
+        "facts": [
+          {
+            "k": "Parts",
+            "v": "Two PWAs: user and specialist"
+          },
+          {
+            "k": "Today",
+            "v": "Clickable mockup, simulated server"
+          },
+          {
+            "k": "Contracts",
+            "v": "v1 with 54 endpoints · OpenAPI with 42 routes"
+          }
+        ]
       },
       "lucero": {
         "name": "Lucero",
-        "text": "An invented restaurant-bar to show the digital menu: ordering from the table, the kitchen and a character that keeps you company. Fictional data."
+        "text": "An invented restaurant-bar to show the digital menu: ordering from the table, the kitchen and a character that keeps you company. Fictional data.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Demo of an own product"
+          },
+          {
+            "k": "Parts",
+            "v": "Menu with Gus · waiter · kitchen · CRM"
+          },
+          {
+            "k": "Data",
+            "v": "Fictional, no payments, no real venue"
+          }
+        ]
       },
       "trazo": {
         "name": "Trazo",
         "state": "Personal product · in use",
-        "text": "My personal tracker: the day in hours, study with its own review engine, goals, training and weight. A PWA I use every day."
+        "text": "My personal tracker: the day in hours, study with its own review engine, goals, training and weight. A PWA I use every day.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Personal PWA, local first"
+          },
+          {
+            "k": "Data",
+            "v": "In the browser, no server or accounts"
+          },
+          {
+            "k": "Review",
+            "v": "Own engine with FSRS-5"
+          }
+        ]
       },
       "core": {
         "name": "Core",

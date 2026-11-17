@@ -179,6 +179,143 @@
         }
       }
     },
+    "real": {
+      "h": "Ejemplo de backend: propuesta, no existe",
+      "p": [
+        "Nota de prototipo: esto es solo frontend, con datos ficticios y almacenamiento local. Según el README del repo, no incluye backend, inicio de sesión corporativo ni envío real de correos, y los permisos de la interfaz sirven para la demo: la autorización final le corresponde al servidor. Lo mismo vale para la seguridad, los correos y el control de cupos.",
+        "Lo que sigue es un ejemplo de backend para un prototipo de inscripciones a eventos internos. Es una propuesta mía, a validar: no existe, no describe el sistema de ninguna empresa y no nombra a ningún cliente. Cada pieza lleva su rótulo: «Está en el repo» o «Propuesta mía, a validar»."
+      ],
+      "list": [
+        "Está en el repo: es un prototipo sin backend ni inicio de sesión corporativo; los cupos, los correos y la autorización van en el servidor, que no existe.",
+        "Está en el repo: el prototipo ya limita la importación de Excel o CSV (5 MB, 5.000 filas) y deja datos personales fuera del QR de la demo.",
+        "Propuesta mía, a validar: el servidor de abajo, con sus servicios, su base de datos, la cola de correos y los controles de seguridad."
+      ]
+    },
+    "realArch": {
+      "h": "Cómo se conectan las piezas",
+      "p": [
+        "Una API que decide todo: la app pide y el servidor responde solo con lo que esa persona puede ver y hacer."
+      ],
+      "diagram": {
+        "badge": "Ejemplo de backend: propuesta, no existe",
+        "title": "Un servidor que decide, no el cliente",
+        "caption": "Lo que hoy simula el navegador pasa al servidor: identidad, cupos y correos. Es un ejemplo mío, no un sistema real.",
+        "nodes": {
+          "app": {
+            "label": "App web",
+            "sub": "la de hoy"
+          },
+          "api": {
+            "label": "API",
+            "sub": "autoriza todo",
+            "note": "Cada operación sale de una sesión verificada: usuario, compañía y rol los pone el servidor, nunca el cliente ni lo que guarda el navegador."
+          },
+          "idp": {
+            "label": "Identidad",
+            "sub": "inicio corporativo"
+          },
+          "svc": {
+            "label": "Servicios",
+            "sub": "cupos · check-in",
+            "note": "Inscribir, cancelar, pasar de la lista de espera y registrar el ingreso son transacciones: dos pedidos por el último cupo no sobrevenden."
+          },
+          "db": {
+            "label": "Base de datos",
+            "sub": "transaccional"
+          },
+          "queue": {
+            "label": "Cola",
+            "sub": "correos y avisos",
+            "note": "El correo se deja en una cola dentro de la misma transacción que la inscripción: si el proveedor cae, la inscripción sigue en pie y el envío se reintenta."
+          },
+          "mail": {
+            "label": "Correo",
+            "sub": "proveedor externo"
+          }
+        },
+        "edges": {
+          "ask": "pide",
+          "who": "quién es",
+          "rules": "reglas",
+          "tx": "transacción",
+          "out": "outbox",
+          "send": "envía"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "Inscribirse al último cupo",
+      "p": [
+        "El flujo crítico: dos personas piden a la vez el último lugar. La base decide quién gana y la cola evita que el correo se pierda."
+      ],
+      "seq": {
+        "title": "De la inscripción al correo",
+        "caption": "Dos pedidos por el último cupo no sobrevenden: la reserva es una transacción. Si el correo falla, la inscripción sigue. Ejemplo mío, no existe.",
+        "lanes": {
+          "person": "Colaborador",
+          "app": "App web",
+          "api": "API",
+          "db": "Base",
+          "queue": "Cola"
+        },
+        "msgs": {
+          "pick": "elige el evento",
+          "send": "pide cupo + clave única",
+          "auth": "verifica sesión y audiencia",
+          "reserve": "reserva en una transacción",
+          "state": "confirmado o en espera",
+          "enqueue": "deja el correo en la cola",
+          "reply": "estado real de la inscripción",
+          "mail": "envía y reintenta"
+        }
+      }
+    },
+    "realData": {
+      "h": "Los datos principales",
+      "p": [
+        "Las entidades y cómo se relacionan, sin esquemas. Todo es propuesta mía."
+      ],
+      "list": [
+        "Evento: título, fechas con su zona horaria, cupo total, límite de acompañantes y si es público o privado.",
+        "Audiencia: quién puede verlo y a quién se invita; una lista privada se congela al publicar.",
+        "Inscripción: una por persona y evento; ocupa un lugar más sus acompañantes y puede quedar en lista de espera.",
+        "Entrada: un token opaco y revocable, sin datos personales, con su registro de uso.",
+        "Correo: la plantilla de cada evento, a quién se manda y el estado de cada envío.",
+        "Auditoría: quién hizo qué, sobre qué recurso y cuándo (en UTC)."
+      ]
+    },
+    "realSec": {
+      "h": "Seguridad que importa de verdad",
+      "p": [
+        "Todo es propuesta mía a validar, salvo lo marcado «Está en el repo»."
+      ],
+      "items": [
+        {
+          "t": "La autorización es del servidor",
+          "d": "Está en el repo: los permisos de la interfaz sirven para la demo y la autorización final corresponde al servidor. En el ejemplo, usuario, compañía y rol salen de la sesión verificada; nada de eso se acepta del cliente."
+        },
+        {
+          "t": "Un evento privado se cierra en el servidor",
+          "d": "No alcanza con esconder tarjetas: el listado, la búsqueda, el detalle, la inscripción y el calendario revisan la audiencia, y quien no tiene acceso recibe lo mismo que si el evento no existiera."
+        },
+        {
+          "t": "Cupos sin sobreventa",
+          "d": "Está en el repo: los cupos se controlan en el servidor. En el ejemplo, la inscripción valida ventana, audiencia y cupo en una transacción, con una clave única por pedido para que un reintento no duplique."
+        },
+        {
+          "t": "QR sin datos personales",
+          "d": "El QR lleva un token opaco que el servidor verifica, vence y puede revocar. El ingreso exige un rol y se registra una sola vez. El QR de la demo no es un token seguro."
+        },
+        {
+          "t": "Correos con límites",
+          "d": "Está en el repo: los correos se envían desde el servidor. En el ejemplo, la plantilla admite una lista cerrada de variables escapadas, los avisos del proveedor se verifican y hay un tope de envíos."
+        },
+        {
+          "t": "Importaciones y registro",
+          "d": "El servidor repite la validación del Excel o CSV y nunca toma como audiencia lo que manda el cliente. Las acciones de administración se registran con actor y recurso, sin tokens ni correos en los logs."
+        }
+      ]
+    },
     "security": {
       "h": "Seguridad y privacidad de un prototipo",
       "p": [

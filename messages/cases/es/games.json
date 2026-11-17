@@ -145,6 +145,135 @@
         "La conclusión quedó escrita en el roadmap: una capa con tests verdes no está probada hasta que algo la usa de verdad."
       ]
     },
+    "real": {
+      "h": "Sin servidor de juego, a propósito",
+      "p": [
+        "Nota de banco de pruebas: la red no tiene servidor de juego por decisión. Según la guía del repo (games-guide), la autoridad de la partida es el proyector: los celulares le mandan sus entradas por WebRTC con PeerJS y él calcula el estado. Solo hace falta señalización para conectarlos, y la pone el broker público de PeerJS.",
+        "Según el ROADMAP y games-guide, un backend haría falta en tres casos. Lo que armo a partir de ahí, más abajo, es propuesta mía: no está en el repo y no se construyó."
+      ],
+      "list": [
+        "Está en el repo: que la partida sobreviva a que se cierre el proyector. Ahí entraría un servidor de salas tipo Colyseus.",
+        "Está en el repo: un ranking. El día que el puntaje valga algo, se valida en el servidor, nunca en el cliente (ROADMAP, «Ranking y persistencia», sin fecha).",
+        "Está en el repo: celulares en redes distintas. Ahí hace falta un servidor TURN, solo si hace falta."
+      ]
+    },
+    "realArch": {
+      "h": "Un servidor de salas, si hiciera falta",
+      "p": [
+        "Si un día la partida tuviera que sobrevivir al proyector, la autoridad se mudaría a un servidor y el proyector pasaría a ser una pantalla más."
+      ],
+      "diagram": {
+        "badge": "Propuesta mía a partir del roadmap del repo",
+        "title": "La partida vive en el servidor",
+        "caption": "Hoy alcanza con el proyector. Este dibujo es para cuando haya ranking o partidas que deban sobrevivir. No existe.",
+        "nodes": {
+          "pages": {
+            "label": "Hosting",
+            "sub": "GitHub Pages"
+          },
+          "phones": {
+            "label": "Celulares",
+            "sub": "mandos"
+          },
+          "host": {
+            "label": "Proyector",
+            "sub": "solo pantalla"
+          },
+          "rooms": {
+            "label": "Salas",
+            "sub": "tipo Colyseus",
+            "note": "Colyseus aparece en la guía del repo como la opción para cuando haya backend y la partida deba sobrevivir al cierre del proyector. Es una opción, no código."
+          },
+          "score": {
+            "label": "Validación",
+            "sub": "puntaje",
+            "note": "Un puntaje que llega del celular no se toma como cierto: el servidor lo recalcula con las entradas de la partida. El ROADMAP dice «el día que valga algo»."
+          },
+          "db": {
+            "label": "Base de datos",
+            "sub": "ranking"
+          }
+        },
+        "edges": {
+          "serve": "la app",
+          "in": "inputs",
+          "state": "estado",
+          "end": "puntaje",
+          "keep": "guarda"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "De una partida a un ranking",
+      "p": [
+        "El flujo crítico de la propuesta: el puntaje nunca viaja como verdad desde el celular."
+      ],
+      "seq": {
+        "title": "Del input al puntaje validado",
+        "caption": "El proyector recibe el mismo estado que los celulares. Solo se guarda lo que el servidor puede recalcular. Propuesta mía; no existe.",
+        "lanes": {
+          "phone": "Celular",
+          "rooms": "Salas",
+          "score": "Validación",
+          "db": "Base"
+        },
+        "msgs": {
+          "join": "entra con el QR de la sala",
+          "check": "valida sala y asiento",
+          "input": "manda sus inputs",
+          "state": "estado (y al proyector)",
+          "end": "fin de la partida",
+          "recalc": "recalcula el puntaje",
+          "save": "guarda si es válido",
+          "result": "puntaje validado"
+        }
+      }
+    },
+    "realData": {
+      "h": "Los datos principales",
+      "p": [
+        "Pocos, y sin cuentas. Propuesta mía: el repo no define un esquema."
+      ],
+      "list": [
+        "Sala: código, juego, semilla, asientos y estado (abierta, jugando, cerrada).",
+        "Partida: la sala, la semilla y las entradas de cada tick, para poder recalcular el resultado.",
+        "Participante: un apodo por sesión, sin cuenta ni datos personales.",
+        "Puntaje: la partida, el participante, el valor validado y la fecha.",
+        "Ranking: una lectura de los puntajes válidos de cada juego, no una tabla que alguien edita."
+      ]
+    },
+    "realSec": {
+      "h": "Seguridad si hubiera servidor",
+      "p": [
+        "Hoy no hay nada que proteger: no hay cuentas ni puntajes guardados. Con servidor, esto sería lo mínimo. Propuesta mía, salvo lo marcado «Está en el repo»."
+      ],
+      "items": [
+        {
+          "t": "El puntaje lo valida el servidor",
+          "d": "Está en el repo (ROADMAP): nunca se confía en el cliente. En la propuesta, el servidor recalcula el resultado con las entradas guardadas y la semilla, y descarta lo que no cierra."
+        },
+        {
+          "t": "Un asiento, un jugador",
+          "d": "Hoy cualquiera con el QR de la sala puede entrar, y la autoridad del proyector no es autenticación. En la propuesta, el servidor firma cada asiento y descarta las entradas de otro."
+        },
+        {
+          "t": "Límites contra el abuso",
+          "d": "Un tope de entradas por segundo y por asiento, un tamaño máximo de mensaje y salas que vencen, para que nadie sature un evento."
+        },
+        {
+          "t": "Lo correcto no sale antes de tiempo",
+          "d": "Está en el repo (games-guide): en las preguntas, la respuesta correcta no llega a la pantalla hasta que se contestó, y el texto libre se filtra antes de proyectarse. Con servidor, la respuesta se queda ahí hasta cerrar la pregunta."
+        },
+        {
+          "t": "Datos mínimos",
+          "d": "Solo un apodo y un puntaje, sin cuentas. Si un día hubiera cuentas, harían falta una política de privacidad y una retención definidas antes de guardar nada."
+        },
+        {
+          "t": "TURN con credenciales cortas",
+          "d": "Está en el repo: TURN solo si hace falta, para redes distintas. Si se sigue con WebRTC, sus credenciales deberían durar poco, y el servidor de salas hablar solo por conexión segura."
+        }
+      ]
+    },
     "security": {
       "h": "Seguridad y privacidad",
       "p": [

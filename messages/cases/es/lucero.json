@@ -1,0 +1,341 @@
+{
+  "title": "Lucero",
+  "kind": "Producto propio · demo",
+  "status": "Demo",
+  "summary": "Lucero es un restó-bar inventado con el que muestro «Eclipse para restaurantes»: el comensal escanea el QR de su mesa, ve la carta con Gus (un mozo ilustrado), pide, y el pedido llega a la cocina. Tiene un CRM y una versión repartida en varios celulares, cada uno con su rol. Datos ficticios, corre en el navegador.",
+  "facts": [
+    {
+      "k": "Tipo",
+      "v": "Demo de un producto propio, con datos ficticios"
+    },
+    {
+      "k": "Piezas",
+      "v": "Carta con Gus · mozo · cocina · dueño con CRM"
+    },
+    {
+      "k": "Carta",
+      "v": "En español, inglés y portugués"
+    },
+    {
+      "k": "Estado",
+      "v": "Demo: sin cobros ni local real"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "La idea",
+      "v": "El comensal escanea el QR de su mesa, ve la carta y pide; el pedido llega a la cocina y al mozo sin papel de por medio."
+    },
+    {
+      "k": "Lo que muestra",
+      "v": "Una carta con un mozo ilustrado que anota y lleva la comanda, un pedido que avanza de la mesa a la cocina y un CRM, también repartidos en varios celulares con roles."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Demo con datos ficticios que anda sola en el navegador. El backend completo es diseño planificado y propuesta mía, no código."
+    }
+  ],
+  "blocks": {
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Lucero es un restó-bar inventado, con la etiqueta «Demo», que uso para mostrar «Eclipse para restaurantes»: el comensal escanea el QR de su mesa, ve la carta y pide, y el pedido llega a la cocina. La carta, los platos y los premios son de ejemplo.",
+        "Es la demo de un producto en preparación. Según su especificación, todavía no hay un local que lo use: primero se hicieron demos para mostrar."
+      ],
+      "list": [
+        "Carta con Gus: un mozo ilustrado (38 poses) que acompaña, anota cada plato y lleva la comanda. La carta está en español, inglés y portugués.",
+        "Pedido: del comensal o del mozo, con variantes y agregados, que avanza solo de enviado a cocina, listo y entregado.",
+        "CRM del local: pedidos, cocina, clientes, carta y stock; ahí también se configura la ruleta de premios.",
+        "Juegos para esperar la comida: Ninja, Combinaciones y Catapulta, y salas para jugar entre celulares (Dibujá y adiviná y Hockey).",
+        "Local en vivo: la demo repartida en varios celulares, cada uno con su rol (mesa, mozo, cocina y dueño), instalable como PWA."
+      ]
+    },
+    "cycle": {
+      "h": "El pedido, de la mesa al plato",
+      "p": [
+        "El ciclo que recorre la demo. Cada paso es un estado real del pedido, y Gus solo se mueve cuando ese estado cambia."
+      ],
+      "title": "Del QR a «entregado»",
+      "steps": [
+        {
+          "actor": "Comensal",
+          "t": "Escanea y elige",
+          "d": "El QR abre la carta de su mesa. Agrega platos con variantes y agregados, y Gus los anota en su libreta."
+        },
+        {
+          "actor": "Comensal",
+          "t": "Manda el pedido",
+          "d": "Queda registrado (estado: enviado). La hoja avisa que no se cobra nada en la app: se paga en caja o con el postnet."
+        },
+        {
+          "actor": "Cocina",
+          "t": "Lo prepara",
+          "d": "El pedido pasa a la cocina y el comensal ve el avance. Gus sale con la bandeja tapada."
+        },
+        {
+          "actor": "Cocina",
+          "t": "Lo termina",
+          "d": "Estado «listo»: suena la campanita y Gus camina hasta la mesa."
+        },
+        {
+          "actor": "Mozo",
+          "t": "Lo entrega",
+          "d": "Estado «entregado»: Gus levanta la campana y le desea buen provecho."
+        },
+        {
+          "actor": "CRM",
+          "t": "Queda registrado",
+          "d": "El local ve el pedido, y el cliente suma una visita con su plato favorito y sus etiquetas."
+        }
+      ],
+      "caption": "En la demo el pedido avanza solo: nada llega a una cocina de verdad."
+    },
+    "now": {
+      "h": "Qué hay hoy: quién manda el estado",
+      "p": [
+        "Hoy no hay base de datos. La demo en vivo reparte el trabajo entre celulares, y el celular del dueño es el centro."
+      ],
+      "diagram": {
+        "badge": "Lo que hay hoy",
+        "title": "El celular del dueño reparte el estado",
+        "caption": "Tres formas de conectar los aparatos, de a una: un solo navegador, sin backend o con el relay. En ninguna hay base de datos.",
+        "nodes": {
+          "mesa": {
+            "label": "Mesa",
+            "sub": "carta con Gus"
+          },
+          "mozo": {
+            "label": "Mozo",
+            "sub": "salón y pedidos"
+          },
+          "cocina": {
+            "label": "Cocina",
+            "sub": "comandas"
+          },
+          "owner": {
+            "label": "Dueño",
+            "sub": "centro del local",
+            "note": "Su celular aplica las acciones, reparte el estado y guarda el local. Si el dueño cierra la pestaña, el local se corta hasta que la vuelve a abrir."
+          },
+          "bc": {
+            "label": "Pestañas",
+            "sub": "BroadcastChannel"
+          },
+          "rtc": {
+            "label": "WebRTC",
+            "sub": "sin backend",
+            "note": "Sin backend, los aparatos se conectan entre sí por el broker público de PeerJS. En la misma WiFi anda; entre redes distintas puede no conectar sin un servidor TURN."
+          },
+          "relay": {
+            "label": "Relay",
+            "sub": "Foody-be · Render",
+            "note": "Existe en otro repo y no leí su código. Desde el frontend se ve un WebSocket por canal, con una clave por asiento, para las salas de juego y para sincronizar pedidos entre aparatos."
+          }
+        },
+        "edges": {
+          "asks": "pide",
+          "asks2": "pide",
+          "moves": "avanza",
+          "tabs": "pestañas",
+          "p2p": "sin backend",
+          "ws": "con backend"
+        }
+      }
+    },
+    "sync": {
+      "h": "Cómo se mantiene el estado",
+      "p": [
+        "Hoy el estado vive en los navegadores. Lo que hay del lado servidor es solo un relay de mensajes."
+      ],
+      "list": [
+        "El local queda guardado en el celular del dueño, así que una recarga no lo borra; cada celular conserva su propio carrito.",
+        "Entre pestañas del mismo navegador, los pedidos y el CRM se sincronizan por BroadcastChannel. Con el relay, un pedido hecho en un celular aparece en el CRM abierto en una computadora.",
+        "Es una PWA: tiene manifest, íconos de Gus y un service worker (archivos primero de la caché, páginas primero de la red, con una página sin conexión)."
+      ]
+    },
+    "real": {
+      "h": "Lo que existe y lo que falta",
+      "p": [
+        "Nota de demo: Lucero es una demo con datos ficticios y hoy anda sola en el navegador. Lo único que existe del lado servidor es un relay de salas y sincronización (el repo Foody-be, en Render). No leí su código: describo solo lo que se ve desde el frontend.",
+        "El producto completo está especificado en el SDD y el roadmap del repo: Next.js para el front y el back, Postgres en Neon como base y una sesión de mesa firmada por el QR. Eso es diseño planificado, no código. Lo que el repo deja abierto, el mecanismo de tiempo real y la impresión de comandas, lo muestro como opciones, sin elegir una.",
+        "Cada pieza lleva su rótulo: «Está en el repo» o «Propuesta mía, a validar»."
+      ],
+      "list": [
+        "Está en el repo, y existe: el relay en Render, que sincroniza pedidos y conecta las salas de juego.",
+        "Está en el repo, como diseño planificado: Next.js, Postgres en Neon, la sesión de mesa firmada por el QR, los roles y el aislamiento entre locales.",
+        "Está en el repo, sin decidir: el tiempo real (queda «a decidir» en el ADR de la fase 0.5) y la impresión de comandas (a investigar).",
+        "Propuesta mía, a validar: el flujo del pedido, las entidades y sus relaciones, y los controles de seguridad."
+      ]
+    },
+    "realArch": {
+      "h": "Cómo se conectan las piezas",
+      "p": [
+        "Las personas entran por dos puertas, el QR de la mesa y el login del personal, y todo pasa por una sola API que decide qué ve cada una."
+      ],
+      "diagram": {
+        "badge": "Diseño planificado",
+        "title": "Un solo servidor, con la mesa firmada",
+        "caption": "Next.js, Neon y la sesión firmada por el QR están en el SDD; el resto del dibujo, incluido el tiempo real, es propuesta mía.",
+        "nodes": {
+          "phones": {
+            "label": "Celulares",
+            "sub": "comensal · mozo"
+          },
+          "auth": {
+            "label": "Sesión",
+            "sub": "QR firmado + login",
+            "note": "El QR lleva un token firmado que abre un contexto de mesa: no autoriza cobros ni datos de otras mesas. El personal entra con usuario y rol. El login es propuesta mía."
+          },
+          "screens": {
+            "label": "Pantallas",
+            "sub": "cocina · encargado"
+          },
+          "api": {
+            "label": "Next.js",
+            "sub": "front y API",
+            "note": "Front y back en el mismo proyecto, según el SDD. En el ejemplo, la API resuelve en cada pedido quién es, de qué local y con qué rol."
+          },
+          "db": {
+            "label": "Neon",
+            "sub": "Postgres"
+          },
+          "rt": {
+            "label": "Tiempo real",
+            "sub": "a decidir",
+            "note": "El SDD lo deja a decidir en el ADR de la fase 0.5, porque una función de Next.js no mantiene conexiones largas. Opciones: conexiones persistentes (como el relay de hoy), eventos enviados por el servidor o consultas periódicas. No elijo una."
+          }
+        },
+        "edges": {
+          "qr": "QR firmado",
+          "login": "usuario, rol",
+          "session": "sesión",
+          "tx": "transacción",
+          "events": "eventos",
+          "push": "comandas"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "Un pedido, de la mesa a la cocina",
+      "p": [
+        "El flujo crítico: dos mesas piden lo último que queda y un reintento no duplica el pedido."
+      ],
+      "seq": {
+        "title": "De escanear el QR a la cocina",
+        "caption": "Dos pedidos por la última unidad no la sobrevenden y un reintento no duplica el pedido (criterios del SDD). El tiempo real queda abierto.",
+        "lanes": {
+          "diner": "Comensal",
+          "api": "API",
+          "db": "Base",
+          "rt": "Tiempo real",
+          "kitchen": "Cocina"
+        },
+        "msgs": {
+          "scan": "abre el QR de su mesa",
+          "verify": "verifica firma y mesa",
+          "send": "envía el pedido + clave",
+          "tx": "valida y descuenta stock",
+          "ok": "pedido registrado",
+          "publish": "publica la comanda",
+          "arrive": "llega a su estación",
+          "advance": "avanza el estado",
+          "seen": "el comensal ve el avance"
+        }
+      }
+    },
+    "realData": {
+      "h": "Los datos principales",
+      "p": [
+        "Los nombres salen de las secciones 4 a 6 del SDD. Las relaciones y las claves son propuesta mía."
+      ],
+      "list": [
+        "Local: sus datos y su configuración, por ejemplo si cada pedido pasa por el encargado o va directo a la estación.",
+        "Usuario y rol: comensal (sin cuenta, solo su nombre), mozo, encargado, cocina y dueño; cada uno pertenece a un local.",
+        "Mesa y sesión de mesa: cada mesa tiene su QR; la sesión se abre al primer escaneo y se cierra cuando el encargado cierra la cuenta.",
+        "Carta y stock: tipos, productos, variantes y agregados, con un límite de stock opcional.",
+        "Pedido e ítems: cada ítem va a una estación (cocina o barra) con su propio estado, y el pedido es la suma.",
+        "Registro de cambios: quién cambió o anuló qué, cuándo y por qué."
+      ]
+    },
+    "realSec": {
+      "h": "Seguridad real",
+      "p": [
+        "Lo marcado «Está en el repo» sale del SDD y del roadmap. Los controles concretos son propuesta mía, a validar."
+      ],
+      "items": [
+        {
+          "t": "El QR abre un contexto, no autoriza",
+          "d": "Está en el repo: no autoriza cobros ni datos de otras mesas. Propuesta mía: un token firmado y con vencimiento, atado a la mesa y a su sesión, que deja de servir cuando el encargado cierra la mesa."
+        },
+        {
+          "t": "Cada local, aislado",
+          "d": "Está en el repo: un comensal nunca ve datos de otra mesa ni un local los de otro. Propuesta mía: el local sale de la sesión verificada y entra en cada consulta, nunca de lo que manda el cliente."
+        },
+        {
+          "t": "Roles verificados en el servidor",
+          "d": "Propuesta mía: el rol se resuelve en el servidor en cada acción. Cambiar o anular un plato es solo del encargado, y queda registrado quién, cuándo y por qué."
+        },
+        {
+          "t": "Un pedido ni se duplica ni sobrevende",
+          "d": "Está en el repo (criterios 1 y 2 del SDD): dos pedidos simultáneos no venden la última unidad y un reintento no duplica. Propuesta mía: una clave de envío por pedido y el stock descontado dentro de una transacción."
+        },
+        {
+          "t": "La app no cobra",
+          "d": "Está en el repo: se paga en caja o con el postnet del local, sin estado «pagado» ni datos de tarjeta en la app. Lo único que se cobra es la suscripción del local, y su medio de pago lo tokeniza el proveedor."
+        },
+        {
+          "t": "Datos del comensal: 90 días",
+          "d": "Está en el repo: solo se guardan nombre y mesa; el local es el responsable y Eclipse el encargado del tratamiento. Se conservan 90 días y después se anonimizan: lo decidí yo el 17/11/2026 (el SDD proponía 90 días y el roadmap, 12 meses)."
+        },
+        {
+          "t": "Sin secretos a la vista",
+          "d": "Está en el repo: no hay secretos en el repositorio y nada que empiece con NEXT_PUBLIC_ es secreto. Propuesta mía: las claves viven solo en variables del servidor, y los pedidos tienen límites por sesión."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones que documenta el repo",
+      "items": [
+        {
+          "t": "No se cobra dentro de la app",
+          "why": "Sin pasarela no hay reembolsos ni conciliación: se paga en caja o con el postnet y el estado «pagado» no existe. El único pago es la suscripción del local (SDD, D13 y §3).",
+          "alt": "El cobro del pedido con dos opciones, que era el plan anterior."
+        },
+        {
+          "t": "Gus cuenta el estado real, nunca lo inventa",
+          "why": "Cada animación sigue un estado del pedido: se va a la cocina cuando quedó registrado y sale con la bandeja cuando el local lo aceptó. El tiempo de espera es el que informa el local."
+        },
+        {
+          "t": "Pedir nunca depende del adorno",
+          "why": "La regla de oro del roadmap: si falla el personaje, el menú del día o un juego, la carta y el pedido siguen funcionando."
+        },
+        {
+          "t": "Los premios los valida una persona",
+          "why": "El puntaje de un juego solo viene del navegador, así que el mozo o el encargado confirma el premio en la mesa. No hay premios automáticos ni con alcohol, porque hay menores en las mesas."
+        },
+        {
+          "t": "El dueño reparte el estado de la demo en vivo",
+          "why": "Una sola fuente evita que cada celular tenga su propia verdad: el del dueño aplica las acciones y reparte el estado. A cambio, si cierra la pestaña, el local se corta hasta que la vuelve a abrir.",
+          "alt": "Un servidor que guarde el estado, que es lo que propongo en «Cómo se implementa de verdad»."
+        },
+        {
+          "t": "El backend, al final",
+          "why": "Se decidió dejar el servidor para el cierre del plan: sin él, la demo corre en el navegador, con pestañas por BroadcastChannel y salas por WebRTC (plan de ejecución, 02/11/2026)."
+        }
+      ]
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Es una demo: Lucero es un local inventado, con la etiqueta «Demo». La carta, los clientes y los premios son de ejemplo.",
+        "Según la especificación del repo, todavía no hay un local que lo use ni un piloto instalado. No hay métricas ni testimonios.",
+        "No cobra ni procesa pagos: el pedido se paga en caja o con el postnet.",
+        "Hoy corre sin base de datos. El relay en Render existe en otro repo y no leí su código.",
+        "Lo de «Cómo se implementa de verdad» es diseño planificado y propuesta mía: no vi construidos en el repo la base, la sesión firmada ni los roles verificados.",
+        "El tiempo real definitivo y la impresión de comandas siguen sin decidirse en el repo.",
+        "Gus y las fotos de los platos son imágenes hechas con IA.",
+        "El README del repo está desactualizado (dice «planificación»): esta página sale de su plan de ejecución, su especificación y su roadmap."
+      ]
+    }
+  }
+}

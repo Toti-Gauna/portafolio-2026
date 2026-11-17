@@ -109,3 +109,15 @@ pausados, porque no están en pantalla.
   - en celular, la barra de pasos y los 44 px;
   - con movimiento reducido, sin traslación.
 - **Medir:** el alto de la página de Eclipse en el paso más largo frente a los 23.000 px de hoy.
+
+## Ola 7b (17/11/2026, implementado)
+
+- Los 13 casos pasan a la plantilla; HandyX, Lucero y Trazo son casos nuevos (`lib/cases/{handyx,lucero,trazo}.ts`).
+- Paso `real` en Volta, Velmar, DentalOS, Supernova, games-market, Lucero y HandyX. Se amplió la regla: `real` va en
+  casos Demo, MVP, Prototipo o Banco de pruebas.
+- Diagramas de system design: `gridLayouts` (`lib/cases/grid.ts`). En celular son una sola columna (dos por fila
+  recortaba los textos y apilaba las etiquetas); las aristas que saltan nodos van por el margen derecho, sin etiqueta
+  (la etiqueta queda en «Leer el diagrama como texto»).
+- Lo que sale de cada repo y lo que es propuesta va rotulado en el texto. Hallazgos para Ignacio: Volta y Velmar
+  toman detalles de transacciones y reservas de una referencia heredada de Velmar; Trazo se leyó en su rama `main`
+  (el clon viejo era de la ola 1); `personal-tracker` guarda el plan personal, por eso no se enlaza.

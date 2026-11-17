@@ -367,6 +367,147 @@
           "caption": "Regalos: «Regalá energía» con producto, stack o gift card."
         }
       }
+    },
+    "real": {
+      "h": "El servidor que no existe todavía",
+      "p": [
+        "Volta es una demo para mostrar antes de la seña: el servidor se construye después de ese paso. Lo dicen el README y los documentos del repo («Corte demo → producción» y el guion de la demo). Hoy no hay backend: todo vive en el navegador, se reinicia con «Reiniciar demo» y no procesa pagos ni crea pedidos reales.",
+        "Cada pieza lleva su rótulo. Todo lo que sigue es diseño planificado en el repo: no sumé decisiones mías, y donde el repo no dice algo, lo aclaro."
+      ],
+      "list": [
+        "Diseño planificado en el repo: una sola app Next.js (tienda, panel y API) en Node, con PostgreSQL y Prisma, Better Auth, y Route Handlers y Server Actions validadas con Zod. El motor de reglas de la demo pasa a servicios del servidor.",
+        "Diseño planificado en el repo, según la referencia que heredó de Velmar (el repo aclara que es una referencia y no describe esta tienda): cada cambio de estado de un pedido es una transición dentro de una transacción, con su historial y su auditoría, y el stock se reserva en esa misma transacción.",
+        "Diseño planificado en el repo: un pedido queda Pagado solo por un webhook firmado y verificado, o por la aprobación de un administrador. Los comprobantes van a almacenamiento privado.",
+        "Lo que la demo simula hoy y haría el servidor: datos compartidos entre equipos, el pago que se confirma solo, correos que llegan, gift cards con clave al azar y la ruleta con un cupón por cuenta.",
+        "No está en el repo, y no lo afirmo: el esquema de Prisma, la lista de endpoints, el hosting elegido ni los límites de intentos."
+      ]
+    },
+    "realArch": {
+      "h": "La arquitectura planificada",
+      "p": [
+        "Una sola app en Node en lugar del export estático. Las pantallas se reutilizan; lo que cambia es dónde corren las reglas y dónde viven los datos."
+      ],
+      "diagram": {
+        "badge": "Diseño planificado",
+        "title": "Una app Next.js con base en Postgres",
+        "caption": "Diseño planificado en el repo (docs/demo-pages.md y la referencia de Velmar). No está construido: el repo no trae esquema ni endpoints.",
+        "nodes": {
+          "shop": {
+            "label": "Tienda",
+            "sub": "navegador"
+          },
+          "admin": {
+            "label": "Panel",
+            "sub": "login + rol",
+            "note": "Hoy no tiene login, a propósito. En producción: usuario y contraseña con Better Auth y rol de administrador verificado en el servidor en cada ruta y cada acción."
+          },
+          "app": {
+            "label": "App Next.js",
+            "sub": "Actions y Zod"
+          },
+          "services": {
+            "label": "Servicios",
+            "sub": "reglas en servidor",
+            "note": "El motor de reglas de hoy (precios, cupones, lotes por vencimiento, recompra) pasa a servicios del servidor. Según el repo, reemplaza a src/demo/engine."
+          },
+          "mp": {
+            "label": "Mercado Pago",
+            "sub": "webhook firmado",
+            "note": "Un pedido queda Pagado solo por este webhook, verificado (monto, moneda y referencia), o por la aprobación de un administrador."
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "Prisma"
+          },
+          "files": {
+            "label": "Comprobantes",
+            "sub": "almacén privado"
+          },
+          "mail": {
+            "label": "Correo",
+            "sub": "emails reales"
+          }
+        },
+        "edges": {
+          "ask": "pide",
+          "session": "sesión",
+          "calls": "llama",
+          "hook": "webhook",
+          "tx": "transacción",
+          "proof": "autoriza",
+          "send": "envía"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "El flujo crítico",
+      "seq": {
+        "title": "Del pedido al Pagado, por webhook",
+        "caption": "Las reglas son las del repo; el orden de los pasos es mi armado para mostrarlas juntas. Los endpoints concretos no están en el repo.",
+        "lanes": {
+          "buyer": "Comprador",
+          "mp": "Mercado Pago",
+          "app": "App Next.js",
+          "db": "PostgreSQL"
+        },
+        "msgs": {
+          "order": "confirma la compra",
+          "check": "valida y recalcula",
+          "save": "pedido + reserva (tx)",
+          "topay": "lo manda a pagar",
+          "pay": "paga en su checkout",
+          "hook": "webhook firmado",
+          "verify": "verifica firma y monto",
+          "paid": "Pagado + historial + auditoría",
+          "mail": "aviso por correo"
+        }
+      }
+    },
+    "realData": {
+      "h": "Los datos",
+      "p": [
+        "Las entidades salen de los tipos de la demo (src/demo/types.ts y src/demo/admin/types.ts) y de la referencia heredada. El esquema real de Prisma no está en el repo."
+      ],
+      "list": [
+        "Catálogo: producto, variantes y lotes con vencimiento, más packs y cupones.",
+        "Pedido: cliente, líneas, entrega, medio de pago, total, comprobante, fecha comprometida y control de lote.",
+        "OrderStatusLog y AuditLog: una fila por cada transición del pedido y por cada acción del panel.",
+        "Comprobante de pago: el archivo va a almacenamiento privado y se pide con autorización.",
+        "Reclamos: arrepentimiento, devolución y reclamo, con su estado.",
+        "Usuarios del panel y su rol; clientes, y gift cards con clave al azar generada por el servidor."
+      ]
+    },
+    "realSec": {
+      "h": "Seguridad de verdad",
+      "p": [
+        "Hoy el panel no tiene login, a propósito. Esto es lo que el repo prevé para producción."
+      ],
+      "items": [
+        {
+          "t": "Panel con login y rol",
+          "d": "Usuario y contraseña con Better Auth y rol de administrador verificado en el servidor en cada ruta y cada acción."
+        },
+        {
+          "t": "Sesión corta y límite de intentos",
+          "d": "La sesión del panel es más corta que la de un cliente y los intentos de ingreso tienen límite. Los valores concretos no están en el repo."
+        },
+        {
+          "t": "Pagado solo por webhook",
+          "d": "Un comprobante no paga: el pedido pasa a Pagado por un webhook firmado y verificado (monto, moneda y referencia) o por la aprobación de un administrador."
+        },
+        {
+          "t": "Validar en el servidor",
+          "d": "Las mutaciones van por Server Actions con Zod, y el servidor recalcula precios, cupones y stock en lugar de creerle al navegador."
+        },
+        {
+          "t": "Comprobantes privados",
+          "d": "Se guardan fuera del sitio público y se sirven con autorización, nunca por una URL abierta."
+        },
+        {
+          "t": "Datos de clientes",
+          "d": "Hoy son inventados y los textos legales son de muestra. Una tienda real necesita su política de privacidad: eso no está en el repo."
+        }
+      ]
     }
   }
 }
