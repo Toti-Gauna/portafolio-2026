@@ -3004,5 +3004,49 @@
       "criterion": "My criterion: Kinetic for pieces that live on a page; Remotion, if I add it, for MP4 deliverables such as shorts and cuts for social media."
     },
     "next": "Contact"
+  },
+  "recruiters": {
+    "label": "For recruiters",
+    "title": "The essentials, on one sheet.",
+    "lead": "I am looking for new opportunities to keep growing and move my career forward, with an international outlook.",
+    "sheet": [
+      {
+        "k": "Role",
+        "v": "Ssr AI Fullstack Developer."
+      },
+      {
+        "k": "Where",
+        "v": "Mar del Plata, Argentina."
+      },
+      {
+        "k": "Today",
+        "v": "At Tsoft, since 2024."
+      },
+      {
+        "k": "Before",
+        "v": "TACH Argentina (2021 – 2022) and Ada ITW (2023 – 2024), where I taught JavaScript and React."
+      },
+      {
+        "k": "Education",
+        "v": "Self-taught: I read and study online."
+      },
+      {
+        "k": "At work I use",
+        "v": "React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD and RAG with LLMs."
+      },
+      {
+        "k": "How I work",
+        "v": "With an agentic system split into parts: 11 agents and a person who approves."
+      }
+    ],
+    "casesTitle": "Three cases to look at",
+    "case": "See the case",
+    "skills": "See all the skills",
+    "write": "Write to me",
+    "cases": {
+      "complia": "An AI assistant inside a compliance portal: I designed and built it, with its RAG, its validations and its recommendations.",
+      "eclipse": "My studio, built as a complete system: landing page, client portal, its own backend and an internal portal.",
+      "agentes": "How I work: 11 agents with separate roles and gates where a person decides."
+    }
   }
 }

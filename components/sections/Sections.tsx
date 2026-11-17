@@ -6,6 +6,9 @@ import { CASE_SLUGS, LAB, WORK_SHOT, WORK_SHOT_800, type CaseSlug } from '@/lib/
 import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
 import { ALL_PAGES, CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
+import { STATIONS } from '@/lib/career';
+import { RECRUITER_CASES } from '@/lib/recruiters';
+import { StatusTag } from '../ui/StatusTag';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
 import { Diagram } from '../diagrams/Diagram';
@@ -268,6 +271,39 @@ export function About({ level = 2 }: { level?: Level } = {}) {
     <section id="sobre-mi" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-sobre-mi">
       <Head id="h-sobre-mi" label={t('label')} title={t('title')} level={level} />
       <div className="about">{(t.raw('paragraphs') as string[]).map((p) => <p key={p}>{p}</p>)}</div>
+    </section>
+  );
+}
+
+/** «Para reclutadores» (Ola 8d): a fact sheet of what is already approved elsewhere on the site, and three cases to look at. */
+export function Recruiters({ level = 2 }: { level?: Level } = {}) {
+  const t = useTranslations('recruiters');
+  const c = useTranslations('cases');
+  return (
+    <section id="reclutadores" className="sec container-x" aria-labelledby="h-reclutadores">
+      <Head id="h-reclutadores" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
+      <dl className="rc-sheet">
+        {(t.raw('sheet') as { k: string; v: string }[]).map((r) => <div key={r.k}><dt className="label">{r.k}</dt><dd>{r.v}</dd></div>)}
+      </dl>
+      <p className="rc-more"><Link className="card-link" href="/capacidades">{t('skills')} →</Link></p>
+      <h3 className="sub-title">{t('casesTitle')}</h3>
+      <ul className="rc-cases">
+        {RECRUITER_CASES.map((slug) => {
+          const st = STATIONS.flatMap((x) => x.buildings).find((b) => b.slug === slug)?.status;
+          return (
+            <li key={slug} className="rc-case">
+              <p className="label">{c(`${slug}.kind`)}</p>
+              <h4 className="rc-case__t">{c(`${slug}.title`)}</h4>
+              {st ? <StatusTag kind={st} /> : <p className="status">{c(`${slug}.status`)}</p>}
+              <p>{t(`cases.${slug}`)}</p>
+              <Link className="card-link" href={`/proyectos/${slug}`}>{t('case')} →</Link>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="contact" data-contact="">
+        <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t('write')}</a>
+      </div>
     </section>
   );
 }
