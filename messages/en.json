@@ -126,7 +126,7 @@
       },
       "business": {
         "t": "Business",
-        "d": "Three books and where I applied them."
+        "d": "How I think about business: models, marketing, brand, operations and funnels."
       },
       "about": {
         "t": "About",
@@ -687,7 +687,7 @@
       },
       "business": {
         "q": "How do I think about business?",
-        "d": "The Lean Startup, The Mom Test and Blue Ocean Strategy: the models I use and where I applied them."
+        "d": "Business models, digital and physical marketing, branding, operations and funnels, and three books."
       },
       "about": {
         "q": "Who am I, and where do I come from?",
@@ -728,7 +728,7 @@
   "business": {
     "metaTitle": "How I think about business — Ignacio Gauna",
     "metaDescription": "The models from The Lean Startup, The Mom Test and Blue Ocean Strategy that I use, and where I applied them.",
-    "back": "Back to the portfolio",
+    "back": "Back to Business",
     "label": "Business",
     "title": "How I think about business.",
     "lead": "Three books that changed how I build. From each, the models I use most and where I applied them in my projects.",
@@ -1113,7 +1113,7 @@
       "business": {
         "title": "Business",
         "heading": "How I think about business.",
-        "text": "The Lean Startup, The Mom Test and Blue Ocean Strategy: the models I use and where I applied them.",
+        "text": "Business models, marketing, brand, operations and funnels from my projects, and the three books I use.",
         "cta": "See how I think about business",
         "alt": "A circular amphitheater whose center sinks into a funnel of dots down to a coral cube.",
         "spots": {
@@ -2429,5 +2429,423 @@
       }
     },
     "pickExercise": "Brand exercise"
+  },
+  "negocio": {
+    "metaTitle": "Business and marketing — Ignacio Gauna",
+    "metaDescription": "How I think about the business of a product: model, digital and physical marketing, brand, operations and funnels, with what I did in my projects and three books I use.",
+    "label": "Business",
+    "title": "How I think about business.",
+    "lead": "Who pays, how it is communicated, what leads to the physical world, how it looks, how it runs and the path the customer takes. With what I did in my projects and three books that changed how I build.",
+    "note": "Everything here is design and demos with sample data: no conversion, sale or customer is measured. Where there is no data, I say so.",
+    "toc": "Topics",
+    "where": "Where I did it",
+    "see": "See the case",
+    "sample": "Sample data",
+    "back": "Back to the portfolio",
+    "topics": {
+      "models": {
+        "label": "Business models",
+        "title": "Who pays what, and why",
+        "idea": "Before designing a screen I ask where the business's money comes from and when. Each demo starts from a different model.",
+        "items": [
+          {
+            "t": "Multi-brand resale with a house brand on the shelf",
+            "d": "The shop resells brands from invented distributors and adds its own. The panel works out margin and suggested price per variant and per brand. To raise the basket: a discount for taking products from three categories, goal-based packs and gift cards, all simulated."
+          },
+          {
+            "t": "Made to order: profit comes from the recipe",
+            "d": "Every product is made to order and personalised. The panel models inputs per unit, machine and hand minutes, margin and suggested price; moving an order to the machine deducts inputs."
+          },
+          {
+            "t": "The venue's subscription, no commission per order",
+            "d": "The order is not paid inside the app: it is paid at the till or on the venue's card terminal. Eclipse charges a monthly subscription to the venue, in three levels that stack. No venue uses it yet."
+          },
+          {
+            "t": "Service with a deposit",
+            "d": "The landing page shows demos by industry; whoever writes gets a demo of their business and a written proposal. The project starts with the deposit: a database trigger rejects one with no deposit paid. Support exists only with a maintenance contract. No customers yet."
+          }
+        ],
+        "flows": {
+          "volta": {
+            "n": [
+              "Customer",
+              "Shop",
+              "Distributors"
+            ],
+            "e": [
+              "buys",
+              "restocks"
+            ],
+            "c": "Profit: price minus supplier and packaging cost."
+          },
+          "velmar": {
+            "n": [
+              "Customer",
+              "Workshop",
+              "Inputs"
+            ],
+            "e": [
+              "orders to measure",
+              "are deducted"
+            ],
+            "c": "Profit per recipe: inputs and working minutes."
+          },
+          "lucero": {
+            "n": [
+              "Diner",
+              "Venue",
+              "Eclipse"
+            ],
+            "e": [
+              "pays at the till",
+              "subscription"
+            ],
+            "c": "The only payment in the system is the venue's subscription."
+          },
+          "eclipse": {
+            "n": [
+              "Business",
+              "Eclipse",
+              "Project"
+            ],
+            "e": [
+              "deposit",
+              "5 stages"
+            ],
+            "c": "The project starts with the deposit; no amounts on this page."
+          }
+        },
+        "figTitle": "Four models, three boxes each"
+      },
+      "digital": {
+        "label": "Digital marketing",
+        "title": "Write when there is a reason",
+        "idea": "The digital marketing I designed starts from a fact about the customer (an order that changed state, a product running out, a date) and lets a person decide whether it is sent.",
+        "items": [
+          {
+            "t": "WhatsApp with the text ready",
+            "d": "12 messages by order state, with the data already filled in and a WhatsApp link. They are edited in the panel and nothing is sent on its own: a person sends it. Reorder works out who to write to about 5 days before a pack runs out, with a link that loads the bag. Volta also turns 17 commercial dates into campaigns, each with its coupon."
+          },
+          {
+            "t": "Commercial dates and a wheel that expires",
+            "d": "Sixteen themes by date (Mother's Day, Black Friday, Christmas…) change palette, banner, loading screen and coupon. The eight-slice wheel gives a single-use coupon that expires. Sending is simulated."
+          },
+          {
+            "t": "One hook per visit",
+            "d": "The prize wheel appears as soon as the menu opens, one spin per visit; the prize comes with a code the waiter checks in person. Special dates change palette and decoration, never prices. The demo has no campaigns to the diner."
+          },
+          {
+            "t": "Campaigns with rules of respect",
+            "d": "Four computed segments: pending check-ups, quotes with no answer, enquiries with no appointment and cancelled appointments. The audience leaves out whoever asked to opt out and whoever already got 2 messages in 30 days, and a check rejects invented urgency, fear and discounts. Sending is simulated."
+          },
+          {
+            "t": "A next action per prospect",
+            "d": "The internal portal works out what to do with each prospect: call the same day they reply, send the proposal within 24 hours and remind them at 2, 5 and 9 days. The system sends nothing on its own."
+          }
+        ],
+        "aud": {
+          "title": "An audience that shrinks out of respect",
+          "steps": [
+            "People in the segment",
+            "Minus whoever opted out",
+            "Minus the administrative exclusion",
+            "Minus whoever hit 2 messages in 30 days",
+            "One person, one message"
+          ],
+          "caption": "A DentalOS campaign (demo). The width is illustrative: there are no figures, and the list is ordered by ID, never by profitability."
+        }
+      },
+      "physical": {
+        "label": "Physical marketing",
+        "title": "Let the physical lead to the digital",
+        "idea": "A QR, a plate or a counter is marketing if it takes the person to the next step in one gesture. The repos have four; there is no real signage or packaging, and I say so.",
+        "items": [
+          {
+            "t": "A QR on every table",
+            "d": "The QR opens that table's menu. Eclipse Academy's guide says how to place it: at eye height, with one sentence beside it, printed matte and checked every week. The wheel closes the circle: the prize comes with a code the waiter checks at the table."
+          },
+          {
+            "t": "NFC plate with the customer's link",
+            "d": "A Velmar product: a printed plate with the image the customer picks and an NFC chip that opens the link they want (Instagram, WhatsApp, a menu). It is physical marketing for their own business."
+          },
+          {
+            "t": "Pass with a QR",
+            "d": "The employee shows a QR of their booking and the organiser registers entry with the camera or a code. In the demo the QR is a reference to the sample booking and does not validate real entries."
+          },
+          {
+            "t": "Pick-up, counter and samples",
+            "d": "Pick-up at the shop with a code, a counter with sales and an end-of-day close, and samples and a brand shaker as prizes of the wheel and the club levels."
+          }
+        ],
+        "touch": {
+          "title": "Four touchpoints",
+          "qr": "Table QR",
+          "nfc": "NFC plate",
+          "pass": "Pass with QR",
+          "counter": "Pick-up and counter"
+        }
+      },
+      "brand": {
+        "label": "Branding",
+        "title": "A brand is decisions",
+        "idea": "The logo comes last. First I decide the tone, the palette with its use and what changes from one client to another. The visual detail of each brand is in the Brand Lab.",
+        "items": [
+          {
+            "t": "A white-label brand per file",
+            "d": "Everything about the brand comes from one file per client: name, palette, type and logo. A test forbids typing «Volta» by hand in the code and a check reviews AA contrast; that is how another demo is prepared in about 15 minutes."
+          },
+          {
+            "t": "A provisional palette, said as such",
+            "d": "Velmar has not confirmed a palette or type: the demo derives it from their logo and says so. With no real photos, the images are my own illustrations labelled «Illustrative image»."
+          },
+          {
+            "t": "A direction chosen among options",
+            "d": "«Warm clinical editorial», chosen on 17/10/2026 among proposals, with two corrections. The children's characters have cosmetic gamification, with no prizes tied to treatments."
+          },
+          {
+            "t": "An invented venue that does not resemble a real one",
+            "d": "A wine-and-cream palette and the «Demo» label everywhere, without resembling a real brand."
+          },
+          {
+            "t": "The eclipse as a system",
+            "d": "Amber on night, the eclipse as a glyph and the project's five stages as phases of the eclipse. A premium, confident, concrete tone with short sentences: Rioplatense Spanish, direct English and Brazilian Portuguese."
+          }
+        ],
+        "sw": {
+          "title": "The eight brands of the Brand Lab",
+          "cta": "See the Brand Lab"
+        }
+      },
+      "ops": {
+        "label": "Operations",
+        "title": "A journey with states",
+        "idea": "In each demo, an order or an appointment goes through states that a single function validates: nobody skips a step and whoever decides is recorded.",
+        "items": [
+          {
+            "t": "Lots with expiry and a check before dispatch",
+            "d": "The lot that expires first goes out first (FEFO), with a warning under 60 days and clearance with ready-made actions. An order does not become «Ready» without the lots confirmed, and a receipt never pays: it is approved after seeing the money."
+          },
+          {
+            "t": "Production queue and delivery calendar",
+            "d": "To make, On the machine, Finishing and Ready, with the preview approved; moving to the machine deducts inputs. The calendar has capacity per day, holidays and is rescheduled by dragging."
+          },
+          {
+            "t": "A cancellation becomes an appointment",
+            "d": "When a slot frees up, a vacancy task is created and it is offered to the waiting list. The offer is held for a while, can be declined with no penalty and is never offered again. Offers are slots, not discounts."
+          },
+          {
+            "t": "Kitchen by columns",
+            "d": "The order moves from sent to kitchen, ready and delivered, only forwards. A dish marked «Sold out» stops showing for the diner at once."
+          },
+          {
+            "t": "Sessions with their own capacity",
+            "d": "Each event has up to 24 sessions with their own capacity; capacity cannot drop below the sign-ups and sessions with bookings cannot be deleted. Without a server, capacity across devices cannot be guaranteed."
+          }
+        ],
+        "rails": {
+          "title": "Four journeys",
+          "volta": [
+            "Payment approved",
+            "Picking",
+            "Lot check",
+            "Dispatch",
+            "Delivered"
+          ],
+          "velmar": [
+            "To make",
+            "On the machine",
+            "Finishing",
+            "Ready"
+          ],
+          "lucero": [
+            "Sent",
+            "Kitchen",
+            "Ready",
+            "Delivered"
+          ],
+          "dentalos": [
+            "Cancellation",
+            "Vacancy",
+            "Waiting list",
+            "Offer",
+            "Appointment confirmed"
+          ]
+        }
+      },
+      "funnels": {
+        "label": "Funnels",
+        "title": "The customer's path, drawn",
+        "idea": "A funnel is the path I designed for someone to go from discovering to coming back. I draw it before measuring anything, with the module that implements each stage.",
+        "legend": "A path designed and navigable in the demo. It is not measured: there are no conversion figures, and the width of each bar is only illustrative.",
+        "figTitle": "Five funnels",
+        "f": {
+          "volta": [
+            {
+              "t": "Discover",
+              "m": "Home with carousel, «What is your goal?» and search"
+            },
+            {
+              "t": "Choose",
+              "m": "Product page, comparison, «Build your stack» and quiz"
+            },
+            {
+              "t": "Cart",
+              "m": "Bag, category discount, coupon and wheel"
+            },
+            {
+              "t": "Checkout",
+              "m": "Three steps, with the courier's real date"
+            },
+            {
+              "t": "Payment",
+              "m": "Transfer with receipt and manual approval"
+            },
+            {
+              "t": "Fulfilment",
+              "m": "Picking, lot check and dispatch"
+            },
+            {
+              "t": "Retention",
+              "m": "My box, reorder on WhatsApp, club and packs"
+            }
+          ],
+          "velmar": [
+            {
+              "t": "Discover",
+              "m": "Home, categories and typo-tolerant search"
+            },
+            {
+              "t": "Personalise",
+              "m": "Live preview and design approval"
+            },
+            {
+              "t": "Cart",
+              "m": "Coupon, mission and recommendations"
+            },
+            {
+              "t": "Hook",
+              "m": "Full-screen wheel on the way to pay"
+            },
+            {
+              "t": "Checkout and payment",
+              "m": "Delivery, payment and receipt"
+            },
+            {
+              "t": "Production",
+              "m": "Queue To make → Ready and calendar"
+            },
+            {
+              "t": "Tracking",
+              "m": "Order states and help on WhatsApp"
+            },
+            {
+              "t": "Retention",
+              "m": "Club, missions, coupons and the pet's birthday"
+            }
+          ],
+          "dentalos": [
+            {
+              "t": "Information",
+              "m": "Home, branches, services and first visit"
+            },
+            {
+              "t": "Booking",
+              "m": "Monthly calendar, request, WhatsApp or call"
+            },
+            {
+              "t": "Confirmation",
+              "m": "Reception confirms; «My appointments»"
+            },
+            {
+              "t": "Reminder",
+              "m": "24 h before, with opt-in"
+            },
+            {
+              "t": "Visit",
+              "m": "Agenda and appointment states"
+            },
+            {
+              "t": "Continuity",
+              "m": "Orthodontic check-ups and campaigns"
+            },
+            {
+              "t": "Quote",
+              "m": "Issued, accepted, declined or expired"
+            },
+            {
+              "t": "Agenda recovery",
+              "m": "Vacancy, waiting list and offer"
+            }
+          ],
+          "lucero": [
+            {
+              "t": "At the venue",
+              "m": "QR on the table; the pavement board"
+            },
+            {
+              "t": "First hook",
+              "m": "Wheel on opening the menu, one spin per visit"
+            },
+            {
+              "t": "Order",
+              "m": "Menu, variants, extras and «Send to the kitchen»"
+            },
+            {
+              "t": "Waiting",
+              "m": "Single-player and table games"
+            },
+            {
+              "t": "Fulfilment",
+              "m": "Sent, kitchen, ready and delivered"
+            },
+            {
+              "t": "Bill",
+              "m": "Ask for the bill; payment is outside the app"
+            },
+            {
+              "t": "Retention",
+              "m": "Diner in the CRM, favourites and another spin"
+            }
+          ],
+          "eclipse": [
+            {
+              "t": "Pick the industry",
+              "m": "Real estate, the first with a demo"
+            },
+            {
+              "t": "See the demo",
+              "m": "A fictional company, with its chatbot and pipeline"
+            },
+            {
+              "t": "See the levels",
+              "m": "Six monthly levels, no amounts on this page"
+            },
+            {
+              "t": "Write",
+              "m": "WhatsApp with the plan in the message"
+            },
+            {
+              "t": "Demo of their business",
+              "m": "In 48 h, before any call"
+            },
+            {
+              "t": "Proposal and deposit",
+              "m": "Scope, price and timelines in writing"
+            },
+            {
+              "t": "Project",
+              "m": "Five stages visible in the portal"
+            }
+          ]
+        }
+      }
+    },
+    "books": {
+      "title": "Three books",
+      "lead": "What changed how I build. The detail of each one, with its models drawn and where I applied them, is on its own page.",
+      "models": "The models I use most",
+      "cta": "See the models and where I applied them"
+    },
+    "reading": "Reading now: SPIN Selling, by Neil Rackham, on consultative selling."
   }
 }

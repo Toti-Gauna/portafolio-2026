@@ -110,9 +110,9 @@ export const CHAPTERS: Chapter[] = [
   },
   { key: 'business', building: 'left', zone: 'brand', href: '/negocio',
     spots: [
-      { id: 'lean', at: [29, 25], poly: [27, 20, 31, 20, 31, 31, 27, 31], go: { href: '/negocio#lean' } },
-      { id: 'mom', at: [42.5, 28], poly: [41, 23, 44.5, 24, 44.5, 34, 41, 33], go: { href: '/negocio#mom' } },
-      { id: 'blue', at: [33, 58], poly: [31, 54, 35, 54, 35, 61, 31, 61], go: { href: '/negocio#blue' } },
+      { id: 'lean', at: [29, 25], poly: [27, 20, 31, 20, 31, 31, 27, 31], go: { href: '/negocio/libros#lean' } },
+      { id: 'mom', at: [42.5, 28], poly: [41, 23, 44.5, 24, 44.5, 34, 41, 33], go: { href: '/negocio/libros#mom' } },
+      { id: 'blue', at: [33, 58], poly: [31, 54, 35, 54, 35, 61, 31, 61], go: { href: '/negocio/libros#blue' } },
     ],
   },
   { key: 'video', building: 'right', zone: 'brand', href: '/proyectos/kinetic',

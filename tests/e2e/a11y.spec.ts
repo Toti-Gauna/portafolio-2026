@@ -32,7 +32,7 @@ async function enter(page: Page, url: string) {
   await expect(page.locator('#boot')).toHaveCount(0);
 }
 
-for (const url of ['/es/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/sobre-mi/', '/es/negocio/', '/es/proyectos/complia/', '/es/proyectos/kinetic/', '/es/proyectos/handyx/#paso-real', '/es/proyectos/lucero/', '/es/proyectos/trazo/', '/es/roadmap/', '/es/brand-lab/', '/es/brand-lab/#marca-velmar', '/es/brand-lab/#marca-sereno', '/en/', '/en/trabajo/']) {
+for (const url of ['/es/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/sobre-mi/', '/es/negocio/', '/es/negocio/libros/', '/es/proyectos/complia/', '/es/proyectos/kinetic/', '/es/proyectos/handyx/#paso-real', '/es/proyectos/lucero/', '/es/proyectos/trazo/', '/es/roadmap/', '/es/brand-lab/', '/es/brand-lab/#marca-velmar', '/es/brand-lab/#marca-sereno', '/en/', '/en/trabajo/']) {
   test(`AA text contrast on ${url}`, async ({ page }) => {
     await enter(page, url);
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 50)); } window.scrollTo(0, 0); });

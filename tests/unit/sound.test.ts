@@ -12,6 +12,7 @@ describe('music zones', () => {
     expect(zoneForPath('/catalogo')).toBeNull();
     expect(zoneForPath('/sobre-mi/#contacto')).toBe('about');
     expect(zoneForPath('/negocio/')).toBe('brand');
+    expect(zoneForPath('/negocio/libros')).toBe('brand');
   });
   it('every home chapter has a zone, every zone is used and a zone never skips back and forth', () => {
     const used = new Set(CHAPTERS.map((c) => c.zone));
