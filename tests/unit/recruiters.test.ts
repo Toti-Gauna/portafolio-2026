@@ -19,13 +19,14 @@ describe('Para reclutadores (Ola 8d)', () => {
   it('the sheet repeats only what the site already approved: role, places and dates from the path', () => {
     for (const m of [es, en]) {
       const sheet = m.recruiters.sheet as Row[];
-      expect(sheet).toHaveLength(7);
+      expect(sheet).toHaveLength(8);
       const all = sheet.map((r) => r.v).join(' ');
       expect(all).toContain(m.intro.role);
       expect(all).toMatch(/2021 – 2022/);
       expect(all).toMatch(/2023 – 2024/);
       expect(all).toMatch(/2024/);
       expect(all).toMatch(/11/);
+      expect(all).toMatch(/C1/);
     }
     const dates = Object.fromEntries(Object.entries(es.career.st).map(([k, v]) => [k, (v as { when: string }).when]));
     expect(dates.tach).toBe('2021 – 2022');
@@ -34,12 +35,12 @@ describe('Para reclutadores (Ola 8d)', () => {
     expect(STATIONS.map((s) => s.id)).toEqual(expect.arrayContaining(['tach', 'ada', 'tsoft']));
   });
 
-  it('what Ignacio decided on 17/11/2026: no Upwork, no salary, no availability, no languages or time zone anywhere', () => {
+  it('what Ignacio decided on 17/11/2026: no Upwork, no salary, no availability, no time zone or modality; the only language data is his English level (C1, asked for on 17/11/2026)', () => {
     for (const m of [es, en]) {
       const all = JSON.stringify(m).toLowerCase();
       expect(all).not.toMatch(/upwork|fiverr|freelancer\.com/);
       const mine = JSON.stringify(m.recruiters).toLowerCase();
-      expect(mine).not.toMatch(/salari|sueldo|salary|expectativ|disponibilidad|availab|zona horaria|time zone|remoto|remote|idiomas|languages|usd|\$\s?\d/);
+      expect(mine).not.toMatch(/salari|sueldo|salary|expectativ|disponibilidad|availab|zona horaria|time zone|remoto|remote|usd|\$\s?\d/);
     }
   });
 

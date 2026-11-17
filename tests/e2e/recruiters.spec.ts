@@ -19,8 +19,9 @@ test('recruiters: the sheet and three cases with their status, between the journ
   await enter(page, '/es/sobre-mi/#reclutadores');
   const s = page.locator('section#reclutadores');
   await expect(s.locator('h2')).toHaveText('Lo esencial, en una ficha.');
-  await expect(s.locator('.rc-sheet > div')).toHaveCount(7);
+  await expect(s.locator('.rc-sheet > div')).toHaveCount(8);
   await expect(s).toContainText('seguir desarrollándome y avanzando en mi carrera');
+  await expect(s.locator('.rc-sheet')).toContainText('Inglés: C1');
   await expect(s.locator('.rc-case')).toHaveCount(3);
   await expect(s.locator('.rc-case .stag')).toHaveCount(2);
   const links = await s.locator('a.card-link').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
