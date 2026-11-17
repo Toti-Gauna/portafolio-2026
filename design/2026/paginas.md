@@ -36,7 +36,9 @@ La home es un recorrido por **el Taller cósmico**: un mundo flotante en el espa
 
 **Interacción (Ola 4):** cada escena lleva referencias numeradas que elevan su edificio y abren una ficha; el hero es el índice del taller. Ver `taller-interaccion.md`.
 
-## 3. Work & Projects (Olas 4–6)
+## 3. Work & Projects (Olas 5–6)
+
+> Ola 5 hecha como maqueta ferroviaria isométrica en código (decisión de Ignacio, 17/11/2026): ver `camino.md`. Lo de abajo es el plan original; el roadmap (Ola 6) sigue pendiente.
 
 - **El camino:** vista isométrica de edificios con trama halftone unidos por un camino coral. Orden: semilla en Mar del Plata (a los 17) → TACH (startup) → Ada ITW (academia) → Tsoft (corporativa, con Telefónica y Tuenti) → caminos propios (Eclipse, HandyX, Lucero, Trazo, Kinetic, laboratorio) → roadmap (edificios en contorno punteado, «Planeado»).
 - **Interacción:** clic o foco en un edificio → sube y abre su ficha (estado, fechas, rol, 3 cifras con fuente, stack, «Ver el caso»). Stepper al pie con las etapas; flechas del teclado avanzan.
