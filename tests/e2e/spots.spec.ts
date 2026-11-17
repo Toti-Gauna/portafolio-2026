@@ -92,7 +92,7 @@ test('walk: the hero is the index of the workshop and each reference goes to its
   await expect.poll(() => page.evaluate(() => Math.abs(document.querySelector('#taller-work')!.getBoundingClientRect().top))).toBeLessThan(40);
 });
 
-test('walk: the trailer reference opens the trailer; the roadmap ones are only «Planeado» and lead nowhere', async ({ page }) => {
+test('walk: the trailer reference opens the trailer; the roadmap ones are «Planeado» and lead to the roadmap page', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await enter(page, '/es/');
   await toChapter(page, 8);
@@ -104,7 +104,8 @@ test('walk: the trailer reference opens the trailer; the roadmap ones are only �
   const roadmap = page.locator('article[data-ch="9"] .tch__spot');
   await expect(roadmap).toHaveCount(4);
   await expect(roadmap.locator('.stag[data-kind="planeado"]')).toHaveCount(4);
-  await expect(roadmap.locator('a, button.tch__go')).toHaveCount(0);
+  for (const a of await roadmap.locator('a.tch__go').all()) await expect(a).toHaveAttribute('href', /\/roadmap\/?$/);
+  await expect(roadmap.locator('a.tch__go')).toHaveCount(4);
 });
 
 test('plain layout (phone): a list under each text, rows of 44 px that unfold their card, no sideways scroll', async ({ browser }) => {

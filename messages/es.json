@@ -127,6 +127,10 @@
       "about": {
         "t": "Sobre mí",
         "d": "De Mar del Plata: el recorrido y el contacto."
+      },
+      "roadmap": {
+        "t": "Roadmap",
+        "d": "Mi plan hasta agosto de 2030, en cuatro etapas."
       }
     }
   },
@@ -1098,7 +1102,7 @@
       "roadmap": {
         "title": "Roadmap",
         "heading": "Lo que viene.",
-        "text": "Un plan de varios años en cuatro etapas, con proyectos en energía, agro, salud, espacio y finanzas. Todo está planeado: nada de esto está hecho todavía.",
+        "text": "Un plan de varios años en cuatro etapas, con proyectos en energía, agro, salud, espacio y finanzas. Casi todo está planeado: solo la consolidación de este mes está en marcha.",
         "items": [
           "Núcleo",
           "Ciberseguridad",
@@ -1109,21 +1113,26 @@
         "spots": {
           "energy": {
             "name": "Energía",
-            "text": "Un proyecto de energía del roadmap. Es una maqueta punteada: todavía no existe."
+            "text": "Un proyecto de energía del roadmap. Es una maqueta punteada: todavía no existe.",
+            "cta": "Ver en el roadmap"
           },
           "agro": {
             "name": "Agro",
-            "text": "Un proyecto de agro del roadmap. Es una maqueta punteada: todavía no existe."
+            "text": "Un proyecto de agro del roadmap. Es una maqueta punteada: todavía no existe.",
+            "cta": "Ver en el roadmap"
           },
           "finance": {
             "name": "Finanzas",
-            "text": "Un proyecto de finanzas del roadmap. Es una maqueta punteada: todavía no existe."
+            "text": "Un proyecto de finanzas del roadmap. Es una maqueta punteada: todavía no existe.",
+            "cta": "Ver en el roadmap"
           },
           "space": {
             "name": "Espacio",
-            "text": "Un proyecto aeroespacial del roadmap. Es una maqueta punteada: todavía no existe."
+            "text": "Un proyecto aeroespacial del roadmap. Es una maqueta punteada: todavía no existe.",
+            "cta": "Ver en el roadmap"
           }
-        }
+        },
+        "cta": "Ver el roadmap"
       },
       "contact": {
         "title": "Contacto",
@@ -1422,6 +1431,329 @@
       "space": {
         "name": "Aeroespacial",
         "text": "Una etapa del roadmap. Es un lote marcado con estacas: todavía no hay nada construido."
+      }
+    },
+    "toRoadmap": "Ver en el roadmap"
+  },
+  "roadmap": {
+    "metaTitle": "Roadmap — Ignacio Gauna",
+    "metaDescription": "Mi plan de noviembre de 2026 a agosto de 2030: cuatro etapas, cada proyecto con su tecnología, las ventanas de matemática y las certificaciones. Todo planeado.",
+    "label": "Roadmap",
+    "title": "Lo que viene.",
+    "lead": "Mi plan hasta agosto de 2030, en cuatro etapas. Es un plan: salvo la consolidación de este mes, nada de esto está hecho todavía.",
+    "rule": "En cada ventana de matemática (W) dejo la programación y estudio matemática pura. Salgo recién con 85 % o más en los tests del tramo; si no llego, la ventana se extiende y se descuenta del colchón.",
+    "stages": "Etapas",
+    "kinds": {
+      "project": "Proyecto",
+      "window": "Ventana de matemática",
+      "cert": "Certificación",
+      "pause": "Pausa"
+    },
+    "weeks": "{n, plural, one {# semana} other {# semanas}}",
+    "tech": "Con",
+    "exit": "Nivel de salida",
+    "opens": "Habilita",
+    "proposed": "Propuesto",
+    "cut": "Recortable",
+    "figure": "Maqueta del roadmap: un terreno relevado con estacas, donde cada proyecto es una maqueta punteada sobre su lote, cada ventana de matemática una barrera y cada certificación una torre de señales.",
+    "loading": "Cargando la maqueta…",
+    "asList": "Ver como lista",
+    "asMap": "Ver la maqueta",
+    "readout": "Etapa {n} de {total}",
+    "count": "{p} proyectos · {w} ventanas · {c} certificaciones",
+    "back": "Volver al trabajo",
+    "st": {
+      "core": {
+        "name": "Núcleo",
+        "when": "nov 2026 – feb 2028",
+        "text": "Los proyectos base: datos, IA, seguridad e infraestructura sobre problemas reales de energía, salud, agro y espacio."
+      },
+      "cyber": {
+        "name": "Ciberseguridad",
+        "when": "feb – ago 2028",
+        "text": "Criptografía, pentesting y detección, con las certificaciones que los respaldan."
+      },
+      "quant": {
+        "name": "Quant",
+        "when": "ago 2028 – jun 2029",
+        "text": "Finanzas cuantitativas: backtesting, opciones, libro de órdenes y riesgo, hasta una puerta antes de operar con capital real."
+      },
+      "space": {
+        "name": "Aeroespacial",
+        "when": "jun 2029 – ago 2030",
+        "text": "Simulación de vuelo, estructuras, fluidos, control y órbitas, hasta un gemelo digital."
+      }
+    },
+    "items": {
+      "p0": {
+        "name": "Consolidación",
+        "tech": "Sin tecnología nueva",
+        "what": "El portafolio con el mapa 3D de proyectos, Trazo como caso, RAG para negocios, tres automatizaciones y portfolio-mcp v0 en TypeScript."
+      },
+      "p1": {
+        "name": "Faro v1",
+        "tech": "Spring Boot, Spring Security y OIDC, Postgres con pgvector, RAG en Python (FastAPI), DuckDB",
+        "what": "Preguntas sobre pozos de Vaca Muerta respondidas con la cita al dato, un «pozo tipo» con percentiles, un verificador de cumplimiento y un visor 3D del yacimiento."
+      },
+      "pausa-1": {
+        "name": "Pausa",
+        "what": "Una semana sin proyecto."
+      },
+      "p2": {
+        "name": "Escudo",
+        "tech": "Gateway en Go con acceso por rol y auditoría, capa FHIR en .NET, modelo local con vLLM y LoRA",
+        "what": "Desidentificación de datos clínicos y un banco de ataques comparado con herramientas existentes."
+      },
+      "w1": {
+        "name": "Funciones y estadística",
+        "what": "Funciones, desigualdades, exponentes y logaritmos, estadística descriptiva.",
+        "exit": "Resolver ecuaciones y desigualdades sin ayuda, graficar funciones, calcular varianza, percentiles y cuantiles.",
+        "opens": "P3"
+      },
+      "p3": {
+        "name": "Surco v1",
+        "tech": "Python, pandas, scikit-learn, gradient boosting, MLflow, Dagster, Rails para el backoffice",
+        "what": "Predicción de rinde con intervalos conformes y un simulador por fecha de siembra."
+      },
+      "c1": {
+        "name": "AWS Solutions Architect Associate",
+        "what": "Certificación."
+      },
+      "p4": {
+        "name": "Estación v1",
+        "tech": "Rust, SGP4, MQTT con mTLS, OTA, WebAssembly",
+        "what": "Un decodificador de telemetría y un planificador de pasadas con calidad de enlace."
+      },
+      "p5": {
+        "name": "Faro v2",
+        "tech": "Kubernetes endurecido, GitOps, artefactos firmados, eBPF con Falco, colector en Go",
+        "what": "Detección sobre tráfico industrial simulado con MITRE ATT&CK for ICS."
+      },
+      "c2": {
+        "name": "CompTIA Security+",
+        "what": "Certificación, en la versión vigente al rendirla."
+      },
+      "w2": {
+        "name": "Cálculo y álgebra lineal",
+        "what": "Derivadas, regla de la cadena, vectores y matrices.",
+        "exit": "Derivar funciones compuestas, multiplicar matrices y hacer a mano la backpropagation de una red de 2 capas.",
+        "opens": "P6"
+      },
+      "p6": {
+        "name": "Lupa v1",
+        "tech": "PyTorch, GPU, Blender para datos sintéticos, autograd desde cero",
+        "what": "Un informe de inspección automático con el defecto ubicado en 3D."
+      },
+      "p7": {
+        "name": "Surco v2",
+        "tech": "MLOps, PostGIS, STAC, serving en Kubernetes",
+        "what": "Zonas de manejo y alerta de estrés de cultivo."
+      },
+      "c3": {
+        "name": "AWS Machine Learning Engineer Associate",
+        "what": "Certificación."
+      },
+      "w3": {
+        "name": "Probabilidad, EDOs y optimización",
+        "what": "Probabilidad (distribuciones, esperanza, Bayes), EDOs (Euler, RK4) y optimización convexa básica.",
+        "exit": "Resolver problemas tipo Stat 110, implementar RK4 y plantear un problema convexo.",
+        "opens": "P8; base de quant y aeroespacial"
+      },
+      "p8": {
+        "name": "Red teaming de agentes",
+        "tech": "garak y PyRIT, mapeado a OWASP LLM Top 10",
+        "what": "Propuesta: atacar agentes de IA de forma sistemática. La alternativa era un gemelo de reactor educativo."
+      },
+      "p9": {
+        "name": "Lupa v2",
+        "tech": "ONNX Runtime y cuantización",
+        "what": "Propuesta: inferencia en CPU. La alternativa era C++ en una Jetson."
+      },
+      "p10": {
+        "name": "Estación v2",
+        "tech": "Kafka, autoencoders, datos SMAP y MSL de la NASA, SLO, multiempresa con Go y Spring",
+        "what": "Triage de anomalías con explicación."
+      },
+      "colchon": {
+        "name": "Colchón",
+        "what": "Dos semanas de margen: una ventana que se extiende se descuenta de acá."
+      },
+      "w4": {
+        "name": "Teoría de números y criptografía",
+        "what": "Aritmética modular, teoría de números, RSA, curvas elípticas.",
+        "exit": "Implementar RSA y Diffie-Hellman de juguete y explicar por qué falla el reuso de nonce.",
+        "opens": "S1"
+      },
+      "s1": {
+        "name": "Cripta",
+        "tech": "Go o Rust, AWS KMS, Vault, SPIFFE, mTLS",
+        "what": "Cifrado de sobre, rotación, firma de artefactos y un escáner de secretos."
+      },
+      "pausa-2": {
+        "name": "Pausa",
+        "what": "Una semana sin proyecto."
+      },
+      "s2": {
+        "name": "Bastión",
+        "tech": "STRIDE, Burp Suite, fuzzing, Semgrep, SAST, DAST y SCA en CI",
+        "what": "Pentest de mis propios proyectos, informe con CVSS y retest automático."
+      },
+      "c4": {
+        "name": "PNPT",
+        "what": "Certificación práctica: examen de 5 días y 2 más para el informe."
+      },
+      "c5": {
+        "name": "CKA",
+        "what": "Certificación de Kubernetes."
+      },
+      "c6": {
+        "name": "CKS",
+        "what": "Certificación de seguridad en Kubernetes; exige la CKA."
+      },
+      "s3": {
+        "name": "Centinela",
+        "tech": "Sigma, MITRE ATT&CK, OpenSearch como SIEM, osquery",
+        "what": "Purple team, playbooks con aprobación y medición del tiempo de detección."
+      },
+      "c7": {
+        "name": "AWS Security Specialty",
+        "what": "Certificación."
+      },
+      "cierre-1": {
+        "name": "Cierre de la etapa",
+        "what": "Una semana para cerrar lo hecho en 18 meses."
+      },
+      "wq1": {
+        "name": "Estadística aplicada y portafolios",
+        "what": "Inferencia, regresión, series de tiempo, portafolios.",
+        "exit": "Test de hipótesis, AR/ARMA y frontera eficiente.",
+        "opens": "Q1 y Q2"
+      },
+      "q1": {
+        "name": "Ábaco",
+        "tech": "Rust, Polars, Arrow, PyO3",
+        "what": "Un backtester con costos, validación walk-forward y registro de experimentos."
+      },
+      "q2": {
+        "name": "Réplica de papers",
+        "tech": "Quarto",
+        "what": "Propuesta: replicar 3 papers, con su informe."
+      },
+      "descanso-1": {
+        "name": "Descanso",
+        "what": "Una semana sin proyecto."
+      },
+      "wq2": {
+        "name": "Cálculo estocástico",
+        "what": "Wiener, Itô, martingalas, Black–Scholes, Monte Carlo.",
+        "exit": "Derivar Black–Scholes, simular un movimiento browniano geométrico y calcular griegas.",
+        "opens": "Q3 y Q4"
+      },
+      "q3": {
+        "name": "Prisma",
+        "tech": "C++ o Rust con enlaces a Python, validado contra QuantLib",
+        "what": "Riesgo de una cartera de opciones y superficie de volatilidad en 3D."
+      },
+      "q4": {
+        "name": "Libro",
+        "tech": "C++ o Rust, protocolo FIX",
+        "what": "Libro de órdenes, market making y análisis de costos."
+      },
+      "wq3": {
+        "name": "Optimización y ML financiero",
+        "what": "Optimización convexa, dualidad, ML financiero con validación purgada.",
+        "opens": "Q5 y Q6"
+      },
+      "q5": {
+        "name": "Tablero",
+        "tech": ".NET",
+        "what": "Gestor de órdenes y riesgo, paper trading con kill-switch y conciliación de posiciones."
+      },
+      "pausa-3": {
+        "name": "Pausa",
+        "what": "Una semana sin proyecto."
+      },
+      "q6": {
+        "name": "Datos de mercado",
+        "tech": "ClickHouse",
+        "what": "Propuesta: un pipeline de datos de mercado."
+      },
+      "cierre-2": {
+        "name": "Cierre y puerta de capital real",
+        "what": "Dos semanas para cerrar la etapa antes de decidir si opero con capital real."
+      },
+      "wa1": {
+        "name": "Mecánica clásica",
+        "what": "Mecánica clásica y EDOs aplicadas.",
+        "exit": "Simular un cuerpo rígido y contrastar RK4 con la solución analítica.",
+        "opens": "A1"
+      },
+      "a1": {
+        "name": "Trayectoria",
+        "tech": "Rust o C++, cuaterniones, Julia como contraste",
+        "what": "Un simulador de 6 grados de libertad con dispersión Monte Carlo."
+      },
+      "wa2": {
+        "name": "Estructuras",
+        "what": "Estática, esfuerzos, vigas, álgebra lineal numérica.",
+        "opens": "A2"
+      },
+      "a2": {
+        "name": "Cuerda",
+        "tech": "Elementos finitos, Gmsh y CalculiX para validar",
+        "what": "Análisis estructural por elementos finitos."
+      },
+      "descanso-2": {
+        "name": "Descanso",
+        "what": "Una semana sin proyecto."
+      },
+      "wa3": {
+        "name": "Termodinámica y fluidos",
+        "what": "Termodinámica, fluidos, diferencias finitas y estabilidad (CFL).",
+        "opens": "A3"
+      },
+      "a3": {
+        "name": "Túnel",
+        "tech": "Paneles, vortex lattice, Euler 2D contra OpenFOAM o SU2",
+        "what": "Un túnel de viento numérico. Recortable si hace falta tiempo."
+      },
+      "wa4": {
+        "name": "Control",
+        "what": "Funciones de transferencia, estabilidad, PID, LQR, Kalman.",
+        "opens": "A4"
+      },
+      "a4": {
+        "name": "Rumbo",
+        "tech": "ROS 2, PX4 o ArduPilot en simulación",
+        "what": "Control por refuerzo comparado con LQR y un banco de fallas."
+      },
+      "wa5": {
+        "name": "Mecánica orbital",
+        "what": "Kepler, Lambert, delta-v, ecuación del cohete.",
+        "opens": "A5 y A6"
+      },
+      "a5": {
+        "name": "Órbita",
+        "tech": "Orekit (Java)",
+        "what": "Un propagador con J2 y screening de conjunciones."
+      },
+      "a6": {
+        "name": "Contribuciones open source",
+        "tech": "PX4, Orekit o F Prime",
+        "what": "Propuesta: contribuir a uno de esos proyectos. Recortable."
+      },
+      "pausa-4": {
+        "name": "Pausa",
+        "what": "Una semana sin proyecto."
+      },
+      "a7": {
+        "name": "Horizonte",
+        "tech": "F Prime o cFS, RTOS con Rust embebido o Ada/SPARK",
+        "what": "Un gemelo digital con un operador asistido."
+      },
+      "cierre-3": {
+        "name": "Cierre",
+        "what": "Dos semanas para cerrar el plan."
       }
     }
   }

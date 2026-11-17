@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { CASE_SLUGS, LAB, WORK_SHOT, WORK_SHOT_800, type CaseSlug } from '@/lib/cases';
 import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
-import { CONTACT_HREF, PAGES } from '@/lib/nav';
+import { ALL_PAGES, CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
@@ -344,7 +344,7 @@ export function Footer() {
           <h2 id="foot-pages" className="label">{t('sitemap')}</h2>
           <ul>
             <li><Link href="/">{n('home')}</Link></li>
-            {PAGES.map((p) => <li key={p.key}><Link href={p.href}>{n(`pages.${p.key}.t`)}</Link></li>)}
+            {ALL_PAGES.map((p) => <li key={p.key}><Link href={p.href}>{n(`pages.${p.key}.t`)}</Link></li>)}
           </ul>
         </nav>
         <nav className="foot__col foot__col--cases" aria-labelledby="foot-cases">

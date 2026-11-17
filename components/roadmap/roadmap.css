@@ -1,0 +1,32 @@
+/* /roadmap (components/roadmap/Roadmap.tsx): shares camino.css; these are the rows of a stage and the card's extras. */
+.camino.roadmap { padding-block: 0 clamp(48px, 8vw, 104px); }
+.camino .camino__steps--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 700px) { .camino .camino__steps--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.roadmap__stext { max-width: 60ch; margin: 0 0 14px; }
+.roadmap__rows { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.roadmap__rows > li { min-width: 0; }
+.roadmap__row { display: none; }
+.js .roadmap:not([data-view='list']) .roadmap__rows { display: block; border-top: 1px solid var(--line); }
+.js .roadmap:not([data-view='list']) .roadmap__row {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 6px 12px;
+  background: transparent; color: var(--paper); border: 0; border-bottom: 1px solid var(--line); font: 600 15px var(--font-sans, inherit); text-align: left; cursor: pointer;
+}
+.js .roadmap:not([data-view='list']) .roadmap__row:hover { background: var(--surface); }
+.js .roadmap:not([data-view='list']) .roadmap__row[aria-pressed='true'] { background: var(--paper); color: var(--ink); }
+.roadmap__code { font: 700 13px var(--font-mono); letter-spacing: 0.08em; color: var(--accent); }
+.js .roadmap:not([data-view='list']) .roadmap__row[aria-pressed='true'] .roadmap__code { color: var(--ink); }
+.js .roadmap:not([data-view='list']) .roadmap__row[data-kind='window'] .roadmap__name, .js .roadmap:not([data-view='list']) .roadmap__row[data-kind='cert'] .roadmap__name { font-weight: 500; }
+.js .roadmap:not([data-view='list']) .roadmap__row[data-kind='pause'] { color: var(--soft); }
+.js .roadmap:not([data-view='list']) .roadmap__row[data-kind='pause'][aria-pressed='true'] { color: var(--ink); }
+.roadmap__when { font: 500 12px var(--font-mono); letter-spacing: 0.06em; opacity: 0.75; white-space: nowrap; }
+.roadmap__kind { color: var(--muted); margin: 0; }
+.roadmap__time { margin: 0; color: var(--soft); }
+@media (max-width: 420px) {
+  .js .roadmap:not([data-view='list']) .roadmap__row { grid-template-columns: 44px minmax(0, 1fr); }
+  .roadmap__when { grid-column: 2; }
+}
+.roadmap__intro { display: grid; gap: 10px; max-width: 70ch; margin-bottom: 28px; }
+.roadmap__intro .note { margin: 0; }
+.roadmap__back { padding-bottom: clamp(32px, 6vw, 64px); }
+/* in the map view the picked piece's card opens under its row */
+.js .roadmap:not([data-view='list']) .roadmap__card { margin: 0; border-top: 0; max-width: 680px; }

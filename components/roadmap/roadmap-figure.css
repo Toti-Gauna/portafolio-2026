@@ -1,0 +1,16 @@
+/* The roadmap's model (scripts/roadmap/build.mjs). Planned things are wire only: dotted graphite at rest, dotted coral in
+   the stage on screen, a solid coral line for the picked one. Districts are four close tints of the paper. */
+.rm-wire { fill: none; stroke: #8d877c; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 0.1 3.2; }
+[data-stage-on] .rm-wire { stroke: #ff4d2e; }
+[data-item][data-on] .rm-wire { stroke: #ff4d2e; stroke-width: 1.6; stroke-dasharray: none; }
+.rm-zone { fill: #eeeae3; }
+.rm-zone[data-zone="core"] { fill: #e9e5dd; }
+.rm-zone[data-zone="cyber"] { fill: #e3e0da; }
+.rm-zone[data-zone="quant"] { fill: #ebe5da; }
+.rm-zone[data-zone="space"] { fill: #e4e3dc; }
+.rm-grid { opacity: 0.55; }
+.rm-stripe, .rm-lamp { fill: #ff4d2e; }
+.cam-stand g[data-item] { cursor: pointer; transition: transform 240ms var(--ease-expo, ease); }
+.cam-stand g[data-item][data-hover] .rm-wire { stroke: #ff4d2e; }
+.cam-stand g[data-item][data-on] { transform: translateY(-6px); }
+@media (prefers-reduced-motion: reduce) { .cam-stand g[data-item] { transition: none !important; } }
