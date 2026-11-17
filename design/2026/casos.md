@@ -49,12 +49,37 @@ pantalla: resumen arriba y el detalle en pasos**.
   - el panel nuevo entra con opacidad y una traslación de 12 px (al instante con movimiento reducido);
   - la página sube hasta el comienzo del panel, si quedó más abajo;
   - el foco va al título del paso (`tabindex="-1"`);
-  - suena el cue `select`;
+  - suena el clic de la interfaz (el oyente delegado de `lib/ui-sounds.ts` ya lo hace para todo enlace; no se suma otro);
   - la URL cambia a `#paso-<id>` con `replaceState`, y al cargar con ese hash se abre ese paso.
 - **Teclado.** Los pasos son enlaces: Tab llega a todos, Enter abre. No usa el patrón de pestañas, porque cada paso es
   largo y se lee como una página.
 - **Sin JavaScript.** Se ven todos los pasos uno debajo del otro, y la columna es un índice de enlaces a `#paso-<id>`.
   Así se sigue leyendo entero.
+
+## Cómo quedó (Ola 7a, implementado)
+
+- `components/case/CaseSteps.tsx` (cliente): columna, barra de celular y paneles. El servidor dibuja todos los paneles
+  (el primero activo); con JS (`html.js`) solo se ve el activo. El hash `#paso-<id>`, o el id de una sección dentro de un
+  panel, abre ese panel. El progreso es una línea coral con `scaleY` (`--p`).
+- `app/[locale]/proyectos/[slug]/page.tsx`: si el caso tiene `steps`, arma un panel por paso con `CaseSections`
+  (`ui.stepped`: secciones h3 y títulos internos h4) y reemplaza el índice; el estado de la portada sale de
+  `lib/career.ts` (`StatusTag`).
+- Una sección titulada igual que su paso no repite el título (`sameAs`): el h2 del paso ya lo dice.
+- Medido (17/11/2026): la página de Eclipse en el paso más largo mide 11.651 px, contra unos 23.000 antes
+  (`case-steps.spec.ts` lo registra y exige < 16.000).
+
+## Decisiones de Ignacio sobre las demos (17/11/2026, para la 7b)
+
+Respuestas a las seis preguntas de `design/2026/demos-implementacion.md`:
+1. **Nota de MVP:** «demo de e-commerce» (Volta y Velmar): el texto dice que es una demo para mostrar antes de la seña.
+2. **DentalOS:** agregar una **propuesta mía, con todo el system design**, rotulada como propuesta.
+3. **Lucero, retención:** 90 días.
+4. **Supernova:** poner un **ejemplo de backend**, sin nombrar al cliente.
+5. **HandyX:** colocarlo igual (paso `real`, aunque su estado sea MVP) y contar **cómo pensamos el backend de ambos
+   lados** (la app de usuario y la de especialistas).
+6. **Lucero:** se puede describir cómo sería el backend, con su system design.
+Consecuencia: la regla «`real` solo en Demo, Prototipo o Banco» se amplía a MVP y a Prototipo (Supernova); el test
+se actualiza en la 7b.
 
 ## Jerarquía
 
