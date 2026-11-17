@@ -30,6 +30,7 @@ function run(root: HTMLElement) {
   const scenes = Array.from(stage.querySelectorAll<HTMLImageElement>('.taller__scene'));
   const chapters = Array.from(root.querySelectorAll<HTMLElement>('article[data-ch]'));
   const bodies = chapters.map((c) => c.querySelector<HTMLElement>('.tch__body'));
+  const maps = chapters.map((c) => c.querySelector<HTMLElement>('.tch__map'));
   const videos = new Map<number, HTMLVideoElement>();
   const html = document.documentElement;
   root.dataset.mode = 'scroll';
@@ -126,6 +127,15 @@ function run(root: HTMLElement) {
       const out = k < chapters.length - 1 ? clamp((fk - HOLD) / FADE) : 0;
       b.style.opacity = String(1 - out);
       b.style.transform = out ? `translate3d(0,${(-24 * out).toFixed(1)}px,0)` : '';
+      // the references leave with the text: an open card closes and the map can't be reached while it fades
+      const m = maps[k];
+      if (m) {
+        m.style.opacity = String(1 - out);
+        if (out > 0 !== m.hasAttribute('inert')) {
+          m.toggleAttribute('inert', out > 0);
+          if (out > 0) m.querySelectorAll<HTMLDetailsElement>('details[open]').forEach((d) => { d.open = false; });
+        }
+      }
     });
 
     html.toggleAttribute('data-scene-covered', y < rootBottom - vh * 0.5);
@@ -149,6 +159,7 @@ function run(root: HTMLElement) {
     Array.from(videos.keys()).forEach(drop);
     scenes.forEach((s) => { s.style.opacity = ''; s.style.transform = ''; });
     bodies.forEach((b) => { if (b) { b.style.opacity = ''; b.style.transform = ''; } });
+    maps.forEach((m) => { if (m) { m.style.opacity = ''; m.removeAttribute('inert'); } });
     html.removeAttribute('data-scene-covered');
     delete root.dataset.mode;
   };

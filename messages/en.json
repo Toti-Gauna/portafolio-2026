@@ -1044,11 +1044,11 @@
         "spots": {
           "lab": {
             "name": "Brand boards",
-            "text": "Logo, palette, type and applications for IG, Eclipse, Velmar, Lucero, Volta and DentalOS, handmade in SVG."
+            "text": "Logo, palette, type and applications, drawn by hand in SVG. This section is being built."
           },
           "exercise": {
             "name": "Brand exercises",
-            "text": "Invented brands to practise on, labelled as exercises."
+            "text": "Invented brands made to practise on are labelled as exercises. This section is being built."
           }
         }
       },
@@ -1136,7 +1136,6 @@
     "creditMusic": "Background music generated with Suno.",
     "spots": {
       "label": "In this scene",
-      "hint": "Tap a number to see what it is.",
       "goScene": "Go to the scene",
       "close": "Close"
     }

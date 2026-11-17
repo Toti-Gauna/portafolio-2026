@@ -19,12 +19,12 @@ test('home: the cosmic workshop walk, one chapter per building, each page reacha
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Ignacio');
   await expect(page.locator('article.tch')).toHaveCount(11);
   // every page of the menu is reachable from a chapter
-  const hrefs = await page.locator('a.tch__go').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
+  const hrefs = await page.locator('.tch__body a.tch__go').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
   for (const p of ['/es/sobre-mi/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/']) expect(hrefs, p).toContain(p);
   // honesty: featured projects and the roadmap carry their status; unbuilt sections say so
-  await expect(page.locator('.tch--work .stag')).toHaveCount(3);
-  await expect(page.locator('.tch--roadmap .stag[data-kind="planeado"]')).toHaveCount(4);
-  await expect(page.locator('.tch--brand .tch__soon')).toHaveCount(1);
+  await expect(page.locator('.tch--work .tch__body .stag')).toHaveCount(3);
+  await expect(page.locator('.tch--roadmap .tch__body .stag[data-kind="planeado"]')).toHaveCount(4);
+  await expect(page.locator('.tch--brand .tch__body .tch__soon')).toHaveCount(1);
   await expect(page.locator('#contacto').getByRole('link', { name: 'Escribime' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await expect(page.locator('#contacto')).toContainText('GPT Image');
   expect(await page.locator('main').innerText()).not.toContain('ComplIA');
@@ -69,7 +69,7 @@ test('home cards lead to their pages, and every page renders its content with it
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await enter(page, '/es/');
-  await page.locator('.tch--work a.tch__go').click();
+  await page.locator('.tch--work .tch__body a.tch__go').click();
   await expect(page).toHaveURL(/\/es\/trabajo\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Lo que construí.');
   for (const id of ['que-hago', 'trabajo', 'laboratorio']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
@@ -236,7 +236,7 @@ test('below 1100 px a floating contact button steps aside near other contact act
   await enter(page, '/es/');
   const fab = page.locator('.fab-contact');
   await expect(fab).toHaveAttribute('data-hidden', 'true'); // hero buttons are on screen
-  await page.locator('.tch--skills .tch__go').scrollIntoViewIfNeeded();
+  await page.locator('.tch--skills .tch__body .tch__go').scrollIntoViewIfNeeded();
   await expect(fab).toHaveAttribute('data-hidden', 'false');
   await expect(page.getByRole('link', { name: /^Contacto/ }).last()).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await page.locator('#contacto').scrollIntoViewIfNeeded();

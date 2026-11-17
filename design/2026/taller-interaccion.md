@@ -147,8 +147,9 @@ Va dentro de cada `article.tch`, después de `.tch__body` y dentro de `.tch__pin
 
 - Una sola `<img>` extra en el escenario, que reutiliza el archivo de la escena (está en caché). Sin `will-change` fijo:
   solo mientras está activa.
-- Las fichas son HTML liviano (el HTML de la home sube unas 30 referencias). Medir el gzip antes y después; el objetivo
-  es sumar menos de 4 KB.
+- Medido (17/11/2026): el HTML de la home pasó de 16,5 a 25,0 KB gzip (35 referencias con su ficha, contando el payload
+  de Next). El objetivo de sumar menos de 4 KB no se cumplió: casi todo es texto real que debe estar en el HTML. Los
+  contornos ya no viajan (se dibujan desde un solo atributo `data-poly`).
 
 ## Pruebas
 

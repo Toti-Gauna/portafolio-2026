@@ -1,6 +1,6 @@
 import { playCue } from './sound';
 
-const CONTROL = 'a[href], button:not([disabled]), [role="button"]';
+const CONTROL = 'a[href], button:not([disabled]), [role="button"], summary';
 
 /**
  * Interface sounds for every control of the site, with one delegated listener each (no per-component wiring).

@@ -1044,11 +1044,11 @@
         "spots": {
           "lab": {
             "name": "Tableros de marca",
-            "text": "Logo, paleta, tipografía y aplicaciones de IG, Eclipse, Velmar, Lucero, Volta y DentalOS, hechos a mano en SVG."
+            "text": "Logo, paleta, tipografía y aplicaciones, dibujados a mano en SVG. Esta sección se está armando."
           },
           "exercise": {
             "name": "Ejercicios de marca",
-            "text": "Marcas inventadas para practicar, rotuladas como ejercicio."
+            "text": "Las marcas inventadas para practicar se rotulan como ejercicio. Esta sección se está armando."
           }
         }
       },
@@ -1136,7 +1136,6 @@
     "creditMusic": "Música de fondo generada con Suno.",
     "spots": {
       "label": "En esta escena",
-      "hint": "Tocá un número para ver qué es.",
       "goScene": "Ir a la escena",
       "close": "Cerrar"
     }
