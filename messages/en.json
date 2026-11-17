@@ -742,7 +742,7 @@
       "title": "A method and a system.",
       "lead": "Six steps to create value and an agentic system, split into parts, where a person approves every delivery.",
       "metaTitle": "How I work — Ignacio Gauna",
-      "metaDescription": "The six-step method, the system of 11 agents with separate roles and how a change travels from the request to production."
+      "metaDescription": "The six-step method, the system of 11 agents with separate roles, how a change travels and how this portfolio was made: nine agents and the decisions taken."
     },
     "skills": {
       "metaTitle": "Skills — Ignacio Gauna",
@@ -3080,5 +3080,94 @@
       "eclipse": "My studio, built as a complete system: landing page, client portal, its own backend and an internal portal.",
       "agentes": "How I work: 11 agents with separate roles and gates where a person decides."
     }
+  },
+  "howsite": {
+    "label": "This site",
+    "title": "How this portfolio was made.",
+    "lead": "To redo it I set up nine more agents, defined in the repo with their role and model, and decided with them what was tried and what was not.",
+    "agentsTitle": "Nine agents, each with its model",
+    "agentsNote": "They are role definitions in the repo (`.claude/agents`). Opus goes on the design and data-scene ones; Sonnet on content, sound and three.js. I do not claim they run on their own: a person approves every delivery.",
+    "model": "Model",
+    "agents": {
+      "design-director": {
+        "name": "Visual direction",
+        "role": "Compares design systems, looks after the IG brand and reviews every piece with a rubric."
+      },
+      "brand-board-designer": {
+        "name": "Brand boards",
+        "role": "The Brand Lab boards in SVG, with native animations."
+      },
+      "iso-3d-builder": {
+        "name": "Isometric kit",
+        "role": "Isometric buildings, dioramas and figures with anatomy and three.js."
+      },
+      "diorama-dashboard-builder": {
+        "name": "Data dioramas",
+        "role": "Data-driven diorama dashboards: the career path and the roadmap."
+      },
+      "three-engineer": {
+        "name": "three.js engineering",
+        "role": "Scene engine: lazy loading, performance and GLB models."
+      },
+      "scroll-choreographer": {
+        "name": "Scroll choreography",
+        "role": "Backgrounds that change as you scroll and pre-recorded scenes that advance with it."
+      },
+      "sound-designer": {
+        "name": "Sound",
+        "role": "Synthesised interface sounds and background music per section."
+      },
+      "media-prompt-writer": {
+        "name": "Media prompts",
+        "role": "Writes the prompts for Higgsfield, GPT Image, Suno and ElevenLabs; it spends no credits on its own."
+      },
+      "content-guardian": {
+        "name": "Content guardian",
+        "role": "Checks every text and every new piece against the honesty and confidentiality rules."
+      }
+    },
+    "decidedTitle": "How it was decided",
+    "tried": "Tried",
+    "chose": "Chose",
+    "why": "Why",
+    "decisions": [
+      {
+        "t": "The visual system",
+        "tried": "Three complete systems (A, B and C) and a mix of A with B, compared on a canvas.",
+        "chose": "The Swiss poster with a dot screen, without the animated coral ribbon (Ignacio, 11/16/2026).",
+        "why": "Two inks, a screen instead of gradients and coral only for action and status: light on phones and legible."
+      },
+      {
+        "t": "Scroll World",
+        "tried": "Its full flow to generate a world you walk through by scrolling.",
+        "chose": "Only its scroll engine and its prompts; its pipeline is not run.",
+        "why": "The pipeline bills per clip or spends Higgsfield credits: spending is my decision."
+      },
+      {
+        "t": "Generated images and video",
+        "tried": "Letting each agent generate its own pieces.",
+        "chose": "The agents write the prompts; I generate with Higgsfield, GPT Image and Suno, and hand the files back.",
+        "why": "I authorise publishing and spending, and everything made with AI is declared on the page."
+      },
+      {
+        "t": "The Work & Projects path",
+        "tried": "More than one technique to draw it.",
+        "chose": "Isometric drawn in code, in SVG (Ignacio, 11/17/2026).",
+        "why": "It loads only when it gets close, takes the site's colours and has an equivalent list without JavaScript."
+      },
+      {
+        "t": "Cases, step by step",
+        "tried": "One scroll per case: Eclipse's was about 23,000 px.",
+        "chose": "One step at a time, with a column of steps: Eclipse's longest step is 11,651 px.",
+        "why": "A summary on top and the detail one step at a time: less information per screen."
+      },
+      {
+        "t": "Remotion",
+        "tried": "A 2 s React composition rendered to MP4, on 11/17/2026, in a separate folder.",
+        "chose": "It works, but I did not add it: no project or piece uses it.",
+        "why": "Dependencies are not added without approval, and its licence asks me to confirm my use is under the free one."
+      }
+    ],
+    "more": "See the agentic system in detail"
   }
 }

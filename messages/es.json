@@ -742,7 +742,7 @@
       "title": "Un método y un sistema.",
       "lead": "Seis pasos para generar valor y un sistema agéntico, dividido en partes, donde una persona aprueba cada entrega.",
       "metaTitle": "Cómo trabajo — Ignacio Gauna",
-      "metaDescription": "El método de seis pasos, el sistema de 11 agentes con roles separados y cómo viaja un cambio desde el pedido hasta producción."
+      "metaDescription": "El método de seis pasos, el sistema de 11 agentes con roles separados, cómo viaja un cambio y cómo se hizo este portafolio: nueve agentes y las decisiones que se tomaron."
     },
     "skills": {
       "metaTitle": "Capacidades — Ignacio Gauna",
@@ -3080,5 +3080,94 @@
       "eclipse": "Mi estudio, construido como un sistema completo: landing, portal de clientes, backend propio y portal interno.",
       "agentes": "Cómo trabajo: 11 agentes con roles separados y puertas donde decide una persona."
     }
+  },
+  "howsite": {
+    "label": "Este sitio",
+    "title": "Cómo se hizo este portafolio.",
+    "lead": "Para rehacerlo armé nueve agentes más, definidos en el repo con su rol y su modelo, y fui decidiendo con ellos qué se probaba y qué no.",
+    "agentsTitle": "Nueve agentes, cada uno con su modelo",
+    "agentsNote": "Son definiciones de rol en el repo (`.claude/agents`). Opus va en los de diseño y de escenas con datos; Sonnet, en los de contenido, sonido y three.js. No afirmo que corran solos: una persona aprueba cada entrega.",
+    "model": "Modelo",
+    "agents": {
+      "design-director": {
+        "name": "Dirección visual",
+        "role": "Compara sistemas de diseño, cuida la marca IG y revisa cada pieza con una rúbrica."
+      },
+      "brand-board-designer": {
+        "name": "Tableros de marca",
+        "role": "Los tableros del Brand Lab en SVG, con animaciones nativas."
+      },
+      "iso-3d-builder": {
+        "name": "Kit isométrico",
+        "role": "Edificios, dioramas y figuras isométricas con anatomy y three.js."
+      },
+      "diorama-dashboard-builder": {
+        "name": "Dioramas con datos",
+        "role": "Dashboards-diorama guiados por datos: el camino de carrera y el roadmap."
+      },
+      "three-engineer": {
+        "name": "Ingeniería three.js",
+        "role": "Motor de escenas: carga bajo demanda, rendimiento y modelos GLB."
+      },
+      "scroll-choreographer": {
+        "name": "Coreografía del scroll",
+        "role": "Fondos que cambian al bajar y escenas pregrabadas que avanzan con el scroll."
+      },
+      "sound-designer": {
+        "name": "Sonido",
+        "role": "Sonidos de interfaz sintetizados y música de fondo por sección."
+      },
+      "media-prompt-writer": {
+        "name": "Prompts de medios",
+        "role": "Escribe los prompts para Higgsfield, GPT Image, Suno y ElevenLabs; no gasta créditos por su cuenta."
+      },
+      "content-guardian": {
+        "name": "Guardián del contenido",
+        "role": "Revisa cada texto y cada pieza nueva contra las reglas de honestidad y confidencialidad."
+      }
+    },
+    "decidedTitle": "Cómo se decidió",
+    "tried": "Se probó",
+    "chose": "Se eligió",
+    "why": "Por qué",
+    "decisions": [
+      {
+        "t": "El sistema visual",
+        "tried": "Tres sistemas completos (A, B y C) y una mezcla de A con B, comparados en un lienzo.",
+        "chose": "El cartel suizo con trama de puntos, sin la cinta coral animada (Ignacio, 16/11/2026).",
+        "why": "Dos tintas, trama en lugar de degradés y coral solo para acción y estado: liviano en celulares y legible."
+      },
+      {
+        "t": "Scroll World",
+        "tried": "Su flujo completo para generar un mundo que se recorre con el scroll.",
+        "chose": "Solo su motor de scroll y sus prompts; no se corre su pipeline.",
+        "why": "El pipeline factura por cada clip o gasta créditos de Higgsfield: gastar es una decisión mía."
+      },
+      {
+        "t": "Imágenes y video generados",
+        "tried": "Que cada agente genere sus piezas.",
+        "chose": "Los agentes escriben los prompts; yo genero con Higgsfield, GPT Image y Suno, y devuelvo los archivos.",
+        "why": "Publicar y gastar los autorizo yo, y todo lo generado con IA se declara en la página."
+      },
+      {
+        "t": "El camino de Work & Projects",
+        "tried": "Más de una técnica para dibujarlo.",
+        "chose": "Isométrico dibujado en código, en SVG (Ignacio, 17/11/2026).",
+        "why": "Se carga solo cuando se acerca, recibe los colores del sitio y tiene una lista equivalente sin JavaScript."
+      },
+      {
+        "t": "Los casos, por pasos",
+        "tried": "Un solo scroll por caso: el de Eclipse medía unos 23.000 px.",
+        "chose": "Un paso por vez, con una columna de pasos: el paso más largo de Eclipse mide 11.651 px.",
+        "why": "Resumen arriba y el detalle de a un paso: menos información por pantalla."
+      },
+      {
+        "t": "Remotion",
+        "tried": "Una composición de React de 2 s renderizada a MP4, el 17/11/2026, en una carpeta aparte.",
+        "chose": "Funciona, pero no lo sumé: ningún proyecto ni pieza lo usa.",
+        "why": "No se agregan dependencias sin aprobación, y su licencia pide confirmar si mi uso entra en la gratuita."
+      }
+    ],
+    "more": "Ver el sistema agéntico en detalle"
   }
 }
