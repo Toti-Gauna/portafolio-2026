@@ -17,8 +17,8 @@ async function enter(page: Page, url: string) {
   await expect(page.locator('#boot')).toHaveCount(0);
 }
 
-test('the canvas is behind the content and the scene runs after the intro (Sobre mí: the home seed)', async ({ page }) => {
-  await page.goto('/es/sobre-mi/');
+test('home: the canvas is behind the content and the scene runs after the intro', async ({ page }) => {
+  await page.goto('/es/');
   // server HTML: the layer and the route's scene are there before any JS, three is not
   await expect(page.locator('.scene[data-scene="home"] canvas')).toHaveCount(1);
   expect(await page.evaluate(() => 'THREE' in window || '__igScene' in window)).toBe(false);
@@ -57,14 +57,8 @@ test('reduced motion: one still frame, no RAF loop', async ({ browser }) => {
   await ctx.close();
 });
 
-test('on the home walk the scene rests while the stage covers the screen', async ({ page }) => {
-  await enter(page, '/es/');
-  await expect.poll(async () => (await read(page)).attr, { timeout: 15000 }).toMatch(/^(paused|fallback)$/);
-  expect((await read(page)).looping).toBe(false);
-});
-
 test('navigating swaps the scene and disposes the old one', async ({ page }) => {
-  await enter(page, '/es/sobre-mi/');
+  await enter(page, '/es/');
   await expect.poll(async () => (await read(page)).attr, { timeout: 15000 }).toMatch(/^(running|fallback)$/);
   test.skip((await read(page)).attr === 'fallback', 'no WebGL');
   await page.locator('a[href*="/proyectos/complia"]').first().click();

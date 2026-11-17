@@ -1,6 +1,5 @@
 /** Structure of the public content (copy lives in messages/). Links point only to public places. */
 import type { CaseDef } from './types';
-import { finishGrid } from './grid';
 import { complia } from './complia';
 import { tuenti } from './tuenti';
 import { eclipse } from './eclipse';
@@ -11,18 +10,12 @@ import { games } from './games';
 import { agentes } from './agentes';
 import { velmar } from './velmar';
 import { supernova } from './supernova';
-import { handyx } from './handyx';
-import { lucero } from './lucero';
-import { trazo } from './trazo';
 
-export const CASE_SLUGS = ['complia', 'tuenti', 'eclipse', 'agentes', 'kinetic', 'volta', 'velmar', 'dentalos', 'supernova', 'games', 'handyx', 'lucero', 'trazo'] as const;
+export const CASE_SLUGS = ['complia', 'tuenti', 'eclipse', 'agentes', 'kinetic', 'volta', 'velmar', 'dentalos', 'supernova', 'games'] as const;
 export type CaseSlug = (typeof CASE_SLUGS)[number];
 
 /** Each case page: its blocks (copy in messages/cases/<locale>/<slug>.json) and its public links. */
-export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, eclipse, agentes, kinetic, volta, velmar, dentalos, supernova, games, handyx, lucero, trazo };
-
-// single-column mobile layouts (Ola 7b) get their edges routed once, here
-for (const def of Object.values(CASES)) for (const b of def.blocks) if (b.type === 'diagram') finishGrid(b.spec);
+export const CASES: Record<CaseSlug, CaseDef> = { complia, tuenti, eclipse, agentes, kinetic, volta, velmar, dentalos, supernova, games };
 
 export const LAB = [
   { id: 'kinetic', href: 'https://toti-gauna.github.io/motion-animations/', code: 'https://github.com/Toti-Gauna/kinetic-studio', page: 'kinetic' },

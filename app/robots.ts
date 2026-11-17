@@ -5,5 +5,5 @@ export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   if (NOINDEX) return { rules: { userAgent: '*', disallow: '/' } };
-  return { rules: { userAgent: '*', allow: '/', disallow: ['/es/catalogo/', '/en/catalogo/'] }, sitemap: absoluteUrl('/sitemap.xml') };
+  return { rules: { userAgent: '*', allow: '/' }, sitemap: absoluteUrl('/sitemap.xml') };
 }

@@ -9,9 +9,6 @@ import { CONTACT_EMAIL, absoluteUrl } from '@/lib/site';
 import { Footer } from '@/components/sections/Sections';
 import { CaseSections, sectionsOf } from '@/components/case/CaseBlocks';
 import { CaseToc } from '@/components/case/CaseToc';
-import { CaseSteps, type StepItem } from '@/components/case/CaseSteps';
-import { StatusTag } from '@/components/ui/StatusTag';
-import { STATIONS } from '@/lib/career';
 import '@/components/sections.css';
 import '@/components/case/case.css';
 
@@ -58,15 +55,7 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
   const nameOf = async (s: string) => (await getTranslations({ locale, namespace: `cases.${s}` }))('title');
   const others = CASE_SLUGS.filter((s) => s !== slug);
   const otherNames = await Promise.all(others.map(nameOf));
-  const steps = def.steps;
-  const status = steps ? STATIONS.flatMap((st) => st.buildings).find((b) => b.slug === slug)?.status : undefined;
-  const ui = { stepped: !!steps, asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt'), play: u('play'), pause: u('pause') };
-  const stepItems: StepItem[] | undefined = steps?.map((st) => ({
-    id: st.id,
-    t: u(`steps.${st.id}.t`),
-    d: u(`steps.${st.id}.d`),
-    panel: <CaseSections blocks={st.blocks.map((k) => def.blocks.find((b) => b.key === k)!)} copy={copy} ui={{ ...ui, stepped: true }} sameAs={u(`steps.${st.id}.t`)} />,
-  }));
+  const ui = { asText: u('asText'), legend: u('legend'), why: u('why'), alt: u('alt'), play: u('play'), pause: u('pause') };
 
   return (
     <>
@@ -75,7 +64,7 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
           <Link href="/trabajo" className="case__back">← {u('back')}</Link>
           <p className="case__kind label">{t('kind')}</p>
           <h1 className="case__title">{t('title')}</h1>
-          {status ? <StatusTag kind={status} /> : <p className="status case__status">{t('status')}</p>}
+          <p className="status case__status">{t('status')}</p>
           <p className="case__summary">{t('summary')}</p>
           {facts.length > 0 && (
             <dl className="facts">
@@ -95,19 +84,6 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
           </section>
         )}
 
-        {stepItems ? (
-          <div className="case__steps container-x">
-            <CaseSteps steps={stepItems} ui={{ label: u('steps.label'), of: u('steps.of', { n: '{n}', total: '{total}' }), prev: u('steps.prev'), next: u('steps.next'), all: u('steps.all') }} />
-            {def.links && (
-              <section className="cs case__links-sec" aria-labelledby="h-links">
-                <h2 id="h-links" className="cs__h">{u('links')}</h2>
-                <div className="case__links">
-                  {def.links.map((l) => <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗<span className="sr-only"> ({c('newTab')})</span></a>)}
-                </div>
-              </section>
-            )}
-          </div>
-        ) : (
         <div className="case__grid container-x">
           {toc.length > 2 && <aside className="case__aside"><CaseToc label={u('toc')} items={toc} /></aside>}
           <div className="case__main">
@@ -122,7 +98,6 @@ export default async function CasePage({ params }: { params: Promise<Params> }) 
             )}
           </div>
         </div>
-        )}
 
         <nav className="case__next container-x" aria-label={u('next')}>
           <Link className="case__next-main" href={`/proyectos/${next}`}>

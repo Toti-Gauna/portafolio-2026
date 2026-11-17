@@ -1,11 +1,7 @@
 import type { CaseDef } from './types';
-import { gridLayouts } from './grid';
 
-/** Supernova Eventos: a prototype made at Tsoft for Telefónica (Ignacio, 28/10/2026: «Prototipo»; built after becoming
- *  Ssr). Naming Telefónica in text is approved; no corporate logo or client brand marks in images, no internal systems,
+/** Supernova Eventos: a prototype made at Tsoft for Telefónica (Ignacio, 28/10/2026: «Prototipo»). Naming Telefónica in text is approved; no corporate logo or client brand marks in images, no internal systems,
  *  and old-events-images/ is never opened. Facts: scratchpad facts/supernova.md, checked read-only against the repo. */
-const realGrid = gridLayouts([['app', 'api', 'idp'], ['svc'], ['db', 'queue', 'mail']]);
-
 export const supernova: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
@@ -129,68 +125,11 @@ export const supernova: CaseDef = {
         },
       },
     },
-    { type: 'text', key: 'real' },
-    {
-      // Ola 7b: an example backend, generic and unnamed (Ignacio, 17/11/2026). Everything here is a proposal except what the
-      // repo's README/AGENTS.md say (no backend, SSO or real email; capacity, email and authorization belong on the server).
-      type: 'diagram', key: 'realArch',
-      spec: {
-        id: 'supernova-real-arch',
-        nodes: [
-          { id: 'app', kind: 'client' },
-          { id: 'api', kind: 'server', tone: 'coral' },
-          { id: 'idp', kind: 'external' },
-          { id: 'svc', kind: 'code', tone: 'blue' },
-          { id: 'db', kind: 'db', tone: 'blue' },
-          { id: 'queue', kind: 'queue', tone: 'yellow' },
-          { id: 'mail', kind: 'external' },
-        ],
-        edges: [
-          { id: 'ask', from: 'app', to: 'api' },
-          { id: 'who', from: 'api', to: 'idp', dashed: true },
-          { id: 'rules', from: 'api', to: 'svc', tone: 'coral' },
-          { id: 'tx', from: 'svc', to: 'db', tone: 'blue' },
-          { id: 'out', from: 'svc', to: 'queue', tone: 'yellow' },
-          { id: 'send', from: 'queue', to: 'mail', dashed: true },
-        ],
-        desktop: realGrid.desktop,
-        mobile: realGrid.mobile,
-      },
-    },
-    {
-      type: 'sequence', key: 'realFlow',
-      spec: {
-        id: 'supernova-real-flow',
-        lanes: [{ id: 'person', kind: 'person' }, { id: 'app', kind: 'client' }, { id: 'api', kind: 'server' }, { id: 'db', kind: 'db' }, { id: 'queue', kind: 'queue' }],
-        msgs: [
-          { id: 'pick', from: 'person', to: 'app' },
-          { id: 'send', from: 'app', to: 'api' },
-          { id: 'auth', from: 'api', to: 'api' },
-          { id: 'reserve', from: 'api', to: 'db' },
-          { id: 'state', from: 'db', to: 'api', back: true },
-          { id: 'enqueue', from: 'api', to: 'queue' },
-          { id: 'reply', from: 'api', to: 'app', back: true },
-          { id: 'mail', from: 'queue', to: 'queue' },
-        ],
-      },
-    },
-    { type: 'text', key: 'realData' },
-    { type: 'checks', key: 'realSec' },
     { type: 'checks', key: 'security' },
     { type: 'decisions', key: 'decisions' },
     { type: 'readouts', key: 'quality' },
     { type: 'stack', key: 'stack' },
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['supernova'] },
     { type: 'limits', key: 'status' },
-  ],
-  steps: [
-    { id: 'what', blocks: ['what', 'journeys'] },
-    { id: 'see', blocks: ['media', 'gallery'] },
-    { id: 'how', blocks: ['checkin', 'arch'] },
-    { id: 'real', blocks: ['real', 'realArch', 'realFlow', 'realData', 'realSec'] },
-    { id: 'security', blocks: ['security'] },
-    { id: 'decisions', blocks: ['decisions'] },
-    { id: 'quality', blocks: ['quality', 'stack'] },
-    { id: 'status', blocks: ['status'] },
   ],
 };

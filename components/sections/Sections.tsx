@@ -3,13 +3,9 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { CASE_SLUGS, LAB, WORK_SHOT, WORK_SHOT_800, type CaseSlug } from '@/lib/cases';
-import { KNOWLEDGE, PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
-import { ALL_PAGES, CONTACT_HREF, PAGES } from '@/lib/nav';
+import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
+import { CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
-import { STATIONS } from '@/lib/career';
-import { RECRUITER_CASES } from '@/lib/recruiters';
-import { SITE_AGENTS } from '@/lib/howsite';
-import { StatusTag } from '../ui/StatusTag';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
 import { Diagram } from '../diagrams/Diagram';
@@ -20,7 +16,6 @@ import { InView } from '../diagrams/InView';
 import { MethodIcon } from '../MethodIcon';
 import { AgentIcon, type AgentId } from '../AgentIcon';
 import { HubArt } from '../home/HubArt';
-import { KnowIcon } from '../home/KnowIcon';
 import '../sections.css';
 import '../home/home.css';
 
@@ -263,59 +258,6 @@ export function Skills({ level = 2 }: { level?: Level } = {}) {
         <h3 className="sub-title">{t('also')}</h3>
         <ul className="also__list">{(t.raw('alsoItems') as string[]).map((x) => <li key={x}>{x}</li>)}</ul>
       </div>
-      <div className="know" id="conocimiento">
-        <h3 className="sub-title">{t('know.title')}</h3>
-        <p className="know__lead">{t('know.lead')}</p>
-        <ul className="know__list">
-          {KNOWLEDGE.map((id) => (
-            <Reveal as="li" key={id} className="know__item">
-              <KnowIcon id={id} className="know__icon" />
-              <p className="status">{t(`know.items.${id}.tag`)}</p>
-              <h4 className="know__name">{t(`know.items.${id}.name`)}</h4>
-              <p>{t(`know.items.${id}.text`)}</p>
-              {id === 'claude' && <Link className="card-link" href="/como-trabajo">{t('know.claudeCta')} →</Link>}
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/** «Cómo se hizo este portafolio» (Ola 11): nine agents with their model, and six decisions (what was tried, what was chosen, why). */
-export function HowSite({ level = 2 }: { level?: Level } = {}) {
-  const t = useTranslations('howsite');
-  const decisions = t.raw('decisions') as { t: string; tried: string; chose: string; why: string }[];
-  return (
-    <section id="este-sitio" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-este-sitio">
-      <Head id="h-este-sitio" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
-      <h3 className="sub-title">{t('agentsTitle')}</h3>
-      <ul className="hs-agents">
-        {SITE_AGENTS.map((a, i) => (
-          <Reveal as="li" key={a.id} className="hs-agent">
-            <span className="hs-agent__icon"><AgentIcon id={a.icon} /></span>
-            <h4 className="hs-agent__name">{t(`agents.${a.id}.name`)}</h4>
-            <p className="hs-agent__model"><span className="label">{t('model')}</span> <b>{a.model === 'opus' ? 'Opus' : 'Sonnet'}</b></p>
-            <p>{t(`agents.${a.id}.role`)}</p>
-          </Reveal>
-        ))}
-      </ul>
-      <p className="note hs-note">{t('agentsNote')}</p>
-      <h3 className="sub-title">{t('decidedTitle')}</h3>
-      <ol className="hs-decisions">
-        {decisions.map((d, i) => (
-          <Reveal as="li" key={d.t} className="adr__item">
-            <p className="adr__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
-            <div>
-              <h4 className="adr__t">{d.t}</h4>
-              <p className="adr__why"><span className="label">{t('tried')}</span> {d.tried}</p>
-              <p className="adr__why"><span className="label">{t('chose')}</span> {d.chose}</p>
-              <p className="adr__alt"><span className="label">{t('why')}</span> {d.why}</p>
-            </div>
-          </Reveal>
-        ))}
-      </ol>
-      <p className="system__deep"><Link className="card-link" href="/proyectos/agentes">{t('more')} →</Link></p>
     </section>
   );
 }
@@ -326,39 +268,6 @@ export function About({ level = 2 }: { level?: Level } = {}) {
     <section id="sobre-mi" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-sobre-mi">
       <Head id="h-sobre-mi" label={t('label')} title={t('title')} level={level} />
       <div className="about">{(t.raw('paragraphs') as string[]).map((p) => <p key={p}>{p}</p>)}</div>
-    </section>
-  );
-}
-
-/** «Para reclutadores» (Ola 8d): a fact sheet of what is already approved elsewhere on the site, and three cases to look at. */
-export function Recruiters({ level = 2 }: { level?: Level } = {}) {
-  const t = useTranslations('recruiters');
-  const c = useTranslations('cases');
-  return (
-    <section id="reclutadores" className="sec container-x" aria-labelledby="h-reclutadores">
-      <Head id="h-reclutadores" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
-      <dl className="rc-sheet">
-        {(t.raw('sheet') as { k: string; v: string }[]).map((r) => <div key={r.k}><dt className="label">{r.k}</dt><dd>{r.v}</dd></div>)}
-      </dl>
-      <p className="rc-more"><Link className="card-link" href="/capacidades">{t('skills')} →</Link></p>
-      <h3 className="sub-title">{t('casesTitle')}</h3>
-      <ul className="rc-cases">
-        {RECRUITER_CASES.map((slug) => {
-          const st = STATIONS.flatMap((x) => x.buildings).find((b) => b.slug === slug)?.status;
-          return (
-            <li key={slug} className="rc-case">
-              <p className="label">{c(`${slug}.kind`)}</p>
-              <h4 className="rc-case__t">{c(`${slug}.title`)}</h4>
-              {st ? <StatusTag kind={st} /> : <p className="status">{c(`${slug}.status`)}</p>}
-              <p>{t(`cases.${slug}`)}</p>
-              <Link className="card-link" href={`/proyectos/${slug}`}>{t('case')} →</Link>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="contact" data-contact="">
-        <a className="btn btn-primary" href={`mailto:${CONTACT_EMAIL}`}>{t('write')}</a>
-      </div>
     </section>
   );
 }
@@ -435,7 +344,7 @@ export function Footer() {
           <h2 id="foot-pages" className="label">{t('sitemap')}</h2>
           <ul>
             <li><Link href="/">{n('home')}</Link></li>
-            {ALL_PAGES.map((p) => <li key={p.key}><Link href={p.href}>{n(`pages.${p.key}.t`)}</Link></li>)}
+            {PAGES.map((p) => <li key={p.key}><Link href={p.href}>{n(`pages.${p.key}.t`)}</Link></li>)}
           </ul>
         </nav>
         <nav className="foot__col foot__col--cases" aria-labelledby="foot-cases">

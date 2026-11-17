@@ -19,7 +19,7 @@ type Copy = {
   items?: unknown; note?: string; groups?: { k: string; items: string[] }[];
 } & Partial<SplitCopy>;
 
-export type CaseUi = DiagramUi & { why: string; alt: string; play: string; pause: string; stepped?: boolean };
+export type CaseUi = DiagramUi & { why: string; alt: string; play: string; pause: string };
 
 /** Groups blocks into sections: a block with a heading opens one, the next blocks without a heading join it. */
 export function sectionsOf(blocks: BlockDef[], copy: Record<string, Copy>) {
@@ -32,17 +32,12 @@ export function sectionsOf(blocks: BlockDef[], copy: Record<string, Copy>) {
   return out;
 }
 
-/** `sameAs`: in a step, a section titled like the step itself skips its heading (the step's h2 says it already). */
-export function CaseSections({ blocks, copy, ui, sameAs }: { blocks: BlockDef[]; copy: Record<string, Copy>; ui: CaseUi; sameAs?: string }) {
+export function CaseSections({ blocks, copy, ui }: { blocks: BlockDef[]; copy: Record<string, Copy>; ui: CaseUi }) {
   return (
     <>
       {sectionsOf(blocks, copy).map((s, i) => (
-        <section key={s.id} id={s.id} className="cs" aria-labelledby={s.h && s.h !== sameAs ? `h-${s.id}` : undefined}>
-          {s.h && s.h !== sameAs && (
-            ui.stepped
-              ? <h3 id={`h-${s.id}`} className="cs__h cs__h--in"><span className="cs__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{s.h}</h3>
-              : <h2 id={`h-${s.id}`} className="cs__h"><span className="cs__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{s.h}</h2>
-          )}
+        <section key={s.id} id={s.id} className="cs" aria-labelledby={`h-${s.id}`}>
+          <h2 id={`h-${s.id}`} className="cs__h"><span className="cs__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{s.h}</h2>
           {s.blocks.map((b) => <Block key={b.key} b={b} c={copy[b.key] ?? {}} ui={ui} />)}
         </section>
       ))}
@@ -79,7 +74,7 @@ function Block({ b, c, ui }: { b: BlockDef; c: Copy; ui: CaseUi }) {
               <Reveal as="li" key={d.t} className="adr__item">
                 <p className="adr__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
                 <div>
-                  {ui.stepped ? <h4 className="adr__t">{d.t}</h4> : <h3 className="adr__t">{d.t}</h3>}
+                  <h3 className="adr__t">{d.t}</h3>
                   <p className="adr__why"><span className="label">{ui.why}</span> {d.why}</p>
                   {d.alt && <p className="adr__alt"><span className="label">{ui.alt}</span> {d.alt}</p>}
                 </div>
@@ -95,7 +90,7 @@ function Block({ b, c, ui }: { b: BlockDef; c: Copy; ui: CaseUi }) {
             {(c.items as { t: string; d: string }[]).map((it, i) => (
               <Reveal as="li" key={it.t} className="checks__item">
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="checks__icon" style={{ '--o': i } as CSSProperties}><path d="M12 2.8l7.5 3v5.6c0 4.6-3.1 8.1-7.5 9.8-4.4-1.7-7.5-5.2-7.5-9.8V5.8z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>
-                <div>{ui.stepped ? <h4 className="checks__t">{it.t}</h4> : <h3 className="checks__t">{it.t}</h3>}<p>{it.d}</p></div>
+                <div><h3 className="checks__t">{it.t}</h3><p>{it.d}</p></div>
               </Reveal>
             ))}
           </ul>
