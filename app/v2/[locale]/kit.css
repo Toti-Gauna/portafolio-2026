@@ -1,0 +1,157 @@
+/* /v2 illustration and icon kit (lote 1.5).
+   Figures are drawn with the Anatomy kit (v2/iso/iso-kit.ts); this file gives them the /v2 colours through
+   the kit's own --anatomy-* variables, then styles the card, the icons, the stamps and the 3D stage. */
+
+/* ── the Anatomy theme of /v2: indigo paper, four shades, mist lines, one lit accent ── */
+.iso {
+  --anatomy-paper: #0f0b2c; --anatomy-face: #2a2470; --anatomy-top: #262066;
+  --anatomy-shade-0: #0c0926; --anatomy-shade-1: #120e34; --anatomy-shade-2: #181342; --anatomy-shade-3: #1e1850;
+  --anatomy-lit-top: #4a3fa0; --anatomy-lit-shade: #342b7c;
+  --anatomy-hi: #eeeaf8; --anatomy-mid: #a29dc8; --anatomy-lo: #6b6699; --anatomy-faint: #3c3670; --anatomy-lit: #ffffff;
+  --anatomy-halo: #03020c; --anatomy-halo-opacity: 0.85; --anatomy-dot: #e4e0f2;
+  --anatomy-red: #ff7a5c; --anatomy-green: #3fe0b0; --anatomy-blue: #8aa4ff;
+  --anatomy-weight: 0.7px; --anatomy-mono: var(--family-mono);
+}
+
+/* the kit's own figure styles (from .claude/skills/anatomy/kit/iso.css, MIT), unchanged */
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+
+/* ── the figure's card: Fig n · title · hint · live readout, legend and a true caption below ── */
+.kit-fig { margin: 0; max-width: 860px; }
+.kit-plate { position: relative; padding: 56px var(--space-4) 64px; border-radius: var(--radius-2xl); border: 1px solid var(--color-line-strong); background: var(--anatomy-paper); box-shadow: var(--shadow-panel); }
+.kit-corner { position: absolute; margin: 0; font-family: var(--family-mono); font-size: var(--type-min-size); line-height: 1.2; letter-spacing: 0.06em; color: var(--color-text-subtle); }
+.kit-corner[data-corner='fig'] { left: var(--space-5); top: var(--space-5); color: var(--color-text-muted); }
+.kit-corner[data-corner='title'] { right: var(--space-5); top: var(--space-5); text-transform: uppercase; letter-spacing: 0.12em; }
+.kit-corner[data-corner='hint'] { left: var(--space-5); bottom: var(--space-5); text-transform: uppercase; letter-spacing: 0.1em; }
+.kit-corner[data-corner='readout'] { left: var(--space-5); bottom: calc(var(--space-5) + 20px); color: var(--color-heading); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.kit-stage { border-radius: var(--radius-lg); cursor: ew-resize; touch-action: pan-y; }
+.kit-stage .iso-svg { margin: 0 auto; }
+/* the lamp reads the band: its lens takes the colour of the verdict (colour is the subject here) */
+.kit-stage .gauge-lens .iso-top, .kit-stage .gauge-lens .iso-shade, .kit-stage .gauge-lens .iso-fill { transition: fill var(--motion-fast) var(--motion-ease); }
+.kit-stage [data-state='pass'] .gauge-lens .iso-top { fill: #7df0cd; }
+.kit-stage [data-state='pass'] .gauge-lens .iso-shade, .kit-stage [data-state='pass'] .gauge-lens .iso-fill { fill: #3fe0b0; }
+.kit-stage [data-state='pass'] .gauge-lens .iso-edge { stroke: #b9f7e3; }
+.kit-stage [data-state='fail'] .gauge-lens .iso-top { fill: #ffa48c; }
+.kit-stage [data-state='fail'] .gauge-lens .iso-shade, .kit-stage [data-state='fail'] .gauge-lens .iso-fill { fill: #ff6b4a; }
+.kit-stage [data-state='fail'] .gauge-lens .iso-edge { stroke: #ffd0c4; }
+.kit-stage .gauge-band .iso-line { stroke-width: 1.5px; }
+.kit-legend { display: grid; gap: var(--space-3); margin-top: var(--space-4); font-size: var(--type-small-size); color: var(--color-text-muted); }
+.kit-legend p { max-width: 70ch; }
+.kit-keys { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.kit-keys li { display: inline-flex; align-items: center; gap: var(--space-2); }
+.kit-keys i { flex: none; width: 18px; height: 10px; border-radius: 2px; }
+.kit-keys i[data-mark='lit'] { height: 2px; background: var(--anatomy-lit); }
+.kit-keys i[data-mark='raised'] { border: 1.5px solid var(--anatomy-hi); background: var(--anatomy-face); }
+.kit-keys i[data-mark='band'] { height: 3px; background: var(--anatomy-green); }
+@media (min-width: 600px) {
+  .kit-plate { padding: 60px var(--space-8) 60px; }
+  .kit-corner[data-corner='readout'] { left: auto; right: var(--space-5); bottom: var(--space-5); }
+}
+
+/* ── rules ── */
+.kit-rules { display: grid; gap: var(--space-3); max-width: 760px; }
+.kit-rules ol { display: grid; gap: var(--space-2); }
+.kit-rules li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-2); color: var(--color-text); }
+.kit-rules li i { font-family: var(--family-mono); font-size: var(--type-min-size); font-style: normal; font-weight: 700; line-height: 2.2; color: var(--color-amber-500); }
+.kit-row { display: grid; gap: var(--space-8); align-items: start; }
+@media (min-width: 900px) { .kit-row { grid-template-columns: auto minmax(0, 1fr); gap: var(--space-16); } }
+
+/* ── icons ── */
+.ic { flex: none; }
+.ic-a { fill: var(--ic-accent, var(--color-coral-500)); stroke: none; }
+.kit-family { display: grid; gap: var(--space-3); }
+.kit-family .v2-sub { margin-top: 0; }
+.kit-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--space-3); }
+.kit-icons li { display: grid; justify-items: center; gap: var(--space-2); text-align: center; font-size: 13px; line-height: 1.25; color: var(--color-text-muted); }
+.kit-icon-tile {
+  display: grid; place-items: center; width: 100%; aspect-ratio: 1.25; border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line); background: rgba(255, 255, 255, 0.03); color: var(--color-heading);
+  transition: border-color var(--motion-fast) var(--motion-ease), transform var(--motion-base) var(--motion-ease);
+}
+@media (hover: hover) and (pointer: fine) { .kit-icons li:hover .kit-icon-tile { border-color: var(--color-mist-400); transform: translateY(-2px); } }
+.kit-sizes { display: grid; gap: var(--space-3); }
+.kit-sizes ul { display: flex; align-items: flex-end; gap: var(--space-6); color: var(--color-heading); }
+.kit-sizes li { display: grid; justify-items: center; gap: var(--space-2); }
+
+/* ── stamps: the one place where the palette changes, on its own cream sheet ── */
+.kit-stamps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: var(--space-5) var(--space-4); max-width: 1120px; min-width: 0;
+  padding: var(--space-6) var(--space-5); border-radius: var(--radius-2xl); background: #f4ecdc;
+}
+.kit-stamp { position: relative; aspect-ratio: 240 / 300; container-type: inline-size; filter: drop-shadow(0 10px 12px rgba(70, 45, 10, 0.3)); }
+.kit-stamp:nth-child(odd) { transform: rotate(-1.6deg); }
+.kit-stamp:nth-child(even) { transform: rotate(1.4deg); }
+.kit-stamp svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.kit-stamp b { position: absolute; left: 12.5%; top: 9%; font-size: max(16px, 15cqw); line-height: 1; font-weight: 900; font-variation-settings: 'wdth' 112; letter-spacing: -0.03em; color: #0a0a0c; }
+.kit-stamp[data-dark] b { color: #fbf6ea; }
+.kit-stamp span { position: absolute; left: 12.5%; bottom: 9.5%; max-width: 76%; padding: 3px 6px; background: #fbf6ea; font-size: 12px; line-height: 1.1; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #0a0a0c; }
+
+/* ── 3D ── */
+.kit-scene-frame {
+  position: relative; max-width: 860px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-2xl); border: 1px solid var(--color-line-strong);
+  background: radial-gradient(70% 60% at 50% 46%, color-mix(in srgb, var(--from) 22%, transparent), transparent 70%), var(--color-bg-deep);
+}
+.kit-scene { position: absolute; inset: 0; cursor: grab; touch-action: pan-y; }
+.kit-scene:active { cursor: grabbing; }
+.kit-scene canvas { display: block; width: 100%; height: 100%; }
+@media (min-width: 760px) { .kit-scene-frame { aspect-ratio: 16 / 9; } }

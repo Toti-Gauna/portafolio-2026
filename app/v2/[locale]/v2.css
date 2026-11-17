@@ -57,6 +57,8 @@ a { color: inherit; }
 .v2-brand { grid-area: brand; display: inline-flex; align-items: center; gap: var(--space-3); min-height: var(--size-touch); color: var(--color-heading); text-decoration: none; font-weight: 800; white-space: nowrap; }
 .v2-top .ui-tabs { grid-area: tabs; margin: var(--space-1) calc(-1 * var(--space-2)) 0; }
 .v2-top-tools { grid-area: tools; display: flex; align-items: center; gap: var(--space-2); }
+/* four tabs still fit a 360 px phone on one line */
+@media (max-width: 759px) { .v2-top .ui-tabs a { padding: 0 var(--space-2); gap: 6px; font-size: 14px; } }
 @media (min-width: 760px) {
   .v2-top { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: 'brand tabs tools'; min-height: var(--size-header); padding-top: 0; column-gap: var(--space-6); }
   .v2-top .ui-tabs { margin: 0; align-self: stretch; }
@@ -94,6 +96,8 @@ a { color: inherit; }
 .v2-sec h2 { font-size: var(--type-h2-size); line-height: var(--type-h2-lh); letter-spacing: var(--type-h2-tracking); }
 .v2-sec-text { max-width: 62ch; color: var(--color-text-muted); }
 .v2-sec { display: grid; gap: var(--space-6); padding: var(--space-12) 0; border-top: 1px solid var(--color-line); scroll-margin-top: var(--size-header); }
+/* a section's children may shrink: a wide grid inside must wrap, never widen the page */
+.v2-sec > * { min-width: 0; }
 .v2-sec-head { display: grid; gap: var(--space-3); }
 .v2-sec-n { color: var(--color-amber-500); }
 .v2-sub { margin-top: var(--space-4); font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: var(--type-h3-weight); color: var(--color-heading); }
