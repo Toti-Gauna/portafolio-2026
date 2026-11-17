@@ -120,6 +120,10 @@
         "t": "Capacidades",
         "d": "Qué uso y de dónde sale cada cosa."
       },
+      "brand": {
+        "t": "Brand Lab",
+        "d": "Cómo doy marca: tableros de marca dibujados en código."
+      },
       "business": {
         "t": "Negocio",
         "d": "Tres libros y dónde los apliqué."
@@ -712,6 +716,10 @@
       "metaTitle": "Capacidades — Ignacio Gauna",
       "metaDescription": "Las tecnologías que uso y de dónde sale cada una: del trabajo, de mis proyectos o de lo que estoy estudiando."
     },
+    "brand": {
+      "metaTitle": "Brand Lab — Ignacio Gauna",
+      "metaDescription": "Cómo doy marca: tableros con logo, paleta, tipografía, patrones y aplicaciones de mis marcas, de un cliente y de ejercicios."
+    },
     "about": {
       "metaTitle": "Sobre mí — Ignacio Gauna",
       "metaDescription": "De Mar del Plata, autodidacta: el recorrido desde mi primer producto a los 17 y cómo contactarme."
@@ -1086,16 +1094,19 @@
       "brand": {
         "title": "Brand Lab",
         "heading": "Cómo doy marca.",
-        "text": "Tableros de marca hechos a mano: logo, paleta, tipografía y aplicaciones. Esta sección se está armando.",
+        "text": "Tableros de marca dibujados en código: logo, paleta, tipografía, patrones y aplicaciones. Cada uno dice de quién es la marca.",
+        "cta": "Ver el Brand Lab",
         "alt": "Una imprenta con una prensa industrial que imprime tableros de marca; uno de ellos es coral.",
         "spots": {
           "lab": {
             "name": "Tableros de marca",
-            "text": "Logo, paleta, tipografía y aplicaciones, dibujados a mano en SVG. Esta sección se está armando."
+            "text": "Logo, paleta, tipografía, patrones y aplicaciones de mis marcas, de un cliente y de las demos, dibujados en SVG.",
+            "cta": "Ver los tableros"
           },
           "exercise": {
             "name": "Ejercicios de marca",
-            "text": "Las marcas inventadas para practicar se rotulan como ejercicio. Esta sección se está armando."
+            "text": "Las marcas inventadas para practicar llevan el rótulo «Ejercicio de marca», como Sereno, una panadería que no existe.",
+            "cta": "Ver un ejercicio"
           }
         }
       },

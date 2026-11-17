@@ -120,6 +120,10 @@
         "t": "Skills",
         "d": "What I use and where each comes from."
       },
+      "brand": {
+        "t": "Brand Lab",
+        "d": "How I build a brand: brand boards drawn in code."
+      },
       "business": {
         "t": "Business",
         "d": "Three books and where I applied them."
@@ -712,6 +716,10 @@
       "metaTitle": "Skills — Ignacio Gauna",
       "metaDescription": "The technologies I use and where each one comes from: work, my own projects or what I'm studying."
     },
+    "brand": {
+      "metaTitle": "Brand Lab — Ignacio Gauna",
+      "metaDescription": "How I build a brand: boards with the logo, palette, type, patterns and applications of my brands, a client's and exercises."
+    },
     "about": {
       "metaTitle": "About — Ignacio Gauna",
       "metaDescription": "From Mar del Plata, self-taught: the journey from my first product at 17, and how to reach me."
@@ -1086,16 +1094,19 @@
       "brand": {
         "title": "Brand Lab",
         "heading": "How I build brands.",
-        "text": "Hand-made brand boards: logo, palette, type and applications. This section is being built.",
+        "text": "Brand boards drawn in code: logo, palette, type, patterns and applications. Each one says whose brand it is.",
+        "cta": "See the Brand Lab",
         "alt": "A printing house with an industrial press printing brand boards; one of them is coral.",
         "spots": {
           "lab": {
             "name": "Brand boards",
-            "text": "Logo, palette, type and applications, drawn by hand in SVG. This section is being built."
+            "text": "Logo, palette, type, patterns and applications of my brands, a client's and the demos', drawn in SVG.",
+            "cta": "See the boards"
           },
           "exercise": {
             "name": "Brand exercises",
-            "text": "Invented brands made to practise on are labelled as exercises. This section is being built."
+            "text": "Brands invented for practice carry the «Brand exercise» label, like Sereno, a bakery that does not exist.",
+            "cta": "See an exercise"
           }
         }
       },

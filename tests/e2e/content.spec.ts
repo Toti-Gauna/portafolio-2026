@@ -138,11 +138,11 @@ test('CompliA case: clip with controls and caption; no internal data claims', as
   await expect(page.getByRole('heading', { name: 'Lo que no muestro' })).toBeVisible();
 });
 
-test('wide header: five page links on one row, the language switch and one Contacto; no menu button', async ({ page }) => {
+test('wide header: six page links on one row, the language switch and one Contacto; no menu button', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await enter(page, '/es/trabajo/');
   const links = page.locator('.site-nav__links a');
-  await expect(links).toHaveCount(5);
+  await expect(links).toHaveCount(6);
   const boxes = await links.evaluateAll((as) => as.map((a) => a.getBoundingClientRect()).map((r) => ({ top: Math.round(r.top), h: Math.round(r.height) })));
   expect(new Set(boxes.map((b) => b.top)).size).toBe(1);
   for (const b of boxes) expect(b.h).toBeLessThanOrEqual(48);

@@ -31,7 +31,7 @@ describe('site pages (lib/nav.ts)', () => {
       for (const l of ['es', 'en']) expect(urls.some((u) => u.endsWith(`/${l}${p.href}/`)), `${l}${p.href}`).toBe(true);
     }
   });
-  it('at most five page links in the wide header', () => {
-    expect(PAGES.length).toBeLessThanOrEqual(5);
+  it('at most six page links in the wide header', () => {
+    expect(PAGES.length).toBeLessThanOrEqual(6);
   });
 });
