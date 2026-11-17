@@ -25,7 +25,9 @@ export function CaseSteps({ steps, ui }: { steps: StepItem[]; ui: StepsUi }) {
     user.current = byUser;
     setFresh(byUser);
     setActive(i);
-    if (byUser) history.replaceState(null, '', `#paso-${ids[i]}`);
+    // the browser's own replaceState, not Next's patched one: Next would sync the URL a moment later and undo a hash
+    // navigation made right after. Only the hash changes; Next needn't know.
+    if (byUser) History.prototype.replaceState.call(history, history.state, '', `#paso-${ids[i]}`);
   }, [ids]);
 
   // open the step named by the hash (and follow it when it changes)

@@ -98,6 +98,11 @@ img, svg { display: block; max-width: 100%; }
   .fab-contact[data-hidden='true'] { transform: translateY(120%); opacity: 0; pointer-events: none; }
   .foot__base { padding-bottom: 96px; }
 }
+/* short landscape screens (a laptop at 150 %, a phone on its side): just the icon, so it doesn't cover the text */
+@media (max-width: 1099.98px) and (max-height: 520px) and (orientation: landscape) {
+  .fab-contact { min-height: 44px; min-width: 44px; padding: 0; justify-content: center; bottom: 12px; right: 12px; }
+  .fab-contact span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
 
 /* Trama halftone: reemplaza a los degradés. El color sale de --ht (por defecto el acento). */
 .ht { --ht: var(--accent); background-image: radial-gradient(circle, var(--ht) var(--ht-r, 1.6px), transparent calc(var(--ht-r, 1.6px) + 0.5px)); background-size: var(--ht-cell, 14px) var(--ht-cell, 14px); }

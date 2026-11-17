@@ -46,6 +46,15 @@ test('brand lab: a click and the arrow keys change the sheet and the hash; #marc
   await page.goto('/es/brand-lab/#marca-velmar');
   await expect(page.locator('#marca-velmar')).toBeVisible();
   await expect(visible(page)).toHaveCount(1);
+  // a hash navigation right after a choice is not undone by Next syncing the URL later (Ola 12: the choice keeps
+  // Next's history state)
+  await page.getByRole('tab', { name: /Velmar/ }).focus();
+  await page.keyboard.press('Home');
+  await page.goto('/es/brand-lab/#marca-volta');
+  await expect(page.locator('#marca-volta')).toBeVisible();
+  await page.waitForTimeout(400);
+  expect(new URL(page.url()).hash).toBe('#marca-volta');
+  await expect(page.locator('#marca-volta')).toBeVisible();
 });
 
 test('brand lab: who owns each brand is said on its sheet; the fictional ones are brand exercises', async ({ page }) => {

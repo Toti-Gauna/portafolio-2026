@@ -42,6 +42,44 @@ test('the music zone follows the home chapters and the routes', async ({ page })
   expect((await snd(page)).wanted).toBe('brand');
 });
 
+test('a zone the visitor comes back to resumes its track; passing through a chapter does not switch the music (Ola 12)', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  // count the <audio> players the music makes: a zone that restarts its track would make new ones
+  await page.addInitScript(() => {
+    const w = window as unknown as { __audios: number; Audio: typeof Audio };
+    w.__audios = 0;
+    const A = w.Audio;
+    const Counted = function (this: unknown, src?: string) { w.__audios++; return new A(src); } as unknown as typeof Audio;
+    Counted.prototype = A.prototype;
+    w.Audio = Counted;
+  });
+  await openAt(page, '/es/');
+  await page.getByRole('button', { name: 'Ver portafolio' }).click();
+  await expect.poll(async () => (await snd(page)).zone).toBe('inicio');
+  const go = (n: number) => page.evaluate((i) => {
+    const a = document.querySelectorAll('article[data-ch]')[i] as HTMLElement;
+    scrollTo(0, a.getBoundingClientRect().top + scrollY + 40);
+  }, n);
+  for (let r = 0; r < 2; r++) {
+    await go(3);
+    await expect.poll(async () => (await snd(page)).zone, { timeout: 8000 }).toBe('work');
+    await go(0);
+    await expect.poll(async () => (await snd(page)).zone, { timeout: 8000 }).toBe('inicio');
+  }
+  const made = await page.evaluate(() => (window as unknown as { __audios: number }).__audios);
+  // two zones with a file: two players each (the loop overlap), made once
+  expect(made).toBeLessThanOrEqual(4);
+  // a fling past the work chapters: the zone goes straight from «inicio» to «brand»
+  const seen = new Set<string>();
+  for (const n of [1, 2, 3, 4, 5, 6]) {
+    await go(n);
+    await page.waitForTimeout(100);
+    seen.add(String((await snd(page)).wanted));
+  }
+  await expect.poll(async () => (await snd(page)).wanted, { timeout: 8000 }).toBe('brand');
+  expect(seen.has('work')).toBe(false);
+});
+
 test('the header button turns the music off and on; the choice is remembered', async ({ page }) => {
   await openAt(page, '/es/trabajo/');
   await page.getByRole('button', { name: 'Ver portafolio' }).click();

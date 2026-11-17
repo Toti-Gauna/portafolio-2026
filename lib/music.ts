@@ -7,6 +7,8 @@
  * - A zone without a file (or when the file fails) gets a quiet synthesized pad in the same key (D minor), so the
  *   site sounds right before the Suno tracks exist and if a download fails.
  * Only one zone's voice plays at a time (plus the one fading out).
+ * - Ola 12: a track that fades out is paused, not thrown away. Coming back to its zone resumes it where it was (no new
+ *   download, no restart from the top), and a zone that comes back while still fading out just fades in again.
  */
 import { SOUND_EVENT, getAudio, isRunning } from './sound';
 import type { Zone } from './zones';
@@ -15,12 +17,24 @@ const FADE = 1.5; // s, between zones
 const LOOP_XF = 2.5; // s, the overlap of a file's loop
 const FILE_LEVEL = 0.55; // ≈ −29 dBFS RMS with the −20 LUFS tracks: under the interface cues (lib/sound.ts)
 
-type Voice = { zone: Zone; kind: 'file' | 'synth'; gain: GainNode; dispose: () => void };
+type Voice = {
+  zone: Zone;
+  kind: 'file' | 'synth';
+  gain: GainNode;
+  dispose: () => void;
+  /** file voices only: stop streaming but keep the place in the track */
+  pause?: () => void;
+  resume?: () => void;
+  /** the pending end of a fade-out */
+  timer?: number;
+};
 
 let available = new Set<Zone>();
 let base = '';
 let wanted: Zone | null = null;
 let current: Voice | null = null;
+/** file voices that faded out, paused, ready to resume */
+const kept = new Map<Zone, Voice>();
 let installed = false;
 
 /** Synth fallback: [frequencies, filter cutoff] per zone — all in D minor, quiet. */
@@ -116,8 +130,7 @@ function fileVoice(ctx: AudioContext, bus: GainNode, zone: Zone, onFail: () => v
     d.g.gain.linearRampToValueAtTime(0, t + LOOP_XF);
     window.setTimeout(() => d.el.pause(), LOOP_XF * 1000 + 100);
   };
-  start(0);
-  timer = window.setInterval(() => {
+  const tick = () => {
     const d = decks[active];
     const left = d.el.duration - d.el.currentTime;
     if (Number.isFinite(left) && left > 0 && left < LOOP_XF + 0.3 && decks[1 - active].el.paused) {
@@ -126,11 +139,29 @@ function fileVoice(ctx: AudioContext, bus: GainNode, zone: Zone, onFail: () => v
       stopDeck(active);
       active = next;
     }
-  }, 250);
+  };
+  start(0);
+  timer = window.setInterval(tick, 250);
   return {
     zone,
     kind: 'file',
     gain,
+    pause: () => {
+      window.clearInterval(timer);
+      timer = 0;
+      decks.forEach((d) => d.el.pause());
+    },
+    resume: () => {
+      if (timer) return;
+      // only the deck that was carrying the track comes back (a loop overlap cut by the pause is dropped)
+      const t = ctx.currentTime;
+      decks.forEach((d, i) => {
+        d.g.gain.cancelScheduledValues(t);
+        d.g.gain.setValueAtTime(i === active ? 1 : 0, t);
+      });
+      void decks[active].el.play().catch(() => {});
+      timer = window.setInterval(tick, 250);
+    },
     dispose: () => {
       window.clearInterval(timer);
       decks.forEach((d) => {
@@ -148,12 +179,23 @@ function fadeOut(v: Voice, a: NonNullable<ReturnType<typeof getAudio>>, seconds 
   v.gain.gain.cancelScheduledValues(t);
   v.gain.gain.setValueAtTime(v.gain.gain.value, t);
   v.gain.gain.linearRampToValueAtTime(0, t + seconds);
-  window.setTimeout(() => v.dispose(), seconds * 1000 + 150);
+  window.clearTimeout(v.timer);
+  if (v.pause) kept.set(v.zone, v);
+  v.timer = window.setTimeout(() => {
+    v.timer = undefined;
+    if (current === v) return;
+    if (v.pause && kept.get(v.zone) === v) v.pause();
+    else v.dispose();
+  }, seconds * 1000 + 150);
 }
 
+/** Fades a voice in from wherever its level is now (a voice coming back mid fade-out doesn't jump). */
 function fadeIn(v: Voice, a: NonNullable<ReturnType<typeof getAudio>>) {
   const t = a.ctx.currentTime;
-  v.gain.gain.setValueAtTime(0, t);
+  window.clearTimeout(v.timer);
+  v.timer = undefined;
+  v.gain.gain.cancelScheduledValues(t);
+  v.gain.gain.setValueAtTime(v.gain.gain.value, t);
   v.gain.gain.linearRampToValueAtTime(v.kind === 'file' ? FILE_LEVEL : 1, t + FADE);
 }
 
@@ -163,8 +205,9 @@ function sync() {
   if (!isRunning() || !wanted) {
     // paused or off: the bus (lib/sound.ts) is already fading to silence; keep the voice for the way back
     if (!wanted && current) {
-      fadeOut(current, a);
+      const v = current;
       current = null;
+      fadeOut(v, a);
     }
     return;
   }
@@ -175,6 +218,7 @@ function sync() {
     if (available.has(zone)) {
       const v: Voice = fileVoice(a.ctx, a.music, zone, () => {
         // the file failed: this zone gets the synth instead (once, without a fade: nothing was heard yet)
+        if (kept.get(zone) === v) kept.delete(zone);
         if (current !== v) return;
         available.delete(zone);
         v.dispose();
@@ -185,7 +229,12 @@ function sync() {
     }
     return synthVoice(a.ctx, a.music, zone);
   };
-  current = mk();
+  const back = kept.get(zone);
+  if (back) {
+    kept.delete(zone);
+    back.resume?.();
+    current = back;
+  } else current = mk();
   fadeIn(current, a);
   if (prev) fadeOut(prev, a);
 }
