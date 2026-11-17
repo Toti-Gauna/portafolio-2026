@@ -355,6 +355,152 @@
           "caption": "Campañas y seguimiento: segmentos calculados y campaña en borrador."
         }
       }
+    },
+    "real": {
+      "h": "Lo que no existe, y una propuesta",
+      "p": [
+        "DentalOS es solo frontend y local, y está decidido así: su especificación fija como límite que no cambia «solo frontend local y datos ficticios; los roles son vistas, no seguridad». El repo no tiene ni planea backend, base de datos, autenticación, cifrado ni mensajes reales, y no es una historia clínica productiva.",
+        "Lo que sigue es una propuesta mía de cómo lo llevaría a producción, con su system design completo. No está en el repo, nadie la validó y no es una promesa de alcance. Cada pieza lleva su rótulo."
+      ],
+      "list": [
+        "Está en el repo: comandos atómicos e idempotentes con commandId, un outbox de recordatorios que respeta la baja de cada persona, auditoría por evento y un QR del turno sin datos personales. Es el punto de partida: hoy corre como una transacción local en el navegador.",
+        "Propuesta mía, a validar: todo lo demás. La API, la base, la autenticación con roles reales, la cola con su worker, el cifrado, el consentimiento, la retención y el acceso auditado.",
+        "No es cumplimiento legal. Lo que habría que revisar con un profesional del derecho figura al final, en la seguridad, sin citar normas."
+      ]
+    },
+    "realArch": {
+      "h": "El system design propuesto",
+      "p": [
+        "La app de hoy pasa a ser el cliente de una API. El dominio de comandos se mueve al servidor, sobre una base con transacciones, y el envío de recordatorios sale de una cola que lee el outbox."
+      ],
+      "diagram": {
+        "badge": "Propuesta mía",
+        "title": "De una SPA local a un sistema real",
+        "caption": "Propuesta mía, no está en el repo. El dominio de comandos, el outbox y la auditoría de hoy son la base; la API, la base, el login y el worker se agregan.",
+        "nodes": {
+          "web": {
+            "label": "Web (SPA)",
+            "sub": "portal y panel"
+          },
+          "api": {
+            "label": "API",
+            "sub": "comandos + REST",
+            "note": "Cada comando llega con su commandId, como hoy. La API lo guarda y, si lo ve de nuevo, devuelve el mismo resultado sin aplicarlo dos veces."
+          },
+          "auth": {
+            "label": "Auth y roles",
+            "sub": "sesión en servidor"
+          },
+          "db": {
+            "label": "PostgreSQL",
+            "sub": "cifrado en reposo",
+            "note": "El turno ya tiene un campo version: ahí se apoya el control de concurrencia. Si dos personas lo editan a la vez, la segunda recibe un conflicto."
+          },
+          "audit": {
+            "label": "Auditoría",
+            "sub": "solo se agrega"
+          },
+          "keys": {
+            "label": "Claves",
+            "sub": "cifrado y copias"
+          },
+          "worker": {
+            "label": "Worker",
+            "sub": "lee el outbox"
+          },
+          "msg": {
+            "label": "Mensajería",
+            "sub": "proveedor a elegir",
+            "note": "El proveedor se elige después de revisar su contrato. Los textos no llevan datos clínicos y ningún dato va a un proveedor de IA."
+          }
+        },
+        "edges": {
+          "https": "HTTPS",
+          "role": "sesión y rol",
+          "cmd": "comando (tx)",
+          "log": "misma tx",
+          "enc": "cifra",
+          "poll": "lee outbox",
+          "send": "envía"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "El flujo crítico",
+      "seq": {
+        "title": "Reprogramar un turno, con servidor",
+        "caption": "Propuesta mía. Es el mismo caso del guion de la demo; lo nuevo es que el servidor decide, guarda en una transacción y un worker envía el aviso.",
+        "lanes": {
+          "web": "Web",
+          "api": "API",
+          "db": "PostgreSQL",
+          "worker": "Worker",
+          "msg": "Mensajería"
+        },
+        "msgs": {
+          "cmd": "comando + commandId",
+          "auth": "valida sesión y rol",
+          "seen": "¿commandId ya visto?",
+          "begin": "BEGIN · turno v1 → v2",
+          "outbox": "outbox y auditoría",
+          "commit": "COMMIT",
+          "done": "turno v2 confirmado",
+          "poll": "lee recordatorios",
+          "optout": "respeta la baja",
+          "send": "envía el aviso"
+        }
+      }
+    },
+    "realData": {
+      "h": "Los datos",
+      "p": [
+        "Propuesta mía. Los nombres son los de src/domain/types.ts, que hoy viven en un solo estado local; en el servidor serían tablas."
+      ],
+      "list": [
+        "Person y ResponsibleLink: nombre, año de nacimiento, adulto o menor, canal preferido, opt-in de recordatorios y baja de campañas. Un menor se vincula a su responsable.",
+        "Appointment: profesional, sillón, sede, horario, estado y version. Un cambio sube la versión y no pisa a otro sin control.",
+        "Estimate, EstimateLine y LedgerEntry: presupuestos y un libro de caja que solo se agrega; un error se corrige con una contrapartida, nunca editando. Sigue siendo un registro administrativo, sin cobros.",
+        "OutboxItem: un aviso por turno, versión y tipo, con una clave única para no duplicarlo y su estado (programado, enviado, anulado, bloqueado por baja).",
+        "Campaign y CampaignDelivery: la campaña con su estado y sus entregas; el tope de 2 mensajes en 30 días por persona pasa a ser una consulta.",
+        "AuditEvent: quién, qué, cuándo y el commandId, en la misma transacción que el cambio.",
+        "Usuario y rol (no existen hoy): las cuentas del personal con su clínica y su rol; los pacientes entran por un vínculo propio con su Person."
+      ]
+    },
+    "realSec": {
+      "h": "Seguridad y datos de salud",
+      "p": [
+        "Propuesta mía, a validar. Los datos de salud son sensibles: este es el mínimo que pondría antes de que una clínica real cargue una sola persona."
+      ],
+      "items": [
+        {
+          "t": "Login y roles reales",
+          "d": "Hoy los roles son vistas. En producción: ingreso del personal con contraseña bien guardada y segundo factor, sesión en cookie solo-HTTP, límite de intentos y permisos verificados en la API, por clínica y por rol, en cada comando."
+        },
+        {
+          "t": "Acceso mínimo por rol",
+          "d": "Recepción ve la agenda y la ficha administrativa; solo el profesional ve el odontograma y los episodios de atención; dirección ve los informes. Un id ajeno responde como si no existiera."
+        },
+        {
+          "t": "Datos de salud cifrados",
+          "d": "Cifrado en tránsito y en reposo, con las claves fuera de la base y copias cifradas con prueba de restauración. El odontograma y los episodios van en tablas aparte, con acceso más estricto."
+        },
+        {
+          "t": "Acceso auditado",
+          "d": "Cada lectura de una ficha clínica deja un evento (quién, cuándo y para qué), además de cada cambio. La auditoría solo se agrega y la app no puede editarla."
+        },
+        {
+          "t": "Consentimiento y baja",
+          "d": "El opt-in de recordatorios y la baja de campañas se guardan con su fecha y el worker los respeta antes de enviar. A un menor se lo contacta a través de su responsable."
+        },
+        {
+          "t": "Mensajes y proveedores",
+          "d": "Los textos no llevan diagnósticos, tratamientos ni importes (hoy una regla ya lo exige) y ningún dato va a un proveedor de IA. El contrato con el proveedor de mensajería se revisa antes de elegirlo."
+        },
+        {
+          "t": "Lo que revisaría un profesional",
+          "d": "Plazo de guarda y borrado, derecho de acceso, consentimiento válido, quién es responsable del tratamiento y la normativa de datos personales e historia clínica que aplique en su país y provincia. No lo defino yo: no inventé cumplimiento legal."
+        }
+      ]
     }
   }
 }

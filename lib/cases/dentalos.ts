@@ -1,8 +1,14 @@
 import type { CaseDef } from './types';
+import { gridLayouts } from './grid';
 
 /** DentalOS: the administrative circuit of a fictional dental clinic, frontend only (Demo).
  *  Facts: scratchpad facts/dentalos.md (repo Toti-Gauna/DentalOS, read on 28/10/2026). Public repo.
  *  16 modules in the code (M01–M16; the README's «15» is older than M16 Campañas). No pricing exists: never invent one. */
+
+/** «How it would really be built» (Ola 7b): MY PROPOSAL, not in the repo (Ignacio, 17/11/2026: «una propuesta mía, con todo
+ *  el system design»). The repo is frontend-only on purpose; its commands, outbox and audit are the starting point. */
+const g = gridLayouts([['web', 'api', 'auth'], ['audit', 'db', 'keys'], ['worker', 'msg']]);
+
 export const dentalos: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
@@ -99,6 +105,55 @@ export const dentalos: CaseDef = {
         ],
       },
     },
+    { type: 'text', key: 'real' },
+    {
+      type: 'diagram', key: 'realArch',
+      spec: {
+        id: 'dentalos-real-arch',
+        nodes: [
+          { id: 'web', kind: 'client' },
+          { id: 'api', kind: 'server', tone: 'coral' },
+          { id: 'auth', kind: 'gate', tone: 'yellow' },
+          { id: 'db', kind: 'db', tone: 'blue' },
+          { id: 'audit', kind: 'doc' },
+          { id: 'keys', kind: 'cloud' },
+          { id: 'worker', kind: 'queue', tone: 'green' },
+          { id: 'msg', kind: 'external' },
+        ],
+        edges: [
+          { id: 'https', from: 'web', to: 'api' },
+          { id: 'role', from: 'api', to: 'auth', tone: 'yellow' },
+          { id: 'cmd', from: 'api', to: 'db', tone: 'coral' },
+          { id: 'log', from: 'db', to: 'audit' },
+          { id: 'enc', from: 'db', to: 'keys', dashed: true },
+          { id: 'poll', from: 'worker', to: 'db', tone: 'green' },
+          { id: 'send', from: 'worker', to: 'msg', dashed: true },
+        ],
+        desktop: g.desktop,
+        mobile: g.mobile,
+      },
+    },
+    {
+      type: 'sequence', key: 'realFlow',
+      spec: {
+        id: 'dentalos-real-flow',
+        lanes: [{ id: 'web', kind: 'client' }, { id: 'api', kind: 'server' }, { id: 'db', kind: 'db' }, { id: 'worker', kind: 'queue' }, { id: 'msg', kind: 'external' }],
+        msgs: [
+          { id: 'cmd', from: 'web', to: 'api' },
+          { id: 'auth', from: 'api', to: 'api' },
+          { id: 'seen', from: 'api', to: 'db' },
+          { id: 'begin', from: 'api', to: 'db' },
+          { id: 'outbox', from: 'api', to: 'db' },
+          { id: 'commit', from: 'db', to: 'api', back: true },
+          { id: 'done', from: 'api', to: 'web', back: true },
+          { id: 'poll', from: 'worker', to: 'db' },
+          { id: 'optout', from: 'worker', to: 'worker' },
+          { id: 'send', from: 'worker', to: 'msg' },
+        ],
+      },
+    },
+    { type: 'text', key: 'realData' },
+    { type: 'checks', key: 'realSec' },
     { type: 'checks', key: 'privacy' },
     { type: 'decisions', key: 'decisions' },
     { type: 'readouts', key: 'quality' },
@@ -110,6 +165,7 @@ export const dentalos: CaseDef = {
     { id: 'what', blocks: ['what', 'reschedule', 'ideas'] },
     { id: 'see', blocks: ['media', 'gallery'] },
     { id: 'how', blocks: ['arch', 'command'] },
+    { id: 'real', blocks: ['real', 'realArch', 'realFlow', 'realData', 'realSec'] },
     { id: 'security', blocks: ['privacy'] },
     { id: 'decisions', blocks: ['decisions'] },
     { id: 'quality', blocks: ['quality', 'stack'] },
