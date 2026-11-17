@@ -1395,7 +1395,8 @@
       },
       "handyx": {
         "name": "HandyX",
-        "text": "Home specialists in Mar del Plata: one app for whoever needs a job done and another for the specialist. Today they run on test data."
+        "text": "Home specialists in Mar del Plata: one app for whoever needs a job done and another for the specialist. Today they run on test data.",
+        "note": "Own project"
       },
       "lucero": {
         "name": "Lucero",

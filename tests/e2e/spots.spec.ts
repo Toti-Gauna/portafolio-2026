@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 
 async function enter(page: Page, url: string) {
   await page.goto(url);
@@ -8,7 +8,16 @@ async function enter(page: Page, url: string) {
     await expect(page.getByRole('button', { name: 'Ver portafolio' })).toBeVisible({ timeout: 500 });
   }).toPass();
   await page.getByRole('button', { name: 'Ver portafolio' }).click();
+  // the gate leaves and the page unlocks: only then does the layout stop moving under the pointer
+  await expect(page.locator('#boot')).toBeHidden();
+  await expect(page.locator('#app-shell')).not.toHaveAttribute('inert', '');
+  // the walk switches to its scroll layout once the page has hydrated; before that the references are a plain list
+  if ((page.viewportSize()?.width ?? 0) >= 900) await expect(page.locator('[data-taller]')).toHaveAttribute('data-mode', 'scroll');
+  await page.waitForTimeout(300);
 }
+
+/** a card fades and slides in for 200 ms: a person waits for it to land before pressing; Playwright would call it unstable and retry with other scroll alignments */
+const landed = (card: Locator) => card.locator('.tch__card').evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)).then(() => true));
 
 /** scroll so that chapter `i` is pinned and its scene is still (the first 40 % of its pin) */
 async function toChapter(page: Page, i: number, extra = 5) {
@@ -77,6 +86,7 @@ test('walk: the hero is the index of the workshop and each reference goes to its
   await expect(spots).toHaveCount(8);
   await expect(spots.locator('.tch__num')).toHaveText(['02', '03', '04', '05', '06', '07', '08', '10']);
   await spots.nth(1).locator('summary').click();
+  await landed(spots.nth(1));
   await spots.nth(1).getByRole('link', { name: 'Ir a la escena' }).click();
   await expect(page).toHaveURL(/#taller-work$/);
   await expect.poll(() => page.evaluate(() => Math.abs(document.querySelector('#taller-work')!.getBoundingClientRect().top))).toBeLessThan(40);
@@ -87,6 +97,7 @@ test('walk: the trailer reference opens the trailer; the roadmap ones are only Â
   await enter(page, '/es/');
   await toChapter(page, 8);
   await page.locator('article[data-ch="8"] [data-spot="trailer"] summary').click();
+  await landed(page.locator('article[data-ch="8"] [data-spot="trailer"]'));
   await page.locator('article[data-ch="8"] [data-spot="trailer"]').getByRole('button', { name: /Ver el trÃ¡iler/ }).click();
   await expect(page.locator('dialog[open]')).toBeVisible({ timeout: 10000 });
   await page.keyboard.press('Escape');

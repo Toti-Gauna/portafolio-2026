@@ -525,7 +525,7 @@ const STOPS = {
   ada: stopAt(720, ROW.a),
   tsoft: stopAt(640, ROW.b),
   own: stopAt(440, ROW.c),
-  next: builtEnd - 4,
+  next: switchS + builtEnd - 4,
 };
 
 /* ── frames: the screen box of each station (its buildings and its stretch of line) ─────────────────────── */
@@ -553,7 +553,7 @@ const body = `<g class="cam-world">${board()}<g class="cam-ground">${ground.join
 const svg = k.figureSvg({ width: W, height: H, label: '', body });
 const origin = at([0, 0, 0]);
 const journey = JOURNEY.filter((_, i) => i % 2 === 0).map((o) => [...at([...o.p, 0]).map((v) => r1(v - 0)), Math.abs(o.t[0]) >= Math.abs(o.t[1]) ? 0 : 1, r1(o.s)]);
-const data = { w: W, h: H, origin: origin.map(r1), depth: JOURNEY.filter((_, i) => i % 2 === 0).map((o) => r1(depth(...o.p))), stops: Object.fromEntries(Object.entries(STOPS).map(([a, s]) => [a, r1(s)])), frames: FRAMES, journey, buildings: Object.fromEntries(B.map((b) => [b.id, frameOf([b.id])])) };
+const data = { w: W, h: H, origin: origin.map(r1), depth: JOURNEY.filter((_, i) => i % 2 === 0).map((o) => r1(depth(...o.p))), stops: Object.fromEntries(Object.entries(STOPS).map(([a, s]) => [a, r1(Math.min(s, journey[journey.length - 1][3]))])), frames: FRAMES, journey, buildings: Object.fromEntries(B.map((b) => [b.id, frameOf([b.id])])) };
 
 mkdirSync(OUT, { recursive: true });
 writeFileSync(join(OUT, 'camino.svg'), svg);
