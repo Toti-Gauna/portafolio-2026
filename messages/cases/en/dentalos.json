@@ -363,7 +363,7 @@
         "What follows is my own proposal for taking it to production, with a full system design. It is not in the repo, nobody has validated it, and it is not a promise of scope. Every piece carries its label."
       ],
       "list": [
-        "In the repo: atomic, idempotent commands with a commandId, a reminder outbox that respects each person's opt-out, per-event audit and an appointment QR with no personal data. It is the starting point: today it runs as a local transaction in the browser.",
+        "In the repo: atomic, idempotent commands with a commandId, a reminder outbox that respects each person's opt-out, per-event audit. It is the starting point: today it runs as a local transaction in the browser. The appointment QR is not built yet: its requirement in the specification is a minimal payload, with no personal data or secrets.",
         "My proposal, to be validated: everything else. The API, the database, authentication with real roles, the queue and its worker, encryption, consent, retention and audited access.",
         "This is not legal compliance. What a legal professional would need to review is listed at the end, under security, without citing statutes."
       ]

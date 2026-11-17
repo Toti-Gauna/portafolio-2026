@@ -147,7 +147,7 @@ identificadores `P-001…` en lugar de documentos.
 > **Lo que ya está pensado para el día que lo tenga.**
 > - Cada acción es un comando con un identificador, que no se aplica dos veces y deja un evento de auditoría.
 > - Los recordatorios salen de una cola (outbox) que respeta la baja de cada persona.
-> - El QR del turno no lleva datos personales ni secretos.
+> - (Corregido el 17/11/2026) El QR del turno todavía no existe en el repo; su requisito es llevar un contenido mínimo, sin datos personales ni secretos.
 
 **Opción b (propuesta mía, a aprobar; no está en el repo):** el mismo texto, más un párrafo que diga que llevarlo a
 producción exige:
