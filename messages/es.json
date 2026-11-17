@@ -1852,5 +1852,582 @@
         "what": "Dos semanas para cerrar el plan."
       }
     }
+  },
+  "brandlab": {
+    "label": "Brand Lab",
+    "title": "Cómo doy marca.",
+    "lead": "Tableros de las marcas que dibujé: la mía, la de mi estudio, la de un cliente, las de mis demos y dos ejercicios. Cada uno dice de quién es la marca y de dónde sale cada pieza.",
+    "method": {
+      "label": "El método",
+      "steps": [
+        {
+          "t": "La idea",
+          "d": "Una frase y un lugar: qué es la marca y dónde vive."
+        },
+        {
+          "t": "La paleta",
+          "d": "Cinco o seis colores con nombre propio y para qué se usa cada uno."
+        },
+        {
+          "t": "Las tipografías",
+          "d": "Una para títulos y una para texto, con licencia abierta."
+        },
+        {
+          "t": "El logo, al final",
+          "d": "Después vienen el submark, los patrones y las piezas."
+        }
+      ]
+    },
+    "picker": "Marcas",
+    "sheet": "Pliego {n} de {total}",
+    "kinds": {
+      "own": "Marca propia",
+      "client": "Marca de un cliente"
+    },
+    "blocks": {
+      "a": "Logo principal",
+      "b": "Logo secundario",
+      "c": "Submark",
+      "d": "Paleta",
+      "e": "Tipografía",
+      "f": "Patrones",
+      "g": "Aplicaciones de ejemplo"
+    },
+    "from": {
+      "repo": "del repo",
+      "site": "del sitio",
+      "lab": "del tablero"
+    },
+    "roles": {
+      "display": "Títulos",
+      "text": "Texto"
+    },
+    "idea": "La idea",
+    "place": "Dónde vive",
+    "source": "Sale de",
+    "note": "Lo que no afirmo",
+    "alt": {
+      "a": "Logo principal de {name}",
+      "b": "Logo secundario de {name}",
+      "c": "Submark de {name}",
+      "f": "Patrón de {name}: {what}",
+      "g": "{what}, de ejemplo, con la marca {name}"
+    },
+    "back": "Volver al trabajo",
+    "brands": {
+      "ig": {
+        "name": "IG",
+        "full": "Ignacio Gauna",
+        "idea": "Mi marca personal: un cartel suizo con trama de puntos, dos tintas y el coral solo para lo que se toca.",
+        "place": "Este portafolio · Mar del Plata",
+        "source": "Los tokens y el monograma de este sitio.",
+        "note": "El logo secundario (monograma y nombre en una línea) lo armé para este tablero.",
+        "palette": {
+          "ink": {
+            "n": "Tinta",
+            "u": "Fondo"
+          },
+          "coral": {
+            "n": "Coral",
+            "u": "Solo acción y estado"
+          },
+          "paper": {
+            "n": "Papel",
+            "u": "Texto y botón principal"
+          },
+          "surface": {
+            "n": "Superficie",
+            "u": "Tarjetas y chips"
+          },
+          "muted": {
+            "n": "Mudo",
+            "u": "Rótulos"
+          },
+          "coralSoft": {
+            "n": "Coral suave",
+            "u": "Variación"
+          }
+        },
+        "patterns": [
+          "la trama de puntos",
+          "la rama que se bifurca",
+          "la grilla de puntos"
+        ],
+        "apps": [
+          {
+            "name": "Tarjeta",
+            "lines": [
+              "Ignacio Gauna",
+              "SSR AI FULLSTACK DEVELOPER"
+            ]
+          },
+          {
+            "name": "Cartel",
+            "lines": [
+              "Abierto a nuevos",
+              "desafíos.",
+              "MAR DEL PLATA · ARGENTINA"
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "VER PORTAFOLIO"
+            ]
+          }
+        ]
+      },
+      "eclipse": {
+        "name": "Eclipse",
+        "full": "Eclipse",
+        "idea": "Un eclipse total: lo oscuro deja ver la corona. Es mi estudio de desarrollo, IA y automatización.",
+        "place": "Su landing y los portales de clientes y de operación",
+        "source": "La reconstrucción en código de su landing y sus portales que está en este repo, con sus fuentes y licencias.",
+        "note": "Las piezas de ejemplo son dibujos de este tablero; la marca todavía no tiene favicon propio ni versión apilada.",
+        "palette": {
+          "corona": {
+            "n": "Corona",
+            "u": "Acción y acento"
+          },
+          "void": {
+            "n": "Void",
+            "u": "Fondo del hero"
+          },
+          "dawn": {
+            "n": "Dawn",
+            "u": "Texto sobre oscuro, fondo del portal"
+          },
+          "flare": {
+            "n": "Flare",
+            "u": "Luz y destellos"
+          },
+          "night": {
+            "n": "Night",
+            "u": "Superficie oscura"
+          },
+          "mist": {
+            "n": "Mist",
+            "u": "Texto secundario"
+          }
+        },
+        "patterns": [
+          "el cielo de estrellas fijas",
+          "el dial",
+          "la corona en anillos"
+        ],
+        "apps": [
+          {
+            "name": "Tarjeta",
+            "lines": [
+              "Desarrollo, IA",
+              "y automatización."
+            ]
+          },
+          {
+            "name": "Landing",
+            "lines": [
+              "Potenciá y visibilizá",
+              "tu negocio."
+            ]
+          },
+          {
+            "name": "Correo de propuesta",
+            "lines": [
+              "Tu propuesta",
+              "Ver la propuesta"
+            ]
+          }
+        ]
+      },
+      "velmar": {
+        "name": "Velmar",
+        "full": "Velmar",
+        "idea": "Objetos hechos a pedido para tu casa y tu mascota.",
+        "place": "Su tienda online y su panel · Mar del Plata",
+        "source": "El código de la demo que hice para Velmar (velmar-ecommerce-).",
+        "note": "La marca es de Velmar, un cliente: el logo está redibujado a partir de su Instagram y la paleta de la demo es provisional, no su identidad final.",
+        "palette": {
+          "olive": {
+            "n": "Verde oliva",
+            "u": "Botones, enlaces y logo"
+          },
+          "paper": {
+            "n": "Papel",
+            "u": "Fondo"
+          },
+          "ink": {
+            "n": "Tinta oliva",
+            "u": "Texto y bandas de noche"
+          },
+          "wood": {
+            "n": "Madera",
+            "u": "Decoración"
+          },
+          "sand": {
+            "n": "Arena",
+            "u": "Chips y fondos suaves"
+          },
+          "brass": {
+            "n": "Latón",
+            "u": "Detalle dorado sobre noche"
+          }
+        },
+        "patterns": [
+          "los chevrones",
+          "el monograma en latón",
+          "la veta de la madera"
+        ],
+        "apps": [
+          {
+            "name": "Etiqueta colgante",
+            "lines": [
+              "HECHO A PEDIDO",
+              "Mar del Plata"
+            ]
+          },
+          {
+            "name": "Lata de vela",
+            "lines": [
+              "VELA EN LATA"
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "Bowl de madera",
+              "Con su nombre",
+              "Personalizar"
+            ]
+          }
+        ]
+      },
+      "volta": {
+        "name": "Volta",
+        "full": "Volta",
+        "idea": "Un box de entrenamiento de noche: carbono, acero, tiza y el voltio como luz de señal.",
+        "place": "Una tienda de suplementos inventada · Mar del Plata",
+        "source": "El código de la demo (supplements-ecommerce).",
+        "note": "Es una marca inventada para una demo de venta y su paleta figura como provisional en el repo.",
+        "palette": {
+          "volt": {
+            "n": "Voltio",
+            "u": "Color firma: el rayo y el botón"
+          },
+          "carbon": {
+            "n": "Carbono",
+            "u": "Fondo"
+          },
+          "chalk": {
+            "n": "Tiza",
+            "u": "Texto"
+          },
+          "steel": {
+            "n": "Gris acero",
+            "u": "Texto apagado"
+          },
+          "ion": {
+            "n": "Ion",
+            "u": "Datos y destellos"
+          },
+          "plasma": {
+            "n": "Plasma",
+            "u": "Halos de los envases"
+          }
+        },
+        "patterns": [
+          "el rayo",
+          "la hoja milimetrada",
+          "las marcas de carril"
+        ],
+        "apps": [
+          {
+            "name": "Pote",
+            "lines": [
+              "PROTEÍNA",
+              "Sabor vainilla · 1 kg"
+            ]
+          },
+          {
+            "name": "Cartel",
+            "lines": [
+              "ENTRENÁ",
+              "CON VOLTAJE",
+              "SUPLEMENTOS · MAR DEL PLATA"
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "Creatina",
+              "Sabor neutro · 300 g",
+              "Agregar"
+            ]
+          }
+        ]
+      },
+      "dentalos": {
+        "name": "Clínica Brisa",
+        "full": "Clínica Brisa",
+        "idea": "Editorial clínico cálido: «Cada consulta tiene un próximo paso».",
+        "place": "Una clínica inventada para la demo de DentalOS",
+        "source": "El código de la demo (DentalOS).",
+        "note": "La clínica y sus datos son ficticios. La versión oscura del logo la armé para este tablero.",
+        "palette": {
+          "clinic": {
+            "n": "Verde clínica",
+            "u": "Texto, enlaces y rellenos"
+          },
+          "paper": {
+            "n": "Papel cálido",
+            "u": "Fondo"
+          },
+          "ink": {
+            "n": "Tinta verdosa",
+            "u": "Texto"
+          },
+          "gold": {
+            "n": "Oro",
+            "u": "La brisa del logo y detalles"
+          },
+          "sand": {
+            "n": "Arena",
+            "u": "Superficies cálidas"
+          },
+          "night": {
+            "n": "Noche",
+            "u": "Bandas oscuras"
+          }
+        },
+        "patterns": [
+          "la brisa",
+          "el diente en línea",
+          "los puntos de oro"
+        ],
+        "apps": [
+          {
+            "name": "Tarjeta de turno",
+            "lines": [
+              "TU PRÓXIMO TURNO",
+              "Martes 14:30",
+              "Control · Consultorio 2"
+            ]
+          },
+          {
+            "name": "Cartel",
+            "lines": [
+              "Cada consulta tiene",
+              "un próximo paso."
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "PRÓXIMO TURNO",
+              "Mar 14:30",
+              "Limpieza",
+              "Confirmar"
+            ]
+          }
+        ]
+      },
+      "lucero": {
+        "name": "Lucero",
+        "full": "Lucero",
+        "idea": "Vino, crema y una lámpara cálida: un bodegón de noche que se pide desde la mesa.",
+        "place": "Un restó-bar inventado para la demo de la carta por QR",
+        "source": "El código de la demo (foody).",
+        "note": "El local no existe. Su repo no tiene símbolo: el submark lo dibujé para este tablero. Gus, el mozo de la demo, no aparece porque su diseño todavía no está aprobado.",
+        "palette": {
+          "wine": {
+            "n": "Vino",
+            "u": "Acento principal"
+          },
+          "night": {
+            "n": "Noche vino",
+            "u": "Fondo"
+          },
+          "cream": {
+            "n": "Crema",
+            "u": "Texto"
+          },
+          "amber": {
+            "n": "Ámbar de lámpara",
+            "u": "Acento cálido"
+          },
+          "copper": {
+            "n": "Cobre",
+            "u": "Juegos de mesa"
+          },
+          "notebook": {
+            "n": "Papel de libreta",
+            "u": "La comanda"
+          }
+        },
+        "patterns": [
+          "la libreta",
+          "las estrellas",
+          "las formas de los juegos"
+        ],
+        "apps": [
+          {
+            "name": "Carpa de mesa con QR",
+            "lines": [
+              "Escaneá y pedí",
+              "Mesa 4"
+            ]
+          },
+          {
+            "name": "Carta",
+            "lines": [
+              "Carta",
+              "Ñoquis de papa",
+              "Pizza de la casa",
+              "Hamburguesa",
+              "Flan casero",
+              "con salsa de tomate",
+              "muzzarella y albahaca",
+              "con papas",
+              "con dulce de leche"
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "1 × Ñoquis",
+              "2 × Limonada",
+              "1 × Flan",
+              "Enviar a cocina"
+            ]
+          }
+        ]
+      },
+      "sereno": {
+        "name": "Sereno",
+        "full": "Sereno",
+        "idea": "Una panadería de masa madre que hornea de madrugada: la luna es el pan, con sus cortes.",
+        "place": "Ejercicio del lab: el negocio no existe",
+        "source": "Este tablero.",
+        "note": "Es un ejercicio: el nombre, la marca y las piezas los inventé para practicar.",
+        "palette": {
+          "night": {
+            "n": "Madrugada",
+            "u": "Fondo y texto"
+          },
+          "dough": {
+            "n": "Masa",
+            "u": "La luna y fondos"
+          },
+          "crust": {
+            "n": "Corteza",
+            "u": "Cortes y detalles"
+          },
+          "oven": {
+            "n": "Horno",
+            "u": "Acento"
+          },
+          "wheat": {
+            "n": "Trigo",
+            "u": "Rótulos sobre noche"
+          },
+          "flour": {
+            "n": "Harina",
+            "u": "Papel"
+          }
+        },
+        "patterns": [
+          "los cortes del pan",
+          "las espigas",
+          "el cielo de madrugada"
+        ],
+        "apps": [
+          {
+            "name": "Bolsa de papel",
+            "lines": [
+              "PAN DE MADRUGADA"
+            ]
+          },
+          {
+            "name": "Sticker",
+            "lines": [
+              "MASA MADRE",
+              "48 horas de fermento"
+            ]
+          },
+          {
+            "name": "Cartel",
+            "lines": [
+              "Horneamos",
+              "mientras dormís.",
+              "ABRIMOS A LAS 6"
+            ]
+          }
+        ]
+      },
+      "brote": {
+        "name": "Brote",
+        "full": "Brote",
+        "idea": "Plantas de interior para departamentos: lo que crece adentro.",
+        "place": "Ejercicio del lab: el negocio no existe",
+        "source": "Este tablero.",
+        "note": "Es un ejercicio: el nombre, la marca y las piezas los inventé para practicar.",
+        "palette": {
+          "leaf": {
+            "n": "Hoja",
+            "u": "Color principal"
+          },
+          "sprout": {
+            "n": "Brote",
+            "u": "Acento"
+          },
+          "pot": {
+            "n": "Maceta",
+            "u": "Botones y detalles"
+          },
+          "lime": {
+            "n": "Cal",
+            "u": "Fondo"
+          },
+          "soil": {
+            "n": "Tierra",
+            "u": "Texto"
+          },
+          "moss": {
+            "n": "Musgo",
+            "u": "Ilustraciones"
+          }
+        },
+        "patterns": [
+          "las hojas",
+          "las semillas",
+          "las rayas de la maceta"
+        ],
+        "apps": [
+          {
+            "name": "Etiqueta de maceta",
+            "lines": [
+              "Potus",
+              "Luz: indirecta",
+              "Riego: cada 7 días",
+              "Sol directo: no"
+            ]
+          },
+          {
+            "name": "Maceta",
+            "lines": [
+              "VIVERO DE INTERIOR"
+            ]
+          },
+          {
+            "name": "Pantalla",
+            "lines": [
+              "Monstera",
+              "Para luz media",
+              "Adoptar"
+            ]
+          }
+        ]
+      }
+    },
+    "pickExercise": "Ejercicio de marca"
   }
 }
