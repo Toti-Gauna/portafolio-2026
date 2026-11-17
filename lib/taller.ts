@@ -115,7 +115,7 @@ export const CHAPTERS: Chapter[] = [
       { id: 'blue', at: [33, 58], poly: [31, 54, 35, 54, 35, 61, 31, 61], go: { href: '/negocio/libros#blue' } },
     ],
   },
-  { key: 'video', building: 'right', zone: 'brand', href: '/proyectos/kinetic',
+  { key: 'video', building: 'right', zone: 'brand', href: '/video',
     spots: [
       { id: 'kinetic', at: [55, 35], poly: [46, 26, 63, 14, 64, 40, 46, 55], go: { href: '/proyectos/kinetic' } },
       { id: 'trailer', at: [80, 40], poly: [76, 38, 80, 30, 84, 32, 85, 46, 80, 49, 76, 47], go: { trailer: true } },

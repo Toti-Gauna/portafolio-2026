@@ -12,7 +12,7 @@ export function zoneForPath(path: string): Zone | null {
   if (p === '/') return 'inicio';
   if (p === '/catalogo') return null;
   if (p === '/trabajo' || p === '/como-trabajo' || p.startsWith('/proyectos/')) return 'work';
-  if (p === '/capacidades' || p === '/brand-lab' || p === '/negocio' || p.startsWith('/negocio/')) return 'brand';
+  if (p === '/capacidades' || p === '/brand-lab' || p === '/video' || p === '/negocio' || p.startsWith('/negocio/')) return 'brand';
   if (p === '/sobre-mi') return 'about';
   return 'inicio';
 }

@@ -135,6 +135,10 @@
       "roadmap": {
         "t": "Roadmap",
         "d": "Mi plan hasta agosto de 2030, en cuatro etapas."
+      },
+      "video": {
+        "t": "Video",
+        "d": "Tráileres con código, recorridos de mis demos y cómo los edito."
       }
     }
   },
@@ -1137,8 +1141,8 @@
       "video": {
         "title": "Video y tráileres",
         "heading": "Tráileres hechos con código.",
-        "text": "En Kinetic Studio hago tráileres de motion graphics que se generan en el navegador: GSAP, canvas, WebGL y audio sintetizado. El tráiler de este sitio sale de ahí.",
-        "cta": "Ver Kinetic Studio",
+        "text": "Tráileres hechos con código, recorridos grabados de mis demos, cómo los edito y una prueba de Remotion.",
+        "cta": "Ver video y tráileres",
         "alt": "Un cine sobre una plataforma de piedra proyecta un haz coral sobre una pantalla flotante.",
         "spots": {
           "kinetic": {
@@ -2847,5 +2851,158 @@
       "cta": "Ver los modelos y dónde los apliqué"
     },
     "reading": "Leyendo ahora: SPIN Selling, de Neil Rackham, sobre ventas consultivas."
+  },
+  "video": {
+    "metaTitle": "Video y tráileres — Ignacio Gauna",
+    "metaDescription": "Los tráileres que hago con código, los recorridos grabados de mis demos, cómo los edito y en qué formatos, y una prueba de Remotion.",
+    "label": "Video",
+    "title": "Video y tráileres.",
+    "lead": "Tráileres que se dibujan con código y recorridos grabados de mis proyectos, con cómo los edito y en qué formatos. Se reproducen solos al entrar en pantalla, sin sonido, y se pueden pausar.",
+    "note": "Todo lo que se ve son demos con datos de muestra o ficticios; las marcas de clientes y las pantallas de dinero están tapadas.",
+    "toc": "Secciones",
+    "case": "Ver el caso",
+    "back": "Volver al portafolio",
+    "groupLabel": "Recorrido de",
+    "code": {
+      "label": "Tráileres hechos con código",
+      "title": "Sin editor de video",
+      "idea": "Kinetic Studio es mi laboratorio de tráileres: sin editor de video, sin material de stock y sin audio grabado. Cada pieza es código; la imagen y el sonido se generan en vivo en el navegador.",
+      "facts": [
+        {
+          "n": "31",
+          "d": "tráileres en el hub"
+        },
+        {
+          "n": "1.430 s",
+          "d": "de película sumando el catálogo"
+        },
+        {
+          "n": "272",
+          "d": "escenas"
+        }
+      ],
+      "trailer": "Ver «Conocer a Ignacio»",
+      "trailerNote": "El tráiler de este portafolio: 130 segundos hechos con el kit de Kinetic.",
+      "caseCta": "Ver el caso de Kinetic Studio",
+      "hub": "Abrir el hub de Kinetic"
+    },
+    "products": {
+      "label": "Recorridos de producto",
+      "title": "Las demos, en movimiento",
+      "idea": "Grabaciones de las demos de mis proyectos corriendo en un build local, con datos de muestra. Las capturas fijas y el detalle de cada una están en su caso."
+    },
+    "groups": {
+      "eclipse": "La landing, las demos por rubro y los portales de clientes y de operación.",
+      "complia": "Un recorte de la demo, con datos de ejemplo y sin marcas.",
+      "volta": "La tienda, el club con ruleta y el panel de una tienda inventada.",
+      "velmar": "El panel, el configurador del collar y el club: la demo que hice para un cliente.",
+      "dentalos": "La recepción y el odontograma de una clínica ficticia.",
+      "supernova": "La inscripción a un evento y el creador de eventos de un prototipo.",
+      "games": "Dos juegos del banco de pruebas."
+    },
+    "formats": {
+      "label": "Edición y formatos",
+      "title": "Una película, varios cuadros",
+      "idea": "Lo que el código me deja hacer con el video, y lo que todavía no afirmo.",
+      "items": [
+        {
+          "t": "Un solo tráiler, dos formatos",
+          "d": "El tráiler del portafolio es la misma película (mismas escenas, tiempos, música y textos) en 16:9 y en una edición vertical 9:16 de 1080×1920. El reproductor elige según la pantalla."
+        },
+        {
+          "t": "Un cuadro en cualquier segundo",
+          "d": "La línea de tiempo está pausada y manda sobre la imagen y el sonido, así que se puede abrir la película congelada en cualquier segundo con ?t=. Es lo que uso para revisar cuadro por cuadro."
+        },
+        {
+          "t": "Un estudio de contenido para redes",
+          "d": "En las demos de Volta y Velmar, el panel arma un post 1:1, una historia 9:16 y un carrusel en PNG o en video con música sintetizada, con un texto sugerido. En la demo es simulado: no publica nada."
+        },
+        {
+          "t": "Exportar a MP4, con su límite",
+          "d": "Kinetic tiene un exportador a MP4, fuera del repo. La prueba dio 2 de 4 momentos idénticos y 2 con diferencias de un nivel de color: no afirmo una exportación determinista al bit."
+        }
+      ]
+    },
+    "remotion": {
+      "label": "Remotion",
+      "title": "La prueba de Remotion",
+      "idea": "Remotion arma video desde componentes de React. Lo probé para ver si sirve de segundo camino, el que entrega un MP4.",
+      "facts": [
+        {
+          "k": "Qué probé",
+          "v": "Una composición de React de 2 segundos, a 1280×720 y 30 cuadros por segundo, renderizada a MP4 (H.264) con Chromium."
+        },
+        {
+          "k": "Resultado",
+          "v": "Funciona: 60 cuadros, del paquete al MP4, en unos 20 segundos, con la tipografía y la animación como las pensé."
+        },
+        {
+          "k": "Cuándo",
+          "v": "17/11/2026, en una carpeta aparte."
+        },
+        {
+          "k": "Estado",
+          "v": "Solo una prueba. Remotion no está en este repositorio ni en ninguna pieza publicada."
+        },
+        {
+          "k": "Licencia",
+          "v": "Es gratis para individuos y organizaciones de hasta 3 personas; una empresa más grande necesita licencia. Antes de usarlo en un proyecto hay que confirmar si entra en la gratuita."
+        }
+      ],
+      "kinetic": {
+        "title": "Kinetic: una película que vive en la página",
+        "caption": "Se ve en vivo en el navegador y se puede congelar en cualquier segundo.",
+        "steps": [
+          {
+            "actor": "Código",
+            "t": "Recetas de escenas",
+            "d": "Cada escena devuelve su duración."
+          },
+          {
+            "actor": "Motor",
+            "t": "Una línea de tiempo",
+            "d": "Pausada: manda sobre imagen y sonido."
+          },
+          {
+            "actor": "Navegador",
+            "t": "Se dibuja en vivo",
+            "d": "Canvas, SVG y audio sintetizado."
+          },
+          {
+            "actor": "Espectador",
+            "t": "Lo mira ahí",
+            "d": "El MP4 sale por un exportador aparte."
+          }
+        ]
+      },
+      "remo": {
+        "title": "Remotion: un video que sale de React",
+        "caption": "Lo que probé: el camino hasta el MP4.",
+        "steps": [
+          {
+            "actor": "Código",
+            "t": "Componentes de React",
+            "d": "Una composición con su duración y sus cuadros por segundo."
+          },
+          {
+            "actor": "Remotion",
+            "t": "Empaqueta y abre",
+            "d": "Un navegador sin interfaz recorre los cuadros."
+          },
+          {
+            "actor": "Render",
+            "t": "Un cuadro por vez",
+            "d": "Cada cuadro sale igual: depende solo de su número."
+          },
+          {
+            "actor": "Archivo",
+            "t": "MP4",
+            "d": "Listo para subir o cortar en shorts."
+          }
+        ]
+      },
+      "criterion": "Mi criterio: Kinetic para piezas que viven en una página; Remotion, si lo sumo, para entregables en MP4 como shorts y recortes para redes."
+    },
+    "next": "Contacto"
   }
 }

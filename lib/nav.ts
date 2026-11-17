@@ -12,7 +12,7 @@ export const PAGES = [
 ] as const;
 
 /** Pages that live outside the header (it holds six): the footer and the sitemap list them too. */
-export const EXTRA_PAGES = [{ key: 'roadmap', href: '/roadmap' }] as const;
+export const EXTRA_PAGES = [{ key: 'roadmap', href: '/roadmap' }, { key: 'video', href: '/video' }] as const;
 export const ALL_PAGES = [...PAGES, ...EXTRA_PAGES] as const;
 
 export type PageKey = (typeof PAGES)[number]['key'];
