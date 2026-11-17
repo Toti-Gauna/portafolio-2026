@@ -1,9 +1,12 @@
 import type { CaseDef } from './types';
+import { gridLayouts } from './grid';
 
 /** games-market: a test bench of web games for live events (Banco de pruebas).
  *  Facts: scratchpad facts/games.md (repo Toti-Gauna/games-market, read on 28/10/2026). Public repo.
  *  18 registered and playable of 24 planned; the six question/survey games don't exist as games (only their shared
  *  engine). The repo's client-related brand name is never used on this page, and the host product is not described. */
+const realGrid = gridLayouts([['pages', 'phones', 'host'], ['rooms'], ['score', 'db']]);
+
 export const games: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
@@ -81,6 +84,51 @@ export const games: CaseDef = {
     },
     { type: 'flow', key: 'contract', cols: 4 },
     { type: 'text', key: 'findings' },
+    { type: 'text', key: 'real' },
+    {
+      // Ola 7b: the room-server design is my proposal from the repo's ROADMAP and games-guide (Colyseus for matches that
+      // outlive the projector, server-side score validation, TURN across networks); none of it is built.
+      type: 'diagram', key: 'realArch',
+      spec: {
+        id: 'games-real-arch',
+        nodes: [
+          { id: 'pages', kind: 'cloud' },
+          { id: 'phones', kind: 'person' },
+          { id: 'host', kind: 'client', tone: 'coral' },
+          { id: 'rooms', kind: 'server', tone: 'blue' },
+          { id: 'score', kind: 'code', tone: 'yellow' },
+          { id: 'db', kind: 'db', tone: 'blue' },
+        ],
+        edges: [
+          { id: 'serve', from: 'pages', to: 'phones', dashed: true },
+          { id: 'in', from: 'phones', to: 'rooms' },
+          { id: 'state', from: 'rooms', to: 'host', tone: 'coral' },
+          { id: 'end', from: 'rooms', to: 'score', tone: 'yellow' },
+          { id: 'keep', from: 'score', to: 'db', tone: 'blue' },
+        ],
+        desktop: realGrid.desktop,
+        mobile: realGrid.mobile,
+      },
+    },
+    {
+      type: 'sequence', key: 'realFlow',
+      spec: {
+        id: 'games-real-flow',
+        lanes: [{ id: 'phone', kind: 'person' }, { id: 'rooms', kind: 'server' }, { id: 'score', kind: 'code' }, { id: 'db', kind: 'db' }],
+        msgs: [
+          { id: 'join', from: 'phone', to: 'rooms' },
+          { id: 'check', from: 'rooms', to: 'rooms' },
+          { id: 'input', from: 'phone', to: 'rooms' },
+          { id: 'state', from: 'rooms', to: 'phone', back: true },
+          { id: 'end', from: 'rooms', to: 'score' },
+          { id: 'recalc', from: 'score', to: 'score' },
+          { id: 'save', from: 'score', to: 'db' },
+          { id: 'result', from: 'score', to: 'rooms', back: true },
+        ],
+      },
+    },
+    { type: 'text', key: 'realData' },
+    { type: 'checks', key: 'realSec' },
     { type: 'checks', key: 'security' },
     { type: 'decisions', key: 'decisions' },
     { type: 'readouts', key: 'quality' },
@@ -92,6 +140,7 @@ export const games: CaseDef = {
     { id: 'what', blocks: ['what', 'plan'] },
     { id: 'see', blocks: ['media', 'gallery'] },
     { id: 'how', blocks: ['net', 'contract', 'findings'] },
+    { id: 'real', blocks: ['real', 'realArch', 'realFlow', 'realData', 'realSec'] },
     { id: 'security', blocks: ['security'] },
     { id: 'decisions', blocks: ['decisions'] },
     { id: 'quality', blocks: ['quality', 'stack'] },

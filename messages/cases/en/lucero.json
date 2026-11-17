@@ -1,12 +1,341 @@
 {
-  "title": "lucero",
-  "kind": "Proyecto propio",
-  "status": "Pendiente",
-  "summary": "Pendiente.",
-  "facts": [],
-  "tldr": [],
+  "title": "Lucero",
+  "kind": "Own product · demo",
+  "status": "Demo",
+  "summary": "Lucero is an invented bar-restaurant I use to show «Eclipse for restaurants»: the diner scans their table's QR code, sees the menu with Gus (an illustrated waiter), orders, and the order reaches the kitchen. It has a CRM and a version split across several phones, each with its own role. Fictional data, it runs in the browser.",
+  "facts": [
+    {
+      "k": "Type",
+      "v": "Demo of an own product, with fictional data"
+    },
+    {
+      "k": "Parts",
+      "v": "Menu with Gus · waiter · kitchen · owner with CRM"
+    },
+    {
+      "k": "Menu",
+      "v": "In Spanish, English and Portuguese"
+    },
+    {
+      "k": "Status",
+      "v": "Demo: no payments, no real venue"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "The idea",
+      "v": "The diner scans their table's QR code, sees the menu and orders; the order reaches the kitchen and the waiter with no paper in between."
+    },
+    {
+      "k": "What it shows",
+      "v": "A menu with an illustrated waiter who writes down the order and carries it, an order that moves from the table to the kitchen and a CRM, also split across phones by role."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A demo with fictional data that runs on its own in the browser. The full backend is planned design and my proposal, not code."
+    }
+  ],
   "blocks": {
-    "what": { "h": "Qué es", "p": ["Pendiente."] },
-    "status": { "h": "Estado y lo que no afirmo", "p": ["Pendiente."] }
+    "what": {
+      "h": "What it is",
+      "p": [
+        "Lucero is an invented bar-restaurant, labelled «Demo», that I use to show «Eclipse for restaurants»: the diner scans their table's QR code, sees the menu and orders, and the order reaches the kitchen. The menu, the dishes and the prizes are samples.",
+        "It is the demo of a product in preparation. According to its specification, no venue uses it yet: demos were built first, to show."
+      ],
+      "list": [
+        "Menu with Gus: an illustrated waiter (38 poses) who keeps the diner company, writes down each dish and carries the order. The menu is in Spanish, English and Portuguese.",
+        "Order: from the diner or the waiter, with variants and add-ons, moving on its own from sent to kitchen, ready and delivered.",
+        "The venue's CRM: orders, kitchen, customers, menu and stock; the prize wheel is configured there too.",
+        "Games while you wait for the food: Ninja, Combinations and Catapult, plus rooms to play between phones (Draw and guess, and Hockey).",
+        "Live venue: the demo split across several phones, each with a role (table, waiter, kitchen and owner), installable as a PWA."
+      ]
+    },
+    "cycle": {
+      "h": "The order, from the table to the plate",
+      "p": [
+        "The cycle the demo runs through. Each step is a real state of the order, and Gus only moves when that state changes."
+      ],
+      "title": "From the QR code to «delivered»",
+      "steps": [
+        {
+          "actor": "Diner",
+          "t": "Scans and picks",
+          "d": "The QR code opens their table's menu. They add dishes with variants and add-ons, and Gus writes them in his notepad."
+        },
+        {
+          "actor": "Diner",
+          "t": "Sends the order",
+          "d": "It is recorded (state: sent). The sheet says nothing is charged in the app: payment is at the register or with the venue's card terminal."
+        },
+        {
+          "actor": "Kitchen",
+          "t": "Prepares it",
+          "d": "The order moves to the kitchen and the diner sees the progress. Gus comes out with the covered tray."
+        },
+        {
+          "actor": "Kitchen",
+          "t": "Finishes it",
+          "d": "State «ready»: the little bell rings and Gus walks to the table."
+        },
+        {
+          "actor": "Waiter",
+          "t": "Delivers it",
+          "d": "State «delivered»: Gus lifts the cloche and wishes them a good meal."
+        },
+        {
+          "actor": "CRM",
+          "t": "It is recorded",
+          "d": "The venue sees the order, and the customer gains a visit, with their favourite dish and their tags."
+        }
+      ],
+      "caption": "In the demo the order moves on its own: nothing reaches a real kitchen."
+    },
+    "now": {
+      "h": "What exists today: who owns the state",
+      "p": [
+        "Today there is no database. The live demo splits the work across phones, and the owner's phone is the centre."
+      ],
+      "diagram": {
+        "badge": "What exists today",
+        "title": "The owner's phone distributes the state",
+        "caption": "Three ways to connect the devices, one at a time: a single browser, no backend, or the relay. None of them has a database.",
+        "nodes": {
+          "mesa": {
+            "label": "Table",
+            "sub": "menu with Gus"
+          },
+          "mozo": {
+            "label": "Waiter",
+            "sub": "floor and orders"
+          },
+          "cocina": {
+            "label": "Kitchen",
+            "sub": "order tickets"
+          },
+          "owner": {
+            "label": "Owner",
+            "sub": "venue centre",
+            "note": "Their phone applies the actions, distributes the state and saves the venue. If the owner closes the tab, the venue goes down until they open it again."
+          },
+          "bc": {
+            "label": "Tabs",
+            "sub": "BroadcastChannel"
+          },
+          "rtc": {
+            "label": "WebRTC",
+            "sub": "no backend",
+            "note": "With no backend, the devices connect to each other through PeerJS's public broker. On the same WiFi it works; across different networks it may fail to connect without a TURN server."
+          },
+          "relay": {
+            "label": "Relay",
+            "sub": "Foody-be · Render",
+            "note": "It lives in another repo and I did not read its code. From the frontend you can see one WebSocket per channel, with a key per seat, for the game rooms and for syncing orders between devices."
+          }
+        },
+        "edges": {
+          "asks": "asks",
+          "asks2": "asks",
+          "moves": "advances",
+          "tabs": "tabs",
+          "p2p": "no backend",
+          "ws": "with backend"
+        }
+      }
+    },
+    "sync": {
+      "h": "How the state is kept",
+      "p": [
+        "Today the state lives in the browsers. All that exists on the server side is a message relay."
+      ],
+      "list": [
+        "The venue is saved on the owner's phone, so a reload does not erase it; each phone keeps its own cart.",
+        "Between tabs of one browser, orders and the CRM sync through BroadcastChannel. With the relay, an order placed on a phone shows up in the CRM open on a computer.",
+        "It is a PWA: it has a manifest, Gus icons and a service worker (files from the cache first, pages from the network first, with an offline page)."
+      ]
+    },
+    "real": {
+      "h": "What exists and what is missing",
+      "p": [
+        "Demo note: Lucero is a demo with fictional data and today it runs on its own in the browser. The only thing that exists on the server side is a room and sync relay (the Foody-be repo, on Render). I did not read its code: I describe only what is visible from the frontend.",
+        "The full product is specified in the repo's SDD and roadmap: Next.js for the front and the back, Postgres on Neon as the database and a table session signed by the QR code. That is planned design, not code. What the repo leaves open, the real-time mechanism and ticket printing, I show as options, without picking one.",
+        "Every piece is labelled: «It is in the repo» or «My proposal, to validate»."
+      ],
+      "list": [
+        "It is in the repo, and it exists: the relay on Render, which syncs orders and connects the game rooms.",
+        "It is in the repo, as planned design: Next.js, Postgres on Neon, the table session signed by the QR code, the roles and the isolation between venues.",
+        "It is in the repo, undecided: real time (left «to decide» in the phase 0.5 ADR) and ticket printing (to investigate).",
+        "My proposal, to validate: the order flow, the entities and their relations, and the security controls."
+      ]
+    },
+    "realArch": {
+      "h": "How the pieces connect",
+      "p": [
+        "People come in through two doors, the table's QR code and the staff login, and everything goes through a single API that decides what each one sees."
+      ],
+      "diagram": {
+        "badge": "Planned design",
+        "title": "One server, with a signed table",
+        "caption": "Next.js, Neon and the QR-signed session are in the SDD; the rest of the drawing, real time included, is my proposal.",
+        "nodes": {
+          "phones": {
+            "label": "Phones",
+            "sub": "diner · waiter"
+          },
+          "auth": {
+            "label": "Session",
+            "sub": "signed QR + login",
+            "note": "The QR carries a signed token that opens a table context: it authorizes no payments and no data from other tables. Staff sign in with a user and a role. The login is my proposal."
+          },
+          "screens": {
+            "label": "Screens",
+            "sub": "kitchen · manager"
+          },
+          "api": {
+            "label": "Next.js",
+            "sub": "front and API",
+            "note": "Front and back in the same project, per the SDD. In the example, the API works out on every order who it is, from which venue and with what role."
+          },
+          "db": {
+            "label": "Neon",
+            "sub": "Postgres"
+          },
+          "rt": {
+            "label": "Real time",
+            "sub": "to decide",
+            "note": "The SDD leaves it to be decided in the phase 0.5 ADR, because a Next.js function does not hold long connections. Options: persistent connections (like today's relay), server-sent events or periodic polling. I do not pick one."
+          }
+        },
+        "edges": {
+          "qr": "signed QR",
+          "login": "user, role",
+          "session": "session",
+          "tx": "transaction",
+          "events": "events",
+          "push": "tickets"
+        }
+      }
+    },
+    "realFlow": {
+      "h": "An order, from the table to the kitchen",
+      "p": [
+        "The critical flow: two tables ask for the last one left and a retry does not duplicate the order."
+      ],
+      "seq": {
+        "title": "From scanning the QR to the kitchen",
+        "caption": "Two orders for the last unit never oversell it and a retry never duplicates the order (SDD criteria). Real time stays open.",
+        "lanes": {
+          "diner": "Diner",
+          "api": "API",
+          "db": "Database",
+          "rt": "Real time",
+          "kitchen": "Kitchen"
+        },
+        "msgs": {
+          "scan": "opens their table's QR",
+          "verify": "checks signature and table",
+          "send": "sends the order + key",
+          "tx": "validates and takes stock",
+          "ok": "order recorded",
+          "publish": "publishes the ticket",
+          "arrive": "reaches its station",
+          "advance": "advances the state",
+          "seen": "the diner sees progress"
+        }
+      }
+    },
+    "realData": {
+      "h": "The main data",
+      "p": [
+        "The names come from sections 4 to 6 of the SDD. The relations and the keys are my proposal."
+      ],
+      "list": [
+        "Venue: its data and its configuration, for example whether each order goes through the manager or straight to the station.",
+        "User and role: diner (no account, just a name), waiter, manager, kitchen and owner; each one belongs to a venue.",
+        "Table and table session: each table has its QR code; the session opens on the first scan and closes when the manager closes the bill.",
+        "Menu and stock: types, products, variants and add-ons, with an optional stock limit.",
+        "Order and items: each item goes to a station (kitchen or bar) with its own state, and the order is the sum.",
+        "Change log: who changed or cancelled what, when and why."
+      ]
+    },
+    "realSec": {
+      "h": "Real security",
+      "p": [
+        "What is marked «It is in the repo» comes from the SDD and the roadmap. The concrete controls are my proposal, to validate."
+      ],
+      "items": [
+        {
+          "t": "The QR code opens a context, it does not authorize",
+          "d": "It is in the repo: it authorizes no payments and no data from other tables. My proposal: a signed, expiring token tied to the table and its session, which stops working when the manager closes the table."
+        },
+        {
+          "t": "Each venue, isolated",
+          "d": "It is in the repo: a diner never sees another table's data and a venue never sees another's. My proposal: the venue comes from the verified session and goes into every query, never from what the client sends."
+        },
+        {
+          "t": "Roles verified on the server",
+          "d": "My proposal: the role is resolved on the server on every action. Changing or cancelling a dish is the manager's alone, and who, when and why is logged."
+        },
+        {
+          "t": "An order is neither duplicated nor oversold",
+          "d": "It is in the repo (SDD criteria 1 and 2): two simultaneous orders do not sell the last unit and a retry does not duplicate. My proposal: a send key per order and the stock taken inside a transaction."
+        },
+        {
+          "t": "The app does not charge",
+          "d": "It is in the repo: payment is at the register or with the venue's card terminal, with no «paid» state and no card data in the app. The only thing charged is the venue's subscription, and its payment method is tokenized by the provider."
+        },
+        {
+          "t": "Diner data: 90 days",
+          "d": "It is in the repo: only the name and the table are stored; the venue is the controller and Eclipse the processor. They are kept for 90 days and then anonymised: I decided that on 17/11/2026 (the SDD proposed 90 days and the roadmap 12 months)."
+        },
+        {
+          "t": "No secrets in sight",
+          "d": "It is in the repo: there are no secrets in the repository and nothing that starts with NEXT_PUBLIC_ is a secret. My proposal: keys live only in server variables, and orders have per-session limits."
+        }
+      ]
+    },
+    "decisions": {
+      "h": "Decisions the repo documents",
+      "items": [
+        {
+          "t": "Nothing is charged inside the app",
+          "why": "With no payment gateway there are no refunds or reconciliation: payment is at the register or with the card terminal and the «paid» state does not exist. The only payment is the venue's subscription (SDD, D13 and §3).",
+          "alt": "Charging for the order with two options, which was the earlier plan."
+        },
+        {
+          "t": "Gus tells the real state, never invents it",
+          "why": "Every animation follows a state of the order: he goes to the kitchen once it is recorded and comes out with the tray once the venue accepted it. The wait time is the one the venue reports."
+        },
+        {
+          "t": "Ordering never depends on decoration",
+          "why": "The roadmap's golden rule: if the character, the dish of the day or a game fails, the menu and the order keep working."
+        },
+        {
+          "t": "A person validates the prizes",
+          "why": "A game's score only comes from the browser, so the waiter or the manager confirms the prize at the table. There are no automatic prizes and none with alcohol, because there are minors at the tables."
+        },
+        {
+          "t": "The owner distributes the live demo's state",
+          "why": "A single source keeps each phone from having its own truth: the owner's phone applies the actions and distributes the state. In exchange, if they close the tab, the venue goes down until they open it again.",
+          "alt": "A server that stores the state, which is what I propose in «How it would really be built»."
+        },
+        {
+          "t": "The backend comes last",
+          "why": "The server was left for the end of the plan: without it, the demo runs in the browser, with tabs over BroadcastChannel and rooms over WebRTC (execution plan, 02/11/2026)."
+        }
+      ]
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "It is a demo: Lucero is an invented venue, labelled «Demo». The menu, the customers and the prizes are samples.",
+        "According to the repo's specification, no venue uses it yet and no pilot is installed. There are no metrics or testimonials.",
+        "It does not charge or process payments: the order is paid at the register or with the card terminal.",
+        "Today it runs with no database. The relay on Render lives in another repo and I did not read its code.",
+        "«How it would really be built» is planned design and my proposal: I did not see the database, the signed session or the verified roles built in the repo.",
+        "The final real-time mechanism and ticket printing are still undecided in the repo.",
+        "Gus and the photos of the dishes are AI-made images.",
+        "The repo's README is out of date (it says «planning»): this page comes from its execution plan, its specification and its roadmap."
+      ]
+    }
   }
 }
