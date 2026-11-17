@@ -211,15 +211,5 @@ export const eclipse: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/portals', shots: ['eclipse-landing', 'eclipse-landing-precios', 'eclipse-portal-proyectos', 'eclipse-portal-detalle', 'eclipse-ops-prospectos', 'eclipse-ops-proyectos', 'eclipse-ops-calendario'] },
     { type: 'limits', key: 'status' },
   ],
-  steps: [
-    { id: 'what', blocks: ['what', 'sell', 'landing'] },
-    { id: 'see', blocks: ['media', 'gallery'] },
-    { id: 'how', blocks: ['arch', 'portal', 'backend', 'journey', 'stages', 'ops', 'kit', 'session'] },
-    { id: 'security', blocks: ['security'] },
-    { id: 'decisions', blocks: ['decisions'] },
-    { id: 'quality', blocks: ['quality', 'stack'] },
-    { id: 'status', blocks: ['status'] },
-  ],
-
   links: [{ label: 'eclipse-business.com', href: 'https://eclipse-business.com/' }],
 };

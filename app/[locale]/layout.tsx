@@ -6,13 +6,11 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing, localeTags, type Locale } from '@/i18n/routing';
 import { fontMono, fontSans } from '../fonts';
-import { SITE_URL, BASE_PATH, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, NOINDEX, absoluteUrl } from '@/lib/site';
+import { SITE_URL, CONTACT_EMAIL, LINKEDIN_URL, GITHUB_URL, NOINDEX, absoluteUrl } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Intro } from '@/components/Intro';
 import { FloatingContact } from '@/components/FloatingContact';
 import { SceneBackground } from '@/components/scene/SceneBackground';
-import { SoundSystem } from '@/components/SoundSystem';
-import { musicTracks } from '@/lib/music-files';
 
 export const dynamicParams = false;
 
@@ -21,7 +19,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0a0a0c',
+  themeColor: '#0e0e10',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
@@ -71,7 +69,7 @@ export default async function LocaleLayout({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Ignacio Gauna',
-    jobTitle: 'Ssr AI Fullstack Developer',
+    jobTitle: 'Sr AI Fullstack Developer',
     url: absoluteUrl(`/${locale}/`),
     email: CONTACT_EMAIL,
     sameAs: [LINKEDIN_URL, GITHUB_URL],
@@ -88,7 +86,6 @@ export default async function LocaleLayout({
         </noscript>
         <NextIntlClientProvider messages={messages}>
           <Intro />
-          <SoundSystem tracks={musicTracks()} base={BASE_PATH} />
           {/* animated background: one fixed canvas behind #app-shell; three loads after the boot screen */}
           <SceneBackground />
           <div id="app-shell">

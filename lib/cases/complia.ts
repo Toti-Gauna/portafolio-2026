@@ -44,12 +44,4 @@ export const complia: CaseDef = {
     { type: 'video', key: 'demo', src: '/media/complia-demo.mp4', poster: '/media/complia-demo-poster.jpg' },
     { type: 'limits', key: 'hidden' },
   ],
-  steps: [
-    { id: 'what', blocks: ['context', 'problem'] },
-    { id: 'how', blocks: ['how', 'steps'] },
-    { id: 'role', blocks: ['role'] },
-    { id: 'decisions', blocks: ['limitsByDesign'] },
-    { id: 'see', blocks: ['demo'] },
-    { id: 'status', blocks: ['hidden'] },
-  ],
 };

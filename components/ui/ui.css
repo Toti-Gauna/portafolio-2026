@@ -1,4 +1,0 @@
-/* Átomos del sistema «Cartel suizo». Los valores salen de los tokens de app/globals.css. */
-.stag { display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; border: 1px solid var(--paper); font: 600 12px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper); white-space: nowrap; }
-.stag[data-kind='produccion'] { background: var(--paper); color: var(--ink); }
-.stag[data-kind='planeado'], .stag[data-kind='ejercicio'] { border-style: dashed; border-color: var(--muted); color: var(--soft); }

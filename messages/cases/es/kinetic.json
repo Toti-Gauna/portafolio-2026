@@ -32,7 +32,7 @@
     },
     {
       "k": "Dónde está",
-      "v": "31 tráileres en el hub y el tráiler de 130 s de este portafolio. Es un laboratorio: no tiene tests y el kit está copiado en cada carpeta."
+      "v": "31 tráileres en el hub y el tráiler de 112 s de este portafolio. Es un laboratorio: no tiene tests y el kit está copiado en cada carpeta."
     }
   ],
   "blocks": {
@@ -161,55 +161,60 @@
       "h": "El tráiler de este portafolio",
       "p": [
         "El uso más exigente del kit es el tráiler «Conocer a Ignacio» que abre este sitio. Usa el motor de Kinetic con un solo cambio de dos líneas (dentro del portafolio no hay atajos de una letra, por WCAG 2.1.4) y le suma recetas propias, un modo para vivir dentro de la página y la pasada de calentamiento.",
-        "En el camino propio, seis vistas de componentes reales de mis proyectos están reconstruidas en código (HTML, CSS y SVG animados con GSAP), sin capturas, y vuelan a un muro final. En las tecnologías, cada una de las 17 es una animación que muestra qué hace, con una nota fija de dónde la usé.",
-        "No es todo código: el tramo de CompliA reproduce un recorte grabado de su demo. Y tiene una edición vertical 9:16, con las mismas escenas y la misma música."
+        "En el acto 5, once vistas de componentes reales de mis proyectos están reconstruidas en código (HTML, CSS y SVG animados con GSAP), sin capturas. En el acto 6, cada una de las 17 tecnologías es una animación que muestra qué hace, con una nota fija de dónde la usé.",
+        "No es todo código: el acto 4 reproduce un recorte grabado de la demo de CompliA."
       ]
     },
     "acts": {
-      "title": "130 segundos en siete actos",
-      "caption": "Tiempos de trailer.es.js, sobre una partitura de 120 BPM (65 compases). En el sitio se reproduce al 85 % de velocidad (unos 153 s reales) para que se pueda leer. El inglés es la misma película con otras palabras.",
+      "title": "112 segundos en ocho actos",
+      "caption": "Tiempos de trailer.es.js, sobre una partitura de 120 BPM (56 compases). El inglés es la misma película con otras palabras.",
       "steps": [
         {
-          "actor": "0:00–0:12",
-          "t": "Mar del Plata",
-          "d": "La costa de noche y una web de juegos retro que se arma sola: de su botón crece el camino."
+          "actor": "0:00–0:08",
+          "t": "La semilla",
+          "d": "Cortes tipográficos: dónde empezó todo."
         },
         {
-          "actor": "0:12–1:00",
-          "t": "Los frentes",
-          "d": "La carrera como un grafo de git: una rama por frente, con un tramo de línea y una frase antes de cada uno, y el recorte de la demo de CompliA."
+          "actor": "0:08–0:12",
+          "t": "Caminos",
+          "d": "De una semilla salen ramas en todas direcciones y queda una sola línea."
         },
         {
-          "actor": "1:00–1:10",
-          "t": "Camino propio",
-          "d": "Seis vistas reconstruidas en código y un muro final: «Todo, en código.»"
+          "actor": "0:12–0:32",
+          "t": "Carrera",
+          "d": "La carrera como un grafo de git: una rama por trabajo y la cámara viaja por la línea."
         },
         {
-          "actor": "1:10–1:26",
-          "t": "Todos los caminos",
-          "d": "La cámara se aleja al grafo entero y después vienen los rubros: «No le temo a ningún rubro.»"
+          "actor": "0:32–0:42",
+          "t": "CompliA",
+          "d": "El caso a la izquierda y el recorte de la demo a la derecha, sincronizado con la línea de tiempo."
         },
         {
-          "actor": "1:26–1:42",
+          "actor": "0:42–1:00",
+          "t": "Ramas propias",
+          "d": "Once vistas reconstruidas en código y un muro final: «Todo, en código.»"
+        },
+        {
+          "actor": "1:00–1:18",
           "t": "Tecnologías",
           "d": "17 animaciones en cuatro pantallas, agrupadas por dónde usé cada tecnología."
         },
         {
-          "actor": "1:42–1:58",
+          "actor": "1:18–1:34",
           "t": "Sistema",
           "d": "Los 11 agentes, las reglas y un tablero de CI."
         },
         {
-          "actor": "1:58–2:10",
+          "actor": "1:34–1:52",
           "t": "Final",
-          "d": "Monograma, nombre, «Abierto a nuevos desafíos.» y contacto; después entra el portafolio."
+          "d": "Nombre, rol y contacto; después el cuadro se vacía y entra el portafolio."
         }
       ]
     },
     "film": {
       "items": [
         {
-          "n": "130",
+          "n": "112",
           "u": "s",
           "d": "Duración de la película"
         },
@@ -219,7 +224,7 @@
           "d": "Iguales en español y en inglés"
         },
         {
-          "n": "6",
+          "n": "11",
           "u": "vistas",
           "d": "Componentes reales reconstruidos en código"
         },
@@ -229,7 +234,7 @@
           "d": "Una por tecnología"
         }
       ],
-      "note": "Los fijan los tests del portafolio: el e2e espera una duración de 130,00 s y los unitarios exigen los mismos tiempos y escenas en los dos guiones, que cada vista y cada tecnología tengan su texto en los dos idiomas y el límite de duración. Corrí los unitarios el 17/11/2026, en verde."
+      "note": "Los fijan los tests del portafolio: el e2e espera una duración de 112,00 s y los unitarios exigen 15 escenas, 11 vistas y 17 tecnologías con los mismos textos en los dos idiomas. Corrí los unitarios el 28/10/2026, en verde."
     },
     "host": {
       "h": "Cómo entra en el portafolio",
@@ -383,7 +388,7 @@
       "h": "Estado y lo que no afirmo",
       "list": [
         "Laboratorio público: 31 tráileres en el hub, una carpeta más sin listar y la primera versión de KINETIC como página heredada.",
-        "No afirmo que todo sea código: dos comerciales animan capturas reales de una demo, y en el tráiler del portafolio hay un recorte grabado de CompliA y algunas ilustraciones con datos ficticios, rotuladas.",
+        "No afirmo que todo sea código: dos comerciales animan capturas reales de una demo, y en el tráiler del portafolio hay un recorte de video y cuatro ilustraciones.",
         "No afirmo una exportación determinista al bit: la prueba dio 2 de 4 momentos idénticos y 2 con diferencias de un nivel de color.",
         "El exportador no está en el repo, y el repo no tiene licencia: no es código abierto.",
         "Las cifras de rendimiento son de laboratorio, en Chromium sin GPU."

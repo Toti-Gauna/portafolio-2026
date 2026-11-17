@@ -109,14 +109,6 @@ export const kinetic: CaseDef = {
     { type: 'text', key: 'debt' },
     { type: 'limits', key: 'status' },
   ],
-  steps: [
-    { id: 'what', blocks: ['what', 'flagship'] },
-    { id: 'see', blocks: ['media', 'gallery'] },
-    { id: 'how', blocks: ['pipeline', 'engine', 'acts', 'film', 'host'] },
-    { id: 'decisions', blocks: ['decisions', 'debt'] },
-    { id: 'quality', blocks: ['quality', 'stack'] },
-    { id: 'status', blocks: ['status'] },
-  ],
   links: [
     { label: 'toti-gauna.github.io/motion-animations', href: 'https://toti-gauna.github.io/motion-animations/' },
     { label: 'github.com/Toti-Gauna/kinetic-studio', href: 'https://github.com/Toti-Gauna/kinetic-studio' },

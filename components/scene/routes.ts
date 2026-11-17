@@ -36,8 +36,6 @@ const ALIASES: Record<string, SceneId> = {
   'sistema-agentico': 'agentes',
   'agentic-system': 'agentes',
   'kinetic-studio': 'kinetic',
-  video: 'kinetic',
-  trailers: 'kinetic',
   'supplements-ecommerce': 'volta',
   'velmar-ecommerce': 'velmar',
   'games-market': 'games',

@@ -78,7 +78,3 @@ export const SYSTEM_FLOW: ArchSpec = {
     },
   },
 };
-
-/** «Lo que conozco y estoy estudiando» (Ola 10, on /capacidades): knowledge only, nothing published. Copy: skills.know.items.<id>. */
-export const KNOWLEDGE = ['arvr', 'blender', 'meshy', 'claude'] as const;
-export type KnowledgeId = (typeof KNOWLEDGE)[number];

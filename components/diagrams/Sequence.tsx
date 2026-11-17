@@ -25,7 +25,7 @@ export function Sequence({ spec, copy }: { spec: SeqSpec; copy: SeqCopy }) {
           <defs>
             {(['edge', 'coral'] as const).map((t) => (
               <marker key={t} id={`${tid}-${t}`} viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
-                <path d="M0 0.8L9 5 0 9.2z" fill={t === 'edge' ? '#8d8a83' : TONE.coral} />
+                <path d="M0 0.8L9 5 0 9.2z" fill={t === 'edge' ? '#a7a39a' : TONE.coral} />
               </marker>
             ))}
           </defs>
@@ -40,7 +40,7 @@ export function Sequence({ spec, copy }: { spec: SeqSpec; copy: SeqCopy }) {
           {spec.msgs.map((m, i) => {
             const y = TOP + 34 + i * ROW, x1 = X[m.from], x2 = X[m.to];
             const dir = Math.sign(x2 - x1) || 1, label = copy.msgs[m.id];
-            const tone = m.tone ? TONE[m.tone] : m.back ? '#8d8a83' : TONE.coral;
+            const tone = m.tone ? TONE[m.tone] : m.back ? '#a7a39a' : TONE.coral;
             const self = m.from === m.to;
             return (
               <g key={m.id} className="sq__msg-g" style={{ '--o': i } as CSSProperties}>

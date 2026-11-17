@@ -4,7 +4,7 @@ import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { pageMetadata } from '@/lib/meta';
-import { Footer, Method, PageHead, System, HowSite } from '@/components/sections/Sections';
+import { Footer, Method, PageHead, System } from '@/components/sections/Sections';
 
 type Params = { locale: string };
 
@@ -27,7 +27,6 @@ export default async function HowPage({ params }: { params: Promise<Params> }) {
         <PageHead label={t('label')} title={t('title')} lead={t('lead')} />
         <Method />
         <System />
-        <HowSite />
       </main>
       <Footer />
     </>

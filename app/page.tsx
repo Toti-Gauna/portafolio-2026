@@ -29,7 +29,7 @@ export default function RootRedirect() {
         <meta name="robots" content="noindex" />
         <script dangerouslySetInnerHTML={{ __html: redirectScript }} />
       </head>
-      <body style={{ background: '#0a0a0c', color: '#eeeae3', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
+      <body style={{ background: '#0e0e10', color: '#eeeae3', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
         <noscript>
           <p>
             <a href={`${BASE_PATH}/es/`} style={{ color: '#ff4d2e' }}>Español</a> ·{' '}

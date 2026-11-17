@@ -13,11 +13,9 @@ describe('route → background scene', () => {
   });
 
   it('every case page gets its own scene', () => {
-    // HandyX, Lucero and Trazo (Ola 7b) keep the quiet dot field until they get a scene of their own
-    const plain = ['handyx', 'lucero', 'trazo'];
     for (const slug of CASE_SLUGS) {
-      expect(sceneForPath(`/es/proyectos/${slug}/`)).toBe(plain.includes(slug) ? 'default' : slug);
-      expect(sceneForPath(`/en/proyectos/${slug}`)).toBe(plain.includes(slug) ? 'default' : slug);
+      expect(sceneForPath(`/es/proyectos/${slug}/`)).toBe(slug);
+      expect(sceneForPath(`/en/proyectos/${slug}`)).toBe(slug);
     }
   });
 
@@ -25,9 +23,6 @@ describe('route → background scene', () => {
     expect(sceneForPath('/es/negocio/')).toBe('negocio');
     expect(sceneForPath('/en/negocio/')).toBe('negocio');
     expect(sceneForPath('/en/business-models/')).toBe('negocio');
-    expect(sceneForPath('/es/negocio/libros/')).toBe('negocio');
-    expect(sceneForPath('/es/video/')).toBe('kinetic');
-    expect(sceneForPath('/en/video')).toBe('kinetic');
     expect(sceneForPath('/es/agentes/')).toBe('agentes');
     expect(sceneForPath('/en/agents/')).toBe('agentes');
     for (const id of ['volta', 'dentalos', 'games', 'velmar', 'supernova'] as const) {

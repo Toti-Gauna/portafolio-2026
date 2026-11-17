@@ -1,13 +1,8 @@
 import type { CaseDef } from './types';
-import { gridLayouts } from './grid';
 
 /** Velmar: a demo made for a real workshop in Mar del Plata (Ignacio, 28/10/2026: shown by name, «Demo · hecha para un
  *  cliente»; no deposit, deployment or results claimed; no Instagram, contact data or logo).
  *  Facts: scratchpad facts/velmar.md, checked read-only against the repo (engine/orders.ts, wheel.ts, collar.ts). */
-
-/** «How it would really be built» (Ola 7b): the design planned in the repo's docs, as a grid diagram + a sequence. */
-const g = gridLayouts([['shop', 'admin'], ['services', 'app', 'mp'], ['db', 'files', 'mail']]);
-
 export const velmar: CaseDef = {
   blocks: [
     { type: 'text', key: 'what' },
@@ -193,69 +188,11 @@ export const velmar: CaseDef = {
         },
       },
     },
-    { type: 'text', key: 'real' },
-    {
-      type: 'diagram', key: 'realArch',
-      spec: {
-        id: 'velmar-real-arch',
-        nodes: [
-          { id: 'shop', kind: 'client' },
-          { id: 'admin', kind: 'client', tone: 'yellow' },
-          { id: 'app', kind: 'server' },
-          { id: 'services', kind: 'code', tone: 'coral' },
-          { id: 'mp', kind: 'external', tone: 'yellow' },
-          { id: 'db', kind: 'db', tone: 'blue' },
-          { id: 'files', kind: 'doc' },
-          { id: 'mail', kind: 'external' },
-        ],
-        edges: [
-          { id: 'ask', from: 'shop', to: 'app' },
-          { id: 'session', from: 'admin', to: 'app', tone: 'yellow' },
-          { id: 'calls', from: 'app', to: 'services', tone: 'coral' },
-          { id: 'hook', from: 'mp', to: 'app', tone: 'yellow' },
-          { id: 'tx', from: 'services', to: 'db', tone: 'blue' },
-          { id: 'proof', from: 'app', to: 'files' },
-          { id: 'send', from: 'app', to: 'mail', dashed: true },
-        ],
-        desktop: g.desktop,
-        mobile: g.mobile,
-      },
-    },
-    {
-      type: 'sequence', key: 'realFlow',
-      spec: {
-        id: 'velmar-real-flow',
-        lanes: [{ id: 'buyer', kind: 'person' }, { id: 'mp', kind: 'external' }, { id: 'app', kind: 'server' }, { id: 'db', kind: 'db' }],
-        msgs: [
-          { id: 'order', from: 'buyer', to: 'app' },
-          { id: 'check', from: 'app', to: 'app' },
-          { id: 'save', from: 'app', to: 'db' },
-          { id: 'form', from: 'app', to: 'buyer', back: true },
-          { id: 'card', from: 'buyer', to: 'mp' },
-          { id: 'hook', from: 'mp', to: 'app', tone: 'yellow' },
-          { id: 'verify', from: 'app', to: 'app' },
-          { id: 'paid', from: 'app', to: 'db' },
-          { id: 'mail', from: 'app', to: 'buyer', back: true },
-        ],
-      },
-    },
-    { type: 'text', key: 'realData' },
-    { type: 'checks', key: 'realSec' },
     { type: 'checks', key: 'security' },
     { type: 'decisions', key: 'decisions' },
     { type: 'readouts', key: 'quality' },
     { type: 'stack', key: 'stack' },
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['velmar'] },
     { type: 'limits', key: 'status' },
-  ],
-  steps: [
-    { id: 'what', blocks: ['what', 'problem', 'business'] },
-    { id: 'see', blocks: ['media', 'gallery'] },
-    { id: 'how', blocks: ['loop', 'orders', 'collar', 'arch'] },
-    { id: 'real', blocks: ['real', 'realArch', 'realFlow', 'realData', 'realSec'] },
-    { id: 'security', blocks: ['security'] },
-    { id: 'decisions', blocks: ['decisions'] },
-    { id: 'quality', blocks: ['quality', 'stack'] },
-    { id: 'status', blocks: ['status'] },
   ],
 };

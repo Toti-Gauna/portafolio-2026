@@ -32,7 +32,7 @@
     },
     {
       "k": "Where it is",
-      "v": "31 trailers in the hub and this portfolio's 130 s trailer. It is a lab: it has no tests and the kit is copied into every folder."
+      "v": "31 trailers in the hub and this portfolio's 112 s trailer. It is a lab: it has no tests and the kit is copied into every folder."
     }
   ],
   "blocks": {
@@ -161,55 +161,60 @@
       "h": "This portfolio's trailer",
       "p": [
         "The most demanding use of the kit is the «Meet Ignacio» trailer that opens this site. It uses the Kinetic engine with a single two-line change (inside the portfolio there are no single-letter shortcuts, per WCAG 2.1.4) and adds its own recipes, a mode to live inside the page and the warm-up pass.",
-        "In the own-path part, six views of real components from my projects are rebuilt in code (HTML, CSS and SVG animated with GSAP), with no screenshots, and they fly to a final wall. In the technologies, each of the 17 is an animation that shows what it does, with a fixed note on where I used it.",
-        "It is not all code: the CompliA stretch plays a recorded clip of its demo. And it has a vertical 9:16 edition, with the same scenes and the same music."
+        "In act 5, eleven views of real components from my projects are rebuilt in code (HTML, CSS and SVG animated with GSAP), with no screenshots. In act 6, each of the 17 technologies is an animation that shows what it does, with a fixed note on where I used it.",
+        "It is not all code: act 4 plays a recorded clip of the CompliA demo."
       ]
     },
     "acts": {
-      "title": "130 seconds in seven acts",
-      "caption": "Timings from trailer.es.js, on a 120 BPM score (65 bars). On the site it plays at 85 % speed (about 153 real seconds) so it can be read. The English version is the same film with other words.",
+      "title": "112 seconds in eight acts",
+      "caption": "Timings from trailer.es.js, on a 120 BPM score (56 bars). The English version is the same film with other words.",
       "steps": [
         {
-          "actor": "0:00–0:12",
-          "t": "Mar del Plata",
-          "d": "The coast at night and a retro games site that builds itself: the path grows from its button."
+          "actor": "0:00–0:08",
+          "t": "The seed",
+          "d": "Typographic cuts: where it all started."
         },
         {
-          "actor": "0:12–1:00",
-          "t": "The fronts",
-          "d": "The career as a git graph: one branch per front, with a stretch of line and a sentence before each, and the clip of the CompliA demo."
+          "actor": "0:08–0:12",
+          "t": "Paths",
+          "d": "Branches burst out of a seed in every direction and one line remains."
         },
         {
-          "actor": "1:00–1:10",
-          "t": "Own path",
-          "d": "Six views rebuilt in code and a final wall: «All of it, in code.»"
+          "actor": "0:12–0:32",
+          "t": "Career",
+          "d": "The career as a git graph: one branch per job, with the camera travelling along the line."
         },
         {
-          "actor": "1:10–1:26",
-          "t": "All the paths",
-          "d": "The camera pulls out to the whole graph and then come the industries: «I am not afraid of any industry.»"
+          "actor": "0:32–0:42",
+          "t": "CompliA",
+          "d": "The case on the left and the demo clip on the right, in sync with the timeline."
         },
         {
-          "actor": "1:26–1:42",
+          "actor": "0:42–1:00",
+          "t": "Own branches",
+          "d": "Eleven views rebuilt in code and a final wall: «All of it, in code.»"
+        },
+        {
+          "actor": "1:00–1:18",
           "t": "Technologies",
           "d": "17 animations on four screens, grouped by where I used each technology."
         },
         {
-          "actor": "1:42–1:58",
+          "actor": "1:18–1:34",
           "t": "System",
           "d": "The 11 agents, the rules and a CI board."
         },
         {
-          "actor": "1:58–2:10",
+          "actor": "1:34–1:52",
           "t": "Ending",
-          "d": "Monogram, name, «Open to new challenges.» and contact; then the portfolio comes in."
+          "d": "Name, role and contact; then the frame empties and the portfolio comes in."
         }
       ]
     },
     "film": {
       "items": [
         {
-          "n": "130",
+          "n": "112",
           "u": "s",
           "d": "Length of the film"
         },
@@ -219,7 +224,7 @@
           "d": "The same in Spanish and English"
         },
         {
-          "n": "6",
+          "n": "11",
           "u": "views",
           "d": "Real components rebuilt in code"
         },
@@ -229,7 +234,7 @@
           "d": "One per technology"
         }
       ],
-      "note": "The portfolio's tests pin them: the e2e test expects a 130.00 s duration and the unit tests require the same timings and scenes in both scripts, a text in both languages for every view and technology, and the length limit. I ran the unit tests on 11/17/2026: green."
+      "note": "The portfolio's tests pin them: the e2e test expects a 112.00 s duration and the unit tests require 15 scenes, 11 views and 17 technologies with the same texts in both languages. I ran the unit tests on 10/28/2026: green."
     },
     "host": {
       "h": "How it plugs into the portfolio",
@@ -383,7 +388,7 @@
       "h": "Status and what I don't claim",
       "list": [
         "Public lab: 31 trailers in the hub, one more unlisted folder and the first version of KINETIC as a legacy page.",
-        "I do not claim it is all code: two commercials animate real captures of a demo, and the portfolio's trailer has a recorded clip of CompliA and some illustrations with fictional data, labelled.",
+        "I don't claim it is all code: two commercials animate real captures of a demo, and the portfolio's trailer has a video clip and four illustrations.",
         "I don't claim bit-exact deterministic export: the test gave 2 of 4 moments identical and 2 differing by one colour level.",
         "The exporter is not in the repo, and the repo has no licence: it is not open source.",
         "The performance figures are lab numbers, in Chromium without a GPU."

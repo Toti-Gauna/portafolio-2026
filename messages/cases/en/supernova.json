@@ -10,7 +10,7 @@
     },
     {
       "k": "Role",
-      "v": "Built the prototype, already as a mid-level dev"
+      "v": "Built the prototype"
     },
     {
       "k": "Type",
@@ -39,7 +39,7 @@
     "what": {
       "h": "What it is",
       "p": [
-        "A micro-app for a large company's employees to find internal events, sign up and get in with a pass. I built it at Tsoft for Telefónica, already as a mid-level (Ssr) developer, as a prototype: it runs entirely in the browser on fictional data."
+        "A micro-app for a large company's employees to find internal events, sign up and get in with a pass. I built it at Tsoft for Telefónica as a prototype: it runs entirely in the browser on fictional data."
       ],
       "list": [
         "Employee: searches and filters the catalog, saves favourites, signs up for a session with guests and gets a pass with a QR code, a calendar and an .ics file.",
@@ -178,143 +178,6 @@
           "data": "reads, writes JSON"
         }
       }
-    },
-    "real": {
-      "h": "Backend example: a proposal, it does not exist",
-      "p": [
-        "Prototype note: this is frontend only, with fictional data and local storage. According to the repo's README, it includes no backend, no corporate sign-in and no real email sending, and the interface permissions are for the demo: final authorization belongs to the server. The same goes for security, email and capacity control.",
-        "What follows is an example backend for a prototype that handles sign-ups to internal events. It is my proposal, to be validated: it does not exist, it does not describe any company's system and it names no client. Every piece is labelled: «It is in the repo» or «My proposal, to validate»."
-      ],
-      "list": [
-        "It is in the repo: a prototype with no backend and no corporate sign-in; capacity, email and authorization belong on the server, which does not exist.",
-        "It is in the repo: the prototype already limits Excel or CSV imports (5 MB, 5,000 rows) and keeps personal data out of the demo's QR code.",
-        "My proposal, to validate: the server below, with its services, its database, the email queue and the security controls."
-      ]
-    },
-    "realArch": {
-      "h": "How the pieces connect",
-      "p": [
-        "One API that decides everything: the app asks, and the server answers only with what that person can see and do."
-      ],
-      "diagram": {
-        "badge": "Backend example: a proposal, it does not exist",
-        "title": "A server that decides, not the client",
-        "caption": "What the browser simulates today moves to the server: identity, capacity and email. It is my example, not a real system.",
-        "nodes": {
-          "app": {
-            "label": "Web app",
-            "sub": "today's one"
-          },
-          "api": {
-            "label": "API",
-            "sub": "authorizes all",
-            "note": "Every operation comes from a verified session: user, company and role are set by the server, never by the client or by what the browser stores."
-          },
-          "idp": {
-            "label": "Identity",
-            "sub": "corporate sign-in"
-          },
-          "svc": {
-            "label": "Services",
-            "sub": "spots · check-in",
-            "note": "Signing up, cancelling, promoting from the waitlist and registering an entry are transactions: two requests for the last spot never oversell."
-          },
-          "db": {
-            "label": "Database",
-            "sub": "transactional"
-          },
-          "queue": {
-            "label": "Queue",
-            "sub": "emails, notices",
-            "note": "The email is put in a queue inside the same transaction as the sign-up: if the provider is down, the sign-up stands and the send is retried."
-          },
-          "mail": {
-            "label": "Email",
-            "sub": "external provider"
-          }
-        },
-        "edges": {
-          "ask": "asks",
-          "who": "who is it",
-          "rules": "rules",
-          "tx": "transaction",
-          "out": "outbox",
-          "send": "sends"
-        }
-      }
-    },
-    "realFlow": {
-      "h": "Signing up for the last spot",
-      "p": [
-        "The critical flow: two people ask for the last place at once. The database decides who wins and the queue keeps the email from getting lost."
-      ],
-      "seq": {
-        "title": "From sign-up to email",
-        "caption": "Two requests for the last spot never oversell: the reservation is a transaction. If the email fails, the sign-up stands. My example, it does not exist.",
-        "lanes": {
-          "person": "Employee",
-          "app": "Web app",
-          "api": "API",
-          "db": "Database",
-          "queue": "Queue"
-        },
-        "msgs": {
-          "pick": "picks the event",
-          "send": "asks for a spot + unique key",
-          "auth": "checks session and audience",
-          "reserve": "reserves in a transaction",
-          "state": "confirmed or waitlisted",
-          "enqueue": "puts the email in the queue",
-          "reply": "real sign-up status",
-          "mail": "sends and retries"
-        }
-      }
-    },
-    "realData": {
-      "h": "The main data",
-      "p": [
-        "The entities and how they relate, with no schemas. All of it is my proposal."
-      ],
-      "list": [
-        "Event: title, dates with their time zone, total capacity, guest limit and whether it is public or private.",
-        "Audience: who can see it and who is invited; a private list is frozen when the event is published.",
-        "Sign-up: one per person and event; it takes one spot plus its guests and can end up on the waitlist.",
-        "Ticket: an opaque, revocable token with no personal data, and its usage record.",
-        "Email: each event's template, who it goes to and the status of every send.",
-        "Audit: who did what, on which resource and when (in UTC)."
-      ]
-    },
-    "realSec": {
-      "h": "Security that really matters",
-      "p": [
-        "All of it is my proposal, to validate, except what is marked «It is in the repo»."
-      ],
-      "items": [
-        {
-          "t": "Authorization belongs to the server",
-          "d": "It is in the repo: the interface permissions are for the demo and final authorization belongs to the server. In the example, user, company and role come from the verified session; none of it is accepted from the client."
-        },
-        {
-          "t": "A private event is closed on the server",
-          "d": "Hiding cards is not enough: the list, the search, the detail, the sign-up and the calendar all check the audience, and someone without access gets the same answer as if the event did not exist."
-        },
-        {
-          "t": "Capacity with no overselling",
-          "d": "It is in the repo: capacity is controlled on the server. In the example, signing up checks the window, the audience and the capacity in one transaction, with a unique key per request so a retry does not duplicate."
-        },
-        {
-          "t": "A QR code with no personal data",
-          "d": "The QR carries an opaque token that the server verifies, expires and can revoke. Entry needs a role and is recorded once. The demo's QR is not a secure token."
-        },
-        {
-          "t": "Email with limits",
-          "d": "It is in the repo: email is sent from the server. In the example, the template allows a closed list of escaped variables, provider notices are verified and there is a cap on sends."
-        },
-        {
-          "t": "Imports and logging",
-          "d": "The server repeats the Excel or CSV validation and never takes what the client sends as the audience. Admin actions are logged with actor and resource, with no tokens or email addresses in the logs."
-        }
-      ]
     },
     "security": {
       "h": "Security and privacy in a prototype",

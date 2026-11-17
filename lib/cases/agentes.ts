@@ -156,11 +156,4 @@ export const agentes: CaseDef = {
     { type: 'text', key: 'not' },
     { type: 'limits', key: 'status' },
   ],
-  steps: [
-    { id: 'what', blocks: ['what', 'not'] },
-    { id: 'how', blocks: ['roles', 'flow', 'gates', 'evidence', 'review'] },
-    { id: 'decisions', blocks: ['rules', 'decisions'] },
-    { id: 'quality', blocks: ['usage', 'quality', 'stack'] },
-    { id: 'status', blocks: ['status'] },
-  ],
 };
