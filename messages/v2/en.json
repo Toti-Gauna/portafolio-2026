@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "IG System v2 · Ignacio Gauna",
+    "description": "The tokens of Ignacio Gauna's new portfolio: colour, type, space, shape, motion and depth.",
+    "redirect": "Choose a language"
+  },
+  "top": {
+    "brand": "IG System",
+    "version": "v2 · tokens",
+    "skip": "Skip to content",
+    "lang": "Language",
+    "back": "Back to the portfolio"
+  },
+  "hero": {
+    "level": "Sr",
+    "role": "AI Fullstack Developer",
+    "first": "Ignacio",
+    "last": "Gauna",
+    "leadBefore": "I build software for a world with more",
+    "leadWord": "solutions",
+    "leadAfter": "than problems.",
+    "meet": "Meet Ignacio",
+    "explore": "Explore the portfolio",
+    "stackAlt": "The craft in five layers, in an exploded view: planning and execution, code, agents, tests and deploy",
+    "stackTitle": "The five layers of the craft"
+  },
+  "layers": {
+    "plan": "Planning and execution",
+    "code": "Code",
+    "agents": "Agents",
+    "tests": "Tests",
+    "ship": "Deploy"
+  },
+  "intro": {
+    "kicker": "Batch 1.2 · Tokens",
+    "title": "The system, in its smallest pieces",
+    "text": "Colour, type, space, shape, motion and depth: the base of all of /v2. Every value comes from a single file and is measured before it goes in."
+  },
+  "color": {
+    "title": "Colour",
+    "text": "Deep indigo as the base and one colour for each part of the craft. IG's coral and blue are still the root of the spectrum.",
+    "base": "Base",
+    "textOnBg": "Text on the background",
+    "spectrum": "Spectrum",
+    "layers": "The five layers",
+    "gradients": "Gradients",
+    "ratio": "Contrast",
+    "decorative": "Decoration only",
+    "names": {
+      "heading": "Headings",
+      "text": "Text",
+      "text-muted": "Secondary",
+      "text-subtle": "Labels",
+      "text-faint": "Decoration"
+    },
+    "gradientNames": {
+      "brand": "Brand",
+      "name": "Surname",
+      "solutions": "Solutions",
+      "spectrum": "Spectrum"
+    }
+  },
+  "type": {
+    "title": "Type",
+    "text": "Archivo, with its width axis, for headings; JetBrains Mono for anything technical. No text goes below 12 px.",
+    "samples": {
+      "display": "Ignacio",
+      "h1": "Software that reaches production",
+      "h2": "From idea to deploy",
+      "h3": "Planning and execution",
+      "lead": "I build software for a world with more solutions than problems.",
+      "body": "I design and build AI products end to end: the interface, the backend, the agents and the tests.",
+      "small": "Every project carries its status: production, demo or prototype.",
+      "label": "Sr AI Fullstack Developer",
+      "code": "async function answer(q: string)"
+    },
+    "names": {
+      "display": "Name",
+      "h1": "Heading 1",
+      "h2": "Heading 2",
+      "h3": "Heading 3",
+      "lead": "Lead",
+      "body": "Body",
+      "small": "Small",
+      "label": "Label",
+      "code": "Code"
+    }
+  },
+  "space": {
+    "title": "Space and shape",
+    "text": "A 4 px scale, soft radii and touch targets of at least 44 px.",
+    "spacing": "Space",
+    "radius": "Radii",
+    "touch": "Minimum touch target"
+  },
+  "motion": {
+    "title": "Motion",
+    "text": "One signature curve and three durations: response, state change and entrance. Only transform and opacity move; with reduced motion, everything stays still.",
+    "hint": "Switch each row on to see its curve.",
+    "fast": "Response",
+    "base": "State change",
+    "slow": "Entrance"
+  },
+  "depth": {
+    "title": "Depth",
+    "text": "A brand glow for the main action, panels that float over the indigo and a focus ring that always shows.",
+    "glow": "Brand glow",
+    "panel": "Panel",
+    "focus": "Focus",
+    "z": "Stacking order"
+  },
+  "footer": {
+    "name": "Ignacio Gauna · 2026",
+    "place": "Mar del Plata, Argentina"
+  }
+}
