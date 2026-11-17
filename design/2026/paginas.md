@@ -69,7 +69,7 @@ Kinetic Studio, tráileres de producto (CompliA y los del hub), edición y short
 
 ## 8. Cómo trabajo (Ola 11)
 
-Método de 6 pasos (ciclo) + sistema agéntico: diagrama «Cómo viaja un cambio», agentes con su ícono y modelo, y **cómo se decidió** (qué se probó, qué se descartó: Scroll World como pipeline, Remotion antes de la prueba).
+Método de 6 pasos (ciclo) + sistema agéntico: diagrama «Cómo viaja un cambio», agentes con su ícono y modelo, y **cómo se decidió** (qué se probó, qué se descartó: Scroll World como pipeline, Remotion antes de la prueba). **Hecho en la Ola 11 (17/11/2026):** la sección `#este-sitio` suma los nueve agentes de `.claude/agents` con su ícono y su modelo (leído de cada archivo) y seis decisiones (se probó · se eligió · por qué).
 
 ## 9. Capacidades
 

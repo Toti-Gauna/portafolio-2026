@@ -338,3 +338,16 @@ test('capabilities: «Lo que conozco y estoy estudiando» has four cards; Claude
   await expect(k.getByRole('link', { name: /Ver cómo trabajo/ })).toHaveAttribute('href', '/es/como-trabajo/');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
 });
+
+test('how I work: «Cómo se hizo este portafolio» shows nine agents with their model and six decisions', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await enter(page, '/es/como-trabajo/');
+  const s = page.locator('section#este-sitio');
+  await expect(s.locator('h2')).toHaveText('Cómo se hizo este portafolio.');
+  await expect(s.locator('.hs-agent')).toHaveCount(9);
+  await expect(s.locator('.hs-agent__model b')).toHaveText(['Opus', 'Opus', 'Opus', 'Opus', 'Opus', 'Sonnet', 'Sonnet', 'Sonnet', 'Sonnet']);
+  await expect(s.locator('.hs-decisions .adr__item')).toHaveCount(6);
+  await expect(s).toContainText('No afirmo que corran solos');
+  await expect(s.getByRole('link', { name: /sistema agéntico en detalle/ })).toHaveAttribute('href', '/es/proyectos/agentes/');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+});

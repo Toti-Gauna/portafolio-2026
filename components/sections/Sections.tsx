@@ -8,6 +8,7 @@ import { ALL_PAGES, CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
 import { STATIONS } from '@/lib/career';
 import { RECRUITER_CASES } from '@/lib/recruiters';
+import { SITE_AGENTS } from '@/lib/howsite';
 import { StatusTag } from '../ui/StatusTag';
 import type { ArchCopy } from '@/lib/diagrams/types';
 import { Reveal } from '../Reveal';
@@ -277,6 +278,44 @@ export function Skills({ level = 2 }: { level?: Level } = {}) {
           ))}
         </ul>
       </div>
+    </section>
+  );
+}
+
+/** «Cómo se hizo este portafolio» (Ola 11): nine agents with their model, and six decisions (what was tried, what was chosen, why). */
+export function HowSite({ level = 2 }: { level?: Level } = {}) {
+  const t = useTranslations('howsite');
+  const decisions = t.raw('decisions') as { t: string; tried: string; chose: string; why: string }[];
+  return (
+    <section id="este-sitio" className={`sec container-x${level === 1 ? ' sec--page' : ''}`} aria-labelledby="h-este-sitio">
+      <Head id="h-este-sitio" label={t('label')} title={t('title')} lead={t('lead')} level={level} />
+      <h3 className="sub-title">{t('agentsTitle')}</h3>
+      <ul className="hs-agents">
+        {SITE_AGENTS.map((a, i) => (
+          <Reveal as="li" key={a.id} className="hs-agent">
+            <span className="hs-agent__icon"><AgentIcon id={a.icon} /></span>
+            <h4 className="hs-agent__name">{t(`agents.${a.id}.name`)}</h4>
+            <p className="hs-agent__model"><span className="label">{t('model')}</span> <b>{a.model === 'opus' ? 'Opus' : 'Sonnet'}</b></p>
+            <p>{t(`agents.${a.id}.role`)}</p>
+          </Reveal>
+        ))}
+      </ul>
+      <p className="note hs-note">{t('agentsNote')}</p>
+      <h3 className="sub-title">{t('decidedTitle')}</h3>
+      <ol className="hs-decisions">
+        {decisions.map((d, i) => (
+          <Reveal as="li" key={d.t} className="adr__item">
+            <p className="adr__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+            <div>
+              <h4 className="adr__t">{d.t}</h4>
+              <p className="adr__why"><span className="label">{t('tried')}</span> {d.tried}</p>
+              <p className="adr__why"><span className="label">{t('chose')}</span> {d.chose}</p>
+              <p className="adr__alt"><span className="label">{t('why')}</span> {d.why}</p>
+            </div>
+          </Reveal>
+        ))}
+      </ol>
+      <p className="system__deep"><Link className="card-link" href="/proyectos/agentes">{t('more')} →</Link></p>
     </section>
   );
 }

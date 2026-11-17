@@ -1,5 +1,5 @@
 const A = 'var(--accent)';
-type Id = 'chief' | 'uxui' | 'design' | 'marketing' | 'ads' | 'frontend' | 'backend' | 'security' | 'game' | 'trailer' | 'docs';
+type Id = 'chief' | 'uxui' | 'design' | 'marketing' | 'ads' | 'frontend' | 'backend' | 'security' | 'game' | 'trailer' | 'docs' | 'iso' | 'scroll' | 'sound' | 'three';
 
 /** One hand-drawn glyph per agent of the system (24×24, 1.5 stroke, one coral detail). Decorative: the name is visible text. */
 export function AgentIcon({ id }: { id: Id }) {
@@ -15,6 +15,10 @@ export function AgentIcon({ id }: { id: Id }) {
     case 'security': return <svg {...p}><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /><path d="M9 12l2 2 4-4" stroke={A} /></svg>;
     case 'game': return <svg {...p}><path d="M7 8h10a4 4 0 0 1 4 4v1.5a3 3 0 0 1-5.4 1.8L14.5 14h-5l-1.1 1.3A3 3 0 0 1 3 13.5V12a4 4 0 0 1 4-4z" /><path d="M8 10.5v3M6.5 12h3" /><circle cx="16" cy="11.5" r="1" fill={A} stroke="none" /></svg>;
     case 'trailer': return <svg {...p}><rect x="3" y="9" width="18" height="11" rx="1.5" /><path d="M3 9l2-5 15 0-1 5" /><path d="M8 4l-1 5M13 4l-1 5" /><path d="M10.5 12.5v4l3.5-2z" fill={A} stroke="none" /></svg>;
+    case 'iso': return <svg {...p}><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" /><path d="M4 7.5l8 4.5 8-4.5M12 12v9" /><circle cx="12" cy="12" r="1.2" fill={A} stroke="none" /></svg>;
+    case 'scroll': return <svg {...p}><rect x="6" y="3" width="12" height="18" rx="6" /><path d="M12 8v4" stroke={A} /><path d="M9.5 15.5L12 18l2.5-2.5" /></svg>;
+    case 'sound': return <svg {...p}><path d="M5 10v4M9 7v10M13 4v16M17 8v8M21 11v2" /><path d="M13 4v16" stroke={A} /></svg>;
+    case 'three': return <svg {...p}><circle cx="12" cy="12" r="8.5" /><ellipse cx="12" cy="12" rx="3.6" ry="8.5" /><path d="M3.5 12h17" /><circle cx="12" cy="3.5" r="1.2" fill={A} stroke="none" /></svg>;
     default: return <svg {...p}><path d="M5 4h9l5 5v11H5z" /><path d="M14 4v5h5" /><path d="M8 13h8M8 16.5h5" stroke={A} /></svg>;
   }
 }
