@@ -112,5 +112,172 @@
   "footer": {
     "name": "Ignacio Gauna · 2026",
     "place": "Mar del Plata, Argentina"
+  },
+  "nav": {
+    "label": "System",
+    "tokens": "Tokens",
+    "components": "Components"
+  },
+  "ui": {
+    "status": {
+      "produccion": "In production",
+      "interna": "In internal production",
+      "desarrollo": "Being built",
+      "mvp": "MVP",
+      "demo": "Demo",
+      "prototipo": "Prototype",
+      "laboratorio": "Lab",
+      "roadmap": "On the roadmap",
+      "ejercicio": "Brand exercise",
+      "profesional": "Client work"
+    },
+    "sound": {
+      "label": "Sound",
+      "on": "Sound: on",
+      "off": "Sound: off"
+    },
+    "menu": "Menu",
+    "external": "(opens in a new tab)",
+    "breadcrumb": "Breadcrumb"
+  },
+  "catalog": {
+    "meta": {
+      "title": "Components · IG System v2",
+      "description": "The base components of Ignacio Gauna's new portfolio: buttons, chips, statuses, glass cards, forms and navigation."
+    },
+    "intro": {
+      "kicker": "Batch 1.3 · Components",
+      "title": "The pieces everything is built from",
+      "text": "Every component comes from the tokens, works with the keyboard and shows its focus. Try them here: hover, press Tab and use the arrow keys."
+    },
+    "states": {
+      "default": "Default",
+      "focus": "Focus",
+      "disabled": "Disabled",
+      "pressed": "Pressed"
+    },
+    "buttons": {
+      "title": "Buttons",
+      "text": "One main action per screen, with the brand gradient; the rest are glass or text. All of them are 44 px or taller.",
+      "primary": "Meet Ignacio",
+      "secondary": "Explore the portfolio",
+      "quiet": "See the case",
+      "small": "Contact",
+      "send": "Send",
+      "variants": "Variants",
+      "sizes": "Sizes",
+      "icon": "Icon only"
+    },
+    "chips": {
+      "title": "Chips and labels",
+      "text": "Technologies, layers of the craft and keyboard shortcuts. They are information, not buttons.",
+      "tech": "Technologies",
+      "layers": "Layers",
+      "keys": "Shortcuts",
+      "keyItems": {
+        "trailer": "Trailer",
+        "work": "Work",
+        "help": "Help"
+      }
+    },
+    "status": {
+      "title": "Statuses",
+      "text": "Every project says where it stands, always in positive terms: what comes next is told as the next step."
+    },
+    "cards": {
+      "title": "Glass cards",
+      "text": "Panels that float over the indigo, in the colour of their layer. The whole card is a link and its title names it.",
+      "cta": "See the case",
+      "items": {
+        "complia": {
+          "title": "CompliA",
+          "meta": "Tsoft · 2026",
+          "text": "A RAG assistant for a compliance portal: every answer comes with its citation."
+        },
+        "eclipse": {
+          "title": "Eclipse",
+          "meta": "Own path",
+          "text": "Product, portal and brand: from the landing page to the backend, with tests at every layer."
+        },
+        "volta": {
+          "title": "Volta",
+          "meta": "Lab",
+          "text": "A demo to show the product before building all of it."
+        },
+        "supernova": {
+          "title": "Supernova Eventos",
+          "meta": "Tsoft · 2026",
+          "text": "An events micro-app, from idea to demo."
+        }
+      },
+      "stats": "Figures",
+      "statItems": {
+        "tests": "green tests in Eclipse",
+        "agents": "agents in the system",
+        "since": "developer since"
+      },
+      "panel": {
+        "title": "Panel",
+        "text": "A glass container to group content without a clickable card."
+      }
+    },
+    "forms": {
+      "title": "Forms",
+      "text": "Labels always visible, hints below and errors that say how to go on. All native: it works with the keyboard and with screen readers.",
+      "sample": "A sample of the components: this form sends no messages.",
+      "name": {
+        "label": "Name",
+        "hint": "However you'd like me to call you."
+      },
+      "email": {
+        "label": "Email",
+        "hint": "I'll reply to this address.",
+        "error": "Write a full email, for example name@company.com.",
+        "example": "name@company"
+      },
+      "topic": {
+        "label": "Topic",
+        "options": {
+          "product": "A new product",
+          "ai": "AI in production",
+          "team": "Joining a team"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "hint": "Tell me the challenge in two or three lines."
+      },
+      "copy": "Send me a copy of the message",
+      "sound": "Interface sounds",
+      "format": {
+        "legend": "Trailer format",
+        "h": "Horizontal",
+        "v": "Vertical"
+      },
+      "send": "Send"
+    },
+    "nav": {
+      "title": "Navigation",
+      "text": "Tabs in the colour of each section, breadcrumb, previous and next, and text that unfolds.",
+      "tabs": "Tabs",
+      "tabItems": {
+        "home": "Home",
+        "work": "Work",
+        "how": "How I work",
+        "brand": "Brand Lab",
+        "business": "Business",
+        "about": "About"
+      },
+      "crumbs": "Breadcrumb",
+      "pager": "Previous and next",
+      "prev": "Previous",
+      "next": "Next",
+      "prevCase": "Tuenti",
+      "nextCase": "Eclipse",
+      "disclosure": "Disclosure",
+      "summary": "Read the diagram as text",
+      "body": "The question reaches the assistant, which searches the documents, drafts an answer and checks it against its sources before replying.",
+      "link": "All cases"
+    }
   }
 }

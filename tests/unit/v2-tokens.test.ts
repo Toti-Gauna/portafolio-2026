@@ -101,3 +101,21 @@ describe('v2 token names', () => {
     expect(names).not.toContain('--font-mono');
   });
 });
+
+describe('v2 statuses', () => {
+  it('every status has a positive name in both languages, and only those', async () => {
+    const { STATUSES } = await import('../../v2/components/ui/Status');
+    expect(Object.keys(es.ui.status).sort()).toEqual(Object.keys(STATUSES).sort());
+    expect(Object.keys(en.ui.status).sort()).toEqual(Object.keys(STATUSES).sort());
+    for (const m of [es, en]) for (const name of Object.values(m.ui.status)) expect(name).not.toMatch(/sin |no |falta|pendiente|without|missing|not /i);
+  });
+  it('each status colour reads as text on its own tinted pill (AA)', async () => {
+    const { STATUSES } = await import('../../v2/components/ui/Status');
+    const { hexToRgb } = await import('../../v2/tokens/contrast');
+    const mix = (a: string, b: string, t: number) =>
+      '#' + hexToRgb(a).map((x, i) => Math.round(x * t + hexToRgb(b)[i] * (1 - t)).toString(16).padStart(2, '0')).join('');
+    for (const [k, s] of Object.entries(STATUSES)) {
+      for (const bg of [C.bg, C['surface-raised']]) expect(contrast(s.color, mix(s.color, bg, 0.1)), k).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+});

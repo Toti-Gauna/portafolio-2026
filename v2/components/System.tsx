@@ -2,7 +2,11 @@ import type { CSSProperties, ReactNode } from 'react';
 import { BASE_PATH, asset } from '@/lib/site';
 import { LAYERS, tokens } from '@/v2/tokens';
 import { contrast, grade } from '@/v2/tokens/contrast';
-import { V2_LOCALES, type V2Locale, v2Messages } from '@/v2/i18n';
+import { type V2Locale, v2Messages } from '@/v2/i18n';
+import { TopBar } from './TopBar';
+import { Button } from './ui/Button';
+import { RoleBadge } from './ui/Chip';
+import { ArrowIcon, PlayIcon } from './ui/Icons';
 
 /** Lote 1.2: the token specimen, the first page of /v2. Every value on screen is read from tokens.json. */
 
@@ -26,23 +30,6 @@ const typeSpec = (k: (typeof TYPE)[number]) => {
   const size = t[`${k}-size`] ?? (k === 'label' ? t['label-size'] : '');
   return [size, t[`${k}-lh`] && `/ ${t[`${k}-lh`]}`, t[`${k}-weight`]].filter(Boolean).join(' ');
 };
-
-function Monogram() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="7" r="3.4" fill="var(--color-coral-500)" stroke="none" />
-      <path d="M11 16v25" />
-      <path d="M41 21a13.5 13.5 0 1 0 1.5 12H30" />
-    </svg>
-  );
-}
-
-const Play = () => (
-  <svg aria-hidden="true" viewBox="0 0 12 12" width="12" height="12"><path d="M2 1l9 5-9 5z" fill="currentColor" /></svg>
-);
-const Arrow = () => (
-  <svg aria-hidden="true" viewBox="0 0 16 12" width="16" height="12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M1 6h13M9 1l5 5-5 5" /></svg>
-);
 
 function Section({ id, n, title, text, children }: { id: string; n: string; title: string; text: string; children: ReactNode }) {
   return (
@@ -70,34 +57,19 @@ function Swatch({ name, hex, ratio }: { name: string; hex: string; ratio?: numbe
 
 export function System({ locale }: { locale: V2Locale }) {
   const m = v2Messages(locale);
-  const home = `${BASE_PATH}/v2/${locale}/`;
   return (
     <>
-      <a className="v2-skip" href="#main">{m.top.skip}</a>
-      <header className="v2-top">
-        <a className="v2-brand" href={home}>
-          <Monogram />
-          <span>{m.top.brand}</span>
-          <span className="v2-chip">{m.top.version}</span>
-        </a>
-        <nav className="v2-seg" aria-label={m.top.lang}>
-          {V2_LOCALES.map((l) => (
-            <a key={l} href={`${BASE_PATH}/v2/${l}/`} hrefLang={l} lang={l} aria-current={l === locale ? 'page' : undefined} aria-label={l === 'es' ? 'Español' : 'English'}>
-              {l.toUpperCase()}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <TopBar locale={locale} page="tokens" />
 
       <main id="main" className="v2-main">
         <section className="v2-hero" aria-labelledby="v2-name">
           <div className="v2-hero-text">
-            <p className="v2-role"><b>{m.hero.level}</b><span>{m.hero.role}</span></p>
+            <RoleBadge level={m.hero.level} role={m.hero.role} />
             <h1 id="v2-name" className="v2-name">{m.hero.first}<br /><span className="v2-last">{m.hero.last}</span></h1>
             <p className="v2-lead">{m.hero.leadBefore} <span className="v2-solutions">{m.hero.leadWord}</span> {m.hero.leadAfter}</p>
             <div className="v2-actions">
-              <a className="v2-btn v2-btn-primary" href={asset(`/trailer/v2/index.html?lang=${locale}`)}><Play />{m.hero.meet}</a>
-              <a className="v2-btn v2-btn-ghost" href={`${BASE_PATH}/${locale}/`}>{m.hero.explore}<Arrow /></a>
+              <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />}>{m.hero.meet}</Button>
+              <Button href={`${BASE_PATH}/${locale}/`} variant="secondary" iconEnd={<ArrowIcon />}>{m.hero.explore}</Button>
             </div>
           </div>
           <figure className="v2-stack">
@@ -227,7 +199,7 @@ export function System({ locale }: { locale: V2Locale }) {
       <footer className="v2-foot">
         <span>{m.footer.name}</span>
         <span className="v2-dim">{m.footer.place}</span>
-        <a href={`${BASE_PATH}/${locale}/`}>{m.top.back}<Arrow /></a>
+        <a href={`${BASE_PATH}/${locale}/`}>{m.top.back}<ArrowIcon /></a>
       </footer>
     </>
   );
