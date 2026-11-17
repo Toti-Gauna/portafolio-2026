@@ -13,7 +13,7 @@ import type { Zone } from './zones';
 
 const FADE = 1.5; // s, between zones
 const LOOP_XF = 2.5; // s, the overlap of a file's loop
-const FILE_LEVEL = 0.7;
+const FILE_LEVEL = 0.55; // ≈ −29 dBFS RMS with the −20 LUFS tracks: under the interface cues (lib/sound.ts)
 
 type Voice = { zone: Zone; kind: 'file' | 'synth'; gain: GainNode; dispose: () => void };
 
