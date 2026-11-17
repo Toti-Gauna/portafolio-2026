@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
+import { CHAPTERS } from '@/lib/taller';
+import { setZone } from '@/lib/music';
+import { playCue } from '@/lib/sound';
 
 /** Wide screens with motion allowed: the walk. Phones, tablets in portrait and reduced motion keep the plain layout. */
 const QUERY = '(min-width: 900px) and (prefers-reduced-motion: no-preference)';
@@ -151,10 +154,31 @@ function run(root: HTMLElement) {
   };
 }
 
+/** The chapter in the middle of the screen sets the music zone, and a soft pulse marks each new building (every mode). */
+function watchChapters(root: HTMLElement) {
+  let shown = -1;
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const i = Number((e.target as HTMLElement).dataset.ch);
+        if (i === shown || !CHAPTERS[i]) continue;
+        if (shown >= 0) playCue('select');
+        shown = i;
+        setZone(CHAPTERS[i].zone);
+      }
+    },
+    { rootMargin: '-45% 0px -45% 0px' },
+  );
+  root.querySelectorAll<HTMLElement>('article[data-ch]').forEach((a) => io.observe(a));
+  return () => io.disconnect();
+}
+
 export function TallerEngine() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>('[data-taller]');
     if (!root) return;
+    const stopWatching = watchChapters(root);
     const mq = matchMedia(QUERY);
     let stop = () => {};
     const start = () => {
@@ -166,6 +190,7 @@ export function TallerEngine() {
     return () => {
       mq.removeEventListener('change', start);
       stop();
+      stopWatching();
     };
   }, []);
   return null;
