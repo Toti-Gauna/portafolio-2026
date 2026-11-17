@@ -117,7 +117,8 @@
     "label": "Sistema",
     "tokens": "Tokens",
     "components": "Componentes",
-    "pieces": "Piezas"
+    "pieces": "Piezas",
+    "kit": "Kit"
   },
   "ui": {
     "status": {
@@ -357,6 +358,162 @@
         "tests": "Pruebo.",
         "ship": "Llevo a producción."
       }
+    }
+  },
+  "kit": {
+    "meta": {
+      "title": "Kit de ilustración e íconos · Sistema IG v2",
+      "description": "Cómo se dibuja el nuevo portafolio de Ignacio Gauna: íconos propios, ilustración isométrica, estampillas y 3D, con sus reglas de uso."
+    },
+    "intro": {
+      "kicker": "Lote 1.5 · Kit de ilustración e íconos",
+      "title": "Cómo se dibuja todo",
+      "text": "Cuatro lenguajes, todos hechos a mano y en código: íconos, figuras isométricas, estampillas y 3D. Cada uno con sus reglas, para que lo que venga se vea de la misma mano."
+    },
+    "rules": "Reglas",
+    "icons": {
+      "title": "Íconos",
+      "text": "Un set propio de 42 íconos sobre una sola grilla. Los de interfaz son un trazo; los de concepto llevan una única pieza de color, como el punto del monograma.",
+      "families": {
+        "interface": "Interfaz",
+        "layers": "Capas del oficio",
+        "technique": "Técnica",
+        "fields": "Rubros"
+      },
+      "sizes": "Tamaños",
+      "names": {
+        "arrow-right": "Flecha",
+        "arrow-left": "Volver",
+        "chevron": "Avanzar",
+        "check": "Listo",
+        "close": "Cerrar",
+        "menu": "Menú",
+        "play": "Reproducir",
+        "pause": "Pausar",
+        "replay": "Repetir",
+        "external": "Enlace externo",
+        "mail": "Mail",
+        "sound-on": "Sonido",
+        "sound-off": "Silencio",
+        "plan": "Planificación",
+        "code": "Código",
+        "agents": "Agentes",
+        "tests": "Tests",
+        "ship": "Deploy",
+        "interface": "Interfaz",
+        "server": "Backend",
+        "database": "Datos",
+        "api": "API",
+        "rag": "RAG con cita",
+        "ai": "IA",
+        "security": "Seguridad",
+        "pipeline": "CI/CD",
+        "mobile": "Móvil",
+        "cube": "3D",
+        "motion": "Movimiento",
+        "data": "Métricas",
+        "energy": "Energía",
+        "health": "Salud",
+        "agro": "Agro",
+        "space": "Espacio",
+        "inspection": "Inspección",
+        "cyber": "Ciberseguridad",
+        "finance": "Finanzas",
+        "aerospace": "Aeroespacial",
+        "education": "Educación",
+        "fintech": "Fintech",
+        "events": "Eventos",
+        "telecom": "Telecom"
+      },
+      "rules": [
+        "Grilla de 24 × 24 y trazo de 1,75 con puntas redondas, en el color del texto.",
+        "Un solo acento por ícono de concepto: la pieza de la que habla la idea.",
+        "Tamaños 16, 20, 24 y 32 px. A 16 px solo se usan los de interfaz.",
+        "Van siempre con su nombre al lado; solos, llevan una etiqueta para lectores de pantalla.",
+        "Sin logos de marcas: una tecnología es su nombre en tipografía y un glifo de concepto."
+      ]
+    },
+    "figure": {
+      "title": "Ilustración isométrica",
+      "text": "El objeto es la explicación: en vez de cajas y flechas, una máquina reconocible cuyo funcionamiento es la idea. Esta se dibujó con el kit de figuras del repo, con los colores del sistema.",
+      "fig": "Fig. 1",
+      "name": "El calibre de tests",
+      "hint": "Mové el puntero o usá las flechas",
+      "alt": "Un calibre de reloj sobre un mármol de trazado. Una base magnética sostiene un poste y un brazo; el brazo lleva un reloj comparador cuyo punzón apoya sobre cinco bloques, uno por cambio, montados en un carro que corre sobre dos rieles. Donde el carro se detiene, el punzón sube al bloque que tiene debajo, la aguja gira lo mismo y una luz dice si la medida cae dentro de la franja de tolerancia.",
+      "labels": {
+        "stage": "El calibre de tests: las flechas llevan cada cambio bajo la aguja",
+        "change": "cambio {n}",
+        "between": "entre dos cambios",
+        "reads": "mide {h}",
+        "pass": "pasa",
+        "fail": "vuelve a ajuste"
+      },
+      "keys": {
+        "lit": "Punzón y aguja: lo que se mueve cuando cambia la medida",
+        "raised": "Cinco cambios sobre el carro",
+        "band": "La franja de tolerancia y la luz que la lee"
+      },
+      "caption": "Cada cambio pasa bajo el calibre antes de salir. La aguja marca su medida: dentro de la franja, la luz queda en verde y el cambio sigue a producción; fuera de ella, vuelve a ajuste. Así trabajan mis proyectos principales: el CI corre los tests antes del build.",
+      "rules": [
+        "Sólidos, no alambres: cada pieza está pintada y tapa a la que tiene detrás.",
+        "Cuatro tonos por cara y un solo acento encendido: lo que hay que mirar.",
+        "Cada línea termina en algo: una cara, otra línea o un punto.",
+        "El detalle pertenece a una pieza: tornillos, moleteados, reglas con sus marcas.",
+        "Todo lo que se mueve y todo número sale del mismo modelo."
+      ]
+    },
+    "stamps": {
+      "title": "Estampillas",
+      "text": "Una por cada parada del recorrido. Van a Work, al abrir un proyecto, y al tráiler.",
+      "items": {
+        "tach": {
+          "year": "2021",
+          "name": "TACH Argentina",
+          "alt": "Estampilla: una web de backoffice y una app en un teléfono"
+        },
+        "ada": {
+          "year": "2023",
+          "name": "Ada ITW",
+          "alt": "Estampilla: un pizarrón con código y tres alumnos"
+        },
+        "tuenti": {
+          "year": "2024",
+          "name": "Tsoft · Tuenti",
+          "alt": "Estampilla: una ruleta de premios"
+        },
+        "complia": {
+          "year": "2026",
+          "name": "CompliA · Tsoft",
+          "alt": "Estampilla: un documento con una cita marcada y una respuesta verificada"
+        },
+        "supernova": {
+          "year": "2026",
+          "name": "Supernova Eventos",
+          "alt": "Estampilla: una supernova y una entrada"
+        },
+        "eclipse": {
+          "year": "Hoy",
+          "name": "Eclipse",
+          "alt": "Estampilla: un eclipse con su corona"
+        }
+      },
+      "rules": [
+        "Tinta plana sobre papel crema: es el único lugar donde la paleta cambia, y siempre dentro de la estampilla.",
+        "Un motivo por parada, dibujado, sin marcas de clientes ni capturas.",
+        "El año arriba y el nombre abajo, en HTML: se leen y se traducen."
+      ]
+    },
+    "three": {
+      "title": "3D",
+      "text": "El mismo lenguaje en tres dimensiones: las cinco capas como losas oscuras con un borde de luz de su color. Arrastrala para girarla.",
+      "label": "Las cinco capas del oficio en 3D. Arrastrá o usá las flechas para girarlas.",
+      "hint": "Arrastrá o usá ← →",
+      "rules": [
+        "Cámara ortográfica, con el mismo ángulo que las ilustraciones.",
+        "Materiales oscuros y un borde de luz del color de la capa; el color nunca rellena.",
+        "three.js se descarga recién cuando la escena entra en pantalla.",
+        "Se dibuja a pedido: al entrar, al arrastrar y mientras frena. Con movimiento reducido, un cuadro quieto."
+      ]
     }
   }
 }

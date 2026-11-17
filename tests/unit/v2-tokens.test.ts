@@ -152,3 +152,46 @@ describe('v2 signature pieces', () => {
     expect(en.pieces.counter.items.tests.value).toBe('1,374');
   });
 });
+
+describe('v2 illustration and icon kit', () => {
+  it('icons: every icon is in exactly one family, concept icons carry one accent, all are named in both languages', async () => {
+    const { ICONS, ICON_FAMILIES } = await import('../../v2/components/kit/icons');
+    const all = Object.values(ICON_FAMILIES).flat();
+    expect([...all].sort()).toEqual(Object.keys(ICONS).sort());
+    expect(new Set(all).size).toBe(all.length);
+    const glyphs = ICONS as Record<string, { s: string; a?: string }>;
+    for (const name of ICON_FAMILIES.interface) expect(glyphs[name].a, name).toBeUndefined();
+    for (const fam of ['layers', 'technique', 'fields'] as const) for (const name of ICON_FAMILIES[fam]) expect(glyphs[name].a, name).toBeTruthy();
+    expect([...ICON_FAMILIES.layers]).toEqual([...LAYERS]);
+    for (const m of [es, en]) expect(Object.keys(m.kit.icons.names).sort()).toEqual(Object.keys(ICONS).sort());
+    // every stroke stays on the 24 grid
+    for (const [name, g] of Object.entries(glyphs)) for (const n of g.s.match(/-?(?:\d+\.?\d*|\.\d+)/g) ?? []) expect(Math.abs(Number(n)), `${name}: ${n}`).toBeLessThanOrEqual(24);
+  });
+  it('the gauge: each stop puts its change under the plunger, and only the ones inside the band pass', async () => {
+    const g = await import('../../v2/components/kit/gauge-model');
+    g.CHANGES.forEach((h, i) => {
+      expect(g.changeUnder(g.STOPS[i])).toBe(i);
+      expect(g.heightUnder(g.STOPS[i])).toBeCloseTo(g.CARRIAGE_TOP + h, 6);
+    });
+    expect(g.CHANGES.map(g.passes)).toEqual([true, true, false, true, true]);
+    expect(g.REACH[0]).toBeLessThan(Math.min(...g.STOPS));
+    expect(g.REACH[1]).toBeGreaterThan(Math.max(...g.STOPS));
+  });
+  it('the gauge drawing has its moving parts and no stray text', async () => {
+    const { gaugeSvg } = await import('../../v2/components/kit/gauge-art');
+    const svg = gaugeSvg('label');
+    for (const part of ['carriage', 'plunger', 'needle', 'lamp']) expect(svg).toContain(`data-part="${part}"`);
+    expect(svg).not.toContain('<text');
+    expect((svg.match(/class="iso-solid/g) ?? []).length).toBeGreaterThanOrEqual(40);
+    expect(gaugeSvg('label')).toBe(svg);
+  });
+  it('stamps: one per stop, ids of their own, text left to HTML, named in both languages', async () => {
+    const { STAMP_IDS, stampSvg } = await import('../../v2/components/kit/stamps');
+    for (const id of STAMP_IDS) {
+      const svg = stampSvg(id);
+      expect(svg).toContain(`id="sp-${id}"`);
+      expect(svg).not.toContain('<text');
+      for (const m of [es, en]) expect(m.kit.stamps.items[id].name && m.kit.stamps.items[id].alt).toBeTruthy();
+    }
+  });
+});

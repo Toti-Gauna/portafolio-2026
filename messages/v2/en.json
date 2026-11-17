@@ -117,7 +117,8 @@
     "label": "System",
     "tokens": "Tokens",
     "components": "Components",
-    "pieces": "Pieces"
+    "pieces": "Pieces",
+    "kit": "Kit"
   },
   "ui": {
     "status": {
@@ -357,6 +358,162 @@
         "tests": "I test.",
         "ship": "I ship to production."
       }
+    }
+  },
+  "kit": {
+    "meta": {
+      "title": "Illustration and icon kit · IG System v2",
+      "description": "How Ignacio Gauna's new portfolio is drawn: its own icons, isometric illustration, stamps and 3D, with their rules of use."
+    },
+    "intro": {
+      "kicker": "Batch 1.5 · Illustration and icon kit",
+      "title": "How everything is drawn",
+      "text": "Four languages, all hand-made and in code: icons, isometric figures, stamps and 3D. Each with its rules, so that whatever comes next looks drawn by the same hand."
+    },
+    "rules": "Rules",
+    "icons": {
+      "title": "Icons",
+      "text": "A set of 42 icons of our own on a single grid. Interface glyphs are one stroke; concept icons carry a single piece of colour, like the dot of the monogram.",
+      "families": {
+        "interface": "Interface",
+        "layers": "Layers of the craft",
+        "technique": "Technique",
+        "fields": "Fields"
+      },
+      "sizes": "Sizes",
+      "names": {
+        "arrow-right": "Arrow",
+        "arrow-left": "Back",
+        "chevron": "Chevron",
+        "check": "Check",
+        "close": "Close",
+        "menu": "Menu",
+        "play": "Play",
+        "pause": "Pause",
+        "replay": "Replay",
+        "external": "External link",
+        "mail": "Mail",
+        "sound-on": "Sound on",
+        "sound-off": "Sound off",
+        "plan": "Planning",
+        "code": "Code",
+        "agents": "Agents",
+        "tests": "Tests",
+        "ship": "Deploy",
+        "interface": "Interface",
+        "server": "Backend",
+        "database": "Database",
+        "api": "API",
+        "rag": "RAG with citation",
+        "ai": "AI",
+        "security": "Security",
+        "pipeline": "CI/CD",
+        "mobile": "Mobile",
+        "cube": "3D",
+        "motion": "Motion",
+        "data": "Metrics",
+        "energy": "Energy",
+        "health": "Health",
+        "agro": "Agriculture",
+        "space": "Space",
+        "inspection": "Inspection",
+        "cyber": "Cybersecurity",
+        "finance": "Finance",
+        "aerospace": "Aerospace",
+        "education": "Education",
+        "fintech": "Fintech",
+        "events": "Events",
+        "telecom": "Telecom"
+      },
+      "rules": [
+        "A 24 × 24 grid and a 1.75 stroke with round ends, in the text colour.",
+        "One accent per concept icon: the piece the idea is about.",
+        "Sizes 16, 20, 24 and 32 px. At 16 px only interface glyphs are used.",
+        "They always sit next to their name; alone, they carry a label for screen readers.",
+        "No brand logos: a technology is its name in type and a concept glyph."
+      ]
+    },
+    "figure": {
+      "title": "Isometric illustration",
+      "text": "The object is the explanation: instead of boxes and arrows, a recognisable machine whose working is the idea. This one was drawn with the repo's figure kit, in the system's colours.",
+      "fig": "Fig. 1",
+      "name": "The test gauge",
+      "hint": "Move the pointer or use the arrow keys",
+      "alt": "A dial gauge on a surface plate. A magnetic base holds a post and an arm; the arm carries a dial indicator whose plunger rests on five blocks, one per change, on a carriage that runs on two rails. Wherever the carriage stops, the plunger rises to the block under it, the needle turns by the same amount and a lamp says whether the reading falls inside the tolerance band.",
+      "labels": {
+        "stage": "The test gauge: the arrow keys bring each change under the needle",
+        "change": "change {n}",
+        "between": "between two changes",
+        "reads": "reads {h}",
+        "pass": "passes",
+        "fail": "goes back for adjustment"
+      },
+      "keys": {
+        "lit": "Plunger and needle: what moves when the reading changes",
+        "raised": "Five changes on the carriage",
+        "band": "The tolerance band and the lamp that reads it"
+      },
+      "caption": "Every change goes under the gauge before it ships. The needle shows its reading: inside the band the lamp stays green and the change goes on to production; outside it, it goes back for adjustment. That is how my main projects work: CI runs the tests before the build.",
+      "rules": [
+        "Solids, not wireframes: every part is painted and hides what is behind it.",
+        "Four tones per face and a single lit accent: the thing to watch.",
+        "Every line ends on something: a face, another line or a dot.",
+        "Detail belongs to a part: screws, knurls, rulers with their ticks.",
+        "Everything that moves and every number comes from the same model."
+      ]
+    },
+    "stamps": {
+      "title": "Stamps",
+      "text": "One for each stop of the journey. They go to Work, when a project opens, and to the trailer.",
+      "items": {
+        "tach": {
+          "year": "2021",
+          "name": "TACH Argentina",
+          "alt": "Stamp: a back-office site and an app on a phone"
+        },
+        "ada": {
+          "year": "2023",
+          "name": "Ada ITW",
+          "alt": "Stamp: a blackboard with code and three students"
+        },
+        "tuenti": {
+          "year": "2024",
+          "name": "Tsoft · Tuenti",
+          "alt": "Stamp: a prize wheel"
+        },
+        "complia": {
+          "year": "2026",
+          "name": "CompliA · Tsoft",
+          "alt": "Stamp: a document with a highlighted citation and a verified answer"
+        },
+        "supernova": {
+          "year": "2026",
+          "name": "Supernova Eventos",
+          "alt": "Stamp: a supernova and a ticket"
+        },
+        "eclipse": {
+          "year": "Today",
+          "name": "Eclipse",
+          "alt": "Stamp: an eclipse with its corona"
+        }
+      },
+      "rules": [
+        "Flat ink on cream paper: the only place where the palette changes, and always inside the stamp.",
+        "One drawn motif per stop, with no client brands or screenshots.",
+        "The year on top and the name below, in HTML: they can be read and translated."
+      ]
+    },
+    "three": {
+      "title": "3D",
+      "text": "The same language in three dimensions: the five layers as dark slabs with a rim of light in their colour. Drag it to turn it.",
+      "label": "The five layers of the craft in 3D. Drag or use the arrow keys to turn them.",
+      "hint": "Drag or use ← →",
+      "rules": [
+        "An orthographic camera, at the same angle as the illustrations.",
+        "Dark materials and a rim of light in the layer's colour; colour never fills.",
+        "three.js is downloaded only when the scene comes on screen.",
+        "It draws on demand: on entering, while dragging and while it coasts. With reduced motion, one still frame."
+      ]
     }
   }
 }
