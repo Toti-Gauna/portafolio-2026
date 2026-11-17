@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Monogram } from './Monogram';
 import { OPEN_TRAILER_EVENT } from './TrailerButton';
 import { primeTrailer } from '@/lib/trailer-prime';
-import { enableSoundFromGate, playCue } from '@/lib/sound';
+import { enableSoundFromGate, hold, playCue } from '@/lib/sound';
 import './intro.css';
 
 // The trailer (engine + audio + scenes) is a separate chunk: it downloads only when asked for.
@@ -107,6 +107,12 @@ export function Intro() {
     const a = document.activeElement;
     if (!a || a === document.body || a.closest('#boot')) document.getElementById('contenido')?.focus({ preventScroll: true });
   }, [phase]);
+
+  // the film has its own music: the site's rests while it plays and comes back when it closes
+  useEffect(() => {
+    hold('trailer', trailer);
+    return () => hold('trailer', false);
+  }, [trailer]);
 
   // The hero's "watch the trailer" button asks for it through an event.
   useEffect(() => {

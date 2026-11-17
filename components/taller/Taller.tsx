@@ -7,6 +7,7 @@ import { CONTACT_EMAIL, LINKEDIN_URL, asset } from '@/lib/site';
 import { TrailerButton } from '../TrailerButton';
 import { Readouts, type Readout } from '../diagrams/Readouts';
 import { StatusTag } from '../ui/StatusTag';
+import { musicTracks } from '@/lib/music-files';
 import { TallerEngine } from './TallerEngine';
 import './taller.css';
 
@@ -103,7 +104,7 @@ export function Taller() {
                             <a className="btn btn-ghost" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> ({h('newTab')})</span></a>
                           </div>
                           <p className="tch__mail"><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> · <Link href={CONTACT_HREF}>{t(`${k}.all`)}</Link></p>
-                          <p className="tch__credit note">{t('credit')}</p>
+                          <p className="tch__credit note">{t('credit')}{musicTracks().length > 0 && ` ${t('creditMusic')}`}</p>
                         </>
                       ) : c.href ? (
                         <Link className="tch__go" href={c.href}>{t(`${k}.cta`)} <span aria-hidden="true">→</span></Link>
