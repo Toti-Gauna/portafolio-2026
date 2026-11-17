@@ -327,3 +327,14 @@ test('CompliA diagram is labelled as a conceptual scheme, not Telefónica archit
   await expect(page.locator('.dg__badge')).toHaveText('Esquema conceptual');
   await expect(page.getByText(/No es la arquitectura de Telefónica/)).toBeVisible();
 });
+
+test('capabilities: «Lo que conozco y estoy estudiando» has four cards; Claude leads to «Cómo trabajo» and the rest claim nothing published', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await enter(page, '/es/capacidades/');
+  const k = page.locator('#conocimiento');
+  await expect(k.locator('.know__item')).toHaveCount(4);
+  await expect(k.locator('.know__item .status')).toHaveText(['Conocimiento y estudio', 'Conocimiento y estudio', 'Conocimiento y estudio', 'Cómo trabajo']);
+  await expect(k.locator('.know__item').nth(2)).toContainText('lo declaro');
+  await expect(k.getByRole('link', { name: /Ver cómo trabajo/ })).toHaveAttribute('href', '/es/como-trabajo/');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+});

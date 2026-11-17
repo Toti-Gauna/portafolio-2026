@@ -553,7 +553,35 @@
       "Agent systems: roles, specs, tests and gates",
       "Teaching JavaScript and React",
       "Consultative selling (SPIN Selling), studying"
-    ]
+    ],
+    "know": {
+      "label": "Knowledge",
+      "title": "What I know and am studying",
+      "lead": "I do not use it in production and have not published it: it is knowledge and study. The closest thing I have shown is the WebGL of this site and of Kinetic Studio.",
+      "items": {
+        "arvr": {
+          "name": "AR/VR",
+          "tag": "Knowledge and study",
+          "text": "Augmented and virtual reality. I know it and am studying it; there is no published piece yet."
+        },
+        "blender": {
+          "name": "Blender",
+          "tag": "Knowledge and study",
+          "text": "3D modelling and animation. I know it and am studying it; there is no published piece yet."
+        },
+        "meshy": {
+          "name": "Meshy",
+          "tag": "Knowledge and study",
+          "text": "3D models generated with AI. I know it and am studying it; if I ever publish a model made this way, I will say so."
+        },
+        "claude": {
+          "name": "Claude",
+          "tag": "How I work",
+          "text": "I built the agentic system I work with in my repos on Claude. It is told in «How I work»."
+        }
+      },
+      "claudeCta": "See how I work"
+    }
   },
   "about": {
     "label": "About",

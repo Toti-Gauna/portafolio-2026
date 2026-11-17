@@ -73,7 +73,7 @@ Método de 6 pasos (ciclo) + sistema agéntico: diagrama «Cómo viaja un cambio
 
 ## 9. Capacidades
 
-La matriz de 17 tecnologías pasa a una constelación: cada tecnología es una estrella con su origen (trabajo / proyectos / estudio) por color de borde; filtros arriba; lista accesible abajo. Sección AR/VR, Blender, Claude y Meshy como conocimiento (Ola 10).
+La matriz de 17 tecnologías pasa a una constelación: cada tecnología es una estrella con su origen (trabajo / proyectos / estudio) por color de borde; filtros arriba; lista accesible abajo. Sección **«Lo que conozco y estoy estudiando»** con AR/VR, Blender, Meshy y Claude (Ola 10, hecha el 17/11/2026): los tres primeros como «Conocimiento y estudio», sin piezas publicadas; Claude lleva a «Cómo trabajo».
 
 ## 10. Sobre mí y contacto
 
