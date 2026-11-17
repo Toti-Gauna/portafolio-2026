@@ -119,3 +119,36 @@ describe('v2 statuses', () => {
     }
   });
 });
+
+describe('v2 signature pieces', () => {
+  it('the stack: five layers, anchors on the stage, and the text threshold the CSS uses', async () => {
+    const { stackArt, STACK_TEXT_MIN_WIDTH, STACK_LIFT, STACK_VIEWBOX } = await import('../../v2/components/signature/stack-art');
+    const { readFileSync } = await import('node:fs');
+    const css = readFileSync(new URL('../../app/v2/[locale]/signature.css', import.meta.url), 'utf8');
+    const art = stackArt();
+    expect(art.layers.map((l) => l.id)).toEqual([...LAYERS]);
+    for (const l of art.layers) {
+      expect(l.anchor.x).toBeGreaterThan(80); expect(l.anchor.x).toBeLessThan(100);
+      expect(l.anchor.y).toBeGreaterThan(0); expect(l.anchor.y).toBeLessThan(100);
+      // every label on a face has its bar stand-in for small sizes
+      expect((l.svg.match(/class="t"/g) ?? []).length > 0).toBe((l.svg.match(/class="b"/g) ?? []).length > 0);
+      expect(l.svg).not.toMatch(/filter=|<animate/);
+    }
+    // the five layers sit at equal steps
+    const ys = art.layers.map((l) => l.anchor.y);
+    for (let i = 2; i < ys.length; i++) expect(ys[i] - ys[i - 1]).toBeCloseTo(ys[1] - ys[0], 1);
+    expect(css).toContain(`@container sigstage (min-width: ${STACK_TEXT_MIN_WIDTH}px)`);
+    // the CSS lifts by the same share of the stage the art leaves free
+    expect(css).toContain(`var(--above) * -${(STACK_LIFT.up / STACK_VIEWBOX.h) * 100}`);
+    expect(css).toContain(`* ${(STACK_LIFT.down / STACK_VIEWBOX.h) * 100} * var(--open)`);
+    expect(stackArt().layers[1].svg).toBe(art.layers[1].svg);
+  });
+  it('the player has a verb for every layer and three kinetic verbs, in both languages', () => {
+    for (const m of [es, en]) {
+      expect(Object.keys(m.pieces.player.verbs).sort()).toEqual([...LAYERS].sort());
+      expect(m.pieces.verbs.items).toHaveLength(3);
+    }
+    expect(es.pieces.counter.items.tests.value).toBe('1.374');
+    expect(en.pieces.counter.items.tests.value).toBe('1,374');
+  });
+});

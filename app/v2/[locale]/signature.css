@@ -1,0 +1,193 @@
+/* /v2 signature pieces (v2/components/signature). Motion: transform, opacity and clip-path only; nothing
+   runs off screen; prefers-reduced-motion keeps the end frame (the global rule in v2.css stops transitions). */
+
+/* ── 01 · the stack ──────────────────────────────────────────────────────── */
+.sig-stack { container: sigbox / inline-size; width: 100%; margin: 0; }
+.sig-stack-fig { position: relative; }
+.sig-stack-stage { position: relative; aspect-ratio: 810 / 1000; container: sigstage / inline-size; }
+.sig-stack-stage > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.sig-stack-layer, .sig-stack-legend li {
+  /* --a: the open layer (0 when none or the top one) · --i: this layer. Layers above the open one rise, the rest sink. */
+  --above: clamp(0, calc(var(--a) - var(--i)), 1);
+  --open: clamp(0, var(--a), 1);
+  --shift: calc(var(--above) * -12 + (1 - var(--above)) * 11.5 * var(--open));
+}
+.sig-stack-layer {
+  transform: translateY(calc(var(--shift) * 1%));
+  transition: transform var(--motion-slow) var(--motion-ease), opacity var(--motion-base) var(--motion-ease);
+}
+.sig-stack-layer text { font-family: var(--family-mono); }
+.sig-stack-layer .hit { pointer-events: all; cursor: pointer; }
+.sig-stack[data-active] .sig-stack-layer[data-on='false'] { opacity: 0.42; }
+/* type on the faces only when it renders at 12 px or more (STACK_TEXT_MIN_WIDTH); bars stand in below that */
+.sig-stack-layer .t, .sig-scene-art .t { display: none; }
+@container sigstage (min-width: 572px) {
+  .sig-stack-layer .t { display: inline; }
+  .sig-stack-layer .b { display: none; }
+}
+
+.sig-stack-legend { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: -7%; position: relative; }
+.sig-stack-legend button {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-3);
+  border-radius: var(--radius-md); border: 1px solid color-mix(in srgb, var(--from) 55%, transparent); background: rgba(12, 10, 36, 0.86);
+  font-family: inherit; font-size: 14px; font-weight: 800; line-height: 1.15; text-align: left; color: var(--color-heading); cursor: pointer;
+  transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease);
+}
+.sig-stack-legend button i { font-family: var(--family-mono); font-size: var(--type-min-size); font-style: normal; font-weight: 700; color: var(--from); }
+.sig-stack-legend button[aria-pressed='true'] { background: var(--from); border-color: var(--from); color: var(--color-on-accent); }
+.sig-stack-legend button[aria-pressed='true'] i { color: var(--color-on-accent); }
+@media (hover: hover) and (pointer: fine) { .sig-stack-legend button:hover { border-color: var(--from); } }
+.sig-stack figcaption { display: block; margin-top: var(--space-3); }
+.sig-stack-hint { font-family: var(--family-mono); font-size: var(--type-label-size); color: var(--color-text-subtle); }
+
+/* room beside the art: each name sits at the end of its layer's leader line and travels with it */
+@container sigbox (min-width: 660px) {
+  .sig-stack-fig { padding-right: 156px; }
+  .sig-stack-over { position: absolute; inset: 0 156px 0 0; container-type: size; pointer-events: none; }
+  .sig-stack-legend { display: block; margin: 0; position: static; }
+  .sig-stack-legend li {
+    position: absolute; left: var(--ax); top: var(--ay); width: 152px; pointer-events: auto;
+    transform: translateY(calc(-50% + var(--shift) * 1cqh));
+    transition: transform var(--motion-slow) var(--motion-ease), opacity var(--motion-base) var(--motion-ease);
+  }
+  .sig-stack-legend button { align-items: flex-start; padding: 0 var(--space-2); border-color: transparent; background: none; font-size: 15px; }
+  .sig-stack-legend button > * { margin-block: auto; }
+  .sig-stack[data-active] .sig-stack-legend li:has(button[aria-pressed='false']) { opacity: 0.55; }
+  .sig-stack figcaption { margin-top: -4%; }
+}
+
+/* ── 02 · the 3D glass panel ─────────────────────────────────────────────── */
+.sig-tilt { display: inline-block; max-width: 100%; perspective: 1100px; }
+.sig-tilt-body {
+  position: relative; transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 7deg)) rotateY(var(--ry, -13deg));
+  transition: transform var(--motion-slow) var(--motion-ease);
+}
+.sig-tilt[data-live] .sig-tilt-body { transition-duration: var(--motion-fast); }
+.sig-tilt-glare { position: absolute; inset: 0; border-radius: var(--radius-2xl); overflow: hidden; pointer-events: none; }
+.sig-tilt-glare::before {
+  content: ''; position: absolute; left: 0; top: 0; width: 460px; height: 460px; margin: -230px 0 0 -230px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.22), transparent);
+  transform: translate3d(var(--gx, 110px), var(--gy, 50px), 0);
+}
+.sig-glass {
+  position: relative; display: grid; gap: var(--space-3); width: min(440px, 100vw - 2 * var(--size-gutter) - 72px);
+  padding: var(--space-6); border-radius: var(--radius-2xl); transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: radial-gradient(120% 90% at 0% 0%, rgba(255, 95, 162, 0.2), transparent 60%), radial-gradient(110% 90% at 100% 100%, rgba(95, 134, 255, 0.24), transparent 60%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 40px 80px rgba(3, 2, 12, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.sig-glass-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.sig-glass-kind { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-mist-200); }
+.sig-glass-q { justify-self: end; max-width: 86%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-xl) var(--radius-xl) var(--radius-xs) var(--radius-xl); background: rgba(255, 255, 255, 0.12); color: var(--color-heading); font-size: 15px; line-height: 1.35; }
+.sig-glass-a { font-size: clamp(22px, 3vw, 28px); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; color: var(--color-heading); }
+.sig-glass-bars { display: grid; gap: 8px; padding-bottom: var(--space-12); }
+.sig-glass-bars i { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.16); }
+.sig-glass-bars i:nth-child(2) { width: 82%; } .sig-glass-bars i:nth-child(3) { width: 56%; }
+.sig-glass [data-depth] {
+  position: absolute; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 36px; padding: 0 var(--space-3);
+  border-radius: var(--radius-md); font-size: 13.5px; font-weight: 700; white-space: nowrap; box-shadow: 0 18px 30px rgba(3, 2, 12, 0.5);
+}
+.sig-glass-cite { left: -22px; bottom: 26px; background: var(--color-amber-500); color: var(--color-on-accent); transform: translateZ(38px); }
+.sig-glass-ok { right: -26px; bottom: 74px; background: var(--color-mint-500); color: var(--color-on-accent); transform: translateZ(68px); }
+.sig-glass-src { right: 18px; bottom: -16px; background: var(--color-ink-700); border: 1px solid var(--color-line-strong); color: var(--color-heading); font-family: var(--family-mono); font-weight: 600; transform: translateZ(94px); }
+.sig-panel-demo { display: grid; place-items: center; padding: var(--space-12) 36px var(--space-16); border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: rgba(255, 255, 255, 0.02); }
+
+/* ── 03 · verbs in pills ─────────────────────────────────────────────────── */
+.sig-demo { display: grid; gap: var(--space-6); justify-items: start; }
+.sig-verbs { display: flex; flex-wrap: wrap; gap: var(--space-3) 14px; margin: 0; }
+.sig-verb {
+  position: relative; display: inline-flex; align-items: center; min-height: 1.9em; padding: 0 0.62em; border-radius: var(--radius-pill);
+  border: 2px solid var(--from); clip-path: inset(-4px round 999px);
+  font-size: clamp(26px, 5vw, 60px); line-height: 1; font-weight: 800; font-variation-settings: 'wdth' 112; letter-spacing: -0.03em; color: var(--color-heading);
+  transition: transform var(--motion-base) var(--motion-ease), opacity var(--motion-base) var(--motion-ease), clip-path var(--motion-slow) var(--motion-ease);
+}
+.sig-verb::before {
+  content: ''; position: absolute; inset: -2px; border-radius: inherit; background: linear-gradient(100deg, var(--from), var(--to));
+  opacity: 0; transition: opacity var(--motion-base) var(--motion-ease);
+}
+.sig-verb > span { position: relative; transition: color var(--motion-fast) var(--motion-ease); }
+.sig-verb[data-state='wait'] { opacity: 0; transform: translateY(18px); clip-path: inset(-4px 100% -4px -4px round 999px); }
+.sig-verb[data-state='on'] { transform: scale(1.04); }
+.sig-verb[data-state='on']::before { opacity: 1; }
+.sig-verb[data-state='on'] > span { color: var(--color-on-accent); }
+
+/* ── 04 · the counter ────────────────────────────────────────────────────── */
+.sig-count-row { display: inline-flex; }
+.sig-digit { display: inline-block; height: 1.1em; overflow: hidden; }
+.sig-digit > span { display: flex; flex-direction: column; transform: translateY(calc(var(--d) * -10%)); transition: transform 1300ms var(--motion-ease) calc(var(--k) * 70ms); }
+.sig-digit > span > span { display: block; height: 1.1em; line-height: 1.1; }
+.sig-count-sep { line-height: 1.1; }
+.sig-count[data-run='0'] .sig-digit > span { transform: none; transition: none; }
+.sig-counters { display: flex; flex-wrap: wrap; gap: var(--space-6) var(--space-10); }
+.sig-counter { display: grid; gap: var(--space-1); min-width: 150px; padding-top: var(--space-3); border-top: 3px solid var(--from); margin: 0; }
+.sig-counter b { font-size: clamp(44px, 8vw, 92px); line-height: 1; font-weight: 900; font-variation-settings: 'wdth' 120; letter-spacing: -0.03em; color: var(--color-heading); }
+.sig-counter > span { color: var(--color-text-muted); }
+
+/* ── 05 · the cursor light ───────────────────────────────────────────────── */
+/* the window is clipped to its field: near an edge the light must not widen the page */
+.sig-light { position: relative; overflow: clip; }
+.sig-light > :not(.sig-light-win) { position: relative; }
+.sig-light-win {
+  /* at rest (touch, reduced motion, before the pointer arrives): a still light, up and to the right */
+  position: absolute; left: 70%; top: 34%; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; overflow: hidden;
+  -webkit-mask-image: radial-gradient(closest-side, #000, transparent); mask-image: radial-gradient(closest-side, #000, transparent);
+  opacity: 0.55; pointer-events: none; transition: opacity var(--motion-base) var(--motion-ease);
+}
+.sig-light-lit {
+  position: absolute; inset: -24px;
+  background: radial-gradient(rgba(255, 255, 255, 0.5) 1.2px, transparent 1.6px) 0 0 / 24px 24px,
+    radial-gradient(closest-side, rgba(255, 95, 162, 0.2), rgba(95, 134, 255, 0.1) 60%, transparent);
+}
+.sig-light[data-live] .sig-light-win { left: 0; top: 0; opacity: 1; transform: translate3d(var(--lx), var(--ly), 0); }
+.sig-light[data-live] .sig-light-lit { transform: translate3d(var(--mx), var(--my), 0); }
+.sig-light-demo { display: grid; place-content: center; justify-items: center; gap: var(--space-6); min-height: 340px; padding: var(--space-8) var(--space-5); overflow: hidden; border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: var(--color-bg-deep); }
+.sig-light-hint { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-text-subtle); }
+.sig-light-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); max-width: 560px; }
+@media (hover: none) { .sig-light-hint { display: none; } }
+
+/* ── 06 · the player with chapters ───────────────────────────────────────── */
+.sig-player { max-width: 1040px; overflow: hidden; border-radius: var(--radius-2xl); border: 1px solid var(--color-line-strong); background: var(--color-bg-deep); box-shadow: var(--shadow-panel); }
+.sig-player-stage {
+  position: relative; aspect-ratio: 4 / 5; overflow: hidden;
+  background: radial-gradient(90% 80% at 78% 34%, color-mix(in srgb, var(--from) 30%, transparent), transparent 70%), linear-gradient(160deg, #15113a, #070614);
+}
+.sig-player-film { position: absolute; left: var(--space-5); top: var(--space-4); z-index: 1; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-mist-200); }
+.sig-scene { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; align-items: center; gap: var(--space-4); padding: var(--space-12) var(--space-5) var(--space-6); }
+.sig-scene-art { grid-row: 1; width: 100%; height: 100%; animation: sig-rise 800ms var(--motion-ease) both; }
+.sig-scene-text { grid-row: 2; display: grid; gap: var(--space-3); justify-items: start; }
+.sig-scene-n { font-family: var(--family-mono); font-size: 15px; font-weight: 700; letter-spacing: var(--type-label-tracking); color: var(--from); animation: sig-rise 500ms var(--motion-ease) both; }
+.sig-scene-title { font-size: clamp(30px, 5.2vw, 62px); line-height: 0.95; font-weight: 800; font-variation-settings: 'wdth' 112; letter-spacing: -0.035em; color: var(--color-heading); animation: sig-wipe 700ms var(--motion-ease) 80ms both; }
+.sig-scene-verb span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-4); border-radius: var(--radius-pill); background: linear-gradient(100deg, var(--from), var(--to)); color: var(--color-on-accent); font-size: clamp(16px, 2vw, 22px); font-weight: 800; }
+.sig-scene-verb { animation: sig-pop 500ms var(--motion-ease) 420ms both; }
+@keyframes sig-rise { from { opacity: 0; transform: translateY(26px); } }
+@keyframes sig-wipe { from { clip-path: inset(-10% 100% -10% 0); } to { clip-path: inset(-10% -2% -10% 0); } }
+@keyframes sig-pop { from { opacity: 0; transform: scale(0.86); } }
+
+.sig-player-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-top: 1px solid var(--color-line); }
+.sig-player-play {
+  display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%; cursor: pointer;
+  background: var(--gradient-brand); color: var(--color-on-accent); transition: transform var(--motion-fast) var(--motion-ease);
+}
+.sig-player-play:active { transform: scale(0.94); }
+.sig-player-chapters { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; }
+.sig-player-chapters button { display: grid; align-content: center; gap: 7px; width: 100%; min-height: var(--size-touch); padding: 0; border: 0; border-radius: var(--radius-xs); background: none; cursor: pointer; text-align: left; }
+.sig-player-track { display: block; height: 6px; overflow: hidden; border-radius: 3px; background: rgba(255, 255, 255, 0.16); }
+.sig-player-track span { display: block; height: 100%; background: linear-gradient(90deg, var(--from), var(--to)); transform: scaleX(0); transform-origin: left; }
+.sig-player-name { display: none; overflow: hidden; font-size: 13px; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; color: var(--color-text-subtle); }
+.sig-player-chapters button[aria-current] .sig-player-name { color: var(--color-heading); }
+.sig-player-time { font-family: var(--family-mono); font-size: var(--type-label-size); color: var(--color-text-muted); white-space: nowrap; }
+.sig-player-keys { padding: 0 var(--space-4) var(--space-4); font-size: var(--type-small-size); color: var(--color-text-subtle); }
+@media (hover: none) { .sig-player-keys { display: none; } }
+@media (max-width: 519px) { .sig-player-time { display: none; } .sig-player-bar { grid-template-columns: auto minmax(0, 1fr); } }
+@media (min-width: 760px) {
+  .sig-player-stage { aspect-ratio: 16 / 9; }
+  .sig-scene { grid-template-rows: none; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); padding: var(--space-16) var(--space-10) var(--space-8); }
+  .sig-scene-art { grid-row: auto; grid-column: 2; }
+  .sig-scene-text { grid-row: 1; grid-column: 1; }
+  .sig-player-name { display: block; }
+}
+
+/* in the catalogue the stage's spare room (kept for the layers that lift) tucks under the heading */
+.sig-stack-demo { max-width: 900px; margin-top: -5%; }

@@ -9,6 +9,7 @@ import { SoundToggle } from './ui/SoundToggle';
 const PAGES = [
   { key: 'tokens', path: '', color: tokens.layer['plan-from'] },
   { key: 'components', path: 'componentes/', color: tokens.layer['code-from'] },
+  { key: 'pieces', path: 'piezas/', color: tokens.layer['agents-from'] },
 ] as const;
 export type SystemPage = (typeof PAGES)[number]['key'];
 
