@@ -46,7 +46,9 @@ export function BrandLabEngine() {
       tabs.forEach((a, k) => { a.setAttribute('aria-selected', String(k === i)); a.tabIndex = k === i ? 0 : -1; });
       sheets.forEach((s, k) => s.toggleAttribute('data-active', k === i));
       if (opts.byUser) {
-        history.replaceState(null, '', `#marca-${tabs[i].dataset.brand}`);
+        // the browser's own replaceState, not Next's patched one: Next would sync the URL a moment later and undo a
+        // hash navigation made right after (a link to another sheet). Only the hash changes; Next needn't know.
+        History.prototype.replaceState.call(history, history.state, '', `#marca-${tabs[i].dataset.brand}`);
         play(sheets[i]);
       } else if (io) io.observe(sheets[i]); else play(sheets[i]);
       if (opts.focus) tabs[i].focus();
