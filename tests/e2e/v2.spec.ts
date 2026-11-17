@@ -13,7 +13,7 @@ test('/v2/ sends the visitor to a language, and /v2/es/ renders the specimen wit
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Ignacio\s*Gauna/);
   await expect(page.locator('.ui-role')).toContainText('Sr');
   for (const id of ['color', 'tipografia', 'espacio', 'movimiento', 'profundidad']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
-  await expect(page.locator('.v2-stack-legend li')).toHaveCount(5);
+  await expect(page.locator('.sig-stack-legend button')).toHaveCount(5);
   expect(await page.locator('body').innerText()).not.toMatch(/\bSsr\b/);
   expect(errors).toEqual([]);
 });

@@ -116,7 +116,8 @@
   "nav": {
     "label": "Sistema",
     "tokens": "Tokens",
-    "components": "Componentes"
+    "components": "Componentes",
+    "pieces": "Piezas"
   },
   "ui": {
     "status": {
@@ -278,6 +279,84 @@
       "summary": "Leer el diagrama como texto",
       "body": "La pregunta llega al asistente, que busca en los documentos, genera un borrador y lo verifica contra sus fuentes antes de responder.",
       "link": "Todos los casos"
+    }
+  },
+  "pieces": {
+    "meta": {
+      "title": "Piezas firma · Sistema IG v2",
+      "description": "Las piezas firma del nuevo portafolio de Ignacio Gauna: el apilado de capas, el panel de vidrio en 3D, los verbos en píldoras, el contador, la luz del cursor y el reproductor con capítulos."
+    },
+    "intro": {
+      "kicker": "Lote 1.4 · Piezas firma",
+      "title": "Las piezas que le dan vida",
+      "text": "Seis piezas hechas a mano, en código: se mueven solo cuando están en pantalla, responden al puntero, al dedo y al teclado, y quedan quietas si pediste menos movimiento."
+    },
+    "replay": "Repetir",
+    "stack": {
+      "title": "El apilado",
+      "text": "El oficio en cinco capas. Tocá una capa, o su nombre, y las de arriba se levantan para verla entera. Escape la cierra.",
+      "hint": "Tocá una capa para abrirla."
+    },
+    "panel": {
+      "title": "Panel de vidrio en 3D",
+      "text": "Un panel con profundidad real: sigue al puntero y cada elemento flota a su altura. En pantallas táctiles descansa girado.",
+      "sample": "Datos de ejemplo",
+      "kind": "Asistente con RAG",
+      "q": "¿Cuál es el plazo para avisar de un incidente?",
+      "a": "72 horas desde que se detecta.",
+      "cite": "Política de ejemplo · §4.2",
+      "verified": "Respuesta verificada",
+      "sources": "3 fuentes"
+    },
+    "verbs": {
+      "title": "Verbos en píldoras",
+      "text": "Lo que hago, en tres verbos que se encienden uno por uno. Corre una vez y el último queda encendido.",
+      "items": [
+        "Diseño.",
+        "Construyo.",
+        "Llevo a producción."
+      ]
+    },
+    "counter": {
+      "title": "Contador",
+      "text": "Las cifras ruedan hasta su valor la primera vez que entran en pantalla.",
+      "items": {
+        "tests": {
+          "value": "1.374",
+          "label": "tests en verde en Eclipse"
+        },
+        "agents": {
+          "value": "11",
+          "label": "agentes en el sistema"
+        },
+        "since": {
+          "value": "2021",
+          "label": "desarrollador desde"
+        }
+      }
+    },
+    "light": {
+      "title": "Luz del cursor",
+      "text": "Una luz sigue al puntero y enciende lo que toca. En pantallas táctiles queda quieta.",
+      "hint": "Mové el puntero por acá"
+    },
+    "player": {
+      "title": "Reproductor con capítulos",
+      "text": "El marco del tráiler: capítulos en la barra, pausa y saltos con el teclado. Nunca arranca solo y se pausa si sale de pantalla.",
+      "film": "El oficio, en cinco capas",
+      "play": "Reproducir",
+      "pause": "Pausar",
+      "replay": "Repetir",
+      "chapter": "Capítulo",
+      "chapters": "Capítulos",
+      "keys": "Con el foco en el reproductor, las flechas ← → cambian de capítulo.",
+      "verbs": {
+        "plan": "Planifico.",
+        "code": "Construyo.",
+        "agents": "Coordino agentes.",
+        "tests": "Pruebo.",
+        "ship": "Llevo a producción."
+      }
     }
   }
 }

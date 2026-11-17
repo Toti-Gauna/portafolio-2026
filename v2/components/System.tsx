@@ -4,6 +4,8 @@ import { LAYERS, tokens } from '@/v2/tokens';
 import { contrast, grade } from '@/v2/tokens/contrast';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { TopBar } from './TopBar';
+import { LightField } from './signature/LightField';
+import { Stack } from './signature/Stack';
 import { Button } from './ui/Button';
 import { RoleBadge } from './ui/Chip';
 import { ArrowIcon, PlayIcon } from './ui/Icons';
@@ -22,8 +24,6 @@ const TEXT: ('heading' | 'text' | 'text-muted' | 'text-subtle' | 'text-faint')[]
 const TYPE = ['display', 'h1', 'h2', 'h3', 'lead', 'body', 'small', 'label', 'code'] as const;
 const GRADIENTS = ['brand', 'name', 'solutions', 'spectrum'] as const;
 const MOTION = ['fast', 'base', 'slow'] as const;
-/** Where each layer's leader line ends, as % of the stack image's height (public/v2/stack.svg, viewBox -310 -390 790 748; the five layers sit at equal steps). */
-const STACK_ANCHORS = [31.7, 42.4, 53.1, 63.8, 74.5];
 
 const typeSpec = (k: (typeof TYPE)[number]) => {
   const t = tokens.type as Record<string, string>;
@@ -63,6 +63,8 @@ export function System({ locale }: { locale: V2Locale }) {
 
       <main id="main" className="v2-main">
         <section className="v2-hero" aria-labelledby="v2-name">
+          <LightField className="v2-hero-light">
+          <div className="v2-hero-grid">
           <div className="v2-hero-text">
             <RoleBadge level={m.hero.level} role={m.hero.role} />
             <h1 id="v2-name" className="v2-name">{m.hero.first}<br /><span className="v2-last">{m.hero.last}</span></h1>
@@ -72,21 +74,9 @@ export function System({ locale }: { locale: V2Locale }) {
               <Button href={`${BASE_PATH}/${locale}/`} variant="secondary" iconEnd={<ArrowIcon />}>{m.hero.explore}</Button>
             </div>
           </div>
-          <figure className="v2-stack">
-            {/* eslint-disable-next-line @next/next/no-img-element -- static export, a single SVG */}
-            <img src={asset('/v2/stack.svg')} alt={m.hero.stackAlt} width={790} height={748} />
-            <figcaption>
-              <span className="v2-sr">{m.hero.stackTitle}</span>
-              <ol className="v2-stack-legend">
-                {LAYERS.map((id, i) => (
-                  <li key={id} style={{ ...cssVar('--from', layerFrom(id)), top: `${STACK_ANCHORS[i]}%` }}>
-                    <i aria-hidden="true">0{i + 1}</i>
-                    {m.layers[id]}
-                  </li>
-                ))}
-              </ol>
-            </figcaption>
-          </figure>
+          <Stack locale={locale} />
+          </div>
+          </LightField>
         </section>
 
         <div className="v2-intro">

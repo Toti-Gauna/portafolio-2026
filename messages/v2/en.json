@@ -116,7 +116,8 @@
   "nav": {
     "label": "System",
     "tokens": "Tokens",
-    "components": "Components"
+    "components": "Components",
+    "pieces": "Pieces"
   },
   "ui": {
     "status": {
@@ -278,6 +279,84 @@
       "summary": "Read the diagram as text",
       "body": "The question reaches the assistant, which searches the documents, drafts an answer and checks it against its sources before replying.",
       "link": "All cases"
+    }
+  },
+  "pieces": {
+    "meta": {
+      "title": "Signature pieces · IG System v2",
+      "description": "The signature pieces of Ignacio Gauna's new portfolio: the stack of layers, the 3D glass panel, the verbs in pills, the counter, the cursor light and the player with chapters."
+    },
+    "intro": {
+      "kicker": "Batch 1.4 · Signature pieces",
+      "title": "The pieces that bring it to life",
+      "text": "Six hand-made pieces, in code: they move only while on screen, respond to pointer, touch and keyboard, and stay still if you asked for less motion."
+    },
+    "replay": "Replay",
+    "stack": {
+      "title": "The stack",
+      "text": "The craft in five layers. Click a layer, or its name, and the ones above lift so you see it whole. Escape closes it.",
+      "hint": "Click a layer to open it."
+    },
+    "panel": {
+      "title": "3D glass panel",
+      "text": "A panel with real depth: it follows the pointer and every element floats at its own height. On touch screens it rests turned.",
+      "sample": "Sample data",
+      "kind": "RAG assistant",
+      "q": "What is the deadline to report an incident?",
+      "a": "72 hours from the moment it is detected.",
+      "cite": "Sample policy · §4.2",
+      "verified": "Answer verified",
+      "sources": "3 sources"
+    },
+    "verbs": {
+      "title": "Verbs in pills",
+      "text": "What I do, in three verbs that light up one by one. It runs once and the last one stays lit.",
+      "items": [
+        "I design.",
+        "I build.",
+        "I ship to production."
+      ]
+    },
+    "counter": {
+      "title": "Counter",
+      "text": "Figures roll to their value the first time they come on screen.",
+      "items": {
+        "tests": {
+          "value": "1,374",
+          "label": "green tests in Eclipse"
+        },
+        "agents": {
+          "value": "11",
+          "label": "agents in the system"
+        },
+        "since": {
+          "value": "2021",
+          "label": "developer since"
+        }
+      }
+    },
+    "light": {
+      "title": "Cursor light",
+      "text": "A light follows the pointer and switches on what it touches. On touch screens it stays still.",
+      "hint": "Move the pointer around here"
+    },
+    "player": {
+      "title": "Player with chapters",
+      "text": "The frame of the trailer: chapters on the bar, pause and jumps with the keyboard. It never starts on its own and pauses when it leaves the screen.",
+      "film": "The craft, in five layers",
+      "play": "Play",
+      "pause": "Pause",
+      "replay": "Replay",
+      "chapter": "Chapter",
+      "chapters": "Chapters",
+      "keys": "With focus on the player, the ← → arrows change chapter.",
+      "verbs": {
+        "plan": "I plan.",
+        "code": "I build.",
+        "agents": "I coordinate agents.",
+        "tests": "I test.",
+        "ship": "I ship to production."
+      }
     }
   }
 }

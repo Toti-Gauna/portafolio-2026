@@ -1,5 +1,6 @@
 import './v2.css';
 import './ui.css';
+import './signature.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
