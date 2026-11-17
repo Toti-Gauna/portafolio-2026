@@ -226,7 +226,7 @@ test('menu: opens as a dialog, keeps focus inside, closes with Escape and the cl
 
 test('no horizontal scroll at 360 px on any page', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
-  for (const url of ['/es/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/sobre-mi/', '/en/', '/en/sobre-mi/']) {
+  for (const url of ['/es/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/negocio/libros/', '/es/sobre-mi/', '/en/', '/en/sobre-mi/']) {
     await enter(page, url, url.startsWith('/en/') ? 'Skip' : 'Saltar', url.startsWith('/en/') ? 'View portfolio' : 'Ver portafolio');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), url).toBeLessThanOrEqual(0);

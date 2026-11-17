@@ -25,6 +25,7 @@ describe('route → background scene', () => {
     expect(sceneForPath('/es/negocio/')).toBe('negocio');
     expect(sceneForPath('/en/negocio/')).toBe('negocio');
     expect(sceneForPath('/en/business-models/')).toBe('negocio');
+    expect(sceneForPath('/es/negocio/libros/')).toBe('negocio');
     expect(sceneForPath('/es/agentes/')).toBe('agentes');
     expect(sceneForPath('/en/agents/')).toBe('agentes');
     for (const id of ['volta', 'dentalos', 'games', 'velmar', 'supernova'] as const) {

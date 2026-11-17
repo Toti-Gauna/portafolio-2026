@@ -31,6 +31,11 @@ describe('site pages (lib/nav.ts)', () => {
       for (const l of ['es', 'en']) expect(urls.some((u) => u.endsWith(`/${l}${p.href}/`)), `${l}${p.href}`).toBe(true);
     }
   });
+  it('the books page (Ola 8b) lives under Negocio and is in the sitemap', () => {
+    expect(existsSync(`${root}app/[locale]/negocio/libros/page.tsx`)).toBe(true);
+    const urls = sitemap().map((u) => u.url);
+    for (const l of ['es', 'en']) expect(urls.some((u) => u.endsWith(`/${l}/negocio/libros/`)), l).toBe(true);
+  });
   it('at most six page links in the wide header', () => {
     expect(PAGES.length).toBeLessThanOrEqual(6);
   });

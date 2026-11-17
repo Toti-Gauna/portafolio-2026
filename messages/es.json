@@ -126,7 +126,7 @@
       },
       "business": {
         "t": "Negocio",
-        "d": "Tres libros y dónde los apliqué."
+        "d": "Cómo pienso el negocio: modelos, marketing, marca, operaciones y embudos."
       },
       "about": {
         "t": "Sobre mí",
@@ -687,7 +687,7 @@
       },
       "business": {
         "q": "¿Cómo pienso el negocio?",
-        "d": "The Lean Startup, The Mom Test y Blue Ocean Strategy: los modelos que uso y dónde los apliqué."
+        "d": "Modelos de negocio, marketing digital y físico, branding, operaciones y embudos, y tres libros."
       },
       "about": {
         "q": "¿Quién soy y de dónde vengo?",
@@ -728,7 +728,7 @@
   "business": {
     "metaTitle": "Cómo pienso el negocio — Ignacio Gauna",
     "metaDescription": "Los modelos de The Lean Startup, The Mom Test y Blue Ocean Strategy que uso, y dónde los apliqué.",
-    "back": "Volver al portafolio",
+    "back": "Volver a Negocio",
     "label": "Negocio",
     "title": "Cómo pienso el negocio.",
     "lead": "Tres libros que cambiaron cómo construyo. De cada uno, los modelos que más uso y dónde los apliqué en mis proyectos.",
@@ -1113,7 +1113,7 @@
       "business": {
         "title": "Negocio",
         "heading": "Cómo pienso el negocio.",
-        "text": "The Lean Startup, The Mom Test y Blue Ocean Strategy: los modelos que uso y dónde los apliqué.",
+        "text": "Modelos de negocio, marketing, marca, operaciones y embudos de mis proyectos, y los tres libros que uso.",
         "cta": "Ver cómo pienso el negocio",
         "alt": "Un anfiteatro circular cuyo centro se hunde en un embudo de puntos hasta un cubo coral.",
         "spots": {
@@ -2429,5 +2429,423 @@
       }
     },
     "pickExercise": "Ejercicio de marca"
+  },
+  "negocio": {
+    "metaTitle": "Negocio y marketing — Ignacio Gauna",
+    "metaDescription": "Cómo pienso el negocio de un producto: modelo, marketing digital y físico, marca, operaciones y embudos, con lo que hice en mis proyectos y tres libros que uso.",
+    "label": "Negocio",
+    "title": "Cómo pienso el negocio.",
+    "lead": "Quién paga, cómo se comunica, qué lleva a lo físico, cómo se ve, cómo se opera y qué camino recorre el cliente. Con lo que hice en mis proyectos y tres libros que me cambiaron la forma de construir.",
+    "note": "Todo lo que ves es diseño y demos con datos de muestra: ninguna conversión, venta ni cliente está medida. Donde no hay datos, lo digo.",
+    "toc": "Temas",
+    "where": "Dónde lo hice",
+    "see": "Ver el caso",
+    "sample": "Datos de muestra",
+    "back": "Volver al portafolio",
+    "topics": {
+      "models": {
+        "label": "Modelos de negocio",
+        "title": "Quién paga qué, y por qué",
+        "idea": "Antes de diseñar una pantalla me pregunto de dónde sale la plata del negocio y en qué momento. Cada demo parte de un modelo distinto.",
+        "items": [
+          {
+            "t": "Reventa multimarca con una marca propia de góndola",
+            "d": "La tienda revende marcas de distribuidoras inventadas y suma una propia. El panel calcula margen y precio sugerido por variante y por marca. Para subir el ticket: descuento por llevar productos de tres categorías, packs por objetivo y gift cards, todo simulado."
+          },
+          {
+            "t": "A pedido: la ganancia sale de la receta",
+            "d": "Cada producto se hace a pedido y se personaliza. El panel modela insumos por unidad, minutos de máquina y a mano, margen y precio sugerido; pasar un pedido a máquina descuenta insumos."
+          },
+          {
+            "t": "Suscripción del local, sin comisión por pedido",
+            "d": "El pedido no se cobra dentro de la app: se paga en caja o con el postnet del local. Eclipse cobra una suscripción mensual del local, en tres niveles que se suman. Todavía no lo usa ningún local."
+          },
+          {
+            "t": "Servicio con seña",
+            "d": "La landing muestra demos por rubro; quien escribe recibe una demo de su negocio y una propuesta escrita. El proyecto arranca con la seña: un trigger de la base rechaza uno sin seña cobrada. El soporte existe solo con mantenimiento contratado. Sin clientes todavía."
+          }
+        ],
+        "flows": {
+          "volta": {
+            "n": [
+              "Cliente",
+              "Tienda",
+              "Distribuidoras"
+            ],
+            "e": [
+              "compra",
+              "repone"
+            ],
+            "c": "Ganancia: precio menos costo del proveedor y del embalaje."
+          },
+          "velmar": {
+            "n": [
+              "Cliente",
+              "Taller",
+              "Insumos"
+            ],
+            "e": [
+              "pide a medida",
+              "se descuentan"
+            ],
+            "c": "Ganancia por receta: insumos y minutos de trabajo."
+          },
+          "lucero": {
+            "n": [
+              "Comensal",
+              "Local",
+              "Eclipse"
+            ],
+            "e": [
+              "paga en caja",
+              "suscripción"
+            ],
+            "c": "El único pago del sistema es la suscripción del local."
+          },
+          "eclipse": {
+            "n": [
+              "Negocio",
+              "Eclipse",
+              "Proyecto"
+            ],
+            "e": [
+              "seña",
+              "5 etapas"
+            ],
+            "c": "El proyecto arranca con la seña; sin importes en esta página."
+          }
+        },
+        "figTitle": "Cuatro modelos, tres cajas cada uno"
+      },
+      "digital": {
+        "label": "Marketing digital",
+        "title": "Escribir cuando hay una razón",
+        "idea": "El marketing digital que diseñé parte de un hecho del cliente (un pedido que cambió de estado, un producto que se termina, una fecha) y deja que una persona decida si se envía.",
+        "items": [
+          {
+            "t": "WhatsApp con el texto armado",
+            "d": "12 mensajes por estado del pedido, con los datos ya cargados y un enlace de WhatsApp. Se editan en el panel y nada se manda solo: lo envía una persona. La recompra calcula a quién escribirle unos 5 días antes de que se termine el envase, con un enlace que carga el bolso. Volta también convierte 17 fechas comerciales en campañas, con su cupón."
+          },
+          {
+            "t": "Fechas comerciales y una ruleta con vencimiento",
+            "d": "Dieciséis temáticas por fecha (Día de la Madre, Black Friday, Navidad…) cambian paleta, banner, pantalla de carga y cupón. La ruleta de ocho gajos da un cupón de un solo uso que vence. Los envíos son simulados."
+          },
+          {
+            "t": "Un gancho por visita",
+            "d": "La ruleta de premios aparece apenas se abre la carta, con un tiro por visita; el premio sale con un código que el mozo valida en persona. Las fechas especiales cambian paleta y decoración, nunca precios. El demo no tiene campañas al comensal."
+          },
+          {
+            "t": "Campañas con reglas de respeto",
+            "d": "Cuatro segmentos calculados: controles pendientes, presupuestos sin respuesta, consultas sin turno y turnos cancelados. La audiencia excluye a quien pidió la baja y a quien ya recibió 2 mensajes en 30 días, y un chequeo rechaza urgencia inventada, miedo y descuentos. Los envíos son simulados."
+          },
+          {
+            "t": "Una próxima acción por prospecto",
+            "d": "El portal interno calcula qué hacer con cada prospecto: llamar el mismo día que responde, mandar la propuesta dentro de las 24 horas y recordar a los 2, 5 y 9 días. El sistema no envía nada solo."
+          }
+        ],
+        "aud": {
+          "title": "Una audiencia que se achica por respeto",
+          "steps": [
+            "Personas del segmento",
+            "Menos quien pidió la baja",
+            "Menos la exclusión administrativa",
+            "Menos quien llegó a 2 mensajes en 30 días",
+            "Una persona, un mensaje"
+          ],
+          "caption": "Campaña de DentalOS (demo). El ancho es ilustrativo: no hay cifras, y el orden de la lista es por ID, nunca por rentabilidad."
+        }
+      },
+      "physical": {
+        "label": "Marketing físico",
+        "title": "Que lo físico lleve a lo digital",
+        "idea": "Un QR, una placa o un mostrador son marketing si llevan a la persona al siguiente paso con un solo gesto. En los repos hay cuatro; no hay cartelería ni packaging reales, y lo digo.",
+        "items": [
+          {
+            "t": "QR en cada mesa",
+            "d": "El QR abre la carta de esa mesa. La guía de Eclipse Academy dice cómo ponerlo: a la altura de la vista, con una sola frase al lado, impreso mate y revisado cada semana. La ruleta cierra el círculo: el premio sale con un código que el mozo valida en la mesa."
+          },
+          {
+            "t": "Placa NFC con el enlace del cliente",
+            "d": "Un producto de Velmar: una placa impresa con la imagen que elija el cliente y un chip NFC que abre el enlace que quiera (Instagram, WhatsApp, un menú). Es soporte de marketing físico para su propio comercio."
+          },
+          {
+            "t": "Pase con QR",
+            "d": "El colaborador muestra un QR de su reserva y el organizador registra el ingreso con la cámara o con un código. En la demo el QR es una referencia a la reserva de muestra y no valida ingresos reales."
+          },
+          {
+            "t": "Retiro, mostrador y muestras",
+            "d": "Retiro en el local con un código, mostrador con venta y cierre del día, y muestras y un shaker de la marca como premios de la ruleta y de los niveles del club."
+          }
+        ],
+        "touch": {
+          "title": "Cuatro puntos de contacto",
+          "qr": "QR de mesa",
+          "nfc": "Placa NFC",
+          "pass": "Pase con QR",
+          "counter": "Retiro y mostrador"
+        }
+      },
+      "brand": {
+        "label": "Branding",
+        "title": "La marca son decisiones",
+        "idea": "El logo es lo último. Antes decido el tono, la paleta con su uso y qué cambia de un cliente a otro. El detalle visual de cada marca está en el Brand Lab.",
+        "items": [
+          {
+            "t": "Una marca blanca por ficha",
+            "d": "Todo lo de la marca sale de un archivo por cliente: nombre, paleta, tipografías y logo. Un test prohíbe escribir «Volta» a mano en el código y un control revisa el contraste AA; así se prepara otra demo en unos 15 minutos."
+          },
+          {
+            "t": "Una paleta provisional, dicha como tal",
+            "d": "Velmar no confirmó paleta ni tipografía: la demo la deriva de su logo y lo declara. Sin fotos reales, las imágenes son ilustraciones propias rotuladas «Imagen ilustrativa»."
+          },
+          {
+            "t": "Una dirección elegida entre opciones",
+            "d": "«Editorial clínico cálido», elegida el 17/10/2026 entre propuestas, con dos correcciones. Los personajes infantiles tienen gamificación cosmética, sin premios ligados a tratamientos."
+          },
+          {
+            "t": "Un local inventado que no se parece a uno real",
+            "d": "Paleta vino y crema y la etiqueta «Demo» en todos lados, sin parecerse a una marca real."
+          },
+          {
+            "t": "El eclipse como sistema",
+            "d": "Ámbar sobre noche, el eclipse como glifo y las cinco etapas del proyecto como fases del eclipse. Tono premium, seguro y concreto, con frases cortas: español rioplatense, inglés directo y portugués de Brasil."
+          }
+        ],
+        "sw": {
+          "title": "Las ocho marcas del Brand Lab",
+          "cta": "Ver el Brand Lab"
+        }
+      },
+      "ops": {
+        "label": "Operaciones",
+        "title": "Un recorrido con estados",
+        "idea": "En cada demo, un pedido o un turno recorre estados que una sola función valida: nadie se salta un paso y quien decide queda registrado.",
+        "items": [
+          {
+            "t": "Lotes con vencimiento y control antes de despachar",
+            "d": "Sale primero el lote que vence primero (FEFO), con aviso a menos de 60 días y liquidación con acciones armadas. Un pedido no pasa a «Listo» sin los lotes confirmados, y un comprobante nunca paga: se aprueba tras ver la plata."
+          },
+          {
+            "t": "Cola de producción y calendario de entregas",
+            "d": "A fabricar, En máquina, Terminación y Listo, con la vista previa aprobada; pasar a máquina descuenta insumos. El calendario tiene capacidad por día, feriados y se reprograma arrastrando."
+          },
+          {
+            "t": "Una cancelación se convierte en un turno",
+            "d": "Al liberarse un cupo se crea una tarea de vacante y se ofrece a la lista de espera. La oferta se retiene un tiempo, se puede rechazar sin penalización y no se vuelve a ofrecer. Las ofertas son cupos, no descuentos."
+          },
+          {
+            "t": "Cocina por columnas",
+            "d": "El pedido avanza de enviado a cocina, listo y entregado, solo hacia adelante. Un plato marcado «Agotado» deja de aparecer al instante para el comensal."
+          },
+          {
+            "t": "Funciones con cupo propio",
+            "d": "Cada evento tiene hasta 24 funciones con su cupo; el cupo no baja de los inscriptos y las funciones con reservas no se eliminan. Sin servidor, los cupos entre dispositivos no se pueden garantizar."
+          }
+        ],
+        "rails": {
+          "title": "Cuatro recorridos",
+          "volta": [
+            "Pago aprobado",
+            "Armado",
+            "Control de lote",
+            "Despacho",
+            "Entregado"
+          ],
+          "velmar": [
+            "A fabricar",
+            "En máquina",
+            "Terminación",
+            "Listo"
+          ],
+          "lucero": [
+            "Enviado",
+            "Cocina",
+            "Listo",
+            "Entregado"
+          ],
+          "dentalos": [
+            "Cancelación",
+            "Vacante",
+            "Lista de espera",
+            "Oferta",
+            "Turno confirmado"
+          ]
+        }
+      },
+      "funnels": {
+        "label": "Embudos",
+        "title": "El recorrido del cliente, dibujado",
+        "idea": "Un embudo es el recorrido que diseñé para que alguien pase de descubrir a volver. Lo dibujo antes de medir nada, con el módulo que implementa cada etapa.",
+        "legend": "Recorrido diseñado y navegable en la demo. No está medido: no hay cifras de conversión, y lo ancho de cada barra es solo ilustrativo.",
+        "figTitle": "Cinco embudos",
+        "f": {
+          "volta": [
+            {
+              "t": "Descubrir",
+              "m": "Inicio con carrusel, «¿Cuál es tu objetivo?» y buscador"
+            },
+            {
+              "t": "Elegir",
+              "m": "Ficha, comparador, «Armá tu stack» y quiz"
+            },
+            {
+              "t": "Carrito",
+              "m": "Bolso, descuento por categorías, cupón y ruleta"
+            },
+            {
+              "t": "Checkout",
+              "m": "Tres pasos, con la fecha real del cadete"
+            },
+            {
+              "t": "Pago",
+              "m": "Transferencia con comprobante y aprobación manual"
+            },
+            {
+              "t": "Cumplimiento",
+              "m": "Armado, control de lote y despacho"
+            },
+            {
+              "t": "Retención",
+              "m": "Mi box, recompra por WhatsApp, club y packs"
+            }
+          ],
+          "velmar": [
+            {
+              "t": "Descubrir",
+              "m": "Inicio, categorías y buscador tolerante a errores"
+            },
+            {
+              "t": "Personalizar",
+              "m": "Vista previa en vivo y aprobación del diseño"
+            },
+            {
+              "t": "Carrito",
+              "m": "Cupón, misión y recomendaciones"
+            },
+            {
+              "t": "Gancho",
+              "m": "Ruleta a pantalla completa al ir a pagar"
+            },
+            {
+              "t": "Checkout y pago",
+              "m": "Entrega, pago y comprobante"
+            },
+            {
+              "t": "Producción",
+              "m": "Cola A fabricar → Listo y calendario"
+            },
+            {
+              "t": "Seguimiento",
+              "m": "Estados del pedido y ayuda por WhatsApp"
+            },
+            {
+              "t": "Retención",
+              "m": "Club, misiones, cupones y cumpleaños de la mascota"
+            }
+          ],
+          "dentalos": [
+            {
+              "t": "Información",
+              "m": "Inicio, sedes, servicios y primera visita"
+            },
+            {
+              "t": "Reserva",
+              "m": "Calendario mensual, solicitud, WhatsApp o llamada"
+            },
+            {
+              "t": "Confirmación",
+              "m": "Recepción confirma; «Mis turnos»"
+            },
+            {
+              "t": "Recordatorio",
+              "m": "24 h antes, con opt-in"
+            },
+            {
+              "t": "Atención",
+              "m": "Agenda y estados del turno"
+            },
+            {
+              "t": "Continuidad",
+              "m": "Controles de ortodoncia y campañas"
+            },
+            {
+              "t": "Presupuesto",
+              "m": "Emitido, aceptado, rechazado o vencido"
+            },
+            {
+              "t": "Recupero de agenda",
+              "m": "Vacante, lista de espera y oferta"
+            }
+          ],
+          "lucero": [
+            {
+              "t": "En el local",
+              "m": "QR en la mesa; pizarra de la vereda"
+            },
+            {
+              "t": "Primer gancho",
+              "m": "Ruleta al abrir la carta, un tiro por visita"
+            },
+            {
+              "t": "Pedido",
+              "m": "Carta, variantes, agregados y «Mandar a la cocina»"
+            },
+            {
+              "t": "Espera",
+              "m": "Juegos individuales y de mesa"
+            },
+            {
+              "t": "Cumplimiento",
+              "m": "Enviado, cocina, listo y entregado"
+            },
+            {
+              "t": "Cuenta",
+              "m": "Pedir la cuenta; el cobro es fuera de la app"
+            },
+            {
+              "t": "Retención",
+              "m": "Cliente en el CRM, favoritos y otro tiro"
+            }
+          ],
+          "eclipse": [
+            {
+              "t": "Elegir el rubro",
+              "m": "Inmobiliarias, el primero con demo"
+            },
+            {
+              "t": "Ver la demo",
+              "m": "Una empresa ficticia, con su chatbot y su pipeline"
+            },
+            {
+              "t": "Ver los niveles",
+              "m": "Seis niveles mensuales, sin importes en esta página"
+            },
+            {
+              "t": "Escribir",
+              "m": "WhatsApp con el plan en el mensaje"
+            },
+            {
+              "t": "Demo de su negocio",
+              "m": "En 48 h, antes de cualquier llamada"
+            },
+            {
+              "t": "Propuesta y seña",
+              "m": "Alcance, precio y plazos por escrito"
+            },
+            {
+              "t": "Proyecto",
+              "m": "Cinco etapas visibles en el portal"
+            }
+          ]
+        }
+      }
+    },
+    "books": {
+      "title": "Tres libros",
+      "lead": "Lo que me cambió el modo de construir. El detalle de cada uno, con sus modelos dibujados y dónde los apliqué, está en su página.",
+      "models": "Los modelos que más uso",
+      "cta": "Ver los modelos y dónde los apliqué"
+    },
+    "reading": "Leyendo ahora: SPIN Selling, de Neil Rackham, sobre ventas consultivas."
   }
 }
