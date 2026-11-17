@@ -9,6 +9,8 @@ import { Readouts, type Readout } from '../diagrams/Readouts';
 import { StatusTag } from '../ui/StatusTag';
 import { musicTracks } from '@/lib/music-files';
 import { TallerEngine } from './TallerEngine';
+import { TallerSpots } from './TallerSpots';
+import { Spots } from './Spots';
 import './taller.css';
 
 const srcSet = (n: number) => SCENE_WIDTHS.map((w) => `${asset(sceneSrc(n, w))} ${w}w`).join(', ');
@@ -42,6 +44,10 @@ export function Taller() {
             fetchPriority={i === 0 ? 'high' : undefined}
           />
         ))}
+        <div className="taller__lift">
+          <div className="taller__lift-shadow" />
+          <img className="taller__lift-img" alt="" width={2400} height={1357} decoding="async" />
+        </div>
       </div>
 
       {CHAPTERS.map((c, i) => {
@@ -115,11 +121,13 @@ export function Taller() {
                   )}
                 </div>
               </div>
+              <Spots chapter={c} index={i} />
             </div>
           </article>
         );
       })}
       <TallerEngine />
+      <TallerSpots />
     </section>
   );
 }
