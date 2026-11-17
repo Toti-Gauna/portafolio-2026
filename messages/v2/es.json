@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Sistema IG v2 · Ignacio Gauna",
+    "description": "Los tokens del nuevo portafolio de Ignacio Gauna: color, tipografía, espacio, forma, movimiento y profundidad.",
+    "redirect": "Elegí el idioma"
+  },
+  "top": {
+    "brand": "Sistema IG",
+    "version": "v2 · tokens",
+    "skip": "Saltar al contenido",
+    "lang": "Idioma",
+    "back": "Volver al portafolio"
+  },
+  "hero": {
+    "level": "Sr",
+    "role": "AI Fullstack Developer",
+    "first": "Ignacio",
+    "last": "Gauna",
+    "leadBefore": "Construyo software para un mundo con más",
+    "leadWord": "soluciones",
+    "leadAfter": "que problemas.",
+    "meet": "Conocer a Ignacio",
+    "explore": "Explorar el portafolio",
+    "stackAlt": "El oficio en cinco capas, en vista explotada: planificación y ejecución, código, agentes, tests y deploy",
+    "stackTitle": "Las cinco capas del oficio"
+  },
+  "layers": {
+    "plan": "Planificación y ejecución",
+    "code": "Código",
+    "agents": "Agentes",
+    "tests": "Tests",
+    "ship": "Deploy"
+  },
+  "intro": {
+    "kicker": "Lote 1.2 · Tokens",
+    "title": "El sistema, en sus piezas mínimas",
+    "text": "Color, tipografía, espacio, forma, movimiento y profundidad: la base de todo /v2. Cada valor sale de un solo archivo y se mide antes de entrar."
+  },
+  "color": {
+    "title": "Color",
+    "text": "Índigo profundo de base y un color por cada parte del oficio. El coral y el azul de IG siguen siendo la raíz del espectro.",
+    "base": "Base",
+    "textOnBg": "Texto sobre el fondo",
+    "spectrum": "Espectro",
+    "layers": "Las cinco capas",
+    "gradients": "Degradados",
+    "ratio": "Contraste",
+    "decorative": "Solo decoración",
+    "names": {
+      "heading": "Títulos",
+      "text": "Texto",
+      "text-muted": "Secundario",
+      "text-subtle": "Rótulos",
+      "text-faint": "Decoración"
+    },
+    "gradientNames": {
+      "brand": "Marca",
+      "name": "Apellido",
+      "solutions": "Soluciones",
+      "spectrum": "Espectro"
+    }
+  },
+  "type": {
+    "title": "Tipografía",
+    "text": "Archivo, con su eje de ancho, para los títulos; JetBrains Mono para lo técnico. Ningún texto baja de 12 px.",
+    "samples": {
+      "display": "Ignacio",
+      "h1": "Software que llega a producción",
+      "h2": "De la idea al deploy",
+      "h3": "Planificación y ejecución",
+      "lead": "Construyo software para un mundo con más soluciones que problemas.",
+      "body": "Diseño y construyo productos con IA de punta a punta: la interfaz, el backend, los agentes y los tests.",
+      "small": "Cada proyecto lleva su estado: producción, demo o prototipo.",
+      "label": "Sr AI Fullstack Developer",
+      "code": "async function responder(q: string)"
+    },
+    "names": {
+      "display": "Nombre",
+      "h1": "Título 1",
+      "h2": "Título 2",
+      "h3": "Título 3",
+      "lead": "Bajada",
+      "body": "Cuerpo",
+      "small": "Chico",
+      "label": "Rótulo",
+      "code": "Código"
+    }
+  },
+  "space": {
+    "title": "Espacio y forma",
+    "text": "Una escala de 4 px, radios suaves y objetivos táctiles de 44 px como mínimo.",
+    "spacing": "Espacio",
+    "radius": "Radios",
+    "touch": "Objetivo táctil mínimo"
+  },
+  "motion": {
+    "title": "Movimiento",
+    "text": "Una curva firma y tres duraciones: respuesta, cambio de estado y entrada. Solo se mueven transform y opacity; con movimiento reducido, todo queda quieto.",
+    "hint": "Activá cada fila para ver su curva.",
+    "fast": "Respuesta",
+    "base": "Cambio de estado",
+    "slow": "Entrada"
+  },
+  "depth": {
+    "title": "Profundidad",
+    "text": "Un brillo de marca para la acción principal, paneles que flotan sobre el índigo y un foco que siempre se ve.",
+    "glow": "Brillo de marca",
+    "panel": "Panel",
+    "focus": "Foco",
+    "z": "Orden de apilado"
+  },
+  "footer": {
+    "name": "Ignacio Gauna · 2026",
+    "place": "Mar del Plata, Argentina"
+  }
+}
