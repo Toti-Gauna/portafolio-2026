@@ -1,12 +1,290 @@
 {
-  "title": "trazo",
-  "kind": "Proyecto propio",
-  "status": "Pendiente",
-  "summary": "Pendiente.",
-  "facts": [],
-  "tldr": [],
+  "title": "Trazo",
+  "kind": "Producto personal · PWA",
+  "status": "Producto personal · en uso",
+  "summary": "Mi tracker personal: el día en horas, el estudio con su propio motor de repaso, las metas, el entreno y el peso. Una PWA con React, Vite y GSAP que uso todos los días. Los datos viven en el dispositivo y esta página no muestra los míos.",
+  "facts": [
+    {
+      "k": "Tipo",
+      "v": "PWA personal, local primero"
+    },
+    {
+      "k": "Stack",
+      "v": "React 19 · Vite · TypeScript · GSAP"
+    },
+    {
+      "k": "Datos",
+      "v": "En el navegador, sin servidor ni cuentas"
+    },
+    {
+      "k": "Estado",
+      "v": "Producto personal · en uso"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "Para qué",
+      "v": "Llevar en un solo lugar el día en horas, el estudio con repaso espaciado, las metas, el entreno y el peso."
+    },
+    {
+      "k": "Lo que hace",
+      "v": "Un motor de repaso con una escalera de días (1, 2, 3, 8, 22 y 61) y FSRS-5 para las tarjetas, con un tope de 20 minutos de repaso por día."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Producto personal en uso. Sin backend: los datos viven en el dispositivo. En la web, solo datos de ejemplo."
+    }
+  ],
   "blocks": {
-    "what": { "h": "Qué es", "p": ["Pendiente."] },
-    "status": { "h": "Estado y lo que no afirmo", "p": ["Pendiente."] }
+    "what": {
+      "h": "Qué es",
+      "p": [
+        "Trazo es mi tracker personal. Es una PWA hecha con React, Vite y GSAP, y la uso todos los días. No es un producto para otras personas: lo hice para mí, a mi medida."
+      ],
+      "list": [
+        "Hoy: las metas del día con su hora, encadenadas desde que me levanto y con las fijas en su lugar. Cada meta abre su foco, con pomodoros que entran justos en el tiempo que queda.",
+        "Mejora diaria: hasta un 1 % por día, repartido en partes iguales entre las metas y comparado siempre con ayer.",
+        "Estudio: un capítulo por día y un motor de repaso propio, con tarjetas, cold recall, tesis y tests.",
+        "Metas: desde la semana hasta el año, con un mapa de cómo avanzan.",
+        "Entreno: rutinas, sesión con timer y un motor de progresión de pesos con doble progresión.",
+        "Peso: pesaje semanal con su curva."
+      ]
+    },
+    "arch": {
+      "h": "Arquitectura: local primero",
+      "p": [
+        "Una app de React compilada con Vite a archivos estáticos y publicada en GitHub Pages. Las pantallas no cambian el estado: le piden cambios a un store, que llama a las reglas del dominio, sin React."
+      ],
+      "diagram": {
+        "title": "Local primero, sin servidor",
+        "caption": "Sin backend: el estado vive en localStorage y sale a un archivo cuando yo quiero.",
+        "nodes": {
+          "screens": {
+            "label": "Pantallas",
+            "sub": "React 19"
+          },
+          "sw": {
+            "label": "Service worker",
+            "sub": "vite-plugin-pwa"
+          },
+          "store": {
+            "label": "Store",
+            "sub": "un solo estado"
+          },
+          "domain": {
+            "label": "Dominio",
+            "sub": "reglas sin React",
+            "note": "Reglas en src/data: planificar el día, el foco, FSRS, el estudio y el entreno. Varias reciben la hora como argumento, así los tests no dependen del reloj."
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "clave trazo.v1",
+            "note": "Se guarda en cada cambio y se migra al cargar. Si el navegador no da acceso al storage, la app sigue en memoria."
+          },
+          "backup": {
+            "label": "Archivos",
+            "sub": "copia · JSON · ics"
+          }
+        },
+        "edges": {
+          "precache": "precachea",
+          "actions": "acciones",
+          "rules": "reglas",
+          "save": "guarda",
+          "export": "exporta"
+        }
+      }
+    },
+    "ladder": {
+      "h": "El motor de repaso: una escalera de días",
+      "p": [
+        "Cada capítulo recorre la misma escalera. Los días y los minutos están en el código (LADDER, en src/data/study-catalog.ts) y los agenda scheduleApproved, en src/data/study.ts."
+      ],
+      "title": "Un capítulo, de estudiarlo a repetirlo",
+      "steps": [
+        {
+          "actor": "Día 1",
+          "t": "Estudiar",
+          "d": "El capítulo entero, de corrido, en pomodoros enteros de 50/10."
+        },
+        {
+          "actor": "Día 2",
+          "t": "Cold recall y test",
+          "d": "Cinco minutos de cold recall contra el capítulo y un test completo de 25 minutos. El corte es 85 %."
+        },
+        {
+          "actor": "Día 3",
+          "t": "Tesis",
+          "d": "Veinte minutos, el día siguiente de aprobar. Si no aprobé: releer al día siguiente y re-test al otro."
+        },
+        {
+          "actor": "Día 8",
+          "t": "Lo flojo y ejercicios",
+          "d": "Quince minutos de estudio de lo flojo y ejercicios mixtos."
+        },
+        {
+          "actor": "Día 22",
+          "t": "Ejercicios mixtos",
+          "d": "Quince minutos."
+        },
+        {
+          "actor": "Día 61",
+          "t": "Examen corto",
+          "d": "Quince minutos, sin mirar."
+        }
+      ],
+      "caption": "Los días se cuentan desde el día 1 del capítulo. Si el test se atrasa, ningún repaso cae antes del día después de la tesis."
+    },
+    "rules": {
+      "h": "Las reglas, en números",
+      "p": [
+        "Son los valores iniciales de DEFAULT_RULES y PASS en src/data/study-catalog.ts; las reglas se pueden ajustar desde la app. Las tarjetas las programa FSRS-5 (src/data/fsrs.ts) con sus parámetros por defecto: cada una vuelve cuando la probabilidad de recordarla baja a la retención buscada."
+      ],
+      "items": [
+        {
+          "n": "20",
+          "u": "min",
+          "d": "Tope de repaso por día. Si vence más, entra primero lo flojo y el resto queda en «Hoy no toca»."
+        },
+        {
+          "n": "85",
+          "u": "%",
+          "d": "Corte de los tests. Con eso o más, sigue la tesis; con menos, releer y re-test."
+        },
+        {
+          "n": "90",
+          "u": "%",
+          "d": "Retención buscada por FSRS: a los S días de estabilidad, la probabilidad de recordar es 90 %."
+        },
+        {
+          "n": "15",
+          "u": "tarjetas",
+          "d": "Nuevas por día."
+        },
+        {
+          "n": "70",
+          "u": "%",
+          "d": "Si el cold recall da menos, se agenda releer. Una tarjeta que falla dos veces seguidas también."
+        }
+      ],
+      "note": "El test fsrs.test.ts comprueba, entre otras cosas, que a los S días la retención da 90 %. El de motor.test.ts, que entran hasta 15 tarjetas nuevas por día y que caben en el tope."
+    },
+    "data": {
+      "h": "Datos y almacenamiento",
+      "p": [
+        "Los datos son míos y viven en el dispositivo. No hay cuentas, servidor ni sincronización: en src/ no hay fetch ni XMLHttpRequest."
+      ],
+      "list": [
+        "El estado completo se guarda en localStorage, con la clave trazo.v1, cada vez que algo cambia. Si el navegador no deja usarlo, la app sigue en memoria.",
+        "Al cargar, migrate() lleva un estado viejo a la forma actual: suma lo que falta y no toca los días ya guardados (lo cubre migracion.test.ts).",
+        "Hay una copia de seguridad en Ajustes: un archivo con todo, que se descarga y se restaura. También se bajan como JSON los intentos de repaso y los tests.",
+        "Al cerrar el día, la pantalla «JSON del día» arma el cierre (bloques, foco, mejora) para copiarlo o guardarlo como archivo.",
+        "Las alarmas salen como un archivo .ics para el calendario del teléfono, así avisan con la app cerrada.",
+        "Un service worker generado por vite-plugin-pwa precachea los archivos de la app y un manifest la hace instalable."
+      ]
+    },
+    "decisions": {
+      "h": "Decisiones",
+      "items": [
+        {
+          "t": "Local primero",
+          "why": "El plan lo fija como principio: los datos se guardan en el dispositivo y, al cerrar el día, se exporta un JSON. No hay cuentas ni servidor."
+        },
+        {
+          "t": "Un motor de repaso propio, con FSRS-5",
+          "why": "El plan pide el estudio «con su propio motor de repaso»: la cola del día sale del mismo estado que las metas y el foco. Las tarjetas las programa FSRS-5, con retención buscada de 90 %."
+        },
+        {
+          "t": "La tesis, después del test",
+          "why": "Dejar pasar unos días hace que reconstruirla cueste un poco, y eso la fija (pantalla «Cómo funciona»). Se sacó del día en que se aprende el capítulo y hoy llega al día siguiente de aprobar el test."
+        },
+        {
+          "t": "Un tope de 20 minutos de repaso",
+          "why": "Solo entra lo que vence. Si vence más, entra primero lo flojo y lo demás queda en «Hoy no toca», con la fecha en que vuelve."
+        },
+        {
+          "t": "Una mejora diaria acotada",
+          "why": "La meta es ser 1 % mejor cada día: cada día aporta hasta 1 %, repartido por igual entre las metas, y el cierre siempre compara con ayer."
+        },
+        {
+          "t": "Ruteo por hash",
+          "why": "GitHub Pages no conoce las rutas de una SPA: con #/hoy, #/estudio y similares, recargar no da 404."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Calidad",
+      "p": [
+        "Los tests son de Vitest, con Testing Library y jsdom. Cubren el motor de repaso (FSRS, la cola diaria, el cold recall, la importación de tarjetas), las reglas del foco y del entreno, la migración del estado guardado, las pantallas y reglas de CSS, por ejemplo que ningún campo baje de 16 px para que el teléfono no haga zoom al escribir. En cada push el CI corre la verificación del roadmap, los tipos, los tests y el build, y el deploy a GitHub Pages repite esas comprobaciones."
+      ],
+      "items": [
+        {
+          "n": "44",
+          "u": "archivos",
+          "d": "De tests con Vitest"
+        },
+        {
+          "n": "4",
+          "u": "controles",
+          "d": "En cada push: roadmap, tipos, tests y build"
+        },
+        {
+          "n": "0",
+          "u": "llamadas",
+          "d": "De red en el código: no hay fetch ni XMLHttpRequest en src/"
+        }
+      ],
+      "note": "Enumeré los archivos de test y busqué llamadas de red en src/ el 17/11/2026, sobre la rama main (commit 54141a4). No corrí los tests ni medí el rendimiento."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 8",
+            "GSAP con Flip"
+          ]
+        },
+        {
+          "k": "PWA y tipografías",
+          "items": [
+            "vite-plugin-pwa",
+            "Archivo, Geist y Geist Mono con @fontsource"
+          ]
+        },
+        {
+          "k": "Propio",
+          "items": [
+            "Store con useSyncExternalStore",
+            "Ruteo por hash",
+            "FSRS-5 escrito a mano",
+            "Sonidos sintetizados"
+          ]
+        },
+        {
+          "k": "Calidad",
+          "items": [
+            "Vitest",
+            "Testing Library",
+            "jsdom",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "status": {
+      "h": "Estado y lo que no afirmo",
+      "list": [
+        "Producto personal en uso: lo uso todos los días y soy el único usuario. No está pensado para otras personas ni se ofrece a nadie.",
+        "No tiene backend, cuentas ni sincronización entre dispositivos: los datos viven en el navegador del teléfono y en las copias que descargo.",
+        "Esta página no muestra mis datos. Mis metas, mi entreno, mi peso y mi plan no se publican.",
+        "El motor de repaso usa los parámetros por defecto de FSRS-5: no los ajusté con mis propios repasos.",
+        "No afirmo resultados de aprendizaje: no medí si este sistema funciona mejor que otro.",
+        "Las cifras salen de leer el repo el 17/11/2026 (rama main, commit 54141a4). No corrí los tests ni medí el rendimiento."
+      ]
+    }
   }
 }

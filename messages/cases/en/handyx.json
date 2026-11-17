@@ -163,14 +163,14 @@
           "spec": "Specialist"
         },
         "msgs": {
-          "order": "creates the request (Idempotency-Key)",
+          "order": "creates it, with a key",
           "saveOrder": "saves: searching",
           "eligible": "sees the eligible requests",
           "offer": "sends their proposal",
           "saveOffer": "saves the proposal",
           "accept": "accepts that version",
           "tx": "transaction: creates the job",
-          "events": "on the way, arrived, in progress, done",
+          "events": "reports each stage",
           "close": "confirms it is finished"
         }
       }

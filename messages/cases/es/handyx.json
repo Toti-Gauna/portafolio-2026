@@ -163,14 +163,14 @@
           "spec": "Especialista"
         },
         "msgs": {
-          "order": "crea el pedido (Idempotency-Key)",
+          "order": "crea el pedido, con clave",
           "saveOrder": "guarda: buscando",
           "eligible": "ve los pedidos elegibles",
           "offer": "envía su propuesta",
           "saveOffer": "guarda la propuesta",
           "accept": "acepta esa versión",
           "tx": "transacción: crea el trabajo",
-          "events": "en camino, llegué, en curso, fin",
+          "events": "avisa cada etapa",
           "close": "confirma que terminó"
         }
       }

@@ -1,12 +1,290 @@
 {
-  "title": "trazo",
-  "kind": "Proyecto propio",
-  "status": "Pendiente",
-  "summary": "Pendiente.",
-  "facts": [],
-  "tldr": [],
+  "title": "Trazo",
+  "kind": "Personal product · PWA",
+  "status": "Personal product · in use",
+  "summary": "My personal tracker: the day in hours, study with its own review engine, goals, training and weight. A PWA built with React, Vite and GSAP that I use every day. The data lives on the device and this page does not show mine.",
+  "facts": [
+    {
+      "k": "Type",
+      "v": "Personal PWA, local first"
+    },
+    {
+      "k": "Stack",
+      "v": "React 19 · Vite · TypeScript · GSAP"
+    },
+    {
+      "k": "Data",
+      "v": "In the browser, no server or accounts"
+    },
+    {
+      "k": "Status",
+      "v": "Personal product · in use"
+    }
+  ],
+  "tldr": [
+    {
+      "k": "What for",
+      "v": "Keeping in one place the day in hours, study with spaced review, goals, training and weight."
+    },
+    {
+      "k": "What it does",
+      "v": "A review engine with a ladder of days (1, 2, 3, 8, 22 and 61) and FSRS-5 for flashcards, with a 20-minute cap on daily review."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A personal product in use. No backend: the data lives on the device. On the web, sample data only."
+    }
+  ],
   "blocks": {
-    "what": { "h": "Qué es", "p": ["Pendiente."] },
-    "status": { "h": "Estado y lo que no afirmo", "p": ["Pendiente."] }
+    "what": {
+      "h": "What it is",
+      "p": [
+        "Trazo is my personal tracker. It is a PWA built with React, Vite and GSAP, and I use it every day. It is not a product for other people: I made it for me, to my own measure."
+      ],
+      "list": [
+        "Today: the day's goals with their time, chained from when I get up, with the fixed ones in their place. Each goal opens its focus, with pomodoros that fit exactly in the time left.",
+        "Daily improvement: up to 1% a day, split equally among the goals and always compared with yesterday.",
+        "Study: one chapter a day and a review engine of my own, with flashcards, cold recall, a thesis and tests.",
+        "Goals: from the week to the year, with a map of how they are moving.",
+        "Training: routines, a timed session and a weight progression engine with double progression.",
+        "Weight: a weekly weigh-in with its curve."
+      ]
+    },
+    "arch": {
+      "h": "Architecture: local first",
+      "p": [
+        "A React app compiled by Vite into static files and published on GitHub Pages. The screens do not change the state: they ask a store for changes, and the store calls the domain rules, which have no React in them."
+      ],
+      "diagram": {
+        "title": "Local first, no server",
+        "caption": "No backend: the state lives in localStorage and goes out to a file when I want it to.",
+        "nodes": {
+          "screens": {
+            "label": "Screens",
+            "sub": "React 19"
+          },
+          "sw": {
+            "label": "Service worker",
+            "sub": "vite-plugin-pwa"
+          },
+          "store": {
+            "label": "Store",
+            "sub": "a single state"
+          },
+          "domain": {
+            "label": "Domain",
+            "sub": "rules, no React",
+            "note": "Rules in src/data: planning the day, focus, FSRS, study and training. Several take the time as an argument, so tests do not depend on the clock."
+          },
+          "ls": {
+            "label": "localStorage",
+            "sub": "key trazo.v1",
+            "note": "Saved on every change and migrated on load. If the browser gives no storage access, the app keeps running in memory."
+          },
+          "backup": {
+            "label": "Files",
+            "sub": "backup, JSON, ics"
+          }
+        },
+        "edges": {
+          "precache": "precaches",
+          "actions": "actions",
+          "rules": "rules",
+          "save": "saves",
+          "export": "exports"
+        }
+      }
+    },
+    "ladder": {
+      "h": "The review engine: a ladder of days",
+      "p": [
+        "Every chapter goes up the same ladder. The days and minutes are in the code (LADDER, in src/data/study-catalog.ts) and scheduleApproved, in src/data/study.ts, schedules them."
+      ],
+      "title": "One chapter, from studying it to repeating it",
+      "steps": [
+        {
+          "actor": "Day 1",
+          "t": "Study",
+          "d": "The whole chapter in one go, in whole 50/10 pomodoros."
+        },
+        {
+          "actor": "Day 2",
+          "t": "Cold recall and test",
+          "d": "Five minutes of cold recall against the chapter and a full 25-minute test. The pass mark is 85%."
+        },
+        {
+          "actor": "Day 3",
+          "t": "Thesis",
+          "d": "Twenty minutes, the day after passing. If I did not pass: reread the next day and re-test the day after."
+        },
+        {
+          "actor": "Day 8",
+          "t": "Weak spots and exercises",
+          "d": "Fifteen minutes of studying weak spots and mixed exercises."
+        },
+        {
+          "actor": "Day 22",
+          "t": "Mixed exercises",
+          "d": "Fifteen minutes."
+        },
+        {
+          "actor": "Day 61",
+          "t": "Short exam",
+          "d": "Fifteen minutes, without looking."
+        }
+      ],
+      "caption": "Days are counted from day 1 of the chapter. If the test slips, no review lands before the day after the thesis."
+    },
+    "rules": {
+      "h": "The rules, in numbers",
+      "p": [
+        "These are the initial values of DEFAULT_RULES and PASS in src/data/study-catalog.ts; the rules can be adjusted from the app. Flashcards are scheduled by FSRS-5 (src/data/fsrs.ts) with its default parameters: each one comes back when the probability of remembering it drops to the target retention."
+      ],
+      "items": [
+        {
+          "n": "20",
+          "u": "min",
+          "d": "Review cap per day. If more is due, weak spots go in first and the rest stays under «Not today»."
+        },
+        {
+          "n": "85",
+          "u": "%",
+          "d": "Pass mark for tests. At that or above, the thesis follows; below it, reread and re-test."
+        },
+        {
+          "n": "90",
+          "u": "%",
+          "d": "Target retention for FSRS: at S days of stability, the probability of remembering is 90%."
+        },
+        {
+          "n": "15",
+          "u": "cards",
+          "d": "New per day."
+        },
+        {
+          "n": "70",
+          "u": "%",
+          "d": "If cold recall scores lower, a reread is scheduled. So is a card that fails twice in a row."
+        }
+      ],
+      "note": "The fsrs.test.ts test checks, among other things, that retention is 90% at S days. The one in motor.test.ts checks that up to 15 new cards enter per day and that they fit under the cap."
+    },
+    "data": {
+      "h": "Data and storage",
+      "p": [
+        "The data is mine and lives on the device. There are no accounts, server or sync: there is no fetch or XMLHttpRequest in src/."
+      ],
+      "list": [
+        "The whole state is saved in localStorage, under the key trazo.v1, every time something changes. If the browser does not allow it, the app keeps running in memory.",
+        "On load, migrate() brings an old state to the current shape: it adds what is missing and leaves days already saved alone (covered by migracion.test.ts).",
+        "There is a backup in Settings: one file with everything, which can be downloaded and restored. The review attempts and tests can also be downloaded as JSON.",
+        "At the end of the day, the «Day JSON» screen builds the closing record (blocks, focus, improvement) to copy or save as a file.",
+        "Alarms come out as an .ics file for the phone's calendar, so they sound with the app closed.",
+        "A service worker generated by vite-plugin-pwa precaches the app's files and a manifest makes it installable."
+      ]
+    },
+    "decisions": {
+      "h": "Decisions",
+      "items": [
+        {
+          "t": "Local first",
+          "why": "The plan sets it as a principle: data is saved on the device and, at the end of the day, a JSON is exported. There are no accounts and no server."
+        },
+        {
+          "t": "A review engine of my own, with FSRS-5",
+          "why": "The plan asks for study «with its own review engine»: the day's queue comes from the same state as the goals and the focus. Flashcards are scheduled by FSRS-5, with a 90% target retention."
+        },
+        {
+          "t": "The thesis, after the test",
+          "why": "Letting a few days pass makes it a bit hard to rebuild, and that is what makes it stick («How it works» screen). It was taken off the day the chapter is learned and now comes the day after passing the test."
+        },
+        {
+          "t": "A 20-minute review cap",
+          "why": "Only what is due goes in. If more is due, weak spots go first and the rest stays under «Not today», with the date it comes back."
+        },
+        {
+          "t": "A bounded daily improvement",
+          "why": "The goal is to be 1% better every day: each day contributes up to 1%, split equally among the goals, and the closing screen always compares with yesterday."
+        },
+        {
+          "t": "Hash routing",
+          "why": "GitHub Pages does not know a SPA's routes: with #/hoy, #/estudio and the like, reloading does not give a 404."
+        }
+      ]
+    },
+    "quality": {
+      "h": "Quality",
+      "p": [
+        "The tests use Vitest, with Testing Library and jsdom. They cover the review engine (FSRS, the daily queue, cold recall, card import), the focus and training rules, the migration of the saved state, the screens and CSS rules, for example that no input drops below 16 px so the phone does not zoom when typing. On every push the CI runs the roadmap check, the types, the tests and the build, and the deploy to GitHub Pages repeats those checks."
+      ],
+      "items": [
+        {
+          "n": "44",
+          "u": "files",
+          "d": "Of Vitest tests"
+        },
+        {
+          "n": "4",
+          "u": "checks",
+          "d": "On every push: roadmap, types, tests and build"
+        },
+        {
+          "n": "0",
+          "u": "calls",
+          "d": "Over the network in the code: no fetch or XMLHttpRequest in src/"
+        }
+      ],
+      "note": "I listed the test files and searched src/ for network calls on 17/11/2026, on the main branch (commit 54141a4). I did not run the tests or measure performance."
+    },
+    "stack": {
+      "h": "Stack",
+      "groups": [
+        {
+          "k": "App",
+          "items": [
+            "React 19",
+            "TypeScript",
+            "Vite 8",
+            "GSAP with Flip"
+          ]
+        },
+        {
+          "k": "PWA and fonts",
+          "items": [
+            "vite-plugin-pwa",
+            "Archivo, Geist and Geist Mono via @fontsource"
+          ]
+        },
+        {
+          "k": "Own code",
+          "items": [
+            "Store with useSyncExternalStore",
+            "Hash routing",
+            "FSRS-5 written by hand",
+            "Synthesized sounds"
+          ]
+        },
+        {
+          "k": "Quality",
+          "items": [
+            "Vitest",
+            "Testing Library",
+            "jsdom",
+            "GitHub Actions"
+          ]
+        }
+      ]
+    },
+    "status": {
+      "h": "Status and what I don't claim",
+      "list": [
+        "A personal product in use: I use it every day and I am the only user. It is not meant for other people and it is not offered to anyone.",
+        "It has no backend, accounts or sync between devices: the data lives in the phone's browser and in the backups I download.",
+        "This page does not show my data. My goals, training, weight and plan are not published.",
+        "The review engine uses FSRS-5's default parameters: I did not tune them with my own reviews.",
+        "I don't claim learning results: I did not measure whether this system works better than another.",
+        "The figures come from reading the repo on 17/11/2026 (main branch, commit 54141a4). I did not run the tests or measure performance."
+      ]
+    }
   }
 }
