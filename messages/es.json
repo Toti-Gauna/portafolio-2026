@@ -127,6 +127,10 @@
       "about": {
         "t": "Sobre mí",
         "d": "De Mar del Plata: el recorrido y el contacto."
+      },
+      "roadmap": {
+        "t": "Roadmap",
+        "d": "Mi plan hasta agosto de 2030, en cuatro etapas."
       }
     }
   },
@@ -1098,7 +1102,7 @@
       "roadmap": {
         "title": "Roadmap",
         "heading": "Lo que viene.",
-        "text": "Un plan de varios años en cuatro etapas, con proyectos en energía, agro, salud, espacio y finanzas. Todo está planeado: nada de esto está hecho todavía.",
+        "text": "Un plan de varios años en cuatro etapas, con proyectos en energía, agro, salud, espacio y finanzas. Casi todo está planeado: solo la consolidación de este mes está en marcha.",
         "items": [
           "Núcleo",
           "Ciberseguridad",

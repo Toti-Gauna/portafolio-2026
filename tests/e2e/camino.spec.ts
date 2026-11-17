@@ -49,7 +49,7 @@ test('path: picking a station moves the camera and the handcar, changes the read
   // the stepper stops at the last station: the roadmap is shown as planned
   await page.locator('.camino__step[data-station="next"]').click();
   await expect(page.locator('.camino__panel[data-active] .stag[data-kind="planeado"]:visible')).toHaveCount(1);
-  await expect(page.locator('.camino__panel[data-active] [data-card][data-on] .camino__go')).toHaveCount(0);
+  await expect(page.locator('.camino__panel[data-active] [data-card][data-on] .camino__go')).toHaveAttribute('href', /\/roadmap\/?$/);
 });
 
 test('path: the stepper works with the keyboard (arrows, Home, End)', async ({ page }) => {

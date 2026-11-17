@@ -117,7 +117,7 @@ function Card({ b, on }: { b: Building; on: boolean }) {
         </dl>
       )}
       {b.slug && <Link className="camino__go" href={`/proyectos/${b.slug}`}>{t('case')} <span aria-hidden="true">→</span></Link>}
-      {!b.slug && b.status === 'planeado' && <p className="camino__soon label">{t('soon')}</p>}
+      {!b.slug && b.status === 'planeado' && <Link className="camino__go" href="/roadmap">{t('toRoadmap')} <span aria-hidden="true">→</span></Link>}
     </article>
   );
 }

@@ -73,10 +73,10 @@ describe('home walk (lib/taller.ts)', () => {
       expect(dest.every((d) => d && d !== 'hero' && CHAPTERS.some((c) => c.key === d))).toBe(true);
       expect(new Set(dest).size).toBe(dest.length);
     });
-    it('the roadmap is always «planeado» and has no destination; the exercise is marked as one', () => {
+    it('the roadmap references are «planeado» and lead to the roadmap page; the exercise is marked as one', () => {
       for (const s of CHAPTERS.find((c) => c.key === 'roadmap')!.spots!) {
         expect(s.status, s.id).toBe('planeado');
-        expect(s.go, s.id).toBeUndefined();
+        expect(s.go, s.id).toEqual({ href: '/roadmap' });
       }
       expect(CHAPTERS.find((c) => c.key === 'brand')!.spots!.find((s) => s.id === 'exercise')!.status).toBe('ejercicio');
     });

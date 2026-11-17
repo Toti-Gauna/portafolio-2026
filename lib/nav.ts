@@ -10,6 +10,10 @@ export const PAGES = [
   { key: 'about', href: '/sobre-mi' },
 ] as const;
 
+/** Pages that live outside the header (it holds five): the footer and the sitemap list them too. */
+export const EXTRA_PAGES = [{ key: 'roadmap', href: '/roadmap' }] as const;
+export const ALL_PAGES = [...PAGES, ...EXTRA_PAGES] as const;
+
 export type PageKey = (typeof PAGES)[number]['key'];
 
 export const pageHref = (key: PageKey) => PAGES.find((p) => p.key === key)!.href;

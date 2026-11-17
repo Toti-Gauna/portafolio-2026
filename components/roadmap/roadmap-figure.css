@@ -10,3 +10,7 @@
 .rm-zone[data-zone="space"] { fill: #e4e3dc; }
 .rm-grid { opacity: 0.55; }
 .rm-stripe, .rm-lamp { fill: #ff4d2e; }
+.cam-stand g[data-item] { cursor: pointer; transition: transform 240ms var(--ease-expo, ease); }
+.cam-stand g[data-item][data-hover] .rm-wire { stroke: #ff4d2e; }
+.cam-stand g[data-item][data-on] { transform: translateY(-6px); }
+@media (prefers-reduced-motion: reduce) { .cam-stand g[data-item] { transition: none !important; } }

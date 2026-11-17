@@ -95,3 +95,22 @@ export const ROADMAP: RoadItem[] = [
 
 export const statusOf = (it: RoadItem): StatusKind => it.status ?? 'planeado';
 export const itemsOf = (stage: StageId) => ROADMAP.filter((it) => it.stage === stage);
+
+/** «feb – ago 2028», «nov 2026 – ene 2027», «nov 2026»: month and year, the year once when both ends share it. */
+export function monthRange(from: string, to: string, locale: string): string {
+  const a = new Date(`${from}T00:00:00Z`);
+  const b = new Date(`${to}T00:00:00Z`);
+  const month = new Intl.DateTimeFormat(locale, { month: 'short', timeZone: 'UTC' });
+  const year = (d: Date) => d.getUTCFullYear();
+  const m = (d: Date) => month.format(d).replace(/\.$/, '');
+  if (year(a) === year(b) && a.getUTCMonth() === b.getUTCMonth()) return `${m(a)} ${year(a)}`;
+  if (year(a) === year(b)) return `${m(a)} – ${m(b)} ${year(a)}`;
+  return `${m(a)} ${year(a)} – ${m(b)} ${year(b)}`;
+}
+
+/** Counts for the lead: projects (P, S, Q, A), maths windows, certifications. */
+export const COUNTS = {
+  p: ROADMAP.filter((i) => i.kind === 'project').length,
+  w: ROADMAP.filter((i) => i.kind === 'window').length,
+  c: ROADMAP.filter((i) => i.kind === 'cert').length,
+};

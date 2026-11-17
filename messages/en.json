@@ -127,6 +127,10 @@
       "about": {
         "t": "About",
         "d": "From Mar del Plata: the journey and contact."
+      },
+      "roadmap": {
+        "t": "Roadmap",
+        "d": "My plan up to August 2030, in four stages."
       }
     }
   },
@@ -1098,7 +1102,7 @@
       "roadmap": {
         "title": "Roadmap",
         "heading": "What's next.",
-        "text": "A multi-year plan in four stages, with projects in energy, agriculture, health, space and finance. All of it is planned: none of it is done yet.",
+        "text": "A multi-year plan in four stages, with projects in energy, agriculture, health, space and finance. Almost all of it is planned: only this month's consolidation is under way.",
         "items": [
           "Core",
           "Cybersecurity",
