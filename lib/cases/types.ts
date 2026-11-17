@@ -32,4 +32,14 @@ export type BlockDef =
 /** One piece of real media in a showcase: files in public/media/<slug>/, with the poster of a video. */
 export type ShowItem = { id: string; kind: 'video' | 'image'; frame: 'browser' | 'phone'; src: string; poster?: string; w: number; h: number; url?: string };
 
-export type CaseDef = { blocks: BlockDef[]; links?: { label: string; href: string }[] };
+/**
+ * The case template (Ola 7a, design/2026/casos.md): the page is read in steps, one at a time, instead of one long scroll.
+ * Each step groups blocks (by key, in order); its label comes from caseUi.steps.<id>. A case without `steps` keeps the
+ * old long layout until it moves to the template (Ola 7b).
+ *   what · see · how · role · real · security · decisions · quality · status
+ * `real` («Cómo se implementa de verdad») is for frontend-only demos: their backend, database and security, as designed.
+ */
+export type StepId = 'what' | 'see' | 'how' | 'role' | 'real' | 'security' | 'decisions' | 'quality' | 'status';
+export type StepDef = { id: StepId; blocks: string[] };
+
+export type CaseDef = { blocks: BlockDef[]; steps?: StepDef[]; links?: { label: string; href: string }[] };
