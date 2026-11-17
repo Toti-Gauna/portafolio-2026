@@ -53,6 +53,34 @@ test('home walk: the stage pins, the scene changes with the scroll and the camer
   expect(await page.evaluate(() => document.documentElement.hasAttribute('data-scene-covered'))).toBe(true);
 });
 
+test('home walk on short screens (Ola 12): a 1280×720 laptop at 150 % walks too, slowly, and the first text fits', async ({ browser }) => {
+  // 1280×720 at 150 % is 853×~400 CSS px: landscape, a mouse, under 900 px wide
+  const ctx = await browser.newContext({ viewport: { width: 853, height: 400 }, deviceScaleFactor: 1.5 });
+  const page = await ctx.newPage();
+  await enter(page, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
+  await expect(page.locator('[data-taller]')).toHaveAttribute('data-mode', 'scroll');
+  const chapters = await page.locator('article.tch').evaluateAll((as) => as.map((a) => (a as HTMLElement).offsetHeight));
+  // each move between buildings gets at least 900 px of scroll (it used to be 0.72 of the screen: 288 px here)
+  for (const h of chapters.slice(0, -1)) expect(h - 400).toBeGreaterThanOrEqual(300 + 900);
+  // a text taller than the screen scrolls first and pins at its end: its last line is reachable before it fades
+  const hero = page.locator('.tch--hero');
+  const lead = await hero.evaluate((a) => -parseFloat((a.querySelector('.tch__pin') as HTMLElement).style.top || '0'));
+  await page.evaluate((y) => scrollTo(0, y), lead + 5);
+  await expect.poll(() => hero.locator('.tch__body').evaluate((b) => Number(getComputedStyle(b).opacity))).toBe(1);
+  const box = await hero.locator('.tch__readouts').boundingBox();
+  expect(box!.y + box!.height).toBeLessThanOrEqual(400 + 1);
+  await ctx.close();
+
+  // 1280×720: the whole first chapter (name, pitch, buttons and the four readouts) is on the first screen
+  const wide = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const p2 = await wide.newPage();
+  await enter(p2, `http://127.0.0.1:${process.env.PW_PORT ?? 4173}/es/`);
+  await expect(p2.locator('[data-taller]')).toHaveAttribute('data-mode', 'scroll');
+  const r = await p2.locator('.tch--hero .tch__readouts').boundingBox();
+  expect(r!.y + r!.height).toBeLessThanOrEqual(720);
+  await wide.close();
+});
+
 test('home on a phone and with reduced motion: pictures and text, no stage, no videos', async ({ browser }) => {
   for (const opts of [{ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, { viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' as const }]) {
     const ctx = await browser.newContext(opts);

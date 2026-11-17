@@ -5,21 +5,35 @@ import { CHAPTERS } from '@/lib/taller';
 import { setZone } from '@/lib/music';
 import { playCue } from '@/lib/sound';
 
-/** Wide screens with motion allowed: the walk. Phones, tablets in portrait and reduced motion keep the plain layout. */
-const QUERY = '(min-width: 900px) and (prefers-reduced-motion: no-preference)';
-/** share of a chapter's pinned scroll spent holding its scene before the camera moves to the next one */
-const HOLD = 0.4;
+/**
+ * The walk: wide screens with motion allowed, and landscape screens with a mouse from 760 px (a 1280×720 laptop at
+ * 150 % is 853×~400 CSS px). Phones, tablets in portrait and reduced motion keep the plain layout.
+ */
+const QUERY = [
+  '(min-width: 900px) and (prefers-reduced-motion: no-preference)',
+  '(min-width: 760px) and (orientation: landscape) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+].join(', ');
+/**
+ * Scroll budget of each chapter, in px (Ola 12): the scene holds still, then the camera moves to the next one. Both
+ * scale with the screen between a floor and a ceiling, so a short screen doesn't race through the films (the move
+ * used to be 0.72 of the screen's height: ~5 wheel steps at 720 px tall, 3 at 400; now 9–12).
+ */
+const HOLD = { vh: 0.35, min: 300, max: 380 };
+const MOVE = { vh: 1.2, min: 900, max: 1200 };
+const budget = (b: { vh: number; min: number; max: number }, vh: number) => Math.round(Math.min(b.max, Math.max(b.min, b.vh * vh)));
 /** the text leaves over this share of the move */
-const FADE = 0.16;
+const FADE = 0.25;
+/** the scroll the scene follows is eased toward the real one (1/s): a wheel step glides instead of jumping a film */
+const EASE = 7;
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 /**
  * Drives the home's walk through the cosmic workshop (components/taller/Taller.tsx). Everything it touches is
- * transform and opacity, written once per animation frame and only while scrolling; nothing loops.
- * - Each chapter pins for its height; while pinned, the stage holds its scene, then moves to the next one: the
- *   generated video (scrubbed by the scroll: currentTime follows the position) or, without one, a crossfade with a
- *   small slide.
+ * transform and opacity, written once per animation frame and only while scrolling (or easing); nothing loops.
+ * - Each chapter pins its text. A text taller than the screen scrolls first and pins at its end (sticky with a negative
+ *   top). Then the stage holds the scene and moves to the next one: the generated video (scrubbed: currentTime
+ *   follows the eased scroll) or, without one, a crossfade with a small slide.
  * - Scenes get their srcset when they are near (one behind, two ahead); a video is created when its chapter is
  *   the current one and dropped (src removed: frees the decoder) when it is far.
  * - While the stage covers the screen, the three.js background is paused (html[data-scene-covered]): it can't be seen.
@@ -29,20 +43,31 @@ function run(root: HTMLElement) {
   if (!stage) return () => {};
   const scenes = Array.from(stage.querySelectorAll<HTMLImageElement>('.taller__scene'));
   const chapters = Array.from(root.querySelectorAll<HTMLElement>('article[data-ch]'));
+  const pins = chapters.map((c) => c.querySelector<HTMLElement>('.tch__pin'));
   const bodies = chapters.map((c) => c.querySelector<HTMLElement>('.tch__body'));
   const maps = chapters.map((c) => c.querySelector<HTMLElement>('.tch__map'));
   const videos = new Map<number, HTMLVideoElement>();
   const html = document.documentElement;
+  const last = chapters.length - 1;
   root.dataset.mode = 'scroll';
 
   let tops: number[] = [];
-  let spans: number[] = [];
+  let leads: number[] = [];
+  let hold = 0;
+  let move = 1;
   let rootBottom = 0;
   let vh = innerHeight;
   const measure = () => {
     vh = innerHeight;
+    hold = budget(HOLD, vh);
+    move = budget(MOVE, vh);
+    leads = pins.map((p) => (p ? Math.max(0, Math.ceil(p.offsetHeight - vh)) : 0));
+    chapters.forEach((c, k) => {
+      c.style.minHeight = k < last ? `${vh + leads[k] + hold + move}px` : '';
+      const p = pins[k];
+      if (p) p.style.top = leads[k] ? `${-leads[k]}px` : '';
+    });
     tops = chapters.map((c) => c.getBoundingClientRect().top + scrollY);
-    spans = chapters.map((c) => Math.max(1, c.offsetHeight - vh));
     rootBottom = root.getBoundingClientRect().bottom + scrollY;
   };
 
@@ -86,15 +111,26 @@ function run(root: HTMLElement) {
     el.style.transform = transform;
   };
 
+  /** px into chapter k's move (negative while its text scrolls in or its scene holds) */
+  const into = (y: number, k: number) => y - tops[k] - leads[k] - hold;
+
   let raf = 0;
-  const frame = () => {
+  let eased = scrollY;
+  let then = 0;
+  const frame = (now: number) => {
     raf = 0;
-    const y = scrollY;
+    const target = scrollY;
+    const dt = then ? Math.min(0.05, (now - then) / 1000) : 1 / 60;
+    then = now;
+    // a jump (an anchor, Home, End) goes straight there: no flight through every film on the way
+    if (Math.abs(target - eased) > vh * 2.5) eased = target;
+    else eased += (target - eased) * (1 - Math.exp(-dt * EASE));
+    if (Math.abs(target - eased) < 0.5) eased = target;
+    const y = eased;
+
     let i = 0;
     for (let k = 0; k < tops.length; k++) if (y >= tops[k] - 1) i = k;
-    const f = y < tops[0] ? 0 : clamp((y - tops[i]) / spans[i]);
-    const hasNext = i < chapters.length - 1;
-    const e = hasNext ? clamp((f - HOLD) / (1 - HOLD)) : 0;
+    const e = i < last && y >= tops[0] ? clamp(into(y, i) / move) : 0;
 
     for (let k = i - 1; k <= i + 2; k++) if (k >= 0 && k < scenes.length) load(k);
     for (const k of Array.from(videos.keys())) if (k < i - 1 || k > i) drop(k);
@@ -114,37 +150,46 @@ function run(root: HTMLElement) {
       if (ready) return show(img, e > 0.96 ? (e - 0.96) / 0.04 : 0);
       return show(img, e, `translate3d(${(dir * 3 * (1 - e)).toFixed(2)}%,0,0) scale(${(1.04 - 0.04 * e).toFixed(4)})`);
     });
+    let seeking = false;
     videos.forEach((vid, k) => {
       if (k !== i || !ready || e === 0) return show(vid, 0);
       show(vid, e < 0.06 ? e / 0.06 : 1);
       const t = e * (vid.duration - 0.05);
-      if (Math.abs(vid.currentTime - t) > 1 / 48) vid.currentTime = t;
+      // one seek at a time: a new one would cancel the frame being decoded
+      if (vid.seeking) seeking = true;
+      else if (Math.abs(vid.currentTime - t) > 1 / 48) {
+        vid.currentTime = t;
+        seeking = true;
+      }
     });
 
     bodies.forEach((b, k) => {
       if (!b) return;
-      const fk = y < tops[k] ? 0 : clamp((y - tops[k]) / spans[k]);
-      const out = k < chapters.length - 1 ? clamp((fk - HOLD) / FADE) : 0;
+      const out = k < last ? clamp(into(y, k) / (FADE * move)) : 0;
       b.style.opacity = String(1 - out);
       b.style.transform = out ? `translate3d(0,${(-24 * out).toFixed(1)}px,0)` : '';
-      // the references leave with the text: an open card closes and the map can't be reached while it fades
+      // the references leave with the text (an open card closes, the map can't be reached while it fades); a text
+      // taller than the screen brings them in once it has pinned, so they sit on the scene
       const m = maps[k];
       if (m) {
-        m.style.opacity = String(1 - out);
-        if (out > 0 !== m.hasAttribute('inert')) {
-          m.toggleAttribute('inert', out > 0);
-          if (out > 0) m.querySelectorAll<HTMLDetailsElement>('details[open]').forEach((d) => { d.open = false; });
+        const off = out > 0 || y < tops[k] + leads[k] - 1;
+        m.style.opacity = String(off && out === 0 ? 0 : 1 - out);
+        if (off !== m.hasAttribute('inert')) {
+          m.toggleAttribute('inert', off);
+          if (off) m.querySelectorAll<HTMLDetailsElement>('details[open]').forEach((d) => { d.open = false; });
         }
       }
     });
 
-    html.toggleAttribute('data-scene-covered', y < rootBottom - vh * 0.5);
+    html.toggleAttribute('data-scene-covered', target < rootBottom - vh * 0.5);
+    if (eased !== target || seeking) raf = requestAnimationFrame(frame);
+    else then = 0;
   };
   const request = () => { if (!raf) raf = requestAnimationFrame(frame); };
   const onResize = () => { measure(); request(); };
 
   measure();
-  frame();
+  frame(performance.now());
   // fonts and the boot screen change the layout once after mount
   const ro = new ResizeObserver(onResize);
   ro.observe(root);
@@ -160,29 +205,46 @@ function run(root: HTMLElement) {
     scenes.forEach((s) => { s.style.opacity = ''; s.style.transform = ''; });
     bodies.forEach((b) => { if (b) { b.style.opacity = ''; b.style.transform = ''; } });
     maps.forEach((m) => { if (m) { m.style.opacity = ''; m.removeAttribute('inert'); } });
+    chapters.forEach((c) => { c.style.minHeight = ''; });
+    pins.forEach((p) => { if (p) p.style.top = ''; });
     html.removeAttribute('data-scene-covered');
     delete root.dataset.mode;
   };
 }
 
-/** The chapter in the middle of the screen sets the music zone, and a soft pulse marks each new building (every mode). */
+/**
+ * The chapter in the middle of the screen sets the music zone, and a soft pulse marks each new building (every mode).
+ * Only a chapter the visitor stays on counts (SETTLE): scrolling past three buildings doesn't switch the music three
+ * times or ring three cues.
+ */
+const SETTLE = 450;
 function watchChapters(root: HTMLElement) {
   let shown = -1;
+  let timer = 0;
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
         if (!e.isIntersecting) continue;
         const i = Number((e.target as HTMLElement).dataset.ch);
-        if (i === shown || !CHAPTERS[i]) continue;
-        if (shown >= 0) playCue('select');
-        shown = i;
-        setZone(CHAPTERS[i].zone);
+        if (!CHAPTERS[i]) continue;
+        window.clearTimeout(timer);
+        if (i === shown) continue;
+        const commit = () => {
+          if (shown >= 0) playCue('select');
+          shown = i;
+          setZone(CHAPTERS[i].zone);
+        };
+        if (shown < 0) commit();
+        else timer = window.setTimeout(commit, SETTLE);
       }
     },
     { rootMargin: '-45% 0px -45% 0px' },
   );
   root.querySelectorAll<HTMLElement>('article[data-ch]').forEach((a) => io.observe(a));
-  return () => io.disconnect();
+  return () => {
+    window.clearTimeout(timer);
+    io.disconnect();
+  };
 }
 
 export function TallerEngine() {
