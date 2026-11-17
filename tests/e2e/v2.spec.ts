@@ -11,7 +11,7 @@ test('/v2/ sends the visitor to a language, and /v2/es/ renders the specimen wit
   await page.goto('/v2/');
   await expect(page).toHaveURL(/\/v2\/es\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Ignacio\s*Gauna/);
-  await expect(page.locator('.v2-role')).toContainText('Sr');
+  await expect(page.locator('.ui-role')).toContainText('Sr');
   for (const id of ['color', 'tipografia', 'espacio', 'movimiento', 'profundidad']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
   await expect(page.locator('.v2-stack-legend li')).toHaveCount(5);
   expect(await page.locator('body').innerText()).not.toMatch(/\bSsr\b/);
@@ -38,7 +38,7 @@ test('the tokens reach the page: CSS variables, fonts and the brand gradient', a
   // the next/font family, not a serif fallback
   expect(v.body).not.toMatch(/^"?Times/);
   expect(v.body.toLowerCase()).toContain('archivo');
-  await expect(page.locator('.v2-btn-primary')).toHaveCSS('background-image', /linear-gradient/);
+  await expect(page.locator('.ui-btn--primary').first()).toHaveCSS('background-image', /linear-gradient/);
 });
 
 test('language switch, keyboard focus and the motion rows', async ({ page }) => {

@@ -112,5 +112,172 @@
   "footer": {
     "name": "Ignacio Gauna · 2026",
     "place": "Mar del Plata, Argentina"
+  },
+  "nav": {
+    "label": "Sistema",
+    "tokens": "Tokens",
+    "components": "Componentes"
+  },
+  "ui": {
+    "status": {
+      "produccion": "En producción",
+      "interna": "En producción interna",
+      "desarrollo": "En construcción",
+      "mvp": "MVP",
+      "demo": "Demo",
+      "prototipo": "Prototipo",
+      "laboratorio": "Laboratorio",
+      "roadmap": "En el roadmap",
+      "ejercicio": "Ejercicio de marca",
+      "profesional": "Trabajo profesional"
+    },
+    "sound": {
+      "label": "Sonido",
+      "on": "Sonido: encendido",
+      "off": "Sonido: apagado"
+    },
+    "menu": "Menú",
+    "external": "(se abre en otra pestaña)",
+    "breadcrumb": "Ruta"
+  },
+  "catalog": {
+    "meta": {
+      "title": "Componentes · Sistema IG v2",
+      "description": "Los componentes base del nuevo portafolio de Ignacio Gauna: botones, chips, estados, tarjetas de vidrio, formularios y navegación."
+    },
+    "intro": {
+      "kicker": "Lote 1.3 · Componentes",
+      "title": "Las piezas con las que se arma todo",
+      "text": "Cada componente sale de los tokens, funciona con teclado y muestra su foco. Probalos acá: pasá el puntero, usá Tab y las flechas."
+    },
+    "states": {
+      "default": "Normal",
+      "focus": "Foco",
+      "disabled": "Deshabilitado",
+      "pressed": "Activado"
+    },
+    "buttons": {
+      "title": "Botones",
+      "text": "Una acción principal por pantalla, con el degradado de marca; las demás, de vidrio o de texto. Todos miden 44 px o más.",
+      "primary": "Conocer a Ignacio",
+      "secondary": "Explorar el portafolio",
+      "quiet": "Ver el caso",
+      "small": "Contacto",
+      "send": "Enviar",
+      "variants": "Variantes",
+      "sizes": "Tamaños",
+      "icon": "Solo ícono"
+    },
+    "chips": {
+      "title": "Chips y rótulos",
+      "text": "Tecnologías, capas del oficio y atajos de teclado. Son información, no botones.",
+      "tech": "Tecnologías",
+      "layers": "Capas",
+      "keys": "Atajos",
+      "keyItems": {
+        "trailer": "Tráiler",
+        "work": "Work",
+        "help": "Ayuda"
+      }
+    },
+    "status": {
+      "title": "Estados",
+      "text": "Cada proyecto dice dónde está, siempre en positivo: lo que viene se cuenta como próximo paso."
+    },
+    "cards": {
+      "title": "Tarjetas de vidrio",
+      "text": "Paneles que flotan sobre el índigo, con el color de su capa. Toda la tarjeta es un enlace y su título lo nombra.",
+      "cta": "Ver el caso",
+      "items": {
+        "complia": {
+          "title": "CompliA",
+          "meta": "Tsoft · 2026",
+          "text": "Asistente con RAG para un portal de compliance: cada respuesta, con su cita."
+        },
+        "eclipse": {
+          "title": "Eclipse",
+          "meta": "Camino propio",
+          "text": "Producto, portal y marca: de la landing al backend, con tests en cada capa."
+        },
+        "volta": {
+          "title": "Volta",
+          "meta": "Laboratorio",
+          "text": "Una demo para mostrar el producto antes de construirlo entero."
+        },
+        "supernova": {
+          "title": "Supernova Eventos",
+          "meta": "Tsoft · 2026",
+          "text": "Una micro-app de eventos, de la idea a la demo."
+        }
+      },
+      "stats": "Cifras",
+      "statItems": {
+        "tests": "tests en verde en Eclipse",
+        "agents": "agentes en el sistema",
+        "since": "desarrollador desde"
+      },
+      "panel": {
+        "title": "Panel",
+        "text": "Un contenedor de vidrio para agrupar contenido sin tarjeta clicable."
+      }
+    },
+    "forms": {
+      "title": "Formularios",
+      "text": "Etiquetas siempre visibles, ayudas debajo y errores que dicen cómo seguir. Todo nativo: funciona con teclado y con lector de pantalla.",
+      "sample": "Muestra de los componentes: este formulario no envía mensajes.",
+      "name": {
+        "label": "Nombre",
+        "hint": "Como quieras que te llame."
+      },
+      "email": {
+        "label": "Mail",
+        "hint": "Te respondo a esta dirección.",
+        "error": "Escribí un mail completo, por ejemplo nombre@empresa.com.",
+        "example": "nombre@empresa"
+      },
+      "topic": {
+        "label": "Tema",
+        "options": {
+          "product": "Un producto nuevo",
+          "ai": "IA en producción",
+          "team": "Sumarme a un equipo"
+        }
+      },
+      "message": {
+        "label": "Mensaje",
+        "hint": "Contame el desafío en dos o tres líneas."
+      },
+      "copy": "Quiero una copia del mensaje",
+      "sound": "Sonidos de la interfaz",
+      "format": {
+        "legend": "Formato del tráiler",
+        "h": "Horizontal",
+        "v": "Vertical"
+      },
+      "send": "Enviar"
+    },
+    "nav": {
+      "title": "Navegación",
+      "text": "Pestañas con el color de cada sección, ruta, anterior y siguiente, y el texto que se despliega.",
+      "tabs": "Pestañas",
+      "tabItems": {
+        "home": "Inicio",
+        "work": "Work",
+        "how": "Cómo trabajo",
+        "brand": "Brand Lab",
+        "business": "Negocio",
+        "about": "Sobre mí"
+      },
+      "crumbs": "Ruta",
+      "pager": "Anterior y siguiente",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "prevCase": "Tuenti",
+      "nextCase": "Eclipse",
+      "disclosure": "Texto desplegable",
+      "summary": "Leer el diagrama como texto",
+      "body": "La pregunta llega al asistente, que busca en los documentos, genera un borrador y lo verifica contra sus fuentes antes de responder.",
+      "link": "Todos los casos"
+    }
   }
 }
