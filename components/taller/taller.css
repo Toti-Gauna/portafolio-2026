@@ -44,10 +44,25 @@
   display: block; position: sticky; top: 0; height: 100vh; height: 100svh; margin-bottom: -100vh; margin-bottom: -100svh;
   overflow: hidden; background: var(--ink);
 }
-.taller[data-mode='scroll'] :is(.taller__scene, .taller__video) {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0;
+/* The scene's frame is the screen under the header. The scene fills its width: on a screen wider than the scene it is
+   cropped, at most 20 % of its height, a third above and two thirds below (every reference stays in view: they sit
+   between 12 % and 80 % of the scene); on a wider screen still, the sides fade into the black instead of ending in a cut
+   (TallerEngine sets data-bars). On a narrower screen the scene is whole and centred, with black above and below. */
+.taller[data-mode='scroll'] {
+  --scene-w: min(100%, calc((100svh - var(--header-h)) * 2400 / 1357 * 1.25));
+  /* placed at the header, then moved by the frame's spare height: half of it when it's positive (centred), a third of it
+     when the scene is taller than the frame (the crop) */
+  --scene-dy: max(calc((100svh - var(--header-h)) * 0.5 - 50%), calc((100svh - var(--header-h)) * 0.33 - 33%));
 }
-/* the whole scene is shown (its edges are black space): the free side drawn for the text stays free */
+.taller[data-mode='scroll'] :is(.taller__scene, .taller__video) {
+  position: absolute; left: 50%; top: var(--header-h); width: var(--scene-w); height: auto; aspect-ratio: 2400 / 1357;
+  translate: -50% var(--scene-dy); object-fit: cover; opacity: 0;
+}
+.taller[data-mode='scroll'] .taller__stage[data-bars] :is(.taller__scene, .taller__video) {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+/* the free side drawn for the text stays free */
 .taller[data-mode='scroll'] .taller__scene[data-scene='0'] { opacity: 1; }
 .taller[data-mode='scroll'] .tch { display: block; min-height: 220vh; min-height: 220svh; padding: 0; border: 0; z-index: 1; }
 .taller[data-mode='scroll'] .tch--contact { min-height: 100vh; min-height: 100svh; }
@@ -96,8 +111,7 @@ button.tch__go { background: none; border: 0; border-bottom: 1px solid var(--acc
   position: absolute; inset: auto 0 0 0; height: 100vh; height: 100svh; z-index: 3; transition: opacity 200ms; max-width: none; margin: 0; padding: 0; pointer-events: none;
 }
 .taller[data-mode='scroll'] .tch__plane {
-  position: absolute; left: 50%; top: 50%; display: block; width: min(100%, calc(100vh * 2400 / 1357)); width: min(100%, calc(100svh * 2400 / 1357));
-  aspect-ratio: 2400 / 1357; transform: translate(-50%, -50%);
+  position: absolute; left: 50%; top: var(--header-h); display: block; width: var(--scene-w); aspect-ratio: 2400 / 1357; transform: translate(-50%, var(--scene-dy));
 }
 .taller[data-mode='scroll'] .tch__body { position: relative; z-index: 2; }
 .taller[data-mode='scroll'] .tch__spots-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); margin: 0; }
@@ -142,8 +156,8 @@ button.tch__go { background: none; border: 0; border-bottom: 1px solid var(--acc
 .tch__shapes g[data-active] .tch__trace { stroke-dashoffset: 0; }
 /* the lift: the same picture, clipped to the outline, raised, with its shadow (TallerSpots fills src and --poly) */
 .taller[data-mode='scroll'] .taller__lift {
-  display: block; position: absolute; left: 50%; top: 50%; width: min(100%, calc(100vh * 2400 / 1357)); width: min(100%, calc(100svh * 2400 / 1357));
-  aspect-ratio: 2400 / 1357; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; transition: opacity 200ms;
+  display: block; position: absolute; left: 50%; top: var(--header-h); width: var(--scene-w);
+  aspect-ratio: 2400 / 1357; transform: translate(-50%, var(--scene-dy)); pointer-events: none; opacity: 0; transition: opacity 200ms;
 }
 .taller[data-mode='scroll'] .taller__lift[data-on] { opacity: 1; }
 .taller__lift-shadow, .taller__lift-img { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: var(--poly, none); transform-origin: var(--ox, 50%) var(--oy, 50%); }

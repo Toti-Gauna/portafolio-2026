@@ -78,6 +78,16 @@ test('home walk on short screens (Ola 12): a 1280×720 laptop at 150 % walks too
   await expect(p2.locator('[data-taller]')).toHaveAttribute('data-mode', 'scroll');
   const r = await p2.locator('.tch--hero .tch__readouts').boundingBox();
   expect(r!.y + r!.height).toBeLessThanOrEqual(720);
+  // the scene fills the width (no black side bands ending in a cut) and its references stay under the header, on screen
+  const scene = await p2.locator('.taller__scene[data-scene="0"]').boundingBox();
+  expect(Math.round(scene!.x)).toBe(0);
+  expect(Math.round(scene!.width)).toBe(1280);
+  await expect(p2.locator('.taller__stage')).not.toHaveAttribute('data-bars', '');
+  for (const m of await p2.locator('.tch--hero .tch__mark').all()) {
+    const b = (await m.boundingBox())!;
+    expect(b.y).toBeGreaterThanOrEqual(64);
+    expect(b.y + b.height).toBeLessThanOrEqual(720);
+  }
   await wide.close();
 });
 

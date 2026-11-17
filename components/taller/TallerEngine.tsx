@@ -67,6 +67,9 @@ function run(root: HTMLElement) {
       const p = pins[k];
       if (p) p.style.top = leads[k] ? `${-leads[k]}px` : '';
     });
+    // a screen wider than the scene can be cropped to (taller.css, --scene-w): its sides fade instead of ending in a cut
+    const header = parseFloat(getComputedStyle(html).getPropertyValue('--header-h')) || 64;
+    stage.toggleAttribute('data-bars', stage.clientWidth > (vh - header) * (2400 / 1357) * 1.25 + 1);
     tops = chapters.map((c) => c.getBoundingClientRect().top + scrollY);
     rootBottom = root.getBoundingClientRect().bottom + scrollY;
   };
@@ -207,6 +210,7 @@ function run(root: HTMLElement) {
     maps.forEach((m) => { if (m) { m.style.opacity = ''; m.removeAttribute('inert'); } });
     chapters.forEach((c) => { c.style.minHeight = ''; });
     pins.forEach((p) => { if (p) p.style.top = ''; });
+    stage.removeAttribute('data-bars');
     html.removeAttribute('data-scene-covered');
     delete root.dataset.mode;
   };
