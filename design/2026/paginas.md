@@ -77,4 +77,6 @@ La matriz de 17 tecnologías pasa a una constelación: cada tecnología es una e
 
 ## 10. Sobre mí y contacto
 
-El recorrido como una línea de luz vertical con 8 hitos; contacto general (mail, LinkedIn, GitHub) y una línea para reclutadores y trabajos en Upwork (Ola 8d).
+El recorrido como una línea de luz vertical con 8 hitos; contacto general (mail, LinkedIn, GitHub) y, antes del contacto, **«Para reclutadores»** (`#reclutadores`, Ola 8d): una ficha con lo que el sitio ya aprobó (rol, dónde, hoy, antes con fechas, formación, qué uso en el trabajo y cómo trabajo) y tres casos para mirar (CompliA, Eclipse y el sistema agéntico).
+
+**Decisiones de Ignacio (17/11/2026):** tiene perfil en Upwork pero **no quiere enlazarlo ni mencionarlo**; lo que busca se dice sin especificar: «nuevas oportunidades para seguir desarrollándome y avanzando en mi carrera», con una mirada internacional; **no se publican disponibilidad, zona horaria ni modalidad** (ni expectativas salariales); de idiomas, solo **inglés C1** (pedido después, el mismo día). `tests/unit/recruiters.test.ts` y `tests/e2e/recruiters.spec.ts` lo verifican.

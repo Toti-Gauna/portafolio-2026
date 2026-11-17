@@ -140,3 +140,15 @@ h3 { font-weight: 700; }
 .agent__role { color: #cfcbc2; font-size: 15px; margin-top: 2px; }
 @media (min-width: 760px) { .agents { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .agents { grid-template-columns: repeat(3, 1fr); } }
+
+/* «Para reclutadores» (Ola 8d) */
+.rc-sheet { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line); max-width: 960px; }
+.rc-sheet > div { display: grid; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.rc-sheet dd { margin: 0; font-size: 18px; line-height: 1.45; color: #e6e2d9; }
+@media (min-width: 760px) { .rc-sheet > div { grid-template-columns: 200px 1fr; align-items: baseline; gap: 16px; } }
+.rc-more { margin: 12px 0 28px; }
+.rc-cases { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .rc-cases { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.rc-case { display: grid; gap: 10px; align-content: start; justify-items: start; padding: 20px; border: 1px solid var(--line); background: #141418; }
+.rc-case__t { font-size: 24px; font-weight: 800; font-variation-settings: 'wdth' 115; line-height: 1.1; }
+.rc-case p:not(.label):not(.status) { color: #d6d2c9; font-size: 16px; line-height: 1.5; }

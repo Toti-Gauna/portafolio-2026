@@ -3004,5 +3004,53 @@
       "criterion": "Mi criterio: Kinetic para piezas que viven en una página; Remotion, si lo sumo, para entregables en MP4 como shorts y recortes para redes."
     },
     "next": "Contacto"
+  },
+  "recruiters": {
+    "label": "Para reclutadores",
+    "title": "Lo esencial, en una ficha.",
+    "lead": "Busco nuevas oportunidades para seguir desarrollándome y avanzando en mi carrera, con una mirada internacional.",
+    "sheet": [
+      {
+        "k": "Rol",
+        "v": "Ssr AI Fullstack Developer."
+      },
+      {
+        "k": "Dónde",
+        "v": "Mar del Plata, Argentina."
+      },
+      {
+        "k": "Idiomas",
+        "v": "Inglés: C1."
+      },
+      {
+        "k": "Hoy",
+        "v": "En Tsoft, desde 2024."
+      },
+      {
+        "k": "Antes",
+        "v": "TACH Argentina (2021 – 2022) y Ada ITW (2023 – 2024), donde enseñé JavaScript y React."
+      },
+      {
+        "k": "Formación",
+        "v": "Autodidacta: leo y estudio por internet."
+      },
+      {
+        "k": "En el trabajo uso",
+        "v": "React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD y RAG con LLM."
+      },
+      {
+        "k": "Cómo trabajo",
+        "v": "Con un sistema agéntico dividido en partes: 11 agentes y una persona que aprueba."
+      }
+    ],
+    "casesTitle": "Tres casos para mirar",
+    "case": "Ver el caso",
+    "skills": "Ver todas las capacidades",
+    "write": "Escribime",
+    "cases": {
+      "complia": "Un asistente con IA en un portal de compliance: lo diseñé y construí, con su RAG, sus validaciones y sus recomendaciones.",
+      "eclipse": "Mi estudio, construido como un sistema completo: landing, portal de clientes, backend propio y portal interno.",
+      "agentes": "Cómo trabajo: 11 agentes con roles separados y puertas donde decide una persona."
+    }
   }
 }
