@@ -23,6 +23,8 @@ export type Layout = {
   nodes: Record<string, Box>;
   edges?: Record<string, EdgeGeo>;
   groups?: Record<string, { x: number; y: number; w: number; h: number }>;
+  /** a single-column layout from `gridLayouts`: node ids in reading order (edges are routed by `finishGrid`) */
+  col?: string[];
 };
 export type ArchSpec = {
   id: string;
