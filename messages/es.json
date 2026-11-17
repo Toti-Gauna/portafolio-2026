@@ -587,7 +587,50 @@
     "alt": "Descartado",
     "nextCase": "Siguiente caso",
     "play": "Reproducir el video",
-    "pause": "Pausar el video"
+    "pause": "Pausar el video",
+    "steps": {
+      "label": "Pasos del caso",
+      "of": "Paso {n} de {total}",
+      "prev": "Paso anterior",
+      "next": "Paso siguiente",
+      "all": "Ver todos los pasos",
+      "what": {
+        "t": "Qué es",
+        "d": "El problema y la idea"
+      },
+      "see": {
+        "t": "Cómo se ve",
+        "d": "El producto, en movimiento"
+      },
+      "how": {
+        "t": "Cómo funciona",
+        "d": "Las piezas y cómo se hablan"
+      },
+      "role": {
+        "t": "Mi aporte",
+        "d": "Qué hice yo"
+      },
+      "real": {
+        "t": "Cómo se implementa de verdad",
+        "d": "Backend, base de datos y seguridad"
+      },
+      "security": {
+        "t": "Seguridad",
+        "d": "Qué protege y cómo"
+      },
+      "decisions": {
+        "t": "Decisiones",
+        "d": "Qué elegí y por qué"
+      },
+      "quality": {
+        "t": "Calidad",
+        "d": "Cómo se prueba"
+      },
+      "status": {
+        "t": "Estado",
+        "d": "Dónde está y lo que no afirmo"
+      }
+    }
   },
   "fab": {
     "label": "Contacto",

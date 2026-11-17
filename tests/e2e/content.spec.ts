@@ -113,12 +113,18 @@ test('contact has email, LinkedIn and GitHub; external links open safely', async
   expect(bad).toBe(0);
 });
 
+/** Case pages with steps show one step at a time (Ola 7a): open the one that holds what the test looks at. */
+const openStep = async (page: Page, id: string) => {
+  await page.evaluate((x) => { location.hash = `#paso-${x}`; }, id);
+  await expect(page.locator(`#paso-${id}`)).toBeVisible();
+};
+
 test('every case page exists in both languages and says its status', async ({ page }) => {
   for (const [loc, skip, port] of [['es', 'Saltar', 'Ver portafolio'], ['en', 'Skip', 'View portfolio']] as const) {
     for (const slug of CASE_SLUGS) {
       await enter(page, `/${loc}/proyectos/${slug}/`, skip, port);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-      await expect(page.locator('.case .status').first()).not.toBeEmpty();
+      await expect(page.locator('.case .status, .case .stag').first()).not.toBeEmpty();
     }
   }
 });
@@ -126,7 +132,9 @@ test('every case page exists in both languages and says its status', async ({ pa
 test('CompliA case: clip with controls and caption; no internal data claims', async ({ page }) => {
   await enter(page, '/es/proyectos/complia/');
   await expect(page.locator('video[controls]')).toHaveCount(1);
+  await openStep(page, 'see');
   await expect(page.getByText('Datos de ejemplo.').first()).toBeVisible();
+  await openStep(page, 'status');
   await expect(page.getByRole('heading', { name: 'Lo que no muestro' })).toBeVisible();
 });
 
@@ -260,6 +268,7 @@ test('Tuenti and Eclipse cases: own page, Eclipse links to its site', async ({ p
 test('portal screenshots: the Eclipse gallery loads, with alt text and a caption; work cards have covers', async ({ page }) => {
   for (const [slug, n] of [['eclipse', 7]] as const) {
     await enter(page, `/es/proyectos/${slug}/`);
+    await openStep(page, 'see');
     const items = page.locator('.gallery__item');
     await expect(items).toHaveCount(n);
     for (let i = 0; i < n; i++) {
@@ -285,16 +294,26 @@ test('case pages: index, numbered sections, diagrams readable as text, no horizo
     await enter(page, `/es/proyectos/${slug}/`);
     const sections = page.locator('main section.cs[id]');
     expect(await sections.count(), slug).toBeGreaterThan(3);
-    await expect(page.locator('.toc a').first()).toBeVisible();
-    const diagrams = CASES[slug].blocks.filter((b) => b.type === 'diagram').length;
-    await expect(page.locator('figure.dg svg.dg__svg--desktop:visible')).toHaveCount(diagrams);
-    if (diagrams) {
-      const text = page.locator('figure.dg details.dg__text').first();
-      await text.locator('summary').click();
-      expect(await text.locator('li').count()).toBeGreaterThan(1);
+    const steps = CASES[slug].steps;
+    await expect((steps ? page.locator('.csteps__side a') : page.locator('.toc a')).first()).toBeVisible();
+    // with steps, each step shows only its own diagrams
+    const groups = steps
+      ? steps.map((st) => ({ step: st.id, n: CASES[slug].blocks.filter((b) => b.type === 'diagram' && st.blocks.includes(b.key)).length }))
+      : [{ step: '', n: CASES[slug].blocks.filter((b) => b.type === 'diagram').length }];
+    for (const g of groups) {
+      if (g.step) await openStep(page, g.step);
+      await expect(page.locator('figure.dg svg.dg__svg--desktop:visible'), `${slug} ${g.step}`).toHaveCount(g.n);
+      if (g.n) {
+        const text = page.locator('figure.dg details.dg__text:visible').first();
+        await text.locator('summary').click();
+        expect(await text.locator('li').count()).toBeGreaterThan(1);
+      }
     }
     await page.setViewportSize({ width: 360, height: 800 });
-    await expect(page.locator('figure.dg svg.dg__svg--mobile:visible')).toHaveCount(diagrams);
+    for (const g of groups) {
+      if (g.step) await openStep(page, g.step);
+      await expect(page.locator('figure.dg svg.dg__svg--mobile:visible'), `${slug} ${g.step}`).toHaveCount(g.n);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), slug).toBeLessThanOrEqual(0);
   }
   expect(errors).toEqual([]);
@@ -302,6 +321,7 @@ test('case pages: index, numbered sections, diagrams readable as text, no horizo
 
 test('CompliA diagram is labelled as a conceptual scheme, not Telefónica architecture', async ({ page }) => {
   await enter(page, '/es/proyectos/complia/');
+  await openStep(page, 'how');
   await expect(page.locator('.dg__badge')).toHaveText('Esquema conceptual');
   await expect(page.getByText(/No es la arquitectura de Telefónica/)).toBeVisible();
 });

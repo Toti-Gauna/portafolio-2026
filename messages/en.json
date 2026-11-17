@@ -587,7 +587,50 @@
     "alt": "Ruled out",
     "nextCase": "Next case",
     "play": "Play the video",
-    "pause": "Pause the video"
+    "pause": "Pause the video",
+    "steps": {
+      "label": "Case steps",
+      "of": "Step {n} of {total}",
+      "prev": "Previous step",
+      "next": "Next step",
+      "all": "See all the steps",
+      "what": {
+        "t": "What it is",
+        "d": "The problem and the idea"
+      },
+      "see": {
+        "t": "How it looks",
+        "d": "The product, in motion"
+      },
+      "how": {
+        "t": "How it works",
+        "d": "The pieces and how they talk"
+      },
+      "role": {
+        "t": "My part",
+        "d": "What I did"
+      },
+      "real": {
+        "t": "How it would be built for real",
+        "d": "Backend, database and security"
+      },
+      "security": {
+        "t": "Security",
+        "d": "What it protects and how"
+      },
+      "decisions": {
+        "t": "Decisions",
+        "d": "What I chose and why"
+      },
+      "quality": {
+        "t": "Quality",
+        "d": "How it is tested"
+      },
+      "status": {
+        "t": "Status",
+        "d": "Where it stands and what I do not claim"
+      }
+    }
   },
   "fab": {
     "label": "Contact",
