@@ -908,7 +908,22 @@
         "heading": "It all started in Mar del Plata.",
         "text": "At 17 I built my first product, a games website. It changed my life. I'm self-taught: I read a lot and study online.",
         "cta": "My story",
-        "alt": "A desk by an open window at night: a laptop with a coral screen and, outside, the sea under a coral moon."
+        "alt": "A desk by an open window at night: a laptop with a coral screen and, outside, the sea under a coral moon.",
+        "spots": {
+          "first": {
+            "name": "The first website",
+            "text": "At 17 I built a games website: my first product."
+          },
+          "sea": {
+            "name": "Mar del Plata",
+            "text": "The city where it all began."
+          },
+          "books": {
+            "name": "Self-taught",
+            "text": "I read a lot and study online. Three books changed how I build.",
+            "cta": "See the books"
+          }
+        }
       },
       "path": {
         "title": "The path",
@@ -920,7 +935,24 @@
           "Tsoft · 2024 – today · Tuenti, CompliA and Supernova Eventos"
         ],
         "cta": "See the path",
-        "alt": "Three buildings joined by a coral path: a studio with an antenna, an academy with a board and a coral tower."
+        "alt": "Three buildings joined by a coral path: a studio with an antenna, an academy with a board and a coral tower.",
+        "spots": {
+          "tach": {
+            "name": "TACH Argentina",
+            "text": "2021 – 2022 · a digital wallet, end to end and remote: back office, landing and app.",
+            "cta": "See the path"
+          },
+          "ada": {
+            "name": "Ada ITW",
+            "text": "2023 – 2024 · teaching to code: JavaScript and React, with students starting from zero.",
+            "cta": "See the path"
+          },
+          "tsoft": {
+            "name": "Tsoft",
+            "text": "2024 – today · Tuenti, CompliA and Supernova Eventos.",
+            "cta": "See the work"
+          }
+        }
       },
       "work": {
         "title": "Work & Projects",
@@ -932,41 +964,136 @@
           "Volta · supplements store with an admin panel and gamification"
         ],
         "cta": "See the work",
-        "alt": "An open-roof hangar with workbenches; floating panels rise from its roof, one of them coral."
+        "alt": "An open-roof hangar with workbenches; floating panels rise from its roof, one of them coral.",
+        "spots": {
+          "complia": {
+            "name": "CompliA",
+            "text": "AI assistant for Telefónica's compliance portal. I designed and built it.",
+            "cta": "See the case"
+          },
+          "eclipse": {
+            "name": "Eclipse",
+            "text": "My own development, AI and automation studio.",
+            "cta": "See the case"
+          },
+          "volta": {
+            "name": "Volta",
+            "text": "Supplements store with an admin panel and gamification, under an invented brand.",
+            "cta": "See the case"
+          },
+          "lab": {
+            "name": "The lab",
+            "text": "Demos, prototypes and test benches. Everything fictional says so.",
+            "cta": "See the lab"
+          }
+        }
       },
       "how": {
         "title": "How I work",
         "heading": "A system of agents, and a person who decides.",
         "text": "I code with 11 agents with separate roles: they specify, build and review. Publishing and spending are my call.",
         "cta": "See how I work",
-        "alt": "An observatory ringed by eleven modules joined by coral lines; a person stands at the central console."
+        "alt": "An observatory ringed by eleven modules joined by coral lines; a person stands at the central console.",
+        "spots": {
+          "gate": {
+            "name": "A person decides",
+            "text": "The agents don't publish, spend or change prices on their own. I authorise publishing and spending.",
+            "cta": "See the system"
+          },
+          "agents": {
+            "name": "11 agents",
+            "text": "Product, UX/UI, design, marketing, and frontend, backend, cybersecurity, games and trailer architects: each with its own part.",
+            "cta": "See the system"
+          },
+          "spec": {
+            "name": "Spec first",
+            "text": "Every change starts with a short document: problem, scope, acceptance criteria and how to roll back.",
+            "cta": "See the system"
+          }
+        }
       },
       "skills": {
         "title": "Skills",
         "heading": "What I use, and where it comes from.",
         "text": "Each technology says where it comes from: work, my own projects or what I'm studying.",
         "cta": "See the skills",
-        "alt": "An observatory with a desk and a telescope pointing at a constellation of symbols."
+        "alt": "An observatory with a desk and a telescope pointing at a constellation of symbols.",
+        "spots": {
+          "work": {
+            "name": "At work",
+            "text": "React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD and RAG with an LLM.",
+            "cta": "See the skills"
+          },
+          "own": {
+            "name": "In my projects",
+            "text": "Security (HttpOnly, CSRF, 2FA, Argon2), Python, C, GSAP and WebGL, Vitest and Playwright.",
+            "cta": "See the skills"
+          },
+          "study": {
+            "name": "Studying",
+            "text": "Machine learning fundamentals, AWS and Azure.",
+            "cta": "See the skills"
+          }
+        }
       },
       "brand": {
         "title": "Brand Lab",
         "heading": "How I build brands.",
         "text": "Hand-made brand boards: logo, palette, type and applications. This section is being built.",
-        "alt": "A printing house with an industrial press printing brand boards; one of them is coral."
+        "alt": "A printing house with an industrial press printing brand boards; one of them is coral.",
+        "spots": {
+          "lab": {
+            "name": "Brand boards",
+            "text": "Logo, palette, type and applications for IG, Eclipse, Velmar, Lucero, Volta and DentalOS, handmade in SVG."
+          },
+          "exercise": {
+            "name": "Brand exercises",
+            "text": "Invented brands to practise on, labelled as exercises."
+          }
+        }
       },
       "business": {
         "title": "Business",
         "heading": "How I think about business.",
         "text": "The Lean Startup, The Mom Test and Blue Ocean Strategy: the models I use and where I applied them.",
         "cta": "See how I think about business",
-        "alt": "A circular amphitheater whose center sinks into a funnel of dots down to a coral cube."
+        "alt": "A circular amphitheater whose center sinks into a funnel of dots down to a coral cube.",
+        "spots": {
+          "lean": {
+            "name": "The Lean Startup",
+            "text": "Build, measure, learn: small batches with acceptance criteria.",
+            "cta": "See how I use it"
+          },
+          "mom": {
+            "name": "The Mom Test",
+            "text": "Ask about past facts, not opinions: that way nobody lies to you out of kindness.",
+            "cta": "See how I use it"
+          },
+          "blue": {
+            "name": "Blue Ocean Strategy",
+            "text": "Create a space where the competition stops mattering.",
+            "cta": "See how I use it"
+          }
+        }
       },
       "video": {
         "title": "Video and trailers",
         "heading": "Trailers made with code.",
         "text": "At Kinetic Studio I make motion-graphics trailers that are generated in the browser: GSAP, canvas, WebGL and synthesized audio. This site's trailer comes from there.",
         "cta": "See Kinetic Studio",
-        "alt": "A cinema on a stone platform projects a coral beam onto a floating screen."
+        "alt": "A cinema on a stone platform projects a coral beam onto a floating screen.",
+        "spots": {
+          "kinetic": {
+            "name": "Kinetic Studio",
+            "text": "My lab of trailers made with code: image and sound are generated in the browser.",
+            "cta": "See Kinetic Studio"
+          },
+          "trailer": {
+            "name": "Meet Ignacio",
+            "text": "This site's trailer, made in code with Kinetic Studio.",
+            "cta": "Watch the trailer"
+          }
+        }
       },
       "roadmap": {
         "title": "Roadmap",
@@ -978,7 +1105,25 @@
           "Quant",
           "Aerospace"
         ],
-        "alt": "A launch field with dotted mock-ups of a pumpjack, a crop field, a dish, a server and a rocket taking off."
+        "alt": "A launch field with dotted mock-ups of a pumpjack, a crop field, a dish, a server and a rocket taking off.",
+        "spots": {
+          "energy": {
+            "name": "Energy",
+            "text": "An energy project on the roadmap. It's a dotted model: it doesn't exist yet."
+          },
+          "agro": {
+            "name": "Agro",
+            "text": "An agriculture project on the roadmap. It's a dotted model: it doesn't exist yet."
+          },
+          "finance": {
+            "name": "Finance",
+            "text": "A finance project on the roadmap. It's a dotted model: it doesn't exist yet."
+          },
+          "space": {
+            "name": "Space",
+            "text": "An aerospace project on the roadmap. It's a dotted model: it doesn't exist yet."
+          }
+        }
       },
       "contact": {
         "title": "Contact",
@@ -988,6 +1133,12 @@
         "alt": "A lighthouse at the edge of the platform sends coral waves into space, under an eclipse."
       }
     },
-    "creditMusic": "Background music generated with Suno."
+    "creditMusic": "Background music generated with Suno.",
+    "spots": {
+      "label": "In this scene",
+      "hint": "Tap a number to see what it is.",
+      "goScene": "Go to the scene",
+      "close": "Close"
+    }
   }
 }

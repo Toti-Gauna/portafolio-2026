@@ -908,7 +908,22 @@
         "heading": "Todo empezó en Mar del Plata.",
         "text": "Con 17 años programé mi primer producto, una web de juegos. Me cambió la vida. Soy autodidacta: leo mucho y estudio por internet.",
         "cta": "Mi historia",
-        "alt": "Un escritorio frente a una ventana abierta, de noche: una laptop con la pantalla coral y, afuera, el mar con una luna coral."
+        "alt": "Un escritorio frente a una ventana abierta, de noche: una laptop con la pantalla coral y, afuera, el mar con una luna coral.",
+        "spots": {
+          "first": {
+            "name": "La primera web",
+            "text": "A los 17 programé una web de juegos: mi primer producto."
+          },
+          "sea": {
+            "name": "Mar del Plata",
+            "text": "La ciudad donde empezó todo."
+          },
+          "books": {
+            "name": "Autodidacta",
+            "text": "Leo mucho y estudio por internet. Tres libros cambiaron cómo construyo.",
+            "cta": "Ver los libros"
+          }
+        }
       },
       "path": {
         "title": "El recorrido",
@@ -920,7 +935,24 @@
           "Tsoft · 2024 – hoy · Tuenti, CompliA y Supernova Eventos"
         ],
         "cta": "Ver el recorrido",
-        "alt": "Tres edificios unidos por un camino coral: un estudio con antena, una academia con un pizarrón y una torre coral."
+        "alt": "Tres edificios unidos por un camino coral: un estudio con antena, una academia con un pizarrón y una torre coral.",
+        "spots": {
+          "tach": {
+            "name": "TACH Argentina",
+            "text": "2021 – 2022 · una billetera virtual, de punta a punta y en remoto: backoffice, landing y app.",
+            "cta": "Ver el recorrido"
+          },
+          "ada": {
+            "name": "Ada ITW",
+            "text": "2023 – 2024 · enseñar a programar: JavaScript y React, con alumnos que arrancaban de cero.",
+            "cta": "Ver el recorrido"
+          },
+          "tsoft": {
+            "name": "Tsoft",
+            "text": "2024 – hoy · Tuenti, CompliA y Supernova Eventos.",
+            "cta": "Ver el trabajo"
+          }
+        }
       },
       "work": {
         "title": "Work & Projects",
@@ -932,41 +964,136 @@
           "Volta · tienda de suplementos con panel y gamificación"
         ],
         "cta": "Ver el trabajo",
-        "alt": "Un hangar de techo abierto con mesas de trabajo; de su techo suben paneles flotantes, uno coral."
+        "alt": "Un hangar de techo abierto con mesas de trabajo; de su techo suben paneles flotantes, uno coral.",
+        "spots": {
+          "complia": {
+            "name": "CompliA",
+            "text": "Asistente con IA para el portal de compliance de Telefónica. Lo diseñé y construí.",
+            "cta": "Ver el caso"
+          },
+          "eclipse": {
+            "name": "Eclipse",
+            "text": "Estudio propio de desarrollo, IA y automatización.",
+            "cta": "Ver el caso"
+          },
+          "volta": {
+            "name": "Volta",
+            "text": "Tienda de suplementos con panel y gamificación, con una marca inventada.",
+            "cta": "Ver el caso"
+          },
+          "lab": {
+            "name": "El laboratorio",
+            "text": "Demos, prototipos y bancos de prueba. Todo lo ficticio lo dice.",
+            "cta": "Ver el laboratorio"
+          }
+        }
       },
       "how": {
         "title": "Cómo trabajo",
         "heading": "Un sistema de agentes, y una persona que decide.",
         "text": "Programo con 11 agentes con roles separados: especifican, construyen y revisan. Publicar y gastar lo autorizo yo.",
         "cta": "Ver cómo trabajo",
-        "alt": "Un observatorio rodeado por once módulos unidos con líneas coral; una persona frente a la consola central."
+        "alt": "Un observatorio rodeado por once módulos unidos con líneas coral; una persona frente a la consola central.",
+        "spots": {
+          "gate": {
+            "name": "Una persona decide",
+            "text": "Los agentes no publican, no gastan y no cambian precios por su cuenta. Publicar y gastar lo autorizo yo.",
+            "cta": "Ver el sistema"
+          },
+          "agents": {
+            "name": "11 agentes",
+            "text": "Producto, UX/UI, diseño, marketing y arquitectos de frontend, backend, ciberseguridad, juegos y tráileres: cada uno con su parte.",
+            "cta": "Ver el sistema"
+          },
+          "spec": {
+            "name": "Primero la especificación",
+            "text": "Cada cambio arranca con un documento corto: problema, alcance, criterios de aceptación y cómo revertir.",
+            "cta": "Ver el sistema"
+          }
+        }
       },
       "skills": {
         "title": "Capacidades",
         "heading": "Qué uso, y de dónde sale.",
         "text": "Cada tecnología dice de dónde viene: el trabajo, mis proyectos o lo que estoy estudiando.",
         "cta": "Ver las capacidades",
-        "alt": "Un observatorio con un escritorio y un telescopio que apunta a una constelación de símbolos."
+        "alt": "Un observatorio con un escritorio y un telescopio que apunta a una constelación de símbolos.",
+        "spots": {
+          "work": {
+            "name": "En el trabajo",
+            "text": "React, TypeScript, Next.js, React Native, Tailwind, Node.js, SQL, CI/CD y RAG con LLM.",
+            "cta": "Ver las capacidades"
+          },
+          "own": {
+            "name": "En mis proyectos",
+            "text": "Seguridad (HttpOnly, CSRF, 2FA, Argon2), Python, C, GSAP y WebGL, Vitest y Playwright.",
+            "cta": "Ver las capacidades"
+          },
+          "study": {
+            "name": "Estudiando",
+            "text": "Fundamentos de machine learning, AWS y Azure.",
+            "cta": "Ver las capacidades"
+          }
+        }
       },
       "brand": {
         "title": "Brand Lab",
         "heading": "Cómo doy marca.",
         "text": "Tableros de marca hechos a mano: logo, paleta, tipografía y aplicaciones. Esta sección se está armando.",
-        "alt": "Una imprenta con una prensa industrial que imprime tableros de marca; uno de ellos es coral."
+        "alt": "Una imprenta con una prensa industrial que imprime tableros de marca; uno de ellos es coral.",
+        "spots": {
+          "lab": {
+            "name": "Tableros de marca",
+            "text": "Logo, paleta, tipografía y aplicaciones de IG, Eclipse, Velmar, Lucero, Volta y DentalOS, hechos a mano en SVG."
+          },
+          "exercise": {
+            "name": "Ejercicios de marca",
+            "text": "Marcas inventadas para practicar, rotuladas como ejercicio."
+          }
+        }
       },
       "business": {
         "title": "Negocio",
         "heading": "Cómo pienso el negocio.",
         "text": "The Lean Startup, The Mom Test y Blue Ocean Strategy: los modelos que uso y dónde los apliqué.",
         "cta": "Ver cómo pienso el negocio",
-        "alt": "Un anfiteatro circular cuyo centro se hunde en un embudo de puntos hasta un cubo coral."
+        "alt": "Un anfiteatro circular cuyo centro se hunde en un embudo de puntos hasta un cubo coral.",
+        "spots": {
+          "lean": {
+            "name": "The Lean Startup",
+            "text": "Construir, medir, aprender: lotes chicos con criterio de aceptación.",
+            "cta": "Ver cómo lo aplico"
+          },
+          "mom": {
+            "name": "The Mom Test",
+            "text": "Preguntar por hechos del pasado, no por opiniones: así nadie te miente por cariño.",
+            "cta": "Ver cómo lo aplico"
+          },
+          "blue": {
+            "name": "Blue Ocean Strategy",
+            "text": "Crear un espacio donde la competencia deja de importar.",
+            "cta": "Ver cómo lo aplico"
+          }
+        }
       },
       "video": {
         "title": "Video y tráileres",
         "heading": "Tráileres hechos con código.",
         "text": "En Kinetic Studio hago tráileres de motion graphics que se generan en el navegador: GSAP, canvas, WebGL y audio sintetizado. El tráiler de este sitio sale de ahí.",
         "cta": "Ver Kinetic Studio",
-        "alt": "Un cine sobre una plataforma de piedra proyecta un haz coral sobre una pantalla flotante."
+        "alt": "Un cine sobre una plataforma de piedra proyecta un haz coral sobre una pantalla flotante.",
+        "spots": {
+          "kinetic": {
+            "name": "Kinetic Studio",
+            "text": "Mi laboratorio de tráileres hechos con código: la imagen y el sonido se generan en el navegador.",
+            "cta": "Ver Kinetic Studio"
+          },
+          "trailer": {
+            "name": "Conocer a Ignacio",
+            "text": "El tráiler de este sitio, hecho en código con Kinetic Studio.",
+            "cta": "Ver el tráiler"
+          }
+        }
       },
       "roadmap": {
         "title": "Roadmap",
@@ -978,7 +1105,25 @@
           "Quant",
           "Aeroespacial"
         ],
-        "alt": "Un campo de lanzamiento con maquetas punteadas de un pozo, un cultivo, una antena, un servidor y un cohete que despega."
+        "alt": "Un campo de lanzamiento con maquetas punteadas de un pozo, un cultivo, una antena, un servidor y un cohete que despega.",
+        "spots": {
+          "energy": {
+            "name": "Energía",
+            "text": "Un proyecto de energía del roadmap. Es una maqueta punteada: todavía no existe."
+          },
+          "agro": {
+            "name": "Agro",
+            "text": "Un proyecto de agro del roadmap. Es una maqueta punteada: todavía no existe."
+          },
+          "finance": {
+            "name": "Finanzas",
+            "text": "Un proyecto de finanzas del roadmap. Es una maqueta punteada: todavía no existe."
+          },
+          "space": {
+            "name": "Espacio",
+            "text": "Un proyecto aeroespacial del roadmap. Es una maqueta punteada: todavía no existe."
+          }
+        }
       },
       "contact": {
         "title": "Contacto",
@@ -988,6 +1133,12 @@
         "alt": "Un faro en el borde de la plataforma emite ondas coral hacia el espacio, bajo un eclipse."
       }
     },
-    "creditMusic": "Música de fondo generada con Suno."
+    "creditMusic": "Música de fondo generada con Suno.",
+    "spots": {
+      "label": "En esta escena",
+      "hint": "Tocá un número para ver qué es.",
+      "goScene": "Ir a la escena",
+      "close": "Cerrar"
+    }
   }
 }

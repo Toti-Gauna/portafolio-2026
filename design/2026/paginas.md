@@ -34,6 +34,8 @@ La home es un recorrido por **el Taller cósmico**: un mundo flotante en el espa
 | 9 | Roadmap | Campo de lanzamiento con maquetas punteadas | 4 etapas, «Planeado» | Roadmap |
 | 10 | Contacto | Faro-antena con señal coral | Reclutadores, Upwork, mail, LinkedIn | Contacto |
 
+**Interacción (Ola 4):** cada escena lleva referencias numeradas que elevan su edificio y abren una ficha; el hero es el índice del taller. Ver `taller-interaccion.md`.
+
 ## 3. Work & Projects (Olas 4–6)
 
 - **El camino:** vista isométrica de edificios con trama halftone unidos por un camino coral. Orden: semilla en Mar del Plata (a los 17) → TACH (startup) → Ada ITW (academia) → Tsoft (corporativa, con Telefónica y Tuenti) → caminos propios (Eclipse, HandyX, Lucero, Trazo, Kinetic, laboratorio) → roadmap (edificios en contorno punteado, «Planeado»).
