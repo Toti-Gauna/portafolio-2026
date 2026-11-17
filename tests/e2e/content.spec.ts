@@ -20,13 +20,14 @@ test('home: the cosmic workshop walk, one chapter per building, each page reacha
   await expect(page.locator('article.tch')).toHaveCount(11);
   // every page of the menu is reachable from a chapter
   const hrefs = await page.locator('.tch__body a.tch__go').evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname));
-  for (const p of ['/es/sobre-mi/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/negocio/', '/es/roadmap/']) expect(hrefs, p).toContain(p);
+  for (const p of ['/es/sobre-mi/', '/es/trabajo/', '/es/como-trabajo/', '/es/capacidades/', '/es/brand-lab/', '/es/negocio/', '/es/roadmap/']) expect(hrefs, p).toContain(p);
   // honesty: featured projects and the roadmap carry their status; unbuilt sections say so
   await expect(page.locator('.tch--work .tch__body .stag')).toHaveCount(3);
   await expect(page.locator('.tch--roadmap .tch__body .stag[data-kind="planeado"]')).toHaveCount(3);
   await expect(page.locator('.tch--roadmap .tch__body .stag[data-kind="desarrollo"]')).toHaveCount(1);
   await expect(page.locator('.tch--roadmap .tch__body a.tch__go')).toHaveAttribute('href', /\/roadmap\/?$/);
-  await expect(page.locator('.tch--brand .tch__body .tch__soon')).toHaveCount(1);
+  await expect(page.locator('.tch--brand .tch__body .tch__soon')).toHaveCount(0);
+  await expect(page.locator('.tch--brand .tch__body a.tch__go')).toHaveAttribute('href', /\/brand-lab\/?$/);
   await expect(page.locator('#contacto').getByRole('link', { name: 'Escribime' })).toHaveAttribute('href', 'mailto:ignaciogauna.developer@gmail.com');
   await expect(page.locator('#contacto')).toContainText('GPT Image');
   expect(await page.locator('main').innerText()).not.toContain('ComplIA');
@@ -138,11 +139,11 @@ test('CompliA case: clip with controls and caption; no internal data claims', as
   await expect(page.getByRole('heading', { name: 'Lo que no muestro' })).toBeVisible();
 });
 
-test('wide header: five page links on one row, the language switch and one Contacto; no menu button', async ({ page }) => {
+test('wide header: six page links on one row, the language switch and one Contacto; no menu button', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await enter(page, '/es/trabajo/');
   const links = page.locator('.site-nav__links a');
-  await expect(links).toHaveCount(5);
+  await expect(links).toHaveCount(6);
   const boxes = await links.evaluateAll((as) => as.map((a) => a.getBoundingClientRect()).map((r) => ({ top: Math.round(r.top), h: Math.round(r.height) })));
   expect(new Set(boxes.map((b) => b.top)).size).toBe(1);
   for (const b of boxes) expect(b.h).toBeLessThanOrEqual(48);

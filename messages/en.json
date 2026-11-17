@@ -120,6 +120,10 @@
         "t": "Skills",
         "d": "What I use and where each comes from."
       },
+      "brand": {
+        "t": "Brand Lab",
+        "d": "How I build a brand: brand boards drawn in code."
+      },
       "business": {
         "t": "Business",
         "d": "Three books and where I applied them."
@@ -712,6 +716,10 @@
       "metaTitle": "Skills — Ignacio Gauna",
       "metaDescription": "The technologies I use and where each one comes from: work, my own projects or what I'm studying."
     },
+    "brand": {
+      "metaTitle": "Brand Lab — Ignacio Gauna",
+      "metaDescription": "How I build a brand: boards with the logo, palette, type, patterns and applications of my brands, a client's and exercises."
+    },
     "about": {
       "metaTitle": "About — Ignacio Gauna",
       "metaDescription": "From Mar del Plata, self-taught: the journey from my first product at 17, and how to reach me."
@@ -1086,16 +1094,19 @@
       "brand": {
         "title": "Brand Lab",
         "heading": "How I build brands.",
-        "text": "Hand-made brand boards: logo, palette, type and applications. This section is being built.",
+        "text": "Brand boards drawn in code: logo, palette, type, patterns and applications. Each one says whose brand it is.",
+        "cta": "See the Brand Lab",
         "alt": "A printing house with an industrial press printing brand boards; one of them is coral.",
         "spots": {
           "lab": {
             "name": "Brand boards",
-            "text": "Logo, palette, type and applications, drawn by hand in SVG. This section is being built."
+            "text": "Logo, palette, type, patterns and applications of my brands, a client's and the demos', drawn in SVG.",
+            "cta": "See the boards"
           },
           "exercise": {
             "name": "Brand exercises",
-            "text": "Invented brands made to practise on are labelled as exercises. This section is being built."
+            "text": "Brands invented for practice carry the «Brand exercise» label, like Sereno, a bakery that does not exist.",
+            "cta": "See an exercise"
           }
         }
       },
@@ -1841,5 +1852,582 @@
         "what": "Two weeks to close the plan."
       }
     }
+  },
+  "brandlab": {
+    "label": "Brand Lab",
+    "title": "How I build a brand.",
+    "lead": "Boards of the brands I drew: mine, my studio's, a client's, my demos' and two exercises. Each one says whose brand it is and where every piece comes from.",
+    "method": {
+      "label": "The method",
+      "steps": [
+        {
+          "t": "The idea",
+          "d": "One sentence and one place: what the brand is and where it lives."
+        },
+        {
+          "t": "The palette",
+          "d": "Five or six colors, each with its own name and its use."
+        },
+        {
+          "t": "The type",
+          "d": "One family for headings and one for text, with an open licence."
+        },
+        {
+          "t": "The logo, last",
+          "d": "Then come the submark, the patterns and the pieces."
+        }
+      ]
+    },
+    "picker": "Brands",
+    "sheet": "Sheet {n} of {total}",
+    "kinds": {
+      "own": "My own brand",
+      "client": "A client's brand"
+    },
+    "blocks": {
+      "a": "Main logo",
+      "b": "Secondary logo",
+      "c": "Submark",
+      "d": "Palette",
+      "e": "Type",
+      "f": "Patterns",
+      "g": "Sample applications"
+    },
+    "from": {
+      "repo": "from the repo",
+      "site": "from this site",
+      "lab": "drawn for the board"
+    },
+    "roles": {
+      "display": "Headings",
+      "text": "Text"
+    },
+    "idea": "The idea",
+    "place": "Where it lives",
+    "source": "Comes from",
+    "note": "What I do not claim",
+    "alt": {
+      "a": "Main logo of {name}",
+      "b": "Secondary logo of {name}",
+      "c": "Submark of {name}",
+      "f": "{name} pattern: {what}",
+      "g": "Sample {what} with the {name} brand"
+    },
+    "back": "Back to the work",
+    "brands": {
+      "ig": {
+        "name": "IG",
+        "full": "Ignacio Gauna",
+        "idea": "My personal brand: a Swiss poster with a dot screen, two inks and coral only for what you can touch.",
+        "place": "This portfolio · Mar del Plata",
+        "source": "The tokens and the monogram of this site.",
+        "note": "The secondary logo (monogram and name on one line) was put together for this board.",
+        "palette": {
+          "ink": {
+            "n": "Ink",
+            "u": "Background"
+          },
+          "coral": {
+            "n": "Coral",
+            "u": "Action and status only"
+          },
+          "paper": {
+            "n": "Paper",
+            "u": "Text and main button"
+          },
+          "surface": {
+            "n": "Surface",
+            "u": "Cards and chips"
+          },
+          "muted": {
+            "n": "Muted",
+            "u": "Labels"
+          },
+          "coralSoft": {
+            "n": "Soft coral",
+            "u": "Variation"
+          }
+        },
+        "patterns": [
+          "the dot screen",
+          "the forking branch",
+          "the dot grid"
+        ],
+        "apps": [
+          {
+            "name": "Business card",
+            "lines": [
+              "Ignacio Gauna",
+              "SSR AI FULLSTACK DEVELOPER"
+            ]
+          },
+          {
+            "name": "Poster",
+            "lines": [
+              "Open to new",
+              "challenges.",
+              "MAR DEL PLATA · ARGENTINA"
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "SEE THE PORTFOLIO"
+            ]
+          }
+        ]
+      },
+      "eclipse": {
+        "name": "Eclipse",
+        "full": "Eclipse",
+        "idea": "A total eclipse: the dark lets the corona show. It is my development, AI and automation studio.",
+        "place": "Its landing page and the client and operations portals",
+        "source": "The code reconstruction of its landing and portals that lives in this repo, with its fonts and licences.",
+        "note": "The sample pieces are drawings for this board; the brand has no favicon or stacked version of its own yet.",
+        "palette": {
+          "corona": {
+            "n": "Corona",
+            "u": "Action and accent"
+          },
+          "void": {
+            "n": "Void",
+            "u": "Hero background"
+          },
+          "dawn": {
+            "n": "Dawn",
+            "u": "Text on dark, portal background"
+          },
+          "flare": {
+            "n": "Flare",
+            "u": "Light and glints"
+          },
+          "night": {
+            "n": "Night",
+            "u": "Dark surface"
+          },
+          "mist": {
+            "n": "Mist",
+            "u": "Secondary text"
+          }
+        },
+        "patterns": [
+          "the fixed stars",
+          "the dial",
+          "the corona in rings"
+        ],
+        "apps": [
+          {
+            "name": "Business card",
+            "lines": [
+              "Desarrollo, IA",
+              "y automatización."
+            ]
+          },
+          {
+            "name": "Landing page",
+            "lines": [
+              "Potenciá y visibilizá",
+              "tu negocio."
+            ]
+          },
+          {
+            "name": "Proposal email",
+            "lines": [
+              "Tu propuesta",
+              "Ver la propuesta"
+            ]
+          }
+        ]
+      },
+      "velmar": {
+        "name": "Velmar",
+        "full": "Velmar",
+        "idea": "Made-to-order objects for your home and your pet.",
+        "place": "Its online store and its panel · Mar del Plata",
+        "source": "The code of the demo I made for Velmar (velmar-ecommerce-).",
+        "note": "The brand belongs to Velmar, a client: the logo is redrawn from its Instagram and the demo palette is provisional, not its final identity.",
+        "palette": {
+          "olive": {
+            "n": "Olive green",
+            "u": "Buttons, links and logo"
+          },
+          "paper": {
+            "n": "Paper",
+            "u": "Background"
+          },
+          "ink": {
+            "n": "Olive ink",
+            "u": "Text and night bands"
+          },
+          "wood": {
+            "n": "Wood",
+            "u": "Decoration"
+          },
+          "sand": {
+            "n": "Sand",
+            "u": "Chips and soft backgrounds"
+          },
+          "brass": {
+            "n": "Brass",
+            "u": "Gold detail on night"
+          }
+        },
+        "patterns": [
+          "the chevrons",
+          "the monogram in brass",
+          "the wood grain"
+        ],
+        "apps": [
+          {
+            "name": "Hang tag",
+            "lines": [
+              "HECHO A PEDIDO",
+              "Mar del Plata"
+            ]
+          },
+          {
+            "name": "Candle tin",
+            "lines": [
+              "VELA EN LATA"
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "Bowl de madera",
+              "Con su nombre",
+              "Personalizar"
+            ]
+          }
+        ]
+      },
+      "volta": {
+        "name": "Volta",
+        "full": "Volta",
+        "idea": "A training box at night: carbon, steel, chalk and the volt as a signal light.",
+        "place": "An invented supplement store · Mar del Plata",
+        "source": "The code of the demo (supplements-ecommerce).",
+        "note": "It is a brand invented for a sales demo, and its palette is marked provisional in the repo.",
+        "palette": {
+          "volt": {
+            "n": "Volt",
+            "u": "Signature color: the bolt and the button"
+          },
+          "carbon": {
+            "n": "Carbon",
+            "u": "Background"
+          },
+          "chalk": {
+            "n": "Chalk",
+            "u": "Text"
+          },
+          "steel": {
+            "n": "Steel grey",
+            "u": "Muted text"
+          },
+          "ion": {
+            "n": "Ion",
+            "u": "Data and glints"
+          },
+          "plasma": {
+            "n": "Plasma",
+            "u": "Pack halos"
+          }
+        },
+        "patterns": [
+          "the bolt",
+          "the graph paper",
+          "the lane marks"
+        ],
+        "apps": [
+          {
+            "name": "Tub",
+            "lines": [
+              "PROTEÍNA",
+              "Sabor vainilla · 1 kg"
+            ]
+          },
+          {
+            "name": "Poster",
+            "lines": [
+              "ENTRENÁ",
+              "CON VOLTAJE",
+              "SUPLEMENTOS · MAR DEL PLATA"
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "Creatina",
+              "Sabor neutro · 300 g",
+              "Agregar"
+            ]
+          }
+        ]
+      },
+      "dentalos": {
+        "name": "Clínica Brisa",
+        "full": "Clínica Brisa",
+        "idea": "Warm clinical editorial: «Every visit has a next step».",
+        "place": "A clinic invented for the DentalOS demo",
+        "source": "The code of the demo (DentalOS).",
+        "note": "The clinic and its data are fictional. The dark version of the logo was put together for this board.",
+        "palette": {
+          "clinic": {
+            "n": "Clinic green",
+            "u": "Text, links and fills"
+          },
+          "paper": {
+            "n": "Warm paper",
+            "u": "Background"
+          },
+          "ink": {
+            "n": "Green ink",
+            "u": "Text"
+          },
+          "gold": {
+            "n": "Gold",
+            "u": "The breeze in the logo and details"
+          },
+          "sand": {
+            "n": "Sand",
+            "u": "Warm surfaces"
+          },
+          "night": {
+            "n": "Night",
+            "u": "Dark bands"
+          }
+        },
+        "patterns": [
+          "the breeze",
+          "the outlined tooth",
+          "the gold dots"
+        ],
+        "apps": [
+          {
+            "name": "Appointment card",
+            "lines": [
+              "TU PRÓXIMO TURNO",
+              "Martes 14:30",
+              "Control · Consultorio 2"
+            ]
+          },
+          {
+            "name": "Poster",
+            "lines": [
+              "Cada consulta tiene",
+              "un próximo paso."
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "PRÓXIMO TURNO",
+              "Mar 14:30",
+              "Limpieza",
+              "Confirmar"
+            ]
+          }
+        ]
+      },
+      "lucero": {
+        "name": "Lucero",
+        "full": "Lucero",
+        "idea": "Wine, cream and a warm lamp: a night-time bistro you order from at the table.",
+        "place": "A restaurant-bar invented for the QR menu demo",
+        "source": "The code of the demo (foody).",
+        "note": "The place does not exist. Its repo has no symbol: the submark was drawn for this board. Gus, the demo's waiter, is left out because his design is not approved yet.",
+        "palette": {
+          "wine": {
+            "n": "Wine",
+            "u": "Main accent"
+          },
+          "night": {
+            "n": "Wine night",
+            "u": "Background"
+          },
+          "cream": {
+            "n": "Cream",
+            "u": "Text"
+          },
+          "amber": {
+            "n": "Lamp amber",
+            "u": "Warm accent"
+          },
+          "copper": {
+            "n": "Copper",
+            "u": "Table games"
+          },
+          "notebook": {
+            "n": "Notebook paper",
+            "u": "The order pad"
+          }
+        },
+        "patterns": [
+          "the notebook",
+          "the stars",
+          "the shapes of the games"
+        ],
+        "apps": [
+          {
+            "name": "Table tent with QR",
+            "lines": [
+              "Escaneá y pedí",
+              "Mesa 4"
+            ]
+          },
+          {
+            "name": "Menu",
+            "lines": [
+              "Carta",
+              "Ñoquis de papa",
+              "Pizza de la casa",
+              "Hamburguesa",
+              "Flan casero",
+              "con salsa de tomate",
+              "muzzarella y albahaca",
+              "con papas",
+              "con dulce de leche"
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "1 × Ñoquis",
+              "2 × Limonada",
+              "1 × Flan",
+              "Enviar a cocina"
+            ]
+          }
+        ]
+      },
+      "sereno": {
+        "name": "Sereno",
+        "full": "Sereno",
+        "idea": "A sourdough bakery that bakes before dawn: the moon is the loaf, with its scores.",
+        "place": "A lab exercise: the business does not exist",
+        "source": "This board.",
+        "note": "It is an exercise: I invented the name, the brand and the pieces to practise.",
+        "palette": {
+          "night": {
+            "n": "Small hours",
+            "u": "Background and text"
+          },
+          "dough": {
+            "n": "Dough",
+            "u": "The moon and backgrounds"
+          },
+          "crust": {
+            "n": "Crust",
+            "u": "Scores and details"
+          },
+          "oven": {
+            "n": "Oven",
+            "u": "Accent"
+          },
+          "wheat": {
+            "n": "Wheat",
+            "u": "Labels on night"
+          },
+          "flour": {
+            "n": "Flour",
+            "u": "Paper"
+          }
+        },
+        "patterns": [
+          "the scores of the loaf",
+          "the ears of wheat",
+          "the sky before dawn"
+        ],
+        "apps": [
+          {
+            "name": "Paper bag",
+            "lines": [
+              "PAN DE MADRUGADA"
+            ]
+          },
+          {
+            "name": "Sticker",
+            "lines": [
+              "MASA MADRE",
+              "48 horas de fermento"
+            ]
+          },
+          {
+            "name": "Poster",
+            "lines": [
+              "Horneamos",
+              "mientras dormís.",
+              "ABRIMOS A LAS 6"
+            ]
+          }
+        ]
+      },
+      "brote": {
+        "name": "Brote",
+        "full": "Brote",
+        "idea": "Indoor plants for flats: what grows inside.",
+        "place": "A lab exercise: the business does not exist",
+        "source": "This board.",
+        "note": "It is an exercise: I invented the name, the brand and the pieces to practise.",
+        "palette": {
+          "leaf": {
+            "n": "Leaf",
+            "u": "Main color"
+          },
+          "sprout": {
+            "n": "Sprout",
+            "u": "Accent"
+          },
+          "pot": {
+            "n": "Pot",
+            "u": "Buttons and details"
+          },
+          "lime": {
+            "n": "Lime",
+            "u": "Background"
+          },
+          "soil": {
+            "n": "Soil",
+            "u": "Text"
+          },
+          "moss": {
+            "n": "Moss",
+            "u": "Illustrations"
+          }
+        },
+        "patterns": [
+          "the leaves",
+          "the seeds",
+          "the stripes of the pot"
+        ],
+        "apps": [
+          {
+            "name": "Plant label",
+            "lines": [
+              "Potus",
+              "Luz: indirecta",
+              "Riego: cada 7 días",
+              "Sol directo: no"
+            ]
+          },
+          {
+            "name": "Pot",
+            "lines": [
+              "VIVERO DE INTERIOR"
+            ]
+          },
+          {
+            "name": "Screen",
+            "lines": [
+              "Monstera",
+              "Para luz media",
+              "Adoptar"
+            ]
+          }
+        ]
+      }
+    },
+    "pickExercise": "Brand exercise"
   }
 }

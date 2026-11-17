@@ -102,10 +102,10 @@ export const CHAPTERS: Chapter[] = [
       { id: 'study', at: [22.5, 35], poly: [19, 35, 24, 27, 26.5, 29, 25, 38, 22.5, 44, 19.5, 42], go: { href: '/capacidades' } },
     ],
   },
-  { key: 'brand', building: 'right', zone: 'brand', alignTop: true, next: 't-6-7',
+  { key: 'brand', building: 'right', zone: 'brand', alignTop: true, next: 't-6-7', href: '/brand-lab',
     spots: [
-      { id: 'lab', at: [78, 40], poly: [66, 40, 72, 30, 85, 28, 92, 40, 90, 58, 78, 62, 66, 58] },
-      { id: 'exercise', at: [59, 80], poly: [52, 80, 61, 72, 66.5, 77, 57, 88], status: 'ejercicio' },
+      { id: 'lab', at: [78, 40], poly: [66, 40, 72, 30, 85, 28, 92, 40, 90, 58, 78, 62, 66, 58], go: { href: '/brand-lab' } },
+      { id: 'exercise', at: [59, 80], poly: [52, 80, 61, 72, 66.5, 77, 57, 88], status: 'ejercicio', go: { href: '/brand-lab#marca-sereno' } },
     ],
   },
   { key: 'business', building: 'left', zone: 'brand', href: '/negocio',

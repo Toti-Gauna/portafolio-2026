@@ -6,11 +6,12 @@ export const PAGES = [
   { key: 'work', href: '/trabajo' },
   { key: 'how', href: '/como-trabajo' },
   { key: 'skills', href: '/capacidades' },
+  { key: 'brand', href: '/brand-lab' },
   { key: 'business', href: '/negocio' },
   { key: 'about', href: '/sobre-mi' },
 ] as const;
 
-/** Pages that live outside the header (it holds five): the footer and the sitemap list them too. */
+/** Pages that live outside the header (it holds six): the footer and the sitemap list them too. */
 export const EXTRA_PAGES = [{ key: 'roadmap', href: '/roadmap' }] as const;
 export const ALL_PAGES = [...PAGES, ...EXTRA_PAGES] as const;
 
