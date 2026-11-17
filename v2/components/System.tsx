@@ -18,6 +18,8 @@ const TEXT: ('heading' | 'text' | 'text-muted' | 'text-subtle' | 'text-faint')[]
 const TYPE = ['display', 'h1', 'h2', 'h3', 'lead', 'body', 'small', 'label', 'code'] as const;
 const GRADIENTS = ['brand', 'name', 'solutions', 'spectrum'] as const;
 const MOTION = ['fast', 'base', 'slow'] as const;
+/** Where each layer's leader line ends, as % of the stack image's height (public/v2/stack.svg, viewBox -310 -438 790 796). */
+const STACK_ANCHORS = [29.8, 45.9, 55.9, 66.0, 76.0];
 
 const typeSpec = (k: (typeof TYPE)[number]) => {
   const t = tokens.type as Record<string, string>;
@@ -100,12 +102,12 @@ export function System({ locale }: { locale: V2Locale }) {
           </div>
           <figure className="v2-stack">
             {/* eslint-disable-next-line @next/next/no-img-element -- static export, a single SVG */}
-            <img src={asset('/v2/stack.svg')} alt={m.hero.stackAlt} width={790} height={960} />
+            <img src={asset('/v2/stack.svg')} alt={m.hero.stackAlt} width={790} height={796} />
             <figcaption>
               <span className="v2-sr">{m.hero.stackTitle}</span>
               <ol className="v2-stack-legend">
                 {LAYERS.map((id, i) => (
-                  <li key={id} style={{ ...cssVar('--from', layerFrom(id)), top: `${[24.7, 45.1, 56.8, 68.5, 80.1][i]}%` }}>
+                  <li key={id} style={{ ...cssVar('--from', layerFrom(id)), top: `${STACK_ANCHORS[i]}%` }}>
                     <i aria-hidden="true">0{i + 1}</i>
                     {m.layers[id]}
                   </li>
