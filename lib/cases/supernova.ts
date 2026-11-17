@@ -133,4 +133,13 @@ export const supernova: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['supernova'] },
     { type: 'limits', key: 'status' },
   ],
+  steps: [
+    { id: 'what', blocks: ['what', 'journeys'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['checkin', 'arch'] },
+    { id: 'security', blocks: ['security'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
+  ],
 };

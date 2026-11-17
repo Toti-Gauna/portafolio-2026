@@ -88,5 +88,14 @@ export const games: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['games'] },
     { type: 'limits', key: 'status' },
   ],
+  steps: [
+    { id: 'what', blocks: ['what', 'plan'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['net', 'contract', 'findings'] },
+    { id: 'security', blocks: ['security'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
+  ],
   links: [{ label: 'github.com/Toti-Gauna/games-market', href: 'https://github.com/Toti-Gauna/games-market' }],
 };

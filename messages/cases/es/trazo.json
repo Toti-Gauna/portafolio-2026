@@ -1,0 +1,12 @@
+{
+  "title": "trazo",
+  "kind": "Proyecto propio",
+  "status": "Pendiente",
+  "summary": "Pendiente.",
+  "facts": [],
+  "tldr": [],
+  "blocks": {
+    "what": { "h": "Qué es", "p": ["Pendiente."] },
+    "status": { "h": "Estado y lo que no afirmo", "p": ["Pendiente."] }
+  }
+}

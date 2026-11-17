@@ -149,5 +149,14 @@ export const volta: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['volta'] },
     { type: 'limits', key: 'status' },
   ],
+  steps: [
+    { id: 'what', blocks: ['what', 'loop'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['arch', 'orders'] },
+    { id: 'security', blocks: ['security'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
+  ],
   links: [{ label: 'github.com/Toti-Gauna/supplements-ecommerce', href: 'https://github.com/Toti-Gauna/supplements-ecommerce' }],
 };

@@ -106,5 +106,14 @@ export const dentalos: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['dentalos'] },
     { type: 'limits', key: 'status' },
   ],
+  steps: [
+    { id: 'what', blocks: ['what', 'reschedule', 'ideas'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['arch', 'command'] },
+    { id: 'security', blocks: ['privacy'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
+  ],
   links: [{ label: 'github.com/Toti-Gauna/DentalOS', href: 'https://github.com/Toti-Gauna/DentalOS' }],
 };

@@ -11,4 +11,10 @@ export const tuenti: CaseDef = {
     { type: 'text', key: 'learned' },
     { type: 'limits', key: 'hidden' },
   ],
+  steps: [
+    { id: 'what', blocks: ['context', 'path'] },
+    { id: 'see', blocks: ['drawn'] },
+    { id: 'role', blocks: ['did', 'stack', 'learned'] },
+    { id: 'status', blocks: ['hidden'] },
+  ],
 };

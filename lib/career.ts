@@ -53,9 +53,9 @@ export const STATIONS: Station[] = [
       { id: 'velmar', status: 'demo', slug: 'velmar' },
       { id: 'dentalos', status: 'demo', slug: 'dentalos' },
       { id: 'games', status: 'banco', slug: 'games' },
-      { id: 'handyx', status: 'mvp' },
-      { id: 'lucero', status: 'demo' },
-      { id: 'trazo' },
+      { id: 'handyx', status: 'mvp', slug: 'handyx' },
+      { id: 'lucero', status: 'demo', slug: 'lucero' },
+      { id: 'trazo', slug: 'trazo' },
     ],
   },
   {

@@ -195,4 +195,13 @@ export const velmar: CaseDef = {
     { type: 'gallery', key: 'gallery', dir: '/media/lab', shots: ['velmar'] },
     { type: 'limits', key: 'status' },
   ],
+  steps: [
+    { id: 'what', blocks: ['what', 'problem', 'business'] },
+    { id: 'see', blocks: ['media', 'gallery'] },
+    { id: 'how', blocks: ['loop', 'orders', 'collar', 'arch'] },
+    { id: 'security', blocks: ['security'] },
+    { id: 'decisions', blocks: ['decisions'] },
+    { id: 'quality', blocks: ['quality', 'stack'] },
+    { id: 'status', blocks: ['status'] },
+  ],
 };

@@ -13,9 +13,11 @@ describe('route → background scene', () => {
   });
 
   it('every case page gets its own scene', () => {
+    // HandyX, Lucero and Trazo (Ola 7b) keep the quiet dot field until they get a scene of their own
+    const plain = ['handyx', 'lucero', 'trazo'];
     for (const slug of CASE_SLUGS) {
-      expect(sceneForPath(`/es/proyectos/${slug}/`)).toBe(slug);
-      expect(sceneForPath(`/en/proyectos/${slug}`)).toBe(slug);
+      expect(sceneForPath(`/es/proyectos/${slug}/`)).toBe(plain.includes(slug) ? 'default' : slug);
+      expect(sceneForPath(`/en/proyectos/${slug}`)).toBe(plain.includes(slug) ? 'default' : slug);
     }
   });
 
