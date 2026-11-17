@@ -553,7 +553,35 @@
       "Sistemas con agentes: roles, especificación, pruebas y puertas",
       "Enseñanza de JavaScript y React",
       "Ventas consultivas (SPIN Selling), estudiando"
-    ]
+    ],
+    "know": {
+      "label": "Conocimiento",
+      "title": "Lo que conozco y estoy estudiando",
+      "lead": "No lo uso en producción ni lo publiqué: es conocimiento y estudio. Lo más cercano que mostré es el WebGL de este sitio y de Kinetic Studio.",
+      "items": {
+        "arvr": {
+          "name": "AR/VR",
+          "tag": "Conocimiento y estudio",
+          "text": "Realidad aumentada y realidad virtual. Lo conozco y lo estoy estudiando; todavía no hay ninguna pieza publicada."
+        },
+        "blender": {
+          "name": "Blender",
+          "tag": "Conocimiento y estudio",
+          "text": "Modelado y animación 3D. Lo conozco y lo estoy estudiando; todavía no hay ninguna pieza publicada."
+        },
+        "meshy": {
+          "name": "Meshy",
+          "tag": "Conocimiento y estudio",
+          "text": "Modelos 3D generados con IA. Lo conozco y lo estoy estudiando; si algún día publico un modelo hecho así, lo declaro."
+        },
+        "claude": {
+          "name": "Claude",
+          "tag": "Cómo trabajo",
+          "text": "Con Claude armé el sistema agéntico con el que trabajo en mis repos. Está contado en «Cómo trabajo»."
+        }
+      },
+      "claudeCta": "Ver cómo trabajo"
+    }
   },
   "about": {
     "label": "Sobre mí",

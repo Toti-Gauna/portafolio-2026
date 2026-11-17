@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, asset } from '@/lib/site';
 import { CASE_SLUGS, LAB, WORK_SHOT, WORK_SHOT_800, type CaseSlug } from '@/lib/cases';
-import { PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
+import { KNOWLEDGE, PILLARS, SKILL_ROWS, SYSTEM_FLOW, WORK_INSIDE } from '@/lib/home';
 import { ALL_PAGES, CONTACT_HREF, PAGES } from '@/lib/nav';
 import { BOOKS } from '@/lib/business';
 import { STATIONS } from '@/lib/career';
@@ -19,6 +19,7 @@ import { InView } from '../diagrams/InView';
 import { MethodIcon } from '../MethodIcon';
 import { AgentIcon, type AgentId } from '../AgentIcon';
 import { HubArt } from '../home/HubArt';
+import { KnowIcon } from '../home/KnowIcon';
 import '../sections.css';
 import '../home/home.css';
 
@@ -260,6 +261,21 @@ export function Skills({ level = 2 }: { level?: Level } = {}) {
       <div className="also">
         <h3 className="sub-title">{t('also')}</h3>
         <ul className="also__list">{(t.raw('alsoItems') as string[]).map((x) => <li key={x}>{x}</li>)}</ul>
+      </div>
+      <div className="know" id="conocimiento">
+        <h3 className="sub-title">{t('know.title')}</h3>
+        <p className="know__lead">{t('know.lead')}</p>
+        <ul className="know__list">
+          {KNOWLEDGE.map((id) => (
+            <Reveal as="li" key={id} className="know__item">
+              <KnowIcon id={id} className="know__icon" />
+              <p className="status">{t(`know.items.${id}.tag`)}</p>
+              <h4 className="know__name">{t(`know.items.${id}.name`)}</h4>
+              <p>{t(`know.items.${id}.text`)}</p>
+              {id === 'claude' && <Link className="card-link" href="/como-trabajo">{t('know.claudeCta')} →</Link>}
+            </Reveal>
+          ))}
+        </ul>
       </div>
     </section>
   );
