@@ -126,6 +126,8 @@ a { color: inherit; }
   font-size: var(--type-min-size); line-height: 1.2; font-weight: 800; color: var(--color-heading);
 }
 .v2-stack-legend i { font-family: var(--family-mono); font-size: var(--type-min-size); font-style: normal; color: var(--from); }
+/* the first name runs on two lines: it hangs above its leader so it never touches the next one */
+.v2-stack-legend li:first-child { transform: translateY(-82%); }
 
 /* specimen sections */
 .v2-intro { display: grid; gap: var(--space-4); padding: var(--space-12) 0 var(--space-8); border-top: 1px solid var(--color-line); }
