@@ -1,0 +1,59 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Sistema IG</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;display=swap">
+<style>
+  html, body { margin: 0; height: 100%; }
+  .cover { position: relative; width: 960px; height: 320px; overflow: hidden; background: var(--color-bg); }
+  .cover svg { position: absolute; inset: 0; }
+  .dot { fill: var(--color-mist-500); }
+  .plan { fill: var(--layer-plan-from); }
+  .code { fill: var(--layer-code-from); }
+  .agents { fill: var(--layer-agents-from); }
+  .tests { fill: var(--layer-tests-from); }
+  .ship { fill: var(--layer-ship-from); }
+  .slab { rx: var(--radius-md); }
+  .name { position: absolute; left: 40px; bottom: 40px; width: 440px; }
+  .name h1 { margin: 0; font-family: var(--font-sans); font-size: 68px; line-height: 0.92; font-weight: 800; font-variation-settings: 'wdth' 112; letter-spacing: -0.04em; color: var(--color-heading); }
+  .name p { margin: 12px 0 0; font-family: var(--font-sans); font-size: 14px; line-height: 1.4; color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <svg viewBox="0 0 960 320" width="960" height="320" aria-hidden="true">
+    <!--
+      blocks: the five layer colours (layer-plan-from, layer-code-from, layer-agents-from, layer-tests-from, layer-ship-from), each 312 × 40 (space-10), corners radius-md.
+      arrangement: a staggered stack, top to bottom in the order of the craft, each slab space-6 further right and space-4 lower: the exploded stack of the home page.
+      pattern: a dot grid at space-6 in color-mist-500, the precise, technical side of a system whose UI is set in mono labels and measured on a 4 px scale.
+      steps and radii: space-4 (16), space-6 (24), space-10 (40), radius-md (12); dots r 1.5, everything right of x = 480.
+    -->
+    <g>
+      <!-- dot grid at space-6, x 504..936, y 24..296 -->
+      <g id="dots"></g>
+    </g>
+    <rect class="slab plan" x="520" y="28" width="312" height="40" />
+    <rect class="slab code" x="544" y="84" width="312" height="40" />
+    <rect class="slab agents" x="568" y="140" width="312" height="40" />
+    <rect class="slab tests" x="592" y="196" width="312" height="40" />
+    <rect class="slab ship" x="616" y="252" width="312" height="40" />
+  </svg>
+  <div class="name">
+    <h1>Sistema IG</h1>
+    <p>El oficio en cinco capas: índigo profundo y un espectro, todo dibujado en código.</p>
+  </div>
+</div>
+<script>
+  (function () {
+    var g = document.getElementById('dots'), ns = 'http://www.w3.org/2000/svg';
+    for (var x = 504; x <= 936; x += 24) for (var y = 24; y <= 296; y += 24) {
+      var c = document.createElementNS(ns, 'circle');
+      c.setAttribute('class', 'dot'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', '1.5');
+      g.appendChild(c);
+    }
+  })();
+</script>
+</body>
+</html>
