@@ -27,7 +27,7 @@ export function PageOpening({ locale, page, children }: { locale: V2Locale; page
           <p className="st-lead">{copy.lead}</p>
         </section>
         {children}
-        <nav className="ui-pager st-pager" aria-label={s.pager}>
+        <nav className="ui-pager st-pager" aria-label={s.pager} data-reveal>
           <Link href={sitePath(locale, prev.path)} rel="prev" className="ui-pager-prev">
             <span className="ui-pager-kicker"><ArrowLeftIcon size={14} />{s.prev}</span>
             <span className="ui-pager-title">{s.pages[prev.key].t}</span>

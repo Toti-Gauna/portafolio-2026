@@ -240,3 +240,38 @@ describe('v2 site header (lote 2.1)', () => {
     for (const m of [es, en]) expect(JSON.stringify(m.site)).not.toMatch(/próximamente|coming soon|en construcción|under construction|todavía|not yet/i);
   });
 });
+
+describe('v2 motion engine (lote 2.2)', () => {
+  const key = (k: string, mods: Partial<KeyboardEvent> = {}) => ({ key: k, ctrlKey: false, metaKey: false, altKey: false, repeat: false, defaultPrevented: false, ...mods });
+
+  it('one key per action, and never while typing, with a modifier or on a held key', async () => {
+    const { commandFor } = await import('../../v2/motion/shortcuts');
+    expect(commandFor(key('?'), null, 6)).toEqual({ type: 'help' });
+    expect(commandFor(key('1'), null, 6)).toEqual({ type: 'page', index: 0 });
+    expect(commandFor(key('6'), null, 6)).toEqual({ type: 'page', index: 5 });
+    expect(commandFor(key('7'), null, 6)).toBeNull();
+    expect(commandFor(key('T'), null, 6)).toEqual({ type: 'top' });
+    expect(commandFor(key('m'), null, 6)).toEqual({ type: 'sound' });
+    expect(commandFor(key('l'), null, 6)).toEqual({ type: 'lang' });
+    expect(commandFor(key('x'), null, 6)).toBeNull();
+    for (const mods of [{ ctrlKey: true }, { metaKey: true }, { altKey: true }, { repeat: true }, { defaultPrevented: true }]) expect(commandFor(key('2', mods), null, 6)).toBeNull();
+    const typing = { closest: (sel: string) => (sel.includes('input') ? {} : null) } as unknown as Element;
+    expect(commandFor(key('2'), typing, 6)).toBeNull();
+    expect(commandFor(key('?'), typing, 6)).toBeNull();
+  });
+
+  it('the help names every shortcut in both languages', async () => {
+    const { SHORTCUTS } = await import('../../v2/motion/shortcuts');
+    for (const m of [es, en]) for (const s of SHORTCUTS) expect(m.engine.help.actions[s.action].length, s.action).toBeGreaterThan(0);
+  });
+
+  it('the camera follows the menu: forward, back, and depth for pages off the menu', async () => {
+    const { cameraMove, samePath } = await import('../../v2/motion/camera');
+    expect(cameraMove(0, 3)).toBe('forward');
+    expect(cameraMove(4, 1)).toBe('back');
+    expect(cameraMove(-1, 2)).toBe('depth');
+    expect(cameraMove(2, -1)).toBe('depth');
+    expect(samePath('/v2/es/work/', '/v2/es/work')).toBe(true);
+    expect(samePath('/v2/es/work/', '/v2/es/')).toBe(false);
+  });
+});

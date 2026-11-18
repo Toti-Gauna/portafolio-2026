@@ -1,0 +1,139 @@
+/* /v2 motion engine (lote 2.2): entrances, magnetic hover, the contextual cursor, the shortcuts help,
+   scroll-linked scenes and page changes as camera moves. Only transform, opacity, clip-path and
+   stroke-dashoffset move; everything rests in its final frame with reduced motion. */
+
+/* ── aparición ───────────────────────────────────────────────────────────── */
+/* Hidden only once the engine runs, and only what is below the fold (the engine shows the rest at once). */
+html.v2-motion [data-reveal]:not([data-shown]) { opacity: 0; transform: translate3d(0, 28px, 0); }
+html.v2-motion [data-reveal='fade']:not([data-shown]) { transform: none; }
+html.v2-motion [data-reveal='scale']:not([data-shown]) { transform: scale(0.94); }
+[data-reveal][data-shown='in'] {
+  transition: opacity var(--motion-slow) var(--motion-ease), transform var(--motion-slow) var(--motion-ease);
+  transition-delay: calc(var(--ri, 0) * var(--motion-stagger));
+}
+
+/* ── cursor contextual ───────────────────────────────────────────────────── */
+.v2-cursor {
+  --cc: var(--color-mist-200);
+  position: fixed; left: 0; top: 0; z-index: var(--z-dialog); pointer-events: none;
+  opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease);
+}
+.v2-cursor[data-on='true'] { opacity: 1; }
+.v2-cursor-ring {
+  position: absolute; left: -16px; top: -16px; width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--cc) 70%, transparent);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--cc) 16%, transparent), transparent);
+  transform: scale(0.6); opacity: 0.7;
+  transition: transform var(--motion-base) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease);
+}
+.v2-cursor[data-mode='link'] .v2-cursor-ring { transform: scale(1.35); opacity: 1; }
+.v2-cursor[data-mode='label'] .v2-cursor-ring { transform: scale(1.7); opacity: 1; }
+.v2-cursor[data-mode='text'] .v2-cursor-ring { transform: scale(0.2); opacity: 0; }
+.v2-cursor[data-down='true'] .v2-cursor-ring { transform: scale(0.9); }
+.v2-cursor-label {
+  position: absolute; left: 34px; top: 14px; padding: 5px 10px; border-radius: var(--radius-pill);
+  background: var(--cc); color: var(--color-on-accent);
+  font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.04em; white-space: nowrap;
+  opacity: 0; transform: translate3d(-6px, 0, 0) scale(0.9); transform-origin: left center;
+  transition: opacity var(--motion-fast) var(--motion-ease), transform var(--motion-base) var(--motion-ease);
+}
+.v2-cursor[data-mode='label'] .v2-cursor-label { opacity: 1; transform: none; }
+/* the camera moves the whole page: the ring stays out of the picture */
+html[data-vt] .v2-cursor { opacity: 0; }
+
+/* ── atajos ──────────────────────────────────────────────────────────────── */
+.v2-keys {
+  width: min(520px, calc(100% - 2 * var(--size-gutter))); max-height: calc(100% - 2 * var(--space-6)); margin: auto; padding: 0;
+  border: 1px solid var(--color-line-strong); border-radius: var(--radius-2xl);
+  background: linear-gradient(180deg, var(--color-ink-600), var(--color-ink-700)); color: var(--color-text);
+  box-shadow: var(--shadow-panel);
+}
+.v2-keys::backdrop { background: rgba(6, 5, 19, 0.72); }
+.v2-keys[open] { animation: v2-keys-in var(--motion-base) var(--motion-ease) both; }
+@keyframes v2-keys-in { from { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.98); } }
+.v2-keys-in { display: grid; gap: var(--space-4); padding: var(--space-5) var(--space-5) var(--space-6); }
+.v2-keys-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.v2-keys h2 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
+.v2-keys-close {
+  display: grid; place-items: center; flex: none; width: var(--size-touch); height: var(--size-touch); padding: 0;
+  border-radius: var(--radius-md); border: 1px solid var(--color-line-strong); background: var(--color-glass); color: var(--color-heading); cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) { .v2-keys-close:hover { border-color: var(--color-mist-300); } }
+.v2-keys-intro { color: var(--color-text-muted); }
+.v2-keys-list { display: grid; gap: var(--space-2); margin: 0; }
+.v2-keys-list > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: var(--space-3); min-height: 36px; }
+.v2-keys-list dd { margin: 0; color: var(--color-text); }
+.v2-keys-list[data-off] { opacity: 0.55; }
+.v2-keys-note { font-size: 15px; color: var(--color-text-muted); }
+.v2-keys-btn {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0;
+  border: 0; background: none; color: var(--color-mist-200); font: inherit; cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) { .v2-keys-btn:hover { color: var(--color-heading); } }
+
+/* ── cambio de página ────────────────────────────────────────────────────── */
+/* View Transitions: the old page leaves and the new one arrives as if the camera travelled. The header keeps
+   its place (its own light slides to the new page), and the screen behind is the page colour. */
+.sh { view-transition-name: v2-header; }
+::view-transition { background: var(--color-bg); }
+::view-transition-group(v2-header) { animation: none; }
+::view-transition-old(v2-header) { display: none; }
+::view-transition-new(v2-header) { animation: none; }
+::view-transition-old(root), ::view-transition-new(root) {
+  animation-duration: 560ms; animation-timing-function: var(--motion-ease); animation-fill-mode: both;
+}
+html[data-vt='forward']::view-transition-old(root) { animation-name: v2-cam-out-left; }
+html[data-vt='forward']::view-transition-new(root) { animation-name: v2-cam-in-right; }
+html[data-vt='back']::view-transition-old(root) { animation-name: v2-cam-out-right; }
+html[data-vt='back']::view-transition-new(root) { animation-name: v2-cam-in-left; }
+html[data-vt='depth']::view-transition-old(root) { animation-name: v2-cam-out-depth; }
+html[data-vt='depth']::view-transition-new(root) { animation-name: v2-cam-in-depth; }
+@keyframes v2-cam-out-left { to { opacity: 0; transform: translate3d(-7%, 0, 0) scale(0.97); } }
+@keyframes v2-cam-in-right { from { opacity: 0; transform: translate3d(7%, 0, 0) scale(0.97); } }
+@keyframes v2-cam-out-right { to { opacity: 0; transform: translate3d(7%, 0, 0) scale(0.97); } }
+@keyframes v2-cam-in-left { from { opacity: 0; transform: translate3d(-7%, 0, 0) scale(0.97); } }
+@keyframes v2-cam-out-depth { to { opacity: 0; transform: scale(1.06); } }
+@keyframes v2-cam-in-depth { from { opacity: 0; transform: scale(0.94); } }
+/* without View Transitions (or back and forward): the new page fades up; never on the first load */
+html[data-nav='fade'] .v2-page { animation: v2-page-in var(--motion-slow) var(--motion-ease) both; }
+@keyframes v2-page-in { from { opacity: 0; transform: translate3d(0, 16px, 0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html.v2-motion [data-reveal]:not([data-shown]) { opacity: 1; transform: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* ── the demo page (/motion/) ────────────────────────────────────────────── */
+.mo-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr)); gap: var(--space-3); }
+.mo-tile {
+  display: grid; align-content: space-between; gap: var(--space-6); min-height: 120px; padding: var(--space-4);
+  border-radius: var(--radius-xl); border: 1px solid color-mix(in srgb, var(--from) 45%, transparent);
+  background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--from) 18%, transparent), transparent 62%), var(--color-glass);
+}
+.mo-tile b { font-family: var(--family-mono); font-size: var(--type-label-size); color: var(--from); }
+.mo-tile span { font-weight: 800; color: var(--color-heading); }
+.mo-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.mo-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: var(--space-3); }
+.mo-zone {
+  display: grid; place-items: center; min-height: 160px; padding: var(--space-4); border-radius: var(--radius-xl);
+  border: 1px dashed color-mix(in srgb, var(--from) 60%, transparent);
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--from) 7%, transparent) 0 12px, transparent 12px 24px);
+  color: var(--color-heading); font-weight: 700; text-align: center;
+}
+.mo-keys { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.mo-keys li { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 36px; color: var(--color-text-muted); }
+.mo-scroll { position: relative; display: grid; place-items: center; min-height: 520px; overflow: clip; border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: var(--color-bg-deep); }
+.mo-scroll svg { width: min(100%, 560px); height: auto; overflow: visible; }
+.mo-slab { transform: translate3d(0, calc((var(--p, 1) - 0.5) * var(--k) * -120px), 0); }
+.mo-trace { stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--p, 1) * 1.6)); }
+.mo-scroll figcaption { position: absolute; left: var(--space-5); bottom: var(--space-4); }
+.mo-cams { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: var(--space-3); }
+.mo-cam {
+  display: grid; gap: var(--space-1); min-height: var(--size-touch); padding: var(--space-4); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-line-strong); background: var(--color-glass); color: var(--color-heading); text-decoration: none;
+}
+.mo-cam span:first-child { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--from); }
+.mo-cam span:last-child { font-size: var(--type-h3-size); font-weight: 800; }
+.mo-rules { display: grid; gap: var(--space-3); max-width: 70ch; }
+.mo-rules li { padding-left: var(--space-5); position: relative; color: var(--color-text); }
+.mo-rules li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; border-radius: 2px; background: var(--color-coral-500); }

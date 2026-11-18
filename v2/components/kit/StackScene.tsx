@@ -12,7 +12,7 @@ const col = (id: (typeof LAYERS)[number], end: 'from' | 'to') => tokens.layer[`$
  *  · It renders on demand: while it eases in, while you drag and while it coasts. Nothing loops.
  *  · Pixel ratio capped at 1.5; reduced motion draws one still frame; without WebGL the poster stays.
  */
-export function StackScene({ label }: { label: string }) {
+export function StackScene({ label, cursor }: { label: string; cursor?: string }) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = host.current!;
@@ -123,5 +123,5 @@ export function StackScene({ label }: { label: string }) {
     io.observe(el);
     return () => { io.disconnect(); dispose(); };
   }, []);
-  return <div className="kit-scene" ref={host} tabIndex={0} role="img" aria-label={label} />;
+  return <div className="kit-scene" ref={host} tabIndex={0} role="img" aria-label={label} data-cursor={cursor} />;
 }

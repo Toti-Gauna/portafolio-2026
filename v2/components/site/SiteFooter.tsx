@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { SITE_PAGES, sitePath } from '@/v2/site';
+import { ShortcutsButton } from '../motion/ShortcutsButton';
 import { ArrowIcon } from '../ui/Icons';
 
 /** Foot of the site pages: who, where, every page (also the way around without JavaScript) and the design system. */
@@ -17,6 +18,7 @@ export function SiteFooter({ locale }: { locale: V2Locale }) {
           ))}
         </ul>
       </nav>
+      <ShortcutsButton label={m.engine.help.button} />
       <Link className="sf-system" href={sitePath(locale, 'tokens/')}>{m.site.system}<ArrowIcon /></Link>
     </footer>
   );

@@ -9,6 +9,7 @@ const PAGES = [
   { key: 'components', path: 'componentes/', color: tokens.layer['code-from'] },
   { key: 'pieces', path: 'piezas/', color: tokens.layer['agents-from'] },
   { key: 'kit', path: 'kit/', color: tokens.layer['tests-from'] },
+  { key: 'motion', path: 'motion/', color: tokens.layer['ship-from'] },
 ] as const;
 export type SystemPage = (typeof PAGES)[number]['key'];
 

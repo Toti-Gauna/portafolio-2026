@@ -52,6 +52,8 @@ El sistema del portafolio de Ignacio Gauna (Sr AI Fullstack Developer, Mar del P
 - Nada se mueve fuera de pantalla ni en bucle: las piezas corren una vez al entrar, o mientras la persona las toca, y se quedan quietas.
 - Con `prefers-reduced-motion`, cada pieza muestra su cuadro final y los cambios son instantáneos. Sin JavaScript, también.
 - El sonido empieza apagado y se recuerda en el dispositivo (`SoundToggle`).
+- Un solo motor de motion (`v2/components/motion/MotionRoot.tsx`) reparte seis comportamientos con atributos: `data-reveal` (lo de abajo del pliegue entra al llegar, escalonado), `data-magnetic` (la acción se inclina hacia el mouse), `data-cursor="Ver caso"` (el anillo de luz que sigue al cursor dice qué hace el clic), `data-scroll` (la escena recibe `--p` de 0 a 1 con el scroll), los atajos de una tecla (`?` muestra la ayuda y desde ahí se apagan) y el cambio de página como un movimiento de cámara: hacia adelante en el menú entra por la derecha, hacia atrás por la izquierda, las páginas del sistema en profundidad. Todo vivo en `/v2/es/motion/`.
+- Nada pide cuadros por su cuenta: cada uno lo pide el puntero, el scroll o una tecla, y todo se detiene al llegar.
 
 ## Iconografía
 
