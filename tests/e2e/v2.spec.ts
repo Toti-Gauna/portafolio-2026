@@ -27,7 +27,7 @@ test('/v2 is never indexed and stays out of the sitemap', async ({ page, request
   expect(sitemap).not.toContain('/v2/');
 });
 
-test('the tokens reach the page: CSS variables, fonts and the brand gradient', async ({ page }) => {
+test('the tokens reach the page: CSS variables, fonts, the brand gradient and the solid main action', async ({ page }) => {
   await page.goto('/v2/es/');
   const v = await page.evaluate(() => {
     const s = getComputedStyle(document.documentElement);
@@ -38,7 +38,10 @@ test('the tokens reach the page: CSS variables, fonts and the brand gradient', a
   // the next/font family, not a serif fallback
   expect(v.body).not.toMatch(/^"?Times/);
   expect(v.body.toLowerCase()).toContain('archivo');
-  await expect(page.locator('.ui-btn--primary').first()).toHaveCSS('background-image', /linear-gradient/);
+  // the gradient is for the «Sr»; the main action is solid coral (Ignacio, 18/11/2026)
+  await expect(page.locator('.ui-role b').first()).toHaveCSS('background-image', /linear-gradient/);
+  await expect(page.locator('.ui-btn--primary').first()).toHaveCSS('background-color', 'rgb(255, 90, 60)');
+  await expect(page.locator('.ui-btn--primary').first()).toHaveCSS('box-shadow', 'none');
 });
 
 test('language switch, keyboard focus and the motion rows', async ({ page }) => {

@@ -103,8 +103,7 @@
   },
   "depth": {
     "title": "Profundidad",
-    "text": "Un brillo de marca para la acción principal, paneles que flotan sobre el índigo y un foco que siempre se ve.",
-    "glow": "Brillo de marca",
+    "text": "Paneles que flotan sobre el índigo y un foco que siempre se ve. Nada más proyecta sombra: la acción principal se distingue por su color.",
     "panel": "Panel",
     "focus": "Foco",
     "z": "Orden de apilado"
