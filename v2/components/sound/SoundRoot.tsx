@@ -10,7 +10,7 @@ import { pageOf } from '@/v2/site';
 
 const zoneOf = (pathname: string): ZoneKey => pageOf(pathname) ?? 'system';
 
-type Debug = { playing: boolean; style: StyleId; zone: ZoneKey; bar: number; state: string; loaded: boolean; sfx?: number };
+type Debug = { playing: boolean; style: StyleId; zone: ZoneKey; bar: number; state: string; loaded: boolean; sfx?: number; motor?: number };
 
 /**
  * The music of /v2 (lote 2.3), mounted once in the layout. Silent until someone asks for sound: then, inside that
@@ -95,9 +95,12 @@ export function SoundRoot() {
     window.addEventListener(GATE_EVENT, onGate);
     // the small sounds of the world of Work: only with the sound on, and never louder than asked
     const onSfx = (e: Event) => {
-      const d = (e as CustomEvent<{ kind: Sfx; power?: number }>).detail;
+      const d = (e as CustomEvent<{ kind: Sfx | 'motor'; power?: number }>).detail;
+      // the hum of the car follows its speed; it is never the reason to load the engine, and it always may stop
+      if (d.kind === 'motor') { debug.current.motor = d.power ?? 0; engine.current?.motor(wanted.current ? d.power ?? 0 : 0); return; }
       debug.current.sfx = (debug.current.sfx ?? 0) + 1;
-      if (wanted.current) void ensure().then((m) => m.sfx(d.kind, d.power));
+      const kind = d.kind;
+      if (wanted.current) void ensure().then((m) => m.sfx(kind, d.power));
     };
     window.addEventListener(SFX_EVENT, onSfx);
     // a hidden tab is silent and costs nothing; it picks up on return

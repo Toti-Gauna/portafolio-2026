@@ -710,3 +710,114 @@ describe('v2 life of the world (lote 4.3)', () => {
   });
 });
 
+
+describe('v2 world from the ground (lote 4.3, primera persona)', () => {
+  it('the car answers the pedals and the wheel, and stops at what is in its way', async () => {
+    const { car, drive, CAR } = await import('../../v2/components/work/drive/car');
+    const open = (x: number, y: number): [number, number] => [x, y];
+    // gas: it gathers speed, never past its top; let go: it coasts to a stop and stays there
+    const c = car(0, 0, 0);
+    for (let i = 0; i < 600; i++) drive(c, { gas: 1, turn: 0 }, 1 / 60, [], [], open);
+    expect(c.v).toBeGreaterThan(CAR.top * 0.9);
+    expect(c.v).toBeLessThanOrEqual(CAR.top);
+    expect(c.x).toBeGreaterThan(900);
+    expect(Math.abs(c.y)).toBeLessThan(1e-6);
+    for (let i = 0; i < 600; i++) drive(c, { gas: 0, turn: 0 }, 1 / 60, [], [], open);
+    expect(c.v).toBe(0);
+    const rest = [c.x, c.y, c.a];
+    for (let i = 0; i < 60; i++) drive(c, { gas: 0, turn: 0 }, 1 / 60, [], [], open);
+    expect([c.x, c.y, c.a]).toEqual(rest);
+    // the brake stops it before it goes backwards, and reverse is slower than forward
+    const r = car(0, 0, 0);
+    for (let i = 0; i < 600; i++) drive(r, { gas: -1, turn: 0 }, 1 / 60, [], [], open);
+    expect(r.v).toBeLessThan(0);
+    expect(r.v).toBeGreaterThanOrEqual(-CAR.back);
+    // the wheel: right is right (the heading grows, and the car leaves its line to the right-hand side)
+    const t = car(0, 0, 0);
+    for (let i = 0; i < 90; i++) drive(t, { gas: 1, turn: 1 }, 1 / 60, [], [], open);
+    expect(t.a).toBeGreaterThan(0.2);
+    expect(t.y).toBeGreaterThan(1);
+    const l = car(0, 0, 0);
+    for (let i = 0; i < 90; i++) drive(l, { gas: 1, turn: -1 }, 1 / 60, [], [], open);
+    expect(l.a).toBeCloseTo(-t.a, 6);
+    // a wall: it never gets inside, it loses its speed, and the hit is reported once it lands
+    const w = car(0, 0, 0);
+    let hit = 0;
+    for (let i = 0; i < 400; i++) { hit = Math.max(hit, drive(w, { gas: 1, turn: 0 }, 1 / 60, [[100, -50, 140, 50]], [], open)); expect(w.x).toBeLessThanOrEqual(100 - CAR.r + 1e-6); }
+    expect(hit).toBeGreaterThan(0.1);
+    expect(Math.abs(w.v)).toBeLessThan(40);
+    // a post (someone walking, a crate at rest) is gone round, not through
+    const p = car(0, 0.5, 0);
+    for (let i = 0; i < 400; i++) { drive(p, { gas: 1, turn: 0 }, 1 / 60, [], [[80, 0, 3]], open); expect(Math.hypot(p.x - 80, p.y)).toBeGreaterThanOrEqual(CAR.r + 3 - 1e-6); }
+    // the fence keeps it on the land
+    const f = car(0, 0, 0);
+    for (let i = 0; i < 600; i++) drive(f, { gas: 1, turn: 0 }, 1 / 60, [], [], (x, y) => [Math.min(200, x), y]);
+    expect(f.x).toBeLessThanOrEqual(200);
+  });
+
+  it('the autopilot takes the car to its mark: it joins the way, never overshoots and arrives still', async () => {
+    const { along, car, nearest, pathOf, pilot, PILOT, trip } = await import('../../v2/components/work/drive/car');
+    const way = pathOf([[0, 0], [300, 0], [600, 200], [900, 200], [1200, -100]]);
+    expect(way.length).toBeGreaterThan(1300);
+    expect(nearest(way, 150, 40)).toBeCloseTo(150, 6);
+    expect(along(way, 300)).toMatchObject({ x: 300, y: 0 });
+    for (const [from, to, start] of [[0, way.at[3], [0, 0]], [way.at[3], way.at[1], [900, 200]], [0, way.length, [40, 90]]] as [number, number, [number, number]][]) {
+      const c = car(start[0], start[1], 1), t = trip(c, way, to);
+      let n = 0, top = 0, done = false, gap = Math.abs(to - t.s);
+      while (!done && n < 4000) {
+        done = pilot(c, t, way, 1 / 60); n += 1; top = Math.max(top, t.v);
+        // it only ever gets nearer to its mark
+        expect(Math.abs(to - t.s)).toBeLessThanOrEqual(gap + 1e-9); gap = Math.abs(to - t.s);
+      }
+      expect(done).toBe(true);
+      expect(n).toBeLessThan(60 * 14);
+      expect(top).toBeLessThanOrEqual(PILOT.top);
+      const end = along(way, to);
+      expect(Math.hypot(c.x - end.x, c.y - end.y)).toBeLessThan(0.05);
+      expect(c.v).toBe(0);
+      expect(from).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it('the land in 3D is the same land: built from the same bands, light, and with every moving part', async () => {
+    const { buildWorld } = await import('../../v2/components/work/drive/build');
+    const { WORLD_STOPS, WORLD_BOX } = await import('../../v2/components/work/world-art');
+    const world = buildWorld(WORLD_STOPS.map((s) => s.node), WORLD_STOPS.findIndex((s) => s.group === 'next'));
+    // a few tens of thousands of triangles in three draw calls: light enough for a phone
+    expect(world.count.lit).toBeGreaterThan(12000);
+    expect(world.count.lit + world.count.glow).toBeLessThan(45000);
+    expect(world.count.lines).toBeGreaterThan(1500);
+    expect(world.group.children.length).toBeLessThan(12);
+    for (const child of world.group.children.slice(0, 3)) {
+      const pos = (child as unknown as { geometry: { attributes: { position: { array: Float32Array } } } }).geometry.attributes.position.array;
+      expect(pos.every((v) => Number.isFinite(v))).toBe(true);
+    }
+    // what turns on the map turns here: the lighthouse, the two wheels, the sundial, the pump and the windmill
+    expect(world.spinners.map((s) => s.kind.split(' ')[0]).sort()).toEqual(['wl-clock', 'wl-nod', 'wl-rot--fast', 'wl-spin', 'wl-spin', 'wl-sweep']);
+    // there is something to drive round in every part of the land, and the way past every door is clear
+    expect(world.walls.length).toBeGreaterThan(100);
+    const KX = 0.8944, KY = 0.4472;
+    for (const s of WORLD_STOPS) {
+      const x = (s.node[0] / KX + s.node[1] / KY) / 2 + 30 * Math.SQRT1_2, y = (s.node[1] / KY - s.node[0] / KX) / 2 + 30 * Math.SQRT1_2;
+      const blocked = world.walls.filter((w) => x > w[0] - 7.5 && x < w[2] + 7.5 && y > w[1] - 7.5 && y < w[3] + 7.5);
+      expect(blocked, `where the car parks at ${s.id}`).toEqual([]);
+      expect(s.tall, s.id).toBeGreaterThan(10);
+      expect(s.home[0]).toBeGreaterThan(0); expect(s.home[0]).toBeLessThan(WORLD_BOX.width);
+    }
+    world.dispose();
+  });
+
+  it('the two views and the car have their words in both languages, in a positive voice', () => {
+    for (const m of [es, en]) {
+      const w = m.world;
+      expect(Object.keys(w.views)).toEqual(['label', 'iso', 'drive']);
+      expect(Object.keys(w.drive).sort()).toEqual(Object.keys(es.world.drive).sort());
+      for (const v of [...Object.values(w.views), ...Object.values(w.drive)]) {
+        expect(v.trim().length).toBeGreaterThan(0);
+        expect(v).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|nothing)\b/i);
+      }
+    }
+    expect(es.world.views.drive).toBe('Primera persona');
+    expect(en.world.views.drive).toBe('First person');
+  });
+});

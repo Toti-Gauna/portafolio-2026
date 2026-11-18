@@ -134,6 +134,30 @@ export class MusicEngine {
   }
   private sfxN = 0;
 
+  /**
+   * The hum of the car (lote 4.3, primera persona): two low oscillators through a filter; pitch, brightness and
+   * level follow the speed (0…1). At 0 it fades out and is freed: a parked car makes no sound and costs nothing.
+   */
+  motor(level: number) {
+    const t = this.ctx.currentTime, k = Math.max(0, Math.min(1, level));
+    if (!this.hum) {
+      if (!k) return;
+      const out = this.ctx.createGain(), lp = this.ctx.createBiquadFilter(), a = this.ctx.createOscillator(), b = this.ctx.createOscillator();
+      a.type = 'sawtooth'; b.type = 'triangle'; lp.type = 'lowpass'; lp.Q.value = 0.7; out.gain.value = 0;
+      a.connect(lp); b.connect(lp); lp.connect(out); out.connect(this.bus);
+      a.start(); b.start();
+      this.hum = { out, lp, a, b };
+    }
+    const h = this.hum, f = 46 + 74 * k;
+    h.a.frequency.setTargetAtTime(f, t, 0.12); h.b.frequency.setTargetAtTime(f / 2, t, 0.12);
+    h.lp.frequency.setTargetAtTime(180 + 520 * k, t, 0.12);
+    h.out.gain.setTargetAtTime(k ? 0.05 + 0.07 * k : 0, t, k ? 0.1 : 0.16);
+    clearTimeout(this.humOff);
+    if (!k) this.humOff = setTimeout(() => { h.a.stop(); h.b.stop(); h.out.disconnect(); if (this.hum === h) this.hum = null; }, 900);
+  }
+  private hum: { out: GainNode; lp: BiquadFilterNode; a: OscillatorNode; b: OscillatorNode } | null = null;
+  private humOff: ReturnType<typeof setTimeout> | undefined;
+
   /** Offline: lays down `seconds` of music from now (for an OfflineAudioContext); with a tour, the page changes every `barsEach` bars. */
   renderAhead(seconds: number, tour: ZoneKey[] = [], barsEach = 4) {
     const s = this.ctx.createGain();
