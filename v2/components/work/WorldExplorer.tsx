@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { tokens } from '@/v2/tokens';
-import { WORLD_BOX, WORLD_GROUPS, WORLD_GROUP_OF, WORLD_IDS, WORLD_ISLES, WORLD_MINI, WORLD_STOPS, WORLD_SVG } from './world-art';
+import { WORLD_BOX, WORLD_CRATES, WORLD_GROUPS, WORLD_GROUP_OF, WORLD_IDS, WORLD_ISLES, WORLD_MINI, WORLD_STOPS, WORLD_SVG, WORLD_WALKERS } from './world-art';
 import { WORLD_POSTALS } from './world-stamps';
 import { WorldInfo, type WorldPlace } from './WorldInfo';
 import { WorldStrip } from './WorldStrip';
@@ -22,8 +22,9 @@ export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Local
     <>
       <WorldStrip
         svg={WORLD_SVG} mini={WORLD_MINI} width={WORLD_BOX.width} height={WORLD_BOX.height}
-        stops={WORLD_STOPS.map((stop) => { const p = places[stop.id]; return { id: stop.id, x: stop.x, y: stop.y, label: stop.label, ink: stop.ink, on: stop.on, color: GROUP_COLOR[stop.group], name: p.name, when: p.when, state: p.state, group: w.groups[stop.group] }; })}
-        labels={{ kicker, title, alt: w.mapAlt, hint: w.mapHint, prev: w.prev, next: w.next, drag: w.drag, stops: w.stops, more: w.more, zoomIn: w.zoomIn, zoomOut: w.zoomOut, asList: w.asList }}
+        stops={WORLD_STOPS.map((stop) => { const p = places[stop.id]; return { id: stop.id, x: stop.x, y: stop.y, span: stop.span, label: stop.label, ink: stop.ink, on: stop.on, color: GROUP_COLOR[stop.group], name: p.name, when: p.when, state: p.state, group: w.groups[stop.group] }; })}
+        labels={{ kicker, title, alt: w.mapAlt, hint: w.mapHint, prev: w.prev, next: w.next, drag: w.drag, stops: w.stops, more: w.more, zoomIn: w.zoomIn, zoomOut: w.zoomOut, asList: w.asList, toNight: w.toNight, toDay: w.toDay, pause: w.pause, play: w.play }}
+        walkers={WORLD_WALKERS} crates={WORLD_CRATES}
       />
       <div className="v2-main wd-rest" id="lista" tabIndex={-1}>
         <div className="v2-intro">

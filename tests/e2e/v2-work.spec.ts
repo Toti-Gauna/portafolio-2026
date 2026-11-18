@@ -82,6 +82,8 @@ test('a pinch on a trackpad (ctrl + wheel) and a double click zoom around the po
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/v2/es/work/');
   await expect(page.locator('.ws[data-ready]')).toBeVisible();
+  // the life of the map is not what is measured here
+  await page.getByRole('button', { name: 'Pausar el movimiento del mapa' }).click();
   const v = (await page.locator('.ws-view').boundingBox())!;
   const px = v.x + 760, py = v.y + 420;
   const before = await onLand(page, px, py);
@@ -206,10 +208,12 @@ test('with reduced motion a zoom arrives at once', async ({ page }) => {
   expect(await page.locator('.ws-land').evaluate((el) => el.getAnimations().length)).toBe(0);
 });
 
-test('nothing asks for frames on its own: after travelling and zooming, a still map draws nothing', async ({ page }) => {
+test('nothing asks for frames on its own: with its life paused, a map that has travelled and zoomed draws nothing', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/v2/es/work/');
   await expect(page.locator('.ws[data-ready]')).toBeVisible();
+  // the life of the map (lote 4.3) is the one thing that moves by itself, and the visitor can stop it
+  await page.getByRole('button', { name: 'Pausar el movimiento del mapa' }).click();
   await page.getByRole('button', { name: 'Parada siguiente' }).click();
   await page.getByRole('button', { name: 'Acercar' }).click();
   await settled(page);

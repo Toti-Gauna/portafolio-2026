@@ -18,6 +18,9 @@ const ROOM: Record<StyleId, { verb: number; delay: number; level: number }> = { 
 /** Background music: about -22 dBFS RMS, peaks well under -10 (measured offline, tests/e2e/v2-sound.spec.ts). */
 const MASTER = 0.24;
 
+export type Sfx = 'open' | 'stop' | 'grab' | 'thud' | 'night' | 'day' | 'horn';
+const i5 = (n: number, len: number) => n % len;
+
 export class MusicEngine {
   readonly ctx: BaseAudioContext;
   style: StyleId;
@@ -108,6 +111,28 @@ export class MusicEngine {
     const tones = [...chord(z, 0, false), 12];
     tones.forEach((semis, i) => this.play({ voice: 'chime', beat: 0, dur: 4, midi: place(z, semis, 72 + (i === 3 ? 12 : 0), 84 + (i === 3 ? 12 : 0)), vel: 0.34 }, t + i * 0.075, 0.5, this.bus, z.bright));
   }
+
+  /**
+   * Small sounds of the world of Work (lote 4.3), in the key of the page so they sit inside the music: a place
+   * opening, a stop reached, a crate picked up or hitting the ground (`power` 0…1), dusk and dawn, the car.
+   * Each sounds on its own, with or without the music playing.
+   */
+  sfx(kind: Sfx, power = 1) {
+    const z = ZONES[this.zone], t = this.ctx.currentTime + 0.02, k = Math.max(0.15, Math.min(1, power));
+    const note = (voice: NoteEvent['voice'], semis: number, lo: number, at: number, dur: number, vel: number) =>
+      this.play({ voice, beat: 0, dur, midi: place(z, semis, lo, lo + 12), vel }, t + at, 0.5, this.bus, z.bright);
+    const tones = chord(z, 0, false);
+    switch (kind) {
+      case 'open': [tones[0], tones[2], tones[1] + 12].forEach((s2, i) => note('chime', s2, 72, i * 0.07, 3, 0.3)); break;
+      case 'stop': note('pluck', tones[i5(this.sfxN++, tones.length)], 67, 0, 1.2, 0.34); break;
+      case 'grab': note('pluck', tones[2], 79, 0, 0.6, 0.3); note('pluck', tones[0] + 12, 79, 0.06, 0.6, 0.24); break;
+      case 'thud': this.play({ voice: 'kick', beat: 0, dur: 0.4, midi: 38, vel: 0.5 * k }, t, 0.5, this.bus, 0); if (k > 0.5) note('pluck', tones[0], 55, 0, 0.5, 0.2 * k); break;
+      case 'night': [tones[2], tones[1], tones[0]].forEach((s2, i) => note('chime', s2, 67, i * 0.16, 4, 0.26)); this.play({ voice: 'swell', beat: 0, dur: 2.2, midi: 60, vel: 0.3 }, t, 0.5, this.bus, 0); break;
+      case 'day': [tones[0], tones[1], tones[2], tones[0] + 12].forEach((s2, i) => note('chime', s2, 72, i * 0.11, 3, 0.26)); break;
+      case 'horn': note('keys', tones[0], 60, 0, 0.5, 0.42); note('keys', tones[2], 60, 0, 0.5, 0.36); break;
+    }
+  }
+  private sfxN = 0;
 
   /** Offline: lays down `seconds` of music from now (for an OfflineAudioContext); with a tour, the page changes every `barsEach` bars. */
   renderAhead(seconds: number, tour: ZoneKey[] = [], barsEach = 4) {

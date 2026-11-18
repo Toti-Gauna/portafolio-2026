@@ -65,14 +65,14 @@ const awning = (I: Isle, x0: number, x1: number, y: number, z: number, out: numb
 const BANDS: BandDef[] = [
   /* ── where it began ── */
   { id: 'mdp', group: 'origin', w: 176, d: 150, ground: G.sand, node: [70, 6], under: C.sea, tones: { wt: C.sea, g3: '#e3b356', t1: '#4f8a64', t2: '#7fb58a' }, floor: (F, I) => I.face([[-R, 12, 0], [R, 12, 0], [R, R, 0], [-R, R, 0]], 'wa-seaf') + I.face([[-R, 12, 0], [R, 12, 0], [R, 44, 0], [-R, 44, 0]], 'wa-shallow') + I.line([[-R, 12, 0], [R, 12, 0]], 'wa-foam') +
-    Array.from({ length: 34 }, (_, i) => I.line([[-R + ((i * 37) % 48), 30 + i * 17, 0], [R, 30 + i * 17, 0]], 'wa-wave')).join('') +
+    I.live('wl-drift', 0, 0, 0, Array.from({ length: 34 }, (_, i) => I.line([[-R + ((i * 37) % 48), 30 + i * 17, 0], [R, 30 + i * 17, 0]], 'wa-wave')).join('')) +
     F.dune(60, -250, 40) + F.dune(-170, -256, 30) + F.dune(170, -180, 30) + F.dune(-80, -206, 28) + F.dune(206, -104, 26) + F.rock(-232, -84, 1.3) + F.rock(-212, -72, 0.8) +
     F.tuft(130, -130) + F.tuft(40, -190) + F.tuft(218, -56) + F.tuft(-20, -150) + F.umbrella(140, -70, 'wa-acc') + F.umbrella(190, -30, 'wa-lit') + F.umbrella(96, -104, 'wa-lit') + F.boat(-222, 150) + F.boat(212, 188) + F.boat(-330, 40),
     draw: (I) => [
       // the lighthouse, and its beam over the sea
       I.cyl(-56, -44, 10, 0, 12), I.cyl(-56, -44, 7.5, 12, 34), I.ring(-56, -44, 7.5, 24, 'wa-l wa-l--hi'), I.ring(-56, -44, 7.5, 35, 'wa-l wa-l--hi'),
       I.cyl(-56, -44, 9.5, 46, 2.5), I.cyl(-56, -44, 5.6, 48.5, 9, { lit: true }), I.cone(-56, -44, 7.4, 57.5, 9, 'wa-f2'),
-      I.face([[-56, -44, 53], [58, 30, 64], [58, 30, 36]], 'wa-beam'),
+      I.turn('z', -56, -44, 53, 'wl-sweep', '<path class="wa-beam" d="M0 0L150 -16L150 16Z"/>'),
       // the house where the first website was made, its window lit
       I.box(-14, -50, 40, 30, 0, 20), I.gable(-17, -53, 46, 36, 20, 13), I.windows(-10, 22, -20, 5, 15, 3, 1, 1),
       // the first product: a games site
@@ -116,8 +116,8 @@ const BANDS: BandDef[] = [
       I.windows(-105, -65, -42, 8, 96, 4, 11, 1), I.windowsR(-81, -45, -62, 8, 96, 4, 11, 2), I.windows(-100, -70, -48, 103, 117, 3, 2, 3),
       // Tuenti: the wheel of prizes
       I.box(-14, -72, 44, 16, 0, 7), I.line([[-8, -64, 7], [8, -64, 40]], 'wa-pole'), I.line([[24, -64, 7], [8, -64, 40]], 'wa-pole'),
-      I.wheel(8, -64, 40, 30, 'y', 'wa-wheel'), I.wheel(8, -64, 40, 22, 'y', 'wa-pole'),
-      Array.from({ length: 8 }, (_, i) => { const a = (i / 8) * Math.PI * 2; return I.line([[8, -64, 40], [8 + Math.cos(a) * 30, -64, 40 + Math.sin(a) * 30]], 'wa-pole') + I.dot(8 + Math.cos(a + 0.39) * 26, -64, 40 + Math.sin(a + 0.39) * 26, 2.2, i % 2 ? 'wa-lit' : 'wa-acc'); }).join(''),
+      I.turn('y', 8, -64, 40, 'wl-spin', '<circle class="wa-wheel" r="30"/><circle class="wa-pole" r="22"/>' +
+        Array.from({ length: 8 }, (_, i) => { const a = (i / 8) * Math.PI * 2, c = (v: number) => (Math.cos(v) * 1).toFixed(3), q = (v: number) => (Math.sin(v) * 1).toFixed(3); return `<path class="wa-pole" d="M0 0L${(+c(a) * 30).toFixed(1)} ${(+q(a) * 30).toFixed(1)}"/><circle class="${i % 2 ? 'wa-lit' : 'wa-acc'}" cx="${(+c(a + 0.39) * 26).toFixed(1)}" cy="${(+q(a + 0.39) * 26).toFixed(1)}" r="2.2"/>`; }).join('')),
       I.dot(8, -64, 40, 4, 'wa-lit'), I.face([[4, -64, 76], [12, -64, 76], [8, -64, 68]], 'wa-acc'),
       // CompliA: the document, and the answer that passed its checks
       I.box(-100, 14, 44, 32, 0, 58), I.face([[-95, 46, 8], [-61, 46, 8], [-61, 46, 52], [-95, 46, 52]], 'wa-lit'),
@@ -125,7 +125,7 @@ const BANDS: BandDef[] = [
       I.cyl(-66, 30, 10, 58, 4, { lit: true }), I.line([[-71, 31, 62], [-67, 35, 62], [-60, 26, 62]], 'wa-l wa-l--ink wa-l--thick'),
       // Supernova Eventos: a stage
       I.box(10, 18, 64, 44, 0, 7), I.line([[14, 22, 7], [14, 22, 44], [70, 22, 44], [70, 22, 7]], 'wa-pole wa-l--thick'), I.line([[14, 22, 44], [42, 22, 54], [70, 22, 44]], 'wa-pole'),
-      rays(I, 42, 22, 30, 15, 12), I.dot(42, 22, 30, 5, 'wa-acc'),
+      I.live('wl-pulse', 42, 22, 30, rays(I, 42, 22, 30, 15, 12)), I.dot(42, 22, 30, 5, 'wa-acc'),
       I.box(22, 66, 22, 3, 0, 12, { lit: true, r: 2 }), I.line([[36, 69, 2], [36, 69, 10]], 'wa-l wa-l--ink'),
     ].join('') },
 
@@ -137,14 +137,14 @@ const BANDS: BandDef[] = [
       I.cyl(-14, -14, 30, 0, 22, { lit: true }), I.dome(-14, -14, 30, 22, 'wa-lit'), I.line([[-14, 16, 22], [-14, 4, 46], [-14, -14, 56]], 'wa-l wa-l--ink wa-l--thick'),
       I.box(10, 12, 16, 12, 0, 4, { lit: true }), I.box(14, 22, 16, 12, 0, 2, { lit: true }),
       // the eclipse itself, with its corona
-      rays(I, 42, -56, 88, 27, 24, 'wa-corona-l'), I.dot(42, -56, 88, 17, 'wa-corona'), I.dot(42, -56, 88, 14, 'wa-ink'),
+      I.live('wl-rot', 42, -56, 88, rays(I, 42, -56, 88, 27, 24, 'wa-corona-l')), I.dot(42, -56, 88, 17, 'wa-corona'), I.dot(42, -56, 88, 14, 'wa-ink'),
     ].join('') },
 
   { id: 'agentes', group: 'own', w: 134, d: 122, ground: G.blossom, accent: PAPER, tones: { g2: '#f6dbe7', g3: '#e0a6c1', t1: '#d0709f', t2: '#f1c4d8', wt: '#7fa6f5' }, floor: (F, I) => F.band(0, 0, 150, 14) + F.pond(182, -40, 32) + F.scatter(9, 70, (dx, dy, r) => F.dot(dx, dy, 1.2 + r * 1.6, 'wa-petal')) +
     F.tree(-150, -252) + F.tree(-60, -246) + F.tree(0, -224, 1.2) + F.tree(84, -248) + F.tree(150, -190, 1.1) + F.tree(206, -140, 0.9) + F.tree(116, -122) + F.tree(-192, -16, 1.1) + F.tree(-206, 44) + F.bush(-178, 74) + F.tree(204, 44, 0.9) + F.tree(198, 142, 1.1) + F.tree(-200, 154), draw: (I) => {
       // eleven agents around one table, and the gate where a person decides
       const posts = Array.from({ length: 11 }, (_, i) => { const a = (i / 11) * Math.PI * 2 + 0.3; return { x: Math.cos(a) * 46, y: Math.sin(a) * 42, h: 16 + ((i * 5) % 4) * 4 }; });
-      const post = (p: (typeof posts)[number]) => I.line([[0, 0, 12], [p.x, p.y, p.h]], 'wa-l wa-l--hi') + I.cyl(p.x, p.y, 4.4, 0, p.h) + I.dot(p.x, p.y, p.h, 2.2, 'wa-lit');
+      const post = (p: (typeof posts)[number]) => I.line([[0, 0, 12], [p.x, p.y, p.h]], 'wa-l wa-l--hi') + I.cyl(p.x, p.y, 4.4, 0, p.h) + I.dot(p.x, p.y, p.h, 2.2, 'wa-lit wl wl-blink', posts.indexOf(p));
       const back = posts.filter((p) => p.x + p.y < 0).sort((a, b) => a.x + a.y - (b.x + b.y)), front = posts.filter((p) => p.x + p.y >= 0).sort((a, b) => a.x + a.y - (b.x + b.y));
       return back.map(post).join('') + I.cyl(0, 0, 15, 0, 9, { lit: true }) + I.ring(0, 0, 9, 9, 'wa-l wa-l--ink') + I.dot(0, 0, 9, 3, 'wa-ink') + front.map(post).join('') +
         I.line([[38, 50, 0], [38, 50, 24], [58, 34, 24], [58, 34, 0]], 'wa-gate') + I.dot(48, 42, 24, 3, 'wa-lit');
@@ -159,8 +159,8 @@ const BANDS: BandDef[] = [
       [28, 20, 12].map((z, i) => I.line([[-40, -11, z], [i === 2 ? -16 : 4, -11, z]], 'wa-l wa-l--hi')).join(''),
       I.box(-50, -18, 64, 7, 42, 9), Array.from({ length: 5 }, (_, i) => I.face([[-48 + i * 12, -11, 43], [-42 + i * 12, -11, 43], [-38 + i * 12, -11, 50], [-44 + i * 12, -11, 50]], 'wa-lit')).join(''),
       // a reel
-      I.box(24, 26, 26, 8, 0, 4), I.wheel(37, 30, 22, 17, 'y', 'wa-wheel'), I.wheel(37, 30, 22, 5, 'y', 'wa-l wa-l--ink'),
-      Array.from({ length: 5 }, (_, i) => { const a = (i / 5) * Math.PI * 2 + 0.4; return I.dot(37 + Math.cos(a) * 10.5, 30, 22 + Math.sin(a) * 10.5, 2.6, 'wa-acc'); }).join(''),
+      I.box(24, 26, 26, 8, 0, 4), I.turn('y', 37, 30, 22, 'wl-spin wl-spin--slow', '<circle class="wa-wheel" r="17"/><circle class="wa-l wa-l--ink" r="5"/>' +
+        Array.from({ length: 5 }, (_, i) => { const a = (i / 5) * Math.PI * 2 + 0.4; return `<circle class="wa-acc" cx="${(Math.cos(a) * 10.5).toFixed(1)}" cy="${(Math.sin(a) * 10.5).toFixed(1)}" r="2.6"/>`; }).join('')),
     ].join('') },
 
   { id: 'volta', group: 'own', w: 134, d: 118, ground: G.grass, tones: { g3: '#98cb76', t1: '#3a8758', t2: '#6cbb7d' }, floor: (F, I) => F.hill(110, -196, 78) + F.hill(190, -116, 36) + F.hill(-50, -244, 50) + F.hill(-170, -210, 40) + F.track(172, -36, 50) +
@@ -169,18 +169,18 @@ const BANDS: BandDef[] = [
       awning(I, -52, 8, -6, 23, 13, 7, 6),
       // the jar, and what it promises
       I.cyl(36, -22, 15, 0, 32), I.ring(36, -22, 15, 22, 'wa-l wa-l--hi'), I.ring(36, -22, 15, 9, 'wa-l wa-l--hi'), I.cyl(36, -22, 10, 32, 6, { lit: true }),
-      I.face([[35, -7, 21], [41, -7, 21], [37, -7, 15.5], [42, -7, 15.5], [33, -7, 9.5], [36.5, -7, 14], [32, -7, 14]], 'wa-acc'),
+      I.face([[35, -7, 21], [41, -7, 21], [37, -7, 15.5], [42, -7, 15.5], [33, -7, 9.5], [36.5, -7, 14], [32, -7, 14]], 'wa-acc wl wl-flick'),
       // a weight to lift
       I.cyl(6, 34, 6, 0, 9, { lit: true }), I.cyl(30, 34, 6, 0, 9, { lit: true }), I.line([[6, 34, 5], [30, 34, 5]], 'wa-l wa-l--ink wa-l--thick'),
     ].join('') },
 
   { id: 'velmar', group: 'own', w: 134, d: 118, ground: G.quay, tones: { g2: '#f3eedf', g3: '#d3cab0', wt: '#35a9c9' }, floor: (F, I) => I.face([[-R, -R, 0], [R, -R, 0], [R, -84, 0], [-R, -84, 0]], 'wa-seaf') + I.face([[-R, -110, 0], [R, -110, 0], [R, -84, 0], [-R, -84, 0]], 'wa-shallow') + I.line([[-R, -84, 0], [R, -84, 0]], 'wa-foam') +
-    Array.from({ length: 26 }, (_, i) => I.line([[-R + ((i * 29) % 48), -124 - i * 17, 0], [R, -124 - i * 17, 0]], 'wa-wave')).join('') +
+    I.live('wl-drift', 0, 0, 0, Array.from({ length: 26 }, (_, i) => I.line([[-R + ((i * 29) % 48), -124 - i * 17, 0], [R, -124 - i * 17, 0]], 'wa-wave')).join('')) +
     rows(I, 'x', 40) + I.box(40, -150, 14, 68, 0, 4) + F.boat(88, -196) + F.boat(180, -120) + F.boat(-55, -262) + F.boat(190, -236) +
     F.mass(-190, 40, 22, 22, 14) + F.mass(-166, 62, 16, 16, 10) + F.mass(196, 112, 20, 20, 12) + F.rock(-206, 142, 1.2) + F.rock(206, 40, 1), draw: (I) => [
       // the workshop: a saw-tooth roof and a chimney
       I.box(-54, -44, 72, 40, 0, 22), I.gableY(-54, -44, 36, 40, 22, 13), I.gableY(-18, -44, 36, 40, 22, 13),
-      I.cyl(24, -36, 4.2, 0, 44), I.dot(27, -39, 52, 3.4, 'wa-smoke'), I.dot(31, -43, 60, 4.6, 'wa-smoke'), I.dot(37, -48, 70, 6, 'wa-smoke'),
+      I.cyl(24, -36, 4.2, 0, 44), I.dot(27, -39, 52, 3.4, 'wa-smoke wl wl-smoke', 0), I.dot(31, -43, 60, 4.6, 'wa-smoke wl wl-smoke', 1), I.dot(37, -48, 70, 6, 'wa-smoke wl wl-smoke', 2),
       I.face([[-44, -4, 0], [-22, -4, 0], [-22, -4, 16], [-44, -4, 16]], 'wa-lit'), I.windows(-14, 14, -4, 6, 17, 2, 1, 2),
       // made to order: a gift, with its ribbon
       I.box(22, 14, 26, 24, 0, 18, { lit: true }), I.line([[35, 14, 18], [35, 38, 18], [35, 38, 0]], 'wa-acc-l wa-l--thick'), I.line([[22, 26, 18], [48, 26, 18], [48, 26, 0]], 'wa-acc-l wa-l--thick'),
@@ -202,7 +202,7 @@ const BANDS: BandDef[] = [
       // the projector is the screen
       I.line([[-50, -36, 0], [-50, -36, 10]], 'wa-pole'), I.line([[22, -36, 0], [22, -36, 10]], 'wa-pole'),
       I.box(-58, -40, 88, 6, 10, 54), I.face([[-54, -34, 14], [26, -34, 14], [26, -34, 60], [-54, -34, 60]], 'wa-lit'),
-      I.line([[-44, -34, 24], [-44, -34, 38]], 'wa-l wa-l--ink wa-l--thick'), I.line([[16, -34, 34], [16, -34, 48]], 'wa-l wa-l--ink wa-l--thick'), I.dot(-10, -34, 40, 3.4, 'wa-acc'),
+      I.line([[-44, -34, 24], [-44, -34, 38]], 'wa-l wa-l--ink wa-l--thick'), I.line([[16, -34, 34], [16, -34, 48]], 'wa-l wa-l--ink wa-l--thick'), I.dot(-10, -34, 40, 3.4, 'wa-acc wl wl-ball'),
       I.face([[2, 22, 12], [-54, -34, 14], [26, -34, 60]], 'wa-beam'), I.box(-6, 18, 18, 14, 0, 6), I.box(-4, 20, 14, 10, 6, 7), I.dot(2, 20, 10, 2.4, 'wa-lit'),
       // and the phones of the crowd, the controllers
       [[30, 30], [46, 14], [52, 40]].map(([x, y]) => I.line([[x + 3, y + 5, 3], [-14, -34, 36]], 'wa-ctl') + I.box(x, y, 8, 13, 0, 2.4, { lit: true, r: 2 })).join(''),
@@ -212,7 +212,7 @@ const BANDS: BandDef[] = [
     F.tree(96, -204, 1.1) + F.tree(158, -164) + F.tree(200, -208, 0.9) + F.bush(138, -120) + F.tree(-40, -246) + F.tree(-196, -10) + F.bush(-186, 52) + F.tree(202, 110, 1.05) + F.bush(196, 150) + F.tree(-200, 154), draw: (I) => [
       I.box(-52, -44, 66, 34, 0, 26), I.windowsR(-38, -14, 14, 6, 22, 2, 2, 3), awning(I, -52, 14, -10, 21, 12, 6, 6), I.face([[-22, -10, 0], [-8, -10, 0], [-8, -10, 14], [-22, -10, 14]], 'wa-lit'),
       // the morning star over the door
-      I.line([[26, -38, 0], [26, -38, 58]], 'wa-pole'), star(I, 26, -38, 66, 11, 'wa-lit'),
+      I.line([[26, -38, 0], [26, -38, 58]], 'wa-pole'), I.live('wl-pulse wl-pulse--star', 26, -38, 66, star(I, 26, -38, 66, 11, 'wa-lit')),
       // tables you order from
       [[-10, 26], [18, 10], [38, 34]].map(([x, y], i) => I.cyl(x, y, 2, 0, 8) + I.cyl(x, y, 9, 8, 2, { lit: true }) + I.box(x - 3, y - 3, 6, 6, 10, 0.6, { r: 0.6 }) + I.cyl(x + 13, y - 2 + i * 2, 3.4, 0, 5) + I.cyl(x - 4, y + 13, 3.4, 0, 5)).join(''),
     ].join('') },
@@ -223,7 +223,7 @@ const BANDS: BandDef[] = [
       const t = k.radialTicks(I.T(0, 0, 0)[0], I.T(0, 0, 0)[1], 43, 24, 6, 6, [4, 8], P);
       return [
         I.cyl(0, 0, 46, 0, 6, { lit: true }), `<path class="wa-l wa-l--ink" d="${t.minor}"/><path class="wa-l wa-l--ink wa-l--thick" d="${t.major}"/>`, I.ring(0, 0, 28, 6, 'wa-l wa-l--ink'),
-        I.face([[0, 0, 6], [30, 26, 6], [12, 34, 6]], 'wa-acc wa-acc--soft'), I.face([[0, -30, 6], [0, 6, 6], [0, 6, 40]], 'wa-f2'), I.line([[0, -30, 6], [0, 6, 40], [0, 6, 6]], 'wa-l wa-l--hi'),
+        I.turn('z', 0, 0, 6, 'wl-clock', '<path class="wa-acc wa-acc--soft" d="M0 0L30 26L12 34Z"/>'), I.face([[0, -30, 6], [0, 6, 6], [0, 6, 40]], 'wa-f2'), I.line([[0, -30, 6], [0, 6, 40], [0, 6, 6]], 'wa-l wa-l--hi'),
         // a goal reached
         I.flag(-30, 28, 6, 26), I.dot(18, -30, 6, 3, 'wa-ink'), I.dot(-34, -10, 6, 3, 'wa-ink'),
       ].join('');
@@ -238,8 +238,8 @@ const BANDS: BandDef[] = [
       I.cyl(-104, -44, 14, 0, 12), I.ring(-104, -44, 14, 6, 'wa-l wa-l--hi'), `<path class="wa-wire" d="${k.ring(I.T(-104, -44, 0)[0], I.T(-104, -44, 0)[1], 14, 26, P, 28)}"/>` + I.line([[-118, -44, 12], [-118, -44, 26]], 'wa-wire') + I.line([[-90, -44, 12], [-90, -44, 26]], 'wa-wire'),
       [[-60, -52], [-36, -52], [-36, -28], [-60, -28]].map(([x, y]) => I.line([[x, y, 0], [-48, -40, 70]], 'wa-wire')).join(''),
       [18, 36, 52].map((z) => { const s = 12 * (1 - z / 70); return I.line([[-48 - s, -40 - s, z], [-48 + s, -40 - s, z], [-48 + s, -40 + s, z], [-48 - s, -40 + s, z], [-48 - s, -40 - s, z]], 'wa-wire'); }).join(''),
-      I.box(-92, 4, 46, 12, 0, 4), I.line([[-80, 10, 4], [-70, 10, 28], [-60, 10, 4]], 'wa-pole wa-l--thick'), I.line([[-96, 10, 23], [-44, 10, 33]], 'wa-beamline'),
-      I.face([[-46, 10, 39], [-39, 10, 36], [-39, 10, 26], [-46, 10, 29]], 'wa-f2'), I.line([[-41, 10, 27], [-41, 10, 4]], 'wa-pole'), I.wheel(-90, 10, 14, 8, 'y', 'wa-wheel'), I.dot(-41, 10, 4, 2.6, 'wa-acc'),
+      I.box(-92, 4, 46, 12, 0, 4), I.line([[-80, 10, 4], [-70, 10, 28], [-60, 10, 4]], 'wa-pole wa-l--thick'), 
+      I.turn('y', -70, 10, 28, 'wl-nod', '<path class="wa-beamline" d="M-26 -5L26 5"/><path class="wa-f2" d="M24 11L31 8L31 -2L24 1Z"/>'), I.line([[-41, 10, 27], [-41, 10, 4]], 'wa-pole'), I.wheel(-90, 10, 14, 8, 'y', 'wa-wheel'), I.dot(-41, 10, 4, 2.6, 'wa-acc'),
       I.crane(-16, -50, 0, 62, 34, 'y'), I.stake(-122, 58, 0), I.stake(-8, 58, 0),
     ].join('') },
   { id: 'nucleo', group: 'next', w: 124, d: 136, ground: G.field, shift: [-72, 0], tones: { g3: '#8fc56c', t1: '#2f7a52', t2: '#5cb07c', wt: '#4f8df0' },
@@ -249,7 +249,7 @@ const BANDS: BandDef[] = [
       // the farmland: a barn, a silo half risen, a windmill
       I.box(22, -56, 38, 26, 0, 17), I.gable(19, -59, 44, 32, 17, 12), I.face([[34, -30, 0], [46, -30, 0], [46, -30, 12], [34, -30, 12]], 'wa-lit'),
       I.cyl(84, -42, 12, 0, 22), I.ring(84, -42, 12, 11, 'wa-l wa-l--hi'), `<path class="wa-wire" d="${k.ring(I.T(84, -42, 0)[0], I.T(84, -42, 0)[1], 12, 40, P, 28)}"/>` + I.line([[72, -42, 22], [72, -42, 40]], 'wa-wire') + I.line([[96, -42, 22], [96, -42, 40]], 'wa-wire'), I.scaffold(70, 98, -29, 0, 40, 3, 4),
-      I.line([[104, 24, 0], [108, 28, 44], [112, 24, 0]], 'wa-pole'), I.line([[108, 32, 0], [108, 28, 44]], 'wa-pole'), rays(I, 108, 28, 44, 15, 8, 'wa-fan'), I.dot(108, 28, 44, 2.6, 'wa-acc'),
+      I.line([[104, 24, 0], [108, 28, 44], [112, 24, 0]], 'wa-pole'), I.line([[108, 32, 0], [108, 28, 44]], 'wa-pole'), I.live('wl-rot wl-rot--fast', 108, 28, 44, rays(I, 108, 28, 44, 15, 8, 'wa-fan')), I.dot(108, 28, 44, 2.6, 'wa-acc'),
       I.stake(124, 58, 0), I.stake(124, -58, 0), I.stake(14, 58, 0),
     ].join('') },
 ];
@@ -385,7 +385,7 @@ function feats(I: Isle, b: BandDef, cx: number, cy: number, bw: number) {
     band: (dx: number, dy: number, rx: number, w: number) => pa('wa-g2', `${el(X(dx, dy), Y(dy), rx, rx / 2)}${el(X(dx, dy), Y(dy), rx - w, (rx - w) / 2)}`).replace('<path ', '<path fill-rule="evenodd" '),
     track: (dx: number, dy: number, rx: number) => g('track', dx, dy, rx, rx / 2, () => pa('wa-track', `${el(X(dx, dy), Y(dy), rx, rx / 2)}${el(X(dx, dy), Y(dy), rx - 14, (rx - 14) / 2)}`).replace('<path ', '<path fill-rule="evenodd" ') + pa('wa-lane', el(X(dx, dy), Y(dy), rx - 7, (rx - 7) / 2))),
     umbrella: (dx: number, dy: number, cls: string) => g('umbrella', dx, dy, 12, 22, () => { const x = X(dx, dy), y = Y(dy); return shadow(x, y, 9) + pa('wa-pole', `M${n1(x)} ${n1(y)}V${n1(y - 17)}`) + pa(cls, `M${n1(x - 11)} ${n1(y - 14)}A11 8 0 0 1 ${n1(x + 11)} ${n1(y - 14)}A11 3.4 0 0 1 ${n1(x - 11)} ${n1(y - 14)}Z`); }),
-    boat: (dx: number, dy: number) => g('boat', dx, dy, 26, 24, () => { const x = X(dx, dy), y = Y(dy); return pa('wa-glint', `M${n1(x - 26)} ${n1(y + 8)}h16M${n1(x + 12)} ${n1(y + 9)}h12`) + pa('wa-ink', `M${n1(x - 13)} ${n1(y)}H${n1(x + 13)}L${n1(x + 8)} ${n1(y + 6)}H${n1(x - 8)}Z`) + pa('wa-lit', `M${n1(x - 1)} ${n1(y - 2)}V${n1(y - 22)}L${n1(x + 11)} ${n1(y - 2)}Z`); }),
+    boat: (dx: number, dy: number) => g('boat', dx, dy, 26, 24, () => { const x = X(dx, dy), y = Y(dy); return `<g class="wl wl-bob" style="--i:${Math.abs(Math.round(dx)) % 5}">` + pa('wa-glint', `M${n1(x - 26)} ${n1(y + 8)}h16M${n1(x + 12)} ${n1(y + 9)}h12`) + pa('wa-ink', `M${n1(x - 13)} ${n1(y)}H${n1(x + 13)}L${n1(x + 8)} ${n1(y + 6)}H${n1(x - 8)}Z`) + pa('wa-lit', `M${n1(x - 1)} ${n1(y - 2)}V${n1(y - 22)}L${n1(x + 11)} ${n1(y - 2)}Z`) + '</g>'; }),
   };
   return F;
 }
@@ -395,6 +395,8 @@ type Feats = ReturnType<typeof feats>;
 function bounds(svg: string): [number, number, number, number] {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
   const see = (x: number, y: number, r = 0) => { x0 = Math.min(x0, x - r); y0 = Math.min(y0, y - r); x1 = Math.max(x1, x + r); y1 = Math.max(y1, y + r); };
+  // what turns is drawn in the coordinates of its own plane, around (0, 0): it is not part of the measure
+  svg = svg.replace(/<g transform="matrix[^"]*"><g class="[^"]*">.*?<\/g><\/g>/g, '');
   for (const m of svg.matchAll(/ d="([^"]+)"/g)) {
     for (const seg of m[1].matchAll(/([MLCA])([^MLCAZ]*)/g)) {
       const n = (seg[2].match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
@@ -405,7 +407,7 @@ function bounds(svg: string): [number, number, number, number] {
   return [x0, y0, x1, y1];
 }
 
-type Built = { i: number; id: string; group: WorldGroup; vars: string; ground: string; l: number; r: number; cx: number; cy: number; floor: string; over: string; node: [number, number]; under: string; box: [number, number, number, number] };
+type Built = { i: number; reach: number; id: string; group: WorldGroup; vars: string; ground: string; l: number; r: number; cx: number; cy: number; floor: string; over: string; node: [number, number]; under: string; box: [number, number, number, number] };
 let edge = 0;
 const built: Built[] = BANDS.map((b, i) => {
   const bw = Math.round((b.w + b.d) * KX + AIR), l = edge, r = (edge += bw);
@@ -416,11 +418,11 @@ const built: Built[] = BANDS.map((b, i) => {
   const dark = lum(b.ground) <= 0.3;
   const t: Tones = { g2: dark ? mix(b.ground, PAPER, 0.14) : mix(b.ground, '#ffffff', 0.34), g3: dark ? mix(b.ground, INK, 0.36) : mix(b.ground, INK, 0.13), t1: '#2f6f5e', t2: '#5fae8f', wt: '#3f6df2', rk: mix(b.ground, INK, dark ? 0.5 : 0.4), ...b.tones };
   // what stands free on the ground (poles, wires, scaffolds) is ink on a light band and paper on a dark one
-  const vars = `--g:${b.ground};--g2:${t.g2};--g3:${t.g3};--gs:${mix(b.ground, INK, 0.42)};--gs2:${mix(b.ground, INK, 0.58)};--gl:${dark ? mix(b.ground, PAPER, 0.3) : mix(b.ground, INK, 0.2)};--t1:${t.t1};--t2:${t.t2};--wt:${t.wt};--rk:${t.rk};--a:${b.accent ?? C.coral};--w:${dark ? PAPER : INK}`;
+  const vars = `--g0:${b.ground};--g20:${t.g2};--g30:${t.g3};--gs0:${mix(b.ground, INK, 0.42)};--gs20:${mix(b.ground, INK, 0.58)};--gl0:${dark ? mix(b.ground, PAPER, 0.3) : mix(b.ground, INK, 0.2)};--t10:${t.t1};--t20:${t.t2};--wt0:${t.wt};--rk0:${t.rk};--a:${b.accent ?? C.coral};--w0:${dark ? PAPER : INK}`;
   const over = b.draw(I);
   const [x0, y0, x1, y1] = bounds(over);
   return {
-    i, id: b.id, group: b.group, vars, ground: b.ground, l, r, cx, cy, under: b.under ?? b.ground,
+    i, reach: (b.w + b.d) * KX * 0.72, id: b.id, group: b.group, vars, ground: b.ground, l, r, cx, cy, under: b.under ?? b.ground,
     // the door of the place: in front of what stands on it, where the path passes
     node: pt(I.T(...(b.node ?? [-sx + b.w / 2 + 12, -sy + b.d / 2 + 12]), 0)),
     floor: b.floor?.(feats(I, b, cx, cy, bw), I) ?? '',
@@ -446,15 +448,17 @@ const trail =
  */
 const ground = (b: Built) => {
   const d = poly(b.i === 0 ? b.l - 900 : b.l, b.i === built.length - 1 ? b.r + 900 : b.r);
-  return `<g class="wa wa-band" id="wbg${b.i}" data-id="${b.id}" data-group="${b.group}" style="${b.vars}"><clipPath id="wb${b.i}"><path d="${d}"/></clipPath><path class="wa-land" d="${d}"/><g clip-path="url(#wb${b.i})">${b.floor}</g></g>`;
+  return `<g class="wa wa-band" id="wbg${b.i}" data-id="${b.id}" data-group="${b.group}" style="${b.vars}"><clipPath id="wb${b.i}"><path d="${d}"/></clipPath><path class="wa-land" d="${d}"/><g clip-path="url(#wb${b.i})">${b.floor}<ellipse class="wa-glow" fill="url(#wglow)" cx="${n1(b.cx)}" cy="${n1(b.cy + 14)}" rx="${n1(b.reach)}" ry="${n1(b.reach * 0.5)}"/></g></g>`;
 };
 const stands = (b: Built) => `<g class="wa wa-isle" id="wst${b.i}" data-id="${b.id}" data-group="${b.group}" style="${b.vars}">${b.over}</g>`;
-const steps = built.slice(1).map((b) => `<path class="wa-step" style="--gs:${mix(b.ground, INK, 0.42)}" d="${poly(b.l, b.l + STEP)}"/>`).join('');
+const steps = built.slice(1).map((b) => `<path class="wa-step wa-tone" style="--gs0:${mix(b.ground, INK, 0.42)}" d="${poly(b.l, b.l + STEP)}"/>`).join('');
 const byDepth = [...built].sort((a, b) => a.cy - b.cy || a.i - b.i);
 
 export const WORLD_BOX = { x: 0, y: 0, width: W, height: H };
 /** The whole land: every ground with its biome, the steps between them, the path, then everything that stands, back to front. */
-export const WORLD_SVG = built.map(ground).join('') + steps + trail + byDepth.map(stands).join('');
+export const WORLD_SVG =
+  '<defs><radialGradient id="wglow"><stop offset="0" stop-color="#ffe7a6" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffd27a" stop-opacity="0.16"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>' +
+  built.map(ground).join('') + steps + trail + byDepth.map(stands).join('');
 const use = (b: Built[], part: 'wbg' | 'wst') => b.map((c) => `<use href="#${part}${c.i}"/>`).join('');
 /** One place on its own: a 4:3 window on the land, close to what stands on it (its ground and what stands, by reference). */
 export const WORLD_ISLES: Record<string, { svg: string; box: [number, number, number, number]; group: WorldGroup; ground: string }> =
@@ -481,7 +485,7 @@ export const WORLD_STOPS = WORLD_IDS.map((id) => {
   // the middle of what stands on the stop, up and down: where a zoomed map looks
   const top = Math.min(...b.map((c) => c.box[1])), bottom = Math.max(...b.map((c) => c.box[3]));
   // a little to the left of the stop (the band leans that way at the bottom), near enough to be in view on a phone when the stop is in the middle
-  return { id, group: b[0].group, x: Math.round(mid), y: Math.round((top + bottom) / 2), label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
+  return { id, group: b[0].group, x: Math.round(mid), y: Math.round((top + bottom) / 2), span: [Math.round(at(b[0].l, H)), Math.round(at(b[b.length - 1].r, 0))] as [number, number], label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
 });
 /**
  * The whole land in a few shapes, for the minimap: every band in the colour of its ground, the path and a dot
@@ -491,3 +495,32 @@ export const WORLD_MINI =
   built.map((b) => `<path d="${poly(b.l, b.r)}" fill="${b.under === b.ground ? b.ground : b.under}"/>`).join('') +
   `<path class="wm-path" d="${pathD(done)}"/><path class="wm-path wm-path--plan" d="${pathD(plan)}"/>` +
   nodes.map((n, i) => `<circle class="wm-stop" data-i="${i}" cx="${n[0].toFixed(0)}" cy="${n[1].toFixed(0)}" r="9"/>`).join('');
+
+/**
+ * Life (lote 4.3): who walks and what can be picked up, in the units of the land.
+ * People walk the path of light near every stop — in front of what stands there, so nobody is ever drawn over a
+ * building — back and forth between two points: `x, y` where they start, `dx, dy` how far they go, `dur` how long
+ * one way takes (seconds), `c` what they wear and `ink` the colour of the rest of them on that ground.
+ */
+const WEAR = [C.coral, C.amber, C.mint, '#5f86ff', '#ff8fc0', '#c79bff'];
+export const WORLD_WALKERS = WORLD_IDS.flatMap((id, i) => {
+  const n = nodes[i], next = nodes[Math.min(nodes.length - 1, i + 1)], prev = nodes[Math.max(0, i - 1)], on = of(id)[0].ground;
+  const ink = lum(on) > 0.18 ? INK : PAPER;
+  const leg = (to: [number, number], t0: number, t1: number, side: number, k: number) => {
+    const vx = to[0] - n[0], vy = to[1] - n[1], len = Math.hypot(vx, vy) || 1;
+    // two lanes, one each side of the path
+    const ox = (-vy / len) * side, oy = (vx / len) * side;
+    const x = n[0] + vx * t0 + ox, y = n[1] + vy * t0 + oy, dx = vx * (t1 - t0), dy = vy * (t1 - t0);
+    return { id, x: Math.round(x), y: Math.round(y), dx: Math.round(dx), dy: Math.round(dy), dur: Math.round((Math.hypot(dx, dy) / 11) * 10) / 10, c: WEAR[(i * 2 + k) % WEAR.length], ink };
+  };
+  return [
+    ...(i < nodes.length - 1 ? [leg(next, 0.07, 0.3, 9, 0)] : []),
+    ...(i > 0 ? [leg(prev, 0.06, 0.26, -9, 1)] : [leg(next, 0.34, 0.12, -9, 1)]),
+  ];
+});
+/** Crates left by the path, one per stop (three in the arcade): `x, y` on the land, `c` their colour. To pick up and throw. */
+export const WORLD_CRATES = WORLD_IDS.flatMap((id, i) => {
+  const n = nodes[i];
+  const one = (dx: number, dy: number, k: number) => ({ id, x: Math.round(n[0] + dx), y: Math.round(n[1] + dy), c: WEAR[(i + k * 2 + 3) % WEAR.length] });
+  return id === 'games' ? [one(74, 16, 0), one(98, 24, 1), one(84, 34, 2)] : [one(74 + (i % 3) * 8, 18 + (i % 2) * 8, 0)];
+});

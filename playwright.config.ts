@@ -18,8 +18,9 @@ export default defineConfig({
   webServer: { command: `python3 -m http.server ${port} -d out`, url: `http://127.0.0.1:${port}/es/`, reuseExistingServer: true },
   use: {
     baseURL: `http://127.0.0.1:${port}`,
-    // /v2 opens behind its gate on every load of the home (lote 3.1): the QA switch skips it everywhere but in the gate's own tests
-    storageState: { cookies: [], origins: [{ origin: `http://127.0.0.1:${port}`, localStorage: [{ name: 'ig:v2:gate', value: 'off' }] }] },
+    // /v2 opens behind its gate on every load of the home (lote 3.1): the QA switch skips it everywhere but in the gate's own tests.
+    // The world of Work starts by day or by night with the visitor's clock (lote 4.3): the tests start by day.
+    storageState: { cookies: [], origins: [{ origin: `http://127.0.0.1:${port}`, localStorage: [{ name: 'ig:v2:gate', value: 'off' }, { name: 'ig:v2:time', value: 'day' }] }] },
     launchOptions: { executablePath: chromium },
   },
 });

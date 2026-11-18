@@ -29,7 +29,24 @@ export function isle(ox: number, oy: number) {
     S(k.slabOf(plan(x, y, w, d, o.r ?? 1.2), z, h, P, 5, o.bevel ?? 0), { tone: 'hi', ...o });
   const cyl = (cx: number, cy: number, r: number, z: number, h: number, o: Opt = {}) =>
     S(k.cylinder(ox + cx, oy + cy, r, z, h, P, 28, o.bevel ?? 0), { tone: 'hi', ...o });
-  const dot = (x: number, y: number, z: number, r: number, cls = 'wa-lit') => { const [cx, cy] = pt(T(x, y, z)); return `<circle class="${cls}" cx="${n1(cx)}" cy="${n1(cy)}" r="${r}"/>`; };
+  /** `i` staggers whatever life the dot has (a blink, a puff of smoke): --i, read by the animation's delay. */
+  const dot = (x: number, y: number, z: number, r: number, cls = 'wa-lit', i?: number) => { const [cx, cy] = pt(T(x, y, z)); return `<circle class="${cls}"${i === undefined ? '' : ` style="--i:${i}"`} cx="${n1(cx)}" cy="${n1(cy)}" r="${r}"/>`; };
+  /**
+   * Life (lote 4.3). A part that moves is wrapped in a group with a class `wl wl-…`; the stylesheet animates it,
+   * only while its place is on screen. `live` anchors the movement on a point of the world (its transform-origin).
+   */
+  const live = (cls: string, x: number, y: number, z: number, content: string) => { const [cx, cy] = pt(T(x, y, z)); return `<g class="wl ${cls}" style="transform-origin:${n1(cx)}px ${n1(cy)}px">${content}</g>`; };
+  /**
+   * A part that turns in a plane of the world: about the vertical ('z': a beam, a shadow), or standing, facing the
+   * viewer's left ('y') or right ('x') — a wheel, a reel. `local` is drawn flat, in that plane's own two axes
+   * around (0, 0), where a circle is a circle; the outer group lays the plane down in the projection and the
+   * inner one turns. So it is a true rotation in space, done with one `rotate`.
+   */
+  const turn = (axis: 'x' | 'y' | 'z', x: number, y: number, z: number, cls: string, local: string) => {
+    const [cx, cy] = pt(T(x, y, z));
+    const m = axis === 'z' ? [KX, KY, -KX, KY] : axis === 'y' ? [KX, KY, 0, -KZ] : [-KX, KY, 0, -KZ];
+    return `<g transform="matrix(${m.join(' ')} ${n1(cx)} ${n1(cy)})"><g class="wl ${cls}">${local}</g></g>`;
+  };
   /** A flat ring on the ground or on a roof. */
   const ring = (cx: number, cy: number, r: number, z: number, cls = 'wa-l') => `<path class="${cls}" d="${k.ring(ox + cx, oy + cy, r, z, P, 36)}"/>`;
   /** A ring standing up, in the plane that faces the viewer's right (`x`) or left (`y`). */
@@ -59,25 +76,25 @@ export function isle(ox: number, oy: number) {
   };
   /** Windows on the face that looks left (y = yF), from x0 to x1 and z0 to z1. Some are lit, by a fixed pattern. */
   const windows = (x0: number, x1: number, yF: number, z0: number, z1: number, cols: number, rows: number, seed = 0) => {
-    let on = '', off = '';
+    let on = '', off = '', blink = '';
     const cw = (x1 - x0) / cols, rh = (z1 - z0) / rows;
     for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
       const a = x0 + i * cw + cw * 0.22, b = a + cw * 0.56, c = z0 + j * rh + rh * 0.2, e = c + rh * 0.56;
       const d = path([[a, yF, c], [b, yF, c], [b, yF, e], [a, yF, e]], true);
-      if ((i * 7 + j * 5 + seed * 3) % 5 < 2) on += d; else off += d;
+      if ((i * 7 + j * 5 + seed * 3) % 5 < 2) { if ((i * 5 + j * 3 + seed) % 4 === 0) blink += d; else on += d; } else off += d;
     }
-    return `<path class="wa-win" d="${off}"/><path class="wa-lit" d="${on}"/>`;
+    return `<path class="wa-win" d="${off}"/><path class="wa-lit" d="${on}"/>${blink ? `<path class="wa-lit wl wl-twinkle" style="--i:${seed}" d="${blink}"/>` : ''}`;
   };
   /** Windows on the face that looks right (x = xF). */
   const windowsR = (y0: number, y1: number, xF: number, z0: number, z1: number, cols: number, rows: number, seed = 0) => {
-    let on = '', off = '';
+    let on = '', off = '', blink = '';
     const cw = (y1 - y0) / cols, rh = (z1 - z0) / rows;
     for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
       const a = y0 + i * cw + cw * 0.22, b = a + cw * 0.56, c = z0 + j * rh + rh * 0.2, e = c + rh * 0.56;
       const d = path([[xF, a, c], [xF, b, c], [xF, b, e], [xF, a, e]], true);
-      if ((i * 3 + j * 7 + seed * 5) % 6 < 2) on += d; else off += d;
+      if ((i * 3 + j * 7 + seed * 5) % 6 < 2) { if ((i * 5 + j * 3 + seed) % 4 === 0) blink += d; else on += d; } else off += d;
     }
-    return `<path class="wa-win" d="${off}"/><path class="wa-lit" d="${on}"/>`;
+    return `<path class="wa-win" d="${off}"/><path class="wa-lit" d="${on}"/>${blink ? `<path class="wa-lit wl wl-twinkle" style="--i:${seed}" d="${blink}"/>` : ''}`;
   };
   /** The part of a building that is still a drawing: its edges, dashed. */
   const wire = (x: number, y: number, w: number, d: number, z: number, h: number) =>
@@ -98,10 +115,10 @@ export function isle(ox: number, oy: number) {
   };
   const tree = (cx: number, cy: number, z: number, r = 4) => line([[cx, cy, z], [cx, cy, z + r * 1.3]], 'wa-pole') + dot(cx, cy, z + r * 2.1, r * 1.15, 'wa-tree');
   const flag = (cx: number, cy: number, z: number, h: number) =>
-    line([[cx, cy, z], [cx, cy, z + h]], 'wa-pole') + face([[cx, cy, z + h], [cx + 8, cy, z + h - 3], [cx, cy, z + h - 6]], 'wa-acc');
+    line([[cx, cy, z], [cx, cy, z + h]], 'wa-pole') + live('wl-wave', cx, cy, z + h - 3, face([[cx, cy, z + h], [cx + 8, cy, z + h - 3], [cx, cy, z + h - 6]], 'wa-acc'));
   /** A stake with its ribbon: a lot that is marked, not built. */
   const stake = (cx: number, cy: number, z: number) => line([[cx, cy, z], [cx, cy, z + 7]], 'wa-pole') + dot(cx, cy, z + 7, 1.5, 'wa-acc');
-  return { T, path, face, line, box, cyl, dot, ring, wheel, gable, gableY, pyr, cone, dome, windows, windowsR, wire, scaffold, crane, tree, flag, stake, plan };
+  return { T, path, face, line, box, cyl, dot, live, turn, ring, wheel, gable, gableY, pyr, cone, dome, windows, windowsR, wire, scaffold, crane, tree, flag, stake, plan };
 }
 export type Isle = ReturnType<typeof isle>;
 export { S as solid, L as lineSvg };
