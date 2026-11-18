@@ -186,7 +186,7 @@ a { color: inherit; }
 @media (min-width: 1100px) {
   .v2-sys, .v2-main, .v2-foot { padding-left: var(--size-margin-desktop); padding-right: var(--size-margin-desktop); }
   /* the hero starts close under the header (Ignacio, 18/11/2026: «entre el hero y el header tiene que haber menos espacio»): no centring in a full-height box */
-  .v2-hero-grid { grid-template-columns: minmax(0, 516fr) minmax(0, 740fr); gap: var(--space-8); align-items: start; padding: var(--space-8) 0 var(--space-12); }
+  .v2-hero-grid { grid-template-columns: minmax(0, 516fr) minmax(0, 740fr); gap: var(--space-8); align-items: start; padding: var(--space-3) 0 var(--space-12); }
   /* the stack is the tall column: it keeps its own centre, the text starts at the top */
   .v2-hero-grid > :last-child { align-self: center; }
 }
