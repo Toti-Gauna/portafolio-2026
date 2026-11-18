@@ -19,6 +19,9 @@ export const SoundIcon = ({ on, size = 18 }: P & { on: boolean }) => (
 export const MenuIcon = ({ size = 16 }: P) => (
   <svg aria-hidden="true" viewBox="0 0 16 10" width={size} height={(size * 10) / 16} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M1 1h14M1 9h14" /></svg>
 );
+export const CloseIcon = ({ size = 16 }: P) => (
+  <svg aria-hidden="true" viewBox="0 0 16 16" width={size} height={size} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M3 3l10 10M13 3L3 13" /></svg>
+);
 export const CheckIcon = ({ size = 14 }: P) => (
   <svg aria-hidden="true" viewBox="0 0 14 14" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 7.5l3 3 6-7" /></svg>
 );

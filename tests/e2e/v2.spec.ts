@@ -1,9 +1,10 @@
 import { expect, test } from '@playwright/test';
 import tokens from '../../v2/tokens/tokens.json';
 
-// /v2: the new portfolio, built in batches next to the published one (lote 1.2: the token specimen).
+// /v2: the new portfolio, built in batches next to the published one. The home is /v2/<locale>/ and the token
+// specimen (lote 1.2) lives at /v2/<locale>/tokens/.
 
-test('/v2/ sends the visitor to a language, and /v2/es/ renders the specimen with no console errors', async ({ page }) => {
+test('/v2/ sends the visitor to a language; the home and the token specimen render with no console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
@@ -12,15 +13,19 @@ test('/v2/ sends the visitor to a language, and /v2/es/ renders the specimen wit
   await expect(page).toHaveURL(/\/v2\/es\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Ignacio\s*Gauna/);
   await expect(page.locator('.ui-role')).toContainText('Sr');
-  for (const id of ['color', 'tipografia', 'espacio', 'movimiento', 'profundidad']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
   await expect(page.locator('.sig-stack-legend button')).toHaveCount(5);
   expect(await page.locator('body').innerText()).not.toMatch(/\bSsr\b/);
+  await page.goto('/v2/es/tokens/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+  for (const id of ['color', 'tipografia', 'espacio', 'movimiento', 'profundidad']) await expect(page.locator(`section#${id} h2`)).toHaveCount(1);
+  await expect(page.getByRole('navigation', { name: 'Sistema' }).getByRole('link', { name: 'Tokens' })).toHaveAttribute('aria-current', 'page');
   expect(errors).toEqual([]);
 });
 
 test('/v2 is never indexed and stays out of the sitemap', async ({ page, request }) => {
-  for (const l of ['es', 'en']) {
-    await page.goto(`/v2/${l}/`);
+  const paths = ['', 'tokens/', 'work/', 'como-trabajo/', 'brand-lab/', 'negocio/', 'sobre-mi/'];
+  for (const l of ['es', 'en']) for (const path of paths) {
+    await page.goto(`/v2/${l}/${path}`);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   }
   const sitemap = await (await request.get('/sitemap.xml')).text();
@@ -56,6 +61,7 @@ test('language switch, keyboard focus and the motion rows', async ({ page }) => 
   await expect(skip).toBeFocused();
   await expect(skip).toBeInViewport();
   // a motion row switches with the keyboard
+  await page.goto('/v2/en/tokens/');
   const box = page.locator('.v2-motion-input').first();
   await box.focus();
   await page.keyboard.press('Space');
@@ -65,7 +71,8 @@ test('language switch, keyboard focus and the motion rows', async ({ page }) => 
 for (const [w, h] of [[360, 740], [390, 844], [1440, 900]] as const) {
   test(`no horizontal scroll, no text under 12 px, targets of 44 px at ${w}×${h}`, async ({ page }) => {
     await page.setViewportSize({ width: w, height: h });
-    await page.goto('/v2/es/');
+    for (const path of ['/v2/es/', '/v2/es/tokens/']) {
+    await page.goto(path);
     const r = await page.evaluate(() => {
       const small: string[] = [];
       for (const el of document.querySelectorAll('body *')) {
@@ -73,21 +80,23 @@ for (const [w, h] of [[360, 740], [390, 844], [1440, 900]] as const) {
         if (own && parseFloat(getComputedStyle(el).fontSize) < 12) small.push(el.className || el.tagName);
       }
       const tiny = [...document.querySelectorAll<HTMLElement>('a, button, label')]
-        .filter((el) => el.offsetParent && !el.classList.contains('v2-skip'))
+        // a glass card is one link stretched over the card: the card is the target
+        .filter((el) => el.offsetParent && !el.classList.contains('v2-skip') && !el.closest('.ui-card-title'))
         .map((el) => el.getBoundingClientRect())
         .filter((b) => b.height < 44);
       return { over: document.documentElement.scrollWidth - window.innerWidth, small, tiny: tiny.length };
     });
-    expect(r.over).toBeLessThanOrEqual(0);
-    expect(r.small).toEqual([]);
-    expect(r.tiny).toBe(0);
+    expect(r.over, path).toBeLessThanOrEqual(0);
+    expect(r.small, path).toEqual([]);
+    expect(r.tiny, path).toBe(0);
+    }
   });
 }
 
 test('reduced motion: the motion demo jumps without a transition', async ({ browser }) => {
   const ctx = await browser.newContext({ reducedMotion: 'reduce' });
   const page = await ctx.newPage();
-  await page.goto('/v2/es/');
+  await page.goto('/v2/es/tokens/');
   await expect(page.locator('.v2-motion-dot').first()).toHaveCSS('transition-duration', '0s');
   await ctx.close();
 });

@@ -108,12 +108,14 @@ const typeVars = Object.entries(T).map(([k, v]) => `--type-${k}:${v}`).join(';')
 const motionVars = Object.entries(src.motion).map(([k, v]) => `--motion-${k}:${v}`).join(';');
 const css = (f) => readFileSync(join(ROOT, 'app/v2/[locale]', f), 'utf8');
 put('components/bundle.css', [
-  `/* ${TITLE} — the /v2 stylesheets (app/v2/[locale]/ui.css, signature.css, kit.css). Colours, spacing, radii, sizes, shadows and gradients come from tokens.css. */`,
+  `/* ${TITLE} — the /v2 stylesheets (app/v2/[locale]/ui.css, signature.css, kit.css, site.css). Colours, spacing, radii, sizes, shadows and gradients come from tokens.css. */`,
   `:root{--family-sans:var(--font-sans);--family-mono:var(--font-mono);${typeVars};${motionVars}}`,
   `.ds-stage{display:grid;gap:var(--space-4);padding:var(--space-5);background:var(--gradient-page),var(--color-bg);color:var(--color-text);font-family:var(--family-sans);font-size:var(--type-body-size);line-height:var(--type-body-lh);min-height:100%;box-sizing:border-box;align-content:start}.ds-stage>:is(.ui-lang,.ui-sound,.ui-linkarrow,.ui-check,.ui-switch){justify-self:start}`,
   `.ds-stage *,.ds-stage *::before,.ds-stage *::after{box-sizing:border-box}.ds-stage :is(h1,h2,h3,p,ol,ul,figure){margin:0}.ds-stage :is(ol,ul){padding:0;list-style:none}.ds-stage a{color:inherit}.ds-stage :focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;border-radius:var(--radius-xs)}`,
   `.v2-label{font-family:var(--family-mono);font-size:var(--type-label-size);font-weight:700;letter-spacing:var(--type-label-tracking);text-transform:uppercase;color:var(--color-text-subtle)}.v2-mono{font-family:var(--family-mono);font-size:var(--type-label-size)}.v2-dim{color:var(--color-text-subtle)}.v2-sub{font-size:var(--type-h3-size);line-height:var(--type-h3-lh);font-weight:var(--type-h3-weight);color:var(--color-heading)}.v2-sec-text{max-width:62ch;color:var(--color-text-muted)}`,
-  css('ui.css'), css('signature.css'), css('kit.css'),
+  css('ui.css'), css('signature.css'), css('kit.css'), css('site.css'),
+  // the header is fixed on the site; in a preview card it sits in the card
+  `.ds-stage .sh{position:relative;padding:0}.ds-stage .sh-sentinel{display:none}`,
 ].join('\n'));
 
 // ── previews, assets ─────────────────────────────────────────────────────────
@@ -127,7 +129,7 @@ const doc = (c, body) => `<!-- @dsCard group="${c.group}" height=${c.height}${c.
 </body>
 </html>
 `;
-const PAGES = { T: '/v2/es/', C: '/v2/es/componentes/', P: '/v2/es/piezas/', K: '/v2/es/kit/' };
+const PAGES = { H: '/v2/es/', T: '/v2/es/tokens/', C: '/v2/es/componentes/', P: '/v2/es/piezas/', K: '/v2/es/kit/' };
 const browser = await chromium.launch({ executablePath: existsSync('/opt/pw-browsers/chromium') ? '/opt/pw-browsers/chromium' : undefined });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const html = {};
@@ -162,7 +164,7 @@ for (const [key, path] of Object.entries(PAGES)) {
     stamps.forEach((s) => assets.push({ group: 'Estampillas', s }));
   }
   if (key === 'T') {
-    const mono = await page.$eval('.v2-brand svg', (s) => s.innerHTML);
+    const mono = await page.$eval('.sh-home svg', (s) => s.innerHTML);
     assets.push({ group: 'Logos', mono });
   }
 }

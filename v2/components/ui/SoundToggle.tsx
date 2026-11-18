@@ -13,6 +13,10 @@ export function SoundToggle({ label, on, off }: { label: string; on: string; off
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     try { setEnabled(localStorage.getItem(KEY) === 'on'); } catch { /* storage blocked: stays off */ }
+    // the header and the phone menu each have a toggle: they follow each other
+    const sync = (e: Event) => setEnabled(Boolean((e as CustomEvent<{ on: boolean }>).detail?.on));
+    window.addEventListener('ig:v2:sound', sync);
+    return () => window.removeEventListener('ig:v2:sound', sync);
   }, []);
   const toggle = () => {
     const next = !enabled;

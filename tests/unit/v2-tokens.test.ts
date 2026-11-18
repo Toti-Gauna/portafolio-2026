@@ -195,3 +195,48 @@ describe('v2 illustration and icon kit', () => {
     }
   });
 });
+
+describe('v2 site header (lote 2.1)', () => {
+  it('six pages in header order, each with its slug, name and line in both languages', async () => {
+    const { SITE_PAGES } = await import('../../v2/site');
+    expect(SITE_PAGES.map((p) => p.key)).toEqual(['home', 'work', 'how', 'brand', 'business', 'about']);
+    expect(new Set(SITE_PAGES.map((p) => p.path)).size).toBe(SITE_PAGES.length);
+    for (const p of SITE_PAGES) {
+      expect(p.path === '' || /^[a-z-]+\/$/.test(p.path), p.path).toBe(true);
+      for (const m of [es, en]) {
+        const copy = m.site.pages[p.key];
+        expect(copy.t.length, p.key).toBeGreaterThan(0);
+        // one line in the phone menu at 360 px
+        expect(copy.d.length, `${p.key}: ${copy.d}`).toBeLessThanOrEqual(38);
+      }
+    }
+  });
+
+  it('a pathname finds its page; the design system belongs to none', async () => {
+    const { pageOf } = await import('../../v2/site');
+    expect(pageOf('/v2/es/')).toBe('home');
+    expect(pageOf('/v2/en')).toBe('home');
+    expect(pageOf('/v2/es/work/')).toBe('work');
+    expect(pageOf('/v2/en/como-trabajo')).toBe('how');
+    expect(pageOf('/v2/es/brand-lab/')).toBe('brand');
+    expect(pageOf('/v2/es/negocio/')).toBe('business');
+    expect(pageOf('/v2/es/sobre-mi/')).toBe('about');
+    for (const sys of ['tokens/', 'componentes/', 'piezas/', 'kit/']) expect(pageOf(`/v2/es/${sys}`)).toBeNull();
+  });
+
+  it('each page colour reads as a label on the page and on the menu; header text passes AA on the glass', async () => {
+    const { SITE_PAGES } = await import('../../v2/site');
+    for (const p of SITE_PAGES) for (const bg of [C.bg, C['bg-deep']]) expect(contrast(p.from, bg), `${p.key} on ${bg}`).toBeGreaterThanOrEqual(4.5);
+    // the pill is filled with ink-600 → ink-700 (solid on touch screens); its links are text-muted, the current one is heading
+    for (const bg of [C['ink-600'], C['ink-700'], C['surface-raised']]) {
+      expect(contrast(C['text-muted'], bg)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(C.heading, bg)).toBeGreaterThanOrEqual(4.5);
+    }
+    // the lines of the phone menu are text-subtle on bg-deep
+    expect(contrast(C['text-subtle'], C['bg-deep'])).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('the header copy never names what is missing', () => {
+    for (const m of [es, en]) expect(JSON.stringify(m.site)).not.toMatch(/próximamente|coming soon|en construcción|under construction|todavía|not yet/i);
+  });
+});

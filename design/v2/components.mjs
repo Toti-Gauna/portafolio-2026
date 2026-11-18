@@ -158,6 +158,17 @@ export const COMPONENTS = [
   },
   // ── Navegación ──
   {
+    name: 'SiteHeader', group: 'Navegación', page: 'H', select: ['.sh'], height: 96, width: 1280,
+    src: 'v2/components/site/SiteHeader.tsx',
+    readme: `El header del sitio. Arriba de la página es una barra transparente; cuando la página se mueve pasa a ser una píldora de vidrio que flota. Una luz del color de la página actual descansa debajo de su nombre y se desliza hasta el enlace que está bajo el puntero.
+
+- Vive en el layout de \`/v2\`: no se vuelve a montar al cambiar de página, por eso la luz viaja de la página anterior a la nueva.
+- Páginas, en orden: Inicio, Work, Cómo trabajo, Brand Lab, Negocio y Sobre mí (\`v2/site.ts\`), cada una con un color del espectro. A la derecha: sonido, idioma y «Contacto».
+- Debajo de 1100 px muestra el monograma, el nombre de la página actual y «Menú», que abre las páginas a pantalla completa en un \`<dialog>\`: el foco queda adentro, Escape lo cierra y el foco vuelve al botón.
+- Solo cambian \`opacity\` y \`transform\`. El desenfoque del vidrio se usa solo con mouse; en pantallas táctiles el relleno es sólido.
+- La vista previa es estática: muestra la píldora con «Inicio» como página actual.`,
+  },
+  {
     name: 'NavTabs', group: 'Navegación', page: 'C', select: ['#navegacion .cat-spec:nth-of-type(1)'], height: 156,
     src: 'v2/components/ui/Nav.tsx',
     readme: `Pestañas de sección, cada una con su color; la actual lleva \`aria-current\` y una luz arriba.

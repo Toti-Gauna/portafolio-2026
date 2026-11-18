@@ -35,12 +35,12 @@ test('the catalogue renders every family of components, with no console errors',
   expect(errors).toEqual([]);
 });
 
-test('top bar: the current page is marked, tabs lead to the tokens and back, the language keeps the page', async ({ page }) => {
+test('system tabs: the current page is marked, tabs lead to the tokens and back, the language keeps the page', async ({ page }) => {
   await page.goto(URL);
   const tabs = page.getByRole('navigation', { name: 'Sistema' });
   await expect(tabs.getByRole('link', { name: 'Componentes' })).toHaveAttribute('aria-current', 'page');
   await tabs.getByRole('link', { name: 'Tokens' }).click();
-  await expect(page).toHaveURL(/\/v2\/es\/$/);
+  await expect(page).toHaveURL(/\/v2\/es\/tokens\/$/);
   await page.getByRole('navigation', { name: 'Sistema' }).getByRole('link', { name: 'Componentes' }).click();
   await page.getByRole('link', { name: 'English' }).click();
   await expect(page).toHaveURL(/\/v2\/en\/componentes\/$/);
@@ -64,13 +64,15 @@ test('every stop of the Tab order shows its focus ring', async ({ page }) => {
 test('controls work with the keyboard: sound, switch, checkbox, segmented, disclosure, form', async ({ page }) => {
   await page.goto(URL);
   // the sound toggle is remembered on this device
-  const sound = page.locator('.ui-sound');
+  const sound = page.locator('.sh-bar .ui-sound');
   await expect(sound).toHaveAttribute('aria-pressed', 'false');
   await sound.focus();
   await page.keyboard.press('Enter');
   await expect(sound).toHaveAttribute('aria-pressed', 'true');
   await page.reload();
-  await expect(page.locator('.ui-sound')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.sh-bar .ui-sound')).toHaveAttribute('aria-pressed', 'true');
+  // the toggle of the phone menu follows the one of the bar
+  await expect(page.locator('.sm .ui-sound')).toHaveAttribute('aria-pressed', 'true');
 
   const sw = page.getByRole('switch', { name: 'Sonidos de la interfaz' });
   await sw.focus();

@@ -1,0 +1,223 @@
+/* /v2 site chrome (lote 2.1): the header, the phone menu, the opening of each page and the foot.
+   Only tokens; only opacity, transform and colours move. */
+
+/* ── header ──────────────────────────────────────────────────────────────── */
+/* What the page scrolls past: while it is on screen the header is a bar, after it a pill. */
+.sh-sentinel { position: absolute; left: 0; top: 0; width: 1px; height: 28px; pointer-events: none; }
+
+.sh {
+  --sh-pad: calc(var(--size-gutter) - 6px);
+  position: fixed; left: 0; right: 0; top: 0; z-index: var(--z-header);
+  padding: var(--space-2) var(--sh-pad) 0;
+  container: sh / inline-size;
+  pointer-events: none;
+}
+.sh-bar {
+  /* how far each side moves in when the bar becomes the pill (0 below 1100 px) */
+  --sh-d: 0px;
+  /* air between the round ends of the pill and what it holds: the pill grows out on small screens, the sides move in on wide ones */
+  --sh-out: 4px;
+  --sh-in: 0px;
+  position: relative; pointer-events: auto;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-2);
+  height: 56px; padding: 0 6px;
+  max-width: calc(var(--size-max) - 2 * var(--size-margin-desktop) + 12px); margin: 0 auto;
+}
+/* the glass: always the shape of the pill, it only fades and settles in */
+.sh-glass {
+  position: absolute; top: 0; bottom: 0; left: calc(var(--sh-d) - var(--sh-out)); right: calc(var(--sh-d) - var(--sh-out));
+  border-radius: var(--radius-pill); border: 1px solid var(--color-line);
+  /* solid: on a touch screen nothing under the pill shows through it */
+  background: linear-gradient(180deg, var(--color-ink-600), var(--color-ink-700));
+  box-shadow: var(--shadow-panel), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  opacity: 0; transform: scale(1.02, 1.2);
+  transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-base) var(--motion-ease);
+}
+.sh[data-stuck='true'] .sh-glass { opacity: 1; transform: none; }
+.sh-left, .sh-nav, .sh-tools { position: relative; }
+.sh-left, .sh-tools { transition: transform var(--motion-base) var(--motion-ease); }
+.sh[data-stuck='true'] .sh-left { transform: translateX(calc(var(--sh-d) + var(--sh-in))); }
+.sh[data-stuck='true'] .sh-bar > .sh-tools { transform: translateX(calc(-1 * (var(--sh-d) + var(--sh-in)))); }
+
+.sh-left { display: flex; align-items: center; gap: var(--space-1); min-width: 0; }
+.sh-home {
+  display: grid; place-items: center; flex: none; width: var(--size-touch); height: var(--size-touch);
+  border-radius: var(--radius-pill); color: var(--color-heading);
+  transition: background-color var(--motion-fast) var(--motion-ease);
+}
+/* phones and tablets: the page you are on, next to the monogram */
+.sh-here { display: flex; align-items: center; gap: var(--space-2); min-width: 0; font-size: 14px; font-weight: 700; color: var(--color-heading); white-space: nowrap; }
+.sh-here i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c); box-shadow: 0 0 10px var(--c); }
+.sh-here span { overflow: hidden; text-overflow: ellipsis; }
+
+.sh-nav { display: none; justify-self: center; }
+.sh-nav ul { position: relative; display: flex; }
+.sh-nav a {
+  display: inline-flex; align-items: center; min-height: var(--size-touch); padding: 0 14px;
+  border-radius: var(--radius-pill); font-size: 15px; font-weight: 600; color: var(--color-text-muted);
+  text-decoration: none; white-space: nowrap; transition: color var(--motion-fast) var(--motion-ease);
+}
+.sh-nav a[aria-current] { color: var(--color-heading); font-weight: 700; }
+/* the light: a fixed-size glow and a short line that travel with transform */
+.sh-light {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0; pointer-events: none;
+  transform: translateX(var(--x, 0px)); opacity: 0;
+}
+.sh[data-ready='true'] .sh-light {
+  transition: transform var(--motion-base) var(--motion-ease), color var(--motion-base) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease);
+}
+.sh-light[data-on='on'], .sh-light[data-on='over'] { opacity: 1; }
+.sh-light i { position: absolute; left: -60px; top: 50%; width: 120px; height: 56px; margin-top: -28px; background: radial-gradient(closest-side, currentColor, transparent); opacity: 0.2; }
+.sh-light b { position: absolute; left: -11px; bottom: 3px; width: 22px; height: 3px; border-radius: 2px; background: currentColor; box-shadow: 0 0 12px currentColor; transition: opacity var(--motion-fast) var(--motion-ease); }
+.sh-light[data-on='over'] b { opacity: 0.55; }
+/* before the script places the light (or without it), the current page keeps its own line */
+.sh:not([data-ready='true']) .sh-nav a[aria-current] { box-shadow: inset 0 -3px 0 -1px var(--c); }
+
+.sh-tools { display: flex; align-items: center; gap: 6px; }
+.sh-tools .ui-sound { padding: 0; }
+.sh-tools .ui-sound-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.sh-tools .ui-lang { display: none; }
+.sh-lang1, .sh-menu {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); flex: none;
+  min-width: var(--size-touch); min-height: var(--size-touch); padding: 0;
+  border-radius: var(--radius-md); border: 1px solid var(--color-line-strong); background: var(--color-glass);
+  color: var(--color-heading); font-family: inherit; font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer;
+  transition: border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease);
+}
+.sh-lang1 { font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.08em; color: var(--color-text-muted); }
+.sh-menu span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.sh-contact { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .sh-home:hover { background-color: rgba(255, 255, 255, 0.08); }
+  .sh-nav a:hover { color: var(--color-heading); }
+  .sh-lang1:hover, .sh-menu:hover { border-color: var(--color-mist-300); }
+  /* real glass where it is cheap: a mouse means a desktop GPU. Touch screens keep the solid fill (measured). */
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .sh-glass {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-ink-700) 86%, transparent), color-mix(in srgb, var(--color-surface-raised) 90%, transparent));
+      -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6);
+    }
+  }
+}
+@media (min-width: 480px) {
+  .sh-tools .ui-lang { display: inline-flex; }
+  .sh-lang1 { display: none; }
+}
+@media (min-width: 600px) {
+  .sh { --sh-pad: calc(var(--size-margin-tablet) - 6px); }
+  .sh-bar { --sh-out: 8px; }
+  .sh-tools { gap: var(--space-2); }
+  .sh-here { font-size: 15px; }
+  .sh-bar > .sh-tools .sh-menu { padding: 0 var(--space-4); }
+  .sh-bar > .sh-tools .sh-menu span { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+}
+@media (min-width: 1100px) {
+  .sh { --sh-pad: calc(var(--size-margin-desktop) - 6px); padding-top: var(--space-2); }
+  .sh-bar {
+    --sh-pill: 1120px;
+    --sh-out: 0px;
+    --sh-in: 12px;
+    column-gap: var(--space-5);
+    --sh-d: max(0px, calc((min(100cqw, var(--size-max) - 2 * var(--size-margin-desktop) + 12px) - var(--sh-pill)) / 2));
+    /* the pages sit in the middle whenever both sides leave room for it */
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  }
+  .sh-nav { display: block; }
+  .sh-bar > .sh-tools { justify-self: end; }
+  .sh-here, .sh-menu { display: none; }
+  .sh-contact { display: inline-flex; }
+  .sh-tools { gap: var(--space-2); }
+}
+
+/* ── phone menu ──────────────────────────────────────────────────────────── */
+html.sm-open { overflow: hidden; }
+.sm {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: var(--gradient-page), var(--color-bg-deep); color: var(--color-text);
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+}
+@supports (height: 100dvh) { .sm { height: 100dvh; } }
+.sm::backdrop { background: var(--color-bg-deep); }
+.sm:not([open]) { display: none; }
+.sm[open] { display: block; animation: sm-in var(--motion-base) var(--motion-ease) both; }
+.sm[data-closing] { animation: sm-out 180ms var(--motion-ease-in-out) both; }
+@keyframes sm-in { from { opacity: 0; } }
+@keyframes sm-out { to { opacity: 0; } }
+@keyframes sm-rise { from { opacity: 0; transform: translateY(18px); } }
+.sm-in {
+  /* one pixel taller than the dialog: it always scrolls, so a drag never reaches the page under it */
+  display: grid; grid-template-rows: auto 1fr auto; min-height: calc(100% + 1px);
+  padding: var(--space-2) calc(var(--size-gutter) - 6px) calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  background-image: var(--gradient-grid); background-size: var(--size-grid) var(--size-grid);
+}
+.sm-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); height: 56px; padding: 0 6px; }
+.sm-in > nav { display: grid; align-content: center; }
+.sm-list { display: grid; gap: 2px; padding: var(--space-3) 6px; }
+.sm-list li, .sm-foot { animation: sm-rise var(--motion-slow) var(--motion-ease) both; animation-delay: calc(var(--i) * 45ms + 40ms); }
+.sm-list a {
+  position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: baseline; column-gap: var(--space-2);
+  min-height: 60px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-lg); text-decoration: none; overflow: hidden;
+}
+.sm-n { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; color: var(--c); }
+.sm-t {
+  font-size: clamp(28px, 8vw, 44px); line-height: 1; font-weight: 800; font-variation-settings: 'wdth' 112; letter-spacing: -0.03em;
+  color: var(--color-text-muted); transition: color var(--motion-fast) var(--motion-ease);
+}
+.sm-d { grid-column: 2; margin-top: var(--space-1); font-size: 14px; line-height: 1.3; color: var(--color-text-subtle); }
+/* the page you are on: the same light as the header, standing */
+.sm-list a[aria-current] { background: radial-gradient(120% 140% at 0% 50%, color-mix(in srgb, var(--c) 20%, transparent), transparent 62%); }
+.sm-list a[aria-current]::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px; border-radius: 2px; background: var(--c); box-shadow: 0 0 14px var(--c); }
+.sm-list a[aria-current] .sm-t { color: var(--color-heading); }
+.sm-list a[aria-current] .sm-d { color: var(--color-text-muted); }
+@media (hover: hover) and (pointer: fine) { .sm-list a:hover .sm-t { color: var(--color-heading); } }
+.sm-foot { display: grid; gap: var(--space-3); padding: var(--space-4) 6px 0; }
+.sm-foot .ui-btn { justify-content: space-between; }
+.sm-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-4); font-size: 15px; }
+.sm-links a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); color: var(--color-heading); text-decoration-color: var(--color-line-strong); text-underline-offset: 5px; overflow-wrap: anywhere; }
+@media (min-width: 600px) {
+  .sm-in { padding-left: calc(var(--size-margin-tablet) - 6px); padding-right: calc(var(--size-margin-tablet) - 6px); }
+  .sm-list, .sm-foot { width: 100%; max-width: 640px; margin: 0 auto; }
+  .sm-list a { grid-template-columns: 48px minmax(0, 1fr); min-height: 76px; }
+  .sm-t { font-size: 52px; }
+  .sm-d { font-size: 16px; }
+  .sm-foot .ui-btn { justify-self: start; min-width: 240px; }
+}
+
+/* ── the opening of a page ───────────────────────────────────────────────── */
+.st-open {
+  position: relative; display: grid; align-content: center; justify-items: start; gap: var(--space-5);
+  min-height: min(68vh, 640px); padding: var(--space-12) 0;
+}
+.st-open::before {
+  content: ''; position: absolute; left: -12%; top: 6%; width: min(620px, 90%); height: 70%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--from) 22%, transparent), transparent);
+}
+.st-open > * { position: relative; }
+.st-kicker {
+  display: inline-flex; align-items: center; gap: var(--space-3); min-height: 36px; padding: 0 var(--space-4) 0 var(--space-3);
+  border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--from) 55%, transparent); background: var(--color-glass);
+  font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-heading);
+}
+.st-kicker b { color: var(--from); }
+.st-open h1 {
+  max-width: 14ch; font-size: var(--type-h1-size); line-height: var(--type-h1-lh); font-weight: var(--type-h1-weight);
+  font-variation-settings: 'wdth' var(--type-h1-width); letter-spacing: var(--type-h1-tracking); color: var(--color-heading);
+}
+.st-lead { max-width: 38ch; font-size: var(--type-lead-size); line-height: var(--type-lead-lh); font-weight: var(--type-lead-weight); letter-spacing: var(--type-lead-tracking); color: var(--color-text-muted); }
+.st-pager { margin: var(--space-8) 0 0; }
+.st-mail { font-size: var(--type-lead-size); line-height: var(--type-lead-lh); font-weight: 700; color: var(--color-heading); overflow-wrap: anywhere; }
+.st-contact .v2-actions { margin-top: 0; }
+
+/* ── home: a door to every page ──────────────────────────────────────────── */
+.st-doors ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: var(--space-4); }
+.st-doors li { display: grid; }
+.st-doors .ui-card-meta { color: var(--from); font-weight: 700; }
+
+/* ── foot of the site pages ──────────────────────────────────────────────── */
+.sf nav { flex-basis: 100%; order: 3; }
+.sf nav ul { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
+.sf nav a { margin-left: 0; min-width: var(--size-touch); color: var(--color-mist-200); }
+.sf .sf-system { order: 2; }
+@media (min-width: 1100px) {
+  .sf nav { flex-basis: auto; order: 0; margin-left: var(--space-6); }
+}
