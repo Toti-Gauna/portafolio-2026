@@ -23,7 +23,8 @@
 .mu-prog li[data-now] { background: var(--from); border-color: var(--from); color: var(--color-on-accent); }
 .mu-now { min-height: 1.4em; font-family: var(--family-mono); font-size: 13px; color: var(--color-text); }
 .mu-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
-.mu-actions .ui-btn--quiet[aria-pressed='true'] { text-decoration-color: var(--from); }
+.mu-where { color: var(--color-text); }
+.mu-where .v2-label { margin-right: var(--space-2); }
 .mu-table { display: grid; gap: var(--space-1); }
 .mu-table li {
   display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-1); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line);

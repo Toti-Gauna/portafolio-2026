@@ -656,12 +656,12 @@
   "music": {
     "meta": {
       "title": "Música · Sistema IG v2",
-      "description": "Tres propuestas de música generativa para el nuevo portafolio de Ignacio Gauna, hechas con código: un motivo por página."
+      "description": "Tres músicas generativas para el nuevo portafolio de Ignacio Gauna, hechas con código: un motivo por página."
     },
     "intro": {
       "kicker": "Lote 2.3 · Música",
       "title": "Música hecha con código",
-      "text": "Tres propuestas de música generativa. Nada está grabado: cada nota la escribe el código en el momento, con un motivo propio por página. Suena solo si la encendés. Elegí la que va a vivir en el sitio."
+      "text": "Tres músicas generativas, cada una en su lugar del sitio. Nada está grabado: cada nota la escribe el código en el momento, con un motivo propio por página. Suena solo si la encendés."
     },
     "letter": "Propuesta",
     "styles": {
@@ -680,15 +680,13 @@
     },
     "play": "Escuchar",
     "stop": "Detener",
-    "pick": "Elegir para el sitio",
-    "picked": "Elegida para el sitio",
     "zone": "Página",
     "chord": "Acorde",
     "bar": "Compás",
     "bpm": "bpm",
     "zones": {
       "title": "Un motivo por página",
-      "text": "Cada página tiene su tonalidad, su modo y sus cuatro compases. Al cambiar de página la música termina el compás y sigue en la tonalidad nueva, con una campana.",
+      "text": "Cada página tiene su tonalidad, su modo, sus cuatro compases y su música: Circuito es el sonido del sitio, Taller suena en Work y Marea en las dos páginas más calmas. Al cambiar de página la música termina el compás y sigue en la nueva, con una campana.",
       "system": "Sistema",
       "keys": {
         "home": "Re mayor",
@@ -709,6 +707,7 @@
         "Volumen bajo, con un compresor al final: nunca satura.",
         "En iPhone sigue al interruptor de silencio del teléfono."
       ]
-    }
+    },
+    "where": "Suena en"
   }
 }

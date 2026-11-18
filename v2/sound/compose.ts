@@ -202,6 +202,15 @@ const taller: Style = {
 export const STYLES: Record<StyleId, Style> = { marea, circuito, taller };
 export const STYLE_IDS = Object.keys(STYLES) as StyleId[];
 
+/**
+ * Which proposal each page plays (Ignacio, 18/11/2026: «me gusta B, pero usaría A y C para otras partes de la
+ * web; por ejemplo C en Work»). «Circuito» is the sound of the site; «Taller» is Work; «Marea» is for the two
+ * calmest pages. The key of each page stays its own.
+ */
+export const ZONE_STYLE: Record<ZoneKey, StyleId> = {
+  home: 'circuito', work: 'taller', how: 'circuito', brand: 'marea', business: 'circuito', about: 'marea', system: 'circuito',
+};
+
 /** Where a beat really falls: swung styles push the off-beat eighths late. */
 export function swingBeat(beat: number, swing: number): number {
   const whole = Math.floor(beat);

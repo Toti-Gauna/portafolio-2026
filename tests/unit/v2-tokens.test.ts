@@ -320,6 +320,14 @@ describe('v2 generative music (lote 2.3)', () => {
     expect(lead(5)).toEqual(lead(1));
   });
 
+  it('each page plays its proposal: Circuito for the site, Taller on Work, Marea on the calm pages', async () => {
+    const { ZONE_STYLE, ZONES, STYLE_IDS } = await import('../../v2/sound/compose');
+    expect(Object.keys(ZONE_STYLE).sort()).toEqual(Object.keys(ZONES).sort());
+    expect(ZONE_STYLE.home).toBe('circuito');
+    expect(ZONE_STYLE.work).toBe('taller');
+    expect(new Set(Object.values(ZONE_STYLE))).toEqual(new Set(STYLE_IDS));
+  });
+
   it('swing pushes only the off-beat eighths', async () => {
     const { swingBeat } = await import('../../v2/sound/compose');
     expect(swingBeat(1.5, 0.62)).toBeCloseTo(1.62);
