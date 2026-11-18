@@ -2,8 +2,8 @@ import * as k from '@/v2/iso/iso-kit';
 
 /**
  * The drawing kit of the world of Work (lote 4.1): the Anatomy kit plus the few shapes a town needs — roofs,
- * domes, cones, windows, cranes and scaffolds — all in the same isometric projection, all placed in the plane
- * of an island. Solids are ink; `lit` pieces are paper; `acc` is the one accent of each place.
+ * domes, cones, windows, cranes and scaffolds — all in the same isometric projection, all placed on the ground
+ * of a band of the land. Solids are ink; `lit` pieces are paper; `acc` is the one accent of each place.
  * Everything returns SVG strings: the world is drawn once, at build time.
  */
 export const P: k.Projection = { origin: [0, 0], scale: 1 };

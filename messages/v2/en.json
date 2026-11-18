@@ -899,14 +899,18 @@
   "world": {
     "meta": {
       "title": "The world of Work · Sistema IG v2",
-      "description": "The art of the world of Work in Ignacio Gauna's new portfolio: one island per stop of the journey, joined by a path of light."
+      "description": "The art of the world of Work in Ignacio Gauna's new portfolio: one land in diagonal bands, a biome per stop, travelled sideways."
     },
     "kicker": "Batch 4.1 · Work",
     "title": "The world of Work",
-    "text": "One island per stop of the journey, joined by a path of light. No building is drawn twice. What exists is solid; what is coming is drawn under construction, with scaffolds and a dashed line. This is the art: the map to explore arrives with the next batch.",
-    "map": "The whole world",
-    "mapAlt": "Isometric map: seventeen coloured islands joined by a path of light, from the coast of Mar del Plata to the roadmap on the horizon.",
-    "mapHint": "Swipe to travel it.",
+    "text": "One land, edge to edge, in diagonal bands: a biome for every stop and a path of light that crosses them in order. You travel it sideways. No building is drawn twice. What exists is solid; what is coming is drawn under construction, with scaffolds and a dashed line.",
+    "map": "The journey",
+    "mapAlt": "Isometric land in diagonal bands of colour, a biome per stop, crossed by a path of light: from the coast of Mar del Plata to the launch pad of the roadmap.",
+    "mapHint": "Drag the land or use the arrows to travel it.",
+    "prev": "Previous stop",
+    "next": "Next stop",
+    "drag": "Drag",
+    "stops": "Stops of the journey",
     "legend": {
       "done": "Path travelled",
       "plan": "Path planned",

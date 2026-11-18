@@ -498,7 +498,7 @@ describe('v2 home (lote 3.2)', () => {
 });
 
 describe('v2 world of Work (lote 4.1)', () => {
-  it('seventeen islands, each with its words in both languages, and nothing written inside the drawing', async () => {
+  it('seventeen places, each with its words in both languages, and nothing written inside the drawing', async () => {
     const { WORLD_IDS, WORLD_SVG, WORLD_ISLES, WORLD_BOX, WORLD_GROUP_OF, WORLD_GROUPS } = await import('../../v2/components/work/world-art');
     expect(WORLD_IDS).toHaveLength(17);
     expect(new Set(WORLD_IDS).size).toBe(17);
@@ -521,10 +521,35 @@ describe('v2 world of Work (lote 4.1)', () => {
     }
   });
 
-  it('no building is drawn twice: every island is made of a different set of pieces', async () => {
+  it('one land in diagonal bands, travelled sideways: a band per place (two for Núcleo), a stop on each, its name readable on its ground', async () => {
+    const { WORLD_IDS, WORLD_SVG, WORLD_BOX, WORLD_STOPS, WORLD_ISLES } = await import('../../v2/components/work/world-art');
+    // a strip: many screens wide, and it starts at 0 so the engine can measure it
+    expect([WORLD_BOX.x, WORLD_BOX.y]).toEqual([0, 0]);
+    expect(WORLD_BOX.width / WORLD_BOX.height).toBeGreaterThan(10);
+    // every band is one flat ground with its own clip; the land has no gaps: 18 grounds, 17 steps between them
+    expect(WORLD_SVG.match(/class="wa-band"/g) ?? []).toHaveLength(18);
+    expect(WORLD_SVG.match(/class="wa-land"/g) ?? []).toHaveLength(18);
+    expect(WORLD_SVG.match(/class="wa-step"/g) ?? []).toHaveLength(17);
+    expect(new Set(WORLD_SVG.match(/clipPath id="[^"]+"/g)).size).toBe(18);
+    // a card never reuses a clip of the whole land (both are on one page)
+    for (const id of WORLD_IDS) expect(WORLD_ISLES[id].svg, id).not.toMatch(/id="wb\d/);
+    expect((WORLD_ISLES.nucleo.svg.match(/class="wa-band"/g) ?? []).length).toBe(2);
+    // the stops go left to right, in the order of the journey, each with room around it
+    expect(WORLD_STOPS.map((s) => s.id)).toEqual(WORLD_IDS);
+    WORLD_STOPS.forEach((s, i) => {
+      if (i) expect(s.x - WORLD_STOPS[i - 1].x, s.id).toBeGreaterThan(250);
+      expect(s.x, s.id).toBeGreaterThan(0);
+      expect(s.x, s.id).toBeLessThan(WORLD_BOX.width);
+      expect(s.label[1], s.id).toBeLessThanOrEqual(WORLD_BOX.height);
+      // its name is written over the ground in front: ink on a light band, paper on a dark one, AA either way
+      expect(contrast(s.ink, s.on), `${s.id} label`).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
+  it('no building is drawn twice: every place is made of a different set of pieces', async () => {
     const { WORLD_IDS, WORLD_ISLES } = await import('../../v2/components/work/world-art');
     // what an island is made of, whatever its place on the map: the kind of every piece, in the order it is painted
-    const made = (svg: string) => [...svg.matchAll(/class="([^"]+)"/g)].map((m) => m[1]).filter((c) => !/^wa-isle|^iso-(fill|shade|top|line)/.test(c)).join('|');
+    const made = (svg: string) => [...svg.matchAll(/class="([^"]+)"/g)].map((m) => m[1]).filter((c) => !/^wa-(isle|band|land|step)|^iso-(fill|shade|top|line)/.test(c)).join('|');
     const seen = WORLD_IDS.map((id) => made(WORLD_ISLES[id].svg));
     expect(new Set(seen).size).toBe(17);
     for (const s of seen) expect(s.split('|').length).toBeGreaterThanOrEqual(10);

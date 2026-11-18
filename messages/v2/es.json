@@ -899,14 +899,18 @@
   "world": {
     "meta": {
       "title": "El mundo de Work · Sistema IG v2",
-      "description": "El arte del mundo de Work del nuevo portafolio de Ignacio Gauna: una isla por cada parada del recorrido, unidas por un sendero de luz."
+      "description": "El arte del mundo de Work del nuevo portafolio de Ignacio Gauna: un solo terreno en franjas diagonales, un bioma por parada, que se recorre de lado."
     },
     "kicker": "Lote 4.1 · Work",
     "title": "El mundo de Work",
-    "text": "Una isla por cada parada del recorrido, unidas por un sendero de luz. Ningún edificio se repite. Lo que existe es sólido; lo que viene se dibuja en obra, con andamios y línea punteada. Este es el arte: el mapa para explorar llega con el lote siguiente.",
-    "map": "El mundo completo",
-    "mapAlt": "Mapa isométrico: diecisiete islas de colores unidas por un sendero de luz, desde la costa de Mar del Plata hasta el roadmap en el horizonte.",
-    "mapHint": "Deslizá para recorrerlo.",
+    "text": "Un solo terreno, de borde a borde, en franjas diagonales: un bioma por cada parada y un sendero de luz que las cruza en orden. Se recorre de lado. Ningún edificio se repite. Lo que existe es sólido; lo que viene se dibuja en obra, con andamios y línea punteada.",
+    "map": "El recorrido",
+    "mapAlt": "Terreno isométrico en franjas diagonales de colores, un bioma por parada, cruzadas por un sendero de luz: de la costa de Mar del Plata a la plataforma de lanzamiento del roadmap.",
+    "mapHint": "Arrastrá el terreno o usá las flechas para recorrerlo.",
+    "prev": "Parada anterior",
+    "next": "Parada siguiente",
+    "drag": "Arrastrar",
+    "stops": "Paradas del recorrido",
     "legend": {
       "done": "Sendero recorrido",
       "plan": "Sendero planeado",

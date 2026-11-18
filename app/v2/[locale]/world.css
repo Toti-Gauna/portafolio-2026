@@ -1,6 +1,6 @@
 /* The world of Work (lote 4.1): how the drawing of v2/components/work/world-art.ts is painted.
-   Ink solids on islands of flat colour, paper where there is light, one accent per place (--a).
-   --g / --gs / --gs2 are the island's ground and its sides; --w is what stands free on it (ink or paper). */
+   Ink solids on bands of flat colour, paper where there is light, one accent per place (--a).
+   --g is the ground of a band, --gs / --gs2 its shades, --gl the lines drawn on it; --w is what stands free on it (ink or paper). */
 .wa {
   display: block; width: 100%; height: auto; overflow: visible;
   --anatomy-paper: #060513; --anatomy-top: #1b164a; --anatomy-face: #eeeae3;
@@ -21,17 +21,17 @@
 .wa .iso-line { fill: none; stroke: var(--anatomy-hi); stroke-width: var(--anatomy-weight); stroke-linecap: round; stroke-linejoin: round; }
 .wa .iso-line[data-tone='faint'] { stroke: var(--anatomy-faint); }
 .wa .iso-solid[data-lit] > .iso-line { stroke: var(--anatomy-lit); }
-/* the islands */
-.wa-ground > .iso-fill, .wa-ground > .iso-top { fill: var(--g); }
-.wa-ground > .iso-shade { fill: var(--gs); }
-.wa-ground > .iso-shade[data-shade='0'], .wa-ground > .iso-shade[data-shade='1'] { fill: var(--gs2); }
-.wa-ground > .iso-line { stroke: rgba(238, 234, 227, 0.2); }
-.wa-ground--b { --g: #b6f36a; --gs: #6c9548; --gs2: #4d6c39; }
-.wa-sea > .iso-fill, .wa-sea > .iso-top { fill: #2b50ff; }
-.wa-sea > .iso-shade { fill: #1d37ad; }
-.wa-sea > .iso-shade[data-shade='0'], .wa-sea > .iso-shade[data-shade='1'] { fill: #152880; }
-.wa-sea > .iso-line { stroke: none; }
-.wa-wave { fill: none; stroke: #eeeae3; stroke-width: 1.3; stroke-linecap: round; opacity: 0.75; }
+/* the land: one band of flat colour per place, its own quiet pattern on the ground, and the step down from the band before */
+.wa-land { fill: var(--g); stroke: none; }
+.wa-step { fill: var(--gs); stroke: none; opacity: 0.5; }
+.wa-floor { fill: none; stroke: var(--gl); stroke-width: 1; opacity: 0.55; }
+.wa-floor--wide { stroke-width: 9; opacity: 0.22; }
+.wa-floor--dots { stroke-width: 1.4; stroke-dasharray: 1 7; stroke-linecap: round; opacity: 0.8; }
+.wa-speck { fill: var(--gl); stroke: none; opacity: 0.5; }
+.wa-speck--star { fill: #eeeae3; opacity: 0.7; }
+.wa-seaf { fill: #2b50ff; stroke: none; }
+.wa-foam { fill: none; stroke: #eeeae3; stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
+.wa-wave { fill: none; stroke: #eeeae3; stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 20 34; opacity: 0.6; }
 .wa-row { fill: none; stroke: var(--gs); stroke-width: 3; opacity: 0.55; }
 .wa-dune { fill: none; stroke: var(--gs); stroke-width: 1.4; opacity: 0.6; }
 .wa-dial { fill: none; stroke: #eeeae3; stroke-width: 1.2; stroke-dasharray: 1 6; stroke-linecap: round; opacity: 0.7; }
@@ -77,10 +77,36 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .wa-node--plan { fill: #060513; stroke: #ffe39a; }
 
 /* ── the page that shows it (/mundo/) ────────────────────────────────────── */
-.wd-frame { overflow-x: auto; overscroll-behavior-x: contain; border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: var(--color-bg-deep); }
-.wd-world { min-width: 1080px; }
-.wd-hint { margin-top: var(--space-2); font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.06em; color: var(--color-text-subtle); }
-@media (min-width: 1132px) { .wd-hint { display: none; } }
+/* the land, travelled sideways: a frame that scrolls, a strip much wider than it, the names over the ground */
+.ws { --ws-h: clamp(360px, 66vh, 700px); display: grid; gap: var(--space-3); min-width: 0; }
+.ws-view {
+  height: var(--ws-h); overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: thin;
+  border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: var(--color-bg-deep);
+}
+.ws[data-ready] .ws-view { cursor: grab; }
+.ws-view[data-drag] { cursor: grabbing; user-select: none; }
+/* room at both ends, so the first and the last stop can reach the middle; the first and last band run under it */
+.ws-track {
+  box-sizing: content-box; width: max-content; height: 100%; overflow: clip;
+  padding-left: max(0px, calc(50% - var(--ws-h) * var(--ws-a))); padding-right: max(0px, calc(50% - var(--ws-h) * var(--ws-z)));
+}
+.ws-land { position: relative; height: 100%; width: calc(var(--ws-h) * var(--ws-r)); }
+.ws-land > .wa { width: 100%; height: 100%; }
+.ws-names li {
+  position: absolute; transform: translate(-50%, -100%); display: grid; justify-items: center; gap: 1px;
+  white-space: nowrap; text-align: center; pointer-events: none;
+}
+.ws-names b { font-size: 15px; line-height: 1.2; font-weight: 800; font-stretch: 110%; letter-spacing: -0.01em; }
+.ws-names span { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.04em; }
+.ws-bar { display: none; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); }
+.ws[data-ready] .ws-bar { display: grid; }
+.ws-bar .ui-iconbtn { border-radius: var(--radius-pill); }
+.ws-bar .ui-iconbtn:disabled { opacity: 0.4; cursor: default; }
+.ws-now { display: grid; justify-items: center; gap: 2px; min-width: 0; text-align: center; }
+.ws-count { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; color: var(--from); }
+.ws-now b { font-size: var(--type-h3-size); line-height: 1.15; font-weight: 800; color: var(--color-heading); }
+.ws-meta { font-size: 14px; color: var(--color-text-muted); }
+.wd-hint { font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.06em; color: var(--color-text-subtle); }
 .wd-legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin-top: var(--space-4); }
 .wd-legend li { display: inline-flex; align-items: center; gap: var(--space-3); font-size: 14px; color: var(--color-text-muted); }
 .wd-key { flex: none; width: 34px; height: 12px; }
@@ -94,7 +120,7 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
   border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: linear-gradient(170deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
 }
 .wd-card figure { margin: 0 0 var(--space-2); aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: var(--radius-xl); background: var(--color-bg-deep); overflow: hidden; }
-.wd-card figure .wa { width: 100%; height: 100%; }
+.wd-card figure .wa { width: 100%; height: 100%; overflow: hidden; }
 .wd-when { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
 .wd-card h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
 .wd-state { display: inline-flex; align-items: center; gap: var(--space-2); justify-self: start; font-size: 14px; font-weight: 700; color: var(--color-text); }
