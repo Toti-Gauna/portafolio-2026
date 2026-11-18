@@ -15,8 +15,6 @@ export function PageOpening({ locale, page, children }: { locale: V2Locale; page
   const s = v2Messages(locale).site;
   const i = SITE_PAGES.findIndex((p) => p.key === page);
   const p = SITE_PAGES[i];
-  const prev = SITE_PAGES[i - 1];
-  const next = SITE_PAGES[i + 1];
   const copy = s.pages[page];
   return (
     <>
@@ -27,20 +25,31 @@ export function PageOpening({ locale, page, children }: { locale: V2Locale; page
           <p className="st-lead">{copy.lead}</p>
         </section>
         {children}
-        <nav className="ui-pager st-pager" aria-label={s.pager} data-reveal>
-          <Link href={sitePath(locale, prev.path)} rel="prev" className="ui-pager-prev">
-            <span className="ui-pager-kicker"><ArrowLeftIcon size={14} />{s.prev}</span>
-            <span className="ui-pager-title">{s.pages[prev.key].t}</span>
-          </Link>
-          {next ? (
-            <Link href={sitePath(locale, next.path)} rel="next" className="ui-pager-next">
-              <span className="ui-pager-kicker">{s.next}<ArrowIcon size={14} /></span>
-              <span className="ui-pager-title">{s.pages[next.key].t}</span>
-            </Link>
-          ) : <span />}
-        </nav>
+        <PagePager locale={locale} page={page} />
       </main>
       <SiteFooter locale={locale} />
     </>
+  );
+}
+
+/** The way to the pages next to this one, in the order of the header. */
+export function PagePager({ locale, page }: { locale: V2Locale; page: InnerKey }) {
+  const s = v2Messages(locale).site;
+  const i = SITE_PAGES.findIndex((p) => p.key === page);
+  const prev = SITE_PAGES[i - 1];
+  const next = SITE_PAGES[i + 1];
+  return (
+    <nav className="ui-pager st-pager" aria-label={s.pager} data-reveal>
+      <Link href={sitePath(locale, prev.path)} rel="prev" className="ui-pager-prev">
+        <span className="ui-pager-kicker"><ArrowLeftIcon size={14} />{s.prev}</span>
+        <span className="ui-pager-title">{s.pages[prev.key].t}</span>
+      </Link>
+      {next ? (
+        <Link href={sitePath(locale, next.path)} rel="next" className="ui-pager-next">
+          <span className="ui-pager-kicker">{s.next}<ArrowIcon size={14} /></span>
+          <span className="ui-pager-title">{s.pages[next.key].t}</span>
+        </Link>
+      ) : <span />}
+    </nav>
   );
 }

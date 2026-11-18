@@ -478,6 +478,16 @@ export const WORLD_NODES: Record<string, [number, number]> = Object.fromEntries(
  */
 export const WORLD_STOPS = WORLD_IDS.map((id) => {
   const b = of(id), mid = (b[0].l + b[b.length - 1].r) / 2, y = H - 14, on = b[0].under;
+  // the middle of what stands on the stop, up and down: where a zoomed map looks
+  const top = Math.min(...b.map((c) => c.box[1])), bottom = Math.max(...b.map((c) => c.box[3]));
   // a little to the left of the stop (the band leans that way at the bottom), near enough to be in view on a phone when the stop is in the middle
-  return { id, group: b[0].group, x: Math.round(mid), label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
+  return { id, group: b[0].group, x: Math.round(mid), y: Math.round((top + bottom) / 2), label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
 });
+/**
+ * The whole land in a few shapes, for the minimap: every band in the colour of its ground, the path and a dot
+ * per stop (`data-i`, in the order of the journey). Drawn in the land's own units and stretched to its box.
+ */
+export const WORLD_MINI =
+  built.map((b) => `<path d="${poly(b.l, b.r)}" fill="${b.under === b.ground ? b.ground : b.under}"/>`).join('') +
+  `<path class="wm-path" d="${pathD(done)}"/><path class="wm-path wm-path--plan" d="${pathD(plan)}"/>` +
+  nodes.map((n, i) => `<circle class="wm-stop" data-i="${i}" cx="${n[0].toFixed(0)}" cy="${n[1].toFixed(0)}" r="9"/>`).join('');
