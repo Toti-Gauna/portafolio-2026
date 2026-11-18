@@ -789,6 +789,13 @@
           "piece": "Las seis estampillas del recorrido impresas en cartón y colgadas en el estudio, en una pared que se curva hacia quien mira: tinta plana y papel crema contra el fondo oscuro.",
           "loading": "Se reparten desde atrás de la cámara, una parada tras otra, cada una con su año y su nombre."
         }
+      },
+      "pager": {
+        "label": "Recorrer las puertas",
+        "prev": "Anterior",
+        "again": "Repetir",
+        "all": "Todas",
+        "next": "Siguiente"
       }
     },
     "edition": "Portafolio 2026",

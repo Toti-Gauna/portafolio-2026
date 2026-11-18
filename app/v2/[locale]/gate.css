@@ -486,3 +486,22 @@ html[data-gate='off'] .gt { display: none; }
 .gl-card dd { margin: var(--space-1) 0 0; color: var(--color-text); }
 .gl-card .ui-btn { justify-self: start; margin-top: auto; }
 .gl-now { margin-left: var(--space-3); padding: 2px var(--space-2); border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--from) 60%, transparent); color: var(--color-heading); letter-spacing: 0.04em; }
+
+/* the bar that goes from one gate to the next, on the preview of each (under an open gate it is covered) */
+.gl-pager {
+  position: fixed; left: 50%; bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); z-index: var(--z-overlay); transform: translateX(-50%);
+  display: grid; justify-items: center; gap: var(--space-1); width: max-content; max-width: calc(100% - 2 * var(--size-gutter));
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-2xl); border: 1px solid var(--color-line-strong);
+  background: var(--color-ink-700); box-shadow: var(--shadow-panel);
+}
+.gl-pager p { display: flex; gap: var(--space-3); margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+.gl-pager p b { color: var(--color-coral-400); }
+.gl-pager ul { display: flex; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.gl-pager a {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-3); border-radius: var(--radius-md);
+  color: var(--color-heading); font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap;
+}
+.gl-pager-next { background: var(--color-coral-500); color: var(--color-on-accent) !important; }
+.gl-pager-prev svg { transform: scaleX(-1); }
+@media (hover: hover) and (pointer: fine) { .gl-pager a:not(.gl-pager-next):hover { background: rgba(255, 255, 255, 0.08); } .gl-pager-next:hover { background: var(--color-coral-400); } }
+@media (max-width: 420px) { .gl-pager a { padding: 0 var(--space-2); font-size: 14px; } }

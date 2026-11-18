@@ -789,6 +789,13 @@
           "piece": "The six stamps of the journey printed on card and hung in the studio, on a wall that curves toward the viewer: flat ink and cream paper against the dark.",
           "loading": "They are dealt from behind the camera, one stop after another, each with its year and its name."
         }
+      },
+      "pager": {
+        "label": "Go through the gates",
+        "prev": "Previous",
+        "again": "Replay",
+        "all": "All",
+        "next": "Next"
       }
     },
     "edition": "Portfolio 2026",

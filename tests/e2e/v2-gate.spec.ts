@@ -269,6 +269,26 @@ test('/puerta/: the gate and its four studies, each a link to the real thing', a
   await cards.nth(4).getByRole('link', { name: /Abrir esta puerta/ }).click();
   await expect(page).toHaveURL(/\/v2\/es\/puerta\/postal\/$/);
   await expect(page.locator('.gt')).toHaveAttribute('data-v', 'postal');
+  // through that gate, a bar goes on to the next one: the gates one by one
+  expect(await page.locator('.gl-pager').evaluate((el: HTMLElement) => el.inert)).toBe(true);
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.gt')).toHaveCount(0);
+  const pager = page.getByRole('navigation', { name: 'Recorrer las puertas' });
+  await expect(pager).toContainText('5 / 5');
+  await expect(pager).toContainText('Postal');
+  expect(await page.locator('.gl-pager').evaluate((el: HTMLElement) => el.inert)).toBe(false);
+  await expect(pager.getByRole('link')).toHaveText(['Anterior: Ascenso', 'Repetir', 'Todas', 'Siguiente: Cinética']);
+  await pager.getByRole('link', { name: /Siguiente/ }).click();
+  await expect(page).toHaveURL(/\/v2\/es\/puerta\/cinetica\/$/);
+  await expect(page.locator('.gk')).toHaveAttribute('data-v', 'cinetica');
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.gt')).toHaveCount(0);
+  await expect(page.getByRole('navigation', { name: 'Recorrer las puertas' })).toContainText('1 / 5');
+  // the bar fits a phone, with targets to touch
+  await page.setViewportSize({ width: 360, height: 740 });
+  const bar = await page.locator('.gl-pager').evaluate((el) => { const b = el.getBoundingClientRect(); return { in: b.left >= 0 && b.right <= innerWidth, min: Math.min(...[...el.querySelectorAll('a')].map((a) => a.getBoundingClientRect().height)) }; });
+  expect(bar.in).toBe(true);
+  expect(bar.min).toBeGreaterThanOrEqual(44);
   // at 360 px the page fits
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto('/v2/es/puerta/');
