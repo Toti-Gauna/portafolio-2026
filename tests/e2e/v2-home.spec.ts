@@ -168,7 +168,8 @@ test('a featured case plays its clip under the pointer and with its button, and 
   await expect.poll(() => calls(page)).toMatch(/^play pause/);
   // the button, for touch and keyboard: a real control with a name
   const button = card.getByRole('button', { name: /Reproducir: CompliA|Pausar: CompliA/ });
-  expect((await button.boundingBox())!.width).toBeGreaterThanOrEqual(44);
+  // its size as laid out: the card may still be settling from the bounce of the pointer, and a box measured mid-bounce is a little squashed
+  expect(await button.evaluate((el) => (el as HTMLElement).offsetWidth)).toBeGreaterThanOrEqual(44);
   await button.click();
   await expect.poll(async () => (await calls(page)).split(' ').filter((c) => c === 'play').length).toBe(2);
   // Tuenti is an illustration, never a capture
