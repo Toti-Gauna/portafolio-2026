@@ -747,11 +747,11 @@
     "choose": {
       "meta": {
         "title": "Gate · IG System v2",
-        "description": "Four 3D versions of the gate of Ignacio Gauna's new portfolio, to choose one."
+        "description": "The gate of Ignacio Gauna's new portfolio and the 3D studies that came before it."
       },
       "kicker": "Batch 3.1 · Gate",
-      "title": "Four gates in 3D",
-      "text": "The way into the portfolio, in four versions. All four are a 3D scene on the same studio: lights you see in the reflections, a polished floor that mirrors what stands on it, and a camera that arrives while the object builds. Each object builds itself with the real loading of the page, in four steps. They fit one screen on any device and open with Enter. Open each one and choose the one that will greet whoever arrives.",
+      "title": "The gate and its studies",
+      "text": "The way into the portfolio. “Kinetic” is the one that greets whoever arrives: 2D motion graphics around the monogram, with changes of colour. Below are the four 3D studies made before it, each a scene on the same studio of lights. They all fit one screen on any device, build themselves with the real loading of the page and open with Enter.",
       "letter": "Gate",
       "open": "Open this gate",
       "now": "On the home today",
@@ -759,6 +759,12 @@
       "piece": "Central piece",
       "loading": "The loading",
       "items": {
+        "cinetica": {
+          "name": "Kinetic",
+          "theme": "The monogram, in 2D",
+          "piece": "The coral dot of the IG is a ball with a life of its own: it drops and bounces, raises the stem, the G rolls in and bumps it, and the monogram hops to its place. Every landing changes the colour of the whole screen: ink, coral, blue, paper. At rest, the letters of the name jump under the pointer and the monogram changes the colour when pressed.",
+          "loading": "One act per loading step, and a fine meter below."
+        },
         "monograma": {
           "name": "Monogram",
           "theme": "The mark",
@@ -790,6 +796,7 @@
       "codigo": "The five layers of the craft",
       "ascenso": "The roadmap, from 2026 to 2030",
       "postal": "The six stops of the journey"
-    }
+    },
+    "tint": "Change the colour of the gate"
   }
 }

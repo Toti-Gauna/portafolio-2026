@@ -11,6 +11,7 @@ import { ArrowIcon, PlayIcon } from '../ui/Icons';
 import type { GateVariant } from '@/v2/gate/state';
 import { LAYERS } from '@/v2/tokens';
 import { Gate } from '../gate/Gate';
+import { GateKinetic } from '../gate/GateKinetic';
 import { STAMP_IDS, stampSvg } from '../kit/stamps';
 import { SiteFooter } from './SiteFooter';
 
@@ -18,7 +19,7 @@ import { SiteFooter } from './SiteFooter';
  * The home of /v2 as it stands after lote 2.1: the opening of direction 4 and a door to every page.
  * The cinematic home (lote 3.2) replaces what is under the opening.
  */
-export function Home({ locale, gate = 'monograma' }: { locale: V2Locale; gate?: GateVariant }) {
+export function Home({ locale, gate = 'cinetica' }: { locale: V2Locale; gate?: GateVariant }) {
   const m = v2Messages(locale);
   const s = m.site;
   const doors = SITE_PAGES.filter((p) => p.key !== 'home');
@@ -31,8 +32,19 @@ export function Home({ locale, gate = 'monograma' }: { locale: V2Locale; gate?: 
     return `rgb(${c0.map((v, i) => Math.round(v + (c1[i] - v) * f)).join(', ')})`;
   };
   const lastName = [...m.hero.last];
+  const trailer = asset(`/trailer/v2/index.html?lang=${locale}`);
+  const labels = {
+    label: m.gate.label, meet: m.gate.meet, enter: m.gate.enter, loading: m.gate.loading, ready: m.gate.ready, progress: m.gate.progress, key: m.gate.key,
+    level: m.hero.level, role: m.hero.role, edition: m.gate.edition, place: m.footer.place, steps: m.gate.steps,
+  };
   return (
     <>
+      {gate === 'cinetica' ? (
+        <GateKinetic
+          first={m.hero.first} last={m.hero.last} trailerHref={trailer}
+          labels={{ ...labels, tint: m.gate.tint }}
+        />
+      ) : (
       <Gate
         variant={gate}
         // what each version hangs on its object: the five layers, the stages of the roadmap, the stops so far
@@ -44,12 +56,10 @@ export function Home({ locale, gate = 'monograma' }: { locale: V2Locale; gate?: 
         stamps={gate === 'postal' ? STAMP_IDS.map((id) => stampSvg(id)) : undefined}
         first={[...m.hero.first].map((ch) => ({ ch }))}
         last={lastName.map((ch, i) => ({ ch, color: tint(lastName.length > 1 ? i / (lastName.length - 1) : 0) }))}
-        labels={{
-          label: m.gate.label, meet: m.gate.meet, enter: m.gate.enter, loading: m.gate.loading, ready: m.gate.ready, progress: m.gate.progress, key: m.gate.key,
-          level: m.hero.level, role: m.hero.role, edition: m.gate.edition, place: m.footer.place, steps: m.gate.steps,
-        }}
-        trailerHref={asset(`/trailer/v2/index.html?lang=${locale}`)}
+        labels={labels}
+        trailerHref={trailer}
       />
+      )}
       <main id="main" className="v2-main" tabIndex={-1}>
         <section className="v2-hero" aria-labelledby="v2-name">
           <LightField className="v2-hero-light">

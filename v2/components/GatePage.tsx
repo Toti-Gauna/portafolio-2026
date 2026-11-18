@@ -8,7 +8,7 @@ import { ArrowIcon } from './ui/Icons';
 import { SiteFooter } from './site/SiteFooter';
 
 /** Lote 3.1: the four versions of the gate, side by side, each one a link to the real thing. */
-const COLOR = { monograma: tokens.color['coral-500'], codigo: tokens.layer['tests-from'], ascenso: tokens.layer['plan-from'], postal: tokens.color.paper } as const;
+const COLOR = { cinetica: tokens.color['coral-500'], monograma: tokens.color['mist-200'], codigo: tokens.layer['tests-from'], ascenso: tokens.layer['plan-from'], postal: tokens.color.paper } as const;
 
 export function GatePage({ locale }: { locale: V2Locale }) {
   const m = v2Messages(locale);

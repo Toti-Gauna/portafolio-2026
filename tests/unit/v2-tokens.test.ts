@@ -380,6 +380,7 @@ describe('v2 gate (lote 3.1)', () => {
     const { RIGS } = await import('../../v2/gate/scene');
     const { TAG_AFTER, GATE_VARIANTS } = await import('../../v2/gate/state');
     for (const v of GATE_VARIANTS) {
+      if (v === 'cinetica') continue; // the 2D gate: no rig
       for (const after of TAG_AFTER[v]) { expect(after).toBeGreaterThanOrEqual(0); expect(after).toBeLessThanOrEqual(4); }
       if (v === 'postal') continue; // prints its stamps on canvases: it is built in the browser tests
       const rig = RIGS[v]({ coarse: false, reduced: false, scene: new THREE.Scene(), bloom: {} as never });
@@ -423,7 +424,7 @@ describe('v2 gate (lote 3.1)', () => {
 
   it('four versions, each with its name and its three lines in both languages; the roadmap has its four stages', async () => {
     const { GATE_VARIANTS, STEPS } = await import('../../v2/gate/state');
-    expect(GATE_VARIANTS).toEqual(['monograma', 'codigo', 'ascenso', 'postal']);
+    expect(GATE_VARIANTS).toEqual(['cinetica', 'monograma', 'codigo', 'ascenso', 'postal']);
     for (const m of [es, en]) {
       for (const v of GATE_VARIANTS) for (const k of ['name', 'theme', 'piece', 'loading'] as const) expect(m.gate.choose.items[v][k].length, `${v}.${k}`).toBeGreaterThan(0);
       for (const st of STEPS) expect(m.gate.steps[st].length).toBeGreaterThan(0);
@@ -433,8 +434,27 @@ describe('v2 gate (lote 3.1)', () => {
     expect(es.gate.stages.map((x) => x.name)).toEqual(['Núcleo', 'Ciberseguridad', 'Quant', 'Aeroespacial']);
   });
 
+  it('the colours of the 2D gate: every screen is readable (AA), the surname and the focus ring stand out, and the opening returns to ink', async () => {
+    const { GATE_THEMES, GATE_INTRO, GATE_CYCLE } = await import('../../v2/gate/themes');
+    for (const [name, t] of Object.entries(GATE_THEMES)) {
+      expect(contrast(t.fg, t.bg), `${name} fg`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.soft, t.bg), `${name} soft`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.btnFg, t.btn), `${name} button`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.alt, t.bg), `${name} surname (large type)`).toBeGreaterThanOrEqual(3);
+      expect(contrast(t.focus, t.bg), `${name} focus`).toBeGreaterThanOrEqual(3);
+      expect(contrast(t.btn, t.bg), `${name} button on its field`).toBeGreaterThanOrEqual(1.5);
+      expect(t.edge, `${name} edge`).not.toBe(t.bg);
+    }
+    expect(GATE_INTRO).toHaveLength(5); // one colour per act, and the rest
+    expect(GATE_INTRO[0]).toBe('ink');
+    expect(GATE_INTRO[4]).toBe('ink');
+    for (let i = 1; i < GATE_INTRO.length; i++) expect(GATE_INTRO[i]).not.toBe(GATE_INTRO[i - 1]);
+    expect(new Set(GATE_CYCLE).size).toBe(GATE_CYCLE.length);
+    expect(GATE_CYCLE[0]).toBe('ink');
+  });
+
   it('the gate has its words in both languages', () => {
-    for (const m of [es, en]) for (const k of ['label', 'meet', 'enter', 'loading', 'ready', 'progress', 'key', 'edition'] as const) expect(m.gate[k].length).toBeGreaterThan(0);
+    for (const m of [es, en]) for (const k of ['label', 'meet', 'enter', 'loading', 'ready', 'progress', 'key', 'edition', 'tint'] as const) expect(m.gate[k].length).toBeGreaterThan(0);
     for (const m of [es, en]) for (const k of ['codigo', 'ascenso', 'postal'] as const) expect(m.gate.tags[k].length).toBeGreaterThan(0);
   });
 });

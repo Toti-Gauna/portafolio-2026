@@ -6,9 +6,14 @@
  * navigations never show the gate again). QA: `localStorage['ig:v2:gate'] = 'off'` skips it.
  */
 export const GATE_KEY = 'ig:v2:gate';
-/** The four versions of the gate, each a 3D scene on the same stage (Ignacio, 18/11/2026: «premium, y en 3D»). */
-export const GATE_VARIANTS = ['monograma', 'codigo', 'ascenso', 'postal'] as const;
+/**
+ * The gate of the home is «Cinética»: 2D motion graphics (Ignacio, 18/11/2026: «más 2D, no 3D en la entrada…
+ * con el IG, parecido al anterior del portfolio, más motion graphics, cambios de color»). The other four are
+ * the 3D studies that came before it, each a scene on the same stage; they stay on file at /puerta/.
+ */
+export const GATE_VARIANTS = ['cinetica', 'monograma', 'codigo', 'ascenso', 'postal'] as const;
 export type GateVariant = (typeof GATE_VARIANTS)[number];
+export type Gate3D = Exclude<GateVariant, 'cinetica'>;
 /** The real loading, in four steps: the script, the fonts, the scene of the gate, the page itself. */
 export const STEPS = ['dom', 'fonts', 'scene', 'page'] as const;
 export type Step = (typeof STEPS)[number];
@@ -25,7 +30,7 @@ else h.dataset.gate='off';}catch(e){document.documentElement.dataset.gate='off';
  * The labels each version hangs on its 3D object, and the move (0…3) that brings the part each one names:
  * a label shows once that many moves are finished.
  */
-export const TAG_AFTER: Record<GateVariant, number[]> = {
+export const TAG_AFTER: Record<Gate3D, number[]> = {
   monograma: [],
   codigo: [4, 3, 2, 1, 1], // the five layers, top first: they land from the bottom up
   ascenso: [0, 1, 2, 3, 4], // four stages and the arrival

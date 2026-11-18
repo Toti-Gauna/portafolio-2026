@@ -1,9 +1,10 @@
 'use client';
 
-import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
-import { GATE_EVENT, gateOpen, type GateVariant, type Step, STEPS, TAG_AFTER } from '@/v2/gate/state';
+import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { type Gate3D, type Step, STEPS, TAG_AFTER } from '@/v2/gate/state';
 import type { Stage } from '@/v2/gate/scene';
 import { ArrowIcon, PlayIcon } from '../ui/Icons';
+import { reducedMotion as reduced, useGate } from './useGate';
 
 export type GateLabels = {
   label: string; meet: string; enter: string; loading: string; ready: string; progress: string; key: string;
@@ -13,7 +14,6 @@ export type GateLabels = {
 export type GateTag = { k?: string; t: string };
 type Letter = { ch: string; color?: string };
 
-const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MARK = (
   <>
     <path d="M11 16V41" />
@@ -32,45 +32,21 @@ const MARK = (
  * Everything under the gate is inert while it is open. With reduced motion the scene is one still frame.
  */
 export function Gate({ variant = 'monograma', first, last, labels, trailerHref, tags = [], tagsLabel, stamps }: {
-  variant?: GateVariant; first: Letter[]; last: Letter[]; labels: GateLabels; trailerHref: string;
+  variant?: Gate3D; first: Letter[]; last: Letter[]; labels: GateLabels; trailerHref: string;
   tags?: GateTag[]; tagsLabel?: string; stamps?: string[];
 }) {
-  const root = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const box = useRef<HTMLDivElement>(null);
   const tagList = useRef<HTMLUListElement>(null);
   const stage = useRef<Stage | null>(null);
-  const release = useRef<() => void>(() => {});
-  const [open, setOpen] = useState(true);
-  const [done, setDone] = useState<Step[]>([]);
+  const { root, open, done, mark, leaving, enter } = useGate(() => stage.current?.exit());
   const [gl, setGl] = useState<'pending' | 'on' | 'off'>('pending');
   const [built, setBuilt] = useState(0); // what the scene has built, 0…1
-  const [leaving, setLeaving] = useState(false);
-  const mark = useCallback((s: Step) => setDone((d) => (d.includes(s) ? d : [...d, s])), []);
 
-  /* open or not: the layout's script decided before the first paint */
-  useEffect(() => {
-    if (!gateOpen()) { setOpen(false); return; }
-    const html = document.documentElement;
-    html.dataset.gateLive = 'true';
-    // everything under the gate waits: no focus, no clicks, no screen reader
-    const under = [...document.querySelectorAll<HTMLElement>('.sh, .v2-skip, .v2-page > :not(.gt)')];
-    under.forEach((el) => { el.inert = true; });
-    release.current = () => { under.forEach((el) => { el.inert = false; }); delete html.dataset.gateLive; release.current = () => {}; };
-    // focus goes to the gate itself: Enter opens it, and no door is marked until Tab reaches it
-    root.current?.focus({ preventScroll: true });
-    return () => release.current();
-  }, []);
-
-  /* the real loading: four steps, each marked when it actually happens */
+  /* the scene: its first frames are the third loading step */
   useEffect(() => {
     if (!open) return;
-    mark('dom');
     let alive = true;
-    (document.fonts?.ready ?? Promise.resolve()).then(() => alive && mark('fonts'));
-    const loaded = () => alive && mark('page');
-    if (document.readyState === 'complete') loaded(); else window.addEventListener('load', loaded, { once: true });
-
     const el = canvas.current, host = root.current;
     let ro: ResizeObserver | undefined;
     let onMove: ((e: PointerEvent) => void) | undefined;
@@ -117,7 +93,6 @@ export function Gate({ variant = 'monograma', first, last, labels, trailerHref, 
     }
     return () => {
       alive = false;
-      window.removeEventListener('load', loaded);
       ro?.disconnect();
       if (onMove) window.removeEventListener('pointermove', onMove);
       stage.current?.dispose();
@@ -129,31 +104,6 @@ export function Gate({ variant = 'monograma', first, last, labels, trailerHref, 
 
   /* each loading step releases one move of the scene */
   useEffect(() => { stage.current?.step(done.length); }, [done, gl]);
-
-  const enter = useCallback(() => {
-    if (leaving) return;
-    setLeaving(true);
-    window.dispatchEvent(new CustomEvent(GATE_EVENT, { detail: { action: 'enter' } }));
-    const finish = () => {
-      document.documentElement.dataset.gate = 'off';
-      release.current(); // the page under the gate is live again before focus moves into it
-      setOpen(false);
-      document.getElementById('main')?.focus({ preventScroll: true });
-    };
-    if (reduced()) { finish(); return; }
-    void Promise.all([stage.current?.exit() ?? Promise.resolve(), new Promise((r) => setTimeout(r, 520))]).then(finish);
-  }, [leaving]);
-
-  /* Enter and Escape open the gate (Enter on the first door follows its link) */
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.key === 'Escape' || (e.key === 'Enter' && !(e.target as Element | null)?.closest?.('a'))) { e.preventDefault(); enter(); }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [open, enter]);
 
   if (!open) return null;
   const loaded = done.length / STEPS.length;

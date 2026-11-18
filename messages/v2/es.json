@@ -747,11 +747,11 @@
     "choose": {
       "meta": {
         "title": "Puerta · Sistema IG v2",
-        "description": "Cuatro versiones en 3D de la puerta de entrada del nuevo portafolio de Ignacio Gauna, para elegir una."
+        "description": "La puerta de entrada del nuevo portafolio de Ignacio Gauna y los estudios en 3D que la precedieron."
       },
       "kicker": "Lote 3.1 · Puerta",
-      "title": "Cuatro puertas en 3D",
-      "text": "La entrada al portafolio en cuatro versiones. Las cuatro son una escena 3D sobre el mismo estudio: luces que se ven en los reflejos, un piso pulido que espeja lo que hay encima y una cámara que llega mientras el objeto se arma. Cada objeto se construye con la carga real de la página, en cuatro pasos. Entran en una pantalla en cualquier dispositivo y se abren con Enter. Abrí cada una y elegí la que va a recibir a quien llegue.",
+      "title": "La puerta y sus estudios",
+      "text": "La entrada al portafolio. «Cinética» es la que recibe a quien llega: motion graphics en 2D alrededor del monograma, con cambios de color. Debajo quedan los cuatro estudios en 3D que se hicieron antes, cada uno una escena sobre el mismo estudio de luces. Todas entran en una pantalla en cualquier dispositivo, se arman con la carga real de la página y se abren con Enter.",
       "letter": "Puerta",
       "open": "Abrir esta puerta",
       "now": "Hoy en el inicio",
@@ -759,6 +759,12 @@
       "piece": "Pieza central",
       "loading": "La carga",
       "items": {
+        "cinetica": {
+          "name": "Cinética",
+          "theme": "El monograma, en 2D",
+          "piece": "El punto coral del IG es una pelota con vida: cae y rebota, levanta el asta, la G entra rodando y la choca, y el monograma salta a su lugar. Cada aterrizaje cambia el color de toda la pantalla: tinta, coral, azul, papel. En reposo, las letras del nombre saltan bajo el puntero y el monograma cambia el color al tocarlo.",
+          "loading": "Un acto por cada paso de la carga, y un medidor fino abajo."
+        },
         "monograma": {
           "name": "Monograma",
           "theme": "La marca",
@@ -790,6 +796,7 @@
       "codigo": "Las cinco capas del oficio",
       "ascenso": "El roadmap, de 2026 a 2030",
       "postal": "Las seis paradas del recorrido"
-    }
+    },
+    "tint": "Cambiar el color de la puerta"
   }
 }

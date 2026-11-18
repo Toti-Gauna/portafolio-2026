@@ -167,6 +167,312 @@ html[data-gate='off'] .gt { display: none; }
   .gt-l, .gt-role, .gt-doors, .gt-meter, .gt-top, .gt[data-gl='pending'] .gt-poster { animation: none; }
 }
 
+/* ══ «Cinética»: the 2D gate of the home ══════════════════════════════════════
+   Flat fields of colour, the IG mark and character animation: squash, stretch, overshoot. The colours of
+   everything written come from the theme (--fg, --alt, --dot, --btn…, set on .gk); each element switches
+   when the wipe reaches it (--d). Only transform, opacity and clip-path move. */
+.gk { background: transparent; transition: none; --ease-boing: cubic-bezier(0.2, 0.7, 0.4, 1); }
+/* the way out: the gate closes like an iris on the mark, and the page is what is left */
+.gk[data-leaving] { opacity: 1; animation: gk-leave 560ms cubic-bezier(0.5, 0, 0.75, 0) both; }
+@keyframes gk-leave { from { clip-path: circle(78vmax at 50% 40%); } to { clip-path: circle(0 at 50% 40%); } }
+.gk-t {
+  transition: color 0s linear var(--d, 0ms), background-color 0s linear var(--d, 0ms), border-color 0s linear var(--d, 0ms),
+    fill 0s linear var(--d, 0ms), stroke 0s linear var(--d, 0ms);
+}
+.gk :focus-visible { outline-color: var(--focus-c); }
+
+/* ── the colours ─────────────────────────────────────────────────────────── */
+.gk-field, .gk-wipe, .gk-wipe i { position: absolute; inset: 0; }
+.gk-wipe i { clip-path: circle(0 at var(--x) var(--y)); animation: gk-wipe 640ms cubic-bezier(0.5, 1, 0.89, 1) both; }
+.gk-wipe i + i { animation-delay: 70ms; }
+@keyframes gk-wipe { to { clip-path: circle(var(--r) at var(--x) var(--y)); } }
+
+/* ── the opening: the mark, large ────────────────────────────────────────── */
+.gk-big {
+  position: absolute; left: 50%; top: 45%; width: min(56vw, 44vh); aspect-ratio: 1; margin: calc(min(56vw, 44vh) / -2) 0 0 calc(min(56vw, 44vh) / -2);
+  pointer-events: none; z-index: 1;
+}
+.gk[data-landed='true'] .gk-big { display: none; }
+.gk-big svg { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke-width: 3.4; stroke-linecap: round; }
+.gk-stem, .gk-arc, .gk-bar { stroke: var(--fg); }
+.gk-ball { fill: var(--dot); stroke: none; transform-origin: 24px 42.7px; }
+.gk-stem { transform-origin: 11px 42.7px; }
+.gk-stem-w { transform-origin: 11px 42.7px; }
+.gk-g-spin { transform-origin: 29.773px 28.497px; }
+.gk-body { transform-origin: 24px 42.7px; }
+
+.gk-shadow { fill: var(--fg); opacity: 0; transform-origin: 24px 43.5px; }
+.gk-pow { stroke: var(--fg); stroke-width: 1.3; opacity: 0; }
+@keyframes gk-pow { 0% { opacity: 0; transform: scale(0.3); } 18% { opacity: 1; } 100% { opacity: 0; transform: scale(1.45); } }
+.gk[data-scene='0'] .gk-pow--0 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 368ms both; }
+.gk[data-scene='1'] .gk-pow--1 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 378ms both; }
+.gk[data-scene='2'] .gk-pow--2 { animation: gk-pow 420ms cubic-bezier(0.2, 0.7, 0.4, 1) 540ms both; }
+.gk[data-scene='3'] .gk-pow--3 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 413ms both; }
+/* the ball has a floor under it: its shadow gathers as it comes down */
+.gk[data-scene='0'] .gk-shadow { animation: gk0-shadow 800ms both; }
+.gk[data-scene='1'] .gk-shadow { animation: gk1-shadow 840ms both; }
+@keyframes gk0-shadow {
+  0% { opacity: 0; transform: scale(0.2, 1); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.7); }
+  46% { opacity: 0.22; transform: scale(1.3, 1); }
+  62% { opacity: 0.12; transform: scale(0.7, 1); }
+  78% { opacity: 0.22; transform: scale(1.15, 1); }
+  100% { opacity: 0.2; transform: scale(1, 1); }
+}
+@keyframes gk1-shadow {
+  0% { opacity: 0.2; transform: translateX(0) scale(1, 1); }
+  22% { opacity: 0.1; transform: translateX(-6.5px) scale(0.6, 1); }
+  45% { opacity: 0.24; transform: translateX(-13px) scale(1.3, 1); }
+  70%, 100% { opacity: 0; transform: translateX(-13px) scale(0.4, 1); }
+}
+
+/* act 0 · the ball drops in and settles (runs on the first paint, before any script) */
+.gk-ball-y { animation: gk0-y 800ms both, gk0-wait 900ms 820ms infinite; }
+.gk-ball { animation: gk0-sq 800ms both, gk0-wait-sq 900ms 820ms infinite; }
+.gk[data-scene='0'] .gk-stem { transform: scaleY(0); }
+.gk[data-scene='0'] .gk-g-roll, .gk[data-scene='1'] .gk-g-roll { opacity: 0; }
+.gk[data-scene='0'] .gk-bar, .gk[data-scene='1'] .gk-bar, .gk[data-scene='2'] .gk-bar { opacity: 0; }
+@keyframes gk0-y {
+  0% { transform: translateY(-90px); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.7); }
+  46% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  62% { transform: translateY(-10px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  78% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  88% { transform: translateY(-3px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  96%, 100% { transform: translateY(0); }
+}
+@keyframes gk0-sq {
+  0%, 38% { transform: scale(0.86, 1.16); }
+  46% { transform: scale(1.36, 0.66); }
+  56% { transform: scale(0.92, 1.1); }
+  74% { transform: scale(1, 1); }
+  78% { transform: scale(1.2, 0.82); }
+  86% { transform: scale(0.97, 1.04); }
+  96% { transform: scale(1.07, 0.94); }
+  100% { transform: scale(1, 1); }
+}
+/* still loading: it keeps itself busy */
+@keyframes gk0-wait {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  50% { transform: translateY(-6px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+}
+@keyframes gk0-wait-sq { 0%, 100% { transform: scale(1.16, 0.85); } 20%, 80% { transform: scale(0.95, 1.06); } 50% { transform: scale(1, 1); } }
+
+/* from act 1 on, where things stay once their act is over */
+.gk:not([data-scene='0']) .gk-ball-x { transform: translateX(-13px); }
+.gk:not([data-scene='0']) .gk-ball-y { transform: translateY(-32.3px); animation: none; }
+.gk:not([data-scene='0']) .gk-ball { animation: none; }
+
+/* act 1 · it jumps to its place, and the stem shoots up under it */
+.gk[data-scene='1'] .gk-ball-x { animation: gk1-x 380ms linear both; }
+.gk[data-scene='1'] .gk-ball-y { animation: gk1-y 840ms both; }
+.gk[data-scene='1'] .gk-ball { animation: gk1-sq 840ms both; }
+.gk[data-scene='1'] .gk-stem { animation: gk1-stem 840ms both; }
+@keyframes gk1-x { from { transform: translateX(0); } to { transform: translateX(-13px); } }
+@keyframes gk1-y {
+  0% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  22% { transform: translateY(-12px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  45% { transform: translateY(0); animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1); }
+  74% { transform: translateY(-36.5px); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  90% { transform: translateY(-31.4px); }
+  100% { transform: translateY(-32.3px); }
+}
+@keyframes gk1-sq {
+  0% { transform: scale(1.24, 0.78); }
+  10% { transform: scale(0.9, 1.14); }
+  40% { transform: scale(0.9, 1.14); }
+  45% { transform: scale(1.36, 0.66); }
+  56% { transform: scale(0.82, 1.24); }
+  74% { transform: scale(1.08, 0.94); }
+  90% { transform: scale(0.97, 1.03); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes gk1-stem {
+  0%, 45% { transform: scaleY(0); animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1); }
+  72% { transform: scaleY(1.1); }
+  88% { transform: scaleY(0.97); }
+  100% { transform: scaleY(1); }
+}
+
+/* act 2 · the G rolls in and bumps the stem */
+.gk[data-scene='2'] .gk-g-roll { animation: gk2-roll 1020ms both; }
+.gk[data-scene='2'] .gk-g-spin { animation: gk2-spin 1020ms both; }
+.gk[data-scene='2'] .gk-stem-w { animation: gk2-wobble 1020ms both; }
+.gk[data-scene='2'] .gk-ball-x { animation: gk2-ball 1020ms both; }
+@keyframes gk2-roll {
+  0% { transform: translateX(120px); animation-timing-function: cubic-bezier(0.3, 0.5, 0.6, 1); }
+  53% { transform: translateX(-1.8px); }
+  66% { transform: translateX(1.1px); }
+  80% { transform: translateX(-0.3px); }
+  100% { transform: translateX(0); }
+}
+@keyframes gk2-spin {
+  0% { transform: rotate(510deg); animation-timing-function: cubic-bezier(0.3, 0.5, 0.6, 1); }
+  53% { transform: rotate(-9deg); }
+  68% { transform: rotate(5deg); }
+  84% { transform: rotate(-2deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes gk2-wobble { 0%, 53% { transform: rotate(0); } 63% { transform: rotate(-9deg); } 75% { transform: rotate(5.5deg); } 87% { transform: rotate(-2deg); } 100% { transform: rotate(0); } }
+@keyframes gk2-ball { 0%, 53% { transform: translateX(-13px); } 63% { transform: translateX(-18.6px); } 75% { transform: translateX(-9.6px); } 87% { transform: translateX(-14.3px); } 100% { transform: translateX(-13px); } }
+
+/* act 3 · the ball slams down as the dot, the mark takes the hit, the bar snaps in */
+.gk[data-scene='3'] .gk-ball-y { animation: gk3-y 780ms both; }
+.gk[data-scene='3'] .gk-ball { animation: gk3-sq 780ms both; }
+.gk[data-scene='3'] .gk-body { animation: gk3-body 780ms both; }
+.gk[data-scene='3'] .gk-bar { animation: gk3-bar 780ms both; }
+@keyframes gk3-y {
+  0% { transform: translateY(-32.3px); }
+  12% { transform: translateY(-30.4px); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  35% { transform: translateY(-45px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  53% { transform: translateY(-32.3px); }
+  60% { transform: translateY(-30px); }
+  78% { transform: translateY(-33.3px); }
+  100% { transform: translateY(-32.3px); }
+}
+@keyframes gk3-sq { 0% { transform: scale(1, 1); } 12% { transform: scale(1.22, 0.8); } 30% { transform: scale(0.86, 1.18); } 53% { transform: scale(1.34, 0.68); } 66% { transform: scale(0.92, 1.08); } 100% { transform: scale(1, 1); } }
+@keyframes gk3-body { 0%, 53% { transform: scale(1, 1); } 61% { transform: scale(1.07, 0.89); } 76% { transform: scale(0.98, 1.04); } 90% { transform: scale(1.01, 0.99); } 100% { transform: scale(1, 1); } }
+@keyframes gk3-bar {
+  0%, 50% { opacity: 0; transform: translateX(44px); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+  52% { opacity: 1; }
+  74% { opacity: 1; transform: translateX(-1.5px); }
+  88% { transform: translateX(0.5px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* act 4 · it crouches; the script throws it to its place */
+.gk[data-scene='4'] .gk-body { animation: gk4-crouch 150ms var(--ease-boing) both; }
+@keyframes gk4-crouch { to { transform: scale(1.09, 0.84); } }
+
+/* ── the frame ───────────────────────────────────────────────────────────── */
+.gk-in {
+  position: relative; z-index: 2; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%;
+  padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3.4vw, 44px) calc(clamp(14px, 2.4vh, 24px) + env(safe-area-inset-bottom, 0px));
+}
+.gk-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--size-touch); }
+.gk-brand, .gk-place, .gk-meter, .gk-skip {
+  margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft);
+}
+.gk-place { display: none; }
+@media (min-width: 560px) { .gk[data-landed='true'] .gk-place { display: block; animation: gk-rise 500ms var(--motion-ease) 400ms both; } }
+.gk-skip {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-1); margin-left: auto;
+  border: 0; background: none; color: var(--fg); cursor: pointer;
+}
+.gk-meter { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-4); }
+.gk-step { white-space: nowrap; }
+.gk-bar-h { position: relative; height: 1px; background: color-mix(in srgb, var(--fg) 26%, transparent); }
+.gk-bar-h i { position: absolute; inset: -1px 0 0; background: var(--fg); transform-origin: 0 50%; transition: transform 320ms var(--motion-ease); }
+.gk-num { font-variant-numeric: tabular-nums; color: var(--fg); }
+
+/* ── at rest: the mark, the name, the role and two doors on a branch ─────── */
+.gk-final { display: grid; align-content: center; justify-items: center; gap: clamp(10px, 2vh, 18px); min-height: 0; text-align: center; }
+.gk-final > * { opacity: 0; }
+.gk[data-landed='true'] .gk-final > * { opacity: 1; }
+.gk-mark {
+  display: grid; place-items: center; width: clamp(64px, 12vh, 104px); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--fg); cursor: pointer;
+  transform-origin: 50% 90%;
+}
+.gk-mark svg { width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; }
+.gk-mark-g { transform-origin: 29.773px 28.497px; }
+.gk-mark-dot { transform-origin: 11px 10.4px; }
+.gk-mark-dot circle { fill: var(--dot); stroke: none; }
+.gk[data-landed='true'] .gk-mark { animation: gk-land 480ms var(--ease-boing) both; }
+@keyframes gk-land { 0% { transform: scale(1.16, 0.8); } 45% { transform: scale(0.95, 1.08); } 75% { transform: scale(1.03, 0.97); } 100% { transform: scale(1, 1); } }
+/* every few seconds the dot hops: the mark is a button, and it says so */
+.gk[data-ready='true'] .gk-mark-dot { animation: gk-hop 5.2s 1.8s infinite; }
+@keyframes gk-hop {
+  0%, 14%, 100% { transform: translateY(0) scale(1, 1); }
+  2% { transform: translateY(0) scale(1.22, 0.78); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  7% { transform: translateY(-7px) scale(0.9, 1.14); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  11% { transform: translateY(0) scale(1.18, 0.82); }
+}
+
+.gk-id { display: grid; justify-items: center; gap: clamp(8px, 1.4vh, 14px); }
+.gk-name {
+  display: grid; margin: 0; font-size: clamp(40px, min(13vw, 11.4vh), 116px); line-height: 1.02; font-weight: 800;
+  font-variation-settings: 'wdth' 125; letter-spacing: -0.03em; color: var(--fg);
+}
+.gk-word { display: inline-flex; justify-content: center; }
+.gk-l { display: inline-block; transform-origin: 50% 86%; color: var(--fg); cursor: default; }
+.gk-word--last .gk-l { color: var(--alt); }
+.gk[data-landed='true'] .gk-l { animation: gk-jump 760ms both; animation-delay: calc(var(--i) * 46ms + 90ms); }
+@keyframes gk-jump {
+  0% { opacity: 0; transform: translateY(120%) scale(0.8, 1.3); animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1); }
+  8% { opacity: 1; }
+  44% { opacity: 1; transform: translateY(-24%) scale(0.93, 1.1); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  66% { transform: translateY(0) scale(1.15, 0.84); }
+  82% { transform: translateY(-6%) scale(0.98, 1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
+}
+.gk-role { margin: 0; font-family: var(--family-mono); font-size: clamp(13px, 1.7vh, 15px); font-weight: 500; letter-spacing: 0.04em; color: var(--soft); }
+.gk-role b { font-weight: 800; color: var(--fg); }
+.gk[data-landed='true'] .gk-role { animation: gk-rise 520ms var(--motion-ease) 620ms both; }
+@keyframes gk-rise { from { opacity: 0; transform: translate3d(0, 12px, 0); } }
+
+.gk-doors { position: relative; display: grid; gap: var(--space-3); width: min(100%, 340px); margin-top: clamp(14px, 3.4vh, 30px); padding-left: 40px; }
+.gk-fork { position: absolute; left: 0; top: -28px; width: 40px; height: 136px; overflow: visible; fill: none; stroke: var(--soft); stroke-width: 2; }
+.gk-fork path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.gk-fork-a { stroke: var(--btn); }
+.gk-fork circle { fill: var(--btn); stroke: none; }
+.gk[data-landed='true'] .gk-fork path { animation: gk-draw 640ms var(--motion-ease) 700ms both; }
+.gk[data-landed='true'] .gk-fork-b { animation-delay: 800ms; }
+.gk[data-landed='true'] .gk-fork circle:not(.gk-packet) { animation: gk-pop 420ms var(--ease-boing) 660ms both; transform-origin: 6px 6px; }
+@keyframes gk-draw { to { stroke-dashoffset: 0; } }
+/* a packet runs down the branch into the first door, now and then */
+.gk-packet { opacity: 0; }
+.gk[data-ready='true'] .gk-packet { animation: gk-packet 3.6s 2.6s infinite; }
+@keyframes gk-packet {
+  0% { opacity: 0; transform: translate(0, 0); }
+  4% { opacity: 1; }
+  16% { transform: translate(0, 34px); }
+  21% { transform: translate(4px, 43px); }
+  24% { transform: translate(12px, 46px); }
+  32% { opacity: 1; transform: translate(34px, 46px); }
+  36%, 100% { opacity: 0; transform: translate(34px, 46px); }
+}
+.gk-door {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); width: 100%; min-height: var(--size-button); padding: 0 var(--space-5);
+  border-radius: var(--radius-md); border: 2px solid transparent; font-family: inherit; font-size: 16px; font-weight: 800; line-height: 1.1; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+}
+.gk-door svg { flex: none; }
+.gk-door--meet { background: var(--btn); color: var(--btn-fg); }
+.gk-door--enter { background: transparent; border-color: color-mix(in srgb, var(--fg) 62%, transparent); color: var(--fg); font-weight: 700; }
+.gk-key {
+  display: none; place-items: center; height: 26px; padding: 0 7px; margin-left: var(--space-1); border-radius: var(--radius-xs);
+  border: 1px solid color-mix(in srgb, var(--fg) 50%, transparent); font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700;
+}
+.gk[data-landed='true'] .gk-door { animation: gk-pop 520ms var(--ease-boing) 740ms both; }
+.gk[data-landed='true'] .gk-door--enter { animation-delay: 840ms; }
+@keyframes gk-pop { 0% { opacity: 0; transform: scale(0.6, 0.6); } 55% { opacity: 1; transform: scale(1.07, 0.95); } 78% { transform: scale(0.98, 1.03); } 100% { opacity: 1; transform: scale(1, 1); } }
+.gk-door:active { transform: scale(0.96, 0.94); }
+@media (hover: hover) and (pointer: fine) {
+  .gk-key { display: inline-grid; }
+  /* under the pointer a door takes a breath: squash, stretch, settle */
+  .gk[data-ready='true'] .gk-door:hover { animation: gk-boing 460ms var(--ease-boing); }
+  .gk-door:hover svg:last-of-type { transform: translateX(3px); }
+  .gk-skip:hover svg { transform: translateX(3px); }
+}
+.gk-door svg, .gk-skip svg { transition: transform var(--motion-fast) var(--motion-ease); }
+@keyframes gk-boing { 0% { transform: scale(1, 1); } 30% { transform: scale(1.06, 0.9); } 60% { transform: scale(0.97, 1.06); } 82% { transform: scale(1.02, 0.98); } 100% { transform: scale(1, 1); } }
+
+/* short and wide (a phone on its side): who on the left, the doors on the right */
+@media (orientation: landscape) and (max-height: 520px) {
+  .gk-final { grid-template-columns: auto auto; grid-template-rows: auto auto; justify-content: center; column-gap: clamp(28px, 7vw, 72px); row-gap: 8px; align-items: center; }
+  .gk-mark { grid-column: 1; grid-row: 1; width: 56px; }
+  .gk-id { grid-column: 1; grid-row: 2; }
+  .gk-doors { grid-column: 2; grid-row: 1 / 3; width: 300px; margin-top: 28px; }
+  .gk-name { font-size: clamp(34px, 12vh, 52px); }
+  .gk-big { top: 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gk[data-leaving], .gk-wipe i, .gk-ball-y, .gk-ball, .gk-pow, .gk-shadow, .gk[data-landed='true'] .gk-mark, .gk[data-ready='true'] .gk-mark-dot, .gk[data-landed='true'] .gk-l,
+  .gk[data-landed='true'] .gk-role, .gk[data-landed='true'] .gk-place, .gk[data-landed='true'] .gk-fork path, .gk[data-landed='true'] .gk-fork circle,
+  .gk[data-ready='true'] .gk-packet, .gk[data-landed='true'] .gk-door, .gk[data-ready='true'] .gk-door:hover { animation: none; }
+  .gk-fork path { stroke-dashoffset: 0; }
+  .gk-bar-h i, .gk-door svg, .gk-skip svg { transition: none; }
+}
+
 /* ── the page that lists the four (/puerta/) ─────────────────────────────── */
 .gl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); }
 .gl-card {
