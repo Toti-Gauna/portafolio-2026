@@ -496,3 +496,131 @@ describe('v2 home (lote 3.2)', () => {
     for (const m of [es, en]) expect(JSON.stringify(m.home)).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|no screenshots)\b/i);
   });
 });
+
+describe('v2 world of Work (lote 4.1)', () => {
+  it('fourteen places, each with its words in both languages, and nothing written inside the drawing', async () => {
+    const { WORLD_IDS, WORLD_SVG, WORLD_ISLES, WORLD_BOX, WORLD_GROUP_OF, WORLD_GROUPS } = await import('../../v2/components/work/world-art');
+    expect(WORLD_IDS).toEqual(['mdp', 'tach', 'ada', 'tsoft', 'eclipse', 'agentes', 'kinetic', 'volta', 'velmar', 'dentalos', 'games', 'lucero', 'trazo', 'nucleo']);
+    expect(WORLD_SVG).not.toMatch(/<text|NaN|undefined|Infinity/);
+    for (const m of [es, en]) {
+      expect(Object.keys(m.world.places)).toEqual(WORLD_IDS);
+      for (const id of WORLD_IDS) for (const k of ['name', 'when', 'state', 'text', 'art'] as const) expect(m.world.places[id as keyof typeof m.world.places][k].length, `${id}.${k}`).toBeGreaterThan(0);
+      for (const g of WORLD_GROUPS) expect(m.world.groups[g].length).toBeGreaterThan(0);
+    }
+    // the journey in order: where it began, the work, my own path and, of what comes next, only Núcleo (Ignacio, 18/11/2026)
+    expect(WORLD_IDS.map((id) => WORLD_GROUP_OF[id]).join(' ')).toBe(['origin', ...Array(3).fill('work'), ...Array(9).fill('own'), 'next'].join(' '));
+    expect([es.world.groups.next, en.world.groups.next]).toEqual(['Proyectos futuros', 'Future projects']);
+    for (const id of WORLD_IDS) {
+      const [x, y, w, h] = WORLD_ISLES[id].box;
+      expect(w, id).toBeGreaterThan(120);
+      expect(h, id).toBeGreaterThan(90);
+      expect(x, id).toBeGreaterThanOrEqual(WORLD_BOX.x);
+      expect(y, id).toBeGreaterThanOrEqual(WORLD_BOX.y);
+      expect(x + w, id).toBeLessThanOrEqual(WORLD_BOX.x + WORLD_BOX.width);
+      expect(y + h, id).toBeLessThanOrEqual(WORLD_BOX.y + WORLD_BOX.height);
+    }
+  });
+
+  it('one land in diagonal bands, travelled sideways: a band per place (two for Núcleo), a stop on each, its name readable on its ground', async () => {
+    const { WORLD_IDS, WORLD_SVG, WORLD_BOX, WORLD_STOPS, WORLD_ISLES } = await import('../../v2/components/work/world-art');
+    // a strip: many screens wide, and it starts at 0 so the map can measure it
+    expect([WORLD_BOX.x, WORLD_BOX.y]).toEqual([0, 0]);
+    expect(WORLD_BOX.width / WORLD_BOX.height).toBeGreaterThan(10);
+    // every band is one ground with its own clip; the land has no gaps: 15 grounds, 14 steps between them
+    expect(WORLD_SVG.match(/class="wa wa-band"/g) ?? []).toHaveLength(15);
+    expect(WORLD_SVG.match(/class="wa-land"/g) ?? []).toHaveLength(15);
+    expect(WORLD_SVG.match(/class="wa-step"/g) ?? []).toHaveLength(14);
+    // the drawing travels once: every id in it is unique, and a place on its own is shown by reference
+    const ids = [...WORLD_SVG.matchAll(/ id="([^"]+)"/g)].map((m) => m[1]);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).toHaveLength(45);
+    for (const id of WORLD_IDS) { const refs = [...WORLD_ISLES[id].svg.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]); expect(refs.length, id).toBeGreaterThanOrEqual(2); for (const r of refs) expect(ids, `${id} → ${r}`).toContain(r); expect(WORLD_ISLES[id].svg, id).not.toMatch(/<path|<circle/); }
+    expect((WORLD_ISLES.nucleo.svg.match(/<use/g) ?? []).length).toBe(4);
+    // the stops go left to right, in the order of the journey, each with room around it (Ignacio: «más espacio a cada zona»)
+    expect(WORLD_STOPS.map((s) => s.id)).toEqual(WORLD_IDS);
+    WORLD_STOPS.forEach((s, i) => {
+      if (i) expect(s.x - WORLD_STOPS[i - 1].x, s.id).toBeGreaterThan(440);
+      expect(s.x, s.id).toBeGreaterThan(0);
+      expect(s.x, s.id).toBeLessThan(WORLD_BOX.width);
+      expect(s.label[1], s.id).toBeLessThanOrEqual(WORLD_BOX.height);
+      // its name and its button are written over the ground in front: ink on a light band, paper on a dark one, AA either way
+      expect(contrast(s.ink, s.on), `${s.id} label`).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
+  it('every band is a biome in soft tones: something lies on its ground, nothing is cut by a border, and no ground is a pure brand colour', async () => {
+    const { WORLD_SVG, WORLD_DROPPED } = await import('../../v2/components/work/world-art');
+    // what was asked for and did not fit in its band would have been left out: nothing was
+    expect(WORLD_DROPPED).toEqual([]);
+    const bands = WORLD_SVG.split('<g class="wa wa-band"').slice(1).map((b) => b.split('<path class="wa-step"')[0]);
+    expect(bands).toHaveLength(15);
+    const hsl = (hex: string) => { const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255), mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; return { s: mx === mn ? 0 : (mx - mn) / (1 - Math.abs(2 * l - 1)), l }; };
+    for (const b of bands) {
+      const id = b.match(/data-id="(\w+)"/)![1], ground = b.match(/--g:(#[0-9a-f]{6})/)![1];
+      // a biome: at least six things on the ground, of three kinds or more
+      const kinds = new Set([...b.matchAll(/class="(wa-(?:water|seaf|hill|drift|peak|leaf|rock|dune|road|g2|g3|park|wheat|track|floor|row|speck|petal|flower|px|tuft)[^"]*|iso-solid wa-(?:mass|bale))"/g)].map((m) => m[1].split(' ').pop()));
+      expect(kinds.size, `${id}: ${[...kinds].join(' ')}`).toBeGreaterThanOrEqual(3);
+      // comfortable to look at for a whole screen: light grounds are not saturated, dark ones are deep
+      const { s, l } = hsl(ground);
+      expect(l > 0.6 ? s * (1 - l) < 0.3 : l < 0.3, `${id} ${ground} s=${s.toFixed(2)} l=${l.toFixed(2)}`).toBe(true);
+    }
+  });
+
+  it('no building is drawn twice: every place is made of a different set of pieces', async () => {
+    const { WORLD_IDS, WORLD_SVG } = await import('../../v2/components/work/world-art');
+    // what stands on a place, whatever its spot on the map: the kind of every piece, in the order it is painted
+    const stands = (id: string) => WORLD_SVG.split('<g class="wa wa-isle"').slice(1).filter((g) => g.includes(`data-id="${id}"`)).join('');
+    const made = (svg: string) => [...svg.matchAll(/class="([^"]+)"/g)].map((m) => m[1]).filter((c) => !/^wa-(isle|on)|^iso-(fill|shade|top|line)/.test(c)).join('|');
+    const seen = WORLD_IDS.map((id) => made(stands(id)));
+    expect(new Set(seen).size).toBe(14);
+    for (const s of seen) expect(s.split('|').length).toBeGreaterThanOrEqual(10);
+  });
+
+  it('what exists is solid and what is planned is under construction: dashed outline, scaffold or crane, only on the projects to come', async () => {
+    const { WORLD_IDS, WORLD_GROUP_OF, WORLD_SVG } = await import('../../v2/components/work/world-art');
+    const stands = (id: string) => WORLD_SVG.split('<g class="wa wa-isle"').slice(1).filter((g) => g.includes(`data-id="${id}"`)).join('');
+    for (const id of WORLD_IDS) {
+      const svg = stands(id), site = /wa-wire/.test(svg) && /wa-crane|wa-scaf/.test(svg) && /wa-pole/.test(svg);
+      expect(site, id).toBe(WORLD_GROUP_OF[id] === 'next');
+      if (WORLD_GROUP_OF[id] !== 'next') expect(svg, id).not.toMatch(/wa-wire|wa-crane|wa-scaf/);
+    }
+    // the path: travelled up to the last project of my own, dashed from there on
+    expect(WORLD_SVG.match(/class="wa-path wa-path--plan"/g) ?? []).toHaveLength(1);
+    expect(WORLD_SVG.match(/class="wa-node"/g) ?? []).toHaveLength(13);
+    expect(WORLD_SVG.match(/class="wa-node wa-node--plan"/g) ?? []).toHaveLength(1);
+  });
+
+  it('every stop has its postcard: the stamp of the kit where there is one, printed from its own drawing where there is not', async () => {
+    const { WORLD_IDS, WORLD_SVG } = await import('../../v2/components/work/world-art');
+    const { WORLD_POSTALS } = await import('../../v2/components/work/world-stamps');
+    expect(Object.keys(WORLD_POSTALS)).toEqual(WORLD_IDS);
+    expect(WORLD_POSTALS.tsoft.map((p) => p.kit)).toEqual(['tuenti', 'complia', 'supernova']);
+    expect([WORLD_POSTALS.tach[0].kit, WORLD_POSTALS.ada[0].kit, WORLD_POSTALS.eclipse[0].kit]).toEqual(['tach', 'ada', 'eclipse']);
+    const keys = Object.values(WORLD_POSTALS).flat().map((p) => p.key);
+    expect(new Set(keys).size).toBe(keys.length);
+    for (const id of WORLD_IDS) for (const p of WORLD_POSTALS[id]) {
+      expect(p.svg, id).not.toMatch(/<text|NaN|undefined|Infinity/);
+      expect(p.svg, id).toContain(`mask id="sp-${p.key}"`);
+      if (!p.kit) { const ref = p.svg.match(/href="#(wst\d+)"/)![1]; expect(WORLD_SVG, id).toContain(` id="${ref}"`); for (const m of [es, en]) expect((m.world.places[id as keyof typeof m.world.places] as { mark?: string }).mark, `${id} mark`).toBeTruthy(); }
+    }
+  });
+
+  it('the world speaks in positive, in sentences a recruiter reads at a glance, and says what I did at every stop', () => {
+    const words = (t: string) => t.trim().split(/\s+/).length;
+    type Place = { text: string; art: string; state: string; facts: { k: string; v: string }[]; inside?: Record<string, { name: string; state: string; text: string; facts: { k: string; v: string }[] }> };
+    for (const m of [es, en]) {
+      expect(JSON.stringify(m.world)).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|nothing)\b/i);
+      expect(JSON.stringify(m.world)).not.toMatch(/\bSsr\b|HandyX|vibe coding/);
+      for (const p of Object.values(m.world.places) as Place[]) {
+        expect(words(p.text), p.text).toBeLessThanOrEqual(25);
+        expect(words(p.art), p.art).toBeLessThanOrEqual(25);
+        expect(p.facts.length, p.text).toBeGreaterThanOrEqual(3);
+        for (const f of [...p.facts, ...Object.values(p.inside ?? {}).flatMap((i) => i.facts)]) { expect(f.k.length).toBeGreaterThan(1); expect(f.v.length).toBeGreaterThan(1); expect(words(f.v), f.v).toBeLessThanOrEqual(14); }
+        for (const i of Object.values(p.inside ?? {})) expect(words(i.text), i.text).toBeLessThanOrEqual(25);
+      }
+      expect(Object.keys((m.world.places.tsoft as Place).inside!)).toEqual(['tuenti', 'complia', 'supernova']);
+    }
+    expect([es.world.places.nucleo.state, en.world.places.nucleo.state]).toEqual(['Proyecto futuro', 'Future project']);
+    expect((es.world.places.tsoft as Place).facts.find((f) => f.k === 'Puesto')!.v).toContain('Sr AI Fullstack Developer');
+  });
+});

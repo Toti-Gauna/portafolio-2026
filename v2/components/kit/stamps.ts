@@ -57,17 +57,25 @@ const ART: Record<StampId, { bg: string; dot: string; svg: () => string }> = {
 /** True when the stamp's field is dark, so the year over it goes in cream. */
 export const stampIsDark = (id: StampId) => [INK, PL, GR, AZ].includes(ART[id].bg);
 
-/** Inner markup of a stamp's <svg viewBox="0 0 240 300">; ids are prefixed with the stamp's own id. */
-export function stampSvg(id: StampId): string {
-  const a = ART[id];
+/**
+ * The sheet of a stamp, around any art: cream paper with perforations cut by a mask, the field of colour with its
+ * print dots, and the fine frame. `key` prefixes the ids (one stamp per key on a page). The art is clipped to the field.
+ */
+export function stampFrame(key: string, bg: string, dot: string, dark: boolean, art: string): string {
   let holes = '';
   for (let x = 8; x <= 232; x += 16) holes += `<circle cx="${x}" cy="0" r="5.4"/><circle cx="${x}" cy="300" r="5.4"/>`;
   for (let y = 6; y <= 294; y += 16) holes += `<circle cx="0" cy="${y}" r="5.4"/><circle cx="240" cy="${y}" r="5.4"/>`;
   return (
-    `<defs><mask id="sp-${id}"><rect width="240" height="300" fill="#fff"/><g fill="#000">${holes}</g></mask>` +
-    `<pattern id="sd-${id}" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><circle cx="2" cy="2" r="1" fill="${a.dot}"/></pattern>` +
-    `<clipPath id="sc-${id}"><rect x="16" y="16" width="208" height="268"/></clipPath></defs>` +
-    `<rect width="240" height="300" fill="${CR}" mask="url(#sp-${id})"/><rect x="16" y="16" width="208" height="268" fill="${a.bg}"/><rect x="16" y="16" width="208" height="268" fill="url(#sd-${id})" opacity=".1"/>` +
-    `<g clip-path="url(#sc-${id})">${a.svg()}</g><rect x="22.500" y="22.500" width="195" height="255" fill="none" stroke="${stampIsDark(id) ? CR : INK}" stroke-width="1.200" opacity=".55"/>`
+    `<defs><mask id="sp-${key}"><rect width="240" height="300" fill="#fff"/><g fill="#000">${holes}</g></mask>` +
+    `<pattern id="sd-${key}" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(28)"><circle cx="2" cy="2" r="1" fill="${dot}"/></pattern>` +
+    `<clipPath id="sc-${key}"><rect x="16" y="16" width="208" height="268"/></clipPath></defs>` +
+    `<rect width="240" height="300" fill="${CR}" mask="url(#sp-${key})"/><rect x="16" y="16" width="208" height="268" fill="${bg}"/><rect x="16" y="16" width="208" height="268" fill="url(#sd-${key})" opacity=".1"/>` +
+    `<g clip-path="url(#sc-${key})">${art}</g><rect x="22.500" y="22.500" width="195" height="255" fill="none" stroke="${dark ? CR : INK}" stroke-width="1.200" opacity=".55"/>`
   );
+}
+
+/** Inner markup of a stamp's <svg viewBox="0 0 240 300">; ids are prefixed with the stamp's own id. */
+export function stampSvg(id: StampId): string {
+  const a = ART[id];
+  return stampFrame(id, a.bg, a.dot, stampIsDark(id), a.svg());
 }

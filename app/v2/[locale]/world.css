@@ -1,0 +1,241 @@
+/* The world of Work (lote 4.1): how the drawing of v2/components/work/world-art.ts is painted.
+   Ink solids on bands of flat colour, paper where there is light, one accent per place (--a).
+   --g is the ground of a band, --gs / --gs2 its shades, --gl the lines drawn on it; --w is what stands free on it (ink or paper). */
+svg.wa { display: block; width: 100%; height: auto; overflow: visible; }
+/* the colours of the solids: on the drawing, and on each part of it that is shown again elsewhere with <use> */
+.wa {
+  --anatomy-paper: #060513; --anatomy-top: #1b164a; --anatomy-face: #eeeae3;
+  --anatomy-shade-0: #050411; --anatomy-shade-1: #0a0822; --anatomy-shade-2: #0f0c2e; --anatomy-shade-3: #15113c;
+  --anatomy-lit-top: #eeeae3; --anatomy-lit-shade: #c9c5de; --anatomy-lit: #060513;
+  --anatomy-hi: #eeeae3; --anatomy-mid: #b9b4d2; --anatomy-lo: #6c6790; --anatomy-faint: #3c3670; --anatomy-weight: 0.9px;
+}
+.wa path, .wa circle { vector-effect: non-scaling-stroke; }
+.wa .iso-fill { fill: var(--anatomy-paper); stroke: none; }
+.wa .iso-shade, .wa .iso-top { stroke: none; }
+.wa .iso-shade[data-shade='0'] { fill: var(--anatomy-shade-0); }
+.wa .iso-shade[data-shade='1'] { fill: var(--anatomy-shade-1); }
+.wa .iso-shade[data-shade='2'] { fill: var(--anatomy-shade-2); }
+.wa .iso-shade[data-shade='3'] { fill: var(--anatomy-shade-3); }
+.wa .iso-top { fill: var(--anatomy-top); }
+.wa .iso-solid[data-lit] > .iso-fill, .wa .iso-solid[data-lit] > .iso-top { fill: var(--anatomy-lit-top); }
+.wa .iso-solid[data-lit] > .iso-shade { fill: var(--anatomy-lit-shade); }
+.wa .iso-line { fill: none; stroke: var(--anatomy-hi); stroke-width: var(--anatomy-weight); stroke-linecap: round; stroke-linejoin: round; }
+.wa .iso-line[data-tone='faint'] { stroke: var(--anatomy-faint); }
+.wa .iso-solid[data-lit] > .iso-line { stroke: var(--anatomy-lit); }
+/* the land: a band per place. Its ground (--g) and its biome, in the tones of that ground: --g2 lighter, --g3
+   darker, --gl its lines, --t1/--t2 what grows, --wt water, --rk rock. The step is the drop from the band before. */
+.wa-land { fill: var(--g); stroke: none; }
+.wa-step { fill: var(--gs); stroke: none; opacity: 0.45; }
+.wa-g2 { fill: var(--g2); stroke: none; }
+.wa-g3 { fill: var(--g3); stroke: none; }
+.wa-floor { fill: none; stroke: var(--gl); stroke-width: 1; opacity: 0.5; }
+.wa-floor--wide { stroke: var(--g3); stroke-width: 9; opacity: 0.5; }
+.wa-floor--dots { stroke: #eeeae3; stroke-width: 1.4; stroke-dasharray: 1 7; stroke-linecap: round; opacity: 0.6; }
+.wa-speck { fill: var(--gl); stroke: none; opacity: 0.5; }
+.wa-speck--star { fill: #eeeae3; opacity: 0.7; }
+.wa-flower { fill: #ff7d9c; stroke: none; }
+.wa-petal { fill: #ffffff; stroke: none; opacity: 0.85; }
+.wa-road { fill: var(--g3); stroke: none; }
+.wa-dash { fill: none; stroke: var(--g2); stroke-width: 1.2; stroke-dasharray: 6 9; opacity: 0.9; }
+.wa-park { fill: #9fd3a4; stroke: none; }
+.wa-wheat { fill: #ecd785; stroke: none; }
+.wa-water { fill: var(--wt); stroke: none; }
+.wa-ice { fill: var(--wt); stroke: none; }
+.wa-shore { fill: var(--g2); stroke: none; }
+.wa-glint { fill: none; stroke: #ffffff; stroke-width: 1.3; stroke-linecap: round; opacity: 0.7; }
+.wa-hill { fill: var(--g3); stroke: none; }
+.wa-drift { fill: var(--g2); stroke: none; }
+.wa-drift + .wa-crest { stroke: var(--g3); }
+.wa-crest { fill: none; stroke: var(--g2); stroke-width: 2; stroke-linecap: round; }
+.wa-peak { fill: var(--g2); stroke: none; }
+.wa-peak2 { fill: var(--g3); stroke: none; }
+.wa-snow { fill: #eeeae3; stroke: none; }
+.wa-shadow { fill: #060513; stroke: none; opacity: 0.13; }
+.wa-trunk { fill: var(--gs2); stroke: none; }
+.wa-leaf { fill: var(--t1); stroke: none; }
+.wa-leaf2 { fill: var(--t2); stroke: none; }
+.wa-cactus2 { fill: none; stroke: var(--t2); stroke-width: 1.2; stroke-linecap: round; }
+.wa-rock { fill: var(--rk); stroke: none; }
+.wa-rock2 { fill: var(--g2); stroke: none; opacity: 0.55; }
+.wa-dune { fill: var(--g3); stroke: none; }
+.wa-tuft { fill: none; stroke: var(--t1); stroke-width: 1.3; stroke-linecap: round; opacity: 0.8; }
+.wa-track { fill: #d98866; stroke: none; }
+.wa-lane { fill: none; stroke: #eeeae3; stroke-width: 1; opacity: 0.8; }
+.wa-px { fill: #a493ff; stroke: none; opacity: 0.9; }
+.wa-px--b { fill: #ff8fc0; }
+.wa-px--c { fill: #3fe0b0; }
+.wa-floor--neon { stroke: #a493ff; stroke-width: 1.4; opacity: 0.7; }
+.wa .wa-mass > .iso-fill, .wa .wa-mass > .iso-top { fill: var(--g2); }
+.wa .wa-mass > .iso-shade[data-shade] { fill: var(--g3); }
+.wa .wa-mass > .iso-shade[data-shade='0'], .wa .wa-mass > .iso-shade[data-shade='1'] { fill: var(--rk); }
+.wa .wa-mass > .iso-line { stroke: none; }
+.wa .wa-bale > .iso-fill, .wa .wa-bale > .iso-top { fill: #f3dc8a; }
+.wa .wa-bale > .iso-shade[data-shade] { fill: #cdb25c; }
+.wa .wa-bale > .iso-line { stroke: none; }
+.wa-seaf { fill: var(--wt, #2b50ff); stroke: none; }
+.wa-shallow { fill: #ffffff; stroke: none; opacity: 0.2; }
+.wa-foam { fill: none; stroke: #ffffff; stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
+.wa-wave { fill: none; stroke: #ffffff; stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 20 34; opacity: 0.5; }
+.wa-row { fill: none; stroke: var(--g3); stroke-width: 3; opacity: 0.8; }
+/* lines */
+.wa-l { fill: none; stroke: #6c6790; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.wa-l--hi { stroke: #eeeae3; }
+.wa-l--ink { stroke: #060513; }
+.wa-l--thick { stroke-width: 2.6; }
+.wa-pole { fill: none; stroke: var(--w); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.wa-wheel { fill: none; stroke: var(--w); stroke-width: 3.2; }
+.wa-gate { fill: none; stroke: #060513; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+.wa-beamline { fill: none; stroke: #060513; stroke-width: 4.4; stroke-linecap: round; }
+.wa-fan { fill: none; stroke: #060513; stroke-width: 2; stroke-linecap: round; }
+.wa-ctl { fill: none; stroke: #060513; stroke-width: 1.1; stroke-dasharray: 1 4; stroke-linecap: round; }
+/* faces drawn by hand: roofs, cones, domes */
+.wa-f1 { fill: #2a2466; stroke: #eeeae3; stroke-width: 0.9; stroke-linejoin: round; }
+.wa-f2 { fill: #110d31; stroke: #eeeae3; stroke-width: 0.9; stroke-linejoin: round; }
+.wa-f3 { fill: #1b164a; stroke: #eeeae3; stroke-width: 0.9; stroke-linejoin: round; }
+.wa-f-ink { fill: #060513; stroke: #eeeae3; stroke-width: 0.9; stroke-linejoin: round; }
+.wa-lit { fill: #eeeae3; stroke: none; }
+path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
+.wa-win { fill: #2e2874; stroke: none; }
+.wa-ink { fill: #060513; stroke: none; }
+.wa-acc { fill: var(--a); stroke: none; }
+.wa-acc--soft { opacity: 0.4; }
+.wa-acc-l { fill: none; stroke: var(--a); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.wa-hl { fill: none; stroke: #ffffff; stroke-width: 1.4; stroke-linecap: round; opacity: 0.75; }
+.wa-beam { fill: #ffe39a; stroke: none; opacity: 0.34; }
+.wa-tree { fill: var(--gs2); stroke: none; }
+.wa-smoke { fill: #eeeae3; stroke: none; opacity: 0.55; }
+.wa-star { fill: #eeeae3; stroke: none; }
+.wa-corona { fill: none; stroke: var(--a); stroke-width: 3; }
+.wa-corona-l { fill: none; stroke: var(--a); stroke-width: 1.2; stroke-linecap: round; opacity: 0.85; }
+/* what is still a plan: dashed outline, scaffolds, cranes */
+.wa-wire { fill: none; stroke: var(--w); stroke-width: 1.1; stroke-dasharray: 3 3.4; stroke-linecap: round; stroke-linejoin: round; }
+.wa-scaf { fill: none; stroke: var(--w); stroke-width: 0.8; opacity: 0.7; }
+.wa-crane { fill: none; stroke: var(--w); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+/* the path of light */
+.wa-path-glow { fill: none; stroke: #ffe39a; stroke-width: 16; stroke-linecap: round; opacity: 0.13; }
+.wa-path { fill: none; stroke: #ffe39a; stroke-width: 3; stroke-linecap: round; }
+.wa-path--plan { stroke-width: 2.4; stroke-dasharray: 2 11; opacity: 0.8; }
+.wa-node { fill: #ffe39a; stroke: #060513; stroke-width: 2; }
+.wa-node--plan { fill: #060513; stroke: #ffe39a; }
+
+/* ── the page that shows it (/mundo/) ────────────────────────────────────── */
+/* ── the map: the land fills the screen, edge to edge, and is travelled sideways ── */
+.ws {
+  position: relative; width: 100%; height: calc(100svh - var(--ws-top, 132px)); min-height: 440px; overflow: clip;
+  background: var(--color-bg-deep); border-block: 1px solid var(--color-line);
+}
+/* the frame that scrolls: a strip much wider than it; its own size is the unit of everything inside (cqw / cqh) */
+.ws-view { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; container-type: size; }
+.ws-view::-webkit-scrollbar { display: none; }
+.ws-view:focus-visible { outline-offset: -4px; }
+.ws[data-ready] .ws-view { cursor: grab; }
+.ws-view[data-drag] { cursor: grabbing; user-select: none; }
+/* room at both ends, so the first and the last stop can reach the middle; the first and last band run under it */
+.ws-track {
+  box-sizing: content-box; width: max-content; height: 100cqh; overflow: clip;
+  padding-left: max(0px, calc(50cqw - 100cqh * var(--ws-a))); padding-right: max(0px, calc(50cqw - 100cqh * var(--ws-z)));
+}
+.ws-land { position: relative; height: 100%; width: calc(100cqh * var(--ws-r)); }
+.ws-land > .wa { width: 100%; height: 100%; }
+/* over the land, as text: the name of every stop, its dates and its button, written in the ink of its ground */
+.ws-names li {
+  position: absolute; transform: translate(-50%, -100%); display: grid; justify-items: center; gap: 2px;
+  white-space: nowrap; text-align: center; color: var(--ink); pointer-events: none;
+}
+.ws-names b { font-size: clamp(17px, 2.6cqh, 22px); line-height: 1.15; font-weight: 800; font-stretch: 110%; letter-spacing: -0.015em; }
+.ws-names span:not(.ui-sr) { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.04em; }
+.ws-more {
+  position: relative; pointer-events: auto; margin-top: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-5);
+  border: 0; border-radius: var(--radius-pill); background: var(--ink); color: var(--on);
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+/* under the pointer a ring appears around the button: the button itself never moves (a button that moves under
+   the pointer is a moving target, for a hand and for a test) */
+.ws-more::after { content: ''; position: absolute; inset: -5px; border-radius: inherit; border: 2px solid var(--ink); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
+.ws-more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .ws-more:hover::after { opacity: 0.55; } }
+/* inside the map: where you are, and the two buttons */
+.ws-hud {
+  position: absolute; left: var(--space-4); top: var(--space-4); display: grid; gap: 2px; max-width: min(320px, calc(100% - 2 * var(--space-4)));
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-xl); background: rgba(6, 5, 19, 0.86); border: 1px solid rgba(255, 255, 255, 0.16); pointer-events: none;
+}
+.ws-kicker { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--from); }
+.ws-hud h1 { font-size: 20px; line-height: 1.15; font-weight: 800; font-stretch: 110%; letter-spacing: -0.01em; color: var(--color-heading); }
+.ws-now { display: flex; align-items: baseline; gap: var(--space-2); font-size: 14px; color: var(--color-text); }
+.ws-count { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; color: var(--color-text-muted); }
+.ws-now b { font-weight: 700; color: var(--color-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ws-dots { display: flex; gap: 3px; margin-top: var(--space-2); }
+.ws-dots i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.22); }
+.ws-dots i[data-on] { background: var(--from); }
+.ws-nav {
+  position: absolute; top: 50%; display: none; place-items: center; width: 52px; height: 52px; margin-top: -26px;
+  border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(6, 5, 19, 0.9); color: #ffffff; cursor: pointer;
+  transition: opacity var(--motion-fast) var(--motion-ease);
+}
+.ws-nav::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(6, 5, 19, 0.9); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
+.ws[data-ready] .ws-nav { display: grid; }
+.ws-nav--prev { left: var(--space-4); }
+.ws-nav--next { right: var(--space-4); }
+.ws-nav:disabled { opacity: 0; pointer-events: none; }
+.ws-nav:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; box-shadow: 0 0 0 6px #060513; }
+@media (hover: hover) and (pointer: fine) { .ws-nav:not(:disabled):hover::after { opacity: 0.7; } }
+@media (min-width: 1100px) { .ws-hud { left: var(--space-8); top: var(--space-6); } .ws-nav { width: 60px; height: 60px; margin-top: -30px; } .ws-nav--prev { left: var(--space-8); } .ws-nav--next { right: var(--space-8); } }
+
+/* ── «Más información»: the postcard of the stop and, below it, its card ── */
+.wi { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--color-text); overflow-y: auto; overscroll-behavior: contain; }
+.wi::backdrop { background: rgba(6, 5, 19, 0.82); }
+.wi-in { position: relative; display: grid; justify-items: center; gap: var(--space-6); width: min(600px, 100%); margin: 0 auto; padding: var(--space-16) var(--space-4) var(--space-12); }
+.wi-x { position: absolute; right: var(--space-4); top: var(--space-4); }
+.wi-x .ui-iconbtn { border-radius: var(--radius-pill); background: rgba(6, 5, 19, 0.9); }
+.wi-stamps { display: flex; justify-content: center; gap: var(--space-3); width: 100%; }
+.wi-stamps .kit-stamp { flex: none; width: min(230px, 58vw); }
+.wi-stamps[data-n='3'] .kit-stamp { width: min(176px, calc((100% - 2 * var(--space-3)) / 3)); }
+.wi-stamps[data-n='3'] .kit-stamp span { font-size: 12px; }
+.wi-card {
+  display: grid; gap: var(--space-3); width: 100%; padding: var(--space-6); border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-line-strong); background: #0f0b2c;
+}
+.wi-kicker { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
+.wi-card h2 { font-size: clamp(28px, 4vw, 36px); line-height: 1.05; font-weight: 800; font-stretch: 110%; letter-spacing: -0.02em; color: var(--color-heading); }
+.wi-text { color: var(--color-text); }
+.wi-facts { display: grid; gap: 0; margin-top: var(--space-2); border-top: 1px solid var(--color-line); }
+.wi-facts > div { display: grid; grid-template-columns: minmax(96px, 30%) 1fr; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
+.wi-facts dt { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-subtle); padding-top: 3px; }
+.wi-facts dd { color: var(--color-heading); }
+.wi-sub { margin-top: var(--space-4); font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
+.wi-inside { display: grid; gap: var(--space-4); }
+.wi-inside li { display: grid; gap: var(--space-2); padding: var(--space-4); border-radius: var(--radius-xl); background: rgba(255, 255, 255, 0.04); border: 1px solid var(--color-line); }
+.wi-inside h4 { font-size: var(--type-h3-size); line-height: 1.15; font-weight: 800; color: var(--color-heading); }
+@media (prefers-reduced-motion: no-preference) {
+  .wi[open] .kit-stamp { animation: wi-drop 520ms cubic-bezier(0.2, 1.3, 0.4, 1) both; }
+  .wi[open] .kit-stamp:nth-child(2) { animation-delay: 70ms; }
+  .wi[open] .kit-stamp:nth-child(3) { animation-delay: 140ms; }
+  .wi[open] .wi-card { animation: wi-rise 420ms var(--motion-ease) 120ms both; }
+}
+@keyframes wi-drop { from { opacity: 0; translate: 0 -36px; scale: 0.9; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes wi-rise { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+
+/* ── below the map: the same stops, as a list ── */
+.wd-rest { padding-top: var(--space-10); }
+.wd-rest > .v2-intro { border-top: 0; padding-top: 0; }
+.wd-legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin-top: var(--space-4); }
+.wd-legend li { display: inline-flex; align-items: center; gap: var(--space-3); font-size: 14px; color: var(--color-text-muted); }
+.wd-key { flex: none; width: 34px; height: 12px; }
+.wd-key--done { height: 3px; border-radius: 2px; background: var(--color-amber-300); }
+.wd-key--plan { height: 3px; background: repeating-linear-gradient(90deg, var(--color-amber-300) 0 3px, transparent 3px 11px); }
+.wd-key--built { height: 14px; width: 22px; border-radius: 3px; background: var(--color-ink-950); border: 1px solid var(--color-paper); }
+.wd-key--site { height: 14px; width: 22px; border-radius: 3px; border: 1px dashed var(--color-paper); }
+.wd-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); }
+.wd-card {
+  display: grid; align-content: start; gap: var(--space-2); min-width: 0; padding: var(--space-4) var(--space-4) var(--space-5);
+  border-radius: var(--radius-2xl); border: 1px solid var(--color-line); background: linear-gradient(170deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+}
+.wd-card figure { margin: 0 0 var(--space-2); aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: var(--radius-xl); overflow: hidden; }
+.wd-card figure .wa { width: 100%; height: 100%; overflow: hidden; }
+.wd-when { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
+.wd-card h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
+.wd-state { display: inline-flex; align-items: center; gap: var(--space-2); justify-self: start; font-size: 14px; font-weight: 700; color: var(--color-text); }
+.wd-state i { width: 8px; height: 8px; border-radius: 50%; background: var(--from); }
+.wd-text { color: var(--color-text); }
+.wd-art { padding-top: var(--space-3); border-top: 1px solid var(--color-line); font-size: 14px; line-height: 1.45; color: var(--color-text-muted); }
+.wd-art b { display: block; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-subtle); }
