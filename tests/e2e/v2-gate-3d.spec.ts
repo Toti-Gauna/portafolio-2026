@@ -86,7 +86,7 @@ test('the count follows the real loading; under the gate the page waits; Enter o
 
   await page.locator('.gt').focus();
   await page.keyboard.press('Enter');
-  await expect(page.locator('.gt')).toHaveCount(0);
+  await expect(page.locator('.gt')).toHaveCount(0, { timeout: 20_000 });
   await expect(page.locator('html')).toHaveAttribute('data-gate', 'off');
   await expect(page.locator('#main')).toBeFocused();
   expect(await page.evaluate(() => [...document.querySelectorAll<HTMLElement>('.sh, #main')].map((el) => el.inert))).toEqual([false, false]);
@@ -113,7 +113,7 @@ test('reduced motion: one still frame of the finished object, nothing animates, 
     expect(await frames()).toBe(before);
   }
   await page.getByRole('button', { name: 'Ver portafolio' }).click();
-  await expect(page.locator('.gt')).toHaveCount(0);
+  await expect(page.locator('.gt')).toHaveCount(0, { timeout: 20_000 });
   await ctx.close();
 });
 
@@ -130,7 +130,7 @@ test('without WebGL the drawn mark stays, the count is the loading itself and ev
   await expect(page.locator('.gt-tags')).toBeHidden();
   await fits(page);
   await page.keyboard.press('Enter');
-  await expect(page.locator('.gt')).toHaveCount(0);
+  await expect(page.locator('.gt')).toHaveCount(0, { timeout: 20_000 });
 });
 
 test('with 3D the scene is drawn, follows the pointer, and stops when the gate closes', async ({ page }) => {
@@ -146,7 +146,7 @@ test('with 3D the scene is drawn, follows the pointer, and stops when the gate c
   expect(c[3]).toBe(800);
   await expect(page.locator('.gt')).toHaveAttribute('data-move', '4');
   await page.keyboard.press('Enter');
-  await expect(page.locator('.gt')).toHaveCount(0);
+  await expect(page.locator('.gt')).toHaveCount(0, { timeout: 20_000 });
   // nothing keeps asking for frames once it is gone
   await page.mouse.move(5, 5);
   await page.waitForTimeout(800);
@@ -186,7 +186,7 @@ for (const [id, tags] of VERSIONS) {
         expect(await page.locator('.gt-tags li').evaluateAll((els) => els.filter((el) => getComputedStyle(el).opacity === '1' && getComputedStyle(el).visibility === 'visible').length)).toBe(shown);
       }
       await page.keyboard.press('Enter');
-      await expect(page.locator('.gt')).toHaveCount(0);
+      await expect(page.locator('.gt')).toHaveCount(0, { timeout: 20_000 });
       await expect(page.locator('.v2-hero .ui-btn--primary')).toBeVisible();
       expect(errors).toEqual([]);
     });

@@ -109,6 +109,22 @@ test('the light follows the pointer and rests when it leaves; the panel turns to
   expect(await tilt.locator('.sig-tilt-body').evaluate((el) => getComputedStyle(el).transform)).not.toBe(rest);
 });
 
+test('the player keeps its place when its first frame is stamped before the click (a busy machine)', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  // every frame arrives stamped two seconds early: the first one is «before» the click that started the film
+  await page.addInitScript(() => { const raf = window.requestAnimationFrame.bind(window); window.requestAnimationFrame = (cb) => raf((t) => cb(t - 2000)); });
+  await page.goto(URL);
+  const player = page.getByRole('group', { name: 'El oficio, en cinco capas' });
+  await player.scrollIntoViewIfNeeded();
+  await settle(page, 1200);
+  await player.locator('.sig-player-play').click();
+  await expect(player.locator('.sig-player-play')).toHaveAccessibleName('Pausar');
+  await expect(player.locator('.sig-scene-title')).toHaveText('Planificación y ejecución');
+  await expect(player.locator('.sig-player-chapters button').nth(1)).toHaveAttribute('aria-current', 'true', { timeout: 6000 });
+  expect(errors).toEqual([]);
+});
+
 test('the player never starts alone, plays through its chapters, jumps with the arrows and stops at the end', async ({ page }) => {
   await page.goto(URL);
   const player = page.getByRole('group', { name: 'El oficio, en cinco capas' });

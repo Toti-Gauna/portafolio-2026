@@ -32,7 +32,7 @@ export function ChapterPlayer({ chapters, labels }: { chapters: Chapter[]; label
     });
   }, []);
   const sync = useCallback(() => {
-    setChapter(Math.min(chapters.length - 1, Math.floor(t.current / CHAPTER_SECONDS)));
+    setChapter(Math.min(chapters.length - 1, Math.max(0, Math.floor(t.current / CHAPTER_SECONDS))));
     setSecs(Math.floor(t.current));
     paint();
   }, [chapters.length, paint]);
@@ -42,7 +42,8 @@ export function ChapterPlayer({ chapters, labels }: { chapters: Chapter[]; label
     if (!playing) return;
     let raf = 0, last = performance.now();
     const frame = (now: number) => {
-      t.current = Math.min(total, t.current + Math.min(0.1, (now - last) / 1000));
+      // a frame can be stamped before the click that started this (a busy machine): time never runs backwards
+      t.current = Math.min(total, t.current + Math.min(0.1, Math.max(0, (now - last) / 1000)));
       last = now;
       sync();
       if (t.current >= total) { setPlaying(false); setEnded(true); return; }
