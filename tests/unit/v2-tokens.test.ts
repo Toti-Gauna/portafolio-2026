@@ -275,3 +275,74 @@ describe('v2 motion engine (lote 2.2)', () => {
     expect(samePath('/v2/es/work/', '/v2/es/')).toBe(false);
   });
 });
+
+describe('v2 generative music (lote 2.3)', () => {
+  it('names the chords of each page motif', async () => {
+    const { ZONES, chordName, barDegree } = await import('../../v2/sound/compose');
+    const prog = (z: keyof typeof ZONES) => ZONES[z].prog.map((_, i) => chordName(ZONES[z], barDegree(ZONES[z], i)));
+    expect(prog('home')).toEqual(['Dmaj7', 'A7', 'Bm7', 'Gmaj7']);
+    expect(prog('work')).toEqual(['G7', 'Fmaj7', 'Cmaj7', 'G7']);
+    expect(prog('how')).toEqual(['Am7', 'D7', 'Am7', 'Gmaj7']);
+    expect(prog('brand')).toEqual(['E♭maj7', 'F7', 'E♭maj7', 'B♭maj7']);
+    expect(prog('about')).toEqual(['Cmaj7', 'Em7', 'Am7', 'Fmaj7']);
+  });
+
+  it('every proposal writes sound notes on every page: in range, in the bar, in the key, the same every time', async () => {
+    const { STYLES, STYLE_IDS, ZONES, MODES, degree } = await import('../../v2/sound/compose');
+    const PITCHED = new Set(['pad', 'pluck', 'arp', 'keys', 'lead', 'bass', 'chime']);
+    for (const id of STYLE_IDS) for (const [zk, z] of Object.entries(ZONES)) {
+      const scale = new Set(MODES[z.mode].map((s) => (z.root + s) % 12));
+      for (let bar = 0; bar < 16; bar++) {
+        const ev = STYLES[id].compose(bar, z);
+        expect(ev.length, `${id} ${zk} ${bar}`).toBeGreaterThan(3);
+        expect(STYLES[id].compose(bar, z)).toEqual(ev);
+        for (const e of ev) {
+          expect(e.beat).toBeGreaterThanOrEqual(0);
+          expect(e.beat).toBeLessThan(4);
+          expect(e.vel).toBeGreaterThan(0);
+          expect(e.vel).toBeLessThanOrEqual(1);
+          if (!PITCHED.has(e.voice)) continue;
+          expect(e.midi, `${id} ${zk} ${e.voice}`).toBeGreaterThanOrEqual(28);
+          expect(e.midi, `${id} ${zk} ${e.voice}`).toBeLessThanOrEqual(100);
+          // only the walking bass of «Taller» steps outside the key, on its last beat, into the next root
+          if (!(id === 'taller' && e.voice === 'bass' && e.beat === 3)) expect(scale.has(e.midi % 12), `${id} ${zk} ${e.voice} ${e.midi}`).toBe(true);
+        }
+      }
+      expect(degree(z, 7)).toBe(12);
+    }
+  });
+
+  it('a motif comes back every four bars', async () => {
+    const { STYLES, ZONES } = await import('../../v2/sound/compose');
+    const pluck = (bar: number) => STYLES.marea.compose(bar, ZONES.home).filter((e) => e.voice === 'pluck');
+    expect(pluck(4)).toEqual(pluck(0));
+    const lead = (bar: number) => STYLES.taller.compose(bar, ZONES.about).filter((e) => e.voice === 'lead');
+    expect(lead(5)).toEqual(lead(1));
+  });
+
+  it('swing pushes only the off-beat eighths', async () => {
+    const { swingBeat } = await import('../../v2/sound/compose');
+    expect(swingBeat(1.5, 0.62)).toBeCloseTo(1.62);
+    expect(swingBeat(2, 0.62)).toBe(2);
+    expect(swingBeat(2.25, 0.62)).toBe(2.25);
+  });
+
+  it('level meter and WAV writer', async () => {
+    const { levels, wav } = await import('../../v2/sound/analyze');
+    const a = new Float32Array(1000).fill(0.5);
+    const l = levels([a, a], 1000);
+    expect(l.peak).toBeCloseTo(0.5);
+    expect(l.rmsDb).toBeCloseTo(-6.02, 1);
+    const w = wav([a, a], 1000);
+    expect(w.length).toBe(44 + 1000 * 4);
+    expect(String.fromCharCode(...w.slice(0, 4))).toBe('RIFF');
+  });
+
+  it('the music page names every proposal and every page key in both languages', async () => {
+    const { STYLE_IDS, ZONES } = await import('../../v2/sound/compose');
+    for (const m of [es, en]) {
+      for (const id of STYLE_IDS) expect(m.music.styles[id].name.length).toBeGreaterThan(0);
+      for (const z of Object.keys(ZONES)) expect(m.music.zones.keys[z as keyof typeof m.music.zones.keys].length).toBeGreaterThan(0);
+    }
+  });
+});
