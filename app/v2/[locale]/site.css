@@ -15,6 +15,9 @@
 .sh-bar {
   /* how far each side moves in when the bar becomes the pill (0 below 1100 px) */
   --sh-d: 0px;
+  /* air between the round ends of the pill and what it holds: the pill grows out on small screens, the sides move in on wide ones */
+  --sh-out: 4px;
+  --sh-in: 0px;
   position: relative; pointer-events: auto;
   display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-2);
   height: 56px; padding: 0 6px;
@@ -22,9 +25,10 @@
 }
 /* the glass: always the shape of the pill, it only fades and settles in */
 .sh-glass {
-  position: absolute; top: 0; bottom: 0; left: var(--sh-d); right: var(--sh-d);
+  position: absolute; top: 0; bottom: 0; left: calc(var(--sh-d) - var(--sh-out)); right: calc(var(--sh-d) - var(--sh-out));
   border-radius: var(--radius-pill); border: 1px solid var(--color-line);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--color-ink-700) 95%, transparent), color-mix(in srgb, var(--color-surface-raised) 95%, transparent));
+  /* solid: on a touch screen nothing under the pill shows through it */
+  background: linear-gradient(180deg, var(--color-ink-600), var(--color-ink-700));
   box-shadow: var(--shadow-panel), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   opacity: 0; transform: scale(1.02, 1.2);
   transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-base) var(--motion-ease);
@@ -32,8 +36,8 @@
 .sh[data-stuck='true'] .sh-glass { opacity: 1; transform: none; }
 .sh-left, .sh-nav, .sh-tools { position: relative; }
 .sh-left, .sh-tools { transition: transform var(--motion-base) var(--motion-ease); }
-.sh[data-stuck='true'] .sh-left { transform: translateX(var(--sh-d)); }
-.sh[data-stuck='true'] .sh-bar > .sh-tools { transform: translateX(calc(-1 * var(--sh-d))); }
+.sh[data-stuck='true'] .sh-left { transform: translateX(calc(var(--sh-d) + var(--sh-in))); }
+.sh[data-stuck='true'] .sh-bar > .sh-tools { transform: translateX(calc(-1 * (var(--sh-d) + var(--sh-in)))); }
 
 .sh-left { display: flex; align-items: center; gap: var(--space-1); min-width: 0; }
 .sh-home {
@@ -90,8 +94,8 @@
   /* real glass where it is cheap: a mouse means a desktop GPU. Touch screens keep the solid fill (measured). */
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .sh-glass {
-      background: linear-gradient(180deg, color-mix(in srgb, var(--color-ink-700) 74%, transparent), color-mix(in srgb, var(--color-surface-raised) 78%, transparent));
-      -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-ink-700) 86%, transparent), color-mix(in srgb, var(--color-surface-raised) 90%, transparent));
+      -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6);
     }
   }
 }
@@ -101,6 +105,7 @@
 }
 @media (min-width: 600px) {
   .sh { --sh-pad: calc(var(--size-margin-tablet) - 6px); }
+  .sh-bar { --sh-out: 8px; }
   .sh-tools { gap: var(--space-2); }
   .sh-here { font-size: 15px; }
   .sh-bar > .sh-tools .sh-menu { padding: 0 var(--space-4); }
@@ -110,6 +115,9 @@
   .sh { --sh-pad: calc(var(--size-margin-desktop) - 6px); padding-top: var(--space-2); }
   .sh-bar {
     --sh-pill: 1120px;
+    --sh-out: 0px;
+    --sh-in: 12px;
+    column-gap: var(--space-5);
     --sh-d: max(0px, calc((min(100cqw, var(--size-max) - 2 * var(--size-margin-desktop) + 12px) - var(--sh-pill)) / 2));
     /* the pages sit in the middle whenever both sides leave room for it */
     grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);

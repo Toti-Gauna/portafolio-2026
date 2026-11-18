@@ -227,8 +227,8 @@ describe('v2 site header (lote 2.1)', () => {
   it('each page colour reads as a label on the page and on the menu; header text passes AA on the glass', async () => {
     const { SITE_PAGES } = await import('../../v2/site');
     for (const p of SITE_PAGES) for (const bg of [C.bg, C['bg-deep']]) expect(contrast(p.from, bg), `${p.key} on ${bg}`).toBeGreaterThanOrEqual(4.5);
-    // the pill is filled with ink-700 → surface-raised; its links are text-muted, the current one is heading
-    for (const bg of [C['ink-700'], C['surface-raised']]) {
+    // the pill is filled with ink-600 → ink-700 (solid on touch screens); its links are text-muted, the current one is heading
+    for (const bg of [C['ink-600'], C['ink-700'], C['surface-raised']]) {
       expect(contrast(C['text-muted'], bg)).toBeGreaterThanOrEqual(4.5);
       expect(contrast(C.heading, bg)).toBeGreaterThanOrEqual(4.5);
     }
