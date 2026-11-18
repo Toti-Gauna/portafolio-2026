@@ -178,7 +178,8 @@
     "kit": "Kit",
     "motion": "Motion",
     "sound": "Música",
-    "gate": "Puerta"
+    "gate": "Puerta",
+    "world": "Mundo"
   },
   "ui": {
     "status": {
@@ -893,6 +894,152 @@
       "lead": "Fullstack con IA, en cualquier rubro. Escribime y lo hablamos.",
       "write": "Escribime",
       "linkedin": "LinkedIn"
+    }
+  },
+  "world": {
+    "meta": {
+      "title": "El mundo de Work · Sistema IG v2",
+      "description": "El arte del mundo de Work del nuevo portafolio de Ignacio Gauna: una isla por cada parada del recorrido, unidas por un sendero de luz."
+    },
+    "kicker": "Lote 4.1 · Work",
+    "title": "El mundo de Work",
+    "text": "Una isla por cada parada del recorrido, unidas por un sendero de luz. Ningún edificio se repite. Lo que existe es sólido; lo que viene se dibuja en obra, con andamios y línea punteada. Este es el arte: el mapa para explorar llega con el lote siguiente.",
+    "map": "El mundo completo",
+    "mapAlt": "Mapa isométrico: diecisiete islas de colores unidas por un sendero de luz, desde la costa de Mar del Plata hasta el roadmap en el horizonte.",
+    "mapHint": "Deslizá para recorrerlo.",
+    "legend": {
+      "done": "Sendero recorrido",
+      "plan": "Sendero planeado",
+      "built": "Construido",
+      "site": "En obra"
+    },
+    "drawn": "Qué se ve",
+    "groups": {
+      "origin": "Donde empezó",
+      "work": "El trabajo",
+      "own": "Camino propio",
+      "next": "Lo que viene"
+    },
+    "places": {
+      "mdp": {
+        "name": "Mar del Plata",
+        "when": "A los 17",
+        "state": "El comienzo",
+        "text": "A los 17 programé una web de juegos: mi primer producto.",
+        "art": "La costa: el faro, el muelle, la casa con la luz prendida y la primera web de juegos."
+      },
+      "tach": {
+        "name": "TACH Argentina",
+        "when": "2021 – 2022",
+        "state": "Trabajo profesional · startup",
+        "text": "Una billetera virtual, de punta a punta y en remoto: el backoffice, la landing y la app.",
+        "art": "Una ciudad de startup: tres torres, la app en un teléfono y las monedas que pasan por ella."
+      },
+      "ada": {
+        "name": "Ada ITW",
+        "when": "2023 – 2024",
+        "state": "Trabajo profesional · academia",
+        "text": "Del código al aula: enseñar JavaScript y React con proyectos.",
+        "art": "Un campus: el aula con sus columnas, el pizarrón con código y los bancos."
+      },
+      "tsoft": {
+        "name": "Tsoft",
+        "when": "2024 – hoy",
+        "state": "Trabajo profesional · corporativa",
+        "text": "Desde acá trabajo para Tuenti y Telefónica: Tuenti, CompliA y Supernova Eventos.",
+        "art": "Una ciudad corporativa: la torre de Tsoft, la rueda de premios de Tuenti, el documento verificado de CompliA y el escenario de Supernova Eventos."
+      },
+      "eclipse": {
+        "name": "Eclipse",
+        "when": "En paralelo",
+        "state": "En construcción",
+        "text": "Mi estudio de desarrollo, IA y automatización: landing, portal de clientes, backend y portal interno.",
+        "art": "Un observatorio de noche, y el eclipse con su corona."
+      },
+      "agentes": {
+        "name": "Sistema agéntico",
+        "when": "En paralelo",
+        "state": "Sistema propio · en uso",
+        "text": "11 agentes con roles separados y puertas donde decide una persona.",
+        "art": "Once puestos alrededor de una mesa, y la puerta donde decide una persona."
+      },
+      "kinetic": {
+        "name": "Kinetic Studio",
+        "when": "En paralelo",
+        "state": "Laboratorio",
+        "text": "Tráileres de motion graphics hechos con código.",
+        "art": "Un set de filmación: la claqueta, el foco y un rollo."
+      },
+      "volta": {
+        "name": "Volta",
+        "when": "En paralelo",
+        "state": "Demo",
+        "text": "Una tienda de suplementos con una marca inventada: catálogo, club y un juego que da cupones.",
+        "art": "La tienda con su toldo, un frasco gigante y una pesa."
+      },
+      "velmar": {
+        "name": "Velmar",
+        "when": "En paralelo",
+        "state": "Demo · hecha para un cliente",
+        "text": "La tienda online y el panel de un taller de Mar del Plata que hace productos personalizados.",
+        "art": "El taller con su techo de sierra y su chimenea, y un regalo con moño."
+      },
+      "dentalos": {
+        "name": "DentalOS",
+        "when": "En paralelo",
+        "state": "Demo",
+        "text": "El circuito administrativo de una clínica odontológica ficticia, en 16 módulos.",
+        "art": "La clínica con su cruz, y una muela sobre su pedestal."
+      },
+      "games": {
+        "name": "games-market",
+        "when": "En paralelo",
+        "state": "Laboratorio",
+        "text": "Juegos web para eventos presenciales: un proyector es la pantalla y los celulares, el control.",
+        "art": "Una pantalla gigante, el proyector y los celulares que la manejan."
+      },
+      "lucero": {
+        "name": "Lucero",
+        "when": "En paralelo",
+        "state": "Demo",
+        "text": "Un restó-bar inventado para mostrar la carta digital: el pedido desde la mesa.",
+        "art": "El bar con su toldo, el lucero sobre la puerta y las mesas desde las que se pide."
+      },
+      "trazo": {
+        "name": "Trazo",
+        "when": "En paralelo",
+        "state": "Producto personal · en uso",
+        "text": "Mi tracker personal: el día en horas, el estudio, las metas y el entreno.",
+        "art": "Un reloj de sol: el día en veinticuatro horas, y la bandera de una meta."
+      },
+      "nucleo": {
+        "name": "Núcleo",
+        "when": "nov 2026 – feb 2028",
+        "state": "En el roadmap",
+        "text": "Datos, IA, seguridad e infraestructura sobre problemas reales de energía, salud, agro y espacio.",
+        "art": "El desierto con su yacimiento y el campo con su granero, en obra: una torre y un silo a medio levantar."
+      },
+      "ciber": {
+        "name": "Ciberseguridad",
+        "when": "feb – ago 2028",
+        "state": "En el roadmap",
+        "text": "Criptografía, pentesting y detección, con las certificaciones que los respaldan.",
+        "art": "Un bastión en obra: cuatro torres, la muralla y una torre central a medio levantar."
+      },
+      "quant": {
+        "name": "Quant",
+        "when": "ago 2028 – jun 2029",
+        "state": "En el roadmap",
+        "text": "Finanzas cuantitativas: backtesting, opciones, libro de órdenes y riesgo.",
+        "art": "Una ciudad financiera en obra: rascacielos con grúas y el tablero de velas."
+      },
+      "espacio": {
+        "name": "Aeroespacial",
+        "when": "jun 2029 – ago 2030",
+        "state": "En el roadmap",
+        "text": "Simulación de vuelo, estructuras, fluidos, control y órbitas, hasta un gemelo digital.",
+        "art": "Una plataforma de lanzamiento en obra: el cohete, la torre, la antena y dos satélites en órbita."
+      }
     }
   }
 }

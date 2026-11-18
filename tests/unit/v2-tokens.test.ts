@@ -496,3 +496,59 @@ describe('v2 home (lote 3.2)', () => {
     for (const m of [es, en]) expect(JSON.stringify(m.home)).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|no screenshots)\b/i);
   });
 });
+
+describe('v2 world of Work (lote 4.1)', () => {
+  it('seventeen islands, each with its words in both languages, and nothing written inside the drawing', async () => {
+    const { WORLD_IDS, WORLD_SVG, WORLD_ISLES, WORLD_BOX, WORLD_GROUP_OF, WORLD_GROUPS } = await import('../../v2/components/work/world-art');
+    expect(WORLD_IDS).toHaveLength(17);
+    expect(new Set(WORLD_IDS).size).toBe(17);
+    expect(WORLD_SVG).not.toMatch(/<text|NaN|undefined|Infinity/);
+    for (const m of [es, en]) {
+      expect(Object.keys(m.world.places)).toEqual(WORLD_IDS);
+      for (const id of WORLD_IDS) for (const k of ['name', 'when', 'state', 'text', 'art'] as const) expect(m.world.places[id as keyof typeof m.world.places][k].length, `${id}.${k}`).toBeGreaterThan(0);
+      for (const g of WORLD_GROUPS) expect(m.world.groups[g].length).toBeGreaterThan(0);
+    }
+    // the journey in order: where it began, the work, my own path, what comes next
+    expect(WORLD_IDS.map((id) => WORLD_GROUP_OF[id]).join(' ')).toBe(['origin', ...Array(3).fill('work'), ...Array(9).fill('own'), ...Array(4).fill('next')].join(' '));
+    for (const id of WORLD_IDS) {
+      const [x, y, w, h] = WORLD_ISLES[id].box;
+      expect(w, id).toBeGreaterThan(120);
+      expect(h, id).toBeGreaterThan(90);
+      expect(x, id).toBeGreaterThanOrEqual(WORLD_BOX.x);
+      expect(y, id).toBeGreaterThanOrEqual(WORLD_BOX.y);
+      expect(x + w, id).toBeLessThanOrEqual(WORLD_BOX.x + WORLD_BOX.width);
+      expect(y + h, id).toBeLessThanOrEqual(WORLD_BOX.y + WORLD_BOX.height);
+    }
+  });
+
+  it('no building is drawn twice: every island is made of a different set of pieces', async () => {
+    const { WORLD_IDS, WORLD_ISLES } = await import('../../v2/components/work/world-art');
+    // what an island is made of, whatever its place on the map: the kind of every piece, in the order it is painted
+    const made = (svg: string) => [...svg.matchAll(/class="([^"]+)"/g)].map((m) => m[1]).filter((c) => !/^wa-isle|^iso-(fill|shade|top|line)/.test(c)).join('|');
+    const seen = WORLD_IDS.map((id) => made(WORLD_ISLES[id].svg));
+    expect(new Set(seen).size).toBe(17);
+    for (const s of seen) expect(s.split('|').length).toBeGreaterThanOrEqual(10);
+  });
+
+  it('what exists is solid and what is planned is under construction: dashed outline, scaffold or crane, only on the roadmap', async () => {
+    const { WORLD_IDS, WORLD_ISLES, WORLD_GROUP_OF, WORLD_SVG } = await import('../../v2/components/work/world-art');
+    for (const id of WORLD_IDS) {
+      const svg = WORLD_ISLES[id].svg, site = /wa-wire/.test(svg) && /wa-crane|wa-scaf/.test(svg) && /wa-pole/.test(svg);
+      expect(site, id).toBe(WORLD_GROUP_OF[id] === 'next');
+      if (WORLD_GROUP_OF[id] !== 'next') expect(svg, id).not.toMatch(/wa-wire|wa-crane|wa-scaf/);
+    }
+    // the path: travelled up to the last project of my own, dashed from there on
+    expect(WORLD_SVG.match(/class="wa-path wa-path--plan"/g) ?? []).toHaveLength(1);
+    expect(WORLD_SVG.match(/class="wa-node"/g) ?? []).toHaveLength(13);
+    expect(WORLD_SVG.match(/class="wa-node wa-node--plan"/g) ?? []).toHaveLength(4);
+  });
+
+  it('the world speaks in positive, in sentences a recruiter reads at a glance', () => {
+    const words = (t: string) => t.trim().split(/\s+/).length;
+    for (const m of [es, en]) {
+      expect(JSON.stringify(m.world)).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|nothing)\b/i);
+      for (const p of Object.values(m.world.places)) { expect(words(p.text), p.text).toBeLessThanOrEqual(25); expect(words(p.art), p.art).toBeLessThanOrEqual(25); }
+    }
+    for (const id of ['nucleo', 'ciber', 'quant', 'espacio'] as const) { expect(es.world.places[id].state).toBe('En el roadmap'); expect(en.world.places[id].state).toBe('On the roadmap'); }
+  });
+});
