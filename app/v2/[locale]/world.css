@@ -75,7 +75,9 @@ svg.wa { display: block; width: 100%; height: auto; overflow: visible; }
 .wa-seaf { fill: var(--wt, #2b50ff); stroke: none; }
 .wa-shallow { fill: #ffffff; stroke: none; opacity: 0.2; }
 .wa-foam { fill: none; stroke: #ffffff; stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
-.wa-wave { fill: none; stroke: #ffffff; stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 20 34; opacity: 0.5; }
+/* the waves are measured in the land's own units (not in pixels, like every other line): they drift by exactly one
+   period of their dashes, with a transform — the compositor moves them; animating the dashes repainted the whole sea */
+.wa path.wa-wave { fill: none; stroke: #ffffff; stroke-width: 0.8; stroke-linecap: round; stroke-dasharray: 12 20; opacity: 0.5; vector-effect: none; }
 .wa-row { fill: none; stroke: var(--g3); stroke-width: 3; opacity: 0.8; }
 /* lines */
 .wa-l { fill: none; stroke: #6c6790; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
@@ -101,7 +103,7 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .wa-acc--soft { opacity: 0.4; }
 .wa-acc-l { fill: none; stroke: var(--a); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .wa-hl { fill: none; stroke: #ffffff; stroke-width: 1.4; stroke-linecap: round; opacity: 0.75; }
-.wa-beam { fill: #ffe39a; stroke: none; opacity: 0.34; }
+.wa-beam { fill: #ffe39a; stroke: none; opacity: 0.26; }
 .wa-tree { fill: var(--gs2); stroke: none; }
 .wa-smoke { fill: #eeeae3; stroke: none; opacity: 0.55; }
 .wa-star { fill: #eeeae3; stroke: none; }
@@ -119,6 +121,76 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .wa-node--plan { fill: #060513; stroke: #ffe39a; }
 
 /* ── the page that shows it (/mundo/) ────────────────────────────────────── */
+/* ── day and night (lote 4.3) ──
+   A band gives its colours as --…0 (the day). What paints reads --g, --g2…, derived here: the same by day, and
+   mixed into the deep indigo of the night when the map says so. One repaint of what is on screen, hidden under
+   the wave of dusk; what is lit (windows, accents, the path) keeps its colour and so it glows. */
+.wa-band, .wa-isle, .wa-tone {
+  --g: var(--g0); --g2: var(--g20); --g3: var(--g30); --gs: var(--gs0); --gs2: var(--gs20); --gl: var(--gl0);
+  --t1: var(--t10); --t2: var(--t20); --wt: var(--wt0); --rk: var(--rk0); --w: var(--w0);
+}
+.wa-glow { opacity: 0; pointer-events: none; }
+@supports (color: color-mix(in srgb, red, blue)) {
+  .ws[data-time='night'] :is(.wa-band, .wa-isle, .wa-tone) {
+    --g: color-mix(in srgb, var(--g0) 30%, #0d0b3a); --g2: color-mix(in srgb, var(--g20) 32%, #100e44); --g3: color-mix(in srgb, var(--g30) 26%, #0a0830);
+    --gs: color-mix(in srgb, var(--gs0) 30%, #070620); --gs2: color-mix(in srgb, var(--gs20) 30%, #070620); --gl: color-mix(in srgb, var(--g0) 46%, #1a1766);
+    --t1: color-mix(in srgb, var(--t10) 34%, #080726); --t2: color-mix(in srgb, var(--t20) 36%, #0d0b3a); --wt: color-mix(in srgb, var(--wt0) 34%, #070a3a);
+    --rk: color-mix(in srgb, var(--rk0) 34%, #0a0830); --w: #eeeae3;
+    --anatomy-lit-top: #cbc5e2; --anatomy-lit-shade: #8d87ad;
+  }
+  .ws[data-time='night'] .wa-glow { opacity: 1; }
+  .ws[data-time='night'] .wa-lit { fill: #ffe9a8; }
+  .ws[data-time='night'] .wa-beam { opacity: 0.62; }
+  .ws[data-time='night'] .wa-park { fill: #1d3a44; }
+  .ws[data-time='night'] .wa-wheat { fill: #35372f; }
+  .ws[data-time='night'] .wa-track { fill: #5c3442; }
+  .ws[data-time='night'] :is(.wa-petal, .wa-snow, .wa-foam, .wa-wave, .wa-glint, .wa-shallow, .wa-smoke) { opacity: 0.28; }
+  .ws[data-time='night'] .wa-bale > :is(.iso-fill, .iso-top) { fill: #8f7f4a; }
+  .ws[data-time='night'] .wa-shadow { opacity: 0.3; }
+  .ws[data-time='night'] .wa-speck--star { opacity: 1; }
+  /* the names over the land are written in paper at night, and their button turns with them */
+  .ws[data-time='night'] .ws-names li { --ink: #eeeae3 !important; --on: #14124a !important; }
+  .ws[data-time='night'] .ww { --k: #eeeae3 !important; }
+  .ws[data-time='night'] .wk { opacity: 0.32; }
+  .ws[data-time='night'] .wk svg + svg { opacity: 0.5; }
+}
+
+/* ── life (lote 4.3): what moves in each place ──
+   Only while the map is on screen (data-seen), only in the places in view (data-live, set by the map as it
+   travels), only if the visitor has not paused it (data-life) and never with reduced motion. Each is one
+   transform or one opacity: the browser moves them without painting the land again. */
+.wl-smoke, .wl-ball, .wl-twinkle { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .ws[data-life='on'][data-seen] [data-live] .wl-spin { animation: wl-turn 11s linear infinite; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-spin--slow { animation-duration: 16s; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-sweep { animation: wl-turn 12s linear infinite; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-clock { animation: wl-turn 90s linear infinite; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-rot { animation: wl-turn 70s linear infinite; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-rot--fast { animation-duration: 5s; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-nod { animation: wl-nod 2.6s ease-in-out infinite alternate; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-pulse { animation: wl-pulse 2.4s ease-in-out infinite alternate; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-pulse--star { animation-duration: 1.7s; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-wave { animation: wl-wave 1.3s ease-in-out infinite alternate; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-blink { animation: wl-blink 2.2s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -0.42s); }
+  .ws[data-life='on'][data-seen] [data-live] .wl-twinkle { animation: wl-twinkle 7s steps(1) infinite; animation-delay: calc(var(--i, 0) * -1.3s); }
+  .ws[data-life='on'][data-seen] [data-live] .wl-flick { animation: wl-flick 3.2s steps(1) infinite; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-smoke { animation: wl-smoke 3.3s linear infinite; animation-delay: calc(var(--i, 0) * -1.1s); }
+  .ws[data-life='on'][data-seen] [data-live] .wl-ball { animation: wl-ball 1.15s linear infinite alternate; }
+  .ws[data-life='on'][data-seen] [data-live] .wl-bob { animation: wl-bob 3.1s ease-in-out infinite alternate; animation-delay: calc(var(--i, 0) * -0.7s); }
+  .ws[data-life='on'][data-seen] [data-live] .wl-drift { animation: wl-drift 3.6s linear infinite; }
+}
+@keyframes wl-turn { to { rotate: 360deg; } }
+@keyframes wl-nod { from { rotate: -7deg; } to { rotate: 7deg; } }
+@keyframes wl-pulse { from { scale: 0.86; } to { scale: 1.16; } }
+@keyframes wl-wave { from { transform: skewY(-9deg); } to { transform: skewY(11deg); } }
+@keyframes wl-blink { from { opacity: 0.2; } to { opacity: 1; } }
+@keyframes wl-twinkle { 0%, 100% { opacity: 1; } 34% { opacity: 0.15; } 61% { opacity: 1; } 78% { opacity: 0.15; } }
+@keyframes wl-flick { 0%, 100% { opacity: 1; } 8% { opacity: 0.25; } 14% { opacity: 1; } 52% { opacity: 0.3; } 57% { opacity: 1; } }
+@keyframes wl-smoke { from { translate: 0 0; scale: 0.7; opacity: 0; } 18% { opacity: 0.6; } to { translate: 7px -20px; scale: 1.7; opacity: 0; } }
+@keyframes wl-ball { from { translate: 0 0; } to { translate: 19.7px 9.8px; } }
+@keyframes wl-bob { from { translate: 0 0; rotate: -2deg; } to { translate: 0 -2.4px; rotate: 2deg; } }
+@keyframes wl-drift { to { translate: 28.62px 14.31px; } } /* 32 units along the shore: 32 · (0.8944, 0.4472) */
+
 /* ── the map: the land fills the screen, edge to edge, and is travelled sideways; --z is its zoom ── */
 .ws {
   position: relative; width: 100%; height: calc(100svh - var(--ws-top, 132px)); min-height: 440px; overflow: clip;
@@ -139,7 +211,8 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
   box-sizing: content-box; width: max-content; height: calc(100cqh * var(--z)); overflow: clip;
   padding-left: max(0px, calc(50cqw - 100cqh * var(--z) * var(--ws-a))); padding-right: max(0px, calc(50cqw - 100cqh * var(--z) * var(--ws-z)));
 }
-.ws-land { position: relative; height: 100%; width: calc(100cqh * var(--z) * var(--ws-r)); }
+/* --u: one unit of the land, on screen — what is laid over the land (people, crates) is sized and moved with it */
+.ws-land { position: relative; height: 100%; width: calc(100cqh * var(--z) * var(--ws-r)); --u: calc(100cqh * var(--z) / var(--ws-wh)); }
 .ws-land > .wa { width: 100%; height: 100%; }
 /* over the land, as text: the name of every stop, its dates and its button, written in the ink of its ground;
    they keep their size when the land zooms (cqh is the frame's, not the land's) */
@@ -159,6 +232,56 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .ws-more::after { content: ''; position: absolute; inset: -5px; border-radius: inherit; border: 2px solid var(--ink); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
 .ws-more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) { .ws-more:hover::after { opacity: 0.55; } }
+
+/* people walking the path: each goes to a point and comes back, turning round at both ends; the legs swing */
+.ws-walkers, .ws-crates { position: absolute; inset: 0; pointer-events: none; }
+.ww { position: absolute; width: calc(11 * var(--u)); margin: calc(-19.5 * var(--u)) 0 0 calc(-5.5 * var(--u)); scale: var(--f) 1; }
+.ww svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ww-shadow { fill: #060513; opacity: 0.16; }
+.ww-leg, .ww-head, .ww-arm { fill: var(--k); }
+.ww-coat { fill: var(--c); }
+.ww-leg { transform-box: fill-box; transform-origin: 50% 8%; }
+.ww-arm { transform-box: fill-box; transform-origin: 50% 8%; opacity: 0.55; }
+@media (prefers-reduced-motion: no-preference) {
+  .ws[data-life='on'][data-seen] .ww[data-live] { animation: ww-go calc(var(--d) * 2) linear infinite; animation-delay: calc(var(--i) * -1.7s); will-change: translate; }
+  .ws[data-life='on'][data-seen] .ww[data-live] .ww-leg--a, .ws[data-life='on'][data-seen] .ww[data-live] .ww-arm { animation: ww-step 0.54s ease-in-out infinite alternate; }
+  .ws[data-life='on'][data-seen] .ww[data-live] .ww-leg--b { animation: ww-step 0.54s ease-in-out infinite alternate-reverse; }
+  .ws[data-life='on'][data-seen] .ww[data-live] .ww-body { animation: ww-bob 0.27s ease-in-out infinite alternate; }
+}
+@keyframes ww-go {
+  0% { translate: 0 0; scale: var(--f) 1; }
+  48% { translate: calc(var(--dx) * var(--u)) calc(var(--dy) * var(--u)); scale: var(--f) 1; }
+  50% { translate: calc(var(--dx) * var(--u)) calc(var(--dy) * var(--u)); scale: calc(var(--f) * -1) 1; }
+  98% { translate: 0 0; scale: calc(var(--f) * -1) 1; }
+  100% { translate: 0 0; scale: var(--f) 1; }
+}
+@keyframes ww-step { from { rotate: -24deg; } to { rotate: 24deg; } }
+@keyframes ww-bob { from { translate: 0 0; } to { translate: 0 -0.5px; } }
+/* crates: to pick up and throw. The map moves each (--x, --y: the point of the ground under it) and redraws its faces. */
+.wc {
+  position: absolute; left: 0; top: 0; width: calc(48 * var(--u)); pointer-events: auto; cursor: grab; touch-action: none;
+  translate: calc((var(--x) - 24) * var(--u)) calc((var(--y) - 44) * var(--u));
+}
+.wc[data-held] { cursor: grabbing; z-index: 2; }
+.wc svg { display: block; width: 100%; height: auto; overflow: visible; pointer-events: none; }
+.wc path { stroke: #060513; stroke-width: 1.4; stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: auto; }
+.wc-shadow { fill: #060513; opacity: 0.2; }
+/* clouds: they cross the frame slowly, each with its shadow on the land below */
+.ws-sky { position: absolute; inset: 0; overflow: clip; pointer-events: none; }
+.wk { position: absolute; left: 0; top: calc(3% + var(--i) * 9%); width: calc(120px + var(--i) * 26px); opacity: 0.82; translate: calc(-100% - 20px) 0; transition: opacity 600ms var(--motion-ease); }
+.wk:nth-child(even) { top: calc(20% + var(--i) * 5%); }
+.wk svg { display: block; width: 100%; height: auto; fill: #ffffff; }
+.wk svg + svg { position: absolute; left: 12%; top: 190%; fill: #060513; opacity: 0.1; scale: 1 0.6; }
+@media (prefers-reduced-motion: no-preference) {
+  .ws[data-life='on'][data-seen] .wk { animation: wk-go calc(86s + var(--i) * 19s) linear infinite; animation-delay: calc(var(--i) * -37s); will-change: translate; }
+}
+@keyframes wk-go { from { translate: calc(-100% - 20px) 0; } to { translate: calc(100vw + 40px) 0; } }
+/* with reduced motion, or paused, the clouds rest where they would be seen */
+.ws[data-life='off'] .wk, .ws:not([data-ready]) .wk { translate: calc(8vw + var(--i) * 21vw) 0; }
+@media (prefers-reduced-motion: reduce) { .wk { translate: calc(8vw + var(--i) * 21vw) 0; } }
+/* dusk and dawn: a wave of the new hour, from the button */
+.ws-veil { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: #0d0b3a; }
+.ws-veil[data-to='day'] { background: #ffe7a6; }
 
 /* the glass card: the page, where you are, the minimap and the way to the list. Glass (a blur of the land under
    it) only with a mouse; on touch screens a solid fill, as in the header. */
@@ -193,6 +316,8 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 }
 /* zoom: two round buttons in the other corner */
 .ws-zoom { position: absolute; right: var(--space-4); top: var(--space-4); display: none; flex-direction: column; gap: var(--space-2); }
+.ws-time { margin-top: var(--space-2); }
+.ws-pause[aria-pressed='true'] { background: #eeeae3; color: #060513; }
 .ws[data-ready] .ws-zoom { display: flex; }
 .ws-zbtn, .ws-nav {
   display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(6, 5, 19, 0.9); color: #ffffff; cursor: pointer;

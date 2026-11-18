@@ -1,10 +1,15 @@
 'use client';
 
 import { type CSSProperties, type KeyboardEvent, type MouseEvent, type PointerEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { read as recall, sfx, write as remember } from '@/v2/sound/control';
 import { ArrowIcon, ArrowLeftIcon } from '../ui/Icons';
+import { type Body, body, faces, step, toss, twirl } from './crates';
+import { fromScreen, KX, KY, KZ } from './world-kit';
 
-export type StripStop = { id: string; x: number; y: number; label: [number, number]; ink: string; on: string; color: string; name: string; when: string; state: string; group: string };
-export type StripLabels = { kicker: string; title: string; alt: string; hint: string; prev: string; next: string; drag: string; stops: string; more: string; zoomIn: string; zoomOut: string; asList: string };
+export type StripStop = { id: string; x: number; y: number; span: [number, number]; label: [number, number]; ink: string; on: string; color: string; name: string; when: string; state: string; group: string };
+export type StripLabels = { kicker: string; title: string; alt: string; hint: string; prev: string; next: string; drag: string; stops: string; more: string; zoomIn: string; zoomOut: string; asList: string; toNight: string; toDay: string; pause: string; play: string };
+export type StripWalker = { id: string; x: number; y: number; dx: number; dy: number; dur: number; c: string; ink: string };
+export type StripCrate = { id: string; x: number; y: number; c: string };
 
 const pad = (n: number) => String(n).padStart(2, '0');
 /** How far the mouse has to travel before a press becomes a drag (a press on a button stays a click). */
@@ -13,6 +18,32 @@ const DRAG = 6;
 const ZMIN = 1, ZMAX = 2.4, ZSTEP = 1.4;
 const clampZ = (z: number) => Math.round(Math.min(ZMAX, Math.max(ZMIN, z)) * 100) / 100;
 const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TIME_KEY = 'ig:v2:time';
+/** How high a crate rides in the hand, in land units. */
+const LIFT = 24;
+/** A face of a crate: its colour, lighter where the light falls and darker away from it. */
+const shade = (hex: string, lit: number) => {
+  const to = lit > 0.5 ? 255 : 6, k = lit > 0.5 ? (lit - 0.5) * 0.7 : (0.5 - lit) * 1.1;
+  return `rgb(${[1, 3, 5].map((i) => Math.round(parseInt(hex.slice(i, i + 2), 16) * (1 - k) + to * k)).join(' ')})`;
+};
+const crateAt = (c: StripCrate) => { const [x, y] = fromScreen(c.x, c.y); return body(x, y); };
+
+/** Someone walking: no face, what they wear in the colour given, the rest in the ink of the ground they are on. */
+const Walker = () => (
+  <svg viewBox="0 0 16 30" aria-hidden="true">
+    <ellipse className="ww-shadow" cx="9" cy="28.4" rx="6" ry="1.8" />
+    <g className="ww-body">
+      <rect className="ww-leg ww-leg--a" x="5.2" y="17" width="2.6" height="11" rx="1.3" />
+      <rect className="ww-leg ww-leg--b" x="8.2" y="17" width="2.6" height="11" rx="1.3" />
+      <rect className="ww-coat" x="3.6" y="8" width="8.8" height="11.5" rx="3.4" />
+      <rect className="ww-arm" x="6.8" y="9.6" width="2.4" height="8.4" rx="1.2" />
+      <circle className="ww-head" cx="8" cy="4.2" r="3.5" />
+    </g>
+  </svg>
+);
+const Cloud = () => (
+  <svg viewBox="0 0 120 48" aria-hidden="true"><path d="M22 40a14 14 0 0 1 2-27.8A20 20 0 0 1 62 8a17 17 0 0 1 30 8 12.5 12.5 0 0 1 6 24Z" /></svg>
+);
 
 /**
  * The engine of the world of Work (lotes 4.1 y 4.2). The land fills the screen and is travelled sideways: it is a
@@ -28,7 +59,7 @@ const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matche
  * Nothing runs on its own: every frame is asked by a scroll, a gesture, a key or a click.
  * Without JS the frame still scrolls with touch, trackpad and keyboard, and the list below holds the same facts.
  */
-export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: string; mini: string; width: number; height: number; stops: StripStop[]; labels: StripLabels }) {
+export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, labels }: { svg: string; mini: string; width: number; height: number; stops: StripStop[]; walkers: StripWalker[]; crates: StripCrate[]; labels: StripLabels }) {
   const root = useRef<HTMLDivElement>(null);
   const view = useRef<HTMLDivElement>(null);
   const land = useRef<HTMLDivElement>(null);
@@ -44,6 +75,16 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
   const [at, setAt] = useState(0);
   const [z, setZ] = useState(1);
   const [ready, setReady] = useState(false);
+  /* life (lote 4.3): day or night, moving or paused, which places are on screen, and the crates */
+  const [time, setTime] = useState<'day' | 'night'>('day');
+  const [life, setLife] = useState(true);
+  const veil = useRef<HTMLDivElement>(null);
+  const live = useRef<Map<string, Element[]> | null>(null);
+  const liveNow = useRef('');
+  const bodies = useRef<Body[]>(crates.map(crateAt));
+  const crateEls = useRef<(HTMLSpanElement | null)[]>([]);
+  const hand = useRef<{ i: number; id: number; trail: [number, number, number][] } | null>(null);
+  const loop = useRef(0);
   const last = stops.length - 1;
 
   const measure = useCallback(() => {
@@ -58,6 +99,21 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     return { left: g.x + (stops[i].x / width) * g.w - g.vw / 2, top: g.y + (stops[i].y / height) * g.h - g.vh / 2 };
   }, [stops, width, height]);
 
+  /** Which places are on screen: only they move (data-live on their ground, on what stands there and on who walks). */
+  const markLive = useCallback(() => {
+    const v = view.current, l = land.current;
+    if (!v || !l) return;
+    if (!live.current) {
+      live.current = new Map();
+      for (const el of l.querySelectorAll('.wa-band[data-id], .wa-isle[data-id], .ww[data-id]')) { const id = (el as HTMLElement | SVGElement).dataset.id!; live.current.set(id, [...(live.current.get(id) ?? []), el]); }
+    }
+    const g = geo.current, x0 = ((v.scrollLeft - g.x) / g.w) * width, x1 = x0 + (g.vw / g.w) * width;
+    const on = stops.filter((s) => s.span[1] > x0 && s.span[0] < x1).map((s) => s.id);
+    if (on.join() === liveNow.current) return;
+    liveNow.current = on.join();
+    for (const [id, els] of live.current) for (const el of els) el.toggleAttribute('data-live', on.includes(id));
+  }, [stops, width]);
+
   /** The minimap's window: what part of the land is in view. */
   const paintWindow = useCallback(() => {
     const v = view.current, el = win.current;
@@ -68,7 +124,8 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     el.style.width = `${(Math.min(1 - l, g.vw / g.w) * 100).toFixed(3)}%`;
     el.style.top = `${(t * 100).toFixed(2)}%`;
     el.style.height = `${(Math.min(1 - t, g.vh / g.h) * 100).toFixed(2)}%`;
-  }, []);
+    markLive();
+  }, [markLive]);
 
   const go = useCallback((i: number) => {
     const v = view.current;
@@ -76,6 +133,7 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     const n = Math.max(0, Math.min(last, i));
     aim.current = n;
     setAt(n);
+    sfx('stop');
     const s = spot(n);
     v.scrollTo({ left: s.left, top: s.top, behavior: still() ? 'auto' : 'smooth' });
   }, [last, spot]);
@@ -168,6 +226,12 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     measure();
     paintWindow();
     setReady(true);
+    // the hour of the visitor, unless they chose: night from 19 to 7
+    const hour = new Date().getHours(), chosen = recall(TIME_KEY);
+    if (chosen === 'night' || (chosen !== 'day' && (hour >= 19 || hour < 7))) setTime('night');
+    // nothing moves while the map is off screen
+    const seen = new IntersectionObserver(([e]) => r.toggleAttribute('data-seen', e.isIntersecting), { threshold: 0.05 });
+    seen.observe(r);
     let raf = 0;
     /* where you are: the stop nearest to the middle of the frame, read only when the frame has scrolled */
     const read = () => {
@@ -195,7 +259,7 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
       const k = (gesture.current?.k ?? 1) * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0025) * 4);
       preview(k, e.clientX, e.clientY);
       window.clearTimeout(gesture.current?.t);
-      if (gesture.current) gesture.current.t = window.setTimeout(settle, 160);
+      if (gesture.current) gesture.current.t = window.setTimeout(settle, 220);
     };
     /* two fingers on a screen: the same, from the distance between them */
     let pinch: { d: number; cx: number; cy: number } | null = null;
@@ -226,6 +290,8 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     dialogs.forEach((d) => d.addEventListener('click', out));
     return () => {
       ro.disconnect();
+      seen.disconnect();
+      cancelAnimationFrame(loop.current);
       v.removeEventListener('scroll', onScroll); v.removeEventListener('scrollend', end); v.removeEventListener('wheel', onWheel);
       v.removeEventListener('touchstart', onTouchStart); v.removeEventListener('touchmove', onTouchMove); v.removeEventListener('touchend', onTouchEnd);
       v.removeEventListener('touchcancel', onTouchEnd); v.removeEventListener('pointerdown', free);
@@ -247,7 +313,7 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
   /* a mouse drags the land like a finger does — once it has moved: a press that stays put is still a click */
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     const v = view.current;
-    if (!v || e.pointerType !== 'mouse' || e.button !== 0) return;
+    if (!v || e.pointerType !== 'mouse' || e.button !== 0 || (e.target as Element).closest('.wc')) return;
     press.current = { x: e.clientX, y: e.clientY, left: v.scrollLeft, top: v.scrollTop, id: e.pointerId, on: false };
   };
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -281,14 +347,93 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
     v.scrollLeft = g.x + ((e.clientX - b.left) / b.width) * g.w - g.vw / 2;
     v.scrollTop = g.y + ((e.clientY - b.top) / b.height) * g.h - g.vh / 2;
   };
-  const open = (id: string) => (document.getElementById(`wi-${id}`) as HTMLDialogElement | null)?.showModal();
+  const open = (id: string) => { sfx('open'); (document.getElementById(`wi-${id}`) as HTMLDialogElement | null)?.showModal(); };
+
+  /* ── life: day and night ── */
+  const flip = async (e: MouseEvent<HTMLButtonElement>) => {
+    const next = time === 'day' ? 'night' : 'day', r = root.current, el = veil.current;
+    remember(TIME_KEY, next);
+    sfx(next);
+    if (!r || !el || still() || !el.animate) { setTime(next); return; }
+    // the new hour spreads from the button like a wave; the land changes under it, and the wave clears
+    const a = r.getBoundingClientRect(), b = e.currentTarget.getBoundingClientRect();
+    const at = `${Math.round(b.left + b.width / 2 - a.left)}px ${Math.round(b.top + b.height / 2 - a.top)}px`;
+    el.dataset.to = next;
+    el.style.opacity = '1';
+    await el.animate([{ clipPath: `circle(0px at ${at})` }, { clipPath: `circle(${Math.ceil(Math.hypot(a.width, a.height))}px at ${at})` }], { duration: 520, easing: 'cubic-bezier(0.3, 0, 0.2, 1)' }).finished.catch(() => undefined);
+    setTime(next);
+    await el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 460, easing: 'ease-out' }).finished.catch(() => undefined);
+    el.style.opacity = '0';
+  };
+
+  /* ── life: crates to pick up and throw ── */
+  const paint = (i: number) => {
+    const el = crateEls.current[i], b = bodies.current[i];
+    if (!el) return;
+    el.style.setProperty('--x', ((b.p[0] - b.p[1]) * KX).toFixed(1));
+    el.style.setProperty('--y', ((b.p[0] + b.p[1]) * KY).toFixed(1));
+    const f = faces(b), paths = el.querySelectorAll('path'), sh = el.querySelector('ellipse');
+    paths.forEach((path, k) => { path.setAttribute('d', f[k]?.d ?? ''); if (f[k]) path.style.fill = shade(crates[i].c, f[k].lit); });
+    if (sh) { sh.setAttribute('rx', (9 + b.p[2] * 0.06).toFixed(1)); sh.style.opacity = String(Math.max(0.05, 0.22 - b.p[2] * 0.0016)); }
+  };
+  const tick = (t0: number) => (now: number) => {
+    const dt = Math.min(0.032, Math.max(0, (now - t0) / 1000));
+    let busy = false;
+    bodies.current.forEach((b, i) => {
+      if (b.held) { twirl(b, dt); paint(i); busy = true; return; }
+      if (b.rest) return;
+      // two half steps: a fast crate does not sink through the ground
+      const hit = Math.max(step(b, dt / 2, walls), step(b, dt / 2, walls));
+      if (hit > 0.12) sfx('thud', hit);
+      paint(i);
+      busy = busy || !b.rest;
+    });
+    loop.current = busy ? requestAnimationFrame(tick(now)) : 0;
+  };
+  const walls = { x0: 24, x1: width - 24, y0: 70, y1: height - 10 };
+  const run = () => { if (!loop.current) loop.current = requestAnimationFrame(tick(performance.now())); };
+  /** Where a pointer is on the land, in the land's units. */
+  const onLand = (e: PointerEvent) => { const b = land.current!.getBoundingClientRect(); return [((e.clientX - b.left) / b.width) * width, ((e.clientY - b.top) / b.height) * height] as [number, number]; };
+  const carry = (b: Body, x: number, y: number) => { const [px, py] = fromScreen(x, y + LIFT * KZ); b.p = [px, py, LIFT]; };
+  const grab = (i: number) => (e: PointerEvent<HTMLSpanElement>) => {
+    if (e.button !== 0 || hand.current) return;
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const b = bodies.current[i], [x, y] = onLand(e);
+    b.held = true; b.rest = false; b.v = [0, 0, 0]; b.w = [0, 0, 0];
+    carry(b, x, y);
+    hand.current = { i, id: e.pointerId, trail: [[performance.now(), x, y]] };
+    e.currentTarget.dataset.held = '';
+    aim.current = null;
+    sfx('grab');
+    run();
+  };
+  const drag = (e: PointerEvent<HTMLSpanElement>) => {
+    const h = hand.current;
+    if (!h || h.id !== e.pointerId) return;
+    const [x, y] = onLand(e);
+    carry(bodies.current[h.i], x, y);
+    h.trail.push([performance.now(), x, y]);
+    if (h.trail.length > 6) h.trail.shift();
+  };
+  const drop = (e: PointerEvent<HTMLSpanElement>) => {
+    const h = hand.current;
+    if (!h || h.id !== e.pointerId) return;
+    hand.current = null;
+    delete e.currentTarget.dataset.held;
+    // the throw is the way the hand was going over its last moments
+    const a = h.trail[0], z = h.trail[h.trail.length - 1], dt = Math.max(0.016, (z[0] - a[0]) / 1000);
+    const [vx, vy] = fromScreen((z[1] - a[1]) / dt, (z[2] - a[2]) / dt);
+    toss(bodies.current[h.i], vx, vy);
+    run();
+  };
 
   const here = stops[at];
   // the land can bring its first and its last stop to the middle of the frame: it has that much room at both ends
-  const vars = { '--z': 1, '--ws-r': width / height, '--ws-a': stops[0].x / height, '--ws-z': (width - stops[last].x) / height, '--from': here.color } as CSSProperties;
+  const vars = { '--z': 1, '--ws-wh': height, '--ws-r': width / height, '--ws-a': stops[0].x / height, '--ws-z': (width - stops[last].x) / height, '--from': here.color } as CSSProperties;
   return (
     // the keys work from the frame and from its buttons alike
-    <div ref={root} className="ws" style={vars} data-ready={ready || undefined} data-zoomed={z > 1.01 || undefined} onKeyDown={onKey}>
+    <div ref={root} className="ws" style={vars} data-ready={ready || undefined} data-zoomed={z > 1.01 || undefined} data-time={time} data-life={life ? 'on' : 'off'} onKeyDown={onKey}>
       <div
         ref={view} className="ws-view" role="group" aria-label={labels.hint} tabIndex={0} data-cursor={labels.drag}
         onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onDoubleClick={onDouble}
@@ -296,6 +441,31 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
         <div className="ws-track">
           <div ref={land} className="ws-land">
             <svg className="wa" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={labels.alt} dangerouslySetInnerHTML={{ __html: svg }} />
+            {/* life over the land: who walks and what can be thrown. Decoration: nothing here is announced or focused. */}
+            <div className="ws-walkers" aria-hidden="true">
+              {walkers.map((w, i) => (
+                <span key={i} className="ww" data-id={w.id} style={{ left: `${(w.x / width) * 100}%`, top: `${(w.y / height) * 100}%`, '--dx': w.dx, '--dy': w.dy, '--d': `${w.dur}s`, '--c': w.c, '--k': w.ink, '--f': w.dx < 0 ? -1 : 1, '--i': i % 7 } as CSSProperties}>
+                  <Walker />
+                </span>
+              ))}
+            </div>
+            <div className="ws-crates" aria-hidden="true">
+              {crates.map((c, i) => {
+                const b = bodies.current[i], f = faces(b);
+                return (
+                  <span
+                    key={i} ref={(el) => { crateEls.current[i] = el; }} className="wc" data-id={c.id} data-cursor=""
+                    style={{ '--x': ((b.p[0] - b.p[1]) * KX).toFixed(1), '--y': ((b.p[0] + b.p[1]) * KY).toFixed(1) } as CSSProperties}
+                    onPointerDown={grab(i)} onPointerMove={drag} onPointerUp={drop} onPointerCancel={drop}
+                  >
+                    <svg viewBox="-24 -44 48 56">
+                      <ellipse className="wc-shadow" cx="0" cy="0" rx="9.4" ry="4.4" />
+                      {[0, 1, 2].map((k) => <path key={k} d={f[k]?.d ?? ''} style={f[k] ? { fill: shade(c.c, f[k].lit) } : undefined} />)}
+                    </svg>
+                  </span>
+                );
+              })}
+            </div>
             <ol className="ws-names" aria-label={labels.stops}>
               {stops.map((s, i) => (
                 <li key={s.id} data-id={s.id} data-on={i === at || undefined} style={{ left: `${(s.label[0] / width) * 100}%`, top: `${(s.label[1] / height) * 100}%`, '--ink': s.ink, '--on': s.on } as CSSProperties}>
@@ -310,6 +480,11 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
           </div>
         </div>
       </div>
+      {/* clouds cross the frame, with their shadow on the land; the veil is the wave of dusk and dawn */}
+      <div className="ws-sky" aria-hidden="true">
+        {[0, 1, 2, 3, 4].map((i) => <i key={i} className="wk" style={{ '--i': i } as CSSProperties}><Cloud /><Cloud /></i>)}
+      </div>
+      <div ref={veil} className="ws-veil" aria-hidden="true" />
       {/* the glass card: the page, where you are, the whole land, and the way to the list */}
       <div className="ws-hud">
         <p className="ws-kicker">{labels.kicker}</p>
@@ -331,6 +506,16 @@ export function WorldStrip({ svg, mini, width, height, stops, labels }: { svg: s
         </button>
         <button type="button" className="ws-zbtn" aria-label={labels.zoomOut} disabled={z <= ZMIN + 0.01} onClick={() => zoomBy(zoom.current / ZSTEP)}>
           <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+        </button>
+        <button type="button" className="ws-zbtn ws-time" aria-label={time === 'day' ? labels.toNight : labels.toDay} onClick={flip}>
+          {time === 'day'
+            ? <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M15.2 11.4A6.6 6.6 0 0 1 6.6 2.8a6.6 6.6 0 1 0 8.6 8.6Z" /></svg>
+            : <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><circle cx="9" cy="9" r="3.4" /><path d="M9 1.6v1.8M9 14.6v1.8M1.6 9h1.8M14.6 9h1.8M3.8 3.8l1.2 1.2M13 13l1.2 1.2M3.8 14.2 5 13M13 5l1.2-1.2" /></svg>}
+        </button>
+        <button type="button" className="ws-zbtn ws-pause" aria-label={life ? labels.pause : labels.play} aria-pressed={!life} onClick={() => setLife(!life)}>
+          {life
+            ? <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M5 3v10M11 3v10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+            : <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M4.6 2.8v10.4L13 8Z" fill="currentColor" /></svg>}
         </button>
       </div>
       <button type="button" className="ws-nav ws-nav--prev" aria-label={labels.prev} disabled={at === 0} onClick={() => go(at - 1)}><ArrowLeftIcon size={18} /></button>

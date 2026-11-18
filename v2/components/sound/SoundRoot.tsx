@@ -3,14 +3,14 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { type StyleId, ZONE_STYLE, type ZoneKey } from '@/v2/sound/compose';
-import { MUSIC_BAR, MUSIC_PREVIEW, MUSIC_STOP, read, SOUND_EVENT, SOUND_KEY } from '@/v2/sound/control';
-import type { BarInfo, MusicEngine } from '@/v2/sound/engine';
+import { MUSIC_BAR, MUSIC_PREVIEW, MUSIC_STOP, read, SFX_EVENT, SOUND_EVENT, SOUND_KEY } from '@/v2/sound/control';
+import type { BarInfo, MusicEngine, Sfx } from '@/v2/sound/engine';
 import { GATE_EVENT } from '@/v2/gate/state';
 import { pageOf } from '@/v2/site';
 
 const zoneOf = (pathname: string): ZoneKey => pageOf(pathname) ?? 'system';
 
-type Debug = { playing: boolean; style: StyleId; zone: ZoneKey; bar: number; state: string; loaded: boolean };
+type Debug = { playing: boolean; style: StyleId; zone: ZoneKey; bar: number; state: string; loaded: boolean; sfx?: number };
 
 /**
  * The music of /v2 (lote 2.3), mounted once in the layout. Silent until someone asks for sound: then, inside that
@@ -93,6 +93,13 @@ export function SoundRoot() {
     // the gate opens with a chord, if the visitor had the sound on
     const onGate = () => { if (wanted.current) void ensure().then((m) => m.accent()); };
     window.addEventListener(GATE_EVENT, onGate);
+    // the small sounds of the world of Work: only with the sound on, and never louder than asked
+    const onSfx = (e: Event) => {
+      const d = (e as CustomEvent<{ kind: Sfx; power?: number }>).detail;
+      debug.current.sfx = (debug.current.sfx ?? 0) + 1;
+      if (wanted.current) void ensure().then((m) => m.sfx(d.kind, d.power));
+    };
+    window.addEventListener(SFX_EVENT, onSfx);
     // a hidden tab is silent and costs nothing; it picks up on return
     const onVisible = () => {
       if (document.hidden) engine.current?.stop(0.3);
@@ -110,6 +117,7 @@ export function SoundRoot() {
       window.removeEventListener(MUSIC_PREVIEW, onPreview);
       window.removeEventListener(MUSIC_STOP, onStop);
       window.removeEventListener(GATE_EVENT, onGate);
+      window.removeEventListener(SFX_EVENT, onSfx);
       document.removeEventListener('visibilitychange', onVisible);
       engine.current?.stop(0.1);
       void ctx.current?.close();

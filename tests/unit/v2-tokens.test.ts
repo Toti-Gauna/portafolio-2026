@@ -529,11 +529,11 @@ describe('v2 world of Work (lote 4.1)', () => {
     // every band is one ground with its own clip; the land has no gaps: 15 grounds, 14 steps between them
     expect(WORLD_SVG.match(/class="wa wa-band"/g) ?? []).toHaveLength(15);
     expect(WORLD_SVG.match(/class="wa-land"/g) ?? []).toHaveLength(15);
-    expect(WORLD_SVG.match(/class="wa-step"/g) ?? []).toHaveLength(14);
+    expect(WORLD_SVG.match(/class="wa-step wa-tone"/g) ?? []).toHaveLength(14);
     // the drawing travels once: every id in it is unique, and a place on its own is shown by reference
     const ids = [...WORLD_SVG.matchAll(/ id="([^"]+)"/g)].map((m) => m[1]);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids).toHaveLength(45);
+    expect(ids).toHaveLength(46); // 15 grounds, 15 clips, 15 stands and the gradient of the night glow
     for (const id of WORLD_IDS) { const refs = [...WORLD_ISLES[id].svg.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]); expect(refs.length, id).toBeGreaterThanOrEqual(2); for (const r of refs) expect(ids, `${id} → ${r}`).toContain(r); expect(WORLD_ISLES[id].svg, id).not.toMatch(/<path|<circle/); }
     expect((WORLD_ISLES.nucleo.svg.match(/<use/g) ?? []).length).toBe(4);
     // the stops go left to right, in the order of the journey, each with room around it (Ignacio: «más espacio a cada zona»)
@@ -552,11 +552,11 @@ describe('v2 world of Work (lote 4.1)', () => {
     const { WORLD_SVG, WORLD_DROPPED } = await import('../../v2/components/work/world-art');
     // what was asked for and did not fit in its band would have been left out: nothing was
     expect(WORLD_DROPPED).toEqual([]);
-    const bands = WORLD_SVG.split('<g class="wa wa-band"').slice(1).map((b) => b.split('<path class="wa-step"')[0]);
+    const bands = WORLD_SVG.split('<g class="wa wa-band"').slice(1).map((b) => b.split('<path class="wa-step')[0]);
     expect(bands).toHaveLength(15);
     const hsl = (hex: string) => { const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255), mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; return { s: mx === mn ? 0 : (mx - mn) / (1 - Math.abs(2 * l - 1)), l }; };
     for (const b of bands) {
-      const id = b.match(/data-id="(\w+)"/)![1], ground = b.match(/--g:(#[0-9a-f]{6})/)![1];
+      const id = b.match(/data-id="(\w+)"/)![1], ground = b.match(/--g0:(#[0-9a-f]{6})/)![1];
       // a biome: at least six things on the ground, of three kinds or more
       const kinds = new Set([...b.matchAll(/class="(wa-(?:water|seaf|hill|drift|peak|leaf|rock|dune|road|g2|g3|park|wheat|track|floor|row|speck|petal|flower|px|tuft)[^"]*|iso-solid wa-(?:mass|bale))"/g)].map((m) => m[1].split(' ').pop()));
       expect(kinds.size, `${id}: ${[...kinds].join(' ')}`).toBeGreaterThanOrEqual(3);
@@ -624,3 +624,89 @@ describe('v2 world of Work (lote 4.1)', () => {
     expect((es.world.places.tsoft as Place).facts.find((f) => f.k === 'Puesto')!.v).toContain('Sr AI Fullstack Developer');
   });
 });
+
+describe('v2 life of the world (lote 4.3)', () => {
+  it('a crate is a rigid body: thrown, it flies, bounces, tumbles and comes to rest square, inside the land', async () => {
+    const { body, step, toss, faces, twirl, SQUARE_COUNT, EDGE } = await import('../../v2/components/work/crates');
+    expect(SQUARE_COUNT).toBe(24);
+    const walls = { x0: 24, x1: 7000, y0: 70, y1: 510 };
+    const at = (b: { p: number[] }) => [(b.p[0] - b.p[1]) * 0.8944, (b.p[0] + b.p[1]) * 0.4472];
+    // at rest nothing moves it, and it shows three faces
+    const still = body(400, 200);
+    expect(step(still, 0.016, walls)).toBe(0);
+    expect(still.p).toEqual([400, 200, EDGE / 2]);
+    expect(faces(still)).toHaveLength(3);
+    for (const [vx, vy] of [[300, -120], [-260, 80], [40, 500], [0, 0], [-500, -500]]) {
+      const b = body(420, 180);
+      b.held = true; twirl(b, 0.3);
+      toss(b, vx, vy);
+      expect(b.rest).toBe(false);
+      let hits = 0, top = 0, steps = 0;
+      while (!b.rest && steps < 2000) {
+        if (step(b, 0.008, walls) > 0) hits++;
+        top = Math.max(top, b.p[2]);
+        steps++;
+        // never under the ground, never out of the land
+        expect(b.p[2]).toBeGreaterThan(EDGE / 2 - 0.01);
+        const [sx, sy] = at(b);
+        expect(sx).toBeGreaterThanOrEqual(walls.x0 - 0.5); expect(sx).toBeLessThanOrEqual(walls.x1 + 0.5);
+        expect(sy).toBeGreaterThanOrEqual(walls.y0 - 0.5); expect(sy).toBeLessThanOrEqual(walls.y1 + 0.5);
+        for (const f of faces(b)) { expect(f.d).not.toMatch(/NaN/); expect(f.lit).toBeGreaterThanOrEqual(0); expect(f.lit).toBeLessThanOrEqual(1); }
+      }
+      // it left the hand upward, hit the ground more than once, and stopped in under 16 s of its own time
+      expect(top, `${vx},${vy}`).toBeGreaterThan(EDGE);
+      expect(hits, `${vx},${vy}`).toBeGreaterThanOrEqual(2);
+      expect(b.rest, `${vx},${vy}`).toBe(true);
+      // square on the ground: flat, still, three faces again
+      expect(b.p[2]).toBeCloseTo(EDGE / 2, 5);
+      expect(b.v).toEqual([0, 0, 0]);
+      expect(faces(b)).toHaveLength(3);
+    }
+  });
+
+  it('people walk the path near every stop and a crate waits by each, all inside the land and clear of the names', async () => {
+    const { WORLD_WALKERS, WORLD_CRATES, WORLD_IDS, WORLD_BOX, WORLD_STOPS } = await import('../../v2/components/work/world-art');
+    for (const id of WORLD_IDS) {
+      expect(WORLD_WALKERS.filter((w) => w.id === id).length, id).toBeGreaterThanOrEqual(1);
+      expect(WORLD_CRATES.filter((c) => c.id === id).length, id).toBeGreaterThanOrEqual(1);
+    }
+    expect(WORLD_CRATES.filter((c) => c.id === 'games')).toHaveLength(3);
+    for (const w of WORLD_WALKERS) {
+      for (const [x, y] of [[w.x, w.y], [w.x + w.dx, w.y + w.dy]]) { expect(x).toBeGreaterThan(0); expect(x).toBeLessThan(WORLD_BOX.width); expect(y).toBeGreaterThan(300); expect(y).toBeLessThan(WORLD_BOX.height - 70); }
+      expect(Math.hypot(w.dx, w.dy)).toBeGreaterThan(40);
+      expect(w.dur).toBeGreaterThan(3);
+      // what they wear is a colour of the brand; the rest of them reads on their ground
+      expect(w.c).toMatch(/^#[0-9a-f]{6}$/);
+    }
+    for (const c of WORLD_CRATES) {
+      const stop = WORLD_STOPS.find((s) => s.id === c.id)!;
+      expect(c.y).toBeLessThan(WORLD_BOX.height - 60);
+      // to the right of the name of its stop
+      expect(c.x - stop.label[0], c.id).toBeGreaterThan(95);
+    }
+  });
+
+  it('by night every name over the land is still readable, and what moves has its movement written', async () => {
+    const { WORLD_STOPS, WORLD_SVG } = await import('../../v2/components/work/world-art');
+    const { readFileSync } = await import('node:fs');
+    const css = readFileSync('app/v2/[locale]/world.css', 'utf8');
+    const mix = (a: string, b: string, t: number) => `#${[1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * t + parseInt(b.slice(i, i + 2), 16) * (1 - t)).toString(16).padStart(2, '0')).join('')}`;
+    // the stylesheet's own recipe for the night ground: 30 % of the day colour into #0d0b3a
+    expect(css).toContain('--g: color-mix(in srgb, var(--g0) 30%, #0d0b3a)');
+    for (const s of WORLD_STOPS) {
+      const night = mix(s.on, '#0d0b3a', 0.3);
+      expect(contrast('#eeeae3', night), `${s.id} name at night on ${night}`).toBeGreaterThanOrEqual(4.5);
+    }
+    expect(contrast('#14124a', '#eeeae3')).toBeGreaterThanOrEqual(4.5);
+    // every kind of living part in the drawing has its animation in the stylesheet, under reduced-motion: no-preference
+    const kinds = new Set([...WORLD_SVG.matchAll(/class="[^"]*\bwl (wl-[a-z]+)|class="[^"]*\bwl wl-[a-z]+ (wl-[a-z]+--[a-z]+)|\bwl (wl-[a-z]+)"/g)].map((m) => m[1] ?? m[2] ?? m[3]));
+    expect([...kinds].sort()).toEqual(expect.arrayContaining(['wl-ball', 'wl-blink', 'wl-bob', 'wl-clock', 'wl-flick', 'wl-nod', 'wl-pulse', 'wl-rot', 'wl-smoke', 'wl-spin', 'wl-sweep', 'wl-twinkle', 'wl-wave']));
+    const moving = css.slice(css.indexOf('── life (lote 4.3)'));
+    for (const k of kinds) expect(moving, k).toContain(`[data-live] .${k} {`);
+    // and nothing of it runs outside those conditions: no animation is declared on a living part without them
+    for (const line of css.split('\n').filter((l) => /\.wl-[a-z-]+ \{ animation/.test(l))) expect(line, line).toContain(".ws[data-life='on'][data-seen] [data-live]");
+    // what turns, turns in its own plane: a matrix lays it down and one rotate moves it
+    expect(WORLD_SVG.match(/<g transform="matrix\([^)]+\)"><g class="wl wl-(spin|sweep|clock|nod)/g)!.length).toBeGreaterThanOrEqual(5);
+  });
+});
+
