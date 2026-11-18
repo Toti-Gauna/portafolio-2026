@@ -38,8 +38,9 @@ test('entrances: only what is below the fold waits, it enters on screen, and not
   await expect(doors.first()).toHaveAttribute('data-shown', 'in');
   await expect(doors.first()).toHaveCSS('opacity', '1');
   // what enters together is staggered in reading order
-  const ri = await doors.evaluateAll((els) => els.map((el) => (el as HTMLElement).style.getPropertyValue('--ri')).filter(Boolean));
-  expect(ri[0]).toBe('0');
+  const ri = await page.locator('#explorar [data-reveal]').evaluateAll((els) => els.map((el) => (el as HTMLElement).style.getPropertyValue('--ri')).filter(Boolean));
+  expect(ri.length).toBeGreaterThan(1);
+  expect(ri.map(Number)).toEqual([...ri.map(Number)].sort((x, y) => x - y));
 
   for (const ctx of [await browser.newContext({ javaScriptEnabled: false }), await browser.newContext({ reducedMotion: 'reduce' })]) {
     const p = await ctx.newPage();

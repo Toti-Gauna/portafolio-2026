@@ -226,8 +226,8 @@ test('the home leads to every page, and the design system keeps the header witho
   await page.goto('/v2/es/');
   await page.getByRole('link', { name: 'Explorar el portafolio' }).click();
   await expect(page.locator('#explorar')).toBeInViewport();
-  const doors = page.locator('#explorar .ui-card-title a');
-  await expect(doors).toHaveText(PAGES.slice(1).map((p) => p[0]));
+  const doors = page.locator('#explorar .hd-row');
+  await expect(doors.locator('.hd-t')).toHaveText(PAGES.slice(1).map((p) => p[0]));
   await doors.nth(0).click();
   await expect(page).toHaveURL(/\/v2\/es\/work\/$/);
   await page.getByRole('link', { name: 'Sistema IG' }).click();

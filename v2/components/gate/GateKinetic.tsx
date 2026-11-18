@@ -4,6 +4,7 @@ import { type CSSProperties, type PointerEvent as RPointerEvent, useCallback, us
 import { type Step, STEPS } from '@/v2/gate/state';
 import { GATE_CYCLE, GATE_INTRO, GATE_THEMES, type GateTheme } from '@/v2/gate/themes';
 import { ArrowIcon, PlayIcon } from '../ui/Icons';
+import { boing, busy, hop, hopLetters } from '@/v2/motion/hop';
 import { reducedMotion, useGate } from './useGate';
 
 export type KineticLabels = {
@@ -111,25 +112,11 @@ export function GateKinetic({ first, last, labels, trailerHref }: { first: strin
   /* a press anywhere during the opening (not on a control) goes straight to the rest */
   const onPress = (e: RPointerEvent) => { if (!landed && !(e.target as Element).closest('a, button')) rest(); };
 
-  /* a letter jumps under the pointer, and its neighbours with it */
-  // busy: a jump of ours is still running (the CSS entrances and loops do not count)
-  const busy = (el: Element) => el.getAnimations().some((a) => !('animationName' in a) && a.playState === 'running');
-  const hop = (el: Element | null | undefined, amp: number, delay = 0) => {
-    if (!el || !('animate' in el) || busy(el)) return;
-    el.animate([
-      { transform: 'translateY(0) scale(1, 1)' },
-      { transform: 'translateY(0) scale(1.16, 0.8)', offset: 0.16 },
-      { transform: `translateY(${-amp}em) scale(0.9, 1.14)`, offset: 0.48, easing: 'cubic-bezier(0.5, 0, 0.9, 0.6)' },
-      { transform: 'translateY(0) scale(1.13, 0.85)', offset: 0.8 },
-      { transform: 'translateY(0) scale(1, 1)' },
-    ], { duration: 540, delay, easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)' });
-  };
+  /* a letter jumps under the pointer, and its neighbours with it (v2/motion/hop.ts) */
   const onLetter = (e: RPointerEvent) => {
     const el = (e.target as Element).closest('.gk-l');
     if (!el || !landed || reducedMotion()) return;
-    const all = [...(root.current?.querySelectorAll('.gk-l') ?? [])], i = all.indexOf(el);
-    hop(el, 0.4);
-    [1, 2].forEach((n) => { hop(all[i - n], 0.4 / (n * 2.2), n * 70); hop(all[i + n], 0.4 / (n * 2.2), n * 70); });
+    hopLetters(el, [...(root.current?.querySelectorAll('.gk-l') ?? [])]);
   };
   const wiggle = () => {
     if (reducedMotion()) return;
@@ -140,13 +127,10 @@ export function GateKinetic({ first, last, labels, trailerHref }: { first: strin
   /* under the pointer a door takes a breath: squash, stretch, settle. A jump of ours, never a CSS animation on
      :hover — swapping the animation there replayed the door's entrance when the pointer left, and it vanished
      for an instant (Ignacio, 18/11/2026). */
-  const boing = (e: RPointerEvent) => {
+  const breathe = (e: RPointerEvent) => {
     const el = e.currentTarget;
-    if (e.pointerType !== 'mouse' || !landed || reducedMotion() || busy(el)) return;
-    el.animate([
-      { transform: 'scale(1, 1)' }, { transform: 'scale(1.06, 0.9)', offset: 0.3 }, { transform: 'scale(0.97, 1.06)', offset: 0.6 },
-      { transform: 'scale(1.02, 0.98)', offset: 0.82 }, { transform: 'scale(1, 1)' },
-    ], { duration: 460, easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)' });
+    if (e.pointerType !== 'mouse' || !landed || reducedMotion()) return;
+    boing(el);
   };
   const tint = () => {
     wiggle();
@@ -238,11 +222,11 @@ export function GateKinetic({ first, last, labels, trailerHref }: { first: strin
               <circle cx="6" cy="6" r="5" />
               <circle className="gk-packet" cx="6" cy="6" r="3" />
             </svg>
-            <a className="gk-door gk-door--meet gk-t" href={trailerHref} data-magnetic="6" onPointerEnter={boing}>
+            <a className="gk-door gk-door--meet gk-t" href={trailerHref} data-magnetic="6" onPointerEnter={breathe}>
               <PlayIcon size={14} />
               <span>{labels.meet}</span>
             </a>
-            <button type="button" className="gk-door gk-door--enter gk-t" data-gate-enter data-magnetic="6" onClick={enter} onPointerEnter={boing}>
+            <button type="button" className="gk-door gk-door--enter gk-t" data-gate-enter data-magnetic="6" onClick={enter} onPointerEnter={breathe}>
               <span>{labels.enter}</span>
               <ArrowIcon />
               <kbd className="gk-key" aria-hidden="true">{labels.key}</kbd>

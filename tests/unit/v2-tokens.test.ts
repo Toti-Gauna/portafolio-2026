@@ -458,3 +458,41 @@ describe('v2 gate (lote 3.1)', () => {
     for (const m of [es, en]) for (const k of ['codigo', 'ascenso', 'postal'] as const) expect(m.gate.tags[k].length).toBeGreaterThan(0);
   });
 });
+
+describe('v2 home (lote 3.2)', () => {
+  it('four objects, drawn: one lit piece each, no text inside, and a text for each in both languages', async () => {
+    const { WHAT_ART, WHAT_IDS, WHAT_BOX } = await import('../../v2/components/home/what-art');
+    expect(WHAT_IDS).toEqual(['ai', 'full', 'quality', 'motion']);
+    for (const id of WHAT_IDS) {
+      const art = WHAT_ART[id];
+      expect(art.match(/class="hw-acc"/g) ?? [], id).toHaveLength(1);
+      expect(art, id).not.toMatch(/<text|NaN|undefined/);
+      expect(art.match(/class="hw-shadow"/g) ?? [], id).toHaveLength(1);
+      // every coordinate inside the box, with room for the jump
+      const nums = [...art.matchAll(/[ML]\s*(-?[\d.]+)[ ,](-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
+      expect(nums.length, id).toBeGreaterThan(20);
+      for (const [x, y] of nums) { expect(x, id).toBeGreaterThan(-2); expect(x, id).toBeLessThan(WHAT_BOX.width + 2); expect(y, id).toBeGreaterThan(-2); expect(y, id).toBeLessThan(WHAT_BOX.height + 2); }
+      for (const m of [es, en]) for (const k of ['t', 'd', 'proof'] as const) expect(m.home.what.items[id][k].length, `${id}.${k}`).toBeGreaterThan(0);
+    }
+  });
+
+  it('recruiter first: no visible paragraph of the home is longer than 25 words, in either language', () => {
+    const words = (s: string) => s.trim().split(/\s+/).length;
+    for (const m of [es, en]) {
+      const texts = [...Object.values(m.home.what.items).map((i) => i.d), ...Object.values(m.home.cases.items).map((i) => i.text), m.home.contact.lead, ...m.home.stats.items.map((i) => i.d)];
+      for (const t of texts) expect(words(t), t).toBeLessThanOrEqual(25);
+      for (const t of [m.home.what.title, m.home.cases.title, m.home.doors.title, m.home.contact.title]) expect(words(t), t).toBeLessThanOrEqual(8);
+    }
+  });
+
+  it('three figures, the approved ones, with the date of the run that counted the tests', () => {
+    expect(es.home.stats.items.map((i) => i.n)).toEqual(['2021', '1.374', '11']);
+    expect(en.home.stats.items.map((i) => i.n)).toEqual(['2021', '1,374', '11']);
+    expect(es.home.stats.items[1].d).toContain('28/10/2026');
+    expect(en.home.stats.items[1].d).toContain('10/28/2026');
+  });
+
+  it('the home speaks in positive: nothing announces what is missing', () => {
+    for (const m of [es, en]) expect(JSON.stringify(m.home)).not.toMatch(/\b(sin|no hay|falta|pendiente|todavía no|not yet|missing|without|no screenshots)\b/i);
+  });
+});

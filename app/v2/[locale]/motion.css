@@ -12,6 +12,22 @@ html.v2-motion [data-reveal='scale']:not([data-shown]) { transform: scale(0.94);
   transition-delay: calc(var(--ri, 0) * var(--motion-stagger));
 }
 
+/* ── letras que saltan ───────────────────────────────────────────────────── */
+/* JumpText: the letters come in jumping when their block is revealed, and jump under the pointer (v2/motion/hop.ts).
+   After the gate, the opening of the home does the same once. */
+.jt-w { display: inline-block; white-space: nowrap; }
+.jt-l { display: inline-block; transform-origin: 50% 86%; }
+[data-reveal][data-shown='in'] .jt-l { animation: jt-jump 720ms both; animation-delay: calc(var(--i) * 18ms + 80ms); }
+html[data-entered] .v2-hero .jt-l { animation: jt-jump 760ms both; animation-delay: calc(var(--i) * 42ms + 300ms); }
+@keyframes jt-jump {
+  0% { opacity: 0; transform: translateY(110%) scale(0.8, 1.3); animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1); }
+  8% { opacity: 1; }
+  44% { opacity: 1; transform: translateY(-22%) scale(0.93, 1.1); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  66% { transform: translateY(0) scale(1.15, 0.84); }
+  82% { transform: translateY(-6%) scale(0.98, 1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
+}
+
 /* ── cursor contextual ───────────────────────────────────────────────────── */
 .v2-cursor {
   --cc: var(--color-mist-200);
@@ -101,6 +117,7 @@ html[data-nav='fade'] .v2-page { animation: v2-page-in var(--motion-slow) var(--
 @media (prefers-reduced-motion: reduce) {
   html.v2-motion [data-reveal]:not([data-shown]) { opacity: 1; transform: none; }
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  [data-reveal][data-shown='in'] .jt-l, html[data-entered] .v2-hero .jt-l { animation: none; }
 }
 
 /* ── the demo page (/motion/) ────────────────────────────────────────────── */

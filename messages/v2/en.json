@@ -805,5 +805,94 @@
       "postal": "The six stops of the journey"
     },
     "tint": "Change the colour of the gate"
+  },
+  "home": {
+    "stats": {
+      "label": "In numbers",
+      "items": [
+        {
+          "n": "2021",
+          "d": "Developer since"
+        },
+        {
+          "n": "1,374",
+          "u": "tests",
+          "d": "Green across Eclipse (10/28/2026)"
+        },
+        {
+          "n": "11",
+          "u": "agents",
+          "d": "With separate roles in the way I work"
+        }
+      ]
+    },
+    "what": {
+      "kicker": "What I do",
+      "title": "Four things I do well, with proof.",
+      "cta": "See the cases",
+      "items": {
+        "ai": {
+          "t": "AI applied to product",
+          "d": "RAG, validations and restrictions so a language model is useful in a real process, with a person who confirms.",
+          "proof": "CompliA, in internal production"
+        },
+        "full": {
+          "t": "Fullstack, from the interface to the database",
+          "d": "Frontends, APIs, data and deployments. I design the whole system and build it in stages.",
+          "proof": "Eclipse: the website, the portal and the backend"
+        },
+        "quality": {
+          "t": "Security and quality by design",
+          "d": "Passwords with Argon2id, a second factor, HttpOnly cookies and CSRF; automated tests and CI on every change.",
+          "proof": "The Eclipse backend"
+        },
+        "motion": {
+          "t": "Crafted interfaces",
+          "d": "Visual systems, accessibility and motion in code: GSAP, WebGL and synthesised audio.",
+          "proof": "Kinetic Studio and this site's trailer"
+        }
+      }
+    },
+    "cases": {
+      "kicker": "Cases",
+      "title": "Cases, each with its status.",
+      "cta": "See them all in Work",
+      "play": "Play",
+      "pause": "Pause",
+      "items": {
+        "complia": {
+          "name": "CompliA",
+          "role": "Design and development · 2026 – today",
+          "text": "Conversational assistant for Telefónica's compliance portal: it analyses declarations, helps issue rulings and builds reports.",
+          "media": "Clip from the CompliA demo. Sample data.",
+          "alt": "Frame of the CompliA demo with sample data: 28 declarations found, 8 under analysis and 13 processed."
+        },
+        "tuenti": {
+          "name": "Tuenti",
+          "role": "Gamification, metrics and AI products · 2024 – today",
+          "text": "Gamification (the Tuenti roulette and the referral system), a dashboard measuring referrals and recurrence, automatic top-up and a payments module, from Tsoft.",
+          "media": "My own illustration of the wheel.",
+          "alt": "Illustration of a prize wheel, for the Tuenti gamification work."
+        },
+        "eclipse": {
+          "name": "Eclipse",
+          "role": "My own product: four repos, end to end",
+          "text": "My own development, AI and automation studio: a website that shows demos before talking, a client portal in demo mode and its backend.",
+          "media": "Eclipse landing page: hero and a tour of what we offer, small businesses and demos.",
+          "alt": "Hero of the Eclipse landing page on a black sky, with a total eclipse and its corona inside a dial with tick marks."
+        }
+      }
+    },
+    "doors": {
+      "kicker": "Explore",
+      "title": "Choose where to go next."
+    },
+    "contact": {
+      "kicker": "Contact",
+      "title": "Open to new opportunities.",
+      "lead": "Fullstack with AI, in any industry. Write to me and let's talk.",
+      "write": "Write to me",
+      "linkedin": "LinkedIn"
+    }
   }
 }
