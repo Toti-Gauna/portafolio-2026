@@ -47,7 +47,7 @@ export function Stat({ value, label, layer }: { value: string; label: string; la
 export function SectionHeading({ id, n, title, text, level = 2 }: { id: string; n?: string; title: string; text?: string; level?: 2 | 3 }) {
   const H = `h${level}` as 'h2' | 'h3';
   return (
-    <header className="ui-heading">
+    <header className="ui-heading" data-reveal>
       {n && <p className="ui-heading-n" aria-hidden="true">{n}</p>}
       <H id={id} className={`ui-heading-title ui-heading-title--${level}`}>{title}</H>
       {text && <p className="ui-heading-text">{text}</p>}

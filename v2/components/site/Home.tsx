@@ -29,8 +29,8 @@ export function Home({ locale }: { locale: V2Locale }) {
                 <h1 id="v2-name" className="v2-name">{m.hero.first}<br /><span className="v2-last">{m.hero.last}</span></h1>
                 <p className="v2-lead">{m.hero.leadBefore} <span className="v2-solutions">{m.hero.leadWord}</span> {m.hero.leadAfter}</p>
                 <div className="v2-actions">
-                  <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />}>{m.hero.meet}</Button>
-                  <Button href="#explorar" variant="secondary" iconEnd={<ArrowIcon />}>{m.hero.explore}</Button>
+                  <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />} magnetic={10}>{m.hero.meet}</Button>
+                  <Button href="#explorar" variant="secondary" iconEnd={<ArrowIcon />} magnetic={8}>{m.hero.explore}</Button>
                 </div>
               </div>
               <Stack locale={locale} />
@@ -39,11 +39,11 @@ export function Home({ locale }: { locale: V2Locale }) {
         </section>
 
         <section className="v2-sec st-doors" id="explorar" aria-labelledby="explorar-h">
-          <h2 id="explorar-h">{s.explore}</h2>
+          <h2 id="explorar-h" data-reveal>{s.explore}</h2>
           <ul>
             {doors.map((p, i) => (
-              <li key={p.key}>
-                <article className="ui-card" style={{ '--from': p.from, '--to': p.to } as CSSProperties}>
+              <li key={p.key} data-reveal>
+                <article className="ui-card" style={{ '--from': p.from, '--to': p.to } as CSSProperties} data-cursor={s.more}>
                   <p className="ui-card-meta" aria-hidden="true">{String(i + 2).padStart(2, '0')}</p>
                   <h3 className="ui-card-title"><Link href={sitePath(locale, p.path)}>{s.pages[p.key].t}</Link></h3>
                   <div className="ui-card-body"><p>{s.pages[p.key].d}</p></div>

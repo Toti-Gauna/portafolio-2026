@@ -9,7 +9,7 @@ export type CraftLayer = { id: string; label: string; from: string; svg: string;
  * Each layer is its own <svg>, moved only with transform and opacity; the maths lives in signature.css
  * (--a = open layer, --i = this layer). Names are real buttons: Tab reaches them, Escape closes.
  */
-export function CraftStack({ layers, glow, viewBox, title, hint }: { layers: CraftLayer[]; glow: string; viewBox: string; title: string; hint?: string }) {
+export function CraftStack({ layers, glow, viewBox, title, hint, cursor }: { layers: CraftLayer[]; glow: string; viewBox: string; title: string; hint?: string; cursor?: string }) {
   const [active, setActive] = useState<number | null>(null);
   const toggle = (i: number) => setActive((a) => (a === i ? null : i));
   const onStage = (e: MouseEvent) => {
@@ -24,7 +24,7 @@ export function CraftStack({ layers, glow, viewBox, title, hint }: { layers: Cra
       onKeyDown={(e) => { if (e.key === 'Escape' && active !== null) setActive(null); }}
     >
       <div className="sig-stack-fig">
-        <div className="sig-stack-stage" onClick={onStage}>
+        <div className="sig-stack-stage" onClick={onStage} data-cursor={cursor}>
           <svg className="sig-stack-glow" viewBox={viewBox} aria-hidden="true" dangerouslySetInnerHTML={{ __html: glow }} />
           {/* painted bottom first, so the top layer covers the rest */}
           {layers.map((_, k) => {

@@ -14,6 +14,7 @@ export function Stack({ locale, hint = true }: { locale: V2Locale; hint?: boolea
       layers={art.layers.map((l) => ({ id: l.id, label: m.layers[l.id], from: l.from, svg: l.svg, anchor: l.anchor }))}
       title={m.hero.stackAlt}
       hint={hint ? m.pieces.stack.hint : undefined}
+      cursor={m.engine.cursor.zones.open}
     />
   );
 }

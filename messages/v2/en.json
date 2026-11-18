@@ -175,7 +175,8 @@
     "tokens": "Tokens",
     "components": "Components",
     "pieces": "Pieces",
-    "kit": "Kit"
+    "kit": "Kit",
+    "motion": "Motion"
   },
   "ui": {
     "status": {
@@ -571,6 +572,84 @@
         "three.js is downloaded only when the scene comes on screen.",
         "It draws on demand: on entering, while dragging and while it coasts. With reduced motion, one still frame."
       ]
+    }
+  },
+  "engine": {
+    "meta": {
+      "title": "Motion · IG System v2",
+      "description": "The motion and interaction engine of Ignacio Gauna's new portfolio: entrances, magnetic hover, contextual cursor, shortcuts, scroll and page changes."
+    },
+    "intro": {
+      "kicker": "Batch 2.2 · Motion",
+      "title": "Motion, with intent",
+      "text": "How everything in /v2 enters, responds and travels. One engine, mounted once: every frame is asked for by the scroll, the pointer or a key, and everything stops when it arrives."
+    },
+    "reveal": {
+      "title": "Entrances",
+      "text": "What sits further down enters as it reaches the screen, one by one and in order. What is already in view does not wait: it is there from the start.",
+      "replay": "Replay"
+    },
+    "magnetic": {
+      "title": "Magnetic hover",
+      "text": "The action leans toward the mouse and settles back when it leaves. It adds to the button's own movement.",
+      "hint": "Bring the pointer close."
+    },
+    "cursor": {
+      "title": "Contextual cursor",
+      "text": "The system cursor stays; a ring of light follows it, takes the colour of the area and says what a click does.",
+      "touch": "With a mouse: on touch screens the finger leads.",
+      "zones": {
+        "view": "View case",
+        "drag": "Drag",
+        "open": "Open layer"
+      }
+    },
+    "keys": {
+      "title": "Keyboard shortcuts",
+      "text": "One key per action, with its help on «?». They never fire while you type, and the same help turns them off.",
+      "open": "See the shortcuts"
+    },
+    "scroll": {
+      "title": "Scroll-linked",
+      "text": "The scroll moves the scene: the layers part and the line draws as you go down, and they stay still when you stop.",
+      "caption": "The five layers, at the pace of the scroll."
+    },
+    "camera": {
+      "title": "Page changes",
+      "text": "Changing page moves the camera: forward in menu order, the new page comes in from the right; backward, from the left; the system pages arrive in depth. The header stays still and its light travels.",
+      "try": "Try it",
+      "forward": "Forward",
+      "back": "Back",
+      "depth": "In depth"
+    },
+    "rules": {
+      "title": "Rules",
+      "items": [
+        "Only transform, opacity, clip-path and stroke-dashoffset are animated.",
+        "Nothing runs off screen or in a loop: every frame is asked for by the scroll, the pointer or a key.",
+        "One curve and three durations: 150 ms to respond, 400 to change state and 700 to enter.",
+        "With reduced motion everything reaches its final frame at once; without JavaScript, the content is already there."
+      ]
+    },
+    "help": {
+      "title": "Keyboard shortcuts",
+      "intro": "They work across the portfolio, except while you type in a field.",
+      "close": "Close the shortcuts",
+      "toggle": "One-key shortcuts",
+      "off": "Off: the help stays at hand in the foot of every page.",
+      "button": "Keyboard shortcuts",
+      "actions": {
+        "help": "See this help",
+        "pages": "Go to a page, in menu order",
+        "top": "Back to the top",
+        "sound": "Sound",
+        "lang": "Change language",
+        "close": "Close"
+      }
+    },
+    "say": {
+      "soundOn": "Sound on",
+      "soundOff": "Sound off"
     }
   }
 }

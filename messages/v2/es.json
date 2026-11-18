@@ -175,7 +175,8 @@
     "tokens": "Tokens",
     "components": "Componentes",
     "pieces": "Piezas",
-    "kit": "Kit"
+    "kit": "Kit",
+    "motion": "Motion"
   },
   "ui": {
     "status": {
@@ -571,6 +572,84 @@
         "three.js se descarga recién cuando la escena entra en pantalla.",
         "Se dibuja a pedido: al entrar, al arrastrar y mientras frena. Con movimiento reducido, un cuadro quieto."
       ]
+    }
+  },
+  "engine": {
+    "meta": {
+      "title": "Motion · Sistema IG v2",
+      "description": "El motor de motion e interacción del nuevo portafolio de Ignacio Gauna: aparición, hover magnético, cursor contextual, atajos, scroll y cambios de página."
+    },
+    "intro": {
+      "kicker": "Lote 2.2 · Motion",
+      "title": "El movimiento, con intención",
+      "text": "Cómo aparece, responde y viaja cada cosa en /v2. Un solo motor, montado una vez: cada cuadro lo pide el scroll, el puntero o una tecla, y todo se detiene al llegar."
+    },
+    "reveal": {
+      "title": "Aparición",
+      "text": "Lo que está más abajo entra al llegar a la pantalla, de a uno y en orden. Lo que ya estaba a la vista no espera: está ahí desde el principio.",
+      "replay": "Repetir"
+    },
+    "magnetic": {
+      "title": "Hover magnético",
+      "text": "La acción se inclina hacia el mouse y vuelve a su lugar al salir. Se suma al movimiento propio del botón.",
+      "hint": "Acercá el puntero."
+    },
+    "cursor": {
+      "title": "Cursor contextual",
+      "text": "El cursor del sistema se queda; un anillo de luz lo sigue, toma el color de la zona y dice qué hace el clic.",
+      "touch": "Con mouse: en pantallas táctiles manda el dedo.",
+      "zones": {
+        "view": "Ver caso",
+        "drag": "Arrastrar",
+        "open": "Abrir capa"
+      }
+    },
+    "keys": {
+      "title": "Atajos de teclado",
+      "text": "Una tecla por acción, con su ayuda en «?». Nunca se disparan mientras escribís y se apagan desde la misma ayuda.",
+      "open": "Ver los atajos"
+    },
+    "scroll": {
+      "title": "Ligado al scroll",
+      "text": "El scroll mueve la escena: las capas se separan y la línea se dibuja a medida que bajás, y quedan quietas cuando parás.",
+      "caption": "Las cinco capas, al ritmo del scroll."
+    },
+    "camera": {
+      "title": "Cambio de página",
+      "text": "Cambiar de página es mover la cámara: hacia adelante en el orden del menú, la página nueva entra por la derecha; hacia atrás, por la izquierda; las páginas del sistema llegan en profundidad. El header queda quieto y su luz viaja.",
+      "try": "Probalo",
+      "forward": "Adelante",
+      "back": "Atrás",
+      "depth": "En profundidad"
+    },
+    "rules": {
+      "title": "Reglas",
+      "items": [
+        "Solo se animan transform, opacity, clip-path y stroke-dashoffset.",
+        "Nada corre fuera de pantalla ni en bucle: cada cuadro lo pide el scroll, el puntero o una tecla.",
+        "Una curva y tres duraciones: 150 ms para responder, 400 para cambiar de estado y 700 para entrar.",
+        "Con movimiento reducido todo llega a su cuadro final al instante; sin JavaScript, el contenido ya está."
+      ]
+    },
+    "help": {
+      "title": "Atajos de teclado",
+      "intro": "Funcionan en todo el portafolio, salvo mientras escribís en un campo.",
+      "close": "Cerrar los atajos",
+      "toggle": "Atajos de una tecla",
+      "off": "Apagados: la ayuda sigue a mano en el pie de cada página.",
+      "button": "Atajos de teclado",
+      "actions": {
+        "help": "Ver esta ayuda",
+        "pages": "Ir a una página, en el orden del menú",
+        "top": "Volver arriba",
+        "sound": "Sonido",
+        "lang": "Cambiar de idioma",
+        "close": "Cerrar"
+      }
+    },
+    "say": {
+      "soundOn": "Sonido activado",
+      "soundOff": "Sonido apagado"
     }
   }
 }

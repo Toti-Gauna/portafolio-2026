@@ -109,7 +109,7 @@ export function Kit({ locale }: { locale: V2Locale }) {
 
         <Block id="tres-d" n="04" title={t.three.title} text={t.three.text}>
           <div className="kit-scene-frame" style={{ '--from': L['agents-from'] } as CSSProperties}>
-            <StackScene label={t.three.label} />
+            <StackScene label={t.three.label} cursor={m.engine.cursor.zones.drag} />
             <p className="kit-corner" data-corner="hint">{t.three.hint}</p>
           </div>
           <Rules title={m.kit.rules} items={t.three.rules} />
