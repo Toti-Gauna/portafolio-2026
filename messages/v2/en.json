@@ -24,6 +24,64 @@
     "stackAlt": "The craft in five layers, in an exploded view: planning and execution, code, agents, tests and deploy",
     "stackTitle": "The five layers of the craft"
   },
+  "site": {
+    "meta": {
+      "title": "Ignacio Gauna · Sr AI Fullstack Developer",
+      "description": "The portfolio of Ignacio Gauna, Sr AI Fullstack Developer from Mar del Plata."
+    },
+    "nav": "Main",
+    "homeAria": "Ignacio Gauna, go to the home page",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close the menu",
+    "dialog": "Site menu",
+    "elsewhere": "Also on",
+    "newTab": "(opens in a new tab)",
+    "more": "Learn more",
+    "explore": "Explore the portfolio",
+    "pager": "Other pages",
+    "prev": "Previous",
+    "next": "Next",
+    "system": "IG System",
+    "footerNav": "Site map",
+    "write": "Write to me",
+    "pages": {
+      "home": {
+        "t": "Home",
+        "d": "The summary, on one screen."
+      },
+      "work": {
+        "t": "Work",
+        "d": "Cases with their status, and the lab.",
+        "title": "What I've built.",
+        "lead": "Professional and personal cases, each with its status, and a lab of demos and prototypes."
+      },
+      "how": {
+        "t": "How I work",
+        "d": "The method and the agentic system.",
+        "title": "A method and a system.",
+        "lead": "Six steps to create value and an agentic system, split into parts, where a person approves every delivery."
+      },
+      "brand": {
+        "t": "Brand Lab",
+        "d": "Brand boards drawn in code.",
+        "title": "How I build a brand.",
+        "lead": "Brand boards drawn in code."
+      },
+      "business": {
+        "t": "Business",
+        "d": "Models, marketing, brand and funnels.",
+        "title": "How I think about business.",
+        "lead": "Models, marketing, brand, operations and funnels."
+      },
+      "about": {
+        "t": "About",
+        "d": "The journey and contact.",
+        "title": "From Mar del Plata.",
+        "lead": "The journey and contact."
+      }
+    }
+  },
   "layers": {
     "plan": "Planning and execution",
     "code": "Code",

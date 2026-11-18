@@ -2,12 +2,14 @@ import './v2.css';
 import './ui.css';
 import './signature.css';
 import './kit.css';
+import './site.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { fontMono, fontSans } from '../../fonts';
 import { SITE_URL } from '@/lib/site';
 import { tokensCss } from '@/v2/tokens';
+import { SiteHeader } from '@/v2/components/site/SiteHeader';
 import { V2_LANG_TAG, V2_LOCALES, isV2Locale, v2Messages } from '@/v2/i18n';
 
 export const dynamicParams = false;
@@ -39,7 +41,12 @@ export default async function V2Layout({ children, params }: { children: ReactNo
       <head>
         <style id="v2-tokens" dangerouslySetInnerHTML={{ __html: tokensCss() }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <a className="v2-skip" href="#main">{v2Messages(locale).top.skip}</a>
+        {/* in the layout: the header survives every change of page, so its light can travel */}
+        <SiteHeader locale={locale} />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,16 +1,12 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { BASE_PATH, asset } from '@/lib/site';
+import { BASE_PATH } from '@/lib/site';
 import { LAYERS, tokens } from '@/v2/tokens';
 import { contrast, grade } from '@/v2/tokens/contrast';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { TopBar } from './TopBar';
-import { LightField } from './signature/LightField';
-import { Stack } from './signature/Stack';
-import { Button } from './ui/Button';
-import { RoleBadge } from './ui/Chip';
-import { ArrowIcon, PlayIcon } from './ui/Icons';
+import { ArrowIcon } from './ui/Icons';
 
-/** Lote 1.2: the token specimen, the first page of /v2. Every value on screen is read from tokens.json. */
+/** Lote 1.2: the token specimen (/v2/<locale>/tokens/). Every value on screen is read from tokens.json. */
 
 const C = tokens.color;
 type ColorKey = keyof typeof C;
@@ -62,26 +58,9 @@ export function System({ locale }: { locale: V2Locale }) {
       <TopBar locale={locale} page="tokens" />
 
       <main id="main" className="v2-main">
-        <section className="v2-hero" aria-labelledby="v2-name">
-          <LightField className="v2-hero-light">
-          <div className="v2-hero-grid">
-          <div className="v2-hero-text">
-            <RoleBadge level={m.hero.level} role={m.hero.role} />
-            <h1 id="v2-name" className="v2-name">{m.hero.first}<br /><span className="v2-last">{m.hero.last}</span></h1>
-            <p className="v2-lead">{m.hero.leadBefore} <span className="v2-solutions">{m.hero.leadWord}</span> {m.hero.leadAfter}</p>
-            <div className="v2-actions">
-              <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />}>{m.hero.meet}</Button>
-              <Button href={`${BASE_PATH}/${locale}/`} variant="secondary" iconEnd={<ArrowIcon />}>{m.hero.explore}</Button>
-            </div>
-          </div>
-          <Stack locale={locale} />
-          </div>
-          </LightField>
-        </section>
-
         <div className="v2-intro">
           <p className="v2-label">{m.intro.kicker}</p>
-          <h2>{m.intro.title}</h2>
+          <h1 className="cat-title">{m.intro.title}</h1>
           <p className="v2-sec-text">{m.intro.text}</p>
         </div>
 

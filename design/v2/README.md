@@ -36,13 +36,13 @@ El sistema del portafolio de Ignacio Gauna (Sr AI Fullstack Developer, Mar del P
 - Escala de 4 px: de `space-1` (4 px) a `space-32` (128 px). Separá grupos con `gap`, no con márgenes sueltos.
 - Margen lateral `size-gutter` (16 px) en celular, `size-margin-tablet` desde 600 px y `size-margin-desktop` desde 1100 px. Ancho máximo `size-max`.
 - Radios suaves: `radius-md` en controles y botones, `radius-2xl` en tarjetas de vidrio y paneles, `radius-pill` en chips y estados.
-- Alturas fijas: botones `size-button` (48 px), barra de arriba `size-header` (60 px).
+- Alturas fijas: botones `size-button` (48 px); el header ocupa `size-header` (64 px) arriba de cada página.
 - Puntos de quiebre: `bp-sm` 360, `bp-md` 600, `bp-lg` 1100, `bp-xl` 1440. Sin scroll horizontal a 360 px.
 
 ## Profundidad
 
 - `shadow-panel` en tarjetas y paneles que flotan sobre el índigo. Nada más proyecta sombra: la acción principal se distingue por su color, no por un brillo.
-- El vidrio es un relleno claro casi transparente sobre el índigo, con borde `color-line` y un halo del color de su capa arriba a la izquierda. Sin `backdrop-filter`.
+- El vidrio es un relleno claro casi transparente sobre el índigo, con borde `color-line` y un halo del color de su capa arriba a la izquierda. Sin `backdrop-filter`. La única excepción es la píldora del header, y solo con mouse: en pantallas táctiles su relleno es sólido.
 - Orden de apilado: `z-base`, `z-raised`, `z-header`, `z-overlay`, `z-dialog`.
 
 ## Movimiento

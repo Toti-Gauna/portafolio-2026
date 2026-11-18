@@ -24,6 +24,64 @@
     "stackAlt": "El oficio en cinco capas, en vista explotada: planificación y ejecución, código, agentes, tests y deploy",
     "stackTitle": "Las cinco capas del oficio"
   },
+  "site": {
+    "meta": {
+      "title": "Ignacio Gauna · Sr AI Fullstack Developer",
+      "description": "El portafolio de Ignacio Gauna, Sr AI Fullstack Developer de Mar del Plata."
+    },
+    "nav": "Principal",
+    "homeAria": "Ignacio Gauna, ir al inicio",
+    "contact": "Contacto",
+    "menu": "Menú",
+    "close": "Cerrar el menú",
+    "dialog": "Menú del sitio",
+    "elsewhere": "También en",
+    "newTab": "(se abre en otra pestaña)",
+    "more": "Conocer más",
+    "explore": "Explorar el portafolio",
+    "pager": "Otras páginas",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "system": "Sistema IG",
+    "footerNav": "Mapa del sitio",
+    "write": "Escribime",
+    "pages": {
+      "home": {
+        "t": "Inicio",
+        "d": "El resumen, en una pantalla."
+      },
+      "work": {
+        "t": "Work",
+        "d": "Casos con su estado y el laboratorio.",
+        "title": "Lo que construí.",
+        "lead": "Casos del trabajo y propios, cada uno con su estado, y un laboratorio de demos y prototipos."
+      },
+      "how": {
+        "t": "Cómo trabajo",
+        "d": "El método y el sistema agéntico.",
+        "title": "Un método y un sistema.",
+        "lead": "Seis pasos para generar valor y un sistema agéntico, dividido en partes, donde una persona aprueba cada entrega."
+      },
+      "brand": {
+        "t": "Brand Lab",
+        "d": "Tableros de marca dibujados en código.",
+        "title": "Cómo doy marca.",
+        "lead": "Tableros de marca dibujados en código."
+      },
+      "business": {
+        "t": "Negocio",
+        "d": "Modelos, marketing, marca y embudos.",
+        "title": "Cómo pienso el negocio.",
+        "lead": "Modelos, marketing, marca, operaciones y embudos."
+      },
+      "about": {
+        "t": "Sobre mí",
+        "d": "El recorrido y el contacto.",
+        "title": "De Mar del Plata.",
+        "lead": "El recorrido y el contacto."
+      }
+    }
+  },
   "layers": {
     "plan": "Planificación y ejecución",
     "code": "Código",
