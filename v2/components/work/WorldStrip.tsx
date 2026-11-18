@@ -4,10 +4,11 @@ import { type CSSProperties, type KeyboardEvent, type MouseEvent, type PointerEv
 import { read as recall, sfx, write as remember } from '@/v2/sound/control';
 import { ArrowIcon, ArrowLeftIcon } from '../ui/Icons';
 import { type Body, body, faces, step, toss, twirl } from './crates';
+import { Drive, type DriveApi, type DriveLabels } from './drive/Drive';
 import { fromScreen, KX, KY, KZ } from './world-kit';
 
-export type StripStop = { id: string; x: number; y: number; span: [number, number]; label: [number, number]; ink: string; on: string; color: string; name: string; when: string; state: string; group: string };
-export type StripLabels = { kicker: string; title: string; alt: string; hint: string; prev: string; next: string; drag: string; stops: string; more: string; zoomIn: string; zoomOut: string; asList: string; toNight: string; toDay: string; pause: string; play: string };
+export type StripStop = { id: string; node: [number, number]; home: [number, number]; tall: number; planned: boolean; x: number; y: number; span: [number, number]; label: [number, number]; ink: string; on: string; color: string; name: string; when: string; state: string; group: string };
+export type StripLabels = { kicker: string; title: string; alt: string; hint: string; prev: string; next: string; drag: string; stops: string; more: string; zoomIn: string; zoomOut: string; asList: string; toNight: string; toDay: string; pause: string; play: string; views: { label: string; iso: string; drive: string }; drive: Omit<DriveLabels, 'more'> & { hornLabel: string; camIn: string; camOut: string; prev: string; next: string } };
 export type StripWalker = { id: string; x: number; y: number; dx: number; dy: number; dur: number; c: string; ink: string };
 export type StripCrate = { id: string; x: number; y: number; c: string };
 
@@ -85,11 +86,24 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
   const crateEls = useRef<(HTMLSpanElement | null)[]>([]);
   const hand = useRef<{ i: number; id: number; trail: [number, number, number][] } | null>(null);
   const loop = useRef(0);
+  /* the two views (lote 4.3): the drawing seen from above, or the same land from the ground, by car */
+  const [mode, setMode] = useState<'iso' | 'drive'>('iso');
+  const modeNow = useRef<'iso' | 'drive'>('iso');
+  const [driving, setDriving] = useState(false);
+  const [canDrive, setCanDrive] = useState(false);
+  const [cam, setCam] = useState<'in' | 'out'>('in');
+  const drive = useRef<DriveApi>(null);
+  const dot = useRef<HTMLSpanElement>(null);
+  const sceneReady = useRef<((ok: boolean) => void) | null>(null);
+  const changing = useRef(false);
+  const atNow = useRef(0);
   const last = stops.length - 1;
 
   const measure = useCallback(() => {
     const v = view.current, l = land.current;
     if (!v || !l) return;
+    // hidden behind the other view, it has no size: what was measured stays
+    if (!v.clientWidth) return;
     const a = v.getBoundingClientRect(), b = l.getBoundingClientRect();
     geo.current = { x: b.left - a.left - v.clientLeft + v.scrollLeft, y: b.top - a.top - v.clientTop + v.scrollTop, w: l.offsetWidth, h: l.offsetHeight, vw: v.clientWidth, vh: v.clientHeight };
   }, []);
@@ -226,6 +240,7 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
     measure();
     paintWindow();
     setReady(true);
+    setCanDrive('WebGL2RenderingContext' in window);
     // the hour of the visitor, unless they chose: night from 19 to 7
     const hour = new Date().getHours(), chosen = recall(TIME_KEY);
     if (chosen === 'night' || (chosen !== 'day' && (hour >= 19 || hour < 7))) setTime('night');
@@ -247,7 +262,8 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
       for (let i = 0; i <= last; i++) { const g = Math.abs(spot(i).left - v.scrollLeft); if (g < gap) { gap = g; best = i; } }
       setAt(best);
     };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(read); };
+    // from the ground the drawing is put away (and a hidden frame scrolls back to its start): it says nothing then
+    const onScroll = () => { if (!raf && modeNow.current === 'iso') raf = requestAnimationFrame(read); };
     // a hand on the land takes over from a glide; so does the end of the glide, wherever it stopped
     const free = () => { aim.current = null; };
     const end = () => { aim.current = null; onScroll(); };
@@ -302,7 +318,8 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
   }, [last, spot, measure, paintWindow, preview, settle]);
 
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    // from the ground, the keys belong to the car
+    if (mode === 'drive' || e.altKey || e.ctrlKey || e.metaKey) return;
     if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomBy(zoom.current * ZSTEP); return; }
     if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomBy(zoom.current / ZSTEP); return; }
     const to = e.key === 'ArrowRight' ? at + 1 : e.key === 'ArrowLeft' ? at - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? last : null;
@@ -341,7 +358,7 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
   /* the minimap: press to go there, drag to travel; the land follows at once */
   const miniGo = (e: PointerEvent<HTMLSpanElement>) => {
     const v = view.current;
-    if (!v) return;
+    if (!v || modeNow.current === 'drive') return;
     const b = e.currentTarget.getBoundingClientRect(), g = geo.current;
     aim.current = null;
     v.scrollLeft = g.x + ((e.clientX - b.left) / b.width) * g.w - g.vw / 2;
@@ -349,22 +366,73 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
   };
   const open = (id: string) => { sfx('open'); (document.getElementById(`wi-${id}`) as HTMLDialogElement | null)?.showModal(); };
 
-  /* ── life: day and night ── */
-  const flip = async (e: MouseEvent<HTMLButtonElement>) => {
-    const next = time === 'day' ? 'night' : 'day', r = root.current, el = veil.current;
-    remember(TIME_KEY, next);
-    sfx(next);
-    if (!r || !el || still() || !el.animate) { setTime(next); return; }
-    // the new hour spreads from the button like a wave; the land changes under it, and the wave clears
-    const a = r.getBoundingClientRect(), b = e.currentTarget.getBoundingClientRect();
+  /* ── the curtain: a colour spreads from the button that was pressed, the scene changes under it, and it clears ── */
+  const cover = async (to: string, from: Element) => {
+    const r = root.current, el = veil.current;
+    if (!r || !el || still() || !el.animate) return;
+    const a = r.getBoundingClientRect(), b = from.getBoundingClientRect();
     const at = `${Math.round(b.left + b.width / 2 - a.left)}px ${Math.round(b.top + b.height / 2 - a.top)}px`;
-    el.dataset.to = next;
+    el.dataset.to = to;
     el.style.opacity = '1';
     await el.animate([{ clipPath: `circle(0px at ${at})` }, { clipPath: `circle(${Math.ceil(Math.hypot(a.width, a.height))}px at ${at})` }], { duration: 520, easing: 'cubic-bezier(0.3, 0, 0.2, 1)' }).finished.catch(() => undefined);
-    setTime(next);
+  };
+  const lift = async () => {
+    const el = veil.current;
+    if (!el || el.style.opacity !== '1') return;
     await el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 460, easing: 'ease-out' }).finished.catch(() => undefined);
     el.style.opacity = '0';
   };
+
+  /* ── life: day and night ── */
+  const flip = async (e: MouseEvent<HTMLButtonElement>) => {
+    const next = time === 'day' ? 'night' : 'day';
+    remember(TIME_KEY, next);
+    sfx(next);
+    // the new hour spreads from the button like a wave; the land changes under it, and the wave clears
+    await cover(next, e.currentTarget);
+    setTime(next);
+    await lift();
+  };
+
+  /* ── the two views ── */
+  const toDrive = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (changing.current || mode === 'drive') return;
+    changing.current = true;
+    const built = new Promise<boolean>((done) => { sceneReady.current = done; });
+    // the scene is fetched and built behind the curtain, and shows its first picture when the curtain lifts
+    setDriving(true);
+    sfx('open');
+    const [ok] = await Promise.all([built, cover('drive', e.currentTarget)]);
+    if (ok) { modeNow.current = 'drive'; setMode('drive'); }
+    else { setDriving(false); setCanDrive(false); }
+    await lift();
+    changing.current = false;
+    if (ok) root.current?.querySelector<HTMLElement>('.dv-canvas')?.focus({ preventScroll: true });
+  };
+  const toIso = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (changing.current || mode === 'iso') return;
+    changing.current = true;
+    sfx('open');
+    await cover('iso', e.currentTarget);
+    modeNow.current = 'iso';
+    setMode('iso');
+    setDriving(false);
+    setCam('in');
+    await lift();
+    changing.current = false;
+  };
+  // back on the map: it is where the car was, and the crates are where they were left
+  useEffect(() => {
+    const v = view.current;
+    if (mode !== 'iso' || !v || !v.clientWidth) return;
+    measure();
+    const s = spot(atNow.current);
+    v.scrollLeft = s.left; v.scrollTop = s.top;
+    paintWindow();
+    bodies.current.forEach((_, i) => paint(i));
+    run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
 
   /* ── life: crates to pick up and throw ── */
   const paint = (i: number) => {
@@ -429,11 +497,13 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
   };
 
   const here = stops[at];
+  atNow.current = at;
+  const onGround = mode === 'drive';
   // the land can bring its first and its last stop to the middle of the frame: it has that much room at both ends
   const vars = { '--z': 1, '--ws-wh': height, '--ws-r': width / height, '--ws-a': stops[0].x / height, '--ws-z': (width - stops[last].x) / height, '--from': here.color } as CSSProperties;
   return (
     // the keys work from the frame and from its buttons alike
-    <div ref={root} className="ws" style={vars} data-ready={ready || undefined} data-zoomed={z > 1.01 || undefined} data-time={time} data-life={life ? 'on' : 'off'} onKeyDown={onKey}>
+    <div ref={root} className="ws" style={vars} data-ready={ready || undefined} data-zoomed={z > 1.01 || undefined} data-time={time} data-life={life ? 'on' : 'off'} data-mode={mode} onKeyDown={onKey}>
       <div
         ref={view} className="ws-view" role="group" aria-label={labels.hint} tabIndex={0} data-cursor={labels.drag}
         onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp} onDoubleClick={onDouble}
@@ -484,7 +554,16 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
       <div className="ws-sky" aria-hidden="true">
         {[0, 1, 2, 3, 4].map((i) => <i key={i} className="wk" style={{ '--i': i } as CSSProperties}><Cloud /><Cloud /></i>)}
       </div>
-      <div ref={veil} className="ws-veil" aria-hidden="true" />
+      {driving && (
+        <Drive
+          ref={drive} dot={dot} bodies={bodies} crates={crates} walkers={walkers} width={width} height={height} start={at} night={time === 'night'} life={life}
+          stops={stops.map((s) => ({ id: s.id, node: s.node, home: s.home, tall: s.tall, planned: s.planned, name: s.name, when: s.when, state: s.state, color: s.color }))}
+          labels={{ ...labels.drive, more: labels.more }}
+          onAt={setAt} onOpen={open} onCam={setCam} onStep={(by) => drive.current?.goTo(atNow.current + by)}
+          onReady={() => sceneReady.current?.(true)} onFail={() => sceneReady.current?.(false)}
+        />
+      )}
+      <div ref={veil} className="ws-veil" aria-hidden="true"><b data-for="drive">{labels.views.drive}</b><b data-for="iso">{labels.views.iso}</b></div>
       {/* the glass card: the page, where you are, the whole land, and the way to the list */}
       <div className="ws-hud">
         <p className="ws-kicker">{labels.kicker}</p>
@@ -497,16 +576,38 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
         <span className="ws-mini" aria-hidden="true" data-at={at} onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); miniGo(e); }} onPointerMove={(e) => { if (e.currentTarget.hasPointerCapture(e.pointerId)) miniGo(e); }}>
           <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" dangerouslySetInnerHTML={{ __html: mini }} />
           <span ref={win} className="ws-win" />
+          <span ref={dot} className="ws-car" />
         </span>
         <a className="ws-list" href="#lista">{labels.asList}</a>
+        {canDrive && (
+          <div className="ws-views" role="group" aria-label={labels.views.label}>
+            <button type="button" aria-pressed={!onGround} onClick={toIso}>{labels.views.iso}</button>
+            <button type="button" aria-pressed={onGround} onClick={toDrive}>{labels.views.drive}</button>
+          </div>
+        )}
       </div>
       <div className="ws-zoom">
-        <button type="button" className="ws-zbtn" aria-label={labels.zoomIn} disabled={z >= ZMAX - 0.01} onClick={() => zoomBy(zoom.current * ZSTEP)}>
-          <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-        </button>
-        <button type="button" className="ws-zbtn" aria-label={labels.zoomOut} disabled={z <= ZMIN + 0.01} onClick={() => zoomBy(zoom.current / ZSTEP)}>
-          <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-        </button>
+        {onGround ? (
+          <>
+            <button type="button" className="ws-zbtn ws-cam" aria-label={cam === 'in' ? labels.drive.camOut : labels.drive.camIn} onClick={() => { const c = drive.current?.cam(); if (c) setCam(c); }}>
+              {cam === 'in'
+                ? <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3 13.5v-2.2l1.9-4a1.6 1.6 0 0 1 1.5-.9h7.2a1.6 1.6 0 0 1 1.5.9l1.9 4v2.2Z" /><circle cx="6.4" cy="13.6" r="1.5" /><circle cx="13.6" cy="13.6" r="1.5" /><path d="M5.6 10.6h8.8" /></svg>
+                : <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="10" cy="10" r="6.6" /><circle cx="10" cy="10" r="1.6" /><path d="M10 11.6v5M8.5 9.4 4 7.6M11.5 9.4 16 7.6" /></svg>}
+            </button>
+            <button type="button" className="ws-zbtn ws-horn" aria-label={labels.drive.hornLabel} onClick={() => drive.current?.horn()}>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M3.5 8.2v3.6h2.6l4.4 3.4V4.8L6.1 8.2Z" /><path d="M13.4 7.4a3.6 3.6 0 0 1 0 5.2M15.6 5.2a6.8 6.8 0 0 1 0 9.6" /></svg>
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="button" className="ws-zbtn" aria-label={labels.zoomIn} disabled={z >= ZMAX - 0.01} onClick={() => zoomBy(zoom.current * ZSTEP)}>
+              <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+            </button>
+            <button type="button" className="ws-zbtn" aria-label={labels.zoomOut} disabled={z <= ZMIN + 0.01} onClick={() => zoomBy(zoom.current / ZSTEP)}>
+              <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+            </button>
+          </>
+        )}
         <button type="button" className="ws-zbtn ws-time" aria-label={time === 'day' ? labels.toNight : labels.toDay} onClick={flip}>
           {time === 'day'
             ? <svg aria-hidden="true" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M15.2 11.4A6.6 6.6 0 0 1 6.6 2.8a6.6 6.6 0 1 0 8.6 8.6Z" /></svg>
@@ -518,8 +619,8 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
             : <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><path d="M4.6 2.8v10.4L13 8Z" fill="currentColor" /></svg>}
         </button>
       </div>
-      <button type="button" className="ws-nav ws-nav--prev" aria-label={labels.prev} disabled={at === 0} onClick={() => go(at - 1)}><ArrowLeftIcon size={18} /></button>
-      <button type="button" className="ws-nav ws-nav--next" aria-label={labels.next} disabled={at === last} onClick={() => go(at + 1)}><ArrowIcon size={18} /></button>
+      <button type="button" className="ws-nav ws-nav--prev" aria-label={onGround ? labels.drive.prev : labels.prev} disabled={at === 0} onClick={() => (onGround ? drive.current?.goTo(at - 1) : go(at - 1))}><ArrowLeftIcon size={18} /></button>
+      <button type="button" className="ws-nav ws-nav--next" aria-label={onGround ? labels.drive.next : labels.next} disabled={at === last} onClick={() => (onGround ? drive.current?.goTo(at + 1) : go(at + 1))}><ArrowIcon size={18} /></button>
     </div>
   );
 }

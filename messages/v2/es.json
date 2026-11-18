@@ -919,6 +919,28 @@
     "toDay": "Pasar al día",
     "pause": "Pausar el movimiento del mapa",
     "play": "Reanudar el movimiento del mapa",
+    "views": {
+      "label": "Vista del mapa",
+      "iso": "Isométrica",
+      "drive": "Primera persona"
+    },
+    "drive": {
+      "hint": "El mismo recorrido, desde el suelo y en auto. Con el foco acá: flechas o W A S D manejan, Espacio toca la bocina, C cambia la cámara y Enter abre la ficha del lugar. Los botones Anterior y Siguiente llevan el auto a cada parada.",
+      "move": "Manejar",
+      "horn": "Bocina",
+      "camera": "Cámara",
+      "space": "Espacio",
+      "gas": "Acelerar",
+      "brake": "Frenar o ir marcha atrás",
+      "left": "Girar a la izquierda",
+      "right": "Girar a la derecha",
+      "here": "Estás en",
+      "hornLabel": "Tocar la bocina",
+      "camIn": "Ver desde el asiento",
+      "camOut": "Ver el auto desde atrás",
+      "prev": "Manejar a la parada anterior",
+      "next": "Manejar a la parada siguiente"
+    },
     "close": "Cerrar",
     "inside": "Lo que hice ahí",
     "postal": "Postal",

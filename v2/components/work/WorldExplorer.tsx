@@ -22,8 +22,8 @@ export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Local
     <>
       <WorldStrip
         svg={WORLD_SVG} mini={WORLD_MINI} width={WORLD_BOX.width} height={WORLD_BOX.height}
-        stops={WORLD_STOPS.map((stop) => { const p = places[stop.id]; return { id: stop.id, x: stop.x, y: stop.y, span: stop.span, label: stop.label, ink: stop.ink, on: stop.on, color: GROUP_COLOR[stop.group], name: p.name, when: p.when, state: p.state, group: w.groups[stop.group] }; })}
-        labels={{ kicker, title, alt: w.mapAlt, hint: w.mapHint, prev: w.prev, next: w.next, drag: w.drag, stops: w.stops, more: w.more, zoomIn: w.zoomIn, zoomOut: w.zoomOut, asList: w.asList, toNight: w.toNight, toDay: w.toDay, pause: w.pause, play: w.play }}
+        stops={WORLD_STOPS.map((stop) => { const p = places[stop.id]; return { id: stop.id, node: stop.node, home: stop.home, tall: stop.tall, planned: stop.group === 'next', x: stop.x, y: stop.y, span: stop.span, label: stop.label, ink: stop.ink, on: stop.on, color: GROUP_COLOR[stop.group], name: p.name, when: p.when, state: p.state, group: w.groups[stop.group] }; })}
+        labels={{ kicker, title, alt: w.mapAlt, hint: w.mapHint, prev: w.prev, next: w.next, drag: w.drag, stops: w.stops, more: w.more, zoomIn: w.zoomIn, zoomOut: w.zoomOut, asList: w.asList, toNight: w.toNight, toDay: w.toDay, pause: w.pause, play: w.play, views: w.views, drive: w.drive }}
         walkers={WORLD_WALKERS} crates={WORLD_CRATES}
       />
       <div className="v2-main wd-rest" id="lista" tabIndex={-1}>

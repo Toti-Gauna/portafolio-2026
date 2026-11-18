@@ -1,5 +1,5 @@
 import { type BandDef, BANDS, C, INK, LAND, LAYOUT, lum, mix, PAPER, R, tonesOf, type WorldGroup, WORLD_GROUPS } from './world-bands';
-import { fromScreen, isle, type Isle, KX, KY, pt } from './world-kit';
+import { fromScreen, isle, type Isle, KX, KY, KZ, pt } from './world-kit';
 
 export { WORLD_GROUPS, type WorldGroup };
 
@@ -170,7 +170,7 @@ function bounds(svg: string): [number, number, number, number] {
   return [x0, y0, x1, y1];
 }
 
-type Built = { i: number; reach: number; id: string; group: WorldGroup; vars: string; ground: string; l: number; r: number; cx: number; cy: number; floor: string; over: string; node: [number, number]; under: string; box: [number, number, number, number] };
+type Built = { i: number; reach: number; id: string; group: WorldGroup; vars: string; ground: string; l: number; r: number; cx: number; cy: number; floor: string; over: string; node: [number, number]; home: [number, number]; under: string; box: [number, number, number, number] };
 const built: Built[] = BANDS.map((b, i) => {
   const { l, r, bw, cx, cy } = LAYOUT[i];
   const [ox, oy] = fromScreen(cx, cy), [sx, sy] = b.shift ?? [0, 0];
@@ -184,6 +184,8 @@ const built: Built[] = BANDS.map((b, i) => {
     i, reach: (b.w + b.d) * KX * 0.72, id: b.id, group: b.group, vars, ground: b.ground, l, r, cx, cy, under: b.under ?? b.ground,
     // the door of the place: in front of what stands on it, where the path passes
     node: pt(I.T(...(b.node ?? [-sx + b.w / 2 + 12, -sy + b.d / 2 + 12]), 0)),
+    // where it stands: the middle of its plot, on the ground
+    home: pt(I.T(0, 0, 0)),
     floor: b.floor?.(feats(I, b, cx, cy, bw), I) ?? '',
     over: `<g class="wa-on">${over}</g>`,
     box: [x0, y0, x1, y1],
@@ -244,7 +246,9 @@ export const WORLD_STOPS = WORLD_IDS.map((id) => {
   // the middle of what stands on the stop, up and down: where a zoomed map looks
   const top = Math.min(...b.map((c) => c.box[1])), bottom = Math.max(...b.map((c) => c.box[3]));
   // a little to the left of the stop (the band leans that way at the bottom), near enough to be in view on a phone when the stop is in the middle
-  return { id, group: b[0].group, x: Math.round(mid), y: Math.round((top + bottom) / 2), span: [Math.round(at(b[0].l, H)), Math.round(at(b[b.length - 1].r, 0))] as [number, number], label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
+  // for the view from the ground: the door (`node`), the middle of the plot (`home`) and how tall it stands, in land units
+  const home: [number, number] = [Math.round(b.reduce((a, c) => a + c.home[0], 0) / b.length), Math.round(b.reduce((a, c) => a + c.home[1], 0) / b.length)];
+  return { id, group: b[0].group, node: WORLD_NODES[id], home, tall: Math.round((home[1] - top) / KZ), x: Math.round(mid), y: Math.round((top + bottom) / 2), span: [Math.round(at(b[0].l, H)), Math.round(at(b[b.length - 1].r, 0))] as [number, number], label: [Math.round(mid - LABEL), y] as [number, number], on, ink: lum(on) > 0.18 ? INK : PAPER };
 });
 /**
  * The whole land in a few shapes, for the minimap: every band in the colour of its ground, the path and a dot
