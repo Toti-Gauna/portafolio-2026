@@ -19,6 +19,25 @@ export const depth = (x: number, y: number) => x + y;
 /** Plane coordinates of a point given where it should fall on the drawing (ground level). */
 export const fromScreen = (sx: number, sy: number): [number, number] => [(sx / KX + sy / KY) / 2, (sy / KY - sx / KX) / 2];
 
+/**
+ * What a turning part is made of, in the two axes of its plane around its centre (the second axis is up, for a
+ * part that stands): described as data, so the drawing and the 3D world build the same thing.
+ */
+export type Part =
+  | { t: 'circle'; r: number; cls: string }
+  | { t: 'line'; p: [number, number, number, number]; cls: string }
+  | { t: 'dot'; x: number; y: number; r: number; cls: string }
+  | { t: 'poly'; p: number[]; cls: string };
+export const circle = (r: number, cls: string): Part => ({ t: 'circle', r, cls });
+export const seg = (x1: number, y1: number, x2: number, y2: number, cls: string): Part => ({ t: 'line', p: [x1, y1, x2, y2], cls });
+export const pip = (x: number, y: number, r: number, cls: string): Part => ({ t: 'dot', x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10, r, cls });
+export const shape = (p: number[], cls: string): Part => ({ t: 'poly', p, cls });
+const partSvg = (p: Part) =>
+  p.t === 'circle' ? `<circle class="${p.cls}" r="${p.r}"/>`
+    : p.t === 'line' ? `<path class="${p.cls}" d="M${p.p[0]} ${p.p[1]}L${p.p[2]} ${p.p[3]}"/>`
+      : p.t === 'dot' ? `<circle class="${p.cls}" cx="${p.x}" cy="${p.y}" r="${p.r}"/>`
+        : `<path class="${p.cls}" d="M${p.p.map((v, i) => `${i && i % 2 === 0 ? 'L' : i ? ' ' : ''}${v}`).join('')}Z"/>`;
+
 export function isle(ox: number, oy: number) {
   const T = (x: number, y: number, z: number): V3 => [ox + x, oy + y, z];
   const path = (pts: [number, number, number][], closed = false) => k.pathOf(pts.map((p) => pt(T(...p))), closed);
@@ -39,13 +58,33 @@ export function isle(ox: number, oy: number) {
   /**
    * A part that turns in a plane of the world: about the vertical ('z': a beam, a shadow), or standing, facing the
    * viewer's left ('y') or right ('x') — a wheel, a reel. `local` is drawn flat, in that plane's own two axes
-   * around (0, 0), where a circle is a circle; the outer group lays the plane down in the projection and the
+   * around (0, 0), where a circle is a circle (its `parts`); the outer group lays the plane down in the projection and the
    * inner one turns. So it is a true rotation in space, done with one `rotate`.
    */
-  const turn = (axis: 'x' | 'y' | 'z', x: number, y: number, z: number, cls: string, local: string) => {
+  const turn = (axis: 'x' | 'y' | 'z', x: number, y: number, z: number, cls: string, parts: Part[]) => {
     const [cx, cy] = pt(T(x, y, z));
     const m = axis === 'z' ? [KX, KY, -KX, KY] : axis === 'y' ? [KX, KY, 0, -KZ] : [-KX, KY, 0, -KZ];
-    return `<g transform="matrix(${m.join(' ')} ${n1(cx)} ${n1(cy)})"><g class="wl ${cls}">${local}</g></g>`;
+    return `<g transform="matrix(${m.join(' ')} ${n1(cx)} ${n1(cy)})"><g class="wl ${cls}">${parts.map(partSvg).join('')}</g></g>`;
+  };
+  /** Many separate strokes in the plane, as one path: the lines of a floor. */
+  const lines = (segs: [number, number, number][][], cls = 'wa-l') => `<path class="${cls}" d="${segs.map((s) => path(s)).join('')}"/>`;
+  /** Rays around a point, facing the viewer: a sun, a spark, the blades of a windmill. */
+  const burst = (x: number, y: number, z: number, r: number, n = 8, cls = 'wa-acc-l') => {
+    const [cx, cy] = pt(T(x, y, z));
+    let d = '';
+    for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2; d += `M${(cx + Math.cos(a) * r * 0.45).toFixed(1)} ${(cy + Math.sin(a) * r * 0.45).toFixed(1)}L${(cx + Math.cos(a) * r).toFixed(1)} ${(cy + Math.sin(a) * r).toFixed(1)}`; }
+    return `<path class="${cls}" d="${d}"/>`;
+  };
+  /** A five-pointed star, facing the viewer. */
+  const star = (x: number, y: number, z: number, r: number, cls = 'wa-acc') => {
+    const [cx, cy] = pt(T(x, y, z));
+    const p = Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + (i / 10) * Math.PI * 2, q = i % 2 ? r * 0.42 : r; return `${(cx + Math.cos(a) * q).toFixed(1)} ${(cy + Math.sin(a) * q).toFixed(1)}`; });
+    return `<path class="${cls}" d="M${p.join('L')}Z"/>`;
+  };
+  /** The marks of a dial lying flat: twenty-four ticks, every sixth one longer. */
+  const ticks = (cx: number, cy: number, r: number, z: number) => {
+    const t = k.radialTicks(ox + cx, oy + cy, r, 24, z, 6, [4, 8], P);
+    return `<path class="wa-l wa-l--ink" d="${t.minor}"/><path class="wa-l wa-l--ink wa-l--thick" d="${t.major}"/>`;
   };
   /** A flat ring on the ground or on a roof. */
   const ring = (cx: number, cy: number, r: number, z: number, cls = 'wa-l') => `<path class="${cls}" d="${k.ring(ox + cx, oy + cy, r, z, P, 36)}"/>`;
@@ -118,7 +157,7 @@ export function isle(ox: number, oy: number) {
     line([[cx, cy, z], [cx, cy, z + h]], 'wa-pole') + live('wl-wave', cx, cy, z + h - 3, face([[cx, cy, z + h], [cx + 8, cy, z + h - 3], [cx, cy, z + h - 6]], 'wa-acc'));
   /** A stake with its ribbon: a lot that is marked, not built. */
   const stake = (cx: number, cy: number, z: number) => line([[cx, cy, z], [cx, cy, z + 7]], 'wa-pole') + dot(cx, cy, z + 7, 1.5, 'wa-acc');
-  return { T, path, face, line, box, cyl, dot, live, turn, ring, wheel, gable, gableY, pyr, cone, dome, windows, windowsR, wire, scaffold, crane, tree, flag, stake, plan };
+  return { T, path, face, line, lines, box, cyl, dot, live, turn, burst, star, ticks, ring, wheel, gable, gableY, pyr, cone, dome, windows, windowsR, wire, scaffold, crane, tree, flag, stake, plan };
 }
 export type Isle = ReturnType<typeof isle>;
 export { S as solid, L as lineSvg };
