@@ -112,8 +112,11 @@ test('the two arrows drive the car to each stop, and its card opens the same pos
   // on the way the card of the place is put away, and where you are going is announced at once
   await expect(page.locator('.ws-now b')).toHaveText('TACH Argentina');
   expect((await state(page)).pilot).toBe(true);
+  await expect(page.locator('.dv-trip')).toHaveText(/En camino a\s*TACH Argentina/);
+  await expect(page.locator('.dv-card')).toHaveCount(0);
   await expect.poll(async () => (await state(page)).pilot, { timeout: 60_000 }).toBe(false);
   await still(page);
+  await expect(page.locator('.dv-trip')).toHaveCount(0);
   const s = await state(page);
   expect(s.at).toBe(1);
   expect(s.near).toBe(1);

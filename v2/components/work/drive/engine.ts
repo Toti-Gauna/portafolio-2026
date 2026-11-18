@@ -17,7 +17,7 @@ import { along, CAR, type Car, car as newCar, drive, type Input, pathOf, pilot, 
  */
 export type DriveStop = { node: [number, number]; home: [number, number]; tall: number; planned: boolean };
 export type DriveWalker = { x: number; y: number; dx: number; dy: number; dur: number; c: string; ink: string };
-export type DriveState = { x: number; y: number; a: number; v: number; at: number; near: number | null; cam: 'in' | 'out'; pilot: boolean; frames: number; night: number; held: number; tris: number; moving: number; scale: number; kicks: number; flying: number; spots: ([number, number] | null)[] };
+export type DriveState = { x: number; y: number; a: number; v: number; at: number; near: number | null; cam: 'in' | 'out'; pilot: boolean; frames: number; night: number; held: number; tris: number; moving: number; scale: number; kicks: number; ms: number; flying: number; spots: ([number, number] | null)[] };
 export type DriveOpts = {
   canvas: HTMLCanvasElement; stops: DriveStop[]; walkers: DriveWalker[]; crates: { c: string }[]; bodies: Body[];
   width: number; height: number; start: number; night: boolean; life: boolean; still: boolean; coarse: boolean;
@@ -25,8 +25,11 @@ export type DriveOpts = {
   onAt(i: number): void;
   /** The stop the car is at the door of (or none): its card is offered. */
   onNear(i: number | null): void;
-  /** Where the car is on the drawing (fractions of its width and height) and how fast (0…1), each time it moves. */
-  onFrame(f: { u: number; v: number; speed: number }): void;
+  /**
+   * Each time the car moves: where it is on the drawing (fractions of its width and height), how fast (0…1) and,
+   * on autopilot, the stop it is going to and how much of the trip is done (0…1).
+   */
+  onFrame(f: { u: number; v: number; speed: number; to: number | null; trip: number }): void;
   /** Where the name of a stop goes on screen (px from the corner of the canvas), or that it is out of view. */
   place(i: number, x: number, y: number, show: boolean): void;
   sound(kind: string, power?: number): void;
@@ -81,12 +84,14 @@ export function createDrive(o: DriveOpts): DriveHandle {
   const dpr = Math.min(window.devicePixelRatio || 1, o.coarse ? 1.25 : 1.5);
   renderer.setPixelRatio(dpr);
   // if frames come slow, the picture is drawn with fewer pixels (down to half) rather than fewer frames
-  let scale = 1, slow = 0, counted = 0;
+  let scale = 1, slow = 0, counted = 0, crawl = 0;
   const govern = (dt: number) => {
     counted += 1; if (dt > 0.034) slow += 1;
-    if (counted < 24) return;
-    if (slow > 16 && scale > 0.5) { scale = Math.max(0.5, scale * 0.75); renderer.setPixelRatio(dpr * scale); renderer.setSize(o.canvas.clientWidth || 1, o.canvas.clientHeight || 1, false); }
-    counted = 0; slow = 0;
+    // very slow frames do not wait for the count: four in a row are enough
+    crawl = dt >= 0.05 ? crawl + 1 : 0;
+    if (counted < 24 && crawl < 4) return;
+    if ((slow > 16 || crawl >= 4) && scale > 0.5) { scale = Math.max(0.5, scale * 0.75); renderer.setPixelRatio(dpr * scale); renderer.setSize(o.canvas.clientWidth || 1, o.canvas.clientHeight || 1, false); }
+    counted = 0; slow = 0; crawl = 0;
   };
   renderer.toneMapping = THREE.NoToneMapping;
   const scene = new THREE.Scene();
@@ -130,9 +135,9 @@ export function createDrive(o: DriveOpts): DriveHandle {
   // the sun (the moon by night) sits ahead of the way the path goes, so the trip drives towards it
   const sunDir = new THREE.Vector3(0.74, 0.42, -0.52).normalize();
   const sunMat = new THREE.MeshBasicMaterial({ color: DAY.sun, fog: false, depthWrite: false, transparent: true, toneMapped: false });
-  const haloMat = new THREE.MeshBasicMaterial({ color: DAY.sun, fog: false, depthWrite: false, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, toneMapped: false });
+  const haloMat = new THREE.MeshBasicMaterial({ color: DAY.sun, fog: false, depthWrite: false, transparent: true, opacity: 0.13, toneMapped: false });
   // far, but nearer than the end of the view: whatever stands in the land hides them, as it should
-  const sun = new THREE.Group(); sun.add(new THREE.Mesh(new THREE.CircleGeometry(430, 40), haloMat), new THREE.Mesh(new THREE.CircleGeometry(190, 40), sunMat));
+  const sun = new THREE.Group(); sun.add(new THREE.Mesh(new THREE.CircleGeometry(360, 40), haloMat), new THREE.Mesh(new THREE.CircleGeometry(190, 40), sunMat));
   sun.children.forEach((c, i) => { c.renderOrder = i - 2; c.frustumCulled = false; });
   const backdrop = new THREE.Group(); backdrop.add(sky, stars, sun); scene.add(backdrop);
   sun.position.copy(sunDir).multiplyScalar(4600); sun.lookAt(0, 0, 0);
@@ -159,9 +164,10 @@ export function createDrive(o: DriveOpts): DriveHandle {
   lamps.position.set(11, 5, 0); lamps.target.position.set(60, 0, 0);
   model.g.add(lamps, lamps.target);
   const inp: Input = { gas: 0, turn: 0 };
-  let trip_: Pilot | null = null, tripTo = -1, facing: number | null = faceOf(start);
+  let trip_: Pilot | null = null, tripTo = -1, tripLen = 1, facing: number | null = faceOf(start);
   let cam: 'in' | 'out' = 'in', camK = 0, lookYaw = 0, looking = false, tilt = 0;
   const camPos = new THREE.Vector3(), camAt = new THREE.Vector3();
+  let baseFov = 66;
 
   /* ── who walks ── */
   const coat = new THREE.CylinderGeometry(1.5, 2.4, 8.4, 8); coat.translate(0, 6.3, 0);
@@ -229,7 +235,7 @@ export function createDrive(o: DriveOpts): DriveHandle {
     (sky.material as THREE.ShaderMaterial).uniforms.low.value.copy(low);
     fog.color.copy(low);
     (stars.material as THREE.PointsMaterial).opacity = k * 0.9;
-    sunMat.color.copy(mixc(DAY.sun, NIGHT.sun, k)); haloMat.color.copy(sunMat.color); haloMat.opacity = 0.22 - k * 0.1;
+    sunMat.color.copy(mixc(DAY.sun, NIGHT.sun, k)); haloMat.color.copy(mixc('#fff3d4', NIGHT.sun, k)); haloMat.opacity = 0.13;
     ambient.color.copy(mixc(DAY.amb, NIGHT.amb, k)); ambient.intensity = DAY.ambK + (NIGHT.ambK - DAY.ambK) * k;
     sunLight.color.copy(mixc('#fff1dc', '#aab4ff', k)); sunLight.intensity = DAY.sunK + (NIGHT.sunK - DAY.sunK) * k;
     cloudMat.color.copy(mixc(DAY.cloud, NIGHT.cloud, k));
@@ -241,7 +247,7 @@ export function createDrive(o: DriveOpts): DriveHandle {
   paintHour();
 
   /* ── the loop ── */
-  let raf = 0, last = 0, frames = 0, active = true, life = o.life, disposed = false;
+  let raf = 0, last = 0, frames = 0, work = 0, active = true, life = o.life, disposed = false;
   let at = -1, near: number | null = -1 as number | null, motorSent = -1, motorAt = 0, moving = 0, kicks = 0;
   const report = () => {
     let best = 0, gap = Infinity;
@@ -250,7 +256,7 @@ export function createDrive(o: DriveOpts): DriveHandle {
     if (here !== at) { at = here; o.onAt(at); }
     const n = !trip_ && gap < 110 ? best : null;
     if (n !== near) { near = n; o.onNear(n); }
-    o.onFrame({ u: ((c.x - c.y) * KX) / o.width, v: ((c.x + c.y) * KY) / o.height, speed: Math.min(1, Math.abs(c.v) / CAR.top) });
+    o.onFrame({ u: ((c.x - c.y) * KX) / o.width, v: ((c.x + c.y) * KY) / o.height, speed: Math.min(1, Math.abs(c.v) / CAR.top), to: trip_ ? tripTo : null, trip: trip_ ? 1 - Math.abs(trip_.to - trip_.s) / tripLen : 0 });
   };
   const v3 = new THREE.Vector3();
   const names = () => {
@@ -274,6 +280,12 @@ export function createDrive(o: DriveOpts): DriveHandle {
     const outPos = new THREE.Vector3(c.x - lx * 50, 22, c.y - ly * 50), outAt = new THREE.Vector3(c.x + fx * 22, 7 + Math.tan(tilt) * 30, c.y + fy * 22);
     camPos.lerpVectors(inPos, outPos, camK); camAt.lerpVectors(inAt, outAt, camK);
     camera.position.copy(camPos); camera.lookAt(camAt);
+    // the picture leans into the bends and opens a little with the speed (never with reduced motion)
+    if (!o.still) {
+      const pace = Math.min(1, Math.abs(c.v) / CAR.top), fov = baseFov + 7 * pace * pace;
+      camera.rotateZ(-c.steer * pace * 0.09);
+      if (Math.abs(fov - camera.fov) > 0.01) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    }
     backdrop.position.copy(camera.position);
     renderer.render(scene, camera);
     frames += 1;
@@ -284,7 +296,7 @@ export function createDrive(o: DriveOpts): DriveHandle {
     /* the car: on autopilot, at the wheel, or settling to face the place it arrived at */
     const before = [c.x, c.y, c.a];
     if (trip_) {
-      if (pilot(c, trip_, way, dt)) { trip_ = null; facing = faceOf(tripTo); o.sound('stop'); }
+      if (pilot(c, trip_, way, dt)) { trip_ = null; facing = faceOf(tripTo); o.sound('stop'); report(); }
       busy = true;
     } else {
       if (inp.gas || inp.turn) facing = null;
@@ -351,16 +363,19 @@ export function createDrive(o: DriveOpts): DriveHandle {
     // a frame can come stamped before the moment it was asked for: time never runs backwards
     const dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
     last = Math.max(last, now);
+    const t0 = performance.now();
     const busy = update(dt);
     if (dt > 0) govern(dt);
     frame();
+    work += performance.now() - t0;
     if (busy) raf = requestAnimationFrame(tick);
   };
   const wake = () => { if (!raf && active && !disposed) { last = performance.now(); raf = requestAnimationFrame(tick); } };
   const resize = () => {
     const w = o.canvas.clientWidth || 1, h = o.canvas.clientHeight || 1;
     renderer.setSize(w, h, false);
-    camera.aspect = w / h; camera.fov = w < h ? 84 : 66; camera.updateProjectionMatrix();
+    baseFov = w < h ? 84 : 66;
+    camera.aspect = w / h; camera.fov = baseFov; camera.updateProjectionMatrix();
     wake();
   };
   clouds.forEach((m) => { const u = m.userData as { along: number; across: number }; m.position.x = c.x + (u.along + u.across) * Math.SQRT1_2; m.position.z = c.y + (-u.along + u.across) * Math.SQRT1_2; });
@@ -370,12 +385,12 @@ export function createDrive(o: DriveOpts): DriveHandle {
   { const w = o.canvas.clientWidth || 1, h = o.canvas.clientHeight || 1; renderer.setSize(w, h, false); c.a = facing ?? c.a; facing = null; frame(); }
 
   return {
-    input(i) { Object.assign(inp, i); if (inp.gas || inp.turn) { trip_ = null; } wake(); },
+    input(i) { Object.assign(inp, i); if ((inp.gas || inp.turn) && trip_) { trip_ = null; report(); } wake(); },
     goTo(i) {
       const n = Math.max(0, Math.min(o.stops.length - 1, i));
       tripTo = n; facing = null;
       if (o.still) { trip_ = null; c.x = parks[n][0]; c.y = parks[n][1]; c.a = faceOf(n); c.v = 0; o.sound('stop'); report(); moving += 1; }
-      else trip_ = trip(c, way, markOf(n));
+      else { trip_ = trip(c, way, markOf(n)); tripLen = Math.max(1, Math.abs(trip_.to - trip_.s)); }
       report();
       wake();
     },
@@ -420,7 +435,7 @@ export function createDrive(o: DriveOpts): DriveHandle {
     look(d) { looking = true; lookYaw = Math.max(-1.9, Math.min(1.9, lookYaw + d)); wake(); },
     lookEnd() { looking = false; wake(); },
     state: () => ({
-      x: c.x, y: c.y, a: c.a, v: c.v, at, near, cam, pilot: !!trip_, frames, night, held, tris: world.count.lit + world.count.glow, moving, scale, kicks,
+      x: c.x, y: c.y, a: c.a, v: c.v, at, near, cam, pilot: !!trip_, frames, night, held, tris: world.count.lit + world.count.glow, moving, scale, kicks, ms: work / Math.max(1, frames),
       flying: o.bodies.filter((b) => !b.rest && !b.held).length,
       // where each crate is on the canvas, if it is in view and within reach (for whoever tests the hand)
       spots: o.bodies.map((b) => {

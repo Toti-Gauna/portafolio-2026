@@ -422,9 +422,12 @@ export function WorldStrip({ svg, mini, width, height, stops, walkers, crates, l
     changing.current = false;
   };
   // back on the map: it is where the car was, and the crates are where they were left
+  const modeWas = useRef<'iso' | 'drive'>('iso');
   useEffect(() => {
-    const v = view.current;
-    if (mode !== 'iso' || !v || !v.clientWidth) return;
+    const v = view.current, was = modeWas.current;
+    modeWas.current = mode;
+    // only on the way back (the map as it loads starts at its beginning)
+    if (mode !== 'iso' || was === 'iso' || !v || !v.clientWidth) return;
     measure();
     const s = spot(atNow.current);
     v.scrollLeft = s.left; v.scrollTop = s.top;

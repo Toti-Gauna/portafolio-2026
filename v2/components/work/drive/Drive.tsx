@@ -6,7 +6,7 @@ import type { Body } from '../crates';
 import type { DriveHandle, DriveState, DriveWalker } from './engine';
 
 export type DriveStopInfo = { id: string; node: [number, number]; home: [number, number]; tall: number; planned: boolean; name: string; when: string; state: string; color: string };
-export type DriveLabels = { hint: string; move: string; horn: string; camera: string; space: string; gas: string; brake: string; left: string; right: string; more: string; here: string };
+export type DriveLabels = { hint: string; move: string; horn: string; camera: string; space: string; gas: string; brake: string; left: string; right: string; more: string; here: string; going: string };
 export type DriveApi = { goTo(i: number): void; horn(): void; cam(): 'in' | 'out' };
 
 const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -34,6 +34,10 @@ export const Drive = forwardRef<DriveApi, {
   const keys = useRef({ up: false, down: false, left: false, right: false });
   const press = useRef<{ id: number; x: number; crate: boolean } | null>(null);
   const [near, setNear] = useState<number | null>(null);
+  /* on autopilot: the stop the car is going to (its name is shown, with how much of the way is done) */
+  const [going, setGoing] = useState<number | null>(null);
+  const goingNow = useRef<number | null>(null);
+  const bar = useRef<HTMLElement>(null);
   const now = useRef({ night, life });
   now.current = { night, life };
   const cb = useRef({ onAt, onReady, onFail });
@@ -61,7 +65,12 @@ export const Drive = forwardRef<DriveApi, {
           night: now.current.night, life: now.current.life, still: still(), coarse: window.matchMedia('(pointer: coarse)').matches,
           onAt: (i) => cb.current.onAt(i),
           onNear: (i) => setNear(i),
-          onFrame: (f) => { const d = dot.current; if (d) { d.style.left = `${(f.u * 100).toFixed(2)}%`; d.style.top = `${(Math.max(0, Math.min(1, f.v)) * 100).toFixed(1)}%`; } },
+          onFrame: (f) => {
+            const d = dot.current;
+            if (d) { d.style.left = `${(f.u * 100).toFixed(2)}%`; d.style.top = `${(Math.max(0, Math.min(1, f.v)) * 100).toFixed(1)}%`; }
+            if (f.to !== goingNow.current) { goingNow.current = f.to; setGoing(f.to); }
+            if (bar.current) bar.current.style.transform = `scaleX(${f.trip.toFixed(3)})`;
+          },
           place: (i, x, y, show) => { const li = names.current[i]; if (!li) return; li.toggleAttribute('data-show', show); if (show) li.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`; },
           sound: sfx,
         });
@@ -137,11 +146,16 @@ export const Drive = forwardRef<DriveApi, {
       <ol className="dv-names" aria-hidden="true">
         {stops.map((s, i) => <li key={s.id} ref={(el) => { names.current[i] = el; }} style={{ '--c': s.color } as CSSProperties}><i />{s.name}</li>)}
       </ol>
-      {here && (
+      {here && going === null && (
         <div className="dv-card" style={{ '--c': here.color } as CSSProperties}>
           <p><span>{labels.here}</span><b>{here.name}</b><small>{here.when} · {here.state}</small></p>
           <button type="button" className="dv-more" data-cursor="" onClick={() => onOpen(here.id)}>{labels.more}<span className="ui-sr"> · {here.name}</span></button>
         </div>
+      )}
+      {going !== null && (
+        <p className="dv-trip" style={{ '--c': stops[going].color } as CSSProperties}>
+          <span>{labels.going}</span><b>{stops[going].name}</b><i ref={bar} aria-hidden="true" />
+        </p>
       )}
       <p className="dv-keys">
         <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>{labels.move}</span>
