@@ -48,6 +48,7 @@ export function useGate(exit?: () => Promise<void> | void, ms = 520) {
     if (leaving) return;
     setLeaving(true);
     window.dispatchEvent(new CustomEvent(GATE_EVENT, { detail: { action: 'enter' } }));
+    document.documentElement.dataset.entered = 'true'; // the opening of the home plays its entrance once
     const finish = () => {
       document.documentElement.dataset.gate = 'off';
       release.current(); // the page under the gate is live again before focus moves into it

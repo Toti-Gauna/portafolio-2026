@@ -87,9 +87,12 @@
 .sh-lang1 { font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.08em; color: var(--color-text-muted); }
 .sh-menu span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .sh-contact { display: none; }
+/* everything on the right is a pill, like the glass that holds it and the pages beside the monogram */
+.sh-tools .ui-sound, .sh-tools .ui-lang, .sh-tools .ui-lang a, .sh-tools .sh-menu, .sh-tools .sh-lang1, .sh-contact { border-radius: var(--radius-pill); }
+.sh-contact { padding: 0 var(--space-5); font-weight: 700; }
 @media (hover: hover) and (pointer: fine) {
   .sh-home:hover { background-color: rgba(255, 255, 255, 0.08); }
-  .sh-nav a:hover { color: var(--color-heading); }
+  .sh-nav a:hover { color: var(--color-heading); background-color: rgba(255, 255, 255, 0.07); }
   .sh-lang1:hover, .sh-menu:hover { border-color: var(--color-mist-300); }
   /* real glass where it is cheap: a mouse means a desktop GPU. Touch screens keep the solid fill (measured). */
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -119,10 +122,12 @@
     --sh-in: 12px;
     column-gap: var(--space-5);
     --sh-d: max(0px, calc((min(100cqw, var(--size-max) - 2 * var(--size-margin-desktop) + 12px) - var(--sh-pill)) / 2));
-    /* the pages sit in the middle whenever both sides leave room for it */
-    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    /* the monogram, then the pages (Ignacio, 18/11/2026), and the tools at the far end */
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
-  .sh-nav { display: block; }
+  .sh-nav { display: block; justify-self: start; transition: transform var(--motion-base) var(--motion-ease); }
+  /* the pages travel with the monogram when the bar becomes the pill */
+  .sh[data-stuck='true'] .sh-nav { transform: translateX(calc(var(--sh-d) + var(--sh-in))); }
   .sh-bar > .sh-tools { justify-self: end; }
   .sh-here, .sh-menu { display: none; }
   .sh-contact { display: inline-flex; }

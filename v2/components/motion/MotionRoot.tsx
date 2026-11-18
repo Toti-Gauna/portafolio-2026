@@ -6,6 +6,7 @@ import { cameraMove, samePath } from '@/v2/motion/camera';
 import { installCursor } from '@/v2/motion/cursor';
 import { reducedMotion } from '@/v2/motion/env';
 import { OPEN_SHORTCUTS, REPLAY_REVEAL } from '@/v2/motion/events';
+import { installHop } from '@/v2/motion/hop';
 import { installMagnetic } from '@/v2/motion/magnetic';
 import { installReveal } from '@/v2/motion/reveal';
 import { installScroll } from '@/v2/motion/scroll';
@@ -39,6 +40,7 @@ export function MotionRoot({ locale, base, labels }: { locale: 'es' | 'en'; base
     const scroll = installScroll();
     const magnetic = installMagnetic();
     const cursor = installCursor();
+    const unhop = installHop();
     engine.current = { reveal, scroll };
     setKeysOn(keysEnabled());
     const onReplay = (e: Event) => reveal.replay(e.target as Element);
@@ -50,6 +52,7 @@ export function MotionRoot({ locale, base, labels }: { locale: 'es' | 'en'; base
     window.addEventListener('popstate', onPop);
     return () => {
       reveal.destroy(); scroll.destroy(); magnetic.destroy(); cursor.destroy();
+      unhop();
       document.removeEventListener(REPLAY_REVEAL, onReplay);
       window.removeEventListener(OPEN_SHORTCUTS, onOpen);
       window.removeEventListener('popstate', onPop);

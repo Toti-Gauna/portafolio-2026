@@ -6,6 +6,7 @@ import './site.css';
 import './motion.css';
 import './sound.css';
 import './gate.css';
+import './home.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';

@@ -80,8 +80,8 @@ for (const [w, h] of [[360, 740], [390, 844], [1440, 900]] as const) {
         if (own && parseFloat(getComputedStyle(el).fontSize) < 12) small.push(el.className || el.tagName);
       }
       const tiny = [...document.querySelectorAll<HTMLElement>('a, button, label')]
-        // a glass card is one link stretched over the card: the card is the target
-        .filter((el) => el.offsetParent && !el.classList.contains('v2-skip') && !el.closest('.ui-card-title'))
+        // a glass card (and a featured case of the home) is one link stretched over the card: the card is the target
+        .filter((el) => el.offsetParent && !el.classList.contains('v2-skip') && !el.closest('.ui-card-title, .hc-card h3'))
         .map((el) => el.getBoundingClientRect())
         .filter((b) => b.height < 44);
       return { over: document.documentElement.scrollWidth - window.innerWidth, small, tiny: tiny.length };
