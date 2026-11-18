@@ -1,0 +1,131 @@
+{
+  "title": "DentalOS",
+  "kind": "Demo de preventa",
+  "line": "El circuito administrativo de una clínica odontológica ficticia, donde cada consulta tiene un próximo paso: portal para pacientes y panel para el equipo.",
+  "facts": [
+    {
+      "k": "Clínica",
+      "v": "Clínica Brisa, ficticia"
+    },
+    {
+      "k": "Módulos",
+      "v": "16 (M01–M16)"
+    },
+    {
+      "k": "Datos",
+      "v": "Sintéticos, con un reloj de muestra fijo"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Agendá.",
+      "Confirmá.",
+      "Reprogramá."
+    ],
+    "numbers": [
+      {
+        "n": "16",
+        "d": "módulos"
+      },
+      {
+        "n": "59",
+        "d": "comandos del dominio"
+      },
+      {
+        "n": "190",
+        "d": "tests unitarios en verde"
+      }
+    ],
+    "alt": "Recepción de Clínica Brisa: agenda del día por profesional; se confirma un turno y se abre la ficha del paciente.",
+    "label": "Demo · datos sintéticos"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Un turno reprogramado por WhatsApp pierde su recordatorio, un control de ortodoncia queda afuera de la agenda y un presupuesto, en espera."
+    },
+    {
+      "k": "La solución",
+      "v": "Turnos que cambian y se conservan, recordatorios que se reprograman, lista de espera y campañas de seguimiento con reglas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Demo local de preventa con datos sintéticos, con los lotes 1 a 6 de 10 cerrados."
+    }
+  ],
+  "how": [
+    {
+      "t": "Pedir el cambio",
+      "d": "«Quiero cambiar mi turno»: el chat reconoce la intención con reglas locales."
+    },
+    {
+      "t": "Validar el cupo",
+      "d": "Profesional, sillón, sede y duración; si está ocupado, el turno original sigue en pie."
+    },
+    {
+      "t": "Confirmar",
+      "d": "El paciente ve antes y después: A-0012 pasa a la versión 2, mismo ID."
+    },
+    {
+      "t": "Reprogramar avisos",
+      "d": "El recordatorio de la versión 1 se anula y se programa el de la 2."
+    },
+    {
+      "t": "Verlo en agenda",
+      "d": "Recepción ve A-0012 v2 en el panel, con su outbox y su auditoría."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Un store de comandos propio",
+      "why": "Comandos atómicos e idempotentes sobre una copia del estado: un doble clic reserva una vez y un error deja todo intacto."
+    },
+    {
+      "t": "Determinismo",
+      "why": "Reloj inyectable y juegos con semilla; ESLint prohíbe Date.now y Math.random. La demo cuenta la misma historia cada vez."
+    },
+    {
+      "t": "Asistentes hechos de reglas",
+      "why": "El chat y el asistente de dirección leen las cifras del estado, así cada respuesta coincide con lo que muestra el panel."
+    }
+  ],
+  "gallery": {
+    "odontograma": {
+      "alt": "Odontograma ilustrado con las arcadas en U; se seleccionan las piezas 46 y 36 y aparecen sus registros vigentes y el historial.",
+      "caption": "Odontograma: vista oclusal y registros de cada pieza."
+    },
+    "ortodoncia": {
+      "alt": "Módulo de ortodoncia con la ilustración de brackets estéticos, el control indicado con su turno reservado y el formulario de indicaciones.",
+      "caption": "Continuidad de ortodoncia: aparatología, controles indicados y línea de tiempo."
+    },
+    "campanas": {
+      "alt": "Módulo de campañas con contadores, cuatro segmentos administrativos y el editor por pasos de una campaña en borrador.",
+      "caption": "Campañas: segmentos calculados y una campaña en borrador."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite 7",
+    "useSyncExternalStore",
+    "Router por hash",
+    "Vitest",
+    "Playwright",
+    "ESLint"
+  ],
+  "more": [
+    {
+      "h": "Privacidad por diseño",
+      "p": "La CSP del build cierra las conexiones y ESLint prohíbe fetch y dangerouslySetInnerHTML. Los pacientes llevan IDs de muestra, y fuentes e íconos son locales. Las plantillas de mensajes son discretas."
+    },
+    {
+      "h": "Persistencia defensiva",
+      "p": "El estado se guarda en localStorage dentro de un envelope versionado y validado. Si está dañado, se avisa y se ofrece restaurar; si el navegador lo bloquea, la demo sigue en memoria."
+    },
+    {
+      "h": "Guiado por especificación",
+      "p": "Cada requisito tiene ID, fuente, escenario y evidencia, y cuenta como hecho recién con evidencia. Un PR por lote, y la CI corre lint, tipos, unitarios, build y e2e antes de publicar."
+    }
+  ],
+  "next": "Próximo paso: los cuatro lotes restantes: QR del turno, guía por roles y QA completo."
+}

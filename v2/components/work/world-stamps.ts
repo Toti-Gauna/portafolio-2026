@@ -1,5 +1,5 @@
 import { type StampId, stampFrame, stampIsDark, stampSvg } from '../kit/stamps';
-import { WORLD_IDS, WORLD_STANDS } from './world-art';
+import { WORLD_IDS, WORLD_STAND_ART, WORLD_STANDS } from './world-art';
 
 /**
  * The postcard of every stop of the world (direction 6, «Postal»: Ignacio — for Work, when a project opens).
@@ -14,12 +14,16 @@ const FIELD = { x: 30, y: 74, w: 180, h: 172 };
 
 export type WorldPostal = { key: string; kit?: StampId; svg: string; dark: boolean };
 
-function printed(id: string): WorldPostal {
+/** `whole`: the drawing itself instead of a reference to the land (for a page without the land). */
+function printed(id: string, whole = false): WorldPostal {
   const s = WORLD_STANDS[id], [x, y, w, h] = s.box, k = Math.min(FIELD.w / w, FIELD.h / h);
   const tx = FIELD.x + (FIELD.w - w * k) / 2 - x * k, ty = FIELD.y + (FIELD.h - h * k) / 2 - y * k;
-  return { key: `w-${id}`, dark: s.dark, svg: stampFrame(`w-${id}`, s.ground, s.dark ? '#fbf6ea' : '#0a0a0c', s.dark, `<g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${k.toFixed(4)})">${s.svg}</g>`) };
+  return { key: `w-${id}`, dark: s.dark, svg: stampFrame(`w-${id}`, s.ground, s.dark ? '#fbf6ea' : '#0a0a0c', s.dark, `<g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${k.toFixed(4)})">${whole ? WORLD_STAND_ART[id] : s.svg}</g>`) };
 }
 
 export const WORLD_POSTALS: Record<string, WorldPostal[]> = Object.fromEntries(
   WORLD_IDS.map((id) => [id, KIT[id] ? KIT[id].map((kit) => ({ key: kit, kit, svg: stampSvg(kit), dark: stampIsDark(kit) })) : [printed(id)]]),
 );
+
+/** One postcard on a page without the land (a case, lote 5.1): the kit's stamp, or the place printed whole. */
+export const postalAlone = (id: string, kit?: StampId): WorldPostal => (kit ? { key: kit, kit, svg: stampSvg(kit), dark: stampIsDark(kit) } : { ...printed(id, true), key: `c-${id}` });

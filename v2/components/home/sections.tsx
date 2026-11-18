@@ -69,7 +69,7 @@ export function HomeCases({ locale }: { locale: V2Locale }) {
                 <figcaption>{it.media}</figcaption>
               </figure>
               <p className="hc-status" data-status={k.status}><i aria-hidden="true" />{m.ui.status[k.status]}</p>
-              <h3><Link href={sitePath(locale, 'work/')}>{it.name}</Link></h3>
+              <h3><Link href={sitePath(locale, `work/${k.id}/`)}>{it.name}</Link></h3>
               <p className="hc-role">{it.role}</p>
               <p className="hc-text">{it.text}</p>
             </li>

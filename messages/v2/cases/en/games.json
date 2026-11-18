@@ -1,0 +1,127 @@
+{
+  "title": "games-market",
+  "kind": "Own lab",
+  "line": "A test bench and catalogue of web games for live events: the projector is the screen and people's phones are the controllers.",
+  "facts": [
+    {
+      "k": "Games",
+      "v": "18 playable out of 24 planned"
+    },
+    {
+      "k": "Engines",
+      "v": "Canvas 2D · PixiJS · React Three Fiber"
+    },
+    {
+      "k": "Network",
+      "v": "Star-shaped WebRTC, the projector as host"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Scan.",
+      "Connect.",
+      "Play."
+    ],
+    "numbers": [
+      {
+        "n": "18",
+        "d": "playable games"
+      },
+      {
+        "n": "814",
+        "d": "pure-logic tests"
+      },
+      {
+        "n": "12",
+        "d": "batches by technical cost"
+      }
+    ],
+    "alt": "Ninja in full screen: coloured shapes fly up from below and the slice splits them while the score goes up.",
+    "label": "Lab · Canvas 2D"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Seeing how each game looks and plays took a real session with a room code, and there were 24 planned."
+    },
+    {
+      "k": "The solution",
+      "v": "A bench that opens any game instantly, with seed, simulated latency and loss, «Force end» and FPS in view."
+    },
+    {
+      "k": "Where it stands",
+      "v": "18 playable: 6 stable and 12 in beta, including the three 3D ones. The bench serves to build them and to show them."
+    }
+  ],
+  "how": [
+    {
+      "t": "Pick the match",
+      "d": "The container sets room, seed, duration, seat, host and network."
+    },
+    {
+      "t": "Connect",
+      "d": "Each phone joins through a QR and opens a direct channel to the projector."
+    },
+    {
+      "t": "Play",
+      "d": "Seeded PRNG and Rapier physics: the same seed gives the same match."
+    },
+    {
+      "t": "Sync",
+      "d": "Snapshots delta-encoded against the last confirmed tick, with interpolation and prediction."
+    },
+    {
+      "t": "Finish",
+      "d": "onFinish fires exactly once; if aborted, it delivers the partial result."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Deterministic physics",
+      "why": "Seeded PRNG and Rapier compiled to WASM: the same seed gives the same match, and that is what makes the netcode possible."
+    },
+    {
+      "t": "The projector as host",
+      "why": "WebRTC with PeerJS and the projector as the single authority; in development, BroadcastChannel links two tabs and the games stay unaware."
+    },
+    {
+      "t": "Each game in its own chunk",
+      "why": "Rapier weighs 2.1 MB in 2D and 2.2 MB in 3D: only whoever opens a game that uses it downloads it."
+    }
+  ],
+  "gallery": {
+    "arena-3d": {
+      "alt": "3D aerial view of a green valley with hills and houses under a sunset sky, the closing ring and the player markers.",
+      "caption": "3D arena: aerial view of the valley with ten bot players."
+    },
+    "catalogo": {
+      "alt": "Dark \"Batería de experiencias\" catalogue with game cards, each with topology, engine and status, plus the side list by category.",
+      "caption": "The bench catalogue, with category and topology filters."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Canvas 2D",
+    "PixiJS 8",
+    "React Three Fiber",
+    "Rapier (WASM)",
+    "WebRTC (PeerJS)",
+    "Vitest"
+  ],
+  "more": [
+    {
+      "h": "Ordered by cost",
+      "p": "The 24 games were ordered into 12 batches by a score from 0 to 18 across six axes. Work can stop at any batch and the product still serves; the 3D ones came last."
+    },
+    {
+      "h": "The first networked game",
+      "p": "Football was the first to use the whole snapshot layer, and it found five problems. With 20% simulated loss: 121 packets lost and zero decoding failures."
+    },
+    {
+      "h": "Quality",
+      "p": "814 pure-logic unit tests in 39 files: games, engines, network, contract and interface. CI runs lint, tests and build before publishing."
+    }
+  ],
+  "next": "Next step: trying the networked games on real phones, at an event."
+}

@@ -1,0 +1,131 @@
+{
+  "title": "DentalOS",
+  "kind": "Pre-sales demo",
+  "line": "The administrative workflow of a fictional dental clinic, where every visit has a next step: a patient portal and a panel for the team.",
+  "facts": [
+    {
+      "k": "Clinic",
+      "v": "Clínica Brisa, fictional"
+    },
+    {
+      "k": "Modules",
+      "v": "16 (M01–M16)"
+    },
+    {
+      "k": "Data",
+      "v": "Synthetic, with a fixed sample clock"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Book.",
+      "Confirm.",
+      "Reschedule."
+    ],
+    "numbers": [
+      {
+        "n": "16",
+        "d": "modules"
+      },
+      {
+        "n": "59",
+        "d": "domain commands"
+      },
+      {
+        "n": "190",
+        "d": "unit tests passing"
+      }
+    ],
+    "alt": "Clínica Brisa front desk: today's schedule by clinician; an appointment is confirmed and the patient record opens.",
+    "label": "Demo · synthetic data"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "An appointment rescheduled over WhatsApp loses its reminder, an orthodontic check-up stays off the schedule and an estimate waits for an answer."
+    },
+    {
+      "k": "The solution",
+      "v": "Appointments that change and stay safe, reminders that are rescheduled, a waitlist and rule-bound follow-up campaigns."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A local pre-sales demo on synthetic data, with batches 1 to 6 of 10 closed."
+    }
+  ],
+  "how": [
+    {
+      "t": "Ask to change",
+      "d": "\"I want to change my appointment\": the chat spots the intent with local rules."
+    },
+    {
+      "t": "Check the slot",
+      "d": "Clinician, chair, site and duration; if it is taken, the original appointment stands."
+    },
+    {
+      "t": "Confirm",
+      "d": "The patient sees before and after: A-0012 becomes version 2, same ID."
+    },
+    {
+      "t": "Reschedule reminders",
+      "d": "The version 1 reminder is voided and the version 2 one is scheduled."
+    },
+    {
+      "t": "See it booked",
+      "d": "The front desk sees A-0012 v2 in the panel, with its outbox and audit."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "A home-made command store",
+      "why": "Atomic, idempotent commands on a copy of the state: a double click books once and an error leaves everything intact."
+    },
+    {
+      "t": "Determinism",
+      "why": "An injectable clock and seeded games; ESLint forbids Date.now and Math.random. The demo tells the same story every time."
+    },
+    {
+      "t": "Assistants built from rules",
+      "why": "The chat and the management assistant read their figures from the state, so every answer matches what the panel shows."
+    }
+  ],
+  "gallery": {
+    "odontograma": {
+      "alt": "Illustrated odontogram with U-shaped arches; teeth 46 and 36 are selected and their current records and history appear.",
+      "caption": "Odontogram: occlusal view and each tooth's records."
+    },
+    "ortodoncia": {
+      "alt": "Orthodontics module with the aesthetic-brackets illustration, the indicated check-up with its booked appointment and the indication form.",
+      "caption": "Orthodontic continuity: appliance, indicated check-ups and timeline."
+    },
+    "campanas": {
+      "alt": "Campaigns module with counters, four administrative segments and the step-by-step editor of a draft campaign.",
+      "caption": "Campaigns: computed segments and a draft campaign."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite 7",
+    "useSyncExternalStore",
+    "Hash router",
+    "Vitest",
+    "Playwright",
+    "ESLint"
+  ],
+  "more": [
+    {
+      "h": "Privacy by design",
+      "p": "The build's CSP closes every connection and ESLint forbids fetch and dangerouslySetInnerHTML. Patients carry sample IDs, and fonts and icons are local. Message templates stay discreet."
+    },
+    {
+      "h": "Defensive persistence",
+      "p": "State is saved to localStorage inside a versioned, validated envelope. If it is damaged, the demo says so and offers a restore; if the browser blocks it, the demo runs in memory."
+    },
+    {
+      "h": "Specification-driven",
+      "p": "Every requirement has an ID, source, scenario and evidence, and counts as done once it has evidence. One PR per batch, and CI runs lint, types, unit tests, build and e2e before publishing."
+    }
+  ],
+  "next": "Next step: the four remaining batches: appointment QR, role guide and full QA."
+}

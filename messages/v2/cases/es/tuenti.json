@@ -1,0 +1,86 @@
+{
+  "title": "Tuenti",
+  "kind": "Tsoft para Tuenti y Telefónica",
+  "line": "Gamificación, recargas y pagos en productos de Tuenti y Telefónica, del frontend al backend.",
+  "facts": [
+    {
+      "k": "Empresa",
+      "v": "Tsoft"
+    },
+    {
+      "k": "Período",
+      "v": "2024 – hoy"
+    },
+    {
+      "k": "Foco",
+      "v": "Gamificación, recargas y pagos"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Girá.",
+      "Invitá.",
+      "Medí."
+    ],
+    "numbers": [],
+    "alt": "Ilustración propia de la ruleta de premios de Tuenti.",
+    "label": "Ilustración propia"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Darle a la gente un motivo para volver."
+    },
+    {
+      "k": "La solución",
+      "v": "Ruleta, referidos y un dashboard para medirlos; después, recarga automática y pagos."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Trabajo profesional desde 2024; hoy también backend y despliegues."
+    }
+  ],
+  "how": [
+    {
+      "t": "Jugar",
+      "d": "Ruleta y referidos: mecánicas de recompensa."
+    },
+    {
+      "t": "Medir",
+      "d": "Referidos, recurrencia y gamificación en un dashboard."
+    },
+    {
+      "t": "Pagar",
+      "d": "Recarga automática y módulo de pagos."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "La gamificación es producto",
+      "why": "Cada mecánica da un motivo para volver."
+    },
+    {
+      "t": "Medir para elegir",
+      "why": "El dashboard muestra qué mecánica funciona."
+    },
+    {
+      "t": "Primero el negocio",
+      "why": "Lo técnico avanza mejor cuando se entiende el requisito de negocio."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "React",
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "SQL",
+    "CI/CD"
+  ],
+  "more": [
+    {
+      "h": "Cómo crecí",
+      "p": "De Jr Frontend Developer en 2024 a Sr AI Fullstack Developer, con un Reconocimiento Especial de Tsoft."
+    }
+  ]
+}

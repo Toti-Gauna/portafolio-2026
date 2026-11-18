@@ -1,0 +1,99 @@
+{
+  "title": "CompliA",
+  "kind": "Tsoft para Telefónica",
+  "line": "Un asistente con IA dentro del portal de compliance de Telefónica: responde, analiza declaraciones y ayuda a dictaminar.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Diseño y desarrollo completo"
+    },
+    {
+      "k": "Período",
+      "v": "2026 – hoy"
+    },
+    {
+      "k": "Tipo",
+      "v": "Asistente con RAG"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Preguntá.",
+      "Analizá.",
+      "Dictaminá."
+    ],
+    "numbers": [
+      {
+        "n": "4",
+        "d": "piezas que diseñé"
+      }
+    ],
+    "alt": "Recorte de la demo de CompliA con datos de ejemplo.",
+    "label": "Demo · datos de ejemplo"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Mucha información de compliance y procesos que piden criterio: declaraciones, formularios, dictámenes y reportes."
+    },
+    {
+      "k": "La solución",
+      "v": "Un asistente que busca en los documentos, responde con ese contexto y queda acotado por reglas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "En producción interna, dentro del portal. El dictamen lo da una persona."
+    }
+  ],
+  "how": [
+    {
+      "t": "Encontrar",
+      "d": "El RAG trae de los documentos lo que cada consulta necesita."
+    },
+    {
+      "t": "Comprobar",
+      "d": "Las validaciones revisan cada respuesta antes de mostrarla."
+    },
+    {
+      "t": "Acotar",
+      "d": "Las restricciones marcan qué procesos pasan a una persona."
+    },
+    {
+      "t": "Ayudar a decidir",
+      "d": "Propone dictámenes, asigna formularios y arma reportes."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Responde con contexto",
+      "why": "Redacta con lo que encuentra en los documentos: cada respuesta se apoya en una fuente."
+    },
+    {
+      "t": "Reglas antes que respuesta",
+      "why": "Validaciones y restricciones actúan antes de que algo llegue a la pantalla."
+    },
+    {
+      "t": "Una persona confirma",
+      "why": "En compliance el asistente ayuda a dictaminar y una persona firma el dictamen."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "RAG",
+    "Modelo de lenguaje",
+    "Validaciones",
+    "Frontend",
+    "Backend",
+    "CI/CD"
+  ],
+  "more": [
+    {
+      "h": "El portal",
+      "p": "El portal de compliance de Telefónica digitaliza declaraciones y formularios. Trabajo en él desde Tsoft como Sr AI Fullstack Developer."
+    },
+    {
+      "h": "Qué se ve acá",
+      "p": "Los pasos describen un asistente con RAG como CompliA; la demo usa datos de ejemplo."
+    }
+  ]
+}

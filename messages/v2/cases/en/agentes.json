@@ -1,0 +1,117 @@
+{
+  "title": "Agentic system",
+  "kind": "Own tooling",
+  "line": "An agentic system, split into parts: 11 agents with separate roles, skills on demand and gates where a person decides.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "I designed it and maintain it"
+    },
+    {
+      "k": "Where it is used",
+      "v": "Eclipse backend, Eclipse-Web and my own demos"
+    },
+    {
+      "k": "Formats",
+      "v": "Claude Code, Codex and GitHub Copilot"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Specify.",
+      "Build.",
+      "Review."
+    ],
+    "numbers": [
+      {
+        "n": "11",
+        "d": "agents with their role"
+      },
+      {
+        "n": "79",
+        "d": "skills on demand"
+      },
+      {
+        "n": "3",
+        "d": "formats"
+      }
+    ],
+    "alt": "Isometric illustration: a building whose eleven lights answer one after another, one per agent.",
+    "label": "Own illustration"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "A general-purpose assistant on its own mixes scope, design, security and cost: it tends to assume, over-build and spend."
+    },
+    {
+      "k": "The solution",
+      "v": "One owner per decision, discovery before code, written assumptions and gates with human approval."
+    },
+    {
+      "k": "Where it stands",
+      "v": "In use in my repos, in a different shape in each one. Merging, publishing and spending are mine to authorise."
+    }
+  ],
+  "how": [
+    {
+      "t": "Ask",
+      "d": "I ask for a change and Direction orders plan, scope and cost."
+    },
+    {
+      "t": "Specify",
+      "d": "A short spec, with acceptance criteria and how to roll back."
+    },
+    {
+      "t": "Build",
+      "d": "Each role agent states its assumptions and loads the skills it needs."
+    },
+    {
+      "t": "Review",
+      "d": "Tests, typecheck, build and screenshots; another reviewer tries to refute every finding."
+    },
+    {
+      "t": "Approve",
+      "d": "Merging and deploying need my explicit, separate authorisation."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "One owner per decision",
+      "why": "Each agent has its decision table and there is an ownership matrix: every decision has a single owner."
+    },
+    {
+      "t": "Skills on demand",
+      "why": "Each agent loads the skill its table names for the concrete action, and context stays small."
+    },
+    {
+      "t": "Sonnet by default, Opus with reason",
+      "why": "The larger model is used at justified milestones, with reason, deliverable and exit criterion recorded, and goes through the aesthetic gate."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "Markdown",
+    "SKILL.md",
+    "Claude Code",
+    "Codex",
+    "GitHub Copilot",
+    "OWASP Top 10",
+    "ASVS"
+  ],
+  "more": [
+    {
+      "h": "Gates and evidence",
+      "p": "Six gates, from G0 (sources and version) to G5 (merge and deploy, which I authorise). Every claim carries its evidence level: from E0, a document, to E4, real operation."
+    },
+    {
+      "h": "Adversarial review",
+      "p": "A finding comes with file, line and severity; another reviewer tries to refute it, and what survives gets fixed. Design adds a 7-axis rubric with binary blockers: focus, contrast, reduced motion and honesty."
+    },
+    {
+      "h": "Where it is used",
+      "p": "The Eclipse backend follows the backend and cybersecurity profiles in Codex format; in Eclipse-Web the roles are steps of a single session; my own demos carry adapted copies."
+    }
+  ],
+  "next": "Next step: check that Claude Code accepts the model alias and the header fields."
+}

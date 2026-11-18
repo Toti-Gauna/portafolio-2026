@@ -1,0 +1,135 @@
+{
+  "title": "Velmar",
+  "kind": "Demo for a client",
+  "line": "The online store and back office of a workshop that makes personalized goods, in an end-to-end clickable demo.",
+  "facts": [
+    {
+      "k": "Client",
+      "v": "A real workshop in Mar del Plata"
+    },
+    {
+      "k": "Pieces",
+      "v": "Mobile-first store · back office"
+    },
+    {
+      "k": "Size",
+      "v": "24 store screens and 41 panel screens"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Personalize.",
+      "Make.",
+      "Deliver."
+    ],
+    "numbers": [
+      {
+        "n": "65",
+        "d": "screens in all"
+      },
+      {
+        "n": "22",
+        "d": "pure rule modules"
+      },
+      {
+        "n": "256",
+        "d": "unit tests passing"
+      }
+    ],
+    "alt": "Velmar panel with fictional data: indicators, the order funnel and the production queue by stage.",
+    "label": "Demo · sample data"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Every order starts in a chat, goes into a spreadsheet and onto a phone calendar; stock and delivery dates, by hand."
+    },
+    {
+      "k": "The solution",
+      "v": "A mobile store where buyers see their product before paying, and a panel that takes each order from the receipt to delivery."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A navigable demo on sample data, made so the workshop sees its business working before the project starts."
+    }
+  ],
+  "how": [
+    {
+      "t": "Configure",
+      "d": "The buyer builds a collar; the preview and the price change live."
+    },
+    {
+      "t": "Approve",
+      "d": "Adding to the cart approves the design, which travels with the order to the workshop."
+    },
+    {
+      "t": "Check payment",
+      "d": "A receipt puts the order under review until the workshop approves it."
+    },
+    {
+      "t": "Make",
+      "d": "The production queue moves it through machine and finishing, and deducts supplies."
+    },
+    {
+      "t": "Deliver",
+      "d": "The calendar offers the first date with room, based on the workshop's capacity."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Static demo, same app tomorrow",
+      "why": "A static export to show it before starting; production adds a server, Prisma and login, and the components are reused."
+    },
+    {
+      "t": "Pure rules, in whole pesos",
+      "why": "Prices, coupons, states, dates and draws live in pure functions with injectable randomness: tested on their own, ready to move server-side."
+    },
+    {
+      "t": "A panel that speaks spreadsheet",
+      "why": "Tables edit like a spreadsheet, with keyboard, ranges, copy and paste and undo, and import and export Excel or CSV."
+    }
+  ],
+  "gallery": {
+    "collar-en-vivo": {
+      "alt": "Name-collar product page on a phone: ROCCO is typed in and the illustrated preview shows the hanging letters.",
+      "caption": "The configurator writes the name on the preview."
+    },
+    "club-ruleta": {
+      "alt": "Full-screen green-and-gold \"Girá y ganá\" wheel: the centre is tapped, it spins and shows \"¡Ganaste! Envío gratis\".",
+      "caption": "Velmar club: the coupon wheel spins and gives a prize."
+    },
+    "cupones": {
+      "alt": "\"Mis cupones\" screen with sample coupons (10% on the first purchase, free shipping with an account), each with its code.",
+      "caption": "My coupons: sample coupons applied to the cart."
+    },
+    "panel-calendario": {
+      "alt": "Monthly delivery calendar with orders per day, full days and holidays marked, plus counters for deliveries, late orders and capacity.",
+      "caption": "Delivery calendar with daily capacity."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Zustand",
+    "Zod",
+    "Konva",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Wheel, club and coupons",
+      "p": "Every incentive ends as a coupon in \"Mis cupones\": the cart validates everything with one rule and the panel controls each source. The wheel is a weighted draw in a pure function; prizes are single-use and expire."
+    },
+    {
+      "h": "Orders with rules",
+      "p": "Order states are a state machine with rules: the panel offers only valid transitions, in bulk too. Approving a receipt asks for confirmation; rejecting one asks for a reason. Each change leaves an email in a simulated outbox."
+    },
+    {
+      "h": "Quality and production",
+      "p": "CI runs lint, types, unit tests, build, an export check and e2e on an emulated Pixel 7. Planned for production: a Next server, PostgreSQL with Prisma, role-based login and Mercado Pago."
+    }
+  ],
+  "next": "Next step: checking on a real iPhone and iPad and confirming the collar styles."
+}

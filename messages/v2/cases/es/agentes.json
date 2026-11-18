@@ -1,0 +1,117 @@
+{
+  "title": "Sistema agéntico",
+  "kind": "Herramienta propia",
+  "line": "Un sistema agéntico, dividido en partes: 11 agentes con roles separados, skills a demanda y puertas donde decide una persona.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Lo diseñé y lo mantengo"
+    },
+    {
+      "k": "Dónde se usa",
+      "v": "Backend de Eclipse, Eclipse-Web y demos propias"
+    },
+    {
+      "k": "Formatos",
+      "v": "Claude Code, Codex y GitHub Copilot"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Especificá.",
+      "Construí.",
+      "Revisá."
+    ],
+    "numbers": [
+      {
+        "n": "11",
+        "d": "agentes con su rol"
+      },
+      {
+        "n": "79",
+        "d": "skills a demanda"
+      },
+      {
+        "n": "3",
+        "d": "formatos"
+      }
+    ],
+    "alt": "Ilustración isométrica: un edificio cuyas once luces responden una tras otra, una por agente.",
+    "label": "Ilustración propia"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Un asistente general, solo, mezcla alcance, diseño, seguridad y costo: tiende a suponer, a construir de más y a gastar."
+    },
+    {
+      "k": "La solución",
+      "v": "Un responsable por decisión, descubrimiento antes del código, supuestos por escrito y puertas con aprobación humana."
+    },
+    {
+      "k": "Dónde está",
+      "v": "En uso en mis repos, con una forma distinta en cada uno. Mergear, publicar y gastar lo autorizo yo."
+    }
+  ],
+  "how": [
+    {
+      "t": "Pedir",
+      "d": "Pido un cambio y Dirección ordena el plan, el alcance y el costo."
+    },
+    {
+      "t": "Especificar",
+      "d": "Una especificación corta, con criterios de aceptación y cómo revertir."
+    },
+    {
+      "t": "Construir",
+      "d": "Cada agente de rol declara sus supuestos y carga las skills que necesita."
+    },
+    {
+      "t": "Revisar",
+      "d": "Tests, typecheck, build y capturas; otro revisor intenta refutar cada hallazgo."
+    },
+    {
+      "t": "Aprobar",
+      "d": "Mergear y desplegar piden mi autorización, explícita y separada."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Un responsable por decisión",
+      "why": "Cada agente tiene su tabla de decisiones y hay una matriz de responsables: cada decisión tiene un solo dueño."
+    },
+    {
+      "t": "Skills a demanda",
+      "why": "Cada agente carga la skill que su tabla indica para la acción concreta, y el contexto queda chico."
+    },
+    {
+      "t": "Sonnet por defecto, Opus con motivo",
+      "why": "El modelo grande va en hitos justificados, con motivo, entrega y criterio de salida registrados, y pasa por la puerta estética."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "Markdown",
+    "SKILL.md",
+    "Claude Code",
+    "Codex",
+    "GitHub Copilot",
+    "OWASP Top 10",
+    "ASVS"
+  ],
+  "more": [
+    {
+      "h": "Puertas y evidencia",
+      "p": "Seis puertas, de G0 (fuentes y versión) a G5 (merge y deploy, que autorizo yo). Cada afirmación lleva su nivel de evidencia: de E0, un documento, a E4, operación real."
+    },
+    {
+      "h": "Revisión adversarial",
+      "p": "Un hallazgo llega con archivo, línea y severidad; otro revisor intenta refutarlo y se arregla lo que sobrevive. Diseño suma una rúbrica de 7 ejes con bloqueos binarios: foco, contraste, movimiento reducido y honestidad."
+    },
+    {
+      "h": "Dónde se usa",
+      "p": "El backend de Eclipse sigue los perfiles de backend y ciberseguridad en formato Codex; en Eclipse-Web los roles son pasos de una misma sesión; las demos propias llevan copias adaptadas."
+    }
+  ],
+  "next": "Próximo paso: verificar que Claude Code acepte el alias del modelo y el encabezado."
+}

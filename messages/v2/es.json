@@ -1331,5 +1331,42 @@
         "mark": "2026"
       }
     }
+  },
+  "case": {
+    "meta": "Caso",
+    "back": "Work",
+    "film": "Película del caso: diez segundos en cuatro capítulos",
+    "chapters": [
+      "El producto",
+      "Qué hace",
+      "En uso",
+      "Dónde está"
+    ],
+    "chapter": "Capítulo",
+    "chaptersLabel": "Capítulos de la película",
+    "play": "Reproducir la película",
+    "pause": "Pausar la película",
+    "replay": "Repetir la película",
+    "keys": "← → cambian de capítulo",
+    "clip": "Reproducir el recorte",
+    "clipStop": "Pausar el recorte",
+    "postal": "Estampilla",
+    "ten": "En 10 segundos",
+    "how": "Cómo funciona",
+    "gallery": "Galería",
+    "decisions": "Tres decisiones",
+    "stack": "Con qué está hecho",
+    "more": "Más detalle",
+    "moreHint": "Arquitectura, seguridad y calidad, para quien quiera la profundidad.",
+    "next": "Siguiente caso",
+    "all": "Todos los casos en Work",
+    "links": {
+      "site": "Ver el sitio",
+      "demo": "Ver la demo",
+      "code": "Ver el código"
+    },
+    "play2": "Reproducir",
+    "pause2": "Pausar",
+    "see": "Ver caso"
   }
 }

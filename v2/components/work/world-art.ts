@@ -220,6 +220,8 @@ export const WORLD_BOX = { x: 0, y: 0, width: W, height: H };
 export const WORLD_SVG =
   '<defs><radialGradient id="wglow"><stop offset="0" stop-color="#ffe7a6" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffd27a" stop-opacity="0.16"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs>' +
   built.map(ground).join('') + steps + trail + byDepth.map(stands).join('');
+/** What stands on a place, drawn whole (no reference): for pages that do not carry the land, like a case (lote 5.1). */
+export const WORLD_STAND_ART: Record<string, string> = Object.fromEntries(WORLD_IDS.map((id) => [id, of(id).map((b) => `<g class="wa wa-isle" data-id="${b.id}" style="${b.vars}">${b.over}</g>`).join('')]));
 const use = (b: Built[], part: 'wbg' | 'wst') => b.map((c) => `<use href="#${part}${c.i}"/>`).join('');
 /** One place on its own: a 4:3 window on the land, close to what stands on it (its ground and what stands, by reference). */
 export const WORLD_ISLES: Record<string, { svg: string; box: [number, number, number, number]; group: WorldGroup; ground: string }> =

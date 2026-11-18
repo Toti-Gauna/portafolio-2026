@@ -1331,5 +1331,42 @@
         "mark": "2026"
       }
     }
+  },
+  "case": {
+    "meta": "Case",
+    "back": "Work",
+    "film": "The case's film: ten seconds in four chapters",
+    "chapters": [
+      "The product",
+      "What it does",
+      "In use",
+      "Where it stands"
+    ],
+    "chapter": "Chapter",
+    "chaptersLabel": "Chapters of the film",
+    "play": "Play the film",
+    "pause": "Pause the film",
+    "replay": "Replay the film",
+    "keys": "← → change chapter",
+    "clip": "Play the clip",
+    "clipStop": "Pause the clip",
+    "postal": "Stamp",
+    "ten": "In 10 seconds",
+    "how": "How it works",
+    "gallery": "Gallery",
+    "decisions": "Three decisions",
+    "stack": "What it is built with",
+    "more": "More detail",
+    "moreHint": "Architecture, security and quality, for whoever wants the depth.",
+    "next": "Next case",
+    "all": "Every case in Work",
+    "links": {
+      "site": "Visit the site",
+      "demo": "Open the demo",
+      "code": "See the code"
+    },
+    "play2": "Play",
+    "pause2": "Pause",
+    "see": "See the case"
   }
 }

@@ -1,0 +1,134 @@
+{
+  "title": "Kinetic Studio",
+  "kind": "Laboratorio propio",
+  "line": "Mi laboratorio de tráileres de motion graphics hechos con código: imagen y sonido se generan en vivo en el navegador.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Proyecto propio, hecho con un agente de tráileres"
+    },
+    {
+      "k": "Período",
+      "v": "Septiembre y octubre de 2026"
+    },
+    {
+      "k": "Piezas",
+      "v": "Hub, tráileres, motor, recetas y sonido"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Componé.",
+      "Sincronizá.",
+      "Congelá."
+    ],
+    "numbers": [
+      {
+        "n": "31",
+        "d": "tráileres en el hub"
+      },
+      {
+        "n": "272",
+        "d": "escenas en el catálogo"
+      },
+      {
+        "n": "23",
+        "d": "voces sintetizadas"
+      }
+    ],
+    "alt": "Fragmento del tráiler KINETIC: círculo, cuadrado y triángulo sobre papel crema cambian de color y de lugar.",
+    "label": "Hecho con código"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Tráileres de producto que se editen como datos y se puedan revisar cuadro por cuadro."
+    },
+    {
+      "k": "La solución",
+      "v": "Una línea de tiempo maestra, pausada, maneja imagen y sonido; las escenas son recetas que devuelven su duración y la música, una lista de notas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "31 tráileres en un hub público en GitHub Pages, y el tráiler «Conocer a Ignacio» de este portafolio, hecho con su kit."
+    }
+  ],
+  "how": [
+    {
+      "t": "Armar",
+      "d": "Un agente de tráileres crea la carpeta con su copia del kit."
+    },
+    {
+      "t": "Editar datos",
+      "d": "trailer.js nombra escenas, paleta, fuentes y música."
+    },
+    {
+      "t": "Componer",
+      "d": "El motor llama a cada receta y suma todo a una línea de tiempo."
+    },
+    {
+      "t": "Publicar",
+      "d": "Cada push a main construye el hub y lo publica en GitHub Pages."
+    },
+    {
+      "t": "Previsualizar",
+      "d": "En el hub, un afiche y una vista previa en silencio al pasar el mouse."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Una sola línea de tiempo",
+      "why": "La película es determinista y salta a cualquier segundo: revisión cuadro por cuadro con ?t=, vistas previas del hub y audio offline."
+    },
+    {
+      "t": "La música es una lista",
+      "why": "La misma lista de notas suena en vivo, se renderiza offline con semilla fija y mueve la imagen al compás."
+    },
+    {
+      "t": "El cuadro caro, primero",
+      "why": "El primer cuadro de cada escena es el costoso: el tráiler del portafolio recorre la película una vez detrás de una cortina."
+    }
+  ],
+  "gallery": {
+    "kinetic-ritmo": {
+      "alt": "Grilla de puntos en degradé azul a naranja que ondula, con la palabra RHYTHM, y termina en partículas.",
+      "caption": "KINETIC: una grilla de puntos que late con RHYTHM."
+    },
+    "kinetic-profundidad": {
+      "alt": "Partículas que forman MOTION y un túnel de polígonos de neón con DEPTH y SPEED a gran velocidad.",
+      "caption": "KINETIC: túnel geométrico con DEPTH y SPEED."
+    },
+    "lab-bauhaus": {
+      "alt": "Composición Bauhaus que se dibuja sobre azul y pasa a tipografía grande en amarillo: «una sola escuela».",
+      "caption": "Tráiler «Bauhaus 100», grabado desde un build local."
+    },
+    "lab-hyperspace": {
+      "alt": "Un planeta azul con anillos gira en el espacio y la cámara atraviesa un campo de asteroides.",
+      "caption": "Tráiler «Hyperspace»: escenas 3D con Three.js."
+    }
+  },
+  "stack": [
+    "GSAP",
+    "Canvas 2D",
+    "Three.js",
+    "WebAudio",
+    "TypeScript estricto",
+    "Vite",
+    "GitHub Actions"
+  ],
+  "more": [
+    {
+      "h": "En el portafolio",
+      "p": "El tráiler es una página estática del kit dentro de un iframe del mismo origen. El audio se crea dentro del clic y el iframe lo toma prestado."
+    },
+    {
+      "h": "Rendimiento",
+      "p": "Con la pasada de calentamiento, el cuadro medio del tráiler del portafolio bajó de 29 a 20 ms, medido en laboratorio con Chromium dibujando por software."
+    },
+    {
+      "h": "Determinismo",
+      "p": "La prueba de hash abre el mismo segundo por tres caminos: 2 de 4 momentos salen idénticos bit a bit y los otros dos difieren en un nivel de color."
+    }
+  ],
+  "next": "Próximo paso: unificar el kit en una sola copia para todos los tráileres."
+}

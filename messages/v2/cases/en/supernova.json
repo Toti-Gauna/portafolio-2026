@@ -1,0 +1,126 @@
+{
+  "title": "Supernova Eventos",
+  "kind": "Tsoft for Telefónica",
+  "line": "An internal events micro-app: employees sign up and get in with a QR pass; organizers create events step by step.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "Built the prototype"
+    },
+    {
+      "k": "Type",
+      "v": "Internal events micro-app"
+    },
+    {
+      "k": "Data",
+      "v": "Fictional, stored in the browser"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Discover.",
+      "Sign up.",
+      "Check in."
+    ],
+    "numbers": [
+      {
+        "n": "4",
+        "d": "steps to create an event"
+      },
+      {
+        "n": "122",
+        "d": "E2E tests with Playwright"
+      },
+      {
+        "n": "18",
+        "d": "visual QA scripts"
+      }
+    ],
+    "alt": "Signing up to an event over a 3D universe: a session is picked, confirmed, and the QR pass appears.",
+    "label": "Prototype · fictional data"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Bring internal events, sign-up with per-session capacity, the entry pass and audiences together in one place."
+    },
+    {
+      "k": "The solution",
+      "v": "A catalog that orders itself, sign-up with a QR pass, and a step-by-step creator, set in a navigable 3D universe."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A prototype that runs entirely in the browser, on fictional data. The backend contract is written down as a proposal."
+    }
+  ],
+  "how": [
+    {
+      "t": "Discover",
+      "d": "A catalog with search and filters: active, upcoming and finished."
+    },
+    {
+      "t": "Sign up",
+      "d": "Each session has its own capacity; guests are optional."
+    },
+    {
+      "t": "Get the pass",
+      "d": "QR code, calendar and an .ics file."
+    },
+    {
+      "t": "Create",
+      "d": "Details, audience, email template and review, with autosave."
+    },
+    {
+      "t": "Check in",
+      "d": "The QR code is validated against a saved booking, by camera or code."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "The first frame, in the HTML",
+      "why": "The orbital scene is already in the HTML with critical CSS, and the GSAP intro carries it on with the same clock."
+    },
+    {
+      "t": "One Canvas, apart from the app",
+      "why": "Signing up or checking in runs apart from the animations; if WebGL fails, a static backdrop remains and everything keeps working."
+    },
+    {
+      "t": "The backend, written as a proposal",
+      "why": "The repo documents the contract: idempotency keys, atomic booking and check-in, and a signed token per booking in place of the demo's QR code."
+    }
+  ],
+  "gallery": {
+    "creador": {
+      "alt": "Managing experiences: «Crear experiencia» opens step 1, a cover is chosen and the title appears at once on the preview card.",
+      "caption": "The step-by-step event creator, with a live preview."
+    },
+    "favoritos": {
+      "alt": "Favourites page with two saved experiences, a search box and a 3D planet; the client's brand is hidden.",
+      "caption": "Favourites: the employee's saved events."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite",
+    "Three.js",
+    "React Three Fiber",
+    "GSAP",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Three presentations",
+      "p": "The same app and data in three versions: classic, a navigable 3D universe and a hybrid. The heavy parts load on demand: the QR code and the Excel reader."
+    },
+    {
+      "h": "Care with data",
+      "p": "The QR code carries only demo identifiers. Excel or CSV up to 5 MB and 5,000 rows, with validated emails and duplicates detected. The camera is requested after a click."
+    },
+    {
+      "h": "Quality",
+      "p": "End-to-end journeys: 122 E2E tests in 15 files and 18 visual QA scripts with screenshots per theme and width. The 3D pauses off-screen."
+    }
+  ],
+  "next": "Next step: the backend from that contract, with SSO and passes validated on a server."
+}

@@ -1,0 +1,99 @@
+{
+  "title": "CompliA",
+  "kind": "Tsoft for Telefónica",
+  "line": "An AI assistant inside Telefónica's compliance portal: it answers, analyses declarations and helps reach a ruling.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "Full design and development"
+    },
+    {
+      "k": "Period",
+      "v": "2026 – today"
+    },
+    {
+      "k": "Type",
+      "v": "RAG assistant"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Ask.",
+      "Analyse.",
+      "Rule."
+    ],
+    "numbers": [
+      {
+        "n": "4",
+        "d": "pieces I designed"
+      }
+    ],
+    "alt": "Clip of the CompliA demo with sample data.",
+    "label": "Demo · sample data"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Lots of compliance information and processes that call for judgement: declarations, forms, rulings and reports."
+    },
+    {
+      "k": "The solution",
+      "v": "An assistant that searches the documents, answers with that context and stays bounded by rules."
+    },
+    {
+      "k": "Where it stands",
+      "v": "In internal production, inside the portal. A person gives the ruling."
+    }
+  ],
+  "how": [
+    {
+      "t": "Find",
+      "d": "RAG brings from the documents what each query needs."
+    },
+    {
+      "t": "Check",
+      "d": "Validations review every answer before it is shown."
+    },
+    {
+      "t": "Bound",
+      "d": "Restrictions mark which processes go to a person."
+    },
+    {
+      "t": "Help decide",
+      "d": "It proposes rulings, assigns forms and builds reports."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Answers with context",
+      "why": "It writes from what it finds in the documents: every answer rests on a source."
+    },
+    {
+      "t": "Rules before the answer",
+      "why": "Validations and restrictions act before anything reaches the screen."
+    },
+    {
+      "t": "A person confirms",
+      "why": "In compliance the assistant helps reach a ruling and a person signs it."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "RAG",
+    "Language model",
+    "Validations",
+    "Frontend",
+    "Backend",
+    "CI/CD"
+  ],
+  "more": [
+    {
+      "h": "The portal",
+      "p": "Telefónica's compliance portal digitises declarations and forms. I work on it from Tsoft as a Sr AI Fullstack Developer, end to end."
+    },
+    {
+      "h": "What you see here",
+      "p": "The steps describe a RAG assistant like CompliA; the demo uses sample data."
+    }
+  ]
+}

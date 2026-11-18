@@ -1,6 +1,10 @@
 import type { CSSProperties } from 'react';
+import Link from 'next/link';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
+import { sitePath } from '@/v2/site';
 import { tokens } from '@/v2/tokens';
+import { casesAt } from '../case/cases';
+import { ArrowIcon } from '../ui/Icons';
 import { WORLD_BOX, WORLD_CRATES, WORLD_GROUPS, WORLD_GROUP_OF, WORLD_IDS, WORLD_ISLES, WORLD_MINI, WORLD_STOPS, WORLD_SVG, WORLD_WALKERS } from './world-art';
 import { WORLD_POSTALS } from './world-stamps';
 import { WorldInfo, type WorldPlace } from './WorldInfo';
@@ -14,10 +18,17 @@ const GROUP_COLOR = { origin: tokens.color['amber-500'], work: tokens.color['blu
  * rendered here and opened by the map. The page that holds it gives its kicker, its title (the h1, inside the
  * map's glass card) and the line over the list.
  */
+/** The case pages of a stop: its own (`self`), or one per part inside it (Tsoft). */
+const caseLinksFor = (locale: V2Locale) => (id: string): Record<string, string> => {
+  const list = casesAt(id);
+  return Object.fromEntries(list.map((slug) => [slug === id ? 'self' : slug, sitePath(locale, `work/${slug}/`)]));
+};
+
 export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Locale; kicker: string; title: string; lead: string }) {
   const m = v2Messages(locale), w = m.world;
   const places = w.places as Record<string, WorldPlace>;
   const stamps = m.kit.stamps.items;
+  const caseLinks = caseLinksFor(locale);
   return (
     <>
       <WorldStrip
@@ -54,6 +65,9 @@ export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Local
                     <p className="wd-state"><i aria-hidden="true" />{p.state}</p>
                     <p className="wd-text">{p.text}</p>
                     <p className="wd-art"><b>{w.drawn}</b> {p.art}</p>
+                    {Object.entries(caseLinks(id)).map(([k, href]) => (
+                      <Link key={k} className="wd-case" href={href}>{m.case.see}{k === 'self' ? '' : ` · ${places[id].inside?.[k]?.name ?? k}`}<span className="ui-sr">{k === 'self' ? ` · ${p.name}` : ''}</span><ArrowIcon size={14} /></Link>
+                    ))}
                   </li>
                 );
               })}
@@ -68,7 +82,8 @@ export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Local
           <WorldInfo
             key={id} id={id} place={p} group={w.groups[group]} color={GROUP_COLOR[group]} postals={WORLD_POSTALS[id]}
             captions={WORLD_POSTALS[id].map((s) => (s.kit ? stamps[s.kit] : { year: p.mark ?? p.when, name: p.name, alt: p.art }))}
-            labels={{ close: w.close, inside: w.inside, postal: w.postal }}
+            labels={{ close: w.close, inside: w.inside, postal: w.postal, see: m.case.see }}
+            cases={caseLinks(id)}
           />
         );
       })}

@@ -1,0 +1,126 @@
+{
+  "title": "Supernova Eventos",
+  "kind": "Tsoft para Telefónica",
+  "line": "Una micro-app de eventos internos: los colaboradores se inscriben y entran con un pase con QR; los organizadores crean eventos por pasos.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Desarrollo del prototipo"
+    },
+    {
+      "k": "Tipo",
+      "v": "Micro-app de eventos internos"
+    },
+    {
+      "k": "Datos",
+      "v": "Ficticios, guardados en el navegador"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Descubrí.",
+      "Inscribite.",
+      "Entrá."
+    ],
+    "numbers": [
+      {
+        "n": "4",
+        "d": "pasos para crear un evento"
+      },
+      {
+        "n": "122",
+        "d": "tests E2E con Playwright"
+      },
+      {
+        "n": "18",
+        "d": "scripts de QA visual"
+      }
+    ],
+    "alt": "Inscripción a un evento sobre un universo 3D: se elige la función, se confirma y aparece el pase con QR.",
+    "label": "Prototipo · datos ficticios"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Juntar en un solo lugar los eventos internos, la inscripción con cupos por función, el pase de ingreso y las audiencias."
+    },
+    {
+      "k": "La solución",
+      "v": "Un catálogo que se ordena solo, inscripción con pase y QR, y un creador por pasos, sobre un universo 3D navegable."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Prototipo que corre entero en el navegador, con datos ficticios. El contrato del backend quedó escrito como propuesta."
+    }
+  ],
+  "how": [
+    {
+      "t": "Descubrir",
+      "d": "Catálogo con búsqueda y filtros: activos, próximos y finalizados."
+    },
+    {
+      "t": "Inscribirse",
+      "d": "Cada función tiene su cupo; acompañantes opcionales."
+    },
+    {
+      "t": "Recibir el pase",
+      "d": "QR, calendario y archivo .ics."
+    },
+    {
+      "t": "Crear",
+      "d": "Información, audiencia, plantilla de email y revisión, con guardado automático."
+    },
+    {
+      "t": "Registrar el ingreso",
+      "d": "El QR se valida contra una reserva guardada, por cámara o código."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "El primer cuadro, en el HTML",
+      "why": "La escena orbital ya está en el HTML con CSS crítico, y la intro con GSAP la continúa con el mismo reloj."
+    },
+    {
+      "t": "Un Canvas aparte de la app",
+      "why": "Inscribirse o registrar un ingreso siguen su curso aparte de las animaciones; si falla WebGL, queda un fondo estático y todo sigue andando."
+    },
+    {
+      "t": "El backend, escrito como propuesta",
+      "why": "El repo documenta el contrato: claves de idempotencia, reserva e ingreso atómicos y un token firmado por reserva en lugar del QR de la demo."
+    }
+  ],
+  "gallery": {
+    "creador": {
+      "alt": "Administrar experiencias: «Crear experiencia» abre el paso 1, se elige una portada y el título aparece al instante en la vista previa.",
+      "caption": "El creador de eventos por pasos, con vista previa en vivo."
+    },
+    "favoritos": {
+      "alt": "Página Favoritos con dos experiencias guardadas, buscador y un planeta 3D; la marca del cliente está oculta.",
+      "caption": "Favoritos: los eventos guardados del colaborador."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite",
+    "Three.js",
+    "React Three Fiber",
+    "GSAP",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Tres presentaciones",
+      "p": "La misma app y los mismos datos en tres versiones: clásica, un universo 3D navegable e híbrida. Lo pesado llega a pedido: el QR y el lector de Excel."
+    },
+    {
+      "h": "Cuidado con los datos",
+      "p": "El QR lleva solo identificadores de demo. Excel o CSV de hasta 5 MB y 5.000 filas, con emails validados y duplicados detectados. La cámara se pide después de un clic."
+    },
+    {
+      "h": "Calidad",
+      "p": "Recorridos de punta a punta: 122 tests E2E en 15 archivos y 18 scripts de QA visual con capturas por tema y ancho. El 3D se pausa fuera de pantalla."
+    }
+  ],
+  "next": "Próximo paso: el backend del contrato, con SSO y el pase validado en un servidor."
+}
