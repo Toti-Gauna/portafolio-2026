@@ -103,8 +103,7 @@
   },
   "depth": {
     "title": "Depth",
-    "text": "A brand glow for the main action, panels that float over the indigo and a focus ring that always shows.",
-    "glow": "Brand glow",
+    "text": "Panels that float over the indigo and a focus ring that always shows. Nothing else casts a shadow: the main action stands out by its colour.",
     "panel": "Panel",
     "focus": "Focus",
     "z": "Stacking order"

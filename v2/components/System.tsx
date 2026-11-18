@@ -173,7 +173,6 @@ export function System({ locale }: { locale: V2Locale }) {
 
         <Section id="profundidad" n="05" title={m.depth.title} text={m.depth.text}>
           <ul className="v2-depth">
-            <li><span className="v2-depth-glow">{m.depth.glow}</span><span className="v2-mono v2-dim">--shadow-glow-brand</span></li>
             <li><span className="v2-depth-panel">{m.depth.panel}</span><span className="v2-mono v2-dim">--shadow-panel</span></li>
             <li><span className="v2-depth-focus">{m.depth.focus}</span><span className="v2-mono v2-dim">--shadow-focus</span></li>
           </ul>

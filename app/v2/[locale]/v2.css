@@ -51,7 +51,7 @@ a { color: inherit; }
   display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: 'brand . tools' 'tabs tabs tabs';
   align-items: center; column-gap: var(--space-3);
   padding: var(--space-2) var(--size-gutter) 0;
-  background: rgba(9, 7, 32, 0.9);
+  background: rgba(9, 7, 32, 0.97);
   border-bottom: 1px solid var(--color-line);
 }
 .v2-brand { grid-area: brand; display: inline-flex; align-items: center; gap: var(--space-3); min-height: var(--size-touch); color: var(--color-heading); text-decoration: none; font-weight: 800; white-space: nowrap; }
@@ -165,8 +165,7 @@ a { color: inherit; }
 
 .v2-depth { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: var(--space-6); }
 .v2-depth li { display: grid; gap: var(--space-3); justify-items: start; }
-.v2-depth-glow, .v2-depth-panel, .v2-depth-focus { display: inline-flex; align-items: center; min-height: var(--size-button); padding: 0 var(--space-6); border-radius: var(--radius-xl); font-weight: 800; }
-.v2-depth-glow { background: var(--gradient-brand); color: var(--color-on-accent); box-shadow: var(--shadow-glow-brand); }
+.v2-depth-panel, .v2-depth-focus { display: inline-flex; align-items: center; min-height: var(--size-button); padding: 0 var(--space-6); border-radius: var(--radius-md); font-weight: 800; }
 .v2-depth-panel { background: var(--color-surface-raised); border: 1px solid var(--color-line); box-shadow: var(--shadow-panel); color: var(--color-heading); }
 .v2-depth-focus { border: 1px solid var(--color-line-strong); box-shadow: var(--shadow-focus); color: var(--color-heading); }
 .v2-z { position: relative; display: grid; gap: var(--space-2); max-width: 420px; }

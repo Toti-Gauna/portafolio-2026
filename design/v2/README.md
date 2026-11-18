@@ -18,7 +18,7 @@ El sistema del portafolio de Ignacio Gauna (Sr AI Fullstack Developer, Mar del P
 - Texto: títulos en `color-heading`, cuerpo en `color-text`, secundario en `color-text-muted`, rótulos en `color-text-subtle`. Los cuatro pasan AA sobre `color-bg`, `color-bg-deep`, `color-surface` y `color-surface-raised`. `color-text-faint` es solo decoración (números de línea, guías): no pasa AA y nunca lleva texto que haya que leer.
 - El espectro es el de las cinco capas, siempre en este orden y con su par `-from` → `-to`: `layer-plan-*` (ámbar), `layer-code-*` (coral), `layer-agents-*` (rosa a lila), `layer-tests-*` (menta a lima) y `layer-ship-*` (azul a celeste). Cada color de capa se lee como rótulo sobre `color-bg` (AA). Usá el color de una capa para hablar de esa capa, no para decorar.
 - El coral y el azul de IG (`color-coral-ig`, `color-blue-ig`) siguen siendo la raíz. `color-blue-ig` no llega a AA sobre el fondo: usalo en rellenos y trazos, nunca como color de texto.
-- La acción principal usa `gradient-brand` con texto `color-on-accent`. El apellido del nombre usa `gradient-name`; la palabra «soluciones», `gradient-solutions`.
+- La acción principal es coral liso (`color-coral-500`, `color-coral-400` al pasar el puntero) con texto `color-on-accent`, las esquinas de los campos (`radius-md`) y sin brillo. `gradient-brand` queda para el «Sr» del rol. El apellido del nombre usa `gradient-name`; la palabra «soluciones», `gradient-solutions`.
 - Estados: `color-success` (menta), `color-warning` (ámbar) y `color-danger` (coral claro). Cada estado lleva también una palabra o un ícono: nunca solo el color.
 - El foco es `color-focus` (ámbar): un anillo sólido de 2 px a 3 px de distancia (`shadow-focus` cuando va como sombra). Pasa 3:1 sobre el fondo y sobre el botón de marca.
 - La paleta cambia en un solo lugar: las estampillas, que son tinta plana sobre papel crema y siempre quedan dentro de su propio marco.
@@ -35,13 +35,13 @@ El sistema del portafolio de Ignacio Gauna (Sr AI Fullstack Developer, Mar del P
 
 - Escala de 4 px: de `space-1` (4 px) a `space-32` (128 px). Separá grupos con `gap`, no con márgenes sueltos.
 - Margen lateral `size-gutter` (16 px) en celular, `size-margin-tablet` desde 600 px y `size-margin-desktop` desde 1100 px. Ancho máximo `size-max`.
-- Radios suaves: `radius-md` en controles, `radius-xl` en botones grandes, `radius-2xl` en tarjetas de vidrio y paneles, `radius-pill` en chips y estados.
-- Alturas fijas: botón principal `size-button` (56 px), barra de arriba `size-header` (60 px).
+- Radios suaves: `radius-md` en controles y botones, `radius-2xl` en tarjetas de vidrio y paneles, `radius-pill` en chips y estados.
+- Alturas fijas: botones `size-button` (48 px), barra de arriba `size-header` (60 px).
 - Puntos de quiebre: `bp-sm` 360, `bp-md` 600, `bp-lg` 1100, `bp-xl` 1440. Sin scroll horizontal a 360 px.
 
 ## Profundidad
 
-- `shadow-glow-brand` solo debajo de la acción principal. `shadow-panel` en tarjetas y paneles que flotan sobre el índigo. Nada más proyecta sombra.
+- `shadow-panel` en tarjetas y paneles que flotan sobre el índigo. Nada más proyecta sombra: la acción principal se distingue por su color, no por un brillo.
 - El vidrio es un relleno claro casi transparente sobre el índigo, con borde `color-line` y un halo del color de su capa arriba a la izquierda. Sin `backdrop-filter`.
 - Orden de apilado: `z-base`, `z-raised`, `z-header`, `z-overlay`, `z-dialog`.
 

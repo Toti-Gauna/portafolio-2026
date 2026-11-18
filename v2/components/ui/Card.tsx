@@ -17,7 +17,6 @@ export function GlassCard({ layer, title, href, meta, status, statusLabel, cta, 
   const H = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
   return (
     <article className="ui-card" style={layerVars(layer)}>
-      <span className="ui-card-bar" aria-hidden="true" />
       <div className="ui-card-top">
         {meta && <p className="ui-card-meta">{meta}</p>}
         {status && statusLabel && <StatusBadge status={status} label={statusLabel} />}
