@@ -119,25 +119,30 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .wa-node--plan { fill: #060513; stroke: #ffe39a; }
 
 /* ── the page that shows it (/mundo/) ────────────────────────────────────── */
-/* ── the map: the land fills the screen, edge to edge, and is travelled sideways ── */
+/* ── the map: the land fills the screen, edge to edge, and is travelled sideways; --z is its zoom ── */
 .ws {
   position: relative; width: 100%; height: calc(100svh - var(--ws-top, 132px)); min-height: 440px; overflow: clip;
   background: var(--color-bg-deep); border-block: 1px solid var(--color-line);
 }
-/* the frame that scrolls: a strip much wider than it; its own size is the unit of everything inside (cqw / cqh) */
-.ws-view { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; container-type: size; }
+/* the frame that scrolls: a strip much wider than it; its own size is the unit of everything inside (cqw / cqh).
+   It pans both ways once zoomed in; the browser's own pinch is left to the map (touch-action). */
+.ws-view {
+  position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: none; container-type: size;
+  touch-action: pan-x pan-y;
+}
 .ws-view::-webkit-scrollbar { display: none; }
 .ws-view:focus-visible { outline-offset: -4px; }
 .ws[data-ready] .ws-view { cursor: grab; }
 .ws-view[data-drag] { cursor: grabbing; user-select: none; }
 /* room at both ends, so the first and the last stop can reach the middle; the first and last band run under it */
 .ws-track {
-  box-sizing: content-box; width: max-content; height: 100cqh; overflow: clip;
-  padding-left: max(0px, calc(50cqw - 100cqh * var(--ws-a))); padding-right: max(0px, calc(50cqw - 100cqh * var(--ws-z)));
+  box-sizing: content-box; width: max-content; height: calc(100cqh * var(--z)); overflow: clip;
+  padding-left: max(0px, calc(50cqw - 100cqh * var(--z) * var(--ws-a))); padding-right: max(0px, calc(50cqw - 100cqh * var(--z) * var(--ws-z)));
 }
-.ws-land { position: relative; height: 100%; width: calc(100cqh * var(--ws-r)); }
+.ws-land { position: relative; height: 100%; width: calc(100cqh * var(--z) * var(--ws-r)); }
 .ws-land > .wa { width: 100%; height: 100%; }
-/* over the land, as text: the name of every stop, its dates and its button, written in the ink of its ground */
+/* over the land, as text: the name of every stop, its dates and its button, written in the ink of its ground;
+   they keep their size when the land zooms (cqh is the frame's, not the land's) */
 .ws-names li {
   position: absolute; transform: translate(-50%, -100%); display: grid; justify-items: center; gap: 2px;
   white-space: nowrap; text-align: center; color: var(--ink); pointer-events: none;
@@ -154,32 +159,77 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .ws-more::after { content: ''; position: absolute; inset: -5px; border-radius: inherit; border: 2px solid var(--ink); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
 .ws-more:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) { .ws-more:hover::after { opacity: 0.55; } }
-/* inside the map: where you are, and the two buttons */
+
+/* the glass card: the page, where you are, the minimap and the way to the list. Glass (a blur of the land under
+   it) only with a mouse; on touch screens a solid fill, as in the header. */
 .ws-hud {
-  position: absolute; left: var(--space-4); top: var(--space-4); display: grid; gap: 2px; max-width: min(320px, calc(100% - 2 * var(--space-4)));
-  padding: var(--space-3) var(--space-4); border-radius: var(--radius-xl); background: rgba(6, 5, 19, 0.86); border: 1px solid rgba(255, 255, 255, 0.16); pointer-events: none;
+  position: absolute; left: var(--space-4); top: var(--space-4); display: grid; gap: 3px;
+  width: min(330px, calc(100% - 2 * var(--space-4) - 52px)); padding: var(--space-3) var(--space-4) var(--space-3);
+  border-radius: var(--radius-xl); background: rgba(9, 7, 32, 0.9); border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
 }
-.ws-kicker { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--from); }
+@media (hover: hover) and (pointer: fine) {
+  .ws-hud { background: rgba(9, 7, 32, 0.66); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); }
+}
+.ws-kicker { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
 .ws-hud h1 { font-size: 20px; line-height: 1.15; font-weight: 800; font-stretch: 110%; letter-spacing: -0.01em; color: var(--color-heading); }
-.ws-now { display: flex; align-items: baseline; gap: var(--space-2); font-size: 14px; color: var(--color-text); }
-.ws-count { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; color: var(--color-text-muted); }
-.ws-now b { font-weight: 700; color: var(--color-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ws-dots { display: flex; gap: 3px; margin-top: var(--space-2); }
-.ws-dots i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.22); }
-.ws-dots i[data-on] { background: var(--from); }
-.ws-nav {
-  position: absolute; top: 50%; display: none; place-items: center; width: 52px; height: 52px; margin-top: -26px;
-  border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(6, 5, 19, 0.9); color: #ffffff; cursor: pointer;
+.ws-now { display: grid; gap: 1px; margin-top: var(--space-2); padding-top: var(--space-2); border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.ws-count { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
+.ws-now b { font-size: 17px; font-weight: 800; color: var(--color-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ws-meta { font-size: 13px; color: var(--color-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* the minimap: the whole land stretched to a strip, a dot per stop, and the window you see */
+.ws-mini {
+  position: relative; display: block; height: 34px; margin-top: var(--space-2); border-radius: var(--radius-sm); overflow: hidden;
+  cursor: pointer; touch-action: none; contain: layout paint; outline: 1px solid rgba(255, 255, 255, 0.16); outline-offset: -1px;
+}
+.ws-mini svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ws-mini .wm-path { fill: none; stroke: #ffe39a; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.ws-mini .wm-path--plan { stroke-dasharray: 2 4; }
+.ws-mini .wm-stop { fill: #060513; }
+.ws-win { position: absolute; left: 0; top: 0; width: 10%; height: 100%; box-sizing: border-box; border: 2px solid #ffffff; border-radius: 3px; box-shadow: 0 0 0 999px rgba(6, 5, 19, 0.38); pointer-events: none; }
+.ws-list {
+  justify-self: start; display: inline-flex; align-items: center; min-height: var(--size-touch); margin-bottom: calc(-1 * var(--space-2));
+  font-size: 14px; font-weight: 700; color: var(--color-heading); text-decoration: underline; text-decoration-color: var(--from); text-underline-offset: 4px;
+}
+/* zoom: two round buttons in the other corner */
+.ws-zoom { position: absolute; right: var(--space-4); top: var(--space-4); display: none; flex-direction: column; gap: var(--space-2); }
+.ws[data-ready] .ws-zoom { display: flex; }
+.ws-zbtn, .ws-nav {
+  display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(6, 5, 19, 0.9); color: #ffffff; cursor: pointer;
   transition: opacity var(--motion-fast) var(--motion-ease);
 }
-.ws-nav::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(6, 5, 19, 0.9); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
+.ws-zbtn { position: relative; width: var(--size-touch); height: var(--size-touch); }
+.ws-zbtn:disabled { opacity: 0.35; cursor: default; }
+/* the two arrows, at the sides */
+.ws-nav { position: absolute; top: 50%; display: none; width: 52px; height: 52px; margin-top: -26px; }
+.ws-nav::after, .ws-zbtn::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(6, 5, 19, 0.9); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; }
 .ws[data-ready] .ws-nav { display: grid; }
 .ws-nav--prev { left: var(--space-4); }
 .ws-nav--next { right: var(--space-4); }
 .ws-nav:disabled { opacity: 0; pointer-events: none; }
-.ws-nav:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; box-shadow: 0 0 0 6px #060513; }
-@media (hover: hover) and (pointer: fine) { .ws-nav:not(:disabled):hover::after { opacity: 0.7; } }
-@media (min-width: 1100px) { .ws-hud { left: var(--space-8); top: var(--space-6); } .ws-nav { width: 60px; height: 60px; margin-top: -30px; } .ws-nav--prev { left: var(--space-8); } .ws-nav--next { right: var(--space-8); } }
+.ws-nav:focus-visible, .ws-zbtn:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; box-shadow: 0 0 0 6px #060513; }
+@media (hover: hover) and (pointer: fine) { .ws-nav:not(:disabled):hover::after, .ws-zbtn:not(:disabled):hover::after { opacity: 0.7; } }
+/* on a phone the card is a strip: the title, where you are and the minimap, and the list on the same line */
+@media (max-width: 599px) {
+  .ws-hud { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--space-3); row-gap: 0; padding: var(--space-2) var(--space-3); }
+  .ws-kicker, .ws-meta { display: none; }
+  .ws-hud h1 { font-size: 15px; grid-column: 1; }
+  .ws-now { grid-column: 1 / -1; margin-top: var(--space-1); padding-top: var(--space-1); }
+  .ws-now b { font-size: 15px; }
+  .ws-mini { grid-column: 1 / -1; height: 26px; margin-top: var(--space-1); }
+  .ws-list { grid-column: 2; grid-row: 1; margin: calc(-1 * var(--space-2)) 0; font-size: 13px; }
+}
+@media (min-width: 1100px) {
+  .ws-hud { left: var(--space-8); top: var(--space-6); }
+  .ws-zoom { right: var(--space-8); top: var(--space-6); }
+  .ws-nav { width: 60px; height: 60px; margin-top: -30px; }
+  .ws-nav--prev { left: var(--space-8); }
+  .ws-nav--next { right: var(--space-8); }
+}
+
+/* ── Work: the page is the world, under the header ── */
+.wk-main { padding-top: var(--size-header); }
+.wk-pager { padding-top: 0; }
 
 /* ── «Más información»: the postcard of the stop and, below it, its card ── */
 .wi { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--color-text); overflow-y: auto; overscroll-behavior: contain; }
@@ -195,6 +245,7 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
   display: grid; gap: var(--space-3); width: 100%; padding: var(--space-6); border-radius: var(--radius-2xl);
   border: 1px solid var(--color-line-strong); background: #0f0b2c;
 }
+@media (hover: hover) and (pointer: fine) { .wi-card { background: rgba(15, 11, 44, 0.78); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); } .wi::backdrop { background: rgba(6, 5, 19, 0.6); } }
 .wi-kicker { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--from); }
 .wi-card h2 { font-size: clamp(28px, 4vw, 36px); line-height: 1.05; font-weight: 800; font-stretch: 110%; letter-spacing: -0.02em; color: var(--color-heading); }
 .wi-text { color: var(--color-text); }

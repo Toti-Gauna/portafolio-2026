@@ -65,7 +65,7 @@ test('travelling it: the two buttons inside the map, the arrow keys and a drag w
   const prev = page.getByRole('button', { name: 'Parada anterior' }), next = page.getByRole('button', { name: 'Parada siguiente' });
   await expect(page.locator('.ws[data-ready]')).toBeVisible();
   // it starts on the first stop, in the middle of the map, with nowhere to go back to
-  await expect(now).toHaveText('01 / 14Mar del Plata');
+  await expect(now).toHaveText(/^01 \/ 14 · Donde empezóMar del Plata/);
   await expect(prev).toBeDisabled();
   expect(await offCentre(page, 'mdp')).toBeLessThan(140);
   // the buttons are inside the map, at its two sides
@@ -73,7 +73,7 @@ test('travelling it: the two buttons inside the map, the arrow keys and a drag w
   expect(inside).toEqual([true, true]);
   // a button goes one stop on and brings it to the middle; the page itself stays where it was
   await next.click();
-  await expect(now).toHaveText('02 / 14TACH Argentina');
+  await expect(now).toHaveText(/^02 \/ 14 · El trabajoTACH Argentina2021 – 2022/);
   await expect.poll(() => offCentre(page, 'tach')).toBeLessThan(140);
   await expect(prev).toBeEnabled();
   await expect(page.locator('.ws-names li[data-on] b')).toHaveText('TACH Argentina');
@@ -84,7 +84,7 @@ test('travelling it: the two buttons inside the map, the arrow keys and a drag w
   await page.keyboard.press('ArrowLeft');
   await expect(now).toContainText('TACH Argentina');
   await page.keyboard.press('End');
-  await expect(now).toHaveText('14 / 14Núcleo');
+  await expect(now).toHaveText(/^14 \/ 14 · Proyectos futurosNúcleo/);
   await expect(next).toBeDisabled();
   // Núcleo takes two bands and is one stop, between its two
   await expect.poll(() => offCentre(page, 'nucleo')).toBeLessThan(140);
