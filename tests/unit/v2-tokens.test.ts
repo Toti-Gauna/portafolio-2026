@@ -821,3 +821,74 @@ describe('v2 world from the ground (lote 4.3, primera persona)', () => {
     expect(en.world.views.drive).toBe('First person');
   });
 });
+
+describe('v2 cases (lote 5.1)', () => {
+  const words = (v: unknown): number => typeof v === 'string' ? v.split(/\s+/).filter(Boolean).length : Array.isArray(v) ? v.reduce((a: number, x) => a + words(x), 0) : v && typeof v === 'object' ? Object.values(v).reduce((a: number, x) => a + words(x), 0) : 0;
+  const strings = (v: unknown): string[] => typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(strings) : v && typeof v === 'object' ? Object.values(v).flatMap(strings) : [];
+  const keysOf = (v: unknown, p = ''): string[] => Array.isArray(v) ? v.flatMap((x, i) => keysOf(x, `${p}[${i}]`)) : v && typeof v === 'object' ? Object.entries(v).flatMap(([k, x]) => [`${p}.${k}`, ...keysOf(x, `${p}.${k}`)]) : [];
+  /** A figure may be written in words in the record («Las cuatro piezas»). */
+  const SPELLED: Record<string, Record<string, string>> = { es: { 2: 'dos', 3: 'tres', 4: 'cuatro', 5: 'cinco', 6: 'seis' }, en: { 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' } };
+
+  it('every case has its words in both languages, with the same keys, and its media and links in place', async () => {
+    const fs = await import('node:fs');
+    const { CASES, CASE_ORDER, nextCase, casesAt } = await import('../../v2/components/case/cases');
+    const { caseCopy } = await import('../../v2/components/case/copy');
+    expect(CASE_ORDER).toHaveLength(10);
+    expect(CASE_ORDER[0]).toBe('complia');
+    expect(new Set(CASE_ORDER.map(nextCase)).size).toBe(10);
+    expect(casesAt('tsoft').sort()).toEqual(['complia', 'supernova', 'tuenti']);
+    for (const slug of CASE_ORDER) {
+      const d = CASES[slug], es = caseCopy('es', slug), en = caseCopy('en', slug);
+      expect(keysOf(en), slug).toEqual(keysOf(es));
+      for (const m of [d.film, ...d.gallery]) {
+        for (const f of [m.src, m.poster].filter(Boolean) as string[]) expect(fs.existsSync(`public${f}`), `${slug}: ${f}`).toBe(true);
+      }
+      // a caption and an alt for every picture of the gallery, and nothing else
+      expect(Object.keys(es.gallery).sort(), slug).toEqual(d.gallery.map((g) => g.id).sort());
+      for (const l of d.links) expect(l.href).toMatch(/^https:\/\//);
+      // Tuenti: an illustration of my own, never a capture
+      if (slug === 'tuenti') expect([d.film, ...d.gallery].every((m) => !m.src?.endsWith('.mp4') && !m.src?.endsWith('.webp'))).toBe(true);
+    }
+  });
+
+  it('every case says it in ≤ 40 % of the words of the published one, in three layers', async () => {
+    const fs = await import('node:fs');
+    const { CASE_ORDER } = await import('../../v2/components/case/cases');
+    const { caseCopy } = await import('../../v2/components/case/copy');
+    for (const slug of CASE_ORDER) for (const l of ['es', 'en'] as const) {
+      const old = JSON.parse(fs.readFileSync(`messages/cases/${l}/${slug}.json`, 'utf8'));
+      const c = caseCopy(l, slug);
+      expect(words(c), `${slug} ${l}`).toBeLessThanOrEqual(Math.floor(words(old) * 0.4));
+      // what is read in 30 seconds stays short
+      for (const s of [c.line, ...c.ten.map((x) => x.v), ...c.decisions.map((x) => x.why)]) expect(words(s), `${slug} ${l}: ${s}`).toBeLessThanOrEqual(25);
+      for (const s of c.how.map((x) => x.d)) expect(words(s), `${slug} ${l}: ${s}`).toBeLessThanOrEqual(15);
+      for (const s of c.more.map((x) => x.p)) expect(words(s), `${slug} ${l}: ${s}`).toBeLessThanOrEqual(40);
+      expect([c.facts.length, c.ten.length, c.decisions.length, c.film.verbs.length]).toEqual([3, 3, 3, 3]);
+      expect(c.how.length).toBeGreaterThanOrEqual(3);
+      expect(c.how.length).toBeLessThanOrEqual(5);
+      expect(c.film.numbers.length).toBeLessThanOrEqual(3);
+      for (const v of c.film.verbs) expect(v, slug).toMatch(/^\S+( \S+)?\.$/);
+    }
+  });
+
+  it('every figure of a film is in the approved record, and the voice is senior and positive', async () => {
+    const fs = await import('node:fs');
+    const { CASE_ORDER } = await import('../../v2/components/case/cases');
+    const { caseCopy } = await import('../../v2/components/case/copy');
+    const VOICE = { es: /\b(sin|no|nunca|todavía|falta|pendiente)\b/i, en: /\b(no|not|never|without|yet|missing|lack)\b|n't\b/i };
+    for (const slug of CASE_ORDER) for (const l of ['es', 'en'] as const) {
+      const record = fs.readFileSync(`messages/cases/${l}/${slug}.json`, 'utf8');
+      const c = caseCopy(l, slug);
+      for (const x of c.film.numbers) {
+        const found = record.includes(x.n) || (SPELLED[l][x.n] && new RegExp(`\\b${SPELLED[l][x.n]}\\b`, 'i').test(record));
+        expect(found, `${slug} ${l}: ${x.n}`).toBeTruthy();
+      }
+      for (const s of strings(c)) {
+        expect(s, `${slug} ${l}`).not.toMatch(VOICE[l]);
+        expect(s).not.toMatch(/vibe coding|\bSsr\b|handyx/i);
+      }
+      if (c.next) expect(c.next).toMatch(l === 'es' ? /^Próximo paso: / : /^Next step: /);
+    }
+    for (const l of ['es', 'en'] as const) for (const s of strings((l === 'es' ? es : en).case)) expect(s).not.toMatch(VOICE[l]);
+  });
+});

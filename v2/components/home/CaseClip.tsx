@@ -9,7 +9,11 @@ import { PlayIcon } from '../ui/Icons';
  * card; the button plays and pauses it for everyone (touch, keyboard, reduced motion). Muted, never downloaded
  * before it is needed, and paused when its card leaves the screen.
  */
-export function CaseClip({ src, poster, alt, play, pause, name }: { src: string; poster: string; alt: string; play: string; pause: string; name: string }) {
+export function CaseClip({ src, poster, alt, play, pause, name, card = '.hc-card', className }: {
+  src: string; poster: string; alt: string; play: string; pause: string; name: string;
+  /** The card whose pointer plays it (the home's case card; a frame of a case's gallery). */
+  card?: string; className?: string;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const [on, setOn] = useState(false);
@@ -19,18 +23,18 @@ export function CaseClip({ src, poster, alt, play, pause, name }: { src: string;
     if (go) void v.play().then(() => setOn(true)).catch(() => setOn(false)); else if (!v.paused) { v.pause(); setOn(false); }
   };
   useEffect(() => {
-    const card = root.current?.closest('.hc-card');
-    if (!card) return;
+    const box = root.current?.closest(card);
+    if (!box) return;
     const enter = (e: Event) => { if ((e as PointerEvent).pointerType === 'mouse' && !reducedMotion()) run(true); };
     const leave = (e: Event) => { if ((e as PointerEvent).pointerType === 'mouse') run(false); };
     const io = new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) run(false); });
-    card.addEventListener('pointerenter', enter);
-    card.addEventListener('pointerleave', leave);
-    io.observe(card);
-    return () => { card.removeEventListener('pointerenter', enter); card.removeEventListener('pointerleave', leave); io.disconnect(); };
-  }, []);
+    box.addEventListener('pointerenter', enter);
+    box.addEventListener('pointerleave', leave);
+    io.observe(box);
+    return () => { box.removeEventListener('pointerenter', enter); box.removeEventListener('pointerleave', leave); io.disconnect(); };
+  }, [card]);
   return (
-    <div className="hc-clip" ref={root} data-playing={on || undefined}>
+    <div className={['hc-clip', className].filter(Boolean).join(' ')} ref={root} data-playing={on || undefined}>
       <video ref={video} muted loop playsInline preload="none" poster={poster} aria-label={alt} tabIndex={-1}>
         <source src={src} type="video/mp4" />
       </video>

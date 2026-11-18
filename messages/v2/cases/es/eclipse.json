@@ -1,0 +1,135 @@
+{
+  "title": "Eclipse",
+  "kind": "Producto propio",
+  "line": "Mi estudio de desarrollo, IA y automatización, construido como un sistema completo: una landing que vende con demos, dos portales y backend propio.",
+  "facts": [
+    {
+      "k": "Rol",
+      "v": "Producto, diseño y desarrollo, de punta a punta"
+    },
+    {
+      "k": "Piezas",
+      "v": "Landing · portal de clientes · backend · portal interno · kit de emails"
+    },
+    {
+      "k": "Desde",
+      "v": "2 de octubre de 2026"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Probá.",
+      "Pedí.",
+      "Seguí."
+    ],
+    "numbers": [
+      {
+        "n": "779",
+        "d": "tests del backend"
+      },
+      {
+        "n": "463",
+        "d": "tests de landing y portal"
+      },
+      {
+        "n": "117",
+        "d": "operaciones en la API"
+      }
+    ],
+    "alt": "Recorrido por la landing de Eclipse: el eclipse animado del hero y las secciones de servicios, PyMEs y demos.",
+    "label": "Landing publicada"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "A una PyME se le escapan consultas, turnos y seguimientos, y compra software cuando ve su negocio funcionando."
+    },
+    {
+      "k": "La solución",
+      "v": "Una landing que muestra primero su rubro en una demo; detrás, un sistema propio lleva el pedido hasta un proyecto en cinco etapas."
+    },
+    {
+      "k": "Dónde está",
+      "v": "La landing está publicada en eclipse-business.com; el portal conectado, el backend y el portal interno están construidos y probados."
+    }
+  ],
+  "how": [
+    {
+      "t": "Elegir el rubro",
+      "d": "Inmobiliarias abre el camino, con demo y planes publicados."
+    },
+    {
+      "t": "Ver la demo",
+      "d": "Lumen Propiedades, una inmobiliaria ficticia con chatbot, pipeline, visitas y seguimientos."
+    },
+    {
+      "t": "Escribir",
+      "d": "Por WhatsApp, con el plan elegido ya en el mensaje."
+    },
+    {
+      "t": "Acuerdo y seña",
+      "d": "Propuesta escrita; el proyecto nace con la seña, en una sola transacción."
+    },
+    {
+      "t": "Seguir el proyecto",
+      "d": "El cliente lo ve en su portal, en cinco etapas, de preparación a entrega."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "El navegador manda solo la selección",
+      "why": "La API recalcula el presupuesto en centavos desde un catálogo congelado; un test exige coincidir con la web en 183 selecciones."
+    },
+    {
+      "t": "El proyecto nace con seña",
+      "why": "Aceptar una solicitud registra una decisión; un trigger diferido de PostgreSQL exige la seña cobrada, aun con SQL escrito por fuera de la aplicación."
+    },
+    {
+      "t": "Un código, dos modos al compilar",
+      "why": "La demo se publica en GitHub Pages con cero llamadas de red; la conectada vive en el dominio de la API, donde viajan las cookies."
+    }
+  ],
+  "gallery": {
+    "portal-clientes": {
+      "alt": "Portal de clientes con datos ficticios: la tabla «Mis proyectos» con etapas e hitos; se abre un proyecto y aparecen etapa, próximo hito y cronograma.",
+      "caption": "Portal de clientes en modo demo: de Mis proyectos al detalle."
+    },
+    "portal-interno": {
+      "alt": "Portal interno con datos de ejemplo: prospectos con su próxima acción, proyectos en sus cinco etapas y el calendario del mes; los montos están ocultos.",
+      "caption": "Portal interno en modo demo: prospectos, proyectos y calendario."
+    },
+    "demo-lumen": {
+      "alt": "Un clic en «Inmobiliarias» abre la capa de demo; «Simular» trae una consulta nocturna, con escritorio y celular lado a lado.",
+      "caption": "«Ver demo»: la inmobiliaria Lumen (Demo) recibe una consulta simulada."
+    },
+    "landing-proceso": {
+      "alt": "Sección «Cómo trabajamos» con las fases del proyecto; baja hasta preguntas y contacto y se abre una respuesta del acordeón.",
+      "caption": "Cómo trabajamos y preguntas: el proceso y una respuesta desplegada."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Node y Express",
+    "PostgreSQL",
+    "Prisma",
+    "OGL (WebGL)",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Arquitectura",
+      "p": "Cuatro repos, un producto. Las webs son estáticas y pasan todo por una API propia en Node y Express, con PostgreSQL vía Prisma: 117 operaciones, 28 modelos y sesiones separadas para clientes y administración."
+    },
+    {
+      "h": "Seguridad",
+      "p": "Sesión en cookies HttpOnly y CSRF en memoria; contraseñas con Argon2id; un refresh que rota en cada uso; administradores solo en el entorno del servidor, con TOTP; cada consulta del cliente filtra por dueño o miembro."
+    },
+    {
+      "h": "Calidad",
+      "p": "CI en cada repo. El 28/10/2026 corrí las tres suites: 463 tests en la web, 779 en el backend y 132 en el portal interno. La web se publica con respaldo, pruebas de humo y vuelta atrás automática."
+    }
+  ],
+  "next": "Próximo paso: desplegar el backend, completo hasta su fase 9, y abrir el portal conectado."
+}

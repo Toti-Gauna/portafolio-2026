@@ -1,0 +1,127 @@
+{
+  "title": "games-market",
+  "kind": "Laboratorio propio",
+  "line": "Un banco de pruebas y catálogo de juegos web para eventos: el proyector es la pantalla y los celulares de la gente, el control.",
+  "facts": [
+    {
+      "k": "Juegos",
+      "v": "18 jugables de 24 planificados"
+    },
+    {
+      "k": "Motores",
+      "v": "Canvas 2D · PixiJS · React Three Fiber"
+    },
+    {
+      "k": "Red",
+      "v": "WebRTC en estrella, con el proyector de host"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Escaneá.",
+      "Conectá.",
+      "Jugá."
+    ],
+    "numbers": [
+      {
+        "n": "18",
+        "d": "juegos jugables"
+      },
+      {
+        "n": "814",
+        "d": "tests de lógica pura"
+      },
+      {
+        "n": "12",
+        "d": "tandas por costo técnico"
+      }
+    ],
+    "alt": "Ninja a pantalla completa: formas de colores saltan desde abajo y el corte las parte mientras sube el puntaje.",
+    "label": "Laboratorio · Canvas 2D"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Ver cómo se ve y se juega cada juego pedía una sesión real con código de sala, y había 24 planificados."
+    },
+    {
+      "k": "La solución",
+      "v": "Un banco que abre cualquier juego al instante, con semilla, latencia y pérdida simuladas, «Forzar fin» y los FPS a la vista."
+    },
+    {
+      "k": "Dónde está",
+      "v": "18 jugables: 6 estables y 12 en beta, incluidos los tres 3D. El banco sirve para desarrollarlos y para mostrarlos."
+    }
+  ],
+  "how": [
+    {
+      "t": "Elegir la partida",
+      "d": "El contenedor define sala, semilla, duración, asiento, host y red."
+    },
+    {
+      "t": "Conectar",
+      "d": "Cada celular entra por un QR y abre un canal directo con el proyector."
+    },
+    {
+      "t": "Jugar",
+      "d": "PRNG sembrado y física Rapier: la misma semilla da la misma partida."
+    },
+    {
+      "t": "Sincronizar",
+      "d": "Snapshots con delta contra el último tick confirmado, con interpolación y predicción."
+    },
+    {
+      "t": "Terminar",
+      "d": "onFinish avisa una sola vez; si se aborta, entrega el resultado parcial."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Física determinista",
+      "why": "PRNG sembrado y Rapier compilado a WASM: la misma semilla da la misma partida, y eso hace posible el netcode."
+    },
+    {
+      "t": "El proyector como host",
+      "why": "WebRTC con PeerJS y el proyector como única autoridad; en desarrollo, BroadcastChannel une dos pestañas y ningún juego se entera."
+    },
+    {
+      "t": "Cada juego en su chunk",
+      "why": "Rapier pesa 2,1 MB en 2D y 2,2 MB en 3D: lo descarga solo quien abre un juego que lo usa."
+    }
+  ],
+  "gallery": {
+    "arena-3d": {
+      "alt": "Vista aérea en 3D de un valle verde con colinas y casas al atardecer, el anillo que se cierra y los marcadores de jugadores.",
+      "caption": "Arena 3D: vista aérea del valle con diez jugadores bot."
+    },
+    "catalogo": {
+      "alt": "Catálogo oscuro «Batería de experiencias» con tarjetas de juegos, cada una con topología, motor y estado, y la lista lateral por categoría.",
+      "caption": "El catálogo del banco, con filtros por categoría y topología."
+    }
+  },
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Canvas 2D",
+    "PixiJS 8",
+    "React Three Fiber",
+    "Rapier (WASM)",
+    "WebRTC (PeerJS)",
+    "Vitest"
+  ],
+  "more": [
+    {
+      "h": "Ordenado por costo",
+      "p": "Los 24 juegos se ordenaron en 12 tandas con un puntaje de 0 a 18 en seis ejes. Se puede parar en cualquier tanda y el producto sirve; los 3D quedaron al final."
+    },
+    {
+      "h": "Primer juego en red",
+      "p": "El fútbol fue el primero en usar entera la capa de snapshots y encontró cinco problemas. Con 20 % de pérdida simulada: 121 paquetes perdidos y cero fallos de decodificación."
+    },
+    {
+      "h": "Calidad",
+      "p": "814 tests unitarios de lógica pura en 39 archivos: juegos, motores, red, contrato e interfaz. La CI corre lint, tests y build antes de publicar."
+    }
+  ],
+  "next": "Próximo paso: probar los juegos en red con celulares reales, en un evento."
+}

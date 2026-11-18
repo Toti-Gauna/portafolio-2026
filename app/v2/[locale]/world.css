@@ -514,3 +514,12 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
   .dv-card b { white-space: normal; }
   .dv-names li { font-size: 12px; }
 }
+
+/* the way from a stop to its case (lote 5.1) */
+.wi-case, .wd-case {
+  display: inline-flex; align-items: center; justify-self: start; gap: 8px; min-height: var(--size-touch); padding: 0 16px; margin-top: var(--space-2);
+  border-radius: var(--radius-md); border: 2px solid var(--from); color: var(--color-heading); font-size: 15px; font-weight: 800; text-decoration: none;
+}
+.wd-case { margin-top: 0; margin-right: var(--space-2); font-size: 14px; }
+.wi-case svg, .wd-case svg { transition: transform var(--motion-fast) var(--motion-ease); }
+@media (hover: hover) and (pointer: fine) { .wi-case:hover svg, .wd-case:hover svg { transform: translateX(4px); } }

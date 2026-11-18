@@ -1,0 +1,135 @@
+{
+  "title": "Velmar",
+  "kind": "Demo para un cliente",
+  "line": "La tienda online y el panel de gestión de un taller de productos personalizados, en una demo clickeable de punta a punta.",
+  "facts": [
+    {
+      "k": "Cliente",
+      "v": "Un taller real de Mar del Plata"
+    },
+    {
+      "k": "Piezas",
+      "v": "Tienda para el celular · panel de gestión"
+    },
+    {
+      "k": "Tamaño",
+      "v": "24 pantallas de tienda y 41 de panel"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Personalizá.",
+      "Fabricá.",
+      "Entregá."
+    ],
+    "numbers": [
+      {
+        "n": "65",
+        "d": "pantallas en total"
+      },
+      {
+        "n": "22",
+        "d": "módulos de reglas puras"
+      },
+      {
+        "n": "256",
+        "d": "tests unitarios en verde"
+      }
+    ],
+    "alt": "Panel de Velmar con datos ficticios: indicadores, embudo de pedidos y la cola de producción por etapas.",
+    "label": "Demo · datos de muestra"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Cada pedido nace en un chat, se anota en un Excel y se agenda en el celular; stock y fechas de entrega, a mano."
+    },
+    {
+      "k": "La solución",
+      "v": "Una tienda móvil donde el comprador ve su producto antes de pagar y un panel que lleva cada pedido del comprobante a la entrega."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Demo navegable con datos de muestra, hecha para que el taller vea su negocio funcionando antes de arrancar el proyecto."
+    }
+  ],
+  "how": [
+    {
+      "t": "Configurar",
+      "d": "El comprador arma su collar y la vista previa y el precio cambian en vivo."
+    },
+    {
+      "t": "Aprobar",
+      "d": "Agregar al carrito aprueba el diseño, que viaja con el pedido hasta el taller."
+    },
+    {
+      "t": "Revisar el pago",
+      "d": "El comprobante deja el pedido en revisión hasta que el taller lo aprueba."
+    },
+    {
+      "t": "Fabricar",
+      "d": "La cola de producción lo pasa por máquina y terminación, y descuenta los insumos."
+    },
+    {
+      "t": "Entregar",
+      "d": "El calendario ofrece la primera fecha con lugar según la capacidad del taller."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Demo estática, la misma app mañana",
+      "why": "Export estático para mostrarla antes de arrancar; para producción se suman servidor, Prisma y login, y los componentes se reutilizan."
+    },
+    {
+      "t": "Reglas puras, en pesos enteros",
+      "why": "Precios, cupones, estados, fechas y sorteos viven en funciones puras con azar inyectable: se testean solas y pasan al servidor."
+    },
+    {
+      "t": "Un panel que habla Excel",
+      "why": "Las tablas se editan como una planilla, con teclado, rangos, copiar y pegar y deshacer, e importan y exportan Excel o CSV."
+    }
+  ],
+  "gallery": {
+    "collar-en-vivo": {
+      "alt": "Ficha del collar con nombre en un celular: se escribe ROCCO y la vista previa ilustrada muestra las letras colgando.",
+      "caption": "El configurador escribe el nombre en la vista previa."
+    },
+    "club-ruleta": {
+      "alt": "Ruleta verde y dorada «Girá y ganá» a pantalla completa: se toca el centro, gira y muestra «¡Ganaste! Envío gratis».",
+      "caption": "Club Velmar: la ruleta de cupones gira y entrega un premio."
+    },
+    "cupones": {
+      "alt": "Pantalla «Mis cupones» con cupones de muestra (10 % en la primera compra, envío gratis con cuenta), cada uno con su código.",
+      "caption": "Mis cupones: cupones de muestra que se aplican al carrito."
+    },
+    "panel-calendario": {
+      "alt": "Calendario mensual de entregas con pedidos por día, días completos y feriados marcados, y contadores de entregas, atrasados y capacidad.",
+      "caption": "Calendario de entregas con capacidad por día."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Zustand",
+    "Zod",
+    "Konva",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Ruleta, club y cupones",
+      "p": "Cada incentivo termina en un cupón de «Mis cupones»: el carrito valida con una regla y el panel controla cada fuente. La ruleta es un sorteo ponderado en una función pura, y los premios son de un uso y vencen."
+    },
+    {
+      "h": "Pedidos con reglas",
+      "p": "Los estados del pedido son una máquina con reglas: el panel ofrece solo las transiciones válidas, también en lote. Aprobar un comprobante pide confirmación y rechazarlo, un motivo; cada cambio deja un email simulado."
+    },
+    {
+      "h": "Calidad y producción",
+      "p": "La CI corre lint, tipos, unitarios, build, una verificación del export y e2e en un Pixel 7 emulado. Para producción está planificado: servidor Next, PostgreSQL con Prisma, login con rol y Mercado Pago."
+    }
+  ],
+  "next": "Próximo paso: revisar en iPhone y iPad reales y confirmar los estilos de collar."
+}

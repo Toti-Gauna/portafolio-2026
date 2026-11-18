@@ -8,6 +8,7 @@ import './sound.css';
 import './gate.css';
 import './home.css';
 import './world.css';
+import './case.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';

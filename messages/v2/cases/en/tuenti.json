@@ -1,0 +1,86 @@
+{
+  "title": "Tuenti",
+  "kind": "Tsoft for Tuenti and Telefónica",
+  "line": "Gamification, top-ups and payments in Tuenti and Telefónica products, from frontend to backend.",
+  "facts": [
+    {
+      "k": "Company",
+      "v": "Tsoft"
+    },
+    {
+      "k": "Period",
+      "v": "2024 – today"
+    },
+    {
+      "k": "Focus",
+      "v": "Gamification, top-ups and payments"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Spin.",
+      "Invite.",
+      "Measure."
+    ],
+    "numbers": [],
+    "alt": "My own illustration of Tuenti's prize wheel.",
+    "label": "My own illustration"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Give people a reason to come back."
+    },
+    {
+      "k": "The solution",
+      "v": "Roulette, referrals and a dashboard to measure them; then automatic top-up and payments."
+    },
+    {
+      "k": "Where it stands",
+      "v": "Professional work since 2024; today also backend and deployments."
+    }
+  ],
+  "how": [
+    {
+      "t": "Play",
+      "d": "Roulette and referrals: reward mechanics."
+    },
+    {
+      "t": "Measure",
+      "d": "Referrals, recurrence and gamification in a dashboard."
+    },
+    {
+      "t": "Pay",
+      "d": "Automatic top-up and the payments module."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Gamification is product",
+      "why": "Every mechanic gives a reason to come back."
+    },
+    {
+      "t": "Measure to choose",
+      "why": "The dashboard shows which mechanic works."
+    },
+    {
+      "t": "Business first",
+      "why": "The technical side moves best once the business requirement is understood."
+    }
+  ],
+  "gallery": {},
+  "stack": [
+    "React",
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "SQL",
+    "CI/CD"
+  ],
+  "more": [
+    {
+      "h": "How I grew",
+      "p": "From Jr Frontend Developer in 2024 to Sr AI Fullstack Developer, with a Special Recognition from Tsoft."
+    }
+  ]
+}

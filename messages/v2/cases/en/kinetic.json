@@ -1,0 +1,134 @@
+{
+  "title": "Kinetic Studio",
+  "kind": "Own lab",
+  "line": "My lab of motion-graphics trailers made in code: picture and sound are generated live in the browser.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "My own project, built with a trailer agent"
+    },
+    {
+      "k": "Period",
+      "v": "September and October 2026"
+    },
+    {
+      "k": "Pieces",
+      "v": "Hub, trailers, engine, recipes and sound"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Compose.",
+      "Sync.",
+      "Freeze."
+    ],
+    "numbers": [
+      {
+        "n": "31",
+        "d": "trailers in the hub"
+      },
+      {
+        "n": "272",
+        "d": "scenes in the catalogue"
+      },
+      {
+        "n": "23",
+        "d": "synthesised voices"
+      }
+    ],
+    "alt": "Excerpt of the KINETIC trailer: circle, square and triangle on cream paper changing colour and place.",
+    "label": "Made in code"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "Product trailers that are edited as data and can be reviewed frame by frame."
+    },
+    {
+      "k": "The solution",
+      "v": "One paused master timeline drives picture and sound; scenes are recipes that return their duration, and the music is a list of notes."
+    },
+    {
+      "k": "Where it stands",
+      "v": "31 trailers in a public hub on GitHub Pages, and this portfolio's «Meet Ignacio» trailer, built with its kit."
+    }
+  ],
+  "how": [
+    {
+      "t": "Set up",
+      "d": "A trailer agent creates the folder with its own copy of the kit."
+    },
+    {
+      "t": "Edit data",
+      "d": "trailer.js names the scenes, palette, fonts and music."
+    },
+    {
+      "t": "Compose",
+      "d": "The engine calls each recipe and adds everything to one timeline."
+    },
+    {
+      "t": "Publish",
+      "d": "Every push to main builds the hub and publishes it on GitHub Pages."
+    },
+    {
+      "t": "Preview",
+      "d": "In the hub, a poster and a silent preview on hover."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "One timeline, paused",
+      "why": "The film is deterministic and jumps to any second: frame-by-frame review with ?t=, hub previews and offline audio."
+    },
+    {
+      "t": "The music is a list",
+      "why": "The same list of notes plays live, renders offline with a fixed seed and moves the picture on the beat."
+    },
+    {
+      "t": "The expensive frame first",
+      "why": "Each scene's first frame is the costly one: the portfolio's trailer walks the film once behind a cover before playing."
+    }
+  ],
+  "gallery": {
+    "kinetic-ritmo": {
+      "alt": "Blue-to-orange gradient dot grid rippling and warping, with the word RHYTHM, ending in particles.",
+      "caption": "KINETIC: a dot grid pulsing with RHYTHM."
+    },
+    "kinetic-profundidad": {
+      "alt": "Particles forming MOTION and a neon polygon tunnel with the words DEPTH and SPEED rushing past.",
+      "caption": "KINETIC: geometric tunnel with DEPTH and SPEED."
+    },
+    "lab-bauhaus": {
+      "alt": "A Bauhaus composition drawing itself on blue, then large type on yellow: \"una sola escuela\".",
+      "caption": "Lab trailer \"Bauhaus 100\", recorded from a local build."
+    },
+    "lab-hyperspace": {
+      "alt": "A ringed blue planet turns in space, then the camera flies through an asteroid field.",
+      "caption": "\"Hyperspace\" trailer: 3D scenes with Three.js."
+    }
+  },
+  "stack": [
+    "GSAP",
+    "Canvas 2D",
+    "Three.js",
+    "WebAudio",
+    "Strict TypeScript",
+    "Vite",
+    "GitHub Actions"
+  ],
+  "more": [
+    {
+      "h": "In the portfolio",
+      "p": "The trailer is a static page of the kit inside a same-origin iframe. Audio is created inside the click and the iframe borrows it."
+    },
+    {
+      "h": "Performance",
+      "p": "With the warm-up pass, the average frame of the portfolio's trailer went from 29 to 20 ms, a lab measurement in Chromium rendering in software."
+    },
+    {
+      "h": "Determinism",
+      "p": "The hash test opens the same second three ways: 2 of 4 moments come out identical bit for bit and the other two differ by one colour level."
+    }
+  ],
+  "next": "Next step: unify the kit into one shared copy for every trailer."
+}

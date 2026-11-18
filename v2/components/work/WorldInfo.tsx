@@ -1,4 +1,6 @@
 import type { CSSProperties } from 'react';
+import Link from 'next/link';
+import { ArrowIcon } from '../ui/Icons';
 import { CloseIcon } from '../ui/Icons';
 import type { WorldPostal } from './world-stamps';
 
@@ -25,9 +27,14 @@ const Facts = ({ facts }: { facts: WorldFact[] }) => (
  * server (the content is in the HTML) and opened by the map with showModal(): the focus goes to «Cerrar» and
  * comes back to the button that opened it; Escape, «Cerrar» or a click outside close it.
  */
-export function WorldInfo({ id, place, group, color, postals, captions, labels }: {
-  id: string; place: WorldPlace; group: string; color: string; postals: WorldPostal[]; captions: PostalCaption[]; labels: { close: string; inside: string; postal: string };
+export function WorldInfo({ id, place, group, color, postals, captions, labels, cases = {} }: {
+  id: string; place: WorldPlace; group: string; color: string; postals: WorldPostal[]; captions: PostalCaption[]; labels: { close: string; inside: string; postal: string; see: string };
+  /** The case page of the stop (key `self`) or of each part inside it (Tsoft: Tuenti, CompliA, Supernova). */
+  cases?: Record<string, string>;
 }) {
+  const see = (href?: string, name?: string) => href && (
+    <Link className="wi-case" href={href}>{labels.see}<span className="ui-sr"> · {name}</span><ArrowIcon size={16} /></Link>
+  );
   return (
     <dialog className="wi" id={`wi-${id}`} aria-labelledby={`wi-t-${id}`} style={{ '--from': color } as CSSProperties}>
       <div className="wi-in">
@@ -49,6 +56,7 @@ export function WorldInfo({ id, place, group, color, postals, captions, labels }
           <p className="wd-state"><i aria-hidden="true" />{place.state}</p>
           <p className="wi-text">{place.text}</p>
           <Facts facts={place.facts} />
+          {see(cases.self, place.name)}
           {place.inside && (
             <>
               <h3 className="wi-sub">{labels.inside}</h3>
@@ -59,6 +67,7 @@ export function WorldInfo({ id, place, group, color, postals, captions, labels }
                     <p className="wd-state"><i aria-hidden="true" />{part.state}</p>
                     <p className="wi-text">{part.text}</p>
                     <Facts facts={part.facts} />
+                    {see(cases[key], part.name)}
                   </li>
                 ))}
               </ul>

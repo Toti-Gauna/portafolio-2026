@@ -1,0 +1,127 @@
+{
+  "title": "Volta",
+  "kind": "Lab · sales demo",
+  "line": "A sports-supplement online store you can click through end to end, with a fictional brand, products and orders.",
+  "facts": [
+    {
+      "k": "Type",
+      "v": "Clickable demo, runs in the browser"
+    },
+    {
+      "k": "Screens",
+      "v": "29 in the store · 60 in the panel"
+    },
+    {
+      "k": "Data",
+      "v": "Fictional brand, products and orders"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Shop.",
+      "Play.",
+      "Gift."
+    ],
+    "numbers": [
+      {
+        "n": "29",
+        "d": "store screens"
+      },
+      {
+        "n": "60",
+        "d": "panel screens"
+      },
+      {
+        "n": "988",
+        "d": "unit tests passing"
+      }
+    ],
+    "alt": "Demo admin panel: «Hoy en tu tienda», then stock with batches and expiry dates, then Promos with the wheel.",
+    "label": "Demo · fictional data"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "A small supplement shop takes orders over WhatsApp, chases changing price lists and has tubs expiring on the shelf."
+    },
+    {
+      "k": "The solution",
+      "v": "A store that works out when to reorder, sells lots by expiry date and turns games into coupons, plus a panel showing today's tasks."
+    },
+    {
+      "k": "Where it stands",
+      "v": "A clickable demo on sample data. The production version, with a server, is described in the repo."
+    }
+  ],
+  "how": [
+    {
+      "t": "Buy",
+      "d": "The product sheet works out how long the tub lasts."
+    },
+    {
+      "t": "Running out",
+      "d": "The panel lists who runs out this week."
+    },
+    {
+      "t": "Reach out",
+      "d": "The owner sends a ready-made WhatsApp with a link that fills the bag."
+    },
+    {
+      "t": "Come back",
+      "d": "The customer opens the ready bag and uses their Club coupon."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Rules in a pure engine",
+      "why": "Pricing, stock, payments and missions live outside the components: they are tested on their own and move to the server keeping the same screens."
+    },
+    {
+      "t": "Static export for GitHub Pages",
+      "why": "A single Next.js app that runs in the browser; the repo rules out, in writing, Server Actions, cookies, middleware and ISR."
+    },
+    {
+      "t": "White label through a sheet",
+      "why": "One demo per prospect by changing a sheet: name, colours and its own storage prefix. A test keeps the brand inside the sheets."
+    }
+  ],
+  "gallery": {
+    "tienda": {
+      "alt": "Dark store with lime accents on a phone: Protein, the Ionic Whey sheet with price per serving, and the bag with the stack discount.",
+      "caption": "VOLTA store (Demo): catalogue → product → cart."
+    },
+    "club-ruleta": {
+      "alt": "Club page with the weight-plate wheel: the centre is tapped, it spins and shows \"¡Ganaste!\" with a single-use coupon.",
+      "caption": "VOLTA club: the \"Disco olímpico\" wheel spins and gives a coupon."
+    },
+    "regalar": {
+      "alt": "Phone screen of VOLTA's gift section: \"Regalá energía\", tabs for a product, a stack or a gift card, and a creatine tub.",
+      "caption": "Gifts: \"Regalá energía\" with a product, stack or gift card."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Zustand",
+    "Zod",
+    "Vitest",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "The order",
+      "p": "A single function decides which transition is valid and with which trigger. A payment proof reaches Paid only through the panel's approval."
+    },
+    {
+      "h": "A careful demo",
+      "p": "Everything stays in the browser: WhatsApp is a link with ready-made text and a payment proof is processed in a canvas. Forms validated with Zod, gifts with a check digit."
+    },
+    {
+      "h": "Quality",
+      "p": "Strict TypeScript and ESLint. CI runs lint, typecheck, unit tests, build and an export check before publishing; 988 unit tests passing on 10/28/2026."
+    }
+  ],
+  "next": "Next step: split the panel's data and test on real iPhone and Android phones."
+}

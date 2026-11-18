@@ -1,0 +1,135 @@
+{
+  "title": "Eclipse",
+  "kind": "My own product",
+  "line": "My own development, AI and automation studio, built as one complete system: a landing page that sells with demos, two portals and its own backend.",
+  "facts": [
+    {
+      "k": "Role",
+      "v": "Product, design and engineering, end to end"
+    },
+    {
+      "k": "Pieces",
+      "v": "Landing · client portal · backend · internal portal · email kit"
+    },
+    {
+      "k": "Since",
+      "v": "October 2, 2026"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Try it.",
+      "Order.",
+      "Follow."
+    ],
+    "numbers": [
+      {
+        "n": "779",
+        "d": "backend tests"
+      },
+      {
+        "n": "463",
+        "d": "landing and portal tests"
+      },
+      {
+        "n": "117",
+        "d": "API operations"
+      }
+    ],
+    "alt": "A walk through the Eclipse landing page: the animated eclipse in the hero, then services, small businesses and demos.",
+    "label": "Live landing page"
+  },
+  "ten": [
+    {
+      "k": "The challenge",
+      "v": "A small business lets inquiries, bookings and follow-ups slip away, and buys software once it sees its own business working."
+    },
+    {
+      "k": "The solution",
+      "v": "A landing page that shows their industry in a demo first; behind it, my own system takes the request to a project in five stages."
+    },
+    {
+      "k": "Where it stands",
+      "v": "The landing page is live at eclipse-business.com; the connected portal, the backend and the internal portal are built and tested."
+    }
+  ],
+  "how": [
+    {
+      "t": "Pick the industry",
+      "d": "Real estate leads the way, with a demo and published plans."
+    },
+    {
+      "t": "Watch the demo",
+      "d": "Lumen Propiedades, a fictional real estate agency with chatbot, pipeline, viewings and follow-ups."
+    },
+    {
+      "t": "Write",
+      "d": "On WhatsApp, with the chosen plan already in the message."
+    },
+    {
+      "t": "Deal and deposit",
+      "d": "A written proposal; the project is born with the deposit, in one transaction."
+    },
+    {
+      "t": "Follow the project",
+      "d": "The client sees it in their portal, in five stages, from preparation to delivery."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "The browser sends only the selection",
+      "why": "The API recomputes the estimate in cents from a frozen catalog; a test requires it to match the website on 183 selections."
+    },
+    {
+      "t": "Projects are born with a deposit",
+      "why": "Accepting a request records a decision; a deferred PostgreSQL trigger requires a collected deposit, even for SQL written outside the application."
+    },
+    {
+      "t": "One codebase, two build-time modes",
+      "why": "The demo is published on GitHub Pages with zero network calls; the connected version lives on the API's domain, where the cookies travel."
+    }
+  ],
+  "gallery": {
+    "portal-clientes": {
+      "alt": "Client portal on fictional data: the «Mis proyectos» table with stages and milestones; a project opens, showing stage, next milestone and timeline.",
+      "caption": "Client portal in demo mode: from My projects to the detail."
+    },
+    "portal-interno": {
+      "alt": "Dark internal portal on sample data: prospects with their next action, projects in their five stages and the month calendar; amounts are hidden.",
+      "caption": "Internal portal in demo mode: prospects, projects and calendar."
+    },
+    "demo-lumen": {
+      "alt": "A click on «Inmobiliarias» opens the demo layer; «Simular» brings a late-night inquiry, with the desktop and phone views side by side.",
+      "caption": "«Ver demo»: the Lumen real-estate demo receives a simulated inquiry."
+    },
+    "landing-proceso": {
+      "alt": "The «Cómo trabajamos» section with the project phases; it scrolls to FAQ and contact and one accordion answer opens.",
+      "caption": "How we work and FAQ: the process, then one answer unfolds."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Node and Express",
+    "PostgreSQL",
+    "Prisma",
+    "OGL (WebGL)",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "Architecture",
+      "p": "Four repos, one product. The websites are static and send everything through my own API in Node and Express, with PostgreSQL via Prisma: 117 operations, 28 models and separate sessions for clients and administration."
+    },
+    {
+      "h": "Security",
+      "p": "Session in HttpOnly cookies and the CSRF token in memory; passwords with Argon2id; a refresh token that rotates on every use; administrators only in the server's environment, with TOTP; every client query filters by owner or member."
+    },
+    {
+      "h": "Quality",
+      "p": "CI in every repo. On 28/10/2026 I ran all three suites: 463 tests on the website, 779 on the backend and 132 on the internal portal. The website deploys with a backup, smoke checks and automatic rollback."
+    }
+  ],
+  "next": "Next step: deploy the backend, complete through phase 9, and open the connected portal."
+}

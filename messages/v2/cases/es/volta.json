@@ -1,0 +1,127 @@
+{
+  "title": "Volta",
+  "kind": "Laboratorio · demo de venta",
+  "line": "Una tienda online de suplementos deportivos para recorrer de punta a punta, con marca, productos y pedidos ficticios.",
+  "facts": [
+    {
+      "k": "Tipo",
+      "v": "Demo clickeable, corre en el navegador"
+    },
+    {
+      "k": "Pantallas",
+      "v": "29 de la tienda · 60 del panel"
+    },
+    {
+      "k": "Datos",
+      "v": "Marca, productos y pedidos ficticios"
+    }
+  ],
+  "film": {
+    "verbs": [
+      "Comprá.",
+      "Jugá.",
+      "Regalá."
+    ],
+    "numbers": [
+      {
+        "n": "29",
+        "d": "pantallas de la tienda"
+      },
+      {
+        "n": "60",
+        "d": "pantallas del panel"
+      },
+      {
+        "n": "988",
+        "d": "tests unitarios en verde"
+      }
+    ],
+    "alt": "Panel de demostración: «Hoy en tu tienda», después stock con lotes y vencimientos, y Promos con la ruleta.",
+    "label": "Demo · datos ficticios"
+  },
+  "ten": [
+    {
+      "k": "El desafío",
+      "v": "Una tienda chica de suplementos toma pedidos por WhatsApp, persigue listas de precios y tiene potes que se vencen en el estante."
+    },
+    {
+      "k": "La solución",
+      "v": "Una tienda que calcula la recompra, ordena lotes por vencimiento y convierte juegos en cupones, más un panel con qué hacer hoy."
+    },
+    {
+      "k": "Dónde está",
+      "v": "Demo navegable con datos de muestra. La versión de producción, con servidor, está descripta en el repo."
+    }
+  ],
+  "how": [
+    {
+      "t": "Compra",
+      "d": "La ficha calcula cuánto le dura el pote al cliente."
+    },
+    {
+      "t": "Se le termina",
+      "d": "El panel lista a quién se le termina esta semana."
+    },
+    {
+      "t": "Le escribe",
+      "d": "El dueño manda un WhatsApp ya armado, con un link que carga el bolso."
+    },
+    {
+      "t": "Vuelve",
+      "d": "El cliente abre el bolso listo y usa su cupón del Club."
+    }
+  ],
+  "decisions": [
+    {
+      "t": "Reglas en un motor puro",
+      "why": "Precio, stock, pagos y misiones viven fuera de los componentes: se testean aparte y en producción pasan al servidor con las mismas pantallas."
+    },
+    {
+      "t": "Export estático para GitHub Pages",
+      "why": "Una sola app de Next.js que corre en el navegador; el repo deja fuera, por escrito, Server Actions, cookies, middleware e ISR."
+    },
+    {
+      "t": "Marca blanca por ficha",
+      "why": "Una demo por prospecto cambiando una ficha: nombre, colores y prefijo de almacenamiento propio. Un test vigila que la marca viva en las fichas."
+    }
+  ],
+  "gallery": {
+    "tienda": {
+      "alt": "Tienda oscura con acentos lima en un celular: Proteínas, la ficha de Ionic Whey con precio por servicio y el bolso con el descuento stack.",
+      "caption": "Tienda VOLTA (Demo): catálogo → ficha → carrito."
+    },
+    "club-ruleta": {
+      "alt": "Página del club con la ruleta de discos de pesas: se toca el centro, gira y muestra «¡Ganaste!» con un cupón de un uso.",
+      "caption": "Club VOLTA: la ruleta «Disco olímpico» gira y entrega un cupón."
+    },
+    "regalar": {
+      "alt": "Celular en la sección de regalos de VOLTA: «Regalá energía», pestañas Un producto, Un stack y Gift card, y un pote de creatina.",
+      "caption": "Regalos: «Regalá energía» con producto, stack o gift card."
+    }
+  },
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Zustand",
+    "Zod",
+    "Vitest",
+    "Playwright"
+  ],
+  "more": [
+    {
+      "h": "El pedido",
+      "p": "Una sola función decide qué transición es válida y con qué disparador. Un comprobante pasa a Pagado solo con la aprobación del panel."
+    },
+    {
+      "h": "Una demo cuidada",
+      "p": "Todo queda en el navegador: WhatsApp es un link con el texto armado y el comprobante se procesa en un canvas. Formularios validados con Zod y regalos con dígito verificador."
+    },
+    {
+      "h": "Calidad",
+      "p": "TypeScript estricto y ESLint. La CI corre lint, typecheck, unitarios, build y una verificación del export antes de publicar; 988 unitarios en verde el 28/10/2026."
+    }
+  ],
+  "next": "Próximo paso: separar los datos del panel y probar en iPhone y Android reales."
+}
