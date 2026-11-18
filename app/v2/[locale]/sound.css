@@ -1,0 +1,37 @@
+/* /v2 music (lote 2.3): the page that plays the three proposals. */
+.mu-lab { display: grid; gap: var(--space-6); }
+.mu-zones .ui-segmented-track { max-width: 100%; }
+.mu-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: var(--space-4); }
+.mu-card {
+  position: relative; display: grid; align-content: start; gap: var(--space-3); padding: var(--space-6) var(--space-5) var(--space-5);
+  border-radius: var(--radius-2xl); border: 1px solid var(--color-line);
+  background: radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--from) 16%, transparent), transparent 60%), linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  transition: border-color var(--motion-base) var(--motion-ease);
+}
+.mu-card[data-on] { border-color: color-mix(in srgb, var(--from) 70%, transparent); }
+.mu-letter { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-text-subtle); }
+.mu-letter b { color: var(--from); }
+.mu-card h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
+.mu-line { color: var(--color-text-muted); }
+.mu-meta { font-family: var(--family-mono); font-size: var(--type-label-size); color: var(--color-text-subtle); }
+.mu-prog { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); }
+.mu-prog li {
+  display: grid; place-items: center; min-height: 40px; padding: 0 var(--space-1); border-radius: var(--radius-md);
+  border: 1px solid var(--color-line); font-family: var(--family-mono); font-size: 13px; font-weight: 600; color: var(--color-text-muted);
+  transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease);
+}
+.mu-prog li[data-now] { background: var(--from); border-color: var(--from); color: var(--color-on-accent); }
+.mu-now { min-height: 1.4em; font-family: var(--family-mono); font-size: 13px; color: var(--color-text); }
+.mu-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+.mu-actions .ui-btn--quiet[aria-pressed='true'] { text-decoration-color: var(--from); }
+.mu-table { display: grid; gap: var(--space-1); }
+.mu-table li {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-1); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line);
+}
+.mu-table-name { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; color: var(--color-heading); }
+.mu-table-name i { width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
+.mu-table-key { color: var(--color-text-muted); }
+.mu-table-prog { font-family: var(--family-mono); font-size: 13px; color: var(--color-text-subtle); }
+@media (min-width: 760px) {
+  .mu-table li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr); align-items: center; }
+}

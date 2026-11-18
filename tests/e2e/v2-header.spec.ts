@@ -232,7 +232,7 @@ test('the home leads to every page, and the design system keeps the header witho
   await expect(page).toHaveURL(/\/v2\/es\/tokens\/$/);
   await expect(page.locator('.sh-nav [aria-current]')).toHaveCount(0);
   await expect(page.locator('.sh-light')).toHaveAttribute('data-on', 'off');
-  await expect(page.getByRole('navigation', { name: 'Sistema' }).getByRole('link')).toHaveCount(5);
+  await expect(page.getByRole('navigation', { name: 'Sistema' }).getByRole('link')).toHaveCount(6);
 });
 
 test('reduced motion: the pill, the light and the menu change at once', async ({ browser }) => {

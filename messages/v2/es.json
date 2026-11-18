@@ -176,7 +176,8 @@
     "components": "Componentes",
     "pieces": "Piezas",
     "kit": "Kit",
-    "motion": "Motion"
+    "motion": "Motion",
+    "sound": "Música"
   },
   "ui": {
     "status": {
@@ -650,6 +651,64 @@
     "say": {
       "soundOn": "Sonido activado",
       "soundOff": "Sonido apagado"
+    }
+  },
+  "music": {
+    "meta": {
+      "title": "Música · Sistema IG v2",
+      "description": "Tres propuestas de música generativa para el nuevo portafolio de Ignacio Gauna, hechas con código: un motivo por página."
+    },
+    "intro": {
+      "kicker": "Lote 2.3 · Música",
+      "title": "Música hecha con código",
+      "text": "Tres propuestas de música generativa. Nada está grabado: cada nota la escribe el código en el momento, con un motivo propio por página. Suena solo si la encendés. Elegí la que va a vivir en el sitio."
+    },
+    "letter": "Propuesta",
+    "styles": {
+      "marea": {
+        "name": "Marea",
+        "line": "Ambiente: pads largos, un arpegio que va y viene como el mar y una ola de ruido suave."
+      },
+      "circuito": {
+        "name": "Circuito",
+        "line": "Pulso: un arpegio en semicorcheas que corre como código, bajo en corcheas, bombo y platillos suaves."
+      },
+      "taller": {
+        "name": "Taller",
+        "line": "Lo-fi: piano eléctrico en séptimas, un bajo que camina, una melodía corta y escobillas, con swing."
+      }
+    },
+    "play": "Escuchar",
+    "stop": "Detener",
+    "pick": "Elegir para el sitio",
+    "picked": "Elegida para el sitio",
+    "zone": "Página",
+    "chord": "Acorde",
+    "bar": "Compás",
+    "bpm": "bpm",
+    "zones": {
+      "title": "Un motivo por página",
+      "text": "Cada página tiene su tonalidad, su modo y sus cuatro compases. Al cambiar de página la música termina el compás y sigue en la tonalidad nueva, con una campana.",
+      "system": "Sistema",
+      "keys": {
+        "home": "Re mayor",
+        "work": "Sol mixolidio",
+        "how": "La dórico",
+        "brand": "Mi♭ lidio",
+        "business": "Fa mayor",
+        "about": "Do mayor",
+        "system": "Re dórico"
+      }
+    },
+    "rules": {
+      "title": "Reglas",
+      "items": [
+        "Apagada por defecto: suena solo si la encendés con el botón de sonido, y la elección se recuerda en el dispositivo.",
+        "Se pausa cuando la pestaña queda oculta y retoma al volver.",
+        "Nada grabado ni descargado: unos pocos KB de código escriben cada nota, y el motor se carga recién al encenderla.",
+        "Volumen bajo, con un compresor al final: nunca satura.",
+        "En iPhone sigue al interruptor de silencio del teléfono."
+      ]
     }
   }
 }

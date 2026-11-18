@@ -4,6 +4,7 @@ import './signature.css';
 import './kit.css';
 import './site.css';
 import './motion.css';
+import './sound.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
@@ -12,6 +13,7 @@ import { BASE_PATH, SITE_URL } from '@/lib/site';
 import { tokensCss } from '@/v2/tokens';
 import { MotionRoot } from '@/v2/components/motion/MotionRoot';
 import { SiteHeader } from '@/v2/components/site/SiteHeader';
+import { SoundRoot } from '@/v2/components/sound/SoundRoot';
 import { V2_LANG_TAG, V2_LOCALES, isV2Locale, v2Messages } from '@/v2/i18n';
 
 export const dynamicParams = false;
@@ -49,6 +51,7 @@ export default async function V2Layout({ children, params }: { children: ReactNo
         {/* in the layout: the header survives every change of page, so its light can travel */}
         <SiteHeader locale={locale} />
         {children}
+        <SoundRoot />
         <MotionRoot locale={locale} base={BASE_PATH} labels={{ ...mo.help, soundOn: mo.say.soundOn, soundOff: mo.say.soundOff }} />
       </body>
     </html>

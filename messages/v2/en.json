@@ -176,7 +176,8 @@
     "components": "Components",
     "pieces": "Pieces",
     "kit": "Kit",
-    "motion": "Motion"
+    "motion": "Motion",
+    "sound": "Music"
   },
   "ui": {
     "status": {
@@ -650,6 +651,64 @@
     "say": {
       "soundOn": "Sound on",
       "soundOff": "Sound off"
+    }
+  },
+  "music": {
+    "meta": {
+      "title": "Music · IG System v2",
+      "description": "Three proposals of generative music for Ignacio Gauna's new portfolio, made with code: one motif per page."
+    },
+    "intro": {
+      "kicker": "Batch 2.3 · Music",
+      "title": "Music made with code",
+      "text": "Three proposals of generative music. Nothing is recorded: the code writes every note as it plays, with a motif of its own for each page. It only plays if you turn it on. Choose the one that will live on the site."
+    },
+    "letter": "Proposal",
+    "styles": {
+      "marea": {
+        "name": "Tide",
+        "line": "Ambient: long pads, an arpeggio that comes and goes like the sea, and a soft wave of noise."
+      },
+      "circuito": {
+        "name": "Circuit",
+        "line": "Pulse: a sixteenth-note arpeggio that runs like code, an eighth-note bass, soft kick and hats."
+      },
+      "taller": {
+        "name": "Workshop",
+        "line": "Lo-fi: electric piano in sevenths, a walking bass, a short melody and brushes, swung."
+      }
+    },
+    "play": "Listen",
+    "stop": "Stop",
+    "pick": "Choose for the site",
+    "picked": "Chosen for the site",
+    "zone": "Page",
+    "chord": "Chord",
+    "bar": "Bar",
+    "bpm": "bpm",
+    "zones": {
+      "title": "One motif per page",
+      "text": "Each page has its key, its mode and its four bars. When the page changes the music finishes the bar and carries on in the new key, with a bell.",
+      "system": "System",
+      "keys": {
+        "home": "D major",
+        "work": "G Mixolydian",
+        "how": "A Dorian",
+        "brand": "E♭ Lydian",
+        "business": "F major",
+        "about": "C major",
+        "system": "D Dorian"
+      }
+    },
+    "rules": {
+      "title": "Rules",
+      "items": [
+        "Off by default: it only plays if you turn it on with the sound button, and the choice is remembered on the device.",
+        "It pauses when the tab is hidden and picks up when you come back.",
+        "Nothing recorded or downloaded: a few KB of code write every note, and the engine only loads when you turn it on.",
+        "Low volume, with a compressor at the end: it never clips.",
+        "On iPhone it follows the phone's silent switch."
+      ]
     }
   }
 }
