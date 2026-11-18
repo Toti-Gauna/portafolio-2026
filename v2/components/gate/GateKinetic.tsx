@@ -27,7 +27,7 @@ type Plate = { id: number; theme: GateTheme; x: number; y: number; r: number };
  * the name, the role and two doors on a branch, with the letters of the name jumping in.
  *  · The real loading drives it: one act per step (the script, the fonts, the scene, the page).
  *  · At rest it answers: a letter jumps under the pointer (and its neighbours with it), the mark wiggles and
- *    its dot hops, the doors squash; pressing the mark takes the gate to the next colour.
+ *    its dot hops, the doors squash (and stay: nothing ever hides a door); pressing the mark takes the gate to the next colour.
  *  · A press anywhere during the opening goes straight to the rest. Enter, Escape or «Ver portafolio» open it.
  *  · Colours never tint text over the wrong field: each element switches when the wipe reaches it (`--d`).
  * Only transform, opacity and clip-path move. With reduced motion the gate is at rest from the start.
@@ -137,6 +137,17 @@ export function GateKinetic({ first, last, labels, trailerHref }: { first: strin
     const g = root.current?.querySelector('.gk-mark-g');
     if (g && !busy(g)) g.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-16deg)', offset: 0.3 }, { transform: 'rotate(9deg)', offset: 0.6 }, { transform: 'rotate(-3deg)', offset: 0.82 }, { transform: 'rotate(0)' }], { duration: 620, easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)' });
   };
+  /* under the pointer a door takes a breath: squash, stretch, settle. A jump of ours, never a CSS animation on
+     :hover — swapping the animation there replayed the door's entrance when the pointer left, and it vanished
+     for an instant (Ignacio, 18/11/2026). */
+  const boing = (e: RPointerEvent) => {
+    const el = e.currentTarget;
+    if (e.pointerType !== 'mouse' || !landed || reducedMotion() || busy(el)) return;
+    el.animate([
+      { transform: 'scale(1, 1)' }, { transform: 'scale(1.06, 0.9)', offset: 0.3 }, { transform: 'scale(0.97, 1.06)', offset: 0.6 },
+      { transform: 'scale(1.02, 0.98)', offset: 0.82 }, { transform: 'scale(1, 1)' },
+    ], { duration: 460, easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)' });
+  };
   const tint = () => {
     wiggle();
     wipe(GATE_CYCLE[(GATE_CYCLE.indexOf(theme) + 1) % GATE_CYCLE.length], centre('.gk-mark'));
@@ -227,11 +238,11 @@ export function GateKinetic({ first, last, labels, trailerHref }: { first: strin
               <circle cx="6" cy="6" r="5" />
               <circle className="gk-packet" cx="6" cy="6" r="3" />
             </svg>
-            <a className="gk-door gk-door--meet gk-t" href={trailerHref} data-magnetic="6">
+            <a className="gk-door gk-door--meet gk-t" href={trailerHref} data-magnetic="6" onPointerEnter={boing}>
               <PlayIcon size={14} />
               <span>{labels.meet}</span>
             </a>
-            <button type="button" className="gk-door gk-door--enter gk-t" data-gate-enter data-magnetic="6" onClick={enter}>
+            <button type="button" className="gk-door gk-door--enter gk-t" data-gate-enter data-magnetic="6" onClick={enter} onPointerEnter={boing}>
               <span>{labels.enter}</span>
               <ArrowIcon />
               <kbd className="gk-key" aria-hidden="true">{labels.key}</kbd>
