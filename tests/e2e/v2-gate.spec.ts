@@ -198,9 +198,17 @@ test('at rest it answers: a letter jumps under the pointer and takes its neighbo
   await page.locator('.gk-mark').hover();
   expect(await page.locator('.gk-mark-g').evaluate((el) => el.getAnimations().length)).toBe(1);
   expect(await page.locator('.gk-mark-dot').evaluate((el) => el.getAnimations().filter((a) => !(a as CSSAnimation).animationName).length)).toBe(1);
-  // a door takes a breath under the pointer
-  await page.getByRole('button', { name: 'Ver portafolio' }).hover();
-  await expect(page.getByRole('button', { name: 'Ver portafolio' })).toHaveCSS('animation-name', 'gk-boing');
+  // a door takes a breath under the pointer — and never goes away: not while the pointer is on it, not when it leaves
+  for (const door of [page.locator('.gk-door--enter'), page.locator('.gk-door--meet')]) {
+    const seen: number[] = [];
+    const look = async () => seen.push(await door.evaluate((el) => Number(getComputedStyle(el).opacity) * (el.getBoundingClientRect().width > 100 ? 1 : 0)));
+    await door.hover();
+    expect(await door.evaluate((el) => el.getAnimations().filter((a) => !(a as CSSAnimation).animationName).length)).toBe(1);
+    for (let i = 0; i < 4; i++) { await look(); await page.waitForTimeout(70); }
+    await page.mouse.move(40, 40);
+    for (let i = 0; i < 12; i++) { await look(); await page.waitForTimeout(70); }
+    expect(Math.min(...seen)).toBe(1);
+  }
 });
 
 test('reduced motion: the gate is at rest from the start, nothing moves, and it opens at once', async ({ browser }) => {

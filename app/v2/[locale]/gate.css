@@ -447,13 +447,10 @@ html[data-gate='off'] .gt { display: none; }
 .gk-door:active { transform: scale(0.96, 0.94); }
 @media (hover: hover) and (pointer: fine) {
   .gk-key { display: inline-grid; }
-  /* under the pointer a door takes a breath: squash, stretch, settle */
-  .gk[data-ready='true'] .gk-door:hover { animation: gk-boing 460ms var(--ease-boing); }
   .gk-door:hover svg:last-of-type { transform: translateX(3px); }
   .gk-skip:hover svg { transform: translateX(3px); }
 }
 .gk-door svg, .gk-skip svg { transition: transform var(--motion-fast) var(--motion-ease); }
-@keyframes gk-boing { 0% { transform: scale(1, 1); } 30% { transform: scale(1.06, 0.9); } 60% { transform: scale(0.97, 1.06); } 82% { transform: scale(1.02, 0.98); } 100% { transform: scale(1, 1); } }
 
 /* short and wide (a phone on its side): who on the left, the doors on the right */
 @media (orientation: landscape) and (max-height: 520px) {
@@ -468,7 +465,7 @@ html[data-gate='off'] .gt { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .gk[data-leaving], .gk-wipe i, .gk-ball-y, .gk-ball, .gk-pow, .gk-shadow, .gk[data-landed='true'] .gk-mark, .gk[data-ready='true'] .gk-mark-dot, .gk[data-landed='true'] .gk-l,
   .gk[data-landed='true'] .gk-role, .gk[data-landed='true'] .gk-place, .gk[data-landed='true'] .gk-fork path, .gk[data-landed='true'] .gk-fork circle,
-  .gk[data-ready='true'] .gk-packet, .gk[data-landed='true'] .gk-door, .gk[data-ready='true'] .gk-door:hover { animation: none; }
+  .gk[data-ready='true'] .gk-packet, .gk[data-landed='true'] .gk-door { animation: none; }
   .gk-fork path { stroke-dashoffset: 0; }
   .gk-bar-h i, .gk-door svg, .gk-skip svg { transition: none; }
 }
