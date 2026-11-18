@@ -899,18 +899,22 @@
   "world": {
     "meta": {
       "title": "The world of Work · Sistema IG v2",
-      "description": "The art of the world of Work in Ignacio Gauna's new portfolio: one land in diagonal bands, a biome per stop, travelled sideways."
+      "description": "The world of Work in Ignacio Gauna's new portfolio: one land in diagonal bands, a biome per stop, travelled sideways."
     },
     "kicker": "Batch 4.1 · Work",
     "title": "The world of Work",
-    "text": "One land, edge to edge, in diagonal bands: a biome for every stop and a path of light that crosses them in order. You travel it sideways. No building is drawn twice. What exists is solid; what is coming is drawn under construction, with scaffolds and a dashed line.",
+    "text": "One land, edge to edge, in diagonal bands: a biome for every stop and a path of light that crosses them in order. You travel it sideways, and every stop opens its postcard with what I did there. No building is drawn twice; what is coming is drawn under construction.",
     "map": "The journey",
-    "mapAlt": "Isometric land in diagonal bands of colour, a biome per stop, crossed by a path of light: from the coast of Mar del Plata to the launch pad of the roadmap.",
+    "mapAlt": "Isometric land in diagonal bands, a biome per stop, crossed by a path of light: from the coast of Mar del Plata to the desert and the farmland of the future projects.",
     "mapHint": "Drag the land or use the arrows to travel it.",
     "prev": "Previous stop",
     "next": "Next stop",
     "drag": "Drag",
     "stops": "Stops of the journey",
+    "more": "More information",
+    "close": "Close",
+    "inside": "What I did there",
+    "postal": "Postcard",
     "legend": {
       "done": "Path travelled",
       "plan": "Path planned",
@@ -922,7 +926,7 @@
       "origin": "Where it began",
       "work": "The work",
       "own": "My own path",
-      "next": "What comes next"
+      "next": "Future projects"
     },
     "places": {
       "mdp": {
@@ -930,119 +934,371 @@
         "when": "At 17",
         "state": "The beginning",
         "text": "At 17 I coded a games website: my first product.",
-        "art": "The coast: the lighthouse, the pier, the house with its light on and the first games website."
+        "art": "The coast: the lighthouse, the pier, the house with its light on and the first games website, facing the sea.",
+        "facts": [
+          {
+            "k": "Where",
+            "v": "Mar del Plata, Argentina"
+          },
+          {
+            "k": "What I did",
+            "v": "A games website: my first product"
+          },
+          {
+            "k": "How I learn",
+            "v": "Self-taught: I read a lot and study online"
+          }
+        ],
+        "mark": "At 17"
       },
       "tach": {
         "name": "TACH Argentina",
         "when": "2021 – 2022",
         "state": "Professional work · startup",
         "text": "A digital wallet, end to end and remote: the back office, the landing page and the app.",
-        "art": "A startup city: three towers, the app on a phone and the coins that move through it."
+        "art": "A startup city: three towers, the app on a phone and the coins that move through it.",
+        "facts": [
+          {
+            "k": "Period",
+            "v": "2021 – 2022"
+          },
+          {
+            "k": "Product",
+            "v": "A virtual wallet"
+          },
+          {
+            "k": "What I did",
+            "v": "The back office, the landing page and the app, on web and mobile"
+          },
+          {
+            "k": "Mode",
+            "v": "Remote"
+          }
+        ]
       },
       "ada": {
         "name": "Ada ITW",
         "when": "2023 – 2024",
         "state": "Professional work · academy",
         "text": "From code to the classroom: teaching JavaScript and React through projects.",
-        "art": "A campus: the hall with its columns, the blackboard with code and the benches."
+        "art": "A campus: the hall with its columns, the blackboard with code and the benches.",
+        "facts": [
+          {
+            "k": "Period",
+            "v": "2023 – 2024"
+          },
+          {
+            "k": "What I did",
+            "v": "I taught JavaScript and React, with projects"
+          },
+          {
+            "k": "Students",
+            "v": "Starting from zero"
+          },
+          {
+            "k": "What it gave me",
+            "v": "Stronger foundations and explaining technical ideas clearly"
+          }
+        ]
       },
       "tsoft": {
         "name": "Tsoft",
         "when": "2024 – today",
         "state": "Professional work · corporation",
         "text": "From here I work for Tuenti and Telefónica: Tuenti, CompliA and Supernova Eventos.",
-        "art": "A corporate city: the Tsoft tower, Tuenti's prize wheel, CompliA's verified document and the stage of Supernova Eventos."
+        "art": "A corporate city: the Tsoft tower, Tuenti's prize wheel, CompliA's verified document and the stage of Supernova Eventos.",
+        "facts": [
+          {
+            "k": "Period",
+            "v": "2024 – today"
+          },
+          {
+            "k": "Position",
+            "v": "I joined as Jr Frontend Developer; today I am Sr AI Fullstack Developer"
+          },
+          {
+            "k": "For whom",
+            "v": "Tuenti and Telefónica"
+          },
+          {
+            "k": "Recognition",
+            "v": "Tsoft Special Recognition, January 2026"
+          }
+        ],
+        "inside": {
+          "tuenti": {
+            "name": "Tuenti",
+            "state": "Professional work",
+            "text": "Gamification, top-ups and payments in Tuenti and Telefónica products: from the frontend to backend logic and deployments.",
+            "facts": [
+              {
+                "k": "Period",
+                "v": "2024 – today"
+              },
+              {
+                "k": "What I did",
+                "v": "The prize wheel, the referral system and a dashboard to measure them"
+              }
+            ]
+          },
+          "complia": {
+            "name": "CompliA",
+            "state": "In internal production",
+            "text": "An AI assistant inside Telefónica’s compliance portal. I designed and built it: the RAG, the validations and the recommendations.",
+            "facts": [
+              {
+                "k": "Role",
+                "v": "Full design and development"
+              },
+              {
+                "k": "Period",
+                "v": "2026 – today"
+              },
+              {
+                "k": "Type",
+                "v": "RAG assistant on a language model"
+              }
+            ]
+          },
+          "supernova": {
+            "name": "Supernova Eventos",
+            "state": "Prototype",
+            "text": "A prototype of an internal events micro-app for Telefónica: find events, sign up and show a pass with a QR code.",
+            "facts": [
+              {
+                "k": "Client",
+                "v": "Telefónica, from Tsoft"
+              },
+              {
+                "k": "Role",
+                "v": "Development of the prototype"
+              },
+              {
+                "k": "Type",
+                "v": "Internal events micro-app"
+              }
+            ]
+          }
+        }
       },
       "eclipse": {
         "name": "Eclipse",
         "when": "Alongside",
         "state": "Being built",
         "text": "My development, AI and automation studio: landing page, client portal, backend and internal portal.",
-        "art": "An observatory at night, and the eclipse with its corona."
+        "art": "An observatory at night, and the eclipse with its corona.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "One person: product, design and development"
+          },
+          {
+            "k": "Parts",
+            "v": "Landing · client portal · backend · internal portal · email kit"
+          },
+          {
+            "k": "Since",
+            "v": "2 October 2026"
+          }
+        ]
       },
       "agentes": {
         "name": "Agentic system",
         "when": "Alongside",
         "state": "Own system · in use",
         "text": "11 agents with separate roles and gates where a person decides.",
-        "art": "Eleven posts around a table, and the gate where a person decides."
+        "art": "Eleven posts around a table, and the gate where a person decides.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "I designed it and maintain it; I approve every final gate"
+          },
+          {
+            "k": "Parts",
+            "v": "11 agents · 79 skills · 3 formats"
+          },
+          {
+            "k": "Where it is used",
+            "v": "Eclipse backend, Eclipse-Web and my own demos"
+          }
+        ],
+        "mark": "Today"
       },
       "kinetic": {
         "name": "Kinetic Studio",
         "when": "Alongside",
         "state": "Lab",
         "text": "Motion graphics trailers made with code.",
-        "art": "A film set: the clapperboard, the spotlight and a reel."
+        "art": "A film set: the clapperboard, the spotlight and a reel.",
+        "facts": [
+          {
+            "k": "Role",
+            "v": "My own project, made with a trailer agent"
+          },
+          {
+            "k": "Period",
+            "v": "September and October 2026 · 51 commits"
+          },
+          {
+            "k": "Parts",
+            "v": "Hub · 31 trailers · engine, recipes and sound"
+          }
+        ],
+        "mark": "2026"
       },
       "volta": {
         "name": "Volta",
         "when": "Alongside",
         "state": "Demo",
         "text": "A supplements shop with an invented brand: catalogue, club and a game that gives coupons.",
-        "art": "The shop with its awning, a giant jar and a dumbbell."
+        "art": "The shop with its awning, a giant jar and a dumbbell.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Clickable demo, all in the browser"
+          },
+          {
+            "k": "Screens",
+            "v": "29 in the shop · 60 in the panel"
+          },
+          {
+            "k": "Data",
+            "v": "Fictional brand, products and orders"
+          }
+        ],
+        "mark": "Demo"
       },
       "velmar": {
         "name": "Velmar",
         "when": "Alongside",
         "state": "Demo · made for a client",
         "text": "The online shop and the panel of a Mar del Plata workshop that makes personalised products.",
-        "art": "The workshop with its saw-tooth roof and its chimney, and a gift with a bow."
+        "art": "A workshop by the water: a saw-tooth roof, the chimney, a pier and a gift with its ribbon.",
+        "facts": [
+          {
+            "k": "Client",
+            "v": "A real workshop in Mar del Plata"
+          },
+          {
+            "k": "Parts",
+            "v": "Shop for the phone · management panel"
+          },
+          {
+            "k": "Size",
+            "v": "65 screens: 24 in the shop and 41 in the panel"
+          }
+        ],
+        "mark": "Demo"
       },
       "dentalos": {
         "name": "DentalOS",
         "when": "Alongside",
         "state": "Demo",
         "text": "The administrative circuit of a fictional dental clinic, in 16 modules.",
-        "art": "The clinic with its cross, and a tooth on its plinth."
+        "art": "The clinic with its cross, and a tooth on its plinth.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Frontend-only demo"
+          },
+          {
+            "k": "Modules",
+            "v": "16 (M01–M16), counted in the code"
+          },
+          {
+            "k": "Data",
+            "v": "Synthetic, with a fixed sample clock"
+          }
+        ],
+        "mark": "Demo"
       },
       "games": {
         "name": "games-market",
         "when": "Alongside",
         "state": "Lab",
         "text": "Web games for in-person events: a projector is the screen and the phones are the controllers.",
-        "art": "A giant screen, the projector and the phones that drive it."
+        "art": "A giant screen, the projector and the phones that drive it.",
+        "facts": [
+          {
+            "k": "Games",
+            "v": "18 playable of 24 planned"
+          },
+          {
+            "k": "Engines",
+            "v": "Canvas 2D · PixiJS · React Three Fiber"
+          },
+          {
+            "k": "Network",
+            "v": "WebRTC in a star"
+          }
+        ],
+        "mark": "Lab"
       },
       "lucero": {
         "name": "Lucero",
         "when": "Alongside",
         "state": "Demo",
         "text": "An invented resto-bar to show the digital menu: ordering from the table.",
-        "art": "The bar with its awning, the morning star over the door and the tables you order from."
+        "art": "The bar with its awning, the morning star over the door and the tables you order from.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Demo of a product of my own"
+          },
+          {
+            "k": "Parts",
+            "v": "Menu with Gus · waiter · kitchen · CRM"
+          },
+          {
+            "k": "Data",
+            "v": "Fictional"
+          }
+        ],
+        "mark": "Demo"
       },
       "trazo": {
         "name": "Trazo",
         "when": "Alongside",
         "state": "Personal product · in use",
         "text": "My personal tracker: the day in hours, study, goals and training.",
-        "art": "A sundial: the day in twenty-four hours, and the flag of a goal."
+        "art": "A sundial: the day in twenty-four hours, and the flag of a goal.",
+        "facts": [
+          {
+            "k": "Type",
+            "v": "Personal PWA, local first"
+          },
+          {
+            "k": "Data",
+            "v": "In the browser"
+          },
+          {
+            "k": "Review",
+            "v": "My own engine with FSRS-5"
+          }
+        ],
+        "mark": "Today"
       },
       "nucleo": {
         "name": "Core",
         "when": "Nov 2026 – Feb 2028",
-        "state": "On the roadmap",
+        "state": "Future project",
         "text": "Data, AI, security and infrastructure on real problems in energy, health, farming and space.",
-        "art": "The desert with its oil field and the farmland with its barn, under construction: a derrick and a silo half risen."
-      },
-      "ciber": {
-        "name": "Cybersecurity",
-        "when": "Feb – Aug 2028",
-        "state": "On the roadmap",
-        "text": "Cryptography, pentesting and detection, with the certifications that back them.",
-        "art": "A bastion under construction: four towers, the wall and a keep half risen."
-      },
-      "quant": {
-        "name": "Quant",
-        "when": "Aug 2028 – Jun 2029",
-        "state": "On the roadmap",
-        "text": "Quantitative finance: backtesting, options, the order book and risk.",
-        "art": "A financial city under construction: skyscrapers with cranes and the board of candles."
-      },
-      "espacio": {
-        "name": "Aerospace",
-        "when": "Jun 2029 – Aug 2030",
-        "state": "On the roadmap",
-        "text": "Flight simulation, structures, fluids, control and orbits, up to a digital twin.",
-        "art": "A launch pad under construction: the rocket, the tower, the dish and two satellites in orbit."
+        "art": "The desert with its oil field and the farmland with its barn, under construction: a derrick and a silo half risen.",
+        "facts": [
+          {
+            "k": "Period",
+            "v": "Nov 2026 – Feb 2028"
+          },
+          {
+            "k": "Areas",
+            "v": "Data, AI, security and infrastructure"
+          },
+          {
+            "k": "Fields",
+            "v": "Energy, health, agriculture and space"
+          }
+        ],
+        "mark": "2026"
       }
     }
   }
