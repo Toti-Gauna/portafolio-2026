@@ -110,7 +110,7 @@ export function MotionRoot({ locale, base, labels }: { locale: 'es' | 'en'; base
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       // the saved choice is read on every key: right after a reload the state may not have caught up yet
-      if (!keysEnabled() || helpOpen || document.querySelector('dialog[open]')) return;
+      if (!keysEnabled() || helpOpen || document.querySelector('dialog[open]') || document.documentElement.dataset.gate === 'on') return;
       const cmd = commandFor(e, e.target as Element, SITE_PAGES.length);
       if (!cmd) return;
       e.preventDefault();

@@ -177,7 +177,8 @@
     "pieces": "Pieces",
     "kit": "Kit",
     "motion": "Motion",
-    "sound": "Music"
+    "sound": "Music",
+    "gate": "Gate"
   },
   "ui": {
     "status": {
@@ -709,5 +710,86 @@
       ]
     },
     "where": "Plays on"
+  },
+  "gate": {
+    "label": "Entrance to the portfolio",
+    "meet": "Meet Ignacio",
+    "enter": "View portfolio",
+    "loading": "Loading",
+    "ready": "Ready",
+    "progress": "Site loading",
+    "key": "Enter",
+    "steps": {
+      "dom": "interface",
+      "fonts": "typefaces",
+      "scene": "scene",
+      "page": "page"
+    },
+    "stages": [
+      {
+        "year": "2026",
+        "name": "Core"
+      },
+      {
+        "year": "2028",
+        "name": "Cybersecurity"
+      },
+      {
+        "year": "2028",
+        "name": "Quant"
+      },
+      {
+        "year": "2029",
+        "name": "Aerospace"
+      }
+    ],
+    "arrival": "2030",
+    "choose": {
+      "meta": {
+        "title": "Gate · IG System v2",
+        "description": "Four 3D versions of the gate of Ignacio Gauna's new portfolio, to choose one."
+      },
+      "kicker": "Batch 3.1 · Gate",
+      "title": "Four gates in 3D",
+      "text": "The way into the portfolio, in four versions. All four are a 3D scene on the same studio: lights you see in the reflections, a polished floor that mirrors what stands on it, and a camera that arrives while the object builds. Each object builds itself with the real loading of the page, in four steps. They fit one screen on any device and open with Enter. Open each one and choose the one that will greet whoever arrives.",
+      "letter": "Gate",
+      "open": "Open this gate",
+      "now": "On the home today",
+      "theme": "Theme",
+      "piece": "Central piece",
+      "loading": "The loading",
+      "items": {
+        "monograma": {
+          "name": "Monogram",
+          "theme": "The mark",
+          "piece": "The IG monogram as a sculpture of polished metal, standing on the mirrored floor. It turns with the pointer and reflects the lights of the studio.",
+          "loading": "It draws itself stroke by stroke: the stem, the G, its bar and, last, the coral dot that ignites and sends a ripple across the floor."
+        },
+        "codigo": {
+          "name": "Code",
+          "theme": "Programming: the craft in five layers",
+          "piece": "Five slabs of dark lacquer in exploded view, each with its rim of light and its own drawing: a board, lines of code, a graph of agents, rows of checks and a pipeline.",
+          "loading": "The slabs come down one at a time, from the bottom up, each bringing its name."
+        },
+        "ascenso": {
+          "name": "Ascent",
+          "theme": "The roadmap 2026 → 2030",
+          "piece": "Four platforms spiral upward, one per stage of the plan (Core, Cybersecurity, Quant, Aerospace), up to the fifth, where the monogram waits.",
+          "loading": "A point of light climbs one stage per step and lights each platform as it lands; at the top, the dot of the monogram ignites."
+        },
+        "postal": {
+          "name": "Postcard",
+          "theme": "The journey",
+          "piece": "The six stamps of the journey printed on card and hung in the studio, on a wall that curves toward the viewer: flat ink and cream paper against the dark.",
+          "loading": "They are dealt from behind the camera, one stop after another, each with its year and its name."
+        }
+      }
+    },
+    "edition": "Portfolio 2026",
+    "tags": {
+      "codigo": "The five layers of the craft",
+      "ascenso": "The roadmap, from 2026 to 2030",
+      "postal": "The six stops of the journey"
+    }
   }
 }

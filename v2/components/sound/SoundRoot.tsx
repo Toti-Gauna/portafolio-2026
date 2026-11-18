@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { type StyleId, ZONE_STYLE, type ZoneKey } from '@/v2/sound/compose';
 import { MUSIC_BAR, MUSIC_PREVIEW, MUSIC_STOP, read, SOUND_EVENT, SOUND_KEY } from '@/v2/sound/control';
 import type { BarInfo, MusicEngine } from '@/v2/sound/engine';
+import { GATE_EVENT } from '@/v2/gate/state';
 import { pageOf } from '@/v2/site';
 
 const zoneOf = (pathname: string): ZoneKey => pageOf(pathname) ?? 'system';
@@ -89,6 +90,9 @@ export function SoundRoot() {
       if (!wanted.current) pause();
       else { engine.current?.setStyle(ZONE_STYLE[zone.current]); engine.current?.setZone(zone.current); }
     };
+    // the gate opens with a chord, if the visitor had the sound on
+    const onGate = () => { if (wanted.current) void ensure().then((m) => m.accent()); };
+    window.addEventListener(GATE_EVENT, onGate);
     // a hidden tab is silent and costs nothing; it picks up on return
     const onVisible = () => {
       if (document.hidden) engine.current?.stop(0.3);
@@ -105,6 +109,7 @@ export function SoundRoot() {
       window.removeEventListener(SOUND_EVENT, onSound);
       window.removeEventListener(MUSIC_PREVIEW, onPreview);
       window.removeEventListener(MUSIC_STOP, onStop);
+      window.removeEventListener(GATE_EVENT, onGate);
       document.removeEventListener('visibilitychange', onVisible);
       engine.current?.stop(0.1);
       void ctx.current?.close();

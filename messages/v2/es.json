@@ -177,7 +177,8 @@
     "pieces": "Piezas",
     "kit": "Kit",
     "motion": "Motion",
-    "sound": "Música"
+    "sound": "Música",
+    "gate": "Puerta"
   },
   "ui": {
     "status": {
@@ -709,5 +710,86 @@
       ]
     },
     "where": "Suena en"
+  },
+  "gate": {
+    "label": "Entrada al portafolio",
+    "meet": "Conocer a Ignacio",
+    "enter": "Ver portafolio",
+    "loading": "Cargando",
+    "ready": "Listo",
+    "progress": "Carga del sitio",
+    "key": "Enter",
+    "steps": {
+      "dom": "interfaz",
+      "fonts": "tipografías",
+      "scene": "escena",
+      "page": "página"
+    },
+    "stages": [
+      {
+        "year": "2026",
+        "name": "Núcleo"
+      },
+      {
+        "year": "2028",
+        "name": "Ciberseguridad"
+      },
+      {
+        "year": "2028",
+        "name": "Quant"
+      },
+      {
+        "year": "2029",
+        "name": "Aeroespacial"
+      }
+    ],
+    "arrival": "2030",
+    "choose": {
+      "meta": {
+        "title": "Puerta · Sistema IG v2",
+        "description": "Cuatro versiones en 3D de la puerta de entrada del nuevo portafolio de Ignacio Gauna, para elegir una."
+      },
+      "kicker": "Lote 3.1 · Puerta",
+      "title": "Cuatro puertas en 3D",
+      "text": "La entrada al portafolio en cuatro versiones. Las cuatro son una escena 3D sobre el mismo estudio: luces que se ven en los reflejos, un piso pulido que espeja lo que hay encima y una cámara que llega mientras el objeto se arma. Cada objeto se construye con la carga real de la página, en cuatro pasos. Entran en una pantalla en cualquier dispositivo y se abren con Enter. Abrí cada una y elegí la que va a recibir a quien llegue.",
+      "letter": "Puerta",
+      "open": "Abrir esta puerta",
+      "now": "Hoy en el inicio",
+      "theme": "Tema",
+      "piece": "Pieza central",
+      "loading": "La carga",
+      "items": {
+        "monograma": {
+          "name": "Monograma",
+          "theme": "La marca",
+          "piece": "El monograma IG como una escultura de metal pulido, de pie sobre el piso espejado. Gira con el puntero y refleja las luces del estudio.",
+          "loading": "Se dibuja trazo por trazo: el asta, la G, su barra y, al final, el punto coral que se enciende y manda una onda por el piso."
+        },
+        "codigo": {
+          "name": "Código",
+          "theme": "Programación: el oficio en cinco capas",
+          "piece": "Cinco placas de laca oscura en vista explotada, cada una con su borde de luz y su dibujo: un tablero, líneas de código, un grafo de agentes, filas de checks y un pipeline.",
+          "loading": "Las placas bajan de a una, de abajo hacia arriba, y cada una trae su nombre."
+        },
+        "ascenso": {
+          "name": "Ascenso",
+          "theme": "El roadmap 2026 → 2030",
+          "piece": "Cuatro plataformas suben en espiral, una por etapa del plan (Núcleo, Ciberseguridad, Quant, Aeroespacial), hasta la quinta, donde espera el monograma.",
+          "loading": "Un punto de luz sube una etapa por paso y enciende cada plataforma al llegar; arriba, se enciende el punto del monograma."
+        },
+        "postal": {
+          "name": "Postal",
+          "theme": "El recorrido",
+          "piece": "Las seis estampillas del recorrido impresas en cartón y colgadas en el estudio, en una pared que se curva hacia quien mira: tinta plana y papel crema contra el fondo oscuro.",
+          "loading": "Se reparten desde atrás de la cámara, una parada tras otra, cada una con su año y su nombre."
+        }
+      }
+    },
+    "edition": "Portafolio 2026",
+    "tags": {
+      "codigo": "Las cinco capas del oficio",
+      "ascenso": "El roadmap, de 2026 a 2030",
+      "postal": "Las seis paradas del recorrido"
+    }
   }
 }

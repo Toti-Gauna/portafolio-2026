@@ -5,11 +5,13 @@ import './kit.css';
 import './site.css';
 import './motion.css';
 import './sound.css';
+import './gate.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { fontMono, fontSans } from '../../fonts';
 import { BASE_PATH, SITE_URL } from '@/lib/site';
+import { gateScript } from '@/v2/gate/state';
 import { tokensCss } from '@/v2/tokens';
 import { MotionRoot } from '@/v2/components/motion/MotionRoot';
 import { SiteHeader } from '@/v2/components/site/SiteHeader';
@@ -45,6 +47,9 @@ export default async function V2Layout({ children, params }: { children: ReactNo
     <html lang={V2_LANG_TAG[locale]} className={`${fontSans.variable} ${fontMono.variable}`}>
       <head>
         <style id="v2-tokens" dangerouslySetInnerHTML={{ __html: tokensCss() }} />
+        {/* the gate of the home: decided before the first paint; without JavaScript there is no gate */}
+        <script dangerouslySetInnerHTML={{ __html: gateScript(BASE_PATH) }} />
+        <noscript><style>{'.gt{display:none}'}</style></noscript>
       </head>
       <body>
         <a className="v2-skip" href="#main">{v2Messages(locale).top.skip}</a>

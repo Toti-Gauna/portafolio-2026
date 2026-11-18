@@ -1,0 +1,182 @@
+/* /v2 gate (lote 3.1): one screen on any device over a 3D scene, in four versions (.gt[data-v]).
+   The server renders it; the layout's script hides it before the first paint wherever it does not apply
+   (html[data-gate='off']). The scene is a canvas (v2/gate/scene); here only opacity and transform move. */
+
+html[data-gate='on'] { overflow: hidden; }
+html[data-gate='off'] .gt { display: none; }
+
+.gt {
+  position: fixed; inset: 0; z-index: var(--z-dialog); height: 100%; overflow: hidden; outline: none;
+  background: var(--color-bg-deep); color: var(--color-text);
+  transition: opacity 520ms var(--motion-ease) 100ms;
+}
+@supports (height: 100dvh) { .gt { height: 100dvh; } }
+.gt[data-leaving] { opacity: 0; pointer-events: none; }
+
+/* the scene: it fades in over the drawn mark once its first frames are on screen */
+.gt-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 900ms var(--motion-ease); }
+.gt[data-gl='on'] .gt-canvas { opacity: 1; }
+/* the words sit on dark: a veil over the far floor and under the top line */
+.gt-veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 5, 19, 0.5) 0, rgba(6, 5, 19, 0) 14%, rgba(6, 5, 19, 0) 58%, rgba(6, 5, 19, 0.62) 80%, rgba(6, 5, 19, 0.9) 100%);
+}
+
+.gt-in {
+  position: relative; z-index: 2; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto auto; justify-items: center;
+  gap: clamp(10px, 2.2vh, 22px); height: 100%;
+  padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3.4vw, 44px) calc(clamp(14px, 2.4vh, 24px) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── the top line ────────────────────────────────────────────────────────── */
+.gt-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); width: 100%; }
+.gt-brand, .gt-place, .gt-meter {
+  margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.gt-brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--color-mist-200); }
+.gt-brand svg, .gt-poster { fill: none; stroke: var(--color-white); stroke-width: 3.4; stroke-linecap: round; }
+.gt-brand svg { flex: none; width: 26px; height: 26px; overflow: visible; }
+.gt-mark-dot { fill: var(--color-coral-500); stroke: none; }
+.gt-place { display: none; color: var(--color-text-subtle); }
+@media (min-width: 560px) { .gt-place { display: block; } }
+
+/* ── the stage: the box the 3D object is framed in ───────────────────────── */
+.gt-stage { container-type: size; display: grid; place-items: center; width: min(88%, 780px); height: 100%; min-height: 0; }
+.gt-poster { width: min(52cqw, 60cqh, 280px); height: auto; overflow: visible; transition: opacity 600ms var(--motion-ease); }
+.gt[data-gl='pending'] .gt-poster { opacity: 0.5; animation: gt-wait 1.6s var(--motion-ease-in-out) infinite alternate; }
+.gt[data-gl='on'] .gt-poster { opacity: 0; }
+@keyframes gt-wait { to { opacity: 0.22; } }
+
+/* ── who ─────────────────────────────────────────────────────────────────── */
+.gt-id { display: grid; justify-items: center; gap: clamp(8px, 1.5vh, 14px); min-width: 0; }
+.gt-name {
+  display: flex; justify-content: center; gap: 0 0.24em; margin: 0; white-space: nowrap;
+  font-size: clamp(34px, min(9.6vw, 8.4vh), 84px); line-height: 0.96; font-weight: 800;
+  font-variation-settings: 'wdth' 112; letter-spacing: -0.045em; color: var(--color-heading);
+}
+.gt-word { display: inline-flex; overflow: hidden; padding: 0.08em 0.04em 0.12em; margin: -0.08em -0.04em -0.12em; }
+.gt-l { display: inline-block; color: var(--lc, inherit); animation: gt-letter 1000ms var(--motion-ease) both; animation-delay: calc(var(--i) * 42ms + 160ms); }
+@keyframes gt-letter { from { opacity: 0; transform: translate3d(0, 108%, 0) rotate(6deg); } }
+.gt-role { display: inline-flex; align-items: center; gap: var(--space-3); margin: 0; }
+.gt-role b {
+  display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: var(--radius-xs);
+  background: var(--gradient-brand); color: var(--color-on-accent); font-size: 16px; font-weight: 900; font-variation-settings: 'wdth' 112;
+}
+.gt-role span { font-size: clamp(15px, 1.9vh, 18px); font-weight: 600; letter-spacing: 0.01em; color: var(--color-mist-100); white-space: nowrap; }
+
+/* ── two doors ───────────────────────────────────────────────────────────── */
+.gt-doors { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); width: min(100%, 340px); }
+.gt-door {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
+  min-height: var(--size-button); padding: 0 var(--space-5); border-radius: var(--radius-md); border: 1px solid transparent;
+  font-family: inherit; font-size: 16px; font-weight: 800; line-height: 1.1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: transform var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease);
+}
+.gt-door svg { flex: none; }
+.gt-door--meet { background: var(--color-coral-500); color: var(--color-on-accent); }
+.gt-door--enter { background: rgba(9, 7, 32, 0.6); border-color: var(--color-line-strong); color: var(--color-heading); font-weight: 700; }
+.gt-door .ui-kbd { display: none; margin-left: var(--space-1); }
+.gt-door:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .gt-door--meet:hover { background-color: var(--color-coral-400); }
+  .gt-door--enter:hover { border-color: var(--color-mist-200); background-color: rgba(34, 29, 79, 0.7); }
+  .gt-door .ui-kbd { display: inline-grid; }
+}
+@media (min-width: 560px) { .gt-doors { grid-template-columns: repeat(2, max-content); justify-content: center; width: auto; } .gt-door { min-width: 216px; } }
+
+/* ── the loading: what is being built, a hairline and the count ──────────── */
+.gt-meter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr); align-items: center; gap: var(--space-4); width: 100%; color: var(--color-text-subtle); }
+.gt-step { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gt-bar { position: relative; height: 1px; background: rgba(255, 255, 255, 0.16); }
+.gt-bar i { position: absolute; left: 0; right: 0; top: -1px; height: 3px; border-radius: 2px; background: var(--gradient-brand); transform-origin: 0 50%; transition: transform 240ms linear; }
+.gt-num { justify-self: end; font-variant-numeric: tabular-nums; color: var(--color-mist-200); }
+.gt[data-ready='true'] .gt-step { color: var(--color-mist-100); }
+@media (max-width: 559px) { .gt-meter { grid-template-columns: auto minmax(0, 1fr) auto; letter-spacing: 0.1em; } }
+
+.gt-role, .gt-doors, .gt-meter, .gt-top { animation: gt-rise var(--motion-slow) var(--motion-ease) both; }
+.gt-top { animation-delay: 80ms; }
+.gt-role { animation-delay: 700ms; }
+.gt-doors { animation-delay: 840ms; }
+.gt-meter { animation-delay: 960ms; }
+@keyframes gt-rise { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+
+/* ── labels that follow points of the 3D object ──────────────────────────── */
+.gt-tags { position: absolute; inset: 0; z-index: 1; margin: 0; padding: 0; list-style: none; pointer-events: none; display: none; }
+.gt[data-gl='on'] .gt-tags { display: block; }
+.gt-tags li { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 600ms var(--motion-ease) 200ms; }
+.gt-tags li[data-after='0'],
+.gt:is([data-move='1'], [data-move='2'], [data-move='3'], [data-move='4']) .gt-tags li[data-after='1'],
+.gt:is([data-move='2'], [data-move='3'], [data-move='4']) .gt-tags li[data-after='2'],
+.gt:is([data-move='3'], [data-move='4']) .gt-tags li[data-after='3'],
+.gt[data-move='4'] .gt-tags li[data-after='4'] { opacity: 1; }
+.gt-tags span { position: absolute; display: grid; gap: 1px; white-space: nowrap; }
+.gt-tags b { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; color: var(--c, var(--color-mist-200)); }
+.gt-tags em { font-style: normal; font-size: 14px; font-weight: 700; line-height: 1.15; color: var(--color-heading); text-shadow: 0 1px 12px rgba(6, 5, 19, 0.9); }
+
+/* «Código»: each layer's name off its right edge, in its colour (when there is room beside the stack) */
+.gt[data-v='codigo'] .gt-tags { visibility: hidden; }
+@media (min-width: 900px) and (min-height: 560px) { .gt[data-v='codigo'] .gt-tags { visibility: visible; } }
+.gt[data-v='codigo'] .gt-tags span { left: 34px; top: 0; transform: translateY(-50%); }
+.gt[data-v='codigo'] .gt-tags span::before { content: ''; position: absolute; right: calc(100% + 8px); top: 50%; width: 22px; height: 1px; background: var(--c); opacity: 0.7; }
+.gt[data-v='codigo'] .gt-tags em { font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(1) { --c: var(--layer-plan-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(2) { --c: var(--layer-code-to); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(3) { --c: var(--layer-agents-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(4) { --c: var(--layer-tests-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(5) { --c: var(--layer-ship-to); }
+
+/* «Ascenso»: year and stage beside each platform, on the outer side of the spiral */
+.gt[data-v='ascenso'] .gt-tags span { top: 0; transform: translateY(-50%); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(even) span { left: calc(var(--u, 10px) * 7.3); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(odd) span { right: calc(var(--u, 10px) * 7.3); text-align: right; }
+/* no room beside the spiral on a narrow screen: each name goes under its platform */
+@media (max-width: 699px) {
+  .gt[data-v='ascenso'] .gt-tags li:nth-child(-n + 4) span { left: 0; right: auto; transform: translate(-50%, calc(var(--u, 6px) * 2.5)); justify-items: center; text-align: center; }
+  .gt[data-v='ascenso'] .gt-tags em { font-size: 13px; }
+}
+.gt[data-v='ascenso'] .gt-tags li:nth-child(1) { --c: var(--layer-plan-from); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(2) { --c: var(--layer-code-to); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(3) { --c: var(--color-pink-400); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(4) { --c: var(--color-blue-400); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(5) span { left: 0; right: auto; transform: translate(-50%, calc(-100% - 6px)); text-align: center; }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(5) b { font-size: 14px; color: var(--color-heading); }
+
+/* «Postal»: year and stop under each stamp */
+.gt[data-v='postal'] .gt-tags span { left: 0; top: 5px; transform: translateX(-50%); justify-items: center; text-align: center; width: calc(var(--u, 8px) * 13.4); white-space: normal; }
+.gt[data-v='postal'] .gt-tags b { color: var(--color-coral-400); }
+.gt[data-v='postal'] .gt-tags em { font-size: 13px; }
+@media (max-width: 559px) { .gt[data-v='postal'] .gt-tags em { font-size: 12px; } }
+/* a short screen: the name alone fits between the rows */
+@media (max-height: 699px) { .gt[data-v='postal'] .gt-tags b { display: none; } }
+
+/* ── short and wide (a phone on its side): the object on the left, the words on the right ── */
+@media (orientation: landscape) and (max-height: 520px) {
+  .gt-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto; column-gap: var(--space-6); row-gap: 10px; align-items: center; }
+  .gt-top { grid-column: 1 / -1; }
+  .gt-stage { grid-column: 1; grid-row: 2 / 4; }
+  .gt-id { grid-column: 2; grid-row: 2; align-self: end; }
+  .gt-doors { grid-column: 2; grid-row: 3; align-self: start; grid-template-columns: minmax(0, 1fr); width: min(100%, 300px); }
+  .gt-door { min-width: 0; }
+  .gt-meter { grid-column: 1 / -1; grid-row: 4; }
+  .gt-name { font-size: clamp(30px, 5.4vw, 52px); }
+  .gt-veil { background: linear-gradient(90deg, rgba(6, 5, 19, 0) 40%, rgba(6, 5, 19, 0.7) 62%, rgba(6, 5, 19, 0.86) 100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gt, .gt-canvas, .gt-poster, .gt-tags li, .gt-bar i { transition: none; }
+  .gt-l, .gt-role, .gt-doors, .gt-meter, .gt-top, .gt[data-gl='pending'] .gt-poster { animation: none; }
+}
+
+/* ── the page that lists the four (/puerta/) ─────────────────────────────── */
+.gl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); }
+.gl-card {
+  display: grid; align-content: start; gap: var(--space-4); padding: var(--space-6) var(--space-5) var(--space-5);
+  border-radius: var(--radius-2xl); border: 1px solid var(--color-line);
+  background: radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--from) 16%, transparent), transparent 60%), linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+}
+.gl-card h2 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
+.gl-card dl { display: grid; gap: var(--space-3); margin: 0; }
+.gl-card dt { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-text-subtle); }
+.gl-card dd { margin: var(--space-1) 0 0; color: var(--color-text); }
+.gl-card .ui-btn { justify-self: start; margin-top: auto; }
+.gl-now { margin-left: var(--space-3); padding: 2px var(--space-2); border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--from) 60%, transparent); color: var(--color-heading); letter-spacing: 0.04em; }
