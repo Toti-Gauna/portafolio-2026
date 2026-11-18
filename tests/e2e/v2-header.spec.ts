@@ -208,7 +208,9 @@ test('phones: the pill appears on scroll, every page fits 360 px and the languag
   }
   await page.goto('/v2/es/');
   await page.evaluate(() => scrollTo(0, 500));
-  await expect(page.locator('.sh')).toHaveAttribute('data-stuck', 'true');
+  // if the pill does not come, say where the page was (seen once under load, never reproduced)
+  const where = await page.evaluate(() => `scrollY ${scrollY} of ${document.documentElement.scrollHeight}, gate ${document.documentElement.dataset.gate}`);
+  await expect(page.locator('.sh'), where).toHaveAttribute('data-stuck', 'true');
   await settle(page);
   await expect(page.locator('.sh-glass')).toHaveCSS('opacity', '1');
   // touch screens keep the solid glass: no backdrop filter to composite on every scroll frame
@@ -232,7 +234,7 @@ test('the home leads to every page, and the design system keeps the header witho
   await expect(page).toHaveURL(/\/v2\/es\/tokens\/$/);
   await expect(page.locator('.sh-nav [aria-current]')).toHaveCount(0);
   await expect(page.locator('.sh-light')).toHaveAttribute('data-on', 'off');
-  await expect(page.getByRole('navigation', { name: 'Sistema' }).getByRole('link')).toHaveCount(6);
+  await expect(page.getByRole('navigation', { name: 'Sistema' }).getByRole('link')).toHaveCount(7);
 });
 
 test('reduced motion: the pill, the light and the menu change at once', async ({ browser }) => {

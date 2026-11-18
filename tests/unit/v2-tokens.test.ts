@@ -320,6 +320,14 @@ describe('v2 generative music (lote 2.3)', () => {
     expect(lead(5)).toEqual(lead(1));
   });
 
+  it('each page plays its proposal: Circuito for the site, Taller on Work, Marea on the calm pages', async () => {
+    const { ZONE_STYLE, ZONES, STYLE_IDS } = await import('../../v2/sound/compose');
+    expect(Object.keys(ZONE_STYLE).sort()).toEqual(Object.keys(ZONES).sort());
+    expect(ZONE_STYLE.home).toBe('circuito');
+    expect(ZONE_STYLE.work).toBe('taller');
+    expect(new Set(Object.values(ZONE_STYLE))).toEqual(new Set(STYLE_IDS));
+  });
+
   it('swing pushes only the off-beat eighths', async () => {
     const { swingBeat } = await import('../../v2/sound/compose');
     expect(swingBeat(1.5, 0.62)).toBeCloseTo(1.62);
@@ -344,5 +352,109 @@ describe('v2 generative music (lote 2.3)', () => {
       for (const id of STYLE_IDS) expect(m.music.styles[id].name.length).toBeGreaterThan(0);
       for (const z of Object.keys(ZONES)) expect(m.music.zones.keys[z as keyof typeof m.music.zones.keys].length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe('v2 gate (lote 3.1)', () => {
+  it('the metal mark is the drawn one: same stem, G, bar and dot, inside the 48 box', async () => {
+    const THREE = await import('three');
+    const { createMark, markMetal, MARK_DOT, MARK_FOOT } = await import('../../v2/gate/scene/monogram');
+    const mark = createMark(markMetal(), false);
+    for (let i = 0; i < 3; i++) mark.draw(i, 1);
+    const box = new THREE.Box3().setFromObject(mark.group);
+    // the SVG is 48 wide with the mark between x 9.3…44.2 and y 14.3…42.7 (stroke 3.4): centred and y up, that is
+    expect(box.min.x).toBeCloseTo(-14.7, 1);
+    expect(box.max.x).toBeCloseTo(20.2, 1);
+    expect(box.min.y).toBeCloseTo(-19.7, 1);
+    expect(box.max.y).toBeCloseTo(10.7, 1);
+    expect(Math.abs(box.max.z)).toBeCloseTo(1.7, 2);
+    expect(MARK_DOT).toEqual({ x: -13, y: 17, r: 3.4 }); // the dot of the SVG: (11, 7)
+    expect(MARK_FOOT).toBeCloseTo(-18.7, 5);
+    // half drawn, the tip of the G is on its circle
+    const tip = mark.draw(1, 0.5);
+    expect(Math.hypot(tip.x - 5.773, tip.y + 4.497)).toBeCloseTo(13.5, 3);
+  });
+
+  it('every 3D rig builds itself in four moves, stays finite, and has a point for each label the page hangs on it', async () => {
+    const THREE = await import('three');
+    const { RIGS } = await import('../../v2/gate/scene');
+    const { TAG_AFTER, GATE_VARIANTS } = await import('../../v2/gate/state');
+    for (const v of GATE_VARIANTS) {
+      if (v === 'cinetica') continue; // the 2D gate: no rig
+      for (const after of TAG_AFTER[v]) { expect(after).toBeGreaterThanOrEqual(0); expect(after).toBeLessThanOrEqual(4); }
+      if (v === 'postal') continue; // prints its stamps on canvases: it is built in the browser tests
+      const rig = RIGS[v]({ coarse: false, reduced: false, scene: new THREE.Scene(), bloom: {} as never });
+      expect(rig.durations, v).toHaveLength(4);
+      expect(rig.anchors?.length ?? 0, v).toBe(TAG_AFTER[v].length);
+      expect(rig.floorY, v).toBeLessThan(rig.frame.y);
+      for (const p of [[0, 0, 0, 0], [1, 0.4, 0, 0], [1, 1, 1, 0.5], [1, 1, 1, 1]]) {
+        rig.update(p, 3.2, 16);
+        rig.root.updateMatrixWorld(true);
+        rig.root.traverse((o) => { for (const n of o.matrixWorld.elements) expect(Number.isFinite(n), `${v} ${o.type}`).toBe(true); });
+      }
+      // built, the object fits the frame the camera keeps in its box (with room for labels and reflection)
+      const box = new THREE.Box3();
+      rig.root.traverse((o) => { if (o.type === 'Mesh' && o.visible && (o as unknown as { geometry: { type: string } }).geometry.type !== 'RingGeometry') box.expandByObject(o); });
+      expect(box.max.x - box.min.x, v).toBeLessThanOrEqual(rig.frame.w * 1.25);
+      rig.dispose();
+    }
+    expect(TAG_AFTER.postal).toHaveLength(6);
+  });
+
+  it('the script that decides the gate shows it only on a full load of the home', async () => {
+    const { gateScript, GATE_KEY } = await import('../../v2/gate/state');
+    const run = (path: string, stored: string | null, base = '') => {
+      const html = { dataset: {} as Record<string, string> };
+      const env = { document: { documentElement: html, addEventListener: () => {} }, location: { pathname: base + path }, localStorage: { getItem: (k: string) => (k === GATE_KEY ? stored : null) } };
+      new Function('document', 'location', 'localStorage', gateScript(base))(env.document, env.location, env.localStorage);
+      return html.dataset.gate;
+    };
+    expect(run('/v2/es/', null)).toBe('on');
+    expect(run('/v2/en', null)).toBe('on');
+    expect(run('/v2/es/', 'off')).toBe('off');
+    expect(run('/v2/es/work/', null)).toBe('off');
+    expect(run('/v2/es/tokens/', null)).toBe('off');
+    expect(run('/v2/es/', null, '/portafolio-2026')).toBe('on');
+    expect(run('/v2/es/sobre-mi/', null, '/portafolio-2026')).toBe('off');
+    // the preview of each version shows its gate; the page that lists them does not
+    expect(run('/v2/es/puerta/codigo/', null)).toBe('on');
+    expect(run('/v2/en/puerta/postal', null, '/portafolio-2026')).toBe('on');
+    expect(run('/v2/es/puerta/', null)).toBe('off');
+  });
+
+  it('four versions, each with its name and its three lines in both languages; the roadmap has its four stages', async () => {
+    const { GATE_VARIANTS, STEPS } = await import('../../v2/gate/state');
+    expect(GATE_VARIANTS).toEqual(['cinetica', 'monograma', 'codigo', 'ascenso', 'postal']);
+    for (const m of [es, en]) {
+      for (const v of GATE_VARIANTS) for (const k of ['name', 'theme', 'piece', 'loading'] as const) expect(m.gate.choose.items[v][k].length, `${v}.${k}`).toBeGreaterThan(0);
+      for (const st of STEPS) expect(m.gate.steps[st].length).toBeGreaterThan(0);
+      expect(m.gate.stages.map((x) => x.year)).toEqual(['2026', '2028', '2028', '2029']);
+      expect(m.gate.arrival).toBe('2030');
+    }
+    expect(es.gate.stages.map((x) => x.name)).toEqual(['Núcleo', 'Ciberseguridad', 'Quant', 'Aeroespacial']);
+  });
+
+  it('the colours of the 2D gate: every screen is readable (AA), the surname and the focus ring stand out, and the opening returns to ink', async () => {
+    const { GATE_THEMES, GATE_INTRO, GATE_CYCLE } = await import('../../v2/gate/themes');
+    for (const [name, t] of Object.entries(GATE_THEMES)) {
+      expect(contrast(t.fg, t.bg), `${name} fg`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.soft, t.bg), `${name} soft`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.btnFg, t.btn), `${name} button`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t.alt, t.bg), `${name} surname (large type)`).toBeGreaterThanOrEqual(3);
+      expect(contrast(t.focus, t.bg), `${name} focus`).toBeGreaterThanOrEqual(3);
+      expect(contrast(t.btn, t.bg), `${name} button on its field`).toBeGreaterThanOrEqual(1.5);
+      expect(t.edge, `${name} edge`).not.toBe(t.bg);
+    }
+    expect(GATE_INTRO).toHaveLength(5); // one colour per act, and the rest
+    expect(GATE_INTRO[0]).toBe('ink');
+    expect(GATE_INTRO[4]).toBe('ink');
+    for (let i = 1; i < GATE_INTRO.length; i++) expect(GATE_INTRO[i]).not.toBe(GATE_INTRO[i - 1]);
+    expect(new Set(GATE_CYCLE).size).toBe(GATE_CYCLE.length);
+    expect(GATE_CYCLE[0]).toBe('ink');
+  });
+
+  it('the gate has its words in both languages', () => {
+    for (const m of [es, en]) for (const k of ['label', 'meet', 'enter', 'loading', 'ready', 'progress', 'key', 'edition', 'tint'] as const) expect(m.gate[k].length).toBeGreaterThan(0);
+    for (const m of [es, en]) for (const k of ['codigo', 'ascenso', 'postal'] as const) expect(m.gate.tags[k].length).toBeGreaterThan(0);
   });
 });

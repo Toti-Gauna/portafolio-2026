@@ -1,0 +1,507 @@
+/* /v2 gate (lote 3.1): one screen on any device over a 3D scene, in four versions (.gt[data-v]).
+   The server renders it; the layout's script hides it before the first paint wherever it does not apply
+   (html[data-gate='off']). The scene is a canvas (v2/gate/scene); here only opacity and transform move. */
+
+html[data-gate='on'] { overflow: hidden; }
+html[data-gate='off'] .gt { display: none; }
+
+.gt {
+  position: fixed; inset: 0; z-index: var(--z-dialog); height: 100%; overflow: hidden; outline: none;
+  background: var(--color-bg-deep); color: var(--color-text);
+  transition: opacity 520ms var(--motion-ease) 100ms;
+}
+@supports (height: 100dvh) { .gt { height: 100dvh; } }
+.gt[data-leaving] { opacity: 0; pointer-events: none; }
+
+/* the scene: it fades in over the drawn mark once its first frames are on screen */
+.gt-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 900ms var(--motion-ease); }
+.gt[data-gl='on'] .gt-canvas { opacity: 1; }
+/* the words sit on dark: a veil over the far floor and under the top line */
+.gt-veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 5, 19, 0.5) 0, rgba(6, 5, 19, 0) 14%, rgba(6, 5, 19, 0) 58%, rgba(6, 5, 19, 0.62) 80%, rgba(6, 5, 19, 0.9) 100%);
+}
+
+.gt-in {
+  position: relative; z-index: 2; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto auto; justify-items: center;
+  gap: clamp(10px, 2.2vh, 22px); height: 100%;
+  padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3.4vw, 44px) calc(clamp(14px, 2.4vh, 24px) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── the top line ────────────────────────────────────────────────────────── */
+.gt-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); width: 100%; }
+.gt-brand, .gt-place, .gt-meter {
+  margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.gt-brand { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--color-mist-200); }
+.gt-brand svg, .gt-poster { fill: none; stroke: var(--color-white); stroke-width: 3.4; stroke-linecap: round; }
+.gt-brand svg { flex: none; width: 26px; height: 26px; overflow: visible; }
+.gt-mark-dot { fill: var(--color-coral-500); stroke: none; }
+.gt-place { display: none; color: var(--color-text-subtle); }
+@media (min-width: 560px) { .gt-place { display: block; } }
+
+/* ── the stage: the box the 3D object is framed in ───────────────────────── */
+.gt-stage { container-type: size; display: grid; place-items: center; width: min(88%, 780px); height: 100%; min-height: 0; }
+.gt-poster { width: min(52cqw, 60cqh, 280px); height: auto; overflow: visible; transition: opacity 600ms var(--motion-ease); }
+.gt[data-gl='pending'] .gt-poster { opacity: 0.5; animation: gt-wait 1.6s var(--motion-ease-in-out) infinite alternate; }
+.gt[data-gl='on'] .gt-poster { opacity: 0; }
+@keyframes gt-wait { to { opacity: 0.22; } }
+
+/* ── who ─────────────────────────────────────────────────────────────────── */
+.gt-id { display: grid; justify-items: center; gap: clamp(8px, 1.5vh, 14px); min-width: 0; }
+.gt-name {
+  display: flex; justify-content: center; gap: 0 0.24em; margin: 0; white-space: nowrap;
+  font-size: clamp(34px, min(9.6vw, 8.4vh), 84px); line-height: 0.96; font-weight: 800;
+  font-variation-settings: 'wdth' 112; letter-spacing: -0.045em; color: var(--color-heading);
+}
+.gt-word { display: inline-flex; overflow: hidden; padding: 0.08em 0.04em 0.12em; margin: -0.08em -0.04em -0.12em; }
+.gt-l { display: inline-block; color: var(--lc, inherit); animation: gt-letter 1000ms var(--motion-ease) both; animation-delay: calc(var(--i) * 42ms + 160ms); }
+@keyframes gt-letter { from { opacity: 0; transform: translate3d(0, 108%, 0) rotate(6deg); } }
+.gt-role { display: inline-flex; align-items: center; gap: var(--space-3); margin: 0; }
+.gt-role b {
+  display: grid; place-items: center; height: 28px; padding: 0 10px; border-radius: var(--radius-xs);
+  background: var(--gradient-brand); color: var(--color-on-accent); font-size: 16px; font-weight: 900; font-variation-settings: 'wdth' 112;
+}
+.gt-role span { font-size: clamp(15px, 1.9vh, 18px); font-weight: 600; letter-spacing: 0.01em; color: var(--color-mist-100); white-space: nowrap; }
+
+/* ── two doors ───────────────────────────────────────────────────────────── */
+.gt-doors { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); width: min(100%, 340px); }
+.gt-door {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
+  min-height: var(--size-button); padding: 0 var(--space-5); border-radius: var(--radius-md); border: 1px solid transparent;
+  font-family: inherit; font-size: 16px; font-weight: 800; line-height: 1.1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: transform var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease), background-color var(--motion-fast) var(--motion-ease);
+}
+.gt-door svg { flex: none; }
+.gt-door--meet { background: var(--color-coral-500); color: var(--color-on-accent); }
+.gt-door--enter { background: rgba(9, 7, 32, 0.6); border-color: var(--color-line-strong); color: var(--color-heading); font-weight: 700; }
+.gt-door .ui-kbd { display: none; margin-left: var(--space-1); }
+.gt-door:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .gt-door--meet:hover { background-color: var(--color-coral-400); }
+  .gt-door--enter:hover { border-color: var(--color-mist-200); background-color: rgba(34, 29, 79, 0.7); }
+  .gt-door .ui-kbd { display: inline-grid; }
+}
+@media (min-width: 560px) { .gt-doors { grid-template-columns: repeat(2, max-content); justify-content: center; width: auto; } .gt-door { min-width: 216px; } }
+
+/* ── the loading: what is being built, a hairline and the count ──────────── */
+.gt-meter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr); align-items: center; gap: var(--space-4); width: 100%; color: var(--color-text-subtle); }
+.gt-step { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gt-bar { position: relative; height: 1px; background: rgba(255, 255, 255, 0.16); }
+.gt-bar i { position: absolute; left: 0; right: 0; top: -1px; height: 3px; border-radius: 2px; background: var(--gradient-brand); transform-origin: 0 50%; transition: transform 240ms linear; }
+.gt-num { justify-self: end; font-variant-numeric: tabular-nums; color: var(--color-mist-200); }
+.gt[data-ready='true'] .gt-step { color: var(--color-mist-100); }
+@media (max-width: 559px) { .gt-meter { grid-template-columns: auto minmax(0, 1fr) auto; letter-spacing: 0.1em; } }
+
+.gt-role, .gt-doors, .gt-meter, .gt-top { animation: gt-rise var(--motion-slow) var(--motion-ease) both; }
+.gt-top { animation-delay: 80ms; }
+.gt-role { animation-delay: 700ms; }
+.gt-doors { animation-delay: 840ms; }
+.gt-meter { animation-delay: 960ms; }
+@keyframes gt-rise { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+
+/* ── labels that follow points of the 3D object ──────────────────────────── */
+.gt-tags { position: absolute; inset: 0; z-index: 1; margin: 0; padding: 0; list-style: none; pointer-events: none; display: none; }
+.gt[data-gl='on'] .gt-tags { display: block; }
+.gt-tags li { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 600ms var(--motion-ease) 200ms; }
+.gt-tags li[data-after='0'],
+.gt:is([data-move='1'], [data-move='2'], [data-move='3'], [data-move='4']) .gt-tags li[data-after='1'],
+.gt:is([data-move='2'], [data-move='3'], [data-move='4']) .gt-tags li[data-after='2'],
+.gt:is([data-move='3'], [data-move='4']) .gt-tags li[data-after='3'],
+.gt[data-move='4'] .gt-tags li[data-after='4'] { opacity: 1; }
+.gt-tags span { position: absolute; display: grid; gap: 1px; white-space: nowrap; }
+.gt-tags b { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; color: var(--c, var(--color-mist-200)); }
+.gt-tags em { font-style: normal; font-size: 14px; font-weight: 700; line-height: 1.15; color: var(--color-heading); text-shadow: 0 1px 12px rgba(6, 5, 19, 0.9); }
+
+/* «Código»: each layer's name off its right edge, in its colour (when there is room beside the stack) */
+.gt[data-v='codigo'] .gt-tags { visibility: hidden; }
+@media (min-width: 900px) and (min-height: 560px) { .gt[data-v='codigo'] .gt-tags { visibility: visible; } }
+.gt[data-v='codigo'] .gt-tags span { left: 34px; top: 0; transform: translateY(-50%); }
+.gt[data-v='codigo'] .gt-tags span::before { content: ''; position: absolute; right: calc(100% + 8px); top: 50%; width: 22px; height: 1px; background: var(--c); opacity: 0.7; }
+.gt[data-v='codigo'] .gt-tags em { font-family: var(--family-mono); font-size: var(--type-label-size); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(1) { --c: var(--layer-plan-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(2) { --c: var(--layer-code-to); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(3) { --c: var(--layer-agents-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(4) { --c: var(--layer-tests-from); }
+.gt[data-v='codigo'] .gt-tags li:nth-child(5) { --c: var(--layer-ship-to); }
+
+/* «Ascenso»: year and stage beside each platform, on the outer side of the spiral */
+.gt[data-v='ascenso'] .gt-tags span { top: 0; transform: translateY(-50%); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(even) span { left: calc(var(--u, 10px) * 7.3); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(odd) span { right: calc(var(--u, 10px) * 7.3); text-align: right; }
+/* no room beside the spiral on a narrow screen: each name goes under its platform */
+@media (max-width: 699px) {
+  .gt[data-v='ascenso'] .gt-tags li:nth-child(-n + 4) span { left: 0; right: auto; transform: translate(-50%, calc(var(--u, 6px) * 2.5)); justify-items: center; text-align: center; }
+  .gt[data-v='ascenso'] .gt-tags em { font-size: 13px; }
+}
+.gt[data-v='ascenso'] .gt-tags li:nth-child(1) { --c: var(--layer-plan-from); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(2) { --c: var(--layer-code-to); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(3) { --c: var(--color-pink-400); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(4) { --c: var(--color-blue-400); }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(5) span { left: 0; right: auto; transform: translate(-50%, calc(-100% - 6px)); text-align: center; }
+.gt[data-v='ascenso'] .gt-tags li:nth-child(5) b { font-size: 14px; color: var(--color-heading); }
+
+/* «Postal»: year and stop under each stamp */
+.gt[data-v='postal'] .gt-tags span { left: 0; top: 5px; transform: translateX(-50%); justify-items: center; text-align: center; width: calc(var(--u, 8px) * 13.4); white-space: normal; }
+.gt[data-v='postal'] .gt-tags b { color: var(--color-coral-400); }
+.gt[data-v='postal'] .gt-tags em { font-size: 13px; }
+@media (max-width: 559px) { .gt[data-v='postal'] .gt-tags em { font-size: 12px; } }
+/* a short screen: the name alone fits between the rows */
+@media (max-height: 699px) { .gt[data-v='postal'] .gt-tags b { display: none; } }
+
+/* ── short and wide (a phone on its side): the object on the left, the words on the right ── */
+@media (orientation: landscape) and (max-height: 520px) {
+  .gt-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto; column-gap: var(--space-6); row-gap: 10px; align-items: center; }
+  .gt-top { grid-column: 1 / -1; }
+  .gt-stage { grid-column: 1; grid-row: 2 / 4; }
+  .gt-id { grid-column: 2; grid-row: 2; align-self: end; }
+  .gt-doors { grid-column: 2; grid-row: 3; align-self: start; grid-template-columns: minmax(0, 1fr); width: min(100%, 300px); }
+  .gt-door { min-width: 0; }
+  .gt-meter { grid-column: 1 / -1; grid-row: 4; }
+  .gt-name { font-size: clamp(30px, 5.4vw, 52px); }
+  .gt-veil { background: linear-gradient(90deg, rgba(6, 5, 19, 0) 40%, rgba(6, 5, 19, 0.7) 62%, rgba(6, 5, 19, 0.86) 100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gt, .gt-canvas, .gt-poster, .gt-tags li, .gt-bar i { transition: none; }
+  .gt-l, .gt-role, .gt-doors, .gt-meter, .gt-top, .gt[data-gl='pending'] .gt-poster { animation: none; }
+}
+
+/* ══ «Cinética»: the 2D gate of the home ══════════════════════════════════════
+   Flat fields of colour, the IG mark and character animation: squash, stretch, overshoot. The colours of
+   everything written come from the theme (--fg, --alt, --dot, --btn…, set on .gk); each element switches
+   when the wipe reaches it (--d). Only transform, opacity and clip-path move. */
+.gk { background: transparent; transition: none; --ease-boing: cubic-bezier(0.2, 0.7, 0.4, 1); }
+/* the way out: the gate closes like an iris on the mark, and the page is what is left */
+.gk[data-leaving] { opacity: 1; animation: gk-leave 560ms cubic-bezier(0.5, 0, 0.75, 0) both; }
+@keyframes gk-leave { from { clip-path: circle(78vmax at 50% 40%); } to { clip-path: circle(0 at 50% 40%); } }
+.gk-t {
+  transition: color 0s linear var(--d, 0ms), background-color 0s linear var(--d, 0ms), border-color 0s linear var(--d, 0ms),
+    fill 0s linear var(--d, 0ms), stroke 0s linear var(--d, 0ms);
+}
+.gk :focus-visible { outline-color: var(--focus-c); }
+
+/* ── the colours ─────────────────────────────────────────────────────────── */
+.gk-field, .gk-wipe, .gk-wipe i { position: absolute; inset: 0; }
+.gk-wipe i { clip-path: circle(0 at var(--x) var(--y)); animation: gk-wipe 640ms cubic-bezier(0.5, 1, 0.89, 1) both; }
+.gk-wipe i + i { animation-delay: 70ms; }
+@keyframes gk-wipe { to { clip-path: circle(var(--r) at var(--x) var(--y)); } }
+
+/* ── the opening: the mark, large ────────────────────────────────────────── */
+.gk-big {
+  position: absolute; left: 50%; top: 45%; width: min(56vw, 44vh); aspect-ratio: 1; margin: calc(min(56vw, 44vh) / -2) 0 0 calc(min(56vw, 44vh) / -2);
+  pointer-events: none; z-index: 1;
+}
+.gk[data-landed='true'] .gk-big { display: none; }
+.gk-big svg { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke-width: 3.4; stroke-linecap: round; }
+.gk-stem, .gk-arc, .gk-bar { stroke: var(--fg); }
+.gk-ball { fill: var(--dot); stroke: none; transform-origin: 24px 42.7px; }
+.gk-stem { transform-origin: 11px 42.7px; }
+.gk-stem-w { transform-origin: 11px 42.7px; }
+.gk-g-spin { transform-origin: 29.773px 28.497px; }
+.gk-body { transform-origin: 24px 42.7px; }
+
+.gk-shadow { fill: var(--fg); opacity: 0; transform-origin: 24px 43.5px; }
+.gk-pow { stroke: var(--fg); stroke-width: 1.3; opacity: 0; }
+@keyframes gk-pow { 0% { opacity: 0; transform: scale(0.3); } 18% { opacity: 1; } 100% { opacity: 0; transform: scale(1.45); } }
+.gk[data-scene='0'] .gk-pow--0 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 368ms both; }
+.gk[data-scene='1'] .gk-pow--1 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 378ms both; }
+.gk[data-scene='2'] .gk-pow--2 { animation: gk-pow 420ms cubic-bezier(0.2, 0.7, 0.4, 1) 540ms both; }
+.gk[data-scene='3'] .gk-pow--3 { animation: gk-pow 380ms cubic-bezier(0.2, 0.7, 0.4, 1) 413ms both; }
+/* the ball has a floor under it: its shadow gathers as it comes down */
+.gk[data-scene='0'] .gk-shadow { animation: gk0-shadow 800ms both; }
+.gk[data-scene='1'] .gk-shadow { animation: gk1-shadow 840ms both; }
+@keyframes gk0-shadow {
+  0% { opacity: 0; transform: scale(0.2, 1); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.7); }
+  46% { opacity: 0.22; transform: scale(1.3, 1); }
+  62% { opacity: 0.12; transform: scale(0.7, 1); }
+  78% { opacity: 0.22; transform: scale(1.15, 1); }
+  100% { opacity: 0.2; transform: scale(1, 1); }
+}
+@keyframes gk1-shadow {
+  0% { opacity: 0.2; transform: translateX(0) scale(1, 1); }
+  22% { opacity: 0.1; transform: translateX(-6.5px) scale(0.6, 1); }
+  45% { opacity: 0.24; transform: translateX(-13px) scale(1.3, 1); }
+  70%, 100% { opacity: 0; transform: translateX(-13px) scale(0.4, 1); }
+}
+
+/* act 0 · the ball drops in and settles (runs on the first paint, before any script) */
+.gk-ball-y { animation: gk0-y 800ms both, gk0-wait 900ms 820ms infinite; }
+.gk-ball { animation: gk0-sq 800ms both, gk0-wait-sq 900ms 820ms infinite; }
+.gk[data-scene='0'] .gk-stem { transform: scaleY(0); }
+.gk[data-scene='0'] .gk-g-roll, .gk[data-scene='1'] .gk-g-roll { opacity: 0; }
+.gk[data-scene='0'] .gk-bar, .gk[data-scene='1'] .gk-bar, .gk[data-scene='2'] .gk-bar { opacity: 0; }
+@keyframes gk0-y {
+  0% { transform: translateY(-90px); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.7); }
+  46% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  62% { transform: translateY(-10px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  78% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  88% { transform: translateY(-3px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  96%, 100% { transform: translateY(0); }
+}
+@keyframes gk0-sq {
+  0%, 38% { transform: scale(0.86, 1.16); }
+  46% { transform: scale(1.36, 0.66); }
+  56% { transform: scale(0.92, 1.1); }
+  74% { transform: scale(1, 1); }
+  78% { transform: scale(1.2, 0.82); }
+  86% { transform: scale(0.97, 1.04); }
+  96% { transform: scale(1.07, 0.94); }
+  100% { transform: scale(1, 1); }
+}
+/* still loading: it keeps itself busy */
+@keyframes gk0-wait {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  50% { transform: translateY(-6px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+}
+@keyframes gk0-wait-sq { 0%, 100% { transform: scale(1.16, 0.85); } 20%, 80% { transform: scale(0.95, 1.06); } 50% { transform: scale(1, 1); } }
+
+/* from act 1 on, where things stay once their act is over */
+.gk:not([data-scene='0']) .gk-ball-x { transform: translateX(-13px); }
+.gk:not([data-scene='0']) .gk-ball-y { transform: translateY(-32.3px); animation: none; }
+.gk:not([data-scene='0']) .gk-ball { animation: none; }
+
+/* act 1 · it jumps to its place, and the stem shoots up under it */
+.gk[data-scene='1'] .gk-ball-x { animation: gk1-x 380ms linear both; }
+.gk[data-scene='1'] .gk-ball-y { animation: gk1-y 840ms both; }
+.gk[data-scene='1'] .gk-ball { animation: gk1-sq 840ms both; }
+.gk[data-scene='1'] .gk-stem { animation: gk1-stem 840ms both; }
+@keyframes gk1-x { from { transform: translateX(0); } to { transform: translateX(-13px); } }
+@keyframes gk1-y {
+  0% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  22% { transform: translateY(-12px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  45% { transform: translateY(0); animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1); }
+  74% { transform: translateY(-36.5px); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  90% { transform: translateY(-31.4px); }
+  100% { transform: translateY(-32.3px); }
+}
+@keyframes gk1-sq {
+  0% { transform: scale(1.24, 0.78); }
+  10% { transform: scale(0.9, 1.14); }
+  40% { transform: scale(0.9, 1.14); }
+  45% { transform: scale(1.36, 0.66); }
+  56% { transform: scale(0.82, 1.24); }
+  74% { transform: scale(1.08, 0.94); }
+  90% { transform: scale(0.97, 1.03); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes gk1-stem {
+  0%, 45% { transform: scaleY(0); animation-timing-function: cubic-bezier(0.1, 0.8, 0.3, 1); }
+  72% { transform: scaleY(1.1); }
+  88% { transform: scaleY(0.97); }
+  100% { transform: scaleY(1); }
+}
+
+/* act 2 · the G rolls in and bumps the stem */
+.gk[data-scene='2'] .gk-g-roll { animation: gk2-roll 1020ms both; }
+.gk[data-scene='2'] .gk-g-spin { animation: gk2-spin 1020ms both; }
+.gk[data-scene='2'] .gk-stem-w { animation: gk2-wobble 1020ms both; }
+.gk[data-scene='2'] .gk-ball-x { animation: gk2-ball 1020ms both; }
+@keyframes gk2-roll {
+  0% { transform: translateX(120px); animation-timing-function: cubic-bezier(0.3, 0.5, 0.6, 1); }
+  53% { transform: translateX(-1.8px); }
+  66% { transform: translateX(1.1px); }
+  80% { transform: translateX(-0.3px); }
+  100% { transform: translateX(0); }
+}
+@keyframes gk2-spin {
+  0% { transform: rotate(510deg); animation-timing-function: cubic-bezier(0.3, 0.5, 0.6, 1); }
+  53% { transform: rotate(-9deg); }
+  68% { transform: rotate(5deg); }
+  84% { transform: rotate(-2deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes gk2-wobble { 0%, 53% { transform: rotate(0); } 63% { transform: rotate(-9deg); } 75% { transform: rotate(5.5deg); } 87% { transform: rotate(-2deg); } 100% { transform: rotate(0); } }
+@keyframes gk2-ball { 0%, 53% { transform: translateX(-13px); } 63% { transform: translateX(-18.6px); } 75% { transform: translateX(-9.6px); } 87% { transform: translateX(-14.3px); } 100% { transform: translateX(-13px); } }
+
+/* act 3 · the ball slams down as the dot, the mark takes the hit, the bar snaps in */
+.gk[data-scene='3'] .gk-ball-y { animation: gk3-y 780ms both; }
+.gk[data-scene='3'] .gk-ball { animation: gk3-sq 780ms both; }
+.gk[data-scene='3'] .gk-body { animation: gk3-body 780ms both; }
+.gk[data-scene='3'] .gk-bar { animation: gk3-bar 780ms both; }
+@keyframes gk3-y {
+  0% { transform: translateY(-32.3px); }
+  12% { transform: translateY(-30.4px); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  35% { transform: translateY(-45px); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  53% { transform: translateY(-32.3px); }
+  60% { transform: translateY(-30px); }
+  78% { transform: translateY(-33.3px); }
+  100% { transform: translateY(-32.3px); }
+}
+@keyframes gk3-sq { 0% { transform: scale(1, 1); } 12% { transform: scale(1.22, 0.8); } 30% { transform: scale(0.86, 1.18); } 53% { transform: scale(1.34, 0.68); } 66% { transform: scale(0.92, 1.08); } 100% { transform: scale(1, 1); } }
+@keyframes gk3-body { 0%, 53% { transform: scale(1, 1); } 61% { transform: scale(1.07, 0.89); } 76% { transform: scale(0.98, 1.04); } 90% { transform: scale(1.01, 0.99); } 100% { transform: scale(1, 1); } }
+@keyframes gk3-bar {
+  0%, 50% { opacity: 0; transform: translateX(44px); animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+  52% { opacity: 1; }
+  74% { opacity: 1; transform: translateX(-1.5px); }
+  88% { transform: translateX(0.5px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* act 4 · it crouches; the script throws it to its place */
+.gk[data-scene='4'] .gk-body { animation: gk4-crouch 150ms var(--ease-boing) both; }
+@keyframes gk4-crouch { to { transform: scale(1.09, 0.84); } }
+
+/* ── the frame ───────────────────────────────────────────────────────────── */
+.gk-in {
+  position: relative; z-index: 2; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%;
+  padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3.4vw, 44px) calc(clamp(14px, 2.4vh, 24px) + env(safe-area-inset-bottom, 0px));
+}
+.gk-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--size-touch); }
+.gk-brand, .gk-place, .gk-meter, .gk-skip {
+  margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft);
+}
+.gk-place { display: none; }
+@media (min-width: 560px) { .gk[data-landed='true'] .gk-place { display: block; animation: gk-rise 500ms var(--motion-ease) 400ms both; } }
+.gk-skip {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-1); margin-left: auto;
+  border: 0; background: none; color: var(--fg); cursor: pointer;
+}
+.gk-meter { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-4); }
+.gk-step { white-space: nowrap; }
+.gk-bar-h { position: relative; height: 1px; background: color-mix(in srgb, var(--fg) 26%, transparent); }
+.gk-bar-h i { position: absolute; inset: -1px 0 0; background: var(--fg); transform-origin: 0 50%; transition: transform 320ms var(--motion-ease); }
+.gk-num { font-variant-numeric: tabular-nums; color: var(--fg); }
+
+/* ── at rest: the mark, the name, the role and two doors on a branch ─────── */
+.gk-final { display: grid; align-content: center; justify-items: center; gap: clamp(10px, 2vh, 18px); min-height: 0; text-align: center; }
+.gk-final > * { opacity: 0; }
+.gk[data-landed='true'] .gk-final > * { opacity: 1; }
+.gk-mark {
+  display: grid; place-items: center; width: clamp(64px, 12vh, 104px); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--fg); cursor: pointer;
+  transform-origin: 50% 90%;
+}
+.gk-mark svg { width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; }
+.gk-mark-g { transform-origin: 29.773px 28.497px; }
+.gk-mark-dot { transform-origin: 11px 10.4px; }
+.gk-mark-dot circle { fill: var(--dot); stroke: none; }
+.gk[data-landed='true'] .gk-mark { animation: gk-land 480ms var(--ease-boing) both; }
+@keyframes gk-land { 0% { transform: scale(1.16, 0.8); } 45% { transform: scale(0.95, 1.08); } 75% { transform: scale(1.03, 0.97); } 100% { transform: scale(1, 1); } }
+/* every few seconds the dot hops: the mark is a button, and it says so */
+.gk[data-ready='true'] .gk-mark-dot { animation: gk-hop 5.2s 1.8s infinite; }
+@keyframes gk-hop {
+  0%, 14%, 100% { transform: translateY(0) scale(1, 1); }
+  2% { transform: translateY(0) scale(1.22, 0.78); animation-timing-function: cubic-bezier(0, 0.6, 0.4, 1); }
+  7% { transform: translateY(-7px) scale(0.9, 1.14); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  11% { transform: translateY(0) scale(1.18, 0.82); }
+}
+
+.gk-id { display: grid; justify-items: center; gap: clamp(8px, 1.4vh, 14px); }
+.gk-name {
+  display: grid; margin: 0; font-size: clamp(40px, min(13vw, 11.4vh), 116px); line-height: 1.02; font-weight: 800;
+  font-variation-settings: 'wdth' 125; letter-spacing: -0.03em; color: var(--fg);
+}
+.gk-word { display: inline-flex; justify-content: center; }
+.gk-l { display: inline-block; transform-origin: 50% 86%; color: var(--fg); cursor: default; }
+.gk-word--last .gk-l { color: var(--alt); }
+.gk[data-landed='true'] .gk-l { animation: gk-jump 760ms both; animation-delay: calc(var(--i) * 46ms + 90ms); }
+@keyframes gk-jump {
+  0% { opacity: 0; transform: translateY(120%) scale(0.8, 1.3); animation-timing-function: cubic-bezier(0, 0.6, 0.3, 1); }
+  8% { opacity: 1; }
+  44% { opacity: 1; transform: translateY(-24%) scale(0.93, 1.1); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  66% { transform: translateY(0) scale(1.15, 0.84); }
+  82% { transform: translateY(-6%) scale(0.98, 1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
+}
+.gk-role { margin: 0; font-family: var(--family-mono); font-size: clamp(13px, 1.7vh, 15px); font-weight: 500; letter-spacing: 0.04em; color: var(--soft); }
+.gk-role b { font-weight: 800; color: var(--fg); }
+.gk[data-landed='true'] .gk-role { animation: gk-rise 520ms var(--motion-ease) 620ms both; }
+@keyframes gk-rise { from { opacity: 0; transform: translate3d(0, 12px, 0); } }
+
+.gk-doors { position: relative; display: grid; gap: var(--space-3); width: min(100%, 340px); margin-top: clamp(14px, 3.4vh, 30px); padding-left: 40px; }
+.gk-fork { position: absolute; left: 0; top: -28px; width: 40px; height: 136px; overflow: visible; fill: none; stroke: var(--soft); stroke-width: 2; }
+.gk-fork path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.gk-fork-a { stroke: var(--btn); }
+.gk-fork circle { fill: var(--btn); stroke: none; }
+.gk[data-landed='true'] .gk-fork path { animation: gk-draw 640ms var(--motion-ease) 700ms both; }
+.gk[data-landed='true'] .gk-fork-b { animation-delay: 800ms; }
+.gk[data-landed='true'] .gk-fork circle:not(.gk-packet) { animation: gk-pop 420ms var(--ease-boing) 660ms both; transform-origin: 6px 6px; }
+@keyframes gk-draw { to { stroke-dashoffset: 0; } }
+/* a packet runs down the branch into the first door, now and then */
+.gk-packet { opacity: 0; }
+.gk[data-ready='true'] .gk-packet { animation: gk-packet 3.6s 2.6s infinite; }
+@keyframes gk-packet {
+  0% { opacity: 0; transform: translate(0, 0); }
+  4% { opacity: 1; }
+  16% { transform: translate(0, 34px); }
+  21% { transform: translate(4px, 43px); }
+  24% { transform: translate(12px, 46px); }
+  32% { opacity: 1; transform: translate(34px, 46px); }
+  36%, 100% { opacity: 0; transform: translate(34px, 46px); }
+}
+.gk-door {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); width: 100%; min-height: var(--size-button); padding: 0 var(--space-5);
+  border-radius: var(--radius-md); border: 2px solid transparent; font-family: inherit; font-size: 16px; font-weight: 800; line-height: 1.1; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+}
+.gk-door svg { flex: none; }
+.gk-door--meet { background: var(--btn); color: var(--btn-fg); }
+.gk-door--enter { background: transparent; border-color: color-mix(in srgb, var(--fg) 62%, transparent); color: var(--fg); font-weight: 700; }
+.gk-key {
+  display: none; place-items: center; height: 26px; padding: 0 7px; margin-left: var(--space-1); border-radius: var(--radius-xs);
+  border: 1px solid color-mix(in srgb, var(--fg) 50%, transparent); font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700;
+}
+.gk[data-landed='true'] .gk-door { animation: gk-pop 520ms var(--ease-boing) 740ms both; }
+.gk[data-landed='true'] .gk-door--enter { animation-delay: 840ms; }
+@keyframes gk-pop { 0% { opacity: 0; transform: scale(0.6, 0.6); } 55% { opacity: 1; transform: scale(1.07, 0.95); } 78% { transform: scale(0.98, 1.03); } 100% { opacity: 1; transform: scale(1, 1); } }
+.gk-door:active { transform: scale(0.96, 0.94); }
+@media (hover: hover) and (pointer: fine) {
+  .gk-key { display: inline-grid; }
+  /* under the pointer a door takes a breath: squash, stretch, settle */
+  .gk[data-ready='true'] .gk-door:hover { animation: gk-boing 460ms var(--ease-boing); }
+  .gk-door:hover svg:last-of-type { transform: translateX(3px); }
+  .gk-skip:hover svg { transform: translateX(3px); }
+}
+.gk-door svg, .gk-skip svg { transition: transform var(--motion-fast) var(--motion-ease); }
+@keyframes gk-boing { 0% { transform: scale(1, 1); } 30% { transform: scale(1.06, 0.9); } 60% { transform: scale(0.97, 1.06); } 82% { transform: scale(1.02, 0.98); } 100% { transform: scale(1, 1); } }
+
+/* short and wide (a phone on its side): who on the left, the doors on the right */
+@media (orientation: landscape) and (max-height: 520px) {
+  .gk-final { grid-template-columns: auto auto; grid-template-rows: auto auto; justify-content: center; column-gap: clamp(28px, 7vw, 72px); row-gap: 8px; align-items: center; }
+  .gk-mark { grid-column: 1; grid-row: 1; width: 56px; }
+  .gk-id { grid-column: 1; grid-row: 2; }
+  .gk-doors { grid-column: 2; grid-row: 1 / 3; width: 300px; margin-top: 28px; }
+  .gk-name { font-size: clamp(34px, 12vh, 52px); }
+  .gk-big { top: 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gk[data-leaving], .gk-wipe i, .gk-ball-y, .gk-ball, .gk-pow, .gk-shadow, .gk[data-landed='true'] .gk-mark, .gk[data-ready='true'] .gk-mark-dot, .gk[data-landed='true'] .gk-l,
+  .gk[data-landed='true'] .gk-role, .gk[data-landed='true'] .gk-place, .gk[data-landed='true'] .gk-fork path, .gk[data-landed='true'] .gk-fork circle,
+  .gk[data-ready='true'] .gk-packet, .gk[data-landed='true'] .gk-door, .gk[data-ready='true'] .gk-door:hover { animation: none; }
+  .gk-fork path { stroke-dashoffset: 0; }
+  .gk-bar-h i, .gk-door svg, .gk-skip svg { transition: none; }
+}
+
+/* ── the page that lists the four (/puerta/) ─────────────────────────────── */
+.gl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: var(--space-4); }
+.gl-card {
+  display: grid; align-content: start; gap: var(--space-4); padding: var(--space-6) var(--space-5) var(--space-5);
+  border-radius: var(--radius-2xl); border: 1px solid var(--color-line);
+  background: radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--from) 16%, transparent), transparent 60%), linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+}
+.gl-card h2 { font-size: var(--type-h3-size); line-height: var(--type-h3-lh); font-weight: 800; color: var(--color-heading); }
+.gl-card dl { display: grid; gap: var(--space-3); margin: 0; }
+.gl-card dt { font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: var(--type-label-tracking); text-transform: uppercase; color: var(--color-text-subtle); }
+.gl-card dd { margin: var(--space-1) 0 0; color: var(--color-text); }
+.gl-card .ui-btn { justify-self: start; margin-top: auto; }
+.gl-now { margin-left: var(--space-3); padding: 2px var(--space-2); border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--from) 60%, transparent); color: var(--color-heading); letter-spacing: 0.04em; }
+
+/* the bar that goes from one gate to the next, on the preview of each (under an open gate it is covered) */
+.gl-pager {
+  position: fixed; left: 50%; bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); z-index: var(--z-overlay); transform: translateX(-50%);
+  display: grid; justify-items: center; gap: var(--space-1); width: max-content; max-width: calc(100% - 2 * var(--size-gutter));
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-2xl); border: 1px solid var(--color-line-strong);
+  background: var(--color-ink-700); box-shadow: var(--shadow-panel);
+}
+.gl-pager p { display: flex; gap: var(--space-3); margin: 0; font-family: var(--family-mono); font-size: var(--type-label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+.gl-pager p b { color: var(--color-coral-400); }
+.gl-pager ul { display: flex; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.gl-pager a {
+  display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-touch); padding: 0 var(--space-3); border-radius: var(--radius-md);
+  color: var(--color-heading); font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap;
+}
+.gl-pager-next { background: var(--color-coral-500); color: var(--color-on-accent) !important; }
+.gl-pager-prev svg { transform: scaleX(-1); }
+@media (hover: hover) and (pointer: fine) { .gl-pager a:not(.gl-pager-next):hover { background: rgba(255, 255, 255, 0.08); } .gl-pager-next:hover { background: var(--color-coral-400); } }
+@media (max-width: 420px) { .gl-pager a { padding: 0 var(--space-2); font-size: 14px; } }

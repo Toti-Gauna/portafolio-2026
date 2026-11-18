@@ -1,4 +1,4 @@
-import { barDegree, chordName, type NoteEvent, STYLES, type StyleId, swingBeat, type Voice, ZONES, type ZoneKey } from './compose';
+import { barDegree, chord, chordName, type NoteEvent, place, STYLES, type StyleId, swingBeat, type Voice, ZONES, type ZoneKey } from './compose';
 
 /**
  * The sound of the generative music (lote 2.3): every voice is synthesised with Web Audio (oscillators,
@@ -99,6 +99,14 @@ export class MusicEngine {
     s.gain.linearRampToValueAtTime(0, t + fade);
     // notes already scheduled for later bars die with their session
     setTimeout(() => s.disconnect(), (fade + 0.1) * 1000);
+  }
+
+  /** A short, bright chord on the tonic of the page: the gate opening (lote 3.1). It sounds on its own, with or without the music. */
+  accent() {
+    const z = ZONES[this.zone];
+    const t = this.ctx.currentTime + 0.03;
+    const tones = [...chord(z, 0, false), 12];
+    tones.forEach((semis, i) => this.play({ voice: 'chime', beat: 0, dur: 4, midi: place(z, semis, 72 + (i === 3 ? 12 : 0), 84 + (i === 3 ? 12 : 0)), vel: 0.34 }, t + i * 0.075, 0.5, this.bus, z.bright));
   }
 
   /** Offline: lays down `seconds` of music from now (for an OfflineAudioContext); with a tour, the page changes every `barsEach` bars. */

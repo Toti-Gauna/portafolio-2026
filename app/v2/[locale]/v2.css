@@ -192,3 +192,4 @@ a { color: inherit; }
   *, *::before, *::after { transition-duration: 0ms !important; animation: none !important; }
 }
 
+.v2-main:focus { outline: none; }

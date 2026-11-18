@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 // Lote 2.3: the generative music of /v2 (v2/sound, v2/components/sound). Silent until asked for, follows the page,
-// pauses with the tab hidden; /sonido/ plays the three proposals and stores the choice.
+// pauses with the tab hidden; each page plays its proposal (Circuito, Taller on Work, Marea on the calm pages).
 
 type Debug = { playing: boolean; style: string; zone: string; bar: number; state: string; loaded: boolean };
 const music = (page: Page) => page.evaluate(() => (window as Window & { __igMusic?: () => Debug }).__igMusic?.() ?? null);
@@ -21,13 +21,16 @@ test('silent by default: no audio context and no engine until the sound button i
   expect(scripts.length).toBeGreaterThan(before); // the engine arrives only now
   await expect.poll(async () => (await music(page))?.state).toBe('running');
   await expect.poll(async () => (await music(page))?.bar, { timeout: 8000 }).toBeGreaterThanOrEqual(1);
-  expect((await music(page))?.zone).toBe('home');
+  expect(await music(page)).toMatchObject({ zone: 'home', style: 'circuito' });
 
-  // a new page: its motif from the next bar, without stopping
+  // a new page: its motif and its proposal from the next bar, without stopping
   await page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Work' }).click();
   await expect(page).toHaveURL(/\/work\/$/);
   await expect.poll(async () => (await music(page))?.zone, { timeout: 8000 }).toBe('work');
+  await expect.poll(async () => (await music(page))?.style, { timeout: 8000 }).toBe('taller');
   expect((await music(page))?.playing).toBe(true);
+  await page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Sobre mí' }).click();
+  await expect.poll(async () => (await music(page))?.style, { timeout: 8000 }).toBe('marea');
 
   // off: it fades out and the audio context sleeps
   await page.locator('.sh-bar .ui-sound').click();
@@ -55,7 +58,7 @@ test('a saved «on» waits for the first click on the page, and a hidden tab is 
   await expect.poll(async () => (await music(page))?.playing).toBe(true);
 });
 
-test('/sonido/: three proposals to listen to on any page motif, and the choice for the site is remembered', async ({ page }) => {
+test('/sonido/: three proposals to listen to on any page motif, each with the pages where it plays', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -81,11 +84,9 @@ test('/sonido/: three proposals to listen to on any page motif, and the choice f
   await cards.nth(1).getByRole('button', { name: 'Detener' }).click();
   await expect.poll(async () => (await music(page))?.playing).toBe(false);
 
-  await cards.nth(2).getByRole('button', { name: 'Elegir para el sitio' }).click();
-  await expect(cards.nth(2).getByRole('button', { name: 'Elegida para el sitio' })).toHaveAttribute('aria-pressed', 'true');
-  await page.reload();
-  await expect(page.locator('.mu-card').nth(2).getByRole('button', { name: 'Elegida para el sitio' })).toBeVisible();
-  expect(await page.evaluate(() => localStorage.getItem('ig:v2:music'))).toBe('taller');
+  await expect(cards.nth(1).locator('.mu-where')).toContainText('Inicio · Cómo trabajo · Negocio · Sistema');
+  await expect(cards.nth(2).locator('.mu-where')).toContainText('Work');
+  await expect(cards.nth(0).locator('.mu-where')).toContainText('Brand Lab · Sobre mí');
   expect(errors).toEqual([]);
 });
 

@@ -177,7 +177,8 @@
     "pieces": "Piezas",
     "kit": "Kit",
     "motion": "Motion",
-    "sound": "Música"
+    "sound": "Música",
+    "gate": "Puerta"
   },
   "ui": {
     "status": {
@@ -656,12 +657,12 @@
   "music": {
     "meta": {
       "title": "Música · Sistema IG v2",
-      "description": "Tres propuestas de música generativa para el nuevo portafolio de Ignacio Gauna, hechas con código: un motivo por página."
+      "description": "Tres músicas generativas para el nuevo portafolio de Ignacio Gauna, hechas con código: un motivo por página."
     },
     "intro": {
       "kicker": "Lote 2.3 · Música",
       "title": "Música hecha con código",
-      "text": "Tres propuestas de música generativa. Nada está grabado: cada nota la escribe el código en el momento, con un motivo propio por página. Suena solo si la encendés. Elegí la que va a vivir en el sitio."
+      "text": "Tres músicas generativas, cada una en su lugar del sitio. Nada está grabado: cada nota la escribe el código en el momento, con un motivo propio por página. Suena solo si la encendés."
     },
     "letter": "Propuesta",
     "styles": {
@@ -680,15 +681,13 @@
     },
     "play": "Escuchar",
     "stop": "Detener",
-    "pick": "Elegir para el sitio",
-    "picked": "Elegida para el sitio",
     "zone": "Página",
     "chord": "Acorde",
     "bar": "Compás",
     "bpm": "bpm",
     "zones": {
       "title": "Un motivo por página",
-      "text": "Cada página tiene su tonalidad, su modo y sus cuatro compases. Al cambiar de página la música termina el compás y sigue en la tonalidad nueva, con una campana.",
+      "text": "Cada página tiene su tonalidad, su modo, sus cuatro compases y su música: Circuito es el sonido del sitio, Taller suena en Work y Marea en las dos páginas más calmas. Al cambiar de página la música termina el compás y sigue en la nueva, con una campana.",
       "system": "Sistema",
       "keys": {
         "home": "Re mayor",
@@ -709,6 +708,102 @@
         "Volumen bajo, con un compresor al final: nunca satura.",
         "En iPhone sigue al interruptor de silencio del teléfono."
       ]
-    }
+    },
+    "where": "Suena en"
+  },
+  "gate": {
+    "label": "Entrada al portafolio",
+    "meet": "Conocer a Ignacio",
+    "enter": "Ver portafolio",
+    "loading": "Cargando",
+    "ready": "Listo",
+    "progress": "Carga del sitio",
+    "key": "Enter",
+    "steps": {
+      "dom": "interfaz",
+      "fonts": "tipografías",
+      "scene": "escena",
+      "page": "página"
+    },
+    "stages": [
+      {
+        "year": "2026",
+        "name": "Núcleo"
+      },
+      {
+        "year": "2028",
+        "name": "Ciberseguridad"
+      },
+      {
+        "year": "2028",
+        "name": "Quant"
+      },
+      {
+        "year": "2029",
+        "name": "Aeroespacial"
+      }
+    ],
+    "arrival": "2030",
+    "choose": {
+      "meta": {
+        "title": "Puerta · Sistema IG v2",
+        "description": "La puerta de entrada del nuevo portafolio de Ignacio Gauna y los estudios en 3D que la precedieron."
+      },
+      "kicker": "Lote 3.1 · Puerta",
+      "title": "La puerta y sus estudios",
+      "text": "La entrada al portafolio. «Cinética» es la que recibe a quien llega: motion graphics en 2D alrededor del monograma, con cambios de color. Debajo quedan los cuatro estudios en 3D que se hicieron antes, cada uno una escena sobre el mismo estudio de luces. Todas entran en una pantalla en cualquier dispositivo, se arman con la carga real de la página y se abren con Enter.",
+      "letter": "Puerta",
+      "open": "Abrir esta puerta",
+      "now": "Hoy en el inicio",
+      "theme": "Tema",
+      "piece": "Pieza central",
+      "loading": "La carga",
+      "items": {
+        "cinetica": {
+          "name": "Cinética",
+          "theme": "El monograma, en 2D",
+          "piece": "El punto coral del IG es una pelota con vida: cae y rebota, levanta el asta, la G entra rodando y la choca, y el monograma salta a su lugar. Cada aterrizaje cambia el color de toda la pantalla: tinta, coral, azul, papel. En reposo, las letras del nombre saltan bajo el puntero y el monograma cambia el color al tocarlo.",
+          "loading": "Un acto por cada paso de la carga, y un medidor fino abajo."
+        },
+        "monograma": {
+          "name": "Monograma",
+          "theme": "La marca",
+          "piece": "El monograma IG como una escultura de metal pulido, de pie sobre el piso espejado. Gira con el puntero y refleja las luces del estudio.",
+          "loading": "Se dibuja trazo por trazo: el asta, la G, su barra y, al final, el punto coral que se enciende y manda una onda por el piso."
+        },
+        "codigo": {
+          "name": "Código",
+          "theme": "Programación: el oficio en cinco capas",
+          "piece": "Cinco placas de laca oscura en vista explotada, cada una con su borde de luz y su dibujo: un tablero, líneas de código, un grafo de agentes, filas de checks y un pipeline.",
+          "loading": "Las placas bajan de a una, de abajo hacia arriba, y cada una trae su nombre."
+        },
+        "ascenso": {
+          "name": "Ascenso",
+          "theme": "El roadmap 2026 → 2030",
+          "piece": "Cuatro plataformas suben en espiral, una por etapa del plan (Núcleo, Ciberseguridad, Quant, Aeroespacial), hasta la quinta, donde espera el monograma.",
+          "loading": "Un punto de luz sube una etapa por paso y enciende cada plataforma al llegar; arriba, se enciende el punto del monograma."
+        },
+        "postal": {
+          "name": "Postal",
+          "theme": "El recorrido",
+          "piece": "Las seis estampillas del recorrido impresas en cartón y colgadas en el estudio, en una pared que se curva hacia quien mira: tinta plana y papel crema contra el fondo oscuro.",
+          "loading": "Se reparten desde atrás de la cámara, una parada tras otra, cada una con su año y su nombre."
+        }
+      },
+      "pager": {
+        "label": "Recorrer las puertas",
+        "prev": "Anterior",
+        "again": "Repetir",
+        "all": "Todas",
+        "next": "Siguiente"
+      }
+    },
+    "edition": "Portafolio 2026",
+    "tags": {
+      "codigo": "Las cinco capas del oficio",
+      "ascenso": "El roadmap, de 2026 a 2030",
+      "postal": "Las seis paradas del recorrido"
+    },
+    "tint": "Cambiar el color de la puerta"
   }
 }

@@ -2,20 +2,20 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { STYLE_IDS, type StyleId, type ZoneKey } from '@/v2/sound/compose';
-import { MUSIC_BAR, MUSIC_PREVIEW, MUSIC_STOP, MUSIC_STYLE, read, SOUND_EVENT, SOUND_KEY, STYLE_KEY } from '@/v2/sound/control';
+import { type StyleId, ZONE_STYLE, type ZoneKey } from '@/v2/sound/compose';
+import { MUSIC_BAR, MUSIC_PREVIEW, MUSIC_STOP, read, SOUND_EVENT, SOUND_KEY } from '@/v2/sound/control';
 import type { BarInfo, MusicEngine } from '@/v2/sound/engine';
+import { GATE_EVENT } from '@/v2/gate/state';
 import { pageOf } from '@/v2/site';
 
 const zoneOf = (pathname: string): ZoneKey => pageOf(pathname) ?? 'system';
-const savedStyle = (): StyleId => { const s = read(STYLE_KEY) as StyleId | null; return s && STYLE_IDS.includes(s) ? s : 'marea'; };
 
 type Debug = { playing: boolean; style: StyleId; zone: ZoneKey; bar: number; state: string; loaded: boolean };
 
 /**
  * The music of /v2 (lote 2.3), mounted once in the layout. Silent until someone asks for sound: then, inside that
  * click, it creates the AudioContext (browsers only allow sound after a gesture) and loads the engine, which is
- * never part of the first load. It follows the page (each page has its motif), pauses with the tab hidden, and
+ * never part of the first load. It follows the page (each page has its motif and its proposal), pauses with the tab hidden, and
  * stops with the sound button. The /sonido/ page plays previews of the three proposals through it.
  */
 export function SoundRoot() {
@@ -42,7 +42,7 @@ export function SoundRoot() {
       if (engine.current) return Promise.resolve(engine.current);
       loading.current ??= import('@/v2/sound/engine').then(({ MusicEngine }) => {
         const p = preview.current;
-        const e = new MusicEngine(ctx.current!, ctx.current!.destination, p?.style ?? savedStyle(), p?.zone ?? zone.current);
+        const e = new MusicEngine(ctx.current!, ctx.current!.destination, p?.style ?? ZONE_STYLE[zone.current], p?.zone ?? zone.current);
         e.onBar = (info: BarInfo) => { debug.current.bar = info.bar; debug.current.style = info.style; debug.current.zone = info.zone; window.dispatchEvent(new CustomEvent(MUSIC_BAR, { detail: info })); };
         engine.current = e;
         return e;
@@ -72,10 +72,9 @@ export function SoundRoot() {
     const onSound = (e: Event) => {
       wanted.current = Boolean((e as CustomEvent<{ on: boolean }>).detail?.on);
       if (wanted.current) {
-        void ensure().then((m) => { if (!preview.current) { m.setStyle(savedStyle()); m.setZone(zone.current); } m.start(); });
+        void ensure().then((m) => { if (!preview.current) { m.setStyle(ZONE_STYLE[zone.current]); m.setZone(zone.current); } m.start(); });
       } else if (!preview.current) pause();
     };
-    const onStyle = (e: Event) => { const s = (e as CustomEvent<{ style: StyleId }>).detail?.style; if (s && !preview.current) engine.current?.setStyle(s); };
     const onPreview = (e: Event) => {
       const d = (e as CustomEvent<{ style: StyleId; zone: ZoneKey }>).detail;
       preview.current = d;
@@ -89,8 +88,11 @@ export function SoundRoot() {
     const onStop = () => {
       preview.current = null;
       if (!wanted.current) pause();
-      else { engine.current?.setStyle(savedStyle()); engine.current?.setZone(zone.current); }
+      else { engine.current?.setStyle(ZONE_STYLE[zone.current]); engine.current?.setZone(zone.current); }
     };
+    // the gate opens with a chord, if the visitor had the sound on
+    const onGate = () => { if (wanted.current) void ensure().then((m) => m.accent()); };
+    window.addEventListener(GATE_EVENT, onGate);
     // a hidden tab is silent and costs nothing; it picks up on return
     const onVisible = () => {
       if (document.hidden) engine.current?.stop(0.3);
@@ -98,7 +100,6 @@ export function SoundRoot() {
     };
 
     window.addEventListener(SOUND_EVENT, onSound);
-    window.addEventListener(MUSIC_STYLE, onStyle);
     window.addEventListener(MUSIC_PREVIEW, onPreview);
     window.addEventListener(MUSIC_STOP, onStop);
     document.addEventListener('visibilitychange', onVisible);
@@ -106,9 +107,9 @@ export function SoundRoot() {
       window.removeEventListener('click', firstGesture);
       window.removeEventListener('keydown', firstGesture);
       window.removeEventListener(SOUND_EVENT, onSound);
-      window.removeEventListener(MUSIC_STYLE, onStyle);
       window.removeEventListener(MUSIC_PREVIEW, onPreview);
       window.removeEventListener(MUSIC_STOP, onStop);
+      window.removeEventListener(GATE_EVENT, onGate);
       document.removeEventListener('visibilitychange', onVisible);
       engine.current?.stop(0.1);
       void ctx.current?.close();
@@ -116,11 +117,11 @@ export function SoundRoot() {
     };
   }, []);
 
-  // a new page: its motif, from the next bar
+  // a new page: its motif, and the proposal that page plays, from the next bar
   useEffect(() => {
     zone.current = zoneOf(pathname);
     debug.current.zone = zone.current;
-    if (!preview.current) engine.current?.setZone(zone.current);
+    if (!preview.current) { engine.current?.setStyle(ZONE_STYLE[zone.current]); engine.current?.setZone(zone.current); }
   }, [pathname]);
 
   return null;

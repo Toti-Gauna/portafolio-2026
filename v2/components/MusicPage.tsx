@@ -39,7 +39,7 @@ export function MusicPage({ locale }: { locale: V2Locale }) {
 
         <section className="v2-sec" aria-label={t.intro.title}>
           <MusicLab
-            labels={{ letter: t.letter, play: t.play, stop: t.stop, pick: t.pick, picked: t.picked, zone: t.zone, chord: t.chord, bar: t.bar, bpm: t.bpm, styles: t.styles }}
+            labels={{ letter: t.letter, play: t.play, stop: t.stop, where: t.where, zone: t.zone, chord: t.chord, bar: t.bar, bpm: t.bpm, styles: t.styles }}
             zones={zones.map(({ key, name }) => ({ key, name }))}
             colors={{ marea: L['ship-from'], circuito: L['tests-from'], taller: L['plan-from'] }}
           />
