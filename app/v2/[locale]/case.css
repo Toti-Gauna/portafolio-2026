@@ -143,20 +143,6 @@
 .cs2-ten h3 { margin: 0; font-size: 18px; line-height: 1.2; font-weight: 800; color: var(--color-heading); }
 .cs2-ten p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--color-text); }
 
-/* how it works: numbered steps joined by a line (down on a phone, across on a wide screen) */
-.cs2-how { display: grid; gap: 22px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
-.cs2-how li { position: relative; display: grid; align-content: start; gap: 6px; padding-left: 44px; counter-increment: step; }
-.cs2-how li > i { position: absolute; left: 0; top: -2px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--c); background: var(--color-bg); }
-.cs2-how li > i::before { content: counter(step); font-family: var(--family-mono); font-size: 13px; font-weight: 700; font-style: normal; color: var(--c); }
-.cs2-how li:not(:last-child)::after { content: ''; position: absolute; left: 14px; top: 32px; bottom: -22px; width: 2px; background: color-mix(in srgb, var(--c) 42%, transparent); }
-.cs2-how h3 { margin: 0; font-size: 18px; line-height: 1.2; font-weight: 800; color: var(--color-heading); }
-.cs2-how p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--color-text-muted); }
-@media (min-width: 860px) {
-  .cs2-how { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 20px; }
-  .cs2-how li { padding: 46px 0 0; }
-  .cs2-how li:not(:last-child)::after { left: 38px; right: -14px; top: 14px; bottom: auto; width: auto; height: 2px; }
-}
-
 /* the gallery: a row that scrolls sideways, captures in their frames */
 .cs2-gallery { display: flex; gap: 18px; margin: 0; padding: 4px 2px 14px; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
 .cs2-shot { flex: none; width: min(80vw, 520px); scroll-snap-align: start; }

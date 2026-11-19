@@ -942,3 +942,26 @@ describe('v2 living architecture (lote 5.2)', () => {
     expect(archCopy('en', 'complia')!.badge).toBeTruthy();
   });
 });
+
+describe('v2 case objects (lote 5.3)', () => {
+  it('every case has its object, with one phase per step and a part for every phase', async () => {
+    const { CASE_ORDER } = await import('../../v2/components/case/cases');
+    const { caseCopy } = await import('../../v2/components/case/copy');
+    const { objectArt } = await import('../../v2/components/case/objects/object-art');
+    for (const slug of CASE_ORDER) {
+      const n = caseCopy('es', slug).how.length;
+      expect(caseCopy('en', slug).how.length, slug).toBe(n);
+      const a = objectArt(slug, n);
+      const marks = [...a.svg.matchAll(/<g data-(from|only|now)="(\d+)"( data-on)?>/g)].map((m) => ({ k: m[1], i: Number(m[2]), on: !!m[3] }));
+      // every phase brings or lights something, and no part belongs to a phase the case lacks
+      for (let i = 0; i < n; i++) expect(marks.some((m) => m.i === i), `${slug} phase ${i}`).toBe(true);
+      expect(Math.max(...marks.map((m) => m.i)), slug).toBe(n - 1);
+      // the HTML is the last phase: everything that came is there, what belongs only to another step is not
+      for (const m of marks) expect(m.on, `${slug} ${m.k} ${m.i}`).toBe(m.k === 'from' ? true : m.i === n - 1);
+      // a drawing: no text in it, and a frame with room
+      expect(a.svg).not.toMatch(/<text/);
+      expect(a.box[2]).toBeGreaterThan(200);
+      expect(a.box[3]).toBeGreaterThan(150);
+    }
+  });
+});

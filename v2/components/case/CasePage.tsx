@@ -14,6 +14,8 @@ import { archCopy } from './arch/copy';
 import { archOf } from './arch/archs';
 import { CaseArch } from './arch/CaseArch';
 import { CaseFilm } from './CaseFilm';
+import { CaseHow } from './objects/CaseHow';
+import { objectArt } from './objects/object-art';
 import { CASES, type CaseMedia, type CaseSlug, nextCase } from './cases';
 import { caseCopy } from './copy';
 
@@ -50,6 +52,7 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
   const cap = def.stamp ? stamps[def.stamp] : { year: (place as { mark?: string }).mark ?? place.when, name: c.title, alt: place.art };
   const workHref = sitePath(locale, 'work/');
   const art = archOf(slug), arch = archCopy(locale, slug);
+  const obj = objectArt(slug, c.how.length);
 
   return (
     <>
@@ -89,15 +92,7 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
 
           <section className="cs2-sec" aria-labelledby="cs-how">
             <h2 id="cs-how" className="cs2-h" data-reveal>{L.how}</h2>
-            <ol className="cs2-how" style={{ '--n': c.how.length } as CSSProperties} data-reveal>
-              {c.how.map((s) => (
-                <li key={s.t}>
-                  <i aria-hidden="true" />
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </li>
-              ))}
-            </ol>
+            <CaseHow svg={obj.svg} box={obj.box} steps={c.how} color={def.color} label={`${L.objAlt} ${c.title}: ${c.how.map((x) => x.t).join(', ')}.`} />
           </section>
 
           {art && arch && (
