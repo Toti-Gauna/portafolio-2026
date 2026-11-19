@@ -1386,6 +1386,7 @@
       "pieces": "Piezas",
       "links": "El recorrido",
       "list": "Piezas del diagrama"
-    }
+    },
+    "objAlt": "Objeto que explica"
   }
 }
