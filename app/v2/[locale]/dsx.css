@@ -20,8 +20,8 @@
 @media (hover: hover) and (pointer: fine) { .dsx-repo:hover code:first-of-type { text-decoration: underline; } .dsx-theme:hover { border-color: color-mix(in srgb, var(--c) 60%, var(--color-line)); } }
 
 /* the canvas: the product sets background and color; the frame gives it room */
-.pds { display: grid; gap: clamp(28px, 5cqi, 48px); padding: clamp(16px, 4cqi, 40px); border-radius: var(--radius-2xl); border: 1px solid var(--color-line); min-width: 0; }
-.dsx-block { display: grid; gap: 16px; min-width: 0; }
+.pds { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5cqi, 48px); padding: clamp(16px, 4cqi, 40px); border-radius: var(--radius-2xl); border: 1px solid var(--color-line); min-width: 0; }
+.dsx-block { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
 .pds .dsx-h { margin: 0; font-family: var(--family-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: currentColor; }
 .pds .dsx-gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; font-size: 15px; line-height: 1.4; color: currentColor; }
 .pds .dsx-gh b { font-weight: 700; }
@@ -32,8 +32,8 @@
 /* components: each specimen in its own cell, the caption under it */
 .dsx-specs { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
 @container (min-width: 760px) { .dsx-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.dsx-spec { display: grid; gap: 12px; align-content: start; min-width: 0; padding: 16px; border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); border-radius: 14px; }
-.dsx-live { display: grid; justify-items: start; align-content: center; min-height: 96px; min-width: 0; overflow-x: auto; }
+.dsx-spec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-content: start; min-width: 0; padding: 16px; border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); border-radius: 14px; }
+.dsx-live { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; align-content: center; min-height: 96px; min-width: 0; overflow-x: auto; }
 .dsx-cap { display: grid; gap: 4px; font-size: 14px; line-height: 1.45; }
 .dsx-cap b { font-size: 15px; }
 

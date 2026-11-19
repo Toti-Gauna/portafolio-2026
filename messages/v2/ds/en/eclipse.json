@@ -1,0 +1,108 @@
+{
+  "title": "Eclipse's design system",
+  "line": "«Efemérides»: an observatory. Amber is the light source and the instrument is the visual language: precise, technical, editorial, warm.",
+  "themes": {
+    "dark": "Night",
+    "light": "Dawn"
+  },
+  "groups": {
+    "palette": "Eclipse palette",
+    "aa": "Derived for text on light",
+    "semantic": "Semantic, switched by the theme"
+  },
+  "tokens": {
+    "--void": "Deep background",
+    "--night": "Dark surfaces",
+    "--ash": "Dark borders and cards",
+    "--corona": "The light: main accent",
+    "--flare": "Corona glow",
+    "--dawn": "Lit background",
+    "--ink": "Text on light",
+    "--mist": "Secondary text on dark",
+    "--corona-deep": "Readable amber on dawn",
+    "--mist-ink": "Readable secondary on dawn",
+    "--dawn-soft": "Dawn, one step down",
+    "--fg": "Main text",
+    "--fg-muted": "Secondary text",
+    "--accent": "Theme accent",
+    "--line": "Hairlines",
+    "--line-strong": "Strong lines and marks",
+    "--surface": "Translucent surface",
+    "--surface-strong": "Near-opaque surface",
+    "--focus": "Focus ring",
+    "--fg-inverse": "Page background",
+    "--radius-card-sm": "Small card",
+    "--radius-card": "Card",
+    "--radius-card-lg": "Large card",
+    "--gutter": "Side margin on phones",
+    "--header-h": "Header height",
+    "--ease-expo": "Signature curve: entrances, drawings",
+    "--ease-soft": "Soft curve: the glint"
+  },
+  "fonts": {
+    "serif": {
+      "role": "One huge headline per section, with a single italic amber word",
+      "sample": "Your business, in full light."
+    },
+    "sans": {
+      "role": "Interface and body text",
+      "sample": "Before we talk, we show you your business working."
+    },
+    "mono": {
+      "role": "Indices, units, timestamps and numbers that read like an instrument",
+      "sample": "02 · 7 pieces · 0.86"
+    }
+  },
+  "components": {
+    "buttons": {
+      "name": "Buttons",
+      "note": "48 px pills; one amber button per screen, with a diamond-ring glint on hover."
+    },
+    "mark": {
+      "name": "Section mark",
+      "note": "A mono index, a hairline that draws in and the section's eclipse phase."
+    },
+    "phase": {
+      "name": "Phase glyph",
+      "note": "The brand icon: from the full sun to totality, for steps, progress and states."
+    },
+    "index": {
+      "name": "Families index",
+      "note": "Number, phase, serif name and a dotted leader; the open row lights up with an amber hairline."
+    },
+    "ledger": {
+      "name": "Parts ledger",
+      "note": "A list set like a menu: name, dotted leader and the value in mono."
+    },
+    "card": {
+      "name": "Card with «Demo»",
+      "note": "Every fictional business carries its «Demo» badge, always in view."
+    }
+  },
+  "samples": {
+    "primary": "Get your demo",
+    "ghost": "Discover the products",
+    "markLabel": "What we offer",
+    "titleA": "What we build,",
+    "titleEm": "piece by piece",
+    "phaseCaption": "Eclipse phase · brand icon",
+    "web": "Web & brand",
+    "webN": "4 pieces",
+    "webR": "People message you on WhatsApp in one tap, from their phone.",
+    "ops": "Operations",
+    "opsN": "7 pieces",
+    "opsR": "Customers book and order on their own; you see everything on one screen.",
+    "ai": "AI & agents",
+    "aiN": "2 pieces",
+    "aiR": "Every call and every message gets an answer, after hours too.",
+    "ledgerLabel": "Exploded view of the Equipment kit",
+    "qr": "QR stands and holders",
+    "displays": "Displays",
+    "packaging": "Packaging and unboxing",
+    "cards": "Cards, coupons and passports",
+    "quote": "Quoted",
+    "cardKicker": "In the demo",
+    "badge": "Demo",
+    "cardText": "Customers book and order on their own; you see everything on one screen."
+  }
+}

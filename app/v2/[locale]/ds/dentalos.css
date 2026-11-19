@@ -1,0 +1,147 @@
+/* DentalOS · «Editorial clínico cálido» (Toti-Gauna/DentalOS @ aac7eea, src/styles/app.css), rebuilt for the case page.
+   Colour tokens arrive from the active theme (written on .pds by the page); shape, space and motion tokens are the
+   product's own (app.css lines 111–124). Hover colour changes are instant here (portfolio rule); only transform moves. */
+
+@font-face {
+  font-family: 'ds-dentalos-display';
+  src: url('../../../../public/trailer/fonts/dentalos/newsreader-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-dentalos-ui';
+  src: url('../../../../public/trailer/fonts/dentalos/source-sans-3-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-dentalos-ui';
+  src: url('../../../../public/trailer/fonts/dentalos/source-sans-3-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-dentalos-ui';
+  src: url('../../../../public/trailer/fonts/dentalos/source-sans-3-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The canvas: paper (--bg) and ink. */
+.pds[data-ds='dentalos'] {
+  background: var(--bg);
+  color: var(--ink);
+  --font-ui: 'ds-dentalos-ui', sans-serif;
+  --font-display: 'ds-dentalos-display', serif;
+  --r-pub: 6px;
+  --r-pub-lg: 8px;
+  --r-adm: 6px;
+  --r-adm-sm: 4px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  --dur-feedback: 180ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Base of the product inside each specimen (app.css 129–144); every specimen is wrapped in .dto. */
+.pds[data-ds='dentalos'] .dto { font-family: var(--font-ui); font-size: 17px; line-height: 1.55; color: var(--ink); max-width: 100%; min-width: 0; }
+.pds[data-ds='dentalos'] .dto *, .pds[data-ds='dentalos'] .dto *::before, .pds[data-ds='dentalos'] .dto *::after { box-sizing: border-box; }
+.pds[data-ds='dentalos'] .dto p { margin: 0; }
+.pds[data-ds='dentalos'] .dto :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.pds[data-ds='dentalos'] .dto .tabular { font-variant-numeric: tabular-nums; }
+.pds[data-ds='dentalos'] .dto .icon { flex: none; }
+.pds[data-ds='dentalos'] .dto .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.pds[data-ds='dentalos'] .dto .row { display: flex; gap: var(--s2); align-items: center; }
+.pds[data-ds='dentalos'] .dto .row.wrap { flex-wrap: wrap; }
+.pds[data-ds='dentalos'] .dto .eyebrow { display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 0.1em; font: 700 12px/1.55 var(--font-ui); color: var(--secondary); margin: 0 0 var(--s2); }
+.pds[data-ds='dentalos'] .dto .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+
+/* Buttons (app.css 255–275 + the direction A weight, 1183) */
+.pds[data-ds='dentalos'] .dto .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s4);
+  border-radius: 6px; border: 1px solid var(--line-strong); font: 600 15px/1.2 var(--font-ui); letter-spacing: 0.005em;
+  cursor: pointer; text-decoration: none; color: var(--ink); background: var(--surface);
+  transition: transform var(--dur-feedback) var(--ease-out);
+}
+.pds[data-ds='dentalos'] .dto .btn:active:not(:disabled) { transform: translateY(1px) scale(0.99); }
+.pds[data-ds='dentalos'] .dto .btn-primary { background: var(--primary-fill); color: var(--on-primary); border-color: var(--primary-fill); }
+.pds[data-ds='dentalos'] .dto .btn-primary:hover:not(:disabled) { background: var(--primary-fill-strong); }
+.pds[data-ds='dentalos'] .dto .btn-secondary:hover:not(:disabled) { background: var(--sand-50); }
+.pds[data-ds='dentalos'] .dto .btn-ghost { background: transparent; border-color: transparent; }
+.pds[data-ds='dentalos'] .dto .btn-ghost:hover:not(:disabled) { background: var(--primary-50); }
+
+/* Status badge (app.css 330–334) */
+.pds[data-ds='dentalos'] .dto .ds-badges { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.pds[data-ds='dentalos'] .dto .badge { display: inline-flex; align-items: center; gap: 4px; font: 700 13px/1.5 var(--font-ui); padding: 2px 10px 2px 8px; border-radius: 999px; white-space: nowrap; border: 1px solid; }
+.pds[data-ds='dentalos'] .dto .badge-ok { background: var(--primary-50); color: var(--primary-strong); border-color: var(--primary-100); }
+.pds[data-ds='dentalos'] .dto .badge-warn { background: var(--warn-50); color: var(--warn); border-color: var(--warn-line); }
+.pds[data-ds='dentalos'] .dto .badge-info { background: var(--info-50); color: var(--info); border-color: var(--info-line); }
+.pds[data-ds='dentalos'] .dto .badge-muted { background: var(--surface-3); color: var(--secondary); border-color: var(--line); }
+
+/* Folio del turno (app.css 1289–1300): a paper ticket with a perforated edge; the holes show the paper behind. */
+.pds[data-ds='dentalos'] .dto .folio { position: relative; background: var(--surface); border: 1px solid var(--line); padding: var(--s5) var(--s5) var(--s5) calc(var(--s5) + 6px); display: grid; gap: var(--s2); align-content: start; }
+.pds[data-ds='dentalos'] .dto .folio::before { content: ''; position: absolute; left: -1px; top: 14px; bottom: 14px; width: 9px; background: radial-gradient(circle at 0 50%, var(--bg) 4px, transparent 4.5px) 0 0 / 9px 14px repeat-y; }
+.pds[data-ds='dentalos'] .dto .folio .eyebrow { margin: 0; }
+.pds[data-ds='dentalos'] .dto .folio-date { display: flex; align-items: flex-end; gap: var(--s4); border-bottom: 1px solid var(--line); padding-bottom: var(--s3); }
+.pds[data-ds='dentalos'] .dto .folio-day { font: 500 84px/0.82 var(--font-display); color: var(--primary); }
+.pds[data-ds='dentalos'] .dto .folio-meta { margin: 0; display: grid; line-height: 1.3; color: var(--secondary); text-transform: capitalize; font-size: 15px; }
+.pds[data-ds='dentalos'] .dto .folio-meta strong { color: var(--ink); font-size: 17px; text-transform: none; }
+.pds[data-ds='dentalos'] .dto .folio-service { margin: var(--s1) 0 0; font: 500 26px/1.2 var(--font-display); }
+.pds[data-ds='dentalos'] .dto .folio-who { margin: 0; color: var(--secondary); }
+.pds[data-ds='dentalos'] .dto .folio .badge { justify-self: start; }
+.pds[data-ds='dentalos'] .dto .folio .row { margin-top: var(--s2); }
+
+/* TurnoCard (app.css 373–397; the date block in Newsreader from direction A, 1184) */
+.pds[data-ds='dentalos'] .dto .turno { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--s3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pub); padding: var(--s3); position: relative; }
+.pds[data-ds='dentalos'] .dto .turno::before { content: ''; position: absolute; left: -1px; top: 12px; bottom: 12px; width: 4px; border-radius: 0 4px 4px 0; background: var(--primary); }
+.pds[data-ds='dentalos'] .dto .turno-when { align-self: start; display: grid; justify-items: center; align-content: start; gap: 0; background: var(--sand-50); border: 1px solid var(--sand); border-radius: 6px; padding: var(--s2) 0; line-height: 1.1; font-family: var(--font-display); font-weight: 500; }
+.pds[data-ds='dentalos'] .dto .turno-dow,
+.pds[data-ds='dentalos'] .dto .turno-month { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); }
+.pds[data-ds='dentalos'] .dto .turno-day { font-size: 26px; font-weight: 800; }
+.pds[data-ds='dentalos'] .dto .turno-body { display: grid; gap: 2px; min-width: 0; }
+.pds[data-ds='dentalos'] .dto .turno-top { display: flex; gap: var(--s2); justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+.pds[data-ds='dentalos'] .dto .turno-title { margin: 0; font: 700 18px/1.2 var(--font-ui); }
+.pds[data-ds='dentalos'] .dto .turno-time { font-size: 15px; color: var(--secondary); }
+.pds[data-ds='dentalos'] .dto .turno-time strong { color: var(--ink); font-size: 18px; font-family: var(--font-ui); }
+.pds[data-ds='dentalos'] .dto .turno-meta { font-size: 14px; color: var(--secondary); display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; }
+.pds[data-ds='dentalos'] .dto .turno-id { font-size: 13px; color: var(--secondary); }
+@media (max-width: 600px) {
+  .pds[data-ds='dentalos'] .dto .turno { grid-template-columns: 56px minmax(0, 1fr); }
+  .pds[data-ds='dentalos'] .dto .turno-day { font-size: 22px; }
+}
+
+/* DateStrip (app.css 403–414). The product marks the chosen day with aria-pressed; the sample picks with aria-checked. */
+.pds[data-ds='dentalos'] .dto .datestrip { display: grid; gap: 4px; min-width: 0; }
+.pds[data-ds='dentalos'] .dto .datestrip-label { font-weight: 700; font-size: 15px; }
+.pds[data-ds='dentalos'] .dto .datestrip-row { display: flex; align-items: center; gap: var(--s1); min-width: 0; flex-wrap: wrap; }
+.pds[data-ds='dentalos'] .dto .datestrip-days { display: flex; gap: var(--s1); overflow-x: auto; flex: 1 1 280px; min-width: 0; padding: 3px; scrollbar-width: thin; }
+.pds[data-ds='dentalos'] .dto .datestrip-day { display: grid; justify-items: center; flex: none; min-width: 52px; min-height: 60px; padding: 4px 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; cursor: pointer; color: var(--ink); font-family: var(--font-ui); }
+.pds[data-ds='dentalos'] .dto .datestrip-day:hover:not(:disabled) { border-color: var(--primary); }
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-pressed='true'],
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-checked='true'] { background: var(--primary-fill); border-color: var(--primary-fill); color: var(--on-primary); }
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-pressed='true'] .dd-dow,
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-pressed='true'] .dd-note,
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-checked='true'] .dd-dow,
+.pds[data-ds='dentalos'] .dto .datestrip-day[aria-checked='true'] .dd-note { color: var(--on-primary); }
+.pds[data-ds='dentalos'] .dto .datestrip-day:disabled { background: var(--surface-3); color: var(--secondary); cursor: not-allowed; }
+.pds[data-ds='dentalos'] .dto .dd-dow { font-size: 12px; text-transform: uppercase; color: var(--secondary); font-weight: 700; }
+.pds[data-ds='dentalos'] .dto .dd-num { font: 800 19px/1.1 var(--font-ui); }
+/* The product sets the note at 11 px; the portfolio's floor is 12 px. */
+.pds[data-ds='dentalos'] .dto .dd-note { font-size: 12px; color: var(--secondary); white-space: nowrap; min-height: 1em; }
+
+/* SummaryStrip (app.css 364–370): one operational line split by 1 px rules. */
+.pds[data-ds='dentalos'] .dto .summary-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; margin: 0; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-adm); overflow: hidden; }
+.pds[data-ds='dentalos'] .dto .summary-item { padding: var(--s2) var(--s4); background: var(--surface); min-width: 0; }
+.pds[data-ds='dentalos'] .dto .summary-item dt { font-size: 13px; color: var(--secondary); font-weight: 600; }
+.pds[data-ds='dentalos'] .dto .summary-item dd { margin: 0; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.pds[data-ds='dentalos'] .dto .summary-item dd .tabular { font: 800 22px var(--font-ui); }
+.pds[data-ds='dentalos'] .dto .summary-item dd small { font-size: 12px; color: var(--secondary); }
+.pds[data-ds='dentalos'] .dto .summary-item.tone-warn dd .tabular { color: var(--warn); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pds[data-ds='dentalos'] .dto .btn { transition: none; }
+  .pds[data-ds='dentalos'] .dto .btn:active:not(:disabled) { transform: none; }
+}

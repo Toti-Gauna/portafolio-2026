@@ -1,0 +1,108 @@
+{
+  "title": "El sistema de Eclipse",
+  "line": "«Efemérides»: un observatorio. El ámbar es la fuente de luz, el instrumento es el lenguaje visual: preciso, técnico, editorial y cálido.",
+  "themes": {
+    "dark": "Noche",
+    "light": "Amanecer"
+  },
+  "groups": {
+    "palette": "Paleta del eclipse",
+    "aa": "Derivados para texto sobre claro",
+    "semantic": "Semánticos, cambian con el tema"
+  },
+  "tokens": {
+    "--void": "Fondo profundo",
+    "--night": "Superficies oscuras",
+    "--ash": "Bordes y tarjetas oscuras",
+    "--corona": "La luz: acento principal",
+    "--flare": "Brillo de la corona",
+    "--dawn": "Fondo iluminado",
+    "--ink": "Texto sobre claro",
+    "--mist": "Texto secundario sobre oscuro",
+    "--corona-deep": "Ámbar legible sobre amanecer",
+    "--mist-ink": "Secundario legible sobre amanecer",
+    "--dawn-soft": "Amanecer, un tono abajo",
+    "--fg": "Texto principal",
+    "--fg-muted": "Texto secundario",
+    "--accent": "Acento del tema",
+    "--line": "Líneas finas",
+    "--line-strong": "Líneas marcadas y marcas",
+    "--surface": "Superficie translúcida",
+    "--surface-strong": "Superficie casi opaca",
+    "--focus": "Anillo de foco",
+    "--fg-inverse": "Fondo de la página",
+    "--radius-card-sm": "Tarjeta chica",
+    "--radius-card": "Tarjeta",
+    "--radius-card-lg": "Tarjeta grande",
+    "--gutter": "Margen lateral en celular",
+    "--header-h": "Alto del header",
+    "--ease-expo": "Curva firma: entradas y dibujos",
+    "--ease-soft": "Curva suave: el destello"
+  },
+  "fonts": {
+    "serif": {
+      "role": "Un titular enorme por sección, con una palabra en ámbar itálica",
+      "sample": "Tu negocio, a plena luz."
+    },
+    "sans": {
+      "role": "Interfaz y texto corrido",
+      "sample": "Antes de hablar, te mostramos tu negocio funcionando."
+    },
+    "mono": {
+      "role": "Índices, unidades, horarios y cifras que se leen como un instrumento",
+      "sample": "02 · 7 piezas · 0.86"
+    }
+  },
+  "components": {
+    "buttons": {
+      "name": "Botones",
+      "note": "Píldoras de 48 px; un solo ámbar por pantalla, con un destello de anillo de diamante al pasar."
+    },
+    "mark": {
+      "name": "Marca de sección",
+      "note": "Índice mono, una línea que se dibuja y la fase del eclipse de esa sección."
+    },
+    "phase": {
+      "name": "Glifo de fase",
+      "note": "El ícono de la marca: del sol entero a la totalidad, para pasos, progreso y estados."
+    },
+    "index": {
+      "name": "Índice de familias",
+      "note": "Número, fase, nombre en serif y puntos guía; la fila abierta se enciende con una línea ámbar."
+    },
+    "ledger": {
+      "name": "Libro de piezas",
+      "note": "Una lista como carta de menú: nombre, puntos guía y el valor en mono."
+    },
+    "card": {
+      "name": "Tarjeta con «Demo»",
+      "note": "Todo negocio ficticio lleva su insignia «Demo», siempre a la vista."
+    }
+  },
+  "samples": {
+    "primary": "Pedí tu demo",
+    "ghost": "Descubrí los productos",
+    "markLabel": "Qué ofrecemos",
+    "titleA": "Lo que construimos,",
+    "titleEm": "pieza por pieza",
+    "phaseCaption": "Fase del eclipse · ícono de marca",
+    "web": "Web y marca",
+    "webN": "4 piezas",
+    "webR": "Te escriben por WhatsApp con un toque, desde el celular.",
+    "ops": "Gestión y operación",
+    "opsN": "7 piezas",
+    "opsR": "Tus clientes reservan y piden solos; vos ves todo en una pantalla.",
+    "ai": "IA y agentes",
+    "aiN": "2 piezas",
+    "aiR": "Cada llamada y cada consulta tiene respuesta, también fuera de horario.",
+    "ledgerLabel": "Despiece del kit de Equipamiento",
+    "qr": "Soportes y exhibidores QR",
+    "displays": "Displays",
+    "packaging": "Packaging y unboxing",
+    "cards": "Tarjetas, cupones y pasaportes",
+    "quote": "A cotizar",
+    "cardKicker": "En la demo",
+    "badge": "Demo",
+    "cardText": "Tus clientes reservan y piden solos; vos ves todo en una pantalla."
+  }
+}

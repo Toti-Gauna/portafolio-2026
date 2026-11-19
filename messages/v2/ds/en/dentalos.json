@@ -1,0 +1,147 @@
+{
+  "title": "The DentalOS system",
+  "line": "Warm clinical editorial: warm paper, Newsreader headings, Source Sans 3 text, fine rules and a touch of gold, in light and dark.",
+  "themes": {
+    "claro": "Light",
+    "oscuro": "Dark"
+  },
+  "groups": {
+    "texto": "Text and surfaces",
+    "marca": "Brand",
+    "estados": "Status and focus",
+    "oro": "Gold accent"
+  },
+  "tokens": {
+    "--ink": "Main text",
+    "--secondary": "Secondary text and metadata",
+    "--bg": "Warm paper background",
+    "--surface": "Cards and panels",
+    "--surface-2": "Hover surface",
+    "--surface-3": "Sunken or disabled surface",
+    "--line": "One-pixel rules",
+    "--line-strong": "Field and button borders",
+    "--sand": "Date block border",
+    "--sand-50": "Date block fill",
+    "--primary": "Brand for text and icons",
+    "--primary-strong": "Strong brand on tints",
+    "--primary-fill": "Primary button fill",
+    "--primary-fill-strong": "Primary button on hover",
+    "--on-primary": "Text on brand fill",
+    "--primary-50": "Brand tint",
+    "--primary-100": "Brand tint border",
+    "--warn": "Warning text and icon",
+    "--warn-50": "Warning background",
+    "--warn-line": "Warning border",
+    "--info": "Info text and icon",
+    "--info-50": "Info background",
+    "--info-line": "Info border",
+    "--focus": "Gold focus ring",
+    "--gold": "Decorative gold rule",
+    "--gold-ink": "The gold made for text",
+    "--gold-50": "Gold tint",
+    "--code-bg": "Identifier background",
+    "--r-pub": "Patient portal radius",
+    "--r-pub-lg": "Large portal radius",
+    "--r-adm": "Reception panel radius",
+    "--r-adm-sm": "Small panel radius",
+    "--s1": "Smallest space",
+    "--s2": "Space between controls",
+    "--s3": "Space inside cards",
+    "--s4": "Side gutter",
+    "--s5": "Panel padding",
+    "--s6": "Space between blocks",
+    "--s7": "Space between sections",
+    "--s8": "Page breathing room",
+    "--dur-feedback": "Feedback to a tap",
+    "--dur-drawer": "Side drawer entrance",
+    "--dur-highlight": "Highlight after a change",
+    "--ease-out": "Smooth, causal ease-out"
+  },
+  "fonts": {
+    "display": {
+      "role": "Headings, large dates and folio figures",
+      "sample": "Every visit has a next step."
+    },
+    "ui": {
+      "role": "Body text, buttons, labels and status",
+      "sample": "Professional and chair are checked together on confirming."
+    }
+  },
+  "components": {
+    "folio": {
+      "name": "Appointment folio",
+      "note": "The signature piece: a paper ticket with a perforated edge and the date set large in serif."
+    },
+    "turno": {
+      "name": "Appointment card",
+      "note": "Time, service, professional, chair and status, always in words; a colour rule marks the status."
+    },
+    "datestrip": {
+      "name": "Day strip",
+      "note": "The reception agenda by day: each day shows its bookings, and the chosen one takes the brand colour."
+    },
+    "summary": {
+      "name": "Day summary",
+      "note": "One operational line split by fine rules, in place of a KPI mosaic, for the front desk."
+    },
+    "badges": {
+      "name": "Status badges",
+      "note": "Every status carries a word and an icon: colour supports, the word informs."
+    },
+    "buttons": {
+      "name": "Buttons",
+      "note": "One primary action in teal; secondary on paper, and ghost for passing actions."
+    }
+  },
+  "samples": {
+    "folioLabel": "Martina's next appointment",
+    "folioEyebrow": "Your next step · Martina (P-001)",
+    "folioDow": "Thursday",
+    "folioMonth": "October",
+    "folioTime": "10:00",
+    "folioLong": "Thursday 22 October 2026, 10:00",
+    "service": "Orthodontic check-up",
+    "pro": "Dr Inés Galván",
+    "site": "Centro branch",
+    "chair": "Chair 2",
+    "stConfirmada": "Confirmed",
+    "stIndicado": "Prescribed",
+    "stAtencion": "In care",
+    "stFinalizada": "Completed",
+    "folioPrimary": "View or change",
+    "folioGhost": "Message on WhatsApp",
+    "turnoLabel": "Orthodontic check-up, Thursday 22 October, 10:00 to 10:30",
+    "dowShort": "Thu",
+    "monShort": "Oct",
+    "turnoWord": "Appointment",
+    "version": "version 1",
+    "dayLabel": "Day",
+    "lun": "Mon",
+    "mar": "Tue",
+    "mie": "Wed",
+    "jue": "Thu",
+    "vie": "Fri",
+    "sab": "Sat",
+    "dom": "Sun",
+    "lunLong": "Monday",
+    "marLong": "Tuesday",
+    "mieLong": "Wednesday",
+    "jueLong": "Thursday",
+    "vieLong": "Friday",
+    "sabLong": "Saturday",
+    "domLong": "Sunday",
+    "n5": "5 visits",
+    "n4": "4 visits",
+    "n2": "2 visits",
+    "n1": "1 visit",
+    "closed": "Closed",
+    "summaryLabel": "Summary for Monday 19 October",
+    "sumActive": "Active appointments",
+    "sumConfirm": "To confirm",
+    "sumConfirmDetail": "slot held",
+    "sumRoom": "Waiting or in care",
+    "btnPrimary": "Book a visit",
+    "btnSecondary": "Block a time slot",
+    "btnGhost": "View details"
+  }
+}

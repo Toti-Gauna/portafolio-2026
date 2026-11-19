@@ -1,0 +1,147 @@
+{
+  "title": "El sistema de DentalOS",
+  "line": "Editorial clínico cálido: papel cálido, títulos en Newsreader, texto en Source Sans 3, filetes finos y oro como acento, en claro y oscuro.",
+  "themes": {
+    "claro": "Claro",
+    "oscuro": "Oscuro"
+  },
+  "groups": {
+    "texto": "Texto y superficies",
+    "marca": "Marca",
+    "estados": "Estados y foco",
+    "oro": "Acento oro"
+  },
+  "tokens": {
+    "--ink": "Texto principal",
+    "--secondary": "Texto secundario y metadatos",
+    "--bg": "Papel cálido de fondo",
+    "--surface": "Tarjetas y paneles",
+    "--surface-2": "Superficie al pasar",
+    "--surface-3": "Superficie hundida o deshabilitada",
+    "--line": "Filetes de un píxel",
+    "--line-strong": "Borde de campos y botones",
+    "--sand": "Borde del bloque de fecha",
+    "--sand-50": "Fondo del bloque de fecha",
+    "--primary": "Marca para texto e íconos",
+    "--primary-strong": "Marca fuerte sobre tintes",
+    "--primary-fill": "Relleno del botón principal",
+    "--primary-fill-strong": "Botón principal al pasar",
+    "--on-primary": "Texto sobre la marca",
+    "--primary-50": "Tinte de marca",
+    "--primary-100": "Borde del tinte de marca",
+    "--warn": "Aviso: texto e ícono",
+    "--warn-50": "Fondo de aviso",
+    "--warn-line": "Borde de aviso",
+    "--info": "Información: texto e ícono",
+    "--info-50": "Fondo de información",
+    "--info-line": "Borde de información",
+    "--focus": "Anillo de foco en oro",
+    "--gold": "Filete de oro decorativo",
+    "--gold-ink": "El oro apto para texto",
+    "--gold-50": "Tinte de oro",
+    "--code-bg": "Fondo de identificadores",
+    "--r-pub": "Radio del portal de pacientes",
+    "--r-pub-lg": "Radio grande del portal",
+    "--r-adm": "Radio del panel de recepción",
+    "--r-adm-sm": "Radio chico del panel",
+    "--s1": "Espacio mínimo",
+    "--s2": "Espacio entre controles",
+    "--s3": "Espacio dentro de tarjetas",
+    "--s4": "Margen lateral",
+    "--s5": "Relleno de paneles",
+    "--s6": "Espacio entre bloques",
+    "--s7": "Espacio entre secciones",
+    "--s8": "Aire de página",
+    "--dur-feedback": "Respuesta a un toque",
+    "--dur-drawer": "Entrada del panel lateral",
+    "--dur-highlight": "Resalte después de un cambio",
+    "--ease-out": "Salida suave y causal"
+  },
+  "fonts": {
+    "display": {
+      "role": "Títulos, fechas grandes y cifras del folio",
+      "sample": "Cada consulta tiene un próximo paso."
+    },
+    "ui": {
+      "role": "Texto, botones, rótulos y estados",
+      "sample": "Profesional y sillón se validan juntos al confirmar."
+    }
+  },
+  "components": {
+    "folio": {
+      "name": "Folio del turno",
+      "note": "La pieza firma: un boleto de papel con borde perforado y la fecha grande en serif."
+    },
+    "turno": {
+      "name": "Tarjeta de turno",
+      "note": "Hora, servicio, profesional, sillón y estado, siempre en palabras; un filete de color marca el estado."
+    },
+    "datestrip": {
+      "name": "Tira de días",
+      "note": "La agenda de recepción por día: cada día muestra cuántos turnos tiene y el elegido toma la marca."
+    },
+    "summary": {
+      "name": "Resumen del día",
+      "note": "Una línea operativa dividida por filetes, en lugar de un mosaico de indicadores, para recepción."
+    },
+    "badges": {
+      "name": "Estados",
+      "note": "Cada estado lleva palabra e ícono: el color acompaña y la palabra informa."
+    },
+    "buttons": {
+      "name": "Botones",
+      "note": "Una acción principal en teal; la secundaria en papel y la fantasma para acciones de paso."
+    }
+  },
+  "samples": {
+    "folioLabel": "Próximo turno de Martina",
+    "folioEyebrow": "Tu próximo paso · Martina (P-001)",
+    "folioDow": "jueves",
+    "folioMonth": "octubre",
+    "folioTime": "10:00 h",
+    "folioLong": "jueves 22 de octubre de 2026, 10:00",
+    "service": "Control de ortodoncia",
+    "pro": "Dra. Inés Galván",
+    "site": "Sede Centro",
+    "chair": "Sillón 2",
+    "stConfirmada": "Confirmado",
+    "stIndicado": "Indicado",
+    "stAtencion": "En atención",
+    "stFinalizada": "Finalizado",
+    "folioPrimary": "Ver o cambiar",
+    "folioGhost": "Escribir por WhatsApp",
+    "turnoLabel": "Control de ortodoncia, jueves 22 de octubre, de 10:00 a 10:30",
+    "dowShort": "jue",
+    "monShort": "oct",
+    "turnoWord": "Turno",
+    "version": "versión 1",
+    "dayLabel": "Día",
+    "lun": "lun",
+    "mar": "mar",
+    "mie": "mié",
+    "jue": "jue",
+    "vie": "vie",
+    "sab": "sáb",
+    "dom": "dom",
+    "lunLong": "lunes",
+    "marLong": "martes",
+    "mieLong": "miércoles",
+    "jueLong": "jueves",
+    "vieLong": "viernes",
+    "sabLong": "sábado",
+    "domLong": "domingo",
+    "n5": "5 turnos",
+    "n4": "4 turnos",
+    "n2": "2 turnos",
+    "n1": "1 turno",
+    "closed": "Cerrado",
+    "summaryLabel": "Resumen del lunes 19/10",
+    "sumActive": "Turnos activos",
+    "sumConfirm": "Por confirmar",
+    "sumConfirmDetail": "cupo reservado",
+    "sumRoom": "En sala o atención",
+    "btnPrimary": "Pedir turno",
+    "btnSecondary": "Bloquear horario",
+    "btnGhost": "Ver detalle"
+  }
+}

@@ -1,0 +1,510 @@
+/* Eclipse · the «Efemérides» system (Toti-Gauna/Eclipse-Web @ eb1f507), rebuilt under .pds[data-ds="eclipse"].
+   Values from app/globals.css, components/ui/section-mark.css, components/sections/services/services.css and
+   components/sections/equipment/equipment.css. The tokens (--void… --fg-inverse) are written on the canvas by the
+   page from ds/eclipse.ts. Portfolio rules applied on top: text ≥ 12 px (the repo's 11 px labels go to 12 px), colour
+   changes are instant (only transform / opacity move), nothing loops, reduced motion is still. */
+
+@font-face {
+  font-family: 'ds-eclipse-sans';
+  src: url('../../../../public/trailer/fonts/eclipse/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-eclipse-serif';
+  src: url('../../../../public/trailer/fonts/eclipse/InstrumentSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-eclipse-serif';
+  src: url('../../../../public/trailer/fonts/eclipse/InstrumentSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ds-eclipse-mono';
+  src: url('../../../../public/trailer/fonts/eclipse/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The canvas: the page background of each theme is --fg-inverse (--void on dark, --dawn on light). */
+.pds[data-ds='eclipse'] {
+  background: var(--fg-inverse);
+  color: var(--fg);
+  font-family: 'ds-eclipse-sans', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* shape and motion tokens of the repo (globals.css @theme inline / :root) */
+  --radius-card-sm: 20px;
+  --radius-card: 24px;
+  --radius-card-lg: 28px;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+}
+.pds[data-ds='eclipse'] :focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* layout helpers of the samples */
+.pds[data-ds='eclipse'] .ds-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pds[data-ds='eclipse'] .ds-stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---- Type classes (globals.css) ---------------------------------------- */
+.pds[data-ds='eclipse'] .display {
+  margin: 0;
+  font-family: 'ds-eclipse-serif', ui-serif, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  color: var(--fg);
+}
+.pds[data-ds='eclipse'] .display em {
+  font-style: italic;
+  color: var(--accent);
+}
+.pds[data-ds='eclipse'] .ds-title {
+  font-size: 2.5rem;
+}
+.pds[data-ds='eclipse'] .eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .label {
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 450;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .readout {
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: -0.02em;
+}
+.pds[data-ds='eclipse'] .leader {
+  flex: 1 1 auto;
+  min-width: 1.25rem;
+  align-self: baseline;
+  border-bottom: 1px dotted var(--line-strong);
+}
+.pds[data-ds='eclipse'] .ticks {
+  --tick: 10px;
+  --tick-c: var(--line-strong);
+  --tick-g: linear-gradient(var(--tick-c), var(--tick-c));
+  background-image:
+    var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g), var(--tick-g),
+    var(--tick-g);
+  background-repeat: no-repeat;
+  background-size:
+    var(--tick) 1px,
+    1px var(--tick),
+    var(--tick) 1px,
+    1px var(--tick),
+    var(--tick) 1px,
+    1px var(--tick),
+    var(--tick) 1px,
+    1px var(--tick);
+  background-position:
+    top left,
+    top left,
+    top right,
+    top right,
+    bottom left,
+    bottom left,
+    bottom right,
+    bottom right;
+}
+
+/* ---- Buttons: pills, min 48 px, the glint on the primary ---------------- */
+.pds[data-ds='eclipse'] .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 500;
+  font-size: 0.975rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-expo);
+}
+.pds[data-ds='eclipse'] .btn:active {
+  transform: scale(0.98);
+}
+.pds[data-ds='eclipse'] .btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  overflow: clip;
+  background: var(--corona);
+  color: var(--void);
+  box-shadow: 0 10px 40px -14px rgb(245 185 66 / 0.7);
+}
+.pds[data-ds='eclipse'] .btn-primary:hover {
+  box-shadow:
+    0 0 0 6px rgb(245 185 66 / 0.14),
+    0 14px 48px -12px rgb(245 185 66 / 0.85);
+}
+/* the diamond-ring sparkle runs along the upper rim once, on hover and on keyboard focus */
+.pds[data-ds='eclipse'] .btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 18px 9px, #fff 0 1.3px, rgb(255 251 240 / 0.95) 2.4px, rgb(255 244 214 / 0.55) 4.6px, transparent 9px),
+    linear-gradient(90deg, transparent, rgb(255 255 255 / 0.95) 50%, transparent) 0 8.5px / 36px 1px no-repeat,
+    linear-gradient(180deg, transparent, rgb(255 255 255 / 0.9) 50%, transparent) 17.5px 1px / 1px 16px no-repeat;
+}
+.pds[data-ds='eclipse'] .btn-primary:hover::after,
+.pds[data-ds='eclipse'] .btn-primary:focus-visible::after {
+  animation: ds-eclipse-glint 0.9s var(--ease-soft) backwards;
+}
+.pds[data-ds='eclipse'] .btn-ghost {
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  background: transparent;
+}
+.pds[data-ds='eclipse'] .btn-ghost:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+@keyframes ds-eclipse-glint {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  18%,
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100% - 36px));
+  }
+}
+
+/* ---- Section mark: «02 ── ◑ QUÉ OFRECEMOS» ----------------------------- */
+.pds[data-ds='eclipse'] .section-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  margin: 0;
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .section-mark-index {
+  flex: none;
+  font-variant-numeric: tabular-nums slashed-zero;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+.pds[data-ds='eclipse'] .draw-line {
+  display: block;
+  height: 1px;
+  background: var(--line-strong);
+}
+.pds[data-ds='eclipse'] .section-mark-rule {
+  flex: none;
+  width: 3.5rem;
+}
+.pds[data-ds='eclipse'] .section-mark-glyph {
+  flex: none;
+  color: var(--accent);
+}
+.pds[data-ds='eclipse'] .section-mark-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Phase glyph: the brand icon, from the sun alone to totality -------- */
+.pds[data-ds='eclipse'] .ds-phases {
+  --tick: 14px;
+  margin: 0;
+  padding: 20px 16px 16px;
+  display: grid;
+  gap: 14px;
+}
+.pds[data-ds='eclipse'] .ds-phase-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pds[data-ds='eclipse'] .ds-phase-list li {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: var(--accent);
+}
+.pds[data-ds='eclipse'] .ds-phase-list .readout {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .ds-phases .label {
+  text-align: center;
+}
+
+/* ---- Services index: «01 ◔ Web y marca ······ 4 piezas» ---------------- */
+.pds[data-ds='eclipse'] .svc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.pds[data-ds='eclipse'] .svc-row {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+/* the open row is lit: an amber hairline draws over its top edge */
+.pds[data-ds='eclipse'] .svc-row::before {
+  content: '';
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--corona), rgb(245 185 66 / 0.15));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.8s var(--ease-expo);
+  pointer-events: none;
+}
+.pds[data-ds='eclipse'] .svc-row:has(.svc-head-btn[aria-pressed='true'])::before {
+  transform: scaleX(1);
+}
+.pds[data-ds='eclipse'] .svc-row-top {
+  position: relative;
+  padding-bottom: 18px;
+}
+/* the whole top block (name, count, result) is the toggle's hit area */
+.pds[data-ds='eclipse'] .svc-head-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.pds[data-ds='eclipse'] .svc-head-btn:focus-visible {
+  outline: none;
+}
+.pds[data-ds='eclipse'] .svc-head-btn:focus-visible::after {
+  border-radius: 12px;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.pds[data-ds='eclipse'] .svc-head-btn {
+  display: grid;
+  grid-template-columns: 1.6rem 1rem minmax(0, auto) minmax(0.75rem, 1fr) 1.75rem;
+  grid-template-areas:
+    'num glyph name leader chev'
+    '. . from from from';
+  align-items: baseline;
+  column-gap: 10px;
+  row-gap: 6px;
+  width: 100%;
+  min-height: 56px;
+  margin: 0;
+  padding: 18px 0 10px;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--fg);
+  cursor: pointer;
+}
+.pds[data-ds='eclipse'] .svc-num {
+  grid-area: num;
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums slashed-zero;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .svc-glyph {
+  grid-area: glyph;
+  align-self: center;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .svc-name {
+  grid-area: name;
+  font-family: 'ds-eclipse-serif', ui-serif, Georgia, serif;
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  opacity: 0.86;
+  transition: opacity 0.3s ease;
+}
+.pds[data-ds='eclipse'] .svc-leader {
+  grid-area: leader;
+  min-width: 0.75rem;
+  opacity: 0.7;
+}
+.pds[data-ds='eclipse'] .svc-from {
+  grid-area: from;
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .svc-chevron {
+  grid-area: chev;
+  align-self: center;
+  justify-self: end;
+  width: 20px;
+  height: 20px;
+  color: var(--fg-muted);
+  transition: transform 0.5s var(--ease-expo);
+}
+.pds[data-ds='eclipse'] .svc-result {
+  max-width: 34rem;
+  margin: 0;
+  padding-left: calc(2.6rem + 20px);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .svc-head-btn[aria-pressed='true'] .svc-num,
+.pds[data-ds='eclipse'] .svc-head-btn[aria-pressed='true'] .svc-glyph {
+  color: var(--accent);
+}
+.pds[data-ds='eclipse'] .svc-head-btn[aria-pressed='true'] .svc-name {
+  opacity: 1;
+}
+.pds[data-ds='eclipse'] .svc-head-btn[aria-pressed='true'] .svc-chevron {
+  transform: rotate(180deg);
+}
+.pds[data-ds='eclipse'] .svc-head-btn[aria-pressed='true'] + .svc-result {
+  color: var(--fg);
+}
+@media (hover: hover) {
+  .pds[data-ds='eclipse'] .svc-head-btn:hover .svc-name {
+    opacity: 1;
+  }
+  .pds[data-ds='eclipse'] .svc-head-btn:hover .svc-glyph {
+    color: var(--accent);
+  }
+}
+
+/* ---- Ledger: «01 Displays ········ A COTIZAR» --------------------------- */
+.pds[data-ds='eclipse'] .eq-parts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+.pds[data-ds='eclipse'] .eq-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.975rem;
+  line-height: 1.35;
+  color: var(--fg);
+}
+.pds[data-ds='eclipse'] .eq-row-n {
+  flex: none;
+  width: 1.6rem;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .eq-row-name {
+  min-width: 0;
+}
+.pds[data-ds='eclipse'] .eq-row-quote {
+  flex: none;
+  font-family: 'ds-eclipse-mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.pds[data-ds='eclipse'] .eq-row:hover .eq-row-n {
+  color: var(--accent);
+}
+
+/* ---- Card with the «Demo» badge (always on fictional content) ----------- */
+.pds[data-ds='eclipse'] .card {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.pds[data-ds='eclipse'] .ds-card {
+  display: grid;
+  gap: 14px;
+  padding: 1.5rem;
+}
+.pds[data-ds='eclipse'] .ds-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pds[data-ds='eclipse'] .ds-card-text {
+  margin: 0;
+  font-family: 'ds-eclipse-serif', ui-serif, Georgia, serif;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+.pds[data-ds='eclipse'] .badge-demo {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.35rem;
+  height: 1.5rem;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--corona);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pds[data-ds='eclipse'] *,
+  .pds[data-ds='eclipse'] *::before,
+  .pds[data-ds='eclipse'] *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
