@@ -10,6 +10,9 @@ import { Disclosure } from '../ui/Nav';
 import { StatusBadge } from '../ui/Status';
 import { WORLD_STAND_ART, WORLD_STANDS } from '../work/world-art';
 import { postalAlone } from '../work/world-stamps';
+import { archCopy } from './arch/copy';
+import { archOf } from './arch/archs';
+import { CaseArch } from './arch/CaseArch';
 import { CaseFilm } from './CaseFilm';
 import { CASES, type CaseMedia, type CaseSlug, nextCase } from './cases';
 import { caseCopy } from './copy';
@@ -46,6 +49,7 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
   const stamps = m.kit.stamps.items as Record<string, { year: string; name: string; alt: string }>;
   const cap = def.stamp ? stamps[def.stamp] : { year: (place as { mark?: string }).mark ?? place.when, name: c.title, alt: place.art };
   const workHref = sitePath(locale, 'work/');
+  const art = archOf(slug), arch = archCopy(locale, slug);
 
   return (
     <>
@@ -95,6 +99,18 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
               ))}
             </ol>
           </section>
+
+          {art && arch && (
+            <section className="cs2-sec" aria-labelledby="cs-arch">
+              <div className="cs2-arch-head" data-reveal>
+                <p className="cs2-arch-k">{L.arch.kicker}</p>
+                <h2 id="cs-arch" className="cs2-h">{arch.title}</h2>
+                {arch.badge && <span className="cs2-arch-badge">{arch.badge}</span>}
+                <p>{arch.caption}</p>
+              </div>
+              <CaseArch art={art} copy={arch} labels={L.arch} color={def.color} />
+            </section>
+          )}
 
           {def.gallery.length > 0 && (
             <section className="cs2-sec" aria-labelledby="cs-gallery">

@@ -1,0 +1,50 @@
+{
+  "title": "From a question to a reviewed answer",
+  "caption": "Generic scheme of a RAG assistant like CompliA: the real architecture stays inside Telefónica.",
+  "badge": "Conceptual scheme",
+  "nodes": {
+    "user": {
+      "label": "Team member",
+      "sub": "asks a question",
+      "note": "Asks a question in natural language."
+    },
+    "ui": {
+      "label": "Assistant",
+      "sub": "chat interface",
+      "note": "Receives the question in a chat and takes it to search."
+    },
+    "search": {
+      "label": "Search",
+      "sub": "in the documents",
+      "note": "Brings only the passages that matter for that question: that is the RAG."
+    },
+    "llm": {
+      "label": "Language model",
+      "sub": "writes",
+      "note": "Just one component: it writes from what was retrieved."
+    },
+    "rules": {
+      "label": "Validations",
+      "sub": "and restrictions",
+      "note": "They bound what it may answer and when it must hand over to a person."
+    },
+    "answer": {
+      "label": "Answer",
+      "sub": "with its sources",
+      "note": "Reaches the screen after the validations, with its sources."
+    },
+    "human": {
+      "label": "Human review",
+      "sub": "confirms",
+      "note": "The assistant helps issue the ruling; a person confirms it."
+    }
+  },
+  "edges": {
+    "ask": "question",
+    "query": "search",
+    "ctx": "context",
+    "draft": "draft",
+    "ok": "validated",
+    "review": "review"
+  }
+}

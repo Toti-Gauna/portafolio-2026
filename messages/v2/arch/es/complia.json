@@ -1,0 +1,50 @@
+{
+  "title": "De una pregunta a una respuesta revisada",
+  "caption": "Esquema genérico de un asistente con RAG como CompliA: la arquitectura real queda dentro de Telefónica.",
+  "badge": "Esquema conceptual",
+  "nodes": {
+    "user": {
+      "label": "Persona del equipo",
+      "sub": "hace una consulta",
+      "note": "Hace su consulta en lenguaje natural."
+    },
+    "ui": {
+      "label": "Asistente",
+      "sub": "interfaz de chat",
+      "note": "Recibe la consulta en un chat y la lleva a la búsqueda."
+    },
+    "search": {
+      "label": "Búsqueda",
+      "sub": "en los documentos",
+      "note": "Trae solo los fragmentos que importan para esa consulta: eso es el RAG."
+    },
+    "llm": {
+      "label": "Modelo de lenguaje",
+      "sub": "redacta",
+      "note": "Es un componente más: redacta a partir de lo que se recuperó."
+    },
+    "rules": {
+      "label": "Validaciones",
+      "sub": "y restricciones",
+      "note": "Acotan qué puede responder y cuándo tiene que derivar a una persona."
+    },
+    "answer": {
+      "label": "Respuesta",
+      "sub": "con sus fuentes",
+      "note": "Llega a la pantalla después de las validaciones, con sus fuentes."
+    },
+    "human": {
+      "label": "Revisión humana",
+      "sub": "confirma",
+      "note": "El asistente ayuda a dictaminar; el dictamen lo confirma una persona."
+    }
+  },
+  "edges": {
+    "ask": "consulta",
+    "query": "busca",
+    "ctx": "contexto",
+    "draft": "borrador",
+    "ok": "validada",
+    "review": "revisar"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "title": "Una app estática, dos caras, un motor",
+  "caption": "Arriba, lo construido: un export estático en GitHub Pages, todo en el navegador; abajo, lo planificado en la documentación del repo.",
+  "nodes": {
+    "shop": {
+      "label": "Tienda",
+      "sub": "24 pantallas",
+      "note": "La tienda para el celular: configurador en vivo, ruleta de cupones, club con misiones y regalos. Cotiza y valida con el motor."
+    },
+    "admin": {
+      "label": "Panel demo",
+      "sub": "41, acceso directo",
+      "note": "Acceso directo a propósito, avisado en pantalla: es solo para la demo, y en producción lo reemplaza el panel real."
+    },
+    "engine": {
+      "label": "Motor de reglas",
+      "sub": "22 módulos puros",
+      "note": "Precios, cupones, estados, fechas de entrega y sorteos en funciones puras, con montos en pesos enteros. Se testean fuera de React."
+    },
+    "data": {
+      "label": "Datos de muestra",
+      "sub": "localStorage",
+      "note": "Datos de muestra más los cambios guardados en este navegador: lo que edita el panel aparece en la tienda del mismo navegador."
+    },
+    "mp": {
+      "label": "Mercado Pago",
+      "sub": "Checkout Pro",
+      "note": "Planificado: el cobro con Checkout Pro, que le confirma el pago al servidor con un webhook firmado."
+    },
+    "server": {
+      "label": "Servidor Next",
+      "sub": "Server Actions + Zod",
+      "note": "Planificado: login con rol de administrador verificado en el servidor y una sola función de transición, en una transacción auditada."
+    },
+    "db": {
+      "label": "PostgreSQL",
+      "sub": "Prisma",
+      "note": "Planificado: la base de producción, con Prisma; cada transición se guarda en una transacción con su auditoría."
+    }
+  },
+  "edges": {
+    "edit": "edita",
+    "read": "lee",
+    "quote": "cotiza y valida",
+    "trans": "transiciones",
+    "move": "pasa al servidor",
+    "webhook": "webhook firmado",
+    "tx": "transacción"
+  },
+  "groups": {
+    "today": "Hoy, en el navegador",
+    "plan": "Planificado"
+  }
+}

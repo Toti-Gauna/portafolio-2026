@@ -1,0 +1,54 @@
+{
+  "title": "One static app, two faces, one engine",
+  "caption": "Top: what is built, a static export on GitHub Pages, all in the browser; bottom: what the repo's documentation plans.",
+  "nodes": {
+    "shop": {
+      "label": "Store",
+      "sub": "24 screens",
+      "note": "The store for phones: live configurator, coupon wheel, club with missions and gifts. It quotes and validates through the engine."
+    },
+    "admin": {
+      "label": "Demo panel",
+      "sub": "41, direct access",
+      "note": "Direct access on purpose, flagged on screen: it is for the demo only, and in production the real panel replaces it."
+    },
+    "engine": {
+      "label": "Rules engine",
+      "sub": "22 pure modules",
+      "note": "Prices, coupons, states, delivery dates and draws in pure functions, with amounts in whole pesos. Tested outside React."
+    },
+    "data": {
+      "label": "Demo data",
+      "sub": "localStorage",
+      "note": "Sample data plus the changes saved in this browser: what the panel edits shows up in the store of the same browser."
+    },
+    "mp": {
+      "label": "Mercado Pago",
+      "sub": "Checkout Pro",
+      "note": "Planned: payment with Checkout Pro, which confirms it to the server through a signed webhook."
+    },
+    "server": {
+      "label": "Next server",
+      "sub": "Server Actions + Zod",
+      "note": "Planned: login with an admin role checked on the server, and a single transition function inside an audited transaction."
+    },
+    "db": {
+      "label": "PostgreSQL",
+      "sub": "Prisma",
+      "note": "Planned: the production database, through Prisma; each transition is stored in a transaction with its audit trail."
+    }
+  },
+  "edges": {
+    "edit": "edits",
+    "read": "reads",
+    "quote": "quotes, validates",
+    "trans": "transitions",
+    "move": "moves to server",
+    "webhook": "signed webhook",
+    "tx": "transaction"
+  },
+  "groups": {
+    "today": "Today, in the browser",
+    "plan": "Planned"
+  }
+}

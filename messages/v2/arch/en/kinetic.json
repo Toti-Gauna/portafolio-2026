@@ -1,0 +1,55 @@
+{
+  "title": "One timeline drives everything",
+  "caption": "Picture and sound read the same timeline and move together; the warm-up pass was added by this portfolio's trailer.",
+  "nodes": {
+    "config": {
+      "label": "trailer.js",
+      "sub": "the scenes",
+      "note": "A trailer is a configuration file: scenes, palette, fonts and music. Each scene names a recipe."
+    },
+    "recipes": {
+      "label": "Recipes",
+      "sub": "→ duration",
+      "note": "Each scene is a recipe: it gets the director, its start second and its options, and returns how long it lasts."
+    },
+    "score": {
+      "label": "Score",
+      "sub": "{ t, voice }",
+      "note": "A function that returns every note with its second and its voice: the same list plays live or renders offline."
+    },
+    "tl": {
+      "label": "Master timeline",
+      "sub": "GSAP, paused",
+      "note": "One, and paused. With ?⁠t=seconds in the URL any frame stays frozen: to review frame by frame and to export."
+    },
+    "seek": {
+      "label": "?t=seconds",
+      "sub": "still frame",
+      "note": "Pauses the film at that second: it enables frame-by-frame review, the hub's previews and exporting the exact frame."
+    },
+    "warm": {
+      "label": "Warm-up",
+      "sub": "a first pass",
+      "note": "Walks the film once, behind a cover and before playing: each scene's first frame is the expensive one."
+    },
+    "image": {
+      "label": "Picture",
+      "sub": "DOM + canvas",
+      "note": "Canvas layers are pure functions of the animated state: moving the timeline moves the canvas too."
+    },
+    "sound": {
+      "label": "Sound",
+      "sub": "WebAudio",
+      "note": "Each note of the score plays at its second with one of the 23 voices synthesised in WebAudio."
+    }
+  },
+  "edges": {
+    "run": "Trailer.run",
+    "tweens": "tweens at T",
+    "notes": "0 s callbacks",
+    "freeze": "pause at t",
+    "warmup": "seek every 1.5 s",
+    "draw": "tweens · ticker",
+    "play": "SFX.voice()"
+  }
+}

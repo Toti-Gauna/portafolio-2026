@@ -1,0 +1,65 @@
+{
+  "title": "Del pedido a producción, con una puerta humana",
+  "caption": "G0–G5 son las puertas del contrato con el que trabajo en Eclipse, donde los roles son pasos que una misma sesión aplica en secuencia.",
+  "nodes": {
+    "req": {
+      "label": "Ignacio",
+      "sub": "pide un cambio",
+      "note": "Cada cambio empieza con un pedido mío y sigue siempre el mismo camino."
+    },
+    "chief": {
+      "label": "Dirección",
+      "sub": "plan, alcance, costo",
+      "note": "Ordena el plan, el alcance y el costo, y le pasa cada tarea al rol que corresponde."
+    },
+    "spec": {
+      "label": "Especificación",
+      "sub": "corta y acotada",
+      "note": "Problema, usuario, flujo, requisitos, exclusiones, criterios de aceptación, cómo revertir, costo y responsable."
+    },
+    "agents": {
+      "label": "Agentes de rol",
+      "sub": "uno por frente",
+      "note": "Cada uno arranca con su skill de descubrimiento y declara sus supuestos en un bloque fijo antes de implementar."
+    },
+    "skills": {
+      "label": "Skills",
+      "sub": "a demanda",
+      "note": "Guías cortas que se cargan cuando la acción las necesita: descubrimiento al empezar, capa o componente al construir, pruebas al cerrar."
+    },
+    "repo": {
+      "label": "Rama + PR",
+      "sub": "un lote por vez",
+      "note": "Un lote, una rama y un PR por vez."
+    },
+    "qa": {
+      "label": "QA",
+      "sub": "tests y revisión",
+      "note": "Typecheck, lint, tests, build y capturas a 360 y 1440 px; después, otro revisor intenta refutar cada hallazgo."
+    },
+    "gate": {
+      "label": "Puerta humana",
+      "sub": "OK de Ignacio",
+      "note": "Mergear, desplegar, gastar, cambiar precios o publicar lo decido yo, con una autorización explícita y separada."
+    },
+    "pub": {
+      "label": "Publicar",
+      "sub": "merge y deploy",
+      "note": "Merge y deploy llegan después de G5, con mi autorización."
+    }
+  },
+  "edges": {
+    "ask": "pedido",
+    "scope": "G0 · G1",
+    "pass": "G2 línea base",
+    "load": "carga",
+    "branch": "una rama",
+    "local": "G3 local",
+    "review": "G4 revisión",
+    "ok": "G5 OK",
+    "fix": "corrige"
+  },
+  "groups": {
+    "human": "Decide una persona"
+  }
+}

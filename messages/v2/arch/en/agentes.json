@@ -1,0 +1,65 @@
+{
+  "title": "From request to production, through a human gate",
+  "caption": "G0–G5 are the gates of the working contract I use at Eclipse, where the roles are steps one session applies in sequence.",
+  "nodes": {
+    "req": {
+      "label": "Ignacio",
+      "sub": "asks for a change",
+      "note": "Every change starts with a request from me and follows the same path."
+    },
+    "chief": {
+      "label": "Direction",
+      "sub": "plan, scope, cost",
+      "note": "Owns the plan, the scope and the cost, and hands each task to the right role."
+    },
+    "spec": {
+      "label": "Specification",
+      "sub": "short and bounded",
+      "note": "Problem, user, flow, requirements, exclusions, acceptance criteria, how to roll back, cost and owner."
+    },
+    "agents": {
+      "label": "Role agents",
+      "sub": "one per front",
+      "note": "Each one starts with its discovery skill and states its assumptions in a fixed block before implementing."
+    },
+    "skills": {
+      "label": "Skills",
+      "sub": "on demand",
+      "note": "Short guides loaded when the action needs them: discovery to start, layer or component ones to build, testing ones to close."
+    },
+    "repo": {
+      "label": "Branch + PR",
+      "sub": "batch by batch",
+      "note": "One batch, one branch and one PR at a time."
+    },
+    "qa": {
+      "label": "QA",
+      "sub": "tests and review",
+      "note": "Type check, lint, tests, build and captures at 360 and 1440 px; then another reviewer tries to refute each finding."
+    },
+    "gate": {
+      "label": "Human gate",
+      "sub": "Ignacio's OK",
+      "note": "Merging, deploying, spending, changing prices or publishing is my call, with an explicit, separate authorisation."
+    },
+    "pub": {
+      "label": "Publish",
+      "sub": "merge and deploy",
+      "note": "Merge and deploy come after G5, with my authorisation."
+    }
+  },
+  "edges": {
+    "ask": "request",
+    "scope": "G0 · G1",
+    "pass": "G2 baseline",
+    "load": "loads",
+    "branch": "one branch",
+    "local": "G3 local",
+    "review": "G4 review",
+    "ok": "G5 OK",
+    "fix": "fixes"
+  },
+  "groups": {
+    "human": "A person decides"
+  }
+}

@@ -892,3 +892,53 @@ describe('v2 cases (lote 5.1)', () => {
     for (const l of ['es', 'en'] as const) for (const s of strings((l === 'es' ? es : en).case)) expect(s).not.toMatch(VOICE[l]);
   });
 });
+
+describe('v2 living architecture (lote 5.2)', () => {
+  const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
+  it('every case but Tuenti has its architecture, drawn from the published diagram, and every piece has its place', async () => {
+    const { CASE_ORDER } = await import('../../v2/components/case/cases');
+    const { ARCH_OF, archOf, archSpec } = await import('../../v2/components/case/arch/archs');
+    expect(Object.keys(ARCH_OF).sort()).toEqual(CASE_ORDER.filter((s) => s !== 'tuenti').sort());
+    for (const slug of Object.keys(ARCH_OF) as (keyof typeof ARCH_OF)[]) {
+      const spec = archSpec(slug)!, art = archOf(slug)!;
+      expect(spec, slug).toBeTruthy();
+      for (const p of ARCH_OF[slug]!.planned ?? []) expect(spec.nodes.map((n) => n.id), slug).toContain(p);
+      // a cell per piece: two pieces never stand on the same square
+      expect(new Set(art.nodes.map((n) => n.cell.join())).size, slug).toBe(art.nodes.length);
+      // names and labels fall inside the drawing
+      for (const p of [...art.nodes, ...art.edges, ...art.zones]) { expect(p.at[0], slug).toBeGreaterThanOrEqual(0); expect(p.at[0]).toBeLessThanOrEqual(100); expect(p.at[1]).toBeGreaterThanOrEqual(0); expect(p.at[1]).toBeLessThanOrEqual(100); }
+      for (const e of art.edges) expect(e.len, `${slug} ${e.id}`).toBeGreaterThan(20);
+      // what is planned is a wireframe, and so is every connection to it
+      expect(art.nodes.filter((n) => n.planned).map((n) => n.id).sort()).toEqual([...(ARCH_OF[slug]!.planned ?? [])].sort());
+      expect(art.svg).not.toMatch(/<text/);
+    }
+  });
+
+  it('its words: every piece and connection in both languages, short, and in a positive voice', async () => {
+    const { ARCH_OF, archSpec } = await import('../../v2/components/case/arch/archs');
+    const { archCopy } = await import('../../v2/components/case/arch/copy');
+    const VOICE = { es: /\b(sin|no|nunca|todavía|falta|pendiente)\b/i, en: /\b(no|not|never|without|yet|missing|lack)\b|n't\b/i };
+    for (const slug of Object.keys(ARCH_OF) as (keyof typeof ARCH_OF)[]) {
+      const spec = archSpec(slug)!;
+      for (const l of ['es', 'en'] as const) {
+        const c = archCopy(l, slug)!;
+        expect(c, `${slug} ${l}`).toBeTruthy();
+        expect(Object.keys(c.nodes), `${slug} ${l}`).toEqual(spec.nodes.map((n) => n.id));
+        expect(Object.keys(c.edges), `${slug} ${l}`).toEqual(spec.edges.map((e) => e.id));
+        expect(Object.keys(c.groups ?? {}).sort(), `${slug} ${l}`).toEqual((spec.groups ?? []).map((g) => g.id).sort());
+        expect(words(c.caption), `${slug} ${l} caption`).toBeLessThanOrEqual(25);
+        for (const [id, n] of Object.entries(c.nodes)) {
+          for (const k of ['label', 'sub', 'note'] as const) expect(n[k]?.trim(), `${slug} ${l} ${id}.${k}`).toBeTruthy();
+          expect(words(n.note), `${slug} ${l} ${id}`).toBeLessThanOrEqual(22);
+        }
+        for (const [id, e] of Object.entries(c.edges)) { expect(e.trim(), `${slug} ${l} ${id}`).toBeTruthy(); expect(words(e)).toBeLessThanOrEqual(4); }
+        const all = JSON.stringify(c);
+        for (const s of all.match(/"[^"]*"/g) ?? []) expect(s, `${slug} ${l}`).not.toMatch(VOICE[l]);
+        expect(all).not.toMatch(/vibe coding|\bSsr\b|handyx/i);
+      }
+    }
+    // CompliA is a generic scheme, and says so
+    expect(archCopy('es', 'complia')!.badge).toBeTruthy();
+    expect(archCopy('en', 'complia')!.badge).toBeTruthy();
+  });
+});

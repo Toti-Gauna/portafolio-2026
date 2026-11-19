@@ -1,0 +1,60 @@
+{
+  "title": "Cuatro repos, un sistema",
+  "caption": "Webs estáticas en Hostinger y GitHub Pages; el backend está listo para desplegar, planificado en Render y Neon, con despliegue automático como próximo paso.",
+  "nodes": {
+    "visitor": {
+      "label": "Dueño de PyME",
+      "sub": "desde el celular",
+      "note": "Llega casi siempre desde el celular y ve su rubro funcionando en una demo."
+    },
+    "web": {
+      "label": "Eclipse-Web",
+      "sub": "landing + portal",
+      "note": "Un código, dos builds: la demo, con datos locales, y la conectada, en el mismo dominio que la API."
+    },
+    "api": {
+      "label": "API Eclipse-be",
+      "sub": "Express · Prisma",
+      "note": "Clientes y administradores con claves, audiencias y sesiones separadas. Los administradores existen solo en el entorno del servidor."
+    },
+    "db": {
+      "label": "PostgreSQL",
+      "sub": "datos y archivos",
+      "note": "Cada proyecto nace con su seña cobrada: un trigger lo exige al confirmar la transacción."
+    },
+    "mail": {
+      "label": "Emails",
+      "sub": "outbox → SMTP",
+      "note": "Se guardan cifrados y se intentan una sola vez. La interfaz los sigue hasta «aceptado por SMTP»."
+    },
+    "ops": {
+      "label": "Operación",
+      "sub": "una persona",
+      "note": "Una sola persona: yo. Entro al portal interno con contraseña y código TOTP."
+    },
+    "internal": {
+      "label": "Portal interno",
+      "sub": "HTML + JS",
+      "note": "Solicitudes, proyectos, prospectos, calendario, comunicaciones y documentos, en HTML y JavaScript nativos, con modo demo y modo conectado."
+    },
+    "kit": {
+      "label": "Kit de emails",
+      "sub": "prototipo",
+      "note": "Compilador local de emails de propuesta, en HTML y texto plano. Es un prototipo y lo estoy rehaciendo."
+    }
+  },
+  "edges": {
+    "visit": "HTTPS",
+    "client": "cookies + CSRF",
+    "tx": "transacción",
+    "mail": "encola",
+    "login": "login + TOTP",
+    "admin": "sesión de admin",
+    "kit": "solo compila"
+  },
+  "groups": {
+    "pub": "Público",
+    "be": "Backend",
+    "int": "Interno"
+  }
+}

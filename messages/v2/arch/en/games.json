@@ -1,0 +1,47 @@
+{
+  "title": "A star-shaped match",
+  "caption": "Each phone sends its input and receives delta snapshots against the last confirmed tick; networked play needs HTTPS for WebRTC.",
+  "nodes": {
+    "host": {
+      "label": "Projector",
+      "sub": "authoritative host",
+      "note": "It simulates the match and shows the QR. It accepts only the host's state: game consistency, apart from security."
+    },
+    "p1": {
+      "label": "Phone 1",
+      "sub": "controller",
+      "note": "Joins through the QR, sends its input to the projector and receives the match state."
+    },
+    "p2": {
+      "label": "Phone 2",
+      "sub": "controller",
+      "note": "Another controller, on its own direct channel to the projector: each phone talks only to the host."
+    },
+    "p3": {
+      "label": "Phone 3",
+      "sub": "runs the game",
+      "note": "Depending on the game, the phone is a controller or runs the whole match on the device."
+    },
+    "broker": {
+      "label": "Signalling",
+      "sub": "PeerJS",
+      "note": "A public broker, only to connect: after that each phone talks directly to the projector over a DataChannel."
+    },
+    "bc": {
+      "label": "Local mode",
+      "sub": "two tabs",
+      "note": "During development, two tabs act as projector and phone over BroadcastChannel, with simulated latency and loss; every game runs the same."
+    }
+  },
+  "edges": {
+    "ask": "asks to connect",
+    "signal": "signalling",
+    "in1": "input",
+    "out1": "state",
+    "in2": "input",
+    "out2": "state",
+    "in3": "input",
+    "out3": "state",
+    "dev": "in development"
+  }
+}
