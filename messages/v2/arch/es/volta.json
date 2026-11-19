@@ -1,0 +1,55 @@
+{
+  "title": "Una app, todo en el navegador",
+  "caption": "Se publica en GitHub Pages desde la CI y todo corre en el navegador; el servidor de abajo está planificado, descripto en el repo.",
+  "nodes": {
+    "shop": {
+      "label": "Tienda",
+      "sub": "29 páginas",
+      "note": "La tienda del comprador: catálogo, armador de stack, club con niveles, un juego que da cupones y regalos."
+    },
+    "admin": {
+      "label": "Panel",
+      "sub": "60 páginas",
+      "note": "Panel del dueño con acceso directo de demo, a propósito, y la señal «Demo» a la vista: se presenta como demo."
+    },
+    "features": {
+      "label": "Contenedores",
+      "sub": "src/features",
+      "note": "Las pantallas delegan acá: cada contenedor une el estado de los stores con el motor de reglas puro."
+    },
+    "engine": {
+      "label": "Motor puro",
+      "sub": "reglas de negocio",
+      "note": "Precio, cupones, stock, estados del pedido y el juego son funciones puras y testeadas, fuera de los componentes."
+    },
+    "stores": {
+      "label": "Stores",
+      "sub": "Zustand",
+      "note": "Se rehidratan después del primer render para cuidar el HTML estático, con migraciones versionadas de lo guardado."
+    },
+    "fixtures": {
+      "label": "Catálogo",
+      "sub": "de muestra",
+      "note": "Los datos ficticios de la demo: marca, productos y pedidos inventados, que lee el motor."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "por marca",
+      "note": "Lo guardado, en JSON y con el prefijo de cada marca: dos demos en el mismo dominio quedan separadas."
+    },
+    "prod": {
+      "label": "Servidor",
+      "sub": "planificado",
+      "note": "Planificado: en producción el motor pasa a servicios del servidor y los componentes se reutilizan. Está descripto en el repo."
+    }
+  },
+  "edges": {
+    "shopUses": "usa",
+    "adminUses": "usa",
+    "calc": "calcula",
+    "state": "estado",
+    "read": "lee",
+    "persist": "JSON",
+    "later": "planificado"
+  }
+}

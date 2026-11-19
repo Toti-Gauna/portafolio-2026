@@ -1,0 +1,61 @@
+{
+  "title": "One state, changed by commands",
+  "caption": "It runs entirely in the browser: screens send commands to a pure domain layer, and CI publishes it on GitHub Pages.",
+  "nodes": {
+    "portal": {
+      "label": "Portal",
+      "sub": "6 modules",
+      "note": "For patients or a responsible adult: books on a calendar with the free slots and shows appointments and estimates."
+    },
+    "panel": {
+      "label": "Panel",
+      "sub": "10 modules",
+      "note": "Reception, clinicians and management: schedule, messages, waiting list, dental chart, estimates and campaigns. Every change travels as a command."
+    },
+    "store": {
+      "label": "DemoStore",
+      "sub": "one state",
+      "note": "The app's single state: it gives each command a commandId, so a double click books once."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "envelope",
+      "note": "A versioned envelope, validated on hydration: if damaged, it warns and offers a restore; if blocked, the demo runs in memory."
+    },
+    "domain": {
+      "label": "Pure domain",
+      "sub": "59 commands",
+      "note": "Each command runs on a copy of the state: if it fails, the copy is discarded and the original stays intact."
+    },
+    "clock": {
+      "label": "Clock",
+      "sub": "UTC−03:00",
+      "note": "An injected sample clock: ESLint forbids Date.now and Math.random, so the demo plays out the same every time."
+    },
+    "sched": {
+      "label": "Slots",
+      "sub": "checks availability",
+      "note": "Checks the new slot: clinician, chair, site, duration and minimum notice. If it is taken, the original appointment stands."
+    },
+    "outbox": {
+      "label": "Outbox",
+      "sub": "simulated",
+      "note": "Reminders, offers and campaigns keyed by appointment, version and type: each one exists once and stays in the browser."
+    },
+    "audit": {
+      "label": "Audit",
+      "sub": "commandId",
+      "note": "Records each command with its commandId; reception sees each appointment's audit trail in the panel."
+    }
+  },
+  "edges": {
+    "portalCmd": "dispatch",
+    "panelCmd": "dispatch",
+    "exec": "execute",
+    "slot": "check slot",
+    "msg": "schedule / void",
+    "log": "records",
+    "time": "time",
+    "save": "saves"
+  }
+}

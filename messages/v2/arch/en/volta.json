@@ -1,0 +1,55 @@
+{
+  "title": "One app, all in the browser",
+  "caption": "Published on GitHub Pages from CI and everything runs in the browser; the server at the bottom is planned, described in the repo.",
+  "nodes": {
+    "shop": {
+      "label": "Store",
+      "sub": "29 pages",
+      "note": "The buyer's store: catalogue, stack builder, tiered club, a game that gives coupons, and gifts."
+    },
+    "admin": {
+      "label": "Panel",
+      "sub": "60 pages",
+      "note": "The owner's panel, with direct demo access on purpose and the «Demo» sign in view: it is presented as a demo."
+    },
+    "features": {
+      "label": "Containers",
+      "sub": "src/features",
+      "note": "Pages hand off here: each container joins the stores' state with the pure rules engine."
+    },
+    "engine": {
+      "label": "Pure engine",
+      "sub": "business rules",
+      "note": "Pricing, coupons, stock, order states and the game are pure, tested functions, outside the components."
+    },
+    "stores": {
+      "label": "Stores",
+      "sub": "Zustand",
+      "note": "They rehydrate after the first render to keep the static HTML intact, with versioned migrations of what was saved."
+    },
+    "fixtures": {
+      "label": "Catalogue",
+      "sub": "sample data",
+      "note": "The demo's fictional data: an invented brand, products and orders, read by the engine."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "per brand",
+      "note": "What is saved, as JSON with each brand's own prefix: two demos on the same domain stay apart."
+    },
+    "prod": {
+      "label": "Server",
+      "sub": "planned",
+      "note": "Planned: in production the engine moves into server services and the components are reused. It is described in the repo."
+    }
+  },
+  "edges": {
+    "shopUses": "uses",
+    "adminUses": "uses",
+    "calc": "computes",
+    "state": "state",
+    "read": "reads",
+    "persist": "JSON",
+    "later": "planned"
+  }
+}

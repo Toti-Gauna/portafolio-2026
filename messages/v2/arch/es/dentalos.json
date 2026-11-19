@@ -1,0 +1,61 @@
+{
+  "title": "Un solo estado, cambiado por comandos",
+  "caption": "Corre entera en el navegador: las pantallas mandan comandos a un dominio puro y la CI la publica en GitHub Pages.",
+  "nodes": {
+    "portal": {
+      "label": "Portal",
+      "sub": "6 módulos",
+      "note": "Para pacientes o su adulto responsable: reserva en un calendario con los horarios libres y muestra turnos y presupuestos."
+    },
+    "panel": {
+      "label": "Panel",
+      "sub": "10 módulos",
+      "note": "Recepción, profesionales y dirección: agenda, mensajes, lista de espera, odontograma, presupuestos y campañas. Cada cambio viaja como comando."
+    },
+    "store": {
+      "label": "DemoStore",
+      "sub": "un estado",
+      "note": "El único estado de la app: le asigna un commandId a cada comando, así un doble clic reserva una sola vez."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "envelope",
+      "note": "Envelope versionado y validado al hidratar: dañado, avisa y ofrece restaurar; bloqueado, la demo sigue en memoria."
+    },
+    "domain": {
+      "label": "Dominio puro",
+      "sub": "59 comandos",
+      "note": "Cada comando se aplica sobre una copia del estado: si falla, la copia se descarta y el original queda intacto."
+    },
+    "clock": {
+      "label": "Reloj",
+      "sub": "UTC−03:00",
+      "note": "Un reloj de muestra inyectado: ESLint prohíbe Date.now y Math.random, así la demo se reproduce igual cada vez."
+    },
+    "sched": {
+      "label": "Cupos",
+      "sub": "valida disponibilidad",
+      "note": "Valida el cupo nuevo: profesional, sillón, sede, duración y anticipación mínima. Si está ocupado, el turno original sigue en pie."
+    },
+    "outbox": {
+      "label": "Outbox",
+      "sub": "simulado",
+      "note": "Recordatorios, ofertas y campañas con una clave por turno, versión y tipo: cada aviso existe una vez y queda en el navegador."
+    },
+    "audit": {
+      "label": "Auditoría",
+      "sub": "commandId",
+      "note": "Registra cada comando con su commandId; recepción ve en el panel la auditoría de cada turno."
+    }
+  },
+  "edges": {
+    "portalCmd": "dispatch",
+    "panelCmd": "dispatch",
+    "exec": "execute",
+    "slot": "valida cupo",
+    "msg": "programa / anula",
+    "log": "registra",
+    "time": "hora",
+    "save": "guarda"
+  }
+}

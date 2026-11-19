@@ -1,0 +1,47 @@
+{
+  "title": "Una partida en estrella",
+  "caption": "Cada celular manda su input y recibe snapshots con delta contra el último tick confirmado; el juego en red pide HTTPS para WebRTC.",
+  "nodes": {
+    "host": {
+      "label": "Proyector",
+      "sub": "host autoritativo",
+      "note": "Simula la partida y muestra el QR. Acepta solo el estado del host: consistencia del juego, aparte de la seguridad."
+    },
+    "p1": {
+      "label": "Celular 1",
+      "sub": "mando",
+      "note": "Entra por el QR, manda su input al proyector y recibe el estado de la partida."
+    },
+    "p2": {
+      "label": "Celular 2",
+      "sub": "mando",
+      "note": "Otro mando, con su propio canal directo al proyector: cada celular habla solo con el host."
+    },
+    "p3": {
+      "label": "Celular 3",
+      "sub": "corre el juego",
+      "note": "Según el juego, el celular es un mando o corre la partida entera en el teléfono."
+    },
+    "broker": {
+      "label": "Señalización",
+      "sub": "PeerJS",
+      "note": "Un broker público, solo para conectar: después cada celular habla directo con el proyector por un DataChannel."
+    },
+    "bc": {
+      "label": "Modo local",
+      "sub": "dos pestañas",
+      "note": "En desarrollo, dos pestañas hacen de proyector y celular por BroadcastChannel, con latencia y pérdida simuladas; cada juego corre igual."
+    }
+  },
+  "edges": {
+    "ask": "pide conectar",
+    "signal": "señalización",
+    "in1": "input",
+    "out1": "estado",
+    "in2": "input",
+    "out2": "estado",
+    "in3": "input",
+    "out3": "estado",
+    "dev": "en desarrollo"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "title": "One app, three presentations, one state",
+  "caption": "A prototype that runs entirely in the browser, with fictional data; CI installs, builds with type checks and publishes on GitHub Pages.",
+  "nodes": {
+    "html": {
+      "label": "Initial HTML",
+      "sub": "first frame",
+      "note": "The orbital scene is already in the HTML, with critical CSS; React and the intro carry it on with the same clock."
+    },
+    "router": {
+      "label": "Router",
+      "sub": "3 presentations",
+      "note": "Picks one of three presentations over the same data: classic, a navigable 3D universe or hybrid, with illustrations on 3D planes."
+    },
+    "app": {
+      "label": "Events app",
+      "sub": "React 19",
+      "note": "Catalogue, sign-up, pass and event builder. Signing up or checking in runs apart from the animations."
+    },
+    "lazy": {
+      "label": "On demand",
+      "sub": "QR · Excel",
+      "note": "The GSAP intro, the QR library and the Excel reader download separately, when they are needed."
+    },
+    "universe": {
+      "label": "3D universe",
+      "sub": "a single Canvas",
+      "note": "It lives outside the views and takes commands with an increasing ID: a new journey cancels the previous one. It only draws."
+    },
+    "fallback": {
+      "label": "Static backdrop",
+      "sub": "app keeps working",
+      "note": "If the download, a shader or the WebGL context fails, a static backdrop remains and every action keeps working."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "JSON",
+      "note": "Stores events, bookings and check-ins. The migration keeps user-created events, and an old booking falls into the main session."
+    }
+  },
+  "edges": {
+    "boot": "before React",
+    "route": "one per URL",
+    "lazy": "deferred import",
+    "cmd": "commands",
+    "fail": "WebGL error",
+    "data": "reads, writes JSON"
+  }
+}

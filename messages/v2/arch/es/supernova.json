@@ -1,0 +1,49 @@
+{
+  "title": "Una app, tres presentaciones, un estado",
+  "caption": "Prototipo que corre entero en el navegador, con datos ficticios; la CI instala, compila con chequeo de tipos y publica en GitHub Pages.",
+  "nodes": {
+    "html": {
+      "label": "HTML inicial",
+      "sub": "primer cuadro",
+      "note": "La escena orbital ya está en el HTML, con CSS crítico; React y la intro la continúan con el mismo reloj."
+    },
+    "router": {
+      "label": "Router",
+      "sub": "3 presentaciones",
+      "note": "Elige una de las tres presentaciones, con los mismos datos: clásica, universo 3D navegable o híbrida, con ilustraciones en planos 3D."
+    },
+    "app": {
+      "label": "App de eventos",
+      "sub": "React 19",
+      "note": "Catálogo, inscripción, pase y creador de eventos. Inscribirse o registrar un ingreso siguen su curso aparte de las animaciones."
+    },
+    "lazy": {
+      "label": "A pedido",
+      "sub": "QR · Excel",
+      "note": "La intro con GSAP, el QR y el lector de Excel se descargan aparte, cuando se usan."
+    },
+    "universe": {
+      "label": "Universo 3D",
+      "sub": "un solo Canvas",
+      "note": "Vive fuera de las vistas y recibe comandos con un ID creciente: un viaje nuevo cancela el anterior. Solo dibuja."
+    },
+    "fallback": {
+      "label": "Fondo estático",
+      "sub": "la app sigue",
+      "note": "Si falla la descarga, un shader o el contexto WebGL, queda un fondo estático y las acciones siguen andando."
+    },
+    "ls": {
+      "label": "localStorage",
+      "sub": "JSON",
+      "note": "Guarda eventos, reservas e ingresos. La migración conserva los eventos creados y una reserva vieja cae en la función principal."
+    }
+  },
+  "edges": {
+    "boot": "antes de React",
+    "route": "una por URL",
+    "lazy": "import diferido",
+    "cmd": "comandos",
+    "fail": "error de WebGL",
+    "data": "lee y escribe JSON"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Una línea de tiempo maneja todo",
+  "caption": "Imagen y sonido leen la misma línea de tiempo y se mueven juntos; la pasada de calentamiento la sumó el tráiler de este portafolio.",
+  "nodes": {
+    "config": {
+      "label": "trailer.js",
+      "sub": "las escenas",
+      "note": "Un tráiler es un archivo de configuración: escenas, paleta, fuentes y música. Cada escena nombra una receta."
+    },
+    "recipes": {
+      "label": "Recetas",
+      "sub": "→ duración",
+      "note": "Cada escena es una receta: recibe al director, su segundo de inicio y sus opciones, y devuelve cuánto dura."
+    },
+    "score": {
+      "label": "Partitura",
+      "sub": "{ t, voz }",
+      "note": "Una función que devuelve cada nota con su segundo y su voz: la misma lista suena en vivo o se renderiza offline."
+    },
+    "tl": {
+      "label": "Timeline maestra",
+      "sub": "GSAP, pausada",
+      "note": "Una sola, y pausada. Con ?⁠t=segundos en la URL cualquier cuadro queda congelado: para revisar cuadro por cuadro y exportar."
+    },
+    "seek": {
+      "label": "?t=segundos",
+      "sub": "cuadro fijo",
+      "note": "Pausa la película en ese segundo: habilita revisar cuadro por cuadro, las vistas previas del hub y exportar el cuadro exacto."
+    },
+    "warm": {
+      "label": "Calentamiento",
+      "sub": "pasada previa",
+      "note": "Recorre la película una vez, tras una cortina y antes de reproducir: el primer cuadro de cada escena es el caro."
+    },
+    "image": {
+      "label": "Imagen",
+      "sub": "DOM + canvas",
+      "note": "Las capas de canvas son funciones puras del estado animado: mover la línea de tiempo mueve también el canvas."
+    },
+    "sound": {
+      "label": "Sonido",
+      "sub": "WebAudio",
+      "note": "Cada nota de la partitura suena en su segundo con una de las 23 voces sintetizadas en WebAudio."
+    }
+  },
+  "edges": {
+    "run": "Trailer.run",
+    "tweens": "tweens en T",
+    "notes": "callbacks de 0 s",
+    "freeze": "pausa en t",
+    "warmup": "seek cada 1,5 s",
+    "draw": "tweens · ticker",
+    "play": "SFX.voz()"
+  }
+}

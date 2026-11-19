@@ -1,0 +1,60 @@
+{
+  "title": "Four repos, one system",
+  "caption": "Static websites on Hostinger and GitHub Pages; the backend is ready to deploy, planned on Render and Neon, with automated deploy as the next step.",
+  "nodes": {
+    "visitor": {
+      "label": "Business owner",
+      "sub": "on a phone",
+      "note": "Almost always arrives on a phone and sees their industry working in a demo."
+    },
+    "web": {
+      "label": "Eclipse-Web",
+      "sub": "landing + portal",
+      "note": "One codebase, two builds: the demo, on local data, and the connected one, on the same domain as the API."
+    },
+    "api": {
+      "label": "Eclipse-be API",
+      "sub": "Express · Prisma",
+      "note": "Clients and administrators have separate keys, audiences and sessions. Administrators exist only in the server's environment."
+    },
+    "db": {
+      "label": "PostgreSQL",
+      "sub": "data and files",
+      "note": "Every project is born with a collected deposit: a trigger requires it when the transaction commits."
+    },
+    "mail": {
+      "label": "Emails",
+      "sub": "outbox → SMTP",
+      "note": "Stored encrypted and attempted once. The interface tracks them up to «accepted by SMTP»."
+    },
+    "ops": {
+      "label": "Operations",
+      "sub": "one person",
+      "note": "One person: me. I sign in to the internal portal with a password and a TOTP code."
+    },
+    "internal": {
+      "label": "Internal portal",
+      "sub": "HTML + JS",
+      "note": "Requests, projects, prospects, calendar, communications and documents, in plain HTML and JavaScript, with a demo mode and a connected mode."
+    },
+    "kit": {
+      "label": "Email kit",
+      "sub": "prototype",
+      "note": "A local compiler of proposal emails, in HTML and plain text. It is a prototype and I'm redoing it."
+    }
+  },
+  "edges": {
+    "visit": "HTTPS",
+    "client": "cookies + CSRF",
+    "tx": "transaction",
+    "mail": "queues",
+    "login": "login + TOTP",
+    "admin": "admin session",
+    "kit": "only builds"
+  },
+  "groups": {
+    "pub": "Public",
+    "be": "Backend",
+    "int": "Internal"
+  }
+}

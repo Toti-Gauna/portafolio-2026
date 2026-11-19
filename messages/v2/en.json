@@ -1367,6 +1367,25 @@
     },
     "play2": "Play",
     "pause2": "Pause",
-    "see": "See the case"
+    "see": "See the case",
+    "arch": {
+      "kicker": "Architecture",
+      "hint": "Point at a piece or focus it to see what it does and what it connects to, or follow the journey end to end.",
+      "follow": "Follow the journey",
+      "pause": "Pause",
+      "resume": "Go on",
+      "prev": "Previous step",
+      "next": "Next step",
+      "reset": "Show all",
+      "step": "Step",
+      "of": "of",
+      "sends": "Sends to",
+      "gets": "Gets from",
+      "planned": "Planned",
+      "text": "Read the diagram as text",
+      "pieces": "Pieces",
+      "links": "The journey",
+      "list": "Pieces of the diagram"
+    }
   }
 }

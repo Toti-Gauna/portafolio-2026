@@ -1367,6 +1367,25 @@
     },
     "play2": "Reproducir",
     "pause2": "Pausar",
-    "see": "Ver caso"
+    "see": "Ver caso",
+    "arch": {
+      "kicker": "Arquitectura",
+      "hint": "Pasá el puntero o el foco por una pieza para ver qué hace y con qué se conecta, o seguí el recorrido de punta a punta.",
+      "follow": "Seguir el recorrido",
+      "pause": "Pausar",
+      "resume": "Seguir",
+      "prev": "Paso anterior",
+      "next": "Paso siguiente",
+      "reset": "Ver todo",
+      "step": "Paso",
+      "of": "de",
+      "sends": "Envía a",
+      "gets": "Recibe de",
+      "planned": "Planificado",
+      "text": "Leer el diagrama como texto",
+      "pieces": "Piezas",
+      "links": "El recorrido",
+      "list": "Piezas del diagrama"
+    }
   }
 }
