@@ -25,7 +25,7 @@
 .pds .dsx-h { margin: 0; font-family: var(--family-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: currentColor; }
 .pds .dsx-gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; font-size: 15px; line-height: 1.4; color: currentColor; }
 .pds .dsx-gh b { font-weight: 700; }
-.pds .dsx-src { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; font-family: var(--family-mono); font-size: 12px; color: currentColor; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.pds .dsx-src { display: inline-flex; flex-wrap: wrap; align-items: center; max-width: 100%; overflow-wrap: anywhere; gap: 4px; min-height: 44px; font-family: var(--family-mono); font-size: 12px; color: currentColor; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pds .dsx-src code { font: inherit; }
 .pds .dsx-src:focus-visible, .pds .dsx-try:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 
@@ -33,7 +33,7 @@
 .dsx-specs { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
 @container (min-width: 760px) { .dsx-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .dsx-spec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-content: start; min-width: 0; padding: 16px; border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); border-radius: 14px; }
-.dsx-live { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; align-content: center; min-height: 96px; min-width: 0; overflow-x: auto; }
+.dsx-live { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: stretch; align-content: center; min-height: 96px; min-width: 0; overflow-x: auto; }
 .dsx-cap { display: grid; gap: 4px; font-size: 14px; line-height: 1.45; }
 .dsx-cap b { font-size: 15px; }
 

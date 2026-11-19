@@ -965,3 +965,108 @@ describe('v2 case objects (lote 5.3)', () => {
     }
   });
 });
+
+describe('v2 product design systems (lote 5.4)', () => {
+  const SLUGS = ['eclipse', 'volta', 'velmar', 'dentalos'] as const;
+  const NEG = { es: /\b(sin|no|nunca|todavía|falta|pendiente)\b/i, en: /\b(no|not|never|without|yet|missing|lack)\b|n't\b/i };
+  const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
+  const strings = (o: unknown): string[] => (typeof o === 'string' ? [o] : o && typeof o === 'object' ? Object.values(o).flatMap(strings) : []);
+
+  it('four products, each read from its own repo at one commit, the one its case links to', async () => {
+    const { CASES } = await import('../../v2/components/case/cases');
+    const { dsOf } = await import('../../v2/components/case/ds');
+    for (const slug of SLUGS) {
+      const ds = dsOf('es', slug)!;
+      expect(ds, slug).toBeTruthy();
+      expect(ds.spec.sha, slug).toMatch(/^[0-9a-f]{40}$/);
+      // the repo is Ignacio's own, and the one the case links to when it shows its code (Eclipse links its site)
+      expect(ds.spec.repo, slug).toMatch(/^Toti-Gauna\/[\w.-]+$/);
+      const code = CASES[slug].links.find((l) => l.kind === 'code')?.href.toLowerCase();
+      if (code) expect(code, slug).toBe(`https://github.com/${ds.spec.repo}`.toLowerCase());
+      // every block cites a file and its lines
+      const srcs = [...ds.spec.themes.map((t) => t.source), ...ds.spec.colors.map((g) => g.source), ...ds.spec.fonts.map((f) => f.source), ds.spec.scale.source, ...ds.spec.components.map((c) => c.source)];
+      for (const s of srcs) {
+        expect(s.path, slug).toMatch(/^[\w.\-/[\]]+$/);
+        expect(s.lines[0], slug).toBeGreaterThan(0);
+        expect(s.lines[1], slug).toBeGreaterThanOrEqual(s.lines[0]);
+        expect(s.match.length, slug).toBeGreaterThanOrEqual(6);
+      }
+    }
+    for (const slug of ['complia', 'tuenti', 'supernova', 'agentes', 'kinetic', 'games'] as const) expect(dsOf('es', slug), slug).toBeNull();
+  });
+
+  it('every token is defined in every theme, and every pair it promises holds in every theme', async () => {
+    const { dsOf } = await import('../../v2/components/case/ds');
+    const { contrast } = await import('../../v2/tokens/contrast');
+    for (const slug of SLUGS) {
+      const { spec } = dsOf('es', slug)!;
+      const used = new Set([...spec.colors.flatMap((g) => g.tokens), ...spec.pairs.flatMap((p) => [p.fg, p.bg])]);
+      expect(spec.pairs.length, slug).toBeGreaterThanOrEqual(3);
+      for (const t of spec.themes) {
+        for (const tk of used) expect(t.vars[tk], `${slug} ${t.id} ${tk}`).toBeTruthy();
+        for (const p of spec.pairs) {
+          expect(t.vars[p.fg], `${slug} ${t.id} ${p.fg}`).toMatch(/^#[0-9a-f]{3}([0-9a-f]{3})?$/i);
+          expect(t.vars[p.bg], `${slug} ${t.id} ${p.bg}`).toMatch(/^#[0-9a-f]{3}([0-9a-f]{3})?$/i);
+          expect(contrast(t.vars[p.fg], t.vars[p.bg]), `${slug} ${t.id} ${p.fg} on ${p.bg}`).toBeGreaterThanOrEqual(p.min);
+        }
+      }
+    }
+  });
+
+  it('the CSS stays inside its canvas, its fonts are on disk, and only transform and opacity move', async () => {
+    const { readFileSync, existsSync } = await import('node:fs');
+    const { dsOf } = await import('../../v2/components/case/ds');
+    const layout = readFileSync('app/v2/[locale]/layout.tsx', 'utf8');
+    for (const slug of SLUGS) {
+      const file = `app/v2/[locale]/ds/${slug}.css`;
+      expect(layout, slug).toContain(`./ds/${slug}.css`);
+      const css = readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+      // every rule's selectors start inside the product's canvas (at-rules aside)
+      const scopes = [`.pds[data-ds="${slug}"]`, `.pds[data-ds='${slug}']`];
+      const sels = [...css.replace(/@font-face\s*\{[^}]*\}/g, '').replace(/@keyframes[^{]+\{(?:[^{}]*\{[^}]*\})*\s*\}/g, '').matchAll(/([^{};]+)\{/g)].map((m) => m[1].trim()).filter((s) => !s.startsWith('@') && s);
+      for (const sel of sels) for (const one of sel.split(',')) expect(scopes.some((sc) => one.trim().startsWith(sc)), `${slug}: ${one.trim()}`).toBe(true);
+      expect(css, slug).not.toMatch(/infinite/);
+      for (const m of css.matchAll(/transition(?:-property)?\s*:\s*([^;]+);/g)) {
+        for (const part of m[1].split(/,(?![^(]*\))/)) {
+          const prop = part.trim().split(/\s+/)[0];
+          expect(['transform', 'opacity', 'none', 'translate', 'scale', 'rotate'], `${slug}: transition ${m[1]}`).toContain(prop);
+        }
+      }
+      // the fonts it declares exist, and every font of the spec is declared
+      const urls = [...css.matchAll(/url\('([^']+)'\)/g)].map((m) => m[1]);
+      for (const u of urls) expect(existsSync(`app/v2/[locale]/ds/${u}`), `${slug} ${u}`).toBe(true);
+      for (const f of dsOf('es', slug)!.spec.fonts) expect(css, `${slug} ${f.family}`).toMatch(new RegExp(`font-family:\\s*['"]?${f.family}['"]?`));
+      // nothing small
+      for (const m of css.matchAll(/font-size\s*:\s*(\d+(?:\.\d+)?)px/g)) expect(Number(m[1]), `${slug} font-size`).toBeGreaterThanOrEqual(12);
+    }
+  });
+
+  it('components are plain markup, and their words come from the copy in both languages', async () => {
+    const { dsOf } = await import('../../v2/components/case/ds');
+    for (const slug of SLUGS) {
+      const es = dsOf('es', slug)!, en = dsOf('en', slug)!;
+      expect(es.spec.components.length, slug).toBeGreaterThanOrEqual(4);
+      for (const c of es.spec.components) {
+        expect(c.html, `${slug} ${c.id}`).not.toMatch(/<script|<img|<iframe|\son\w+=|https?:\/\//i);
+        for (const m of c.html.matchAll(/\{\{(\w+)\}\}/g)) {
+          expect(es.copy.samples[m[1]], `${slug} es ${m[1]}`).toBeTruthy();
+          expect(en.copy.samples[m[1]], `${slug} en ${m[1]}`).toBeTruthy();
+        }
+        expect(es.copy.components[c.id]?.name, `${slug} ${c.id}`).toBeTruthy();
+        expect(words(es.copy.components[c.id].note), `${slug} ${c.id} note`).toBeLessThanOrEqual(18);
+        expect(words(en.copy.components[c.id].note), `${slug} ${c.id} note en`).toBeLessThanOrEqual(18);
+      }
+      const keys = (o: object): string[] => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' ? keys(v).map((x) => `${k}.${x}`) : [k])).sort();
+      expect(keys(en.copy), slug).toEqual(keys(es.copy));
+      for (const g of es.spec.colors) { expect(es.copy.groups[g.key], `${slug} ${g.key}`).toBeTruthy(); for (const tk of g.tokens) expect(es.copy.tokens[tk], `${slug} ${tk}`).toBeTruthy(); }
+      for (const t of es.spec.themes) expect(es.copy.themes[t.id], `${slug} ${t.id}`).toBeTruthy();
+      for (const f of es.spec.fonts) expect(es.copy.fonts[f.key]?.role, `${slug} ${f.key}`).toBeTruthy();
+      for (const [lang, d] of [['es', es], ['en', en]] as const) {
+        expect(words(d.copy.title), `${slug} ${lang} title`).toBeLessThanOrEqual(8);
+        expect(words(d.copy.line), `${slug} ${lang} line`).toBeLessThanOrEqual(25);
+        for (const v of Object.values(d.copy.tokens)) expect(words(v), `${slug} ${lang} token ${v}`).toBeLessThanOrEqual(6);
+        for (const s of strings(d.copy)) expect(s, `${slug} ${lang}`).not.toMatch(NEG[lang]);
+      }
+    }
+  });
+});

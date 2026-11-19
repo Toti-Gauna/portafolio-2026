@@ -13,6 +13,7 @@ import './arch.css';
 import './obj.css';
 import './dsx.css';
 import './ds/eclipse.css';
+import './ds/volta.css';
 import './ds/velmar.css';
 import './ds/dentalos.css';
 import type { Metadata, Viewport } from 'next';
