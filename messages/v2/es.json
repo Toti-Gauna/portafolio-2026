@@ -1387,6 +1387,26 @@
       "links": "El recorrido",
       "list": "Piezas del diagrama"
     },
-    "objAlt": "Objeto que explica"
+    "objAlt": "Objeto que explica",
+    "ds": {
+      "kicker": "Sistema de diseño",
+      "theme": "Tema",
+      "repo": "Leído de",
+      "components": "Componentes",
+      "color": "Color",
+      "type": "Tipografía",
+      "shape": "Forma y movimiento",
+      "pairs": "Pares de contraste que cumple",
+      "radius": "Radios",
+      "space": "Espacio",
+      "motion": "Movimiento",
+      "try": "Probar",
+      "source": "Fuente",
+      "lines": "líneas",
+      "newTab": "se abre en una pestaña nueva",
+      "weights": "Pesos",
+      "on": "sobre",
+      "dec": ","
+    }
   }
 }

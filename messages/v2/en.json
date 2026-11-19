@@ -1387,6 +1387,26 @@
       "links": "The journey",
       "list": "Pieces of the diagram"
     },
-    "objAlt": "An object that explains"
+    "objAlt": "An object that explains",
+    "ds": {
+      "kicker": "Design system",
+      "theme": "Theme",
+      "repo": "Read from",
+      "components": "Components",
+      "color": "Color",
+      "type": "Type",
+      "shape": "Shape and motion",
+      "pairs": "Contrast pairs it keeps",
+      "radius": "Radii",
+      "space": "Space",
+      "motion": "Motion",
+      "try": "Try",
+      "source": "Source",
+      "lines": "lines",
+      "newTab": "opens in a new tab",
+      "weights": "Weights",
+      "on": "on",
+      "dec": "."
+    }
   }
 }
