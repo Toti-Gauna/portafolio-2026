@@ -15,6 +15,8 @@ import { archOf } from './arch/archs';
 import { CaseArch } from './arch/CaseArch';
 import { CaseFilm } from './CaseFilm';
 import { CaseHow } from './objects/CaseHow';
+import { CaseDs } from './ds/CaseDs';
+import { dsOf } from './ds';
 import { objectArt } from './objects/object-art';
 import { CASES, type CaseMedia, type CaseSlug, nextCase } from './cases';
 import { caseCopy } from './copy';
@@ -53,6 +55,7 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
   const workHref = sitePath(locale, 'work/');
   const art = archOf(slug), arch = archCopy(locale, slug);
   const obj = objectArt(slug, c.how.length);
+  const ds = dsOf(locale, slug);
 
   return (
     <>
@@ -104,6 +107,17 @@ export function CasePage({ locale, slug }: { locale: V2Locale; slug: CaseSlug })
                 <p>{arch.caption}</p>
               </div>
               <CaseArch art={art} copy={arch} labels={L.arch} color={def.color} />
+            </section>
+          )}
+
+          {ds && (
+            <section className="cs2-sec" aria-labelledby="cs-ds">
+              <div className="cs2-arch-head" data-reveal>
+                <p className="cs2-arch-k">{L.ds.kicker}</p>
+                <h2 id="cs-ds" className="cs2-h">{ds.copy.title}</h2>
+                <p>{ds.copy.line}</p>
+              </div>
+              <CaseDs slug={slug} spec={ds.spec} copy={ds.copy} labels={L.ds} />
             </section>
           )}
 

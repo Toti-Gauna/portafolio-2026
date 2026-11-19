@@ -1,0 +1,415 @@
+/*
+ * Volta · el sistema «BOX» (Toti-Gauna/supplements-ecommerce @ 0ae34dd), reconstruido para la página del caso.
+ * Todo bajo .pds[data-ds="volta"]; los colores son las variables del tema activo, que el componente escribe en la raíz.
+ * Fuentes del repo: Big Shoulders Display (titulares de póster), Archivo (texto) y JetBrains Mono (rótulos y datos).
+ * Formas rectas de 0 a 4 px (app/globals.css). Se mueve solo transform y opacity; los cambios de color son instantáneos.
+ */
+
+@font-face {
+  font-family: 'ds-volta-display';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../../../../public/trailer/fonts/volta/big-shoulders-display-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ds-volta-sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url('../../../../public/trailer/fonts/Archivo-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ds-volta-mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('../../../../public/trailer/fonts/JetBrainsMono-latin.woff2') format('woff2');
+}
+
+/* El lienzo: fondo y texto del tema (par AA medido en los cuatro temas). */
+.pds[data-ds="volta"] {
+  background: var(--brand-background);
+  color: var(--brand-text);
+  font-family: 'ds-volta-sans', sans-serif;
+  font-feature-settings: "ss01", "ss02", "tnum" 0;
+}
+
+/* ── Utilidades del sistema (app/globals.css, app/box.css) ── */
+.pds[data-ds="volta"] .vt-display {
+  font-family: 'ds-volta-display', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.pds[data-ds="volta"] .vt-eyebrow {
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.pds[data-ds="volta"] .vt-muted { color: var(--brand-muted); }
+.pds[data-ds="volta"] .vt-ink { color: var(--brand-text); }
+/* Placa de acero cepillado con bisel. */
+.pds[data-ds="volta"] .vt-plate {
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--brand-text) 2.5%, transparent) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, color-mix(in oklab, var(--brand-surface), var(--brand-text) 7%), var(--brand-surface));
+  box-shadow: inset 1px 1px 0 color-mix(in srgb, var(--brand-text) 10%, transparent), inset -1px -1px 0 rgb(0 0 0 / 0.35);
+}
+/* Piso de caucho: grano fino y carriles de tiza muy tenues. */
+.pds[data-ds="volta"] .vt-floor {
+  background-color: var(--c-night);
+  background-image:
+    radial-gradient(rgb(255 255 255 / 0.035) 0.6px, transparent 0.8px),
+    linear-gradient(90deg, rgb(242 240 234 / 0.045) 1px, transparent 1px);
+  background-size: 5px 5px, 120px 100%;
+}
+/* Foco del producto: 2,5 px en el primario, separado 3 px. */
+.pds[data-ds="volta"] :focus-visible {
+  outline: 2.5px solid var(--brand-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.pds[data-ds="volta"] .vt-ico {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Botones (Button.tsx): rectos, rótulo en mono mayúscula y golpe seco al apretar ── */
+.pds[data-ds="volta"] .vt-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.pds[data-ds="volta"] .vt-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 2px;
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+.pds[data-ds="volta"] .vt-btn:active { transform: translateY(1px); }
+.pds[data-ds="volta"] .vt-btn-lg { min-height: 56px; padding: 0 28px; font-size: 14px; }
+.pds[data-ds="volta"] .vt-btn-sm { min-height: 44px; padding: 0 14px; font-size: 12px; }
+/* Primario: placa llena con filo de luz arriba y canto oscuro abajo. */
+.pds[data-ds="volta"] .vt-btn-primary {
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), inset 0 -3px 0 rgb(0 0 0 / 0.28);
+}
+.pds[data-ds="volta"] .vt-btn-primary:hover { background: var(--brand-primary-hover); }
+/* Secundario: placa de acero con filo fino. */
+.pds[data-ds="volta"] .vt-btn-secondary {
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--brand-text) 2.5%, transparent) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, color-mix(in oklab, var(--brand-surface), var(--brand-text) 7%), var(--brand-surface));
+  box-shadow: inset 1px 1px 0 color-mix(in srgb, var(--brand-text) 10%, transparent), inset -1px -1px 0 rgb(0 0 0 / 0.35);
+  border: 1px solid var(--brand-border);
+  color: var(--brand-text);
+}
+.pds[data-ds="volta"] .vt-btn-secondary:hover { border-color: color-mix(in srgb, var(--brand-text) 50%, transparent); }
+
+/* ── Campo (Field.tsx): rótulo mono, hundido arriba y la línea de voltio al enfocar ── */
+.pds[data-ds="volta"] .vt-field { display: flex; flex-direction: column; gap: 6px; max-width: 28rem; }
+.pds[data-ds="volta"] .vt-label {
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-text);
+}
+.pds[data-ds="volta"] .vt-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--brand-border);
+  border-radius: 2px;
+  background: var(--brand-surface);
+  color: var(--brand-text);
+  font: inherit;
+  font-size: 16px;
+  box-shadow: inset 0 2px 0 rgb(0 0 0 / 0.12);
+}
+.pds[data-ds="volta"] .vt-input::placeholder { color: color-mix(in srgb, var(--brand-muted) 70%, transparent); opacity: 1; }
+.pds[data-ds="volta"] .vt-input:hover { border-color: color-mix(in srgb, var(--brand-text) 40%, transparent); }
+.pds[data-ds="volta"] .vt-input:focus { border-color: var(--c-volt-ink); outline: none; }
+.pds[data-ds="volta"] .vt-input:focus-visible { outline: none; box-shadow: inset 0 -2px 0 var(--c-volt-ink); }
+
+/* ── Control segmentado (SegmentedTabs.tsx + TabIndicator.tsx): la marca de noche con filo de voltio se desliza ── */
+.pds[data-ds="volta"] .vt-seg {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  padding: 4px;
+  border: 1px solid var(--brand-border);
+  border-radius: 2px;
+  background: var(--brand-surface);
+}
+.pds[data-ds="volta"] .vt-tabs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pds[data-ds="volta"] .vt-ind { position: absolute; inset: 0; pointer-events: none; }
+.pds[data-ds="volta"] .vt-ind-run {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: calc(100% / 3);
+  transition: transform 380ms cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.pds[data-ds="volta"] .vt-tabs:has(.vt-tab-2[aria-selected="true"]) .vt-ind-run { transform: translateX(100%); }
+.pds[data-ds="volta"] .vt-tabs:has(.vt-tab-3[aria-selected="true"]) .vt-ind-run { transform: translateX(200%); }
+.pds[data-ds="volta"] .vt-ind-mark {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--c-night);
+  box-shadow: 0 0 0 1px var(--brand-volt);
+}
+.pds[data-ds="volta"] .vt-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--brand-muted);
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+}
+.pds[data-ds="volta"] .vt-tab:hover { color: var(--brand-text); }
+.pds[data-ds="volta"] .vt-tab[aria-selected="true"] { color: var(--brand-on-night); }
+
+/* ── Marcador LED (Led.tsx): 7 segmentos; los apagados quedan tenues, los prendidos brillan de noche ── */
+.pds[data-ds="volta"] .vt-led { display: block; height: 20px; width: auto; max-width: 100%; overflow: visible; }
+.pds[data-ds="volta"] .vt-led .off { fill: currentColor; opacity: var(--led-off); }
+.pds[data-ds="volta"] .vt-led .on { fill: currentColor; }
+.pds[data-ds="volta"] .vt-tone-chalk { color: var(--led-chalk); }
+.pds[data-ds="volta"] .vt-tone-volt { color: var(--led-volt); }
+.pds[data-ds="volta"] .vt-led.vt-tone-chalk .on { filter: drop-shadow(0 0 var(--led-glow) color-mix(in srgb, var(--led-chalk) 55%, transparent)); }
+.pds[data-ds="volta"] .vt-led.vt-tone-volt .on { filter: drop-shadow(0 0 var(--led-glow) color-mix(in srgb, var(--led-volt) 55%, transparent)); }
+.pds[data-ds="volta"] .vt-sign {
+  font-family: 'ds-volta-display', sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  padding-bottom: 0.08em;
+}
+
+/* La tira del marcador (SheetScore.tsx): placas que encastran, separadas por la luz entre placas. */
+.pds[data-ds="volta"] .vt-score-box { container-type: inline-size; max-width: 36rem; }
+.pds[data-ds="volta"] .vt-score {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--brand-border);
+  border-radius: 2px;
+  background: var(--brand-border);
+}
+@container (min-width: 420px) {
+  .pds[data-ds="volta"] .vt-score { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.pds[data-ds="volta"] .vt-cell { display: flex; min-width: 0; flex-direction: column; gap: 8px; padding: 10px 12px; background: var(--brand-surface); }
+.pds[data-ds="volta"] .vt-lab {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'ds-volta-mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+.pds[data-ds="volta"] .vt-dd { display: flex; min-width: 0; align-items: flex-end; gap: 4px; margin: 0; }
+.pds[data-ds="volta"] .vt-dd .vt-sign { font-size: 16px; }
+.pds[data-ds="volta"] .vt-unit {
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--brand-muted);
+}
+
+/* ── Ficha de rack (ProductCard.tsx) ── */
+.pds[data-ds="volta"] .vt-card-box { container-type: inline-size; max-width: 20rem; }
+.pds[data-ds="volta"] .vt-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--brand-border);
+  background: var(--brand-surface);
+  box-shadow: var(--sh-card);
+}
+.pds[data-ds="volta"] .vt-card:hover { box-shadow: var(--sh-lift); }
+.pds[data-ds="volta"] .vt-card-head { display: flex; height: 28px; align-items: center; justify-content: space-between; gap: 8px; margin: 0; padding: 0 10px; }
+.pds[data-ds="volta"] .vt-card-brand {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+.pds[data-ds="volta"] .vt-card-body { display: flex; flex: 1; flex-direction: column; gap: 10px; padding: 12px; }
+.pds[data-ds="volta"] .vt-card-name { margin: 0; font-size: 1.125rem; line-height: 0.95; }
+.pds[data-ds="volta"] .vt-card-price { display: flex; align-items: flex-end; gap: 6px; margin-top: 4px; }
+.pds[data-ds="volta"] .vt-card-price .vt-sign { font-size: 16px; }
+.pds[data-ds="volta"] .vt-card-price .vt-led { height: 1.15rem; }
+.pds[data-ds="volta"] .vt-mini {
+  margin: 2px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  color: var(--brand-muted);
+}
+.pds[data-ds="volta"] .vt-mini-gap { margin-top: 6px; }
+/* Sellos del rótulo, estampados como con tiza. */
+.pds[data-ds="volta"] .vt-stamps { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.pds[data-ds="volta"] .vt-stamps li {
+  padding: 2px 6px;
+  border: 1px solid color-mix(in srgb, var(--brand-text) 25%, transparent);
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pds[data-ds="volta"] .vt-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--brand-border);
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+}
+.pds[data-ds="volta"] .vt-stock { display: flex; min-width: 0; align-items: center; gap: 8px; }
+/* Una luz por variante, como el tablero de un rack. */
+.pds[data-ds="volta"] .vt-lights { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.pds[data-ds="volta"] .vt-light { display: block; width: 8px; height: 8px; }
+.pds[data-ds="volta"] .vt-light[data-light="ok"] { background: var(--c-success); box-shadow: 0 0 6px color-mix(in srgb, var(--c-success) 70%, transparent); }
+.pds[data-ds="volta"] .vt-light[data-light="low"] { background: var(--c-warning); box-shadow: 0 0 6px color-mix(in srgb, var(--c-warning) 70%, transparent); }
+.pds[data-ds="volta"] .vt-light[data-light="out"] { background: transparent; box-shadow: inset 0 0 0 1px var(--c-danger); }
+.pds[data-ds="volta"] .vt-add {
+  position: relative;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 0;
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+  box-shadow: inset 0 -3px 0 rgb(0 0 0 / 0.25);
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.pds[data-ds="volta"] .vt-add:hover { background: var(--brand-primary-hover); }
+.pds[data-ds="volta"] .vt-add:active { transform: translateY(1px); }
+.pds[data-ds="volta"] .vt-add .vt-ico { width: 15px; height: 15px; }
+.pds[data-ds="volta"] .vt-add-in { display: flex; align-items: center; gap: 6px; }
+.pds[data-ds="volta"] .vt-add-price { display: none; font-variant-numeric: tabular-nums; }
+@container (min-width: 300px) {
+  .pds[data-ds="volta"] .vt-card-body { padding: 16px; }
+  .pds[data-ds="volta"] .vt-card-name { font-size: 1.4rem; }
+  .pds[data-ds="volta"] .vt-card-price .vt-sign { font-size: 20px; }
+  .pds[data-ds="volta"] .vt-card-price .vt-led { height: 2rem; }
+  .pds[data-ds="volta"] .vt-add { justify-content: space-between; }
+  .pds[data-ds="volta"] .vt-add-price { display: inline; }
+}
+
+/* ── Cupón como ticket de acceso del box (CouponTicket.tsx) ── */
+.pds[data-ds="volta"] .vt-ticket {
+  position: relative;
+  display: flex;
+  min-height: 7.5rem;
+  max-width: 30rem;
+  overflow: hidden;
+  border: 1px solid var(--brand-border);
+  border-radius: 2px;
+  background: var(--brand-surface);
+  box-shadow: var(--sh-card);
+}
+.pds[data-ds="volta"] .vt-stub {
+  position: relative;
+  display: grid;
+  width: 6.5rem;
+  flex-shrink: 0;
+  place-items: center;
+  overflow: hidden;
+  padding: 0 8px;
+  text-align: center;
+  color: var(--brand-on-night);
+}
+/* El filo de temporada: la única pieza que una fecha puede teñir. */
+.pds[data-ds="volta"] .vt-stub-season { position: absolute; inset-inline: 0; top: 0; height: 4px; background: var(--season-accent); }
+.pds[data-ds="volta"] .vt-stub-in { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pds[data-ds="volta"] .vt-stub-val { font-size: 1.45rem; line-height: 1; color: var(--brand-volt); }
+.pds[data-ds="volta"] .vt-stub-off { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: var(--brand-night-muted); }
+.pds[data-ds="volta"] .vt-perf { position: relative; width: 0; }
+.pds[data-ds="volta"] .vt-notch { position: absolute; left: -8px; width: 16px; height: 16px; background: var(--brand-background); transform: rotate(45deg); }
+.pds[data-ds="volta"] .vt-notch-t { top: -8px; }
+.pds[data-ds="volta"] .vt-notch-b { bottom: -8px; }
+.pds[data-ds="volta"] .vt-dash { position: absolute; inset-block: 16px; left: 0; border-left: 2px dashed var(--brand-border); }
+.pds[data-ds="volta"] .vt-ticket-body { display: flex; min-width: 0; flex: 1; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 16px 16px 16px 20px; }
+.pds[data-ds="volta"] .vt-ticket-text { min-width: 0; }
+.pds[data-ds="volta"] .vt-ticket-desc { margin: 0; font-weight: 700; line-height: 1.375; }
+.pds[data-ds="volta"] .vt-ticket-code {
+  margin: 2px 0 0;
+  font-family: 'ds-volta-mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--brand-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pds[data-ds="volta"] .vt-ind-run { transition: none; }
+  .pds[data-ds="volta"] .vt-btn:active,
+  .pds[data-ds="volta"] .vt-add:active { transform: none; }
+}
