@@ -1,0 +1,192 @@
+/*
+ * Velmar (Toti-Gauna/velmar-ecommerce- @ aac5aed): the shop's components, rebuilt from its Tailwind classes
+ * (src/components/atoms, src/components/molecules) as plain CSS. Colours come only from the theme variables the page
+ * writes on .pds (the repo's own names: --brand-*, --c-*, --studio-*). Fonts: the OFL files in public/trailer/fonts/velmar.
+ * Motion: only transform and opacity, finite; colour changes on hover are instant.
+ */
+@font-face { font-family: 'ds-velmar-display'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('../../../../public/trailer/fonts/velmar/fraunces-latin-opsz-normal.woff2') format('woff2'); }
+@font-face { font-family: 'ds-velmar-display'; font-style: italic; font-weight: 100 900; font-display: swap; src: url('../../../../public/trailer/fonts/velmar/fraunces-latin-opsz-italic.woff2') format('woff2'); }
+@font-face { font-family: 'ds-velmar-sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url('../../../../public/trailer/fonts/velmar/manrope-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'ds-velmar-script'; font-style: normal; font-weight: 600; font-display: swap; src: url('../../../../public/trailer/fonts/velmar/caveat-latin-600-normal.woff2') format('woff2'); }
+
+.pds[data-ds="velmar"] {
+  background: var(--brand-background);
+  color: var(--brand-text);
+  /* app/globals.css @theme: --ease-out-expo; --sh-card / --sh-lift tinted with the theme's night */
+  --vm-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --vm-sh-card: 0 1px 2px color-mix(in srgb, var(--c-night) 4%, transparent), 0 18px 40px -22px color-mix(in srgb, var(--c-night) 28%, transparent);
+  --vm-sh-lift: 0 2px 4px color-mix(in srgb, var(--c-night) 5%, transparent), 0 30px 60px -28px color-mix(in srgb, var(--c-night) 40%, transparent);
+}
+.pds[data-ds="velmar"][data-scheme="dark"] {
+  --vm-sh-card: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -22px rgb(0 0 0 / 0.75);
+  --vm-sh-lift: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 30px 60px -24px rgb(0 0 0 / 0.9);
+}
+
+/* Base of every specimen: Manrope with its stylistic sets, the store's focus ring (globals.css :focus-visible). */
+.pds[data-ds="velmar"] .vm {
+  font-family: 'ds-velmar-sans', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  color: var(--brand-text);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.pds[data-ds="velmar"] .vm *, .pds[data-ds="velmar"] .vm *::before, .pds[data-ds="velmar"] .vm *::after { box-sizing: border-box; }
+/* resets without weight (:where), so each component class decides */
+.pds[data-ds="velmar"] :where(.vm button) { font: inherit; cursor: pointer; margin: 0; }
+.pds[data-ds="velmar"] :where(.vm p) { margin: 0; }
+.pds[data-ds="velmar"] .vm :focus-visible { outline: 2.5px solid var(--brand-primary); outline-offset: 3px; }
+
+/* ---------- Buttons (atoms/Button.tsx): pill, bold, active scale .98, sheen on hover ---------- */
+.pds[data-ds="velmar"] .vm-actions { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 22rem; }
+.pds[data-ds="velmar"] .vm-btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 3.5rem; padding: 0 2rem; border: 0; border-radius: 9999px;
+  font-size: 1rem; font-weight: 700; letter-spacing: -0.005em; user-select: none;
+  transition: transform 200ms var(--vm-ease);
+}
+.pds[data-ds="velmar"] .vm-btn svg { flex: none; }
+.pds[data-ds="velmar"] .vm-btn:active { transform: scale(0.98); }
+.pds[data-ds="velmar"] .vm-btn--primary {
+  background: var(--brand-primary); color: var(--brand-on-primary);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 10px 24px -12px rgb(58 69 39 / 0.7);
+}
+.pds[data-ds="velmar"] .vm-btn--primary:hover { background: var(--brand-primary-hover); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), 0 16px 30px -12px rgb(58 69 39 / 0.75); }
+.pds[data-ds="velmar"] .vm-btn--dark { background: var(--c-night); color: #f6f1e8; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08); }
+.pds[data-ds="velmar"] .vm-btn--dark:hover { background: var(--c-night-2); }
+.pds[data-ds="velmar"] .vm-btn--secondary { background: var(--brand-surface); color: var(--brand-text); border: 1px solid color-mix(in srgb, var(--brand-text) 15%, transparent); }
+.pds[data-ds="velmar"] .vm-btn--secondary:hover { border-color: color-mix(in srgb, var(--brand-text) 30%, transparent); background: color-mix(in srgb, var(--brand-accent) 40%, var(--brand-surface)); }
+.pds[data-ds="velmar"] .vm-brass { display: inline-flex; color: var(--color-brass); }
+.pds[data-ds="velmar"] .vm-brass-ink { display: inline-flex; color: var(--c-brass-ink); }
+/* SHEEN: a light band crosses the primary and the dark button once per hover (moved with transform). */
+.pds[data-ds="velmar"] .vm-btn--primary::after, .pds[data-ds="velmar"] .vm-btn--dark::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.22) 50%, transparent 70%);
+  transform: translateX(-100%);
+}
+.pds[data-ds="velmar"] .vm-btn--primary:hover::after, .pds[data-ds="velmar"] .vm-btn--dark:hover::after { transform: translateX(100%); transition: transform 700ms var(--vm-ease); }
+
+/* ---------- Product card (molecules/ProductCard.tsx + app/motion.css) ---------- */
+.pds[data-ds="velmar"] .vm-card { position: relative; display: flex; flex-direction: column; gap: 0.75rem; width: 100%; max-width: 18rem; }
+.pds[data-ds="velmar"] .vm-card-media {
+  position: relative; overflow: hidden; border-radius: 1.75rem; background: var(--brand-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-primary) 18%, transparent), var(--vm-sh-card);
+  transition: transform 500ms var(--vm-ease);
+}
+@media (hover: hover) { .pds[data-ds="velmar"] .vm-card:hover .vm-card-media { transform: translateY(-4px); } }
+.pds[data-ds="velmar"] .vm-card:active .vm-card-media { transform: scale(0.985); transition-duration: 160ms; }
+.pds[data-ds="velmar"] .vm-card-visual { overflow: hidden; border-radius: 1.75rem; }
+.pds[data-ds="velmar"] .vm-art { position: relative; aspect-ratio: 4 / 5; overflow: hidden; transition: transform 900ms var(--vm-ease); }
+.pds[data-ds="velmar"] .vm-card:hover .vm-art { transform: scale(1.04); }
+.pds[data-ds="velmar"] .vm-art-svg { display: block; width: 100%; height: 100%; }
+.pds[data-ds="velmar"] .vm-art-tag {
+  position: absolute; left: 0.625rem; bottom: 0.625rem; padding: 0.125rem 0.5rem; border-radius: 9999px;
+  background: rgb(255 253 248 / 0.92); color: #5d6050; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.pds[data-ds="velmar"] .vm-card-tags { position: absolute; left: 0.75rem; top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.375rem; }
+.pds[data-ds="velmar"] .vm-tag { padding: 0.25rem 0.625rem; border-radius: 9999px; font-size: 12px; font-weight: 700; }
+.pds[data-ds="velmar"] .vm-tag--light { background: rgb(255 253 248 / 0.95); color: #1c2016; }
+.pds[data-ds="velmar"] .vm-quick {
+  position: absolute; right: 0.75rem; bottom: 0.75rem; z-index: 1;
+  display: flex; align-items: center; gap: 0.5rem; height: 2.75rem; padding: 0 0.875rem; border: 0; border-radius: 9999px;
+  background: #fffdf8; color: #1c2016; font-size: 0.875rem; font-weight: 700; box-shadow: var(--vm-sh-card);
+  transition: transform 300ms var(--vm-ease);
+}
+.pds[data-ds="velmar"] .vm .vm-quick:hover { background: var(--brand-primary); color: var(--brand-on-primary); }
+.pds[data-ds="velmar"] .vm-quick:active { transform: scale(0.96); }
+/* below lg the label is for screen readers only (max-lg:sr-only): the pill keeps its icon, 44 px */
+.pds[data-ds="velmar"] .vm-quick span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.pds[data-ds="velmar"] .vm-card-body { display: flex; flex-direction: column; gap: 0.25rem; padding: 0 0.25rem; }
+.pds[data-ds="velmar"] .vm-card-name { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.375; color: var(--brand-text); }
+.pds[data-ds="velmar"] .vm-card-price { font-size: 1.125rem; font-weight: 800; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.pds[data-ds="velmar"] .vm-from { margin-right: 0.25rem; font-size: 0.75rem; font-weight: 600; color: var(--brand-muted); }
+.pds[data-ds="velmar"] .vm-card-note { font-size: 13px; color: var(--brand-muted); }
+.pds[data-ds="velmar"] .vm-card-dots { display: flex; gap: 0.375rem; padding: 0 0.25rem; }
+.pds[data-ds="velmar"] .vm-card-dots span { width: 0.875rem; height: 0.875rem; border-radius: 9999px; border: 1px solid rgb(0 0 0 / 0.1); }
+
+/* ---------- Variant picker (molecules/VariantPicker.tsx): swatches and pills; the chosen one turns night ---------- */
+.pds[data-ds="velmar"] .vm-pick { display: flex; flex-direction: column; width: 100%; max-width: 26rem; }
+.pds[data-ds="velmar"] .vm-legend { margin-bottom: 0.75rem; font-size: 0.875rem; font-weight: 700; }
+.pds[data-ds="velmar"] .vm-legend:not(:first-child) { margin-top: 1.25rem; }
+.pds[data-ds="velmar"] .vm-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pds[data-ds="velmar"] .vm-sw {
+  display: grid; place-items: center; width: 3rem; height: 3rem; padding: 0; border: 0; border-radius: 9999px; background: transparent;
+}
+.pds[data-ds="velmar"] .vm-sw span { width: 2.25rem; height: 2.25rem; border-radius: 9999px; border: 1px solid rgb(0 0 0 / 0.1); box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.05); }
+.pds[data-ds="velmar"] .vm-sw[aria-checked="true"] { box-shadow: 0 0 0 2px var(--brand-background), 0 0 0 4px var(--brand-primary); }
+.pds[data-ds="velmar"] .vm-opt {
+  min-height: 3rem; padding: 0 1.25rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 700; color: var(--brand-text);
+  border: 1px solid color-mix(in srgb, var(--brand-text) 15%, transparent); background: var(--brand-surface);
+}
+.pds[data-ds="velmar"] .vm .vm-opt:hover { border-color: color-mix(in srgb, var(--brand-text) 35%, transparent); }
+.pds[data-ds="velmar"] .vm .vm-opt[aria-checked="true"] { background: var(--c-night); border-color: var(--c-night); color: #f6f1e8; }
+
+/* ---------- Fields (atoms/Field.tsx inputClass + atoms/Select.tsx; chevron = globals.css --chevron) ---------- */
+.pds[data-ds="velmar"] .vm-form { display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 24rem; }
+.pds[data-ds="velmar"] .vm-field { display: flex; flex-direction: column; gap: 0.375rem; }
+.pds[data-ds="velmar"] .vm-field label { font-size: 0.875rem; font-weight: 700; color: var(--brand-text); }
+.pds[data-ds="velmar"] .vm-input {
+  width: 100%; min-height: 3rem; padding: 0 1rem; border-radius: 1rem; margin: 0;
+  border: 1px solid color-mix(in srgb, var(--brand-text) 12%, transparent); background: var(--brand-surface); color: var(--brand-text);
+  font: inherit; font-size: 1rem; box-shadow: inset 0 1px 2px rgb(28 32 22 / 0.04);
+}
+.pds[data-ds="velmar"] .vm-input:hover { border-color: color-mix(in srgb, var(--brand-text) 25%, transparent); }
+.pds[data-ds="velmar"] .vm .vm-input:focus { outline: none; border-color: var(--brand-primary); }
+.pds[data-ds="velmar"] .vm .vm-input:focus-visible { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-primary) 12%, transparent); }
+.pds[data-ds="velmar"] .vm-hint { font-size: 0.75rem; color: var(--brand-muted); }
+.pds[data-ds="velmar"] .vm-select { position: relative; display: block; }
+.pds[data-ds="velmar"] .vm-select select { appearance: none; -webkit-appearance: none; padding-right: 2.6rem; font-weight: 600; cursor: pointer; }
+.pds[data-ds="velmar"] .vm-select select option { background: var(--brand-surface); color: var(--brand-text); }
+.pds[data-ds="velmar"] .vm-select::after {
+  content: ""; position: absolute; right: 0.95rem; top: 50%; width: 1rem; height: 1rem; margin-top: -0.5rem; pointer-events: none;
+  background: var(--brand-primary);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ---------- Coupon ticket (molecules/CouponTicket.tsx): night stub, gold guilloché, perforation, apply ---------- */
+.pds[data-ds="velmar"] .vm-ticket {
+  position: relative; display: flex; width: 100%; max-width: 26rem; min-height: 7.5rem; overflow: hidden;
+  border-radius: 1.4rem; background: var(--brand-surface); box-shadow: var(--vm-sh-card);
+}
+.pds[data-ds="velmar"] .vm-ticket-stub {
+  position: relative; display: grid; place-items: center; flex: none; width: 6.5rem; padding: 0 0.5rem; overflow: hidden;
+  background: var(--c-night); color: #f6f1e8; text-align: center;
+}
+.pds[data-ds="velmar"] .vm-gui { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.4; }
+.pds[data-ds="velmar"] .vm-ticket-val { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.pds[data-ds="velmar"] .vm-ticket-num {
+  font-family: 'ds-velmar-display', 'Iowan Old Style', Georgia, serif; font-variation-settings: "opsz" 144; font-weight: 420; letter-spacing: -0.02em;
+  font-size: 1.45rem; line-height: 1; color: var(--color-brass);
+}
+.pds[data-ds="velmar"] .vm-ticket-off { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: #cfc6b3; }
+.pds[data-ds="velmar"] .vm-ticket-perf { position: relative; width: 0; }
+.pds[data-ds="velmar"] .vm-ticket-perf span { position: absolute; left: -0.75rem; width: 1.5rem; height: 1.5rem; border-radius: 9999px; background: var(--brand-background); }
+.pds[data-ds="velmar"] .vm-ticket-perf span:first-child { top: -0.75rem; }
+.pds[data-ds="velmar"] .vm-ticket-perf span:nth-child(2) { bottom: -0.75rem; }
+.pds[data-ds="velmar"] .vm-ticket-perf i { position: absolute; top: 1rem; bottom: 1rem; left: 0; border-left: 2px dashed var(--brand-border); }
+.pds[data-ds="velmar"] .vm-ticket-body { display: flex; flex: 1; min-width: 0; flex-direction: column; justify-content: space-between; gap: 0.5rem; padding: 1rem 1rem 1rem 1.25rem; }
+.pds[data-ds="velmar"] .vm-ticket-desc { font-weight: 700; line-height: 1.375; }
+.pds[data-ds="velmar"] .vm-ticket-code { margin-top: 0.125rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; color: var(--brand-muted); }
+.pds[data-ds="velmar"] .vm-btn--sm { align-self: flex-start; min-height: 2.75rem; padding: 0 1rem; font-size: 0.875rem; }
+.pds[data-ds="velmar"] .vm-applied { display: none; align-items: center; gap: 0.375rem; }
+.pds[data-ds="velmar"] .vm-btn--sm[aria-pressed="true"] { background: var(--c-success-soft); color: var(--c-success); box-shadow: none; }
+.pds[data-ds="velmar"] .vm-btn--sm[aria-pressed="true"]::after { display: none; }
+.pds[data-ds="velmar"] .vm-btn--sm[aria-pressed="true"] .vm-apply { display: none; }
+.pds[data-ds="velmar"] .vm-btn--sm[aria-pressed="true"] .vm-applied { display: inline-flex; }
+
+/* ---------- Status badges (atoms/Badge.tsx + molecules/StatusBadge.tsx): icon + text, never colour alone ---------- */
+.pds[data-ds="velmar"] .vm-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; max-width: 30rem; }
+.pds[data-ds="velmar"] .vm-badge {
+  display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.125rem 0.625rem; border-radius: 9999px;
+  font-size: 0.75rem; font-weight: 700; line-height: 1.5;
+}
+.pds[data-ds="velmar"] .vm-badge--brand { background: var(--brand-primary); color: var(--brand-on-primary); }
+.pds[data-ds="velmar"] .vm-badge--success { background: var(--c-success-soft); color: var(--c-success); }
+.pds[data-ds="velmar"] .vm-badge--warning { background: var(--c-warning-soft); color: var(--c-warning); }
+.pds[data-ds="velmar"] .vm-badge--demo { background: var(--c-warning-soft); color: var(--c-warning); border: 1px dashed var(--c-warning); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pds[data-ds="velmar"] .vm, .pds[data-ds="velmar"] .vm *, .pds[data-ds="velmar"] .vm *::after { transition: none !important; }
+  .pds[data-ds="velmar"] .vm-card:hover .vm-card-media, .pds[data-ds="velmar"] .vm-card:hover .vm-art { transform: none; }
+}

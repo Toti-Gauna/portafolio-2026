@@ -4,6 +4,9 @@ import type { DsCopy, DsSpec } from './types';
 import { DS as eclipse } from './eclipse';
 import esEclipse from '@/messages/v2/ds/es/eclipse.json';
 import enEclipse from '@/messages/v2/ds/en/eclipse.json';
+import { DS as velmar } from './velmar';
+import esVelmar from '@/messages/v2/ds/es/velmar.json';
+import enVelmar from '@/messages/v2/ds/en/velmar.json';
 import { DS as dentalos } from './dentalos';
 import esDentalos from '@/messages/v2/ds/es/dentalos.json';
 import enDentalos from '@/messages/v2/ds/en/dentalos.json';
@@ -11,6 +14,7 @@ import enDentalos from '@/messages/v2/ds/en/dentalos.json';
 /** The products whose design system the case shows (lote 5.4): data in ds/<slug>.ts, words in messages/v2/ds. */
 const ALL: Partial<Record<CaseSlug, { spec: DsSpec; copy: Record<V2Locale, DsCopy> }>> = {
   eclipse: { spec: eclipse, copy: { es: esEclipse, en: enEclipse } },
+  velmar: { spec: velmar, copy: { es: esVelmar, en: enVelmar } },
   dentalos: { spec: dentalos, copy: { es: esDentalos, en: enDentalos } },
 };
 
