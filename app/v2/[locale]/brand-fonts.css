@@ -1,0 +1,19 @@
+/* The brands' own families, for the Brand Lab (lote 6.1). All OFL, self-hosted beside their licence in
+   public/trailer/fonts/<brand>/; a file is only downloaded by the page that uses its family. */
+@font-face { font-family: 'bl-instrument'; src: url('../../../public/trailer/fonts/eclipse/InstrumentSerif-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'bl-instrument'; src: url('../../../public/trailer/fonts/eclipse/InstrumentSerif-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'bl-geist'; src: url('../../../public/trailer/fonts/eclipse/Geist-Variable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'bl-geist-mono'; src: url('../../../public/trailer/fonts/eclipse/GeistMono-Variable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'bl-bigshoulders'; src: url('../../../public/trailer/fonts/volta/big-shoulders-display-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'bl-fraunces'; src: url('../../../public/trailer/fonts/velmar/fraunces-latin-opsz-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'bl-fraunces'; src: url('../../../public/trailer/fonts/velmar/fraunces-latin-opsz-italic.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'bl-manrope'; src: url('../../../public/trailer/fonts/velmar/manrope-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: 'bl-caveat'; src: url('../../../public/trailer/fonts/velmar/caveat-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'bl-newsreader'; src: url('../../../public/trailer/fonts/dentalos/newsreader-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'bl-sourcesans'; src: url('../../../public/trailer/fonts/dentalos/source-sans-3-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'bl-sourcesans'; src: url('../../../public/trailer/fonts/dentalos/source-sans-3-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'bl-sourcesans'; src: url('../../../public/trailer/fonts/dentalos/source-sans-3-latin-700-normal.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'bl-youngserif'; src: url('../../../public/trailer/fonts/sereno/young-serif-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'bl-worksans'; src: url('../../../public/trailer/fonts/sereno/work-sans-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'bl-bricolage'; src: url('../../../public/trailer/fonts/brote/bricolage-grotesque-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: 'bl-figtree'; src: url('../../../public/trailer/fonts/brote/figtree-latin-wght-normal.woff2') format('woff2'); font-weight: 300 900; font-display: swap; }

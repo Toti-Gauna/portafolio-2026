@@ -12,6 +12,8 @@ import './case.css';
 import './arch.css';
 import './obj.css';
 import './dsx.css';
+import './brand-fonts.css';
+import './brand.css';
 import './ds/eclipse.css';
 import './ds/volta.css';
 import './ds/velmar.css';

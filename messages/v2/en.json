@@ -1408,5 +1408,65 @@
       "on": "on",
       "dec": "."
     }
+  },
+  "brandlab": {
+    "kicker": "Brand Lab",
+    "kinds": {
+      "own": "Own brand",
+      "client": "A client's brand",
+      "exercise": "Brand exercise"
+    },
+    "origin": {
+      "repo": "From its repo",
+      "site": "From this site",
+      "lab": "Drawn for the board"
+    },
+    "sections": {
+      "build": "Construction",
+      "color": "Colour",
+      "type": "Type",
+      "patterns": "Patterns",
+      "screen": "On screen",
+      "street": "On the street",
+      "object": "In 3D"
+    },
+    "idea": "The idea",
+    "place": "Where it lives",
+    "redraw": "Draw it again",
+    "grid": "Grid",
+    "notes": "How it is built",
+    "secondary": "Secondary version",
+    "submark": "Submark",
+    "fields": "on its three grounds",
+    "share": "Share of use",
+    "pairs": "Measured contrast",
+    "on": "on",
+    "dec": ".",
+    "display": "Headlines",
+    "text": "Text",
+    "weights": "Weights",
+    "post": "Post",
+    "story": "Story",
+    "poster": "Poster",
+    "turn": "Turn",
+    "reset": "Starting view",
+    "hint": "Drag the piece to turn it.",
+    "source": "Where it comes from.",
+    "rail": "Brands",
+    "all": "All the brands",
+    "prev": "Previous brand",
+    "next": "Next brand",
+    "wall": "The eight brands",
+    "blind": "Shape and colour only",
+    "open": "See the brand",
+    "method": {
+      "title": "How I brand",
+      "steps": [
+        "The idea and the place, in one sentence.",
+        "The palette first, with names of its own.",
+        "The typefaces next.",
+        "The logo last, and its applications."
+      ]
+    }
   }
 }

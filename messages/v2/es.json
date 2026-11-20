@@ -1408,5 +1408,65 @@
       "on": "sobre",
       "dec": ","
     }
+  },
+  "brandlab": {
+    "kicker": "Brand Lab",
+    "kinds": {
+      "own": "Marca propia",
+      "client": "Marca de un cliente",
+      "exercise": "Ejercicio de marca"
+    },
+    "origin": {
+      "repo": "De su repo",
+      "site": "De este sitio",
+      "lab": "Dibujado para el tablero"
+    },
+    "sections": {
+      "build": "Construcción",
+      "color": "Color",
+      "type": "Tipografía",
+      "patterns": "Patrones",
+      "screen": "En pantalla",
+      "street": "En la calle",
+      "object": "En 3D"
+    },
+    "idea": "La idea",
+    "place": "Dónde vive",
+    "redraw": "Volver a dibujar",
+    "grid": "Grilla",
+    "notes": "Cómo se construye",
+    "secondary": "Versión secundaria",
+    "submark": "Submark",
+    "fields": "sobre sus tres fondos",
+    "share": "Proporción de uso",
+    "pairs": "Contraste medido",
+    "on": "sobre",
+    "dec": ",",
+    "display": "Títulos",
+    "text": "Texto",
+    "weights": "Pesos",
+    "post": "Publicación",
+    "story": "Historia",
+    "poster": "Cartel",
+    "turn": "Girar",
+    "reset": "Vista inicial",
+    "hint": "Arrastrá la pieza para girarla.",
+    "source": "De dónde sale.",
+    "rail": "Marcas",
+    "all": "Todas las marcas",
+    "prev": "Marca anterior",
+    "next": "Marca siguiente",
+    "wall": "Las ocho marcas",
+    "blind": "Solo forma y color",
+    "open": "Ver la marca",
+    "method": {
+      "title": "Cómo doy marca",
+      "steps": [
+        "La idea y el lugar, en una frase.",
+        "La paleta primero, con nombres propios.",
+        "Las tipografías después.",
+        "El logo al final, y sus aplicaciones."
+      ]
+    }
   }
 }

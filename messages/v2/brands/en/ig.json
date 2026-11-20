@@ -1,0 +1,44 @@
+{
+  "name": "IG",
+  "owner": "Ignacio Gauna's personal brand",
+  "idea": "A stem, a G and a coral dot: the signature of someone who builds software layer by layer.",
+  "place": "This portfolio, from the gate to the footer",
+  "traits": ["Precise", "Warm", "In motion"],
+  "palette": {
+    "ink": { "name": "Ink indigo", "use": "The ground of almost everything" },
+    "paper": { "name": "Paper", "use": "Text and light sections" },
+    "coral": { "name": "Coral", "use": "The dot and the main action" },
+    "night": { "name": "Night", "use": "Surfaces and cards" },
+    "blue": { "name": "IG blue", "use": "Accent on paper" },
+    "mist": { "name": "Mist", "use": "Secondary text" }
+  },
+  "type": {
+    "display": { "role": "Big, tight headlines with weight", "sample": "I build software that reaches production." },
+    "text": { "role": "Labels, data and code", "sample": "Sr AI Fullstack Developer · Mar del Plata, Argentina" }
+  },
+  "grid": [
+    "The coral dot is the module: everything is measured in dots.",
+    "The G is a single circle; the dot is that circle, four times smaller.",
+    "Minimum clear space: one module on every side."
+  ],
+  "alt": {
+    "logo": "IG logo: the monogram with its coral dot and the name Ignacio Gauna",
+    "secondary": "Horizontal version: monogram, name and role on one line",
+    "submark": "IG monogram",
+    "patterns": "Three patterns: dots with one lit, stems and arcs, and spectrum bars",
+    "post": "Sample post: Sr AI Fullstack Developer on indigo",
+    "story": "Sample story: the craft in five layers",
+    "poster": "Sample poster in coral with the monogram and the portfolio's line",
+    "print": "Sample personal card",
+    "object": "A box of cards in 3D: the monogram in front, the spectrum on its sides"
+  },
+  "pieces": { "print": "Personal card", "object": "Box of cards" },
+  "source": "The monogram, the colours and the typefaces are this site's. The grid, the patterns and the pieces were drawn for the board, as sample applications.",
+  "art": {
+    "first": "Ignacio", "last": "Gauna", "level": "Sr", "role": "AI Fullstack Developer", "roleA": "AI Fullstack", "roleB": "Developer",
+    "site": "portafolio.eclipse-business.com",
+    "storyTitle": "The craft, in layers", "layer0": "Planning", "layer1": "Code", "layer2": "Agents", "layer3": "Tests", "layer4": "Deploy",
+    "storyA": "Five layers,", "storyB": "one judgement.",
+    "posterA": "Software for", "posterB": "a world with", "posterC": "more solutions."
+  }
+}
