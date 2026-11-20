@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { sitePath } from '@/v2/site';
+import { isPlayId } from '../mkt/plays';
+import { Playbook } from '../mkt/Playbook';
 import { SiteFooter } from '../site/SiteFooter';
 import { ArrowIcon, ArrowLeftIcon } from '../ui/Icons';
 import { BrandBoard, Mark, skinVars } from './BrandBoard';
@@ -36,6 +38,7 @@ export function BrandPage({ locale, id }: { locale: V2Locale; id: BrandId }) {
           </ul>
         </nav>
         <BrandBoard spec={spec} copy={copy} labels={L} />
+        {isPlayId(id) && <Playbook locale={locale} id={id} />}
         <nav className="blp-near" aria-label={L.all}>
           {near.map((o, k) => (
             <Link key={k} className="blp-next" data-on="m" data-dir={k ? 'next' : 'prev'} rel={k ? 'next' : 'prev'} href={href(o.id)} style={skinVars(o.spec)}>

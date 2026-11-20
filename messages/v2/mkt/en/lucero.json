@@ -1,0 +1,125 @@
+{
+  "title": "Lucero: from the sidewalk to the table",
+  "goal": "They come in, order from the table and come back another night.",
+  "audience": "Neighbours choosing where to have dinner at night.",
+  "stages": [
+    "Walks by",
+    "Sits down",
+    "Orders",
+    "Plays",
+    "Returns"
+  ],
+  "touches": {
+    "ig": {
+      "name": "The dish of the day",
+      "msg": "The dish of the day, served, with hands and steam, before 12 and before 19.",
+      "rule": "Stories for what changes and the feed for what stays; the menu link in the bio.",
+      "watch": "Taps on the menu link, one measure a month",
+      "p": {
+        "h": "Potato gnocchi",
+        "s": "Dish of the day",
+        "tag": "See the menu"
+      },
+      "alt": "Sample post with the dish of the day"
+    },
+    "board": {
+      "name": "The sidewalk board",
+      "msg": "At the top the dish of the day, in the middle something that only happens today, at the bottom the QR.",
+      "rule": "Big letters, white chalk, and a new board every day.",
+      "watch": "Tables that arrive naming the board",
+      "p": {
+        "l": [
+          "Today: potato gnocchi",
+          "Spin the menu wheel",
+          "Scan the menu"
+        ]
+      },
+      "alt": "Sample sidewalk board with three lines"
+    },
+    "qr": {
+      "name": "The table QR",
+      "msg": "«Scan, order and Gus brings it», at eye level.",
+      "rule": "Printed matte and checked every week: one that came off is a table that stops ordering.",
+      "watch": "Loose QR codes in the weekly check",
+      "p": {
+        "h": "Scan, order and Gus brings it"
+      },
+      "alt": "Sample table stand with the QR and one line"
+    },
+    "carta": {
+      "name": "The menu on the phone",
+      "msg": "The table's menu on the phone, with the order going straight to the kitchen.",
+      "rule": "Every order reaches the kitchen with its origin: by QR or by the waiter.",
+      "watch": "Orders by QR and by the waiter",
+      "p": {
+        "h": "Lucero",
+        "s": "Pasta · Grill · Pizza",
+        "cta": "Order"
+      },
+      "alt": "Sample menu on the phone with the Order button"
+    },
+    "ruleta": {
+      "name": "The house wheel",
+      "msg": "«Spin and win»: one spin per visit, as soon as the menu opens.",
+      "rule": "Prizes and odds are set in the CRM; each venue chooses its own.",
+      "watch": "Prizes the waiter validates",
+      "p": {
+        "h": "Spin and win",
+        "prize": "House dessert"
+      },
+      "alt": "Sample wheel with the prize House dessert"
+    },
+    "code": {
+      "name": "The code at the table",
+      "msg": "«Show the code to the waiter»: the prize is validated in person.",
+      "rule": "The waiter validates it at the table; one code per prize.",
+      "watch": "Codes validated per night",
+      "p": {
+        "h": "House dessert",
+        "code": "LUC-27",
+        "s": "Show the code to the waiter"
+      },
+      "alt": "Sample ticket with the prize code"
+    },
+    "review": {
+      "name": "The Google review",
+      "msg": "Asked for with dessert or with the bill, once they have said they liked it.",
+      "rule": "Reply to every one by name; to a bad one, thank them and continue in private.",
+      "watch": "Reviews answered by name",
+      "p": {
+        "h": "Did you enjoy dinner?",
+        "s": "Tell it on Google"
+      },
+      "alt": "Sample review request with five stars to choose from"
+    },
+    "matches": {
+      "name": "The matchbox",
+      "msg": "A matchbox with the brand, to take home.",
+      "rule": "It comes with the bill: the submark on one side and the menu's QR on the other.",
+      "watch": "Visits that arrive from the box's QR",
+      "p": {
+        "h": "Lucero",
+        "s": "Come back at night"
+      },
+      "alt": "Sample matchbox with Lucero's brand"
+    }
+  },
+  "rules": [
+    "One line per piece, in the voice of the bodegón.",
+    "What changes, in stories; what stays, in the feed.",
+    "The prize is validated in person, at the table."
+  ],
+  "calendar": {
+    "title": "Three seasons a year",
+    "lanes": {
+      "season": "Seasons"
+    },
+    "dates": {
+      "halloween": "Halloween",
+      "navidad": "Christmas",
+      "valentin": "Valentine's Day"
+    }
+  },
+  "next": "The visit passport, already written in its roadmap.",
+  "source": "The guides on Instagram, reviews, the QR and the board come from Eclipse Academy, in Lucero's repo; the matchbox is the playbook's proposal."
+}

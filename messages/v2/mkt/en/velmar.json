@@ -1,0 +1,130 @@
+{
+  "title": "Velmar: handmade, with a name",
+  "goal": "They order a piece with a name and come back for their pet's birthday.",
+  "audience": "Families with dogs and cats who give things with a name on them.",
+  "stages": [
+    "Discovers",
+    "Customises",
+    "Buys",
+    "Waits",
+    "Returns"
+  ],
+  "touches": {
+    "fair": {
+      "name": "The fair",
+      "msg": "The «Seguinos» NFC plate opens the store on the phone, and the FERIA2000 coupon follows it up.",
+      "rule": "A plate in plain sight at the stall: bring the phone close and the store appears.",
+      "watch": "Uses of the FERIA2000 coupon",
+      "p": {
+        "h": "Seguinos",
+        "s": "Tap your phone"
+      },
+      "alt": "Sample NFC plate with the word Seguinos"
+    },
+    "carousel": {
+      "name": "The four-step carousel",
+      "msg": "«How to order yours»: choose and upload the photo, approve the preview, pay and follow the order.",
+      "rule": "The Studio builds the 4:5 carousel and its suggested text from the product.",
+      "watch": "Saves and messages from the carousel",
+      "p": {
+        "h": "How to order yours",
+        "steps": [
+          "Pick your piece and upload your photo",
+          "See the preview and approve it",
+          "Pay your way",
+          "Follow your order to your door"
+        ]
+      },
+      "alt": "Sample slide of the How to order yours carousel, with four steps"
+    },
+    "theme": {
+      "name": "The date's theme",
+      "msg": "«Su día, sus cosas»: the store dresses up for Animal Day, with its ribbon and its coupon.",
+      "rule": "Sixteen themes, each with its loading screen, palette, banner, ribbon, coupon and offers.",
+      "watch": "Sales with the theme's coupon",
+      "p": {
+        "h": "Su día, sus cosas",
+        "s": "Animal Day",
+        "cta": "See offers"
+      },
+      "alt": "Sample cover of the Animal Day theme"
+    },
+    "wheel": {
+      "name": "The coupon wheel",
+      "msg": "Eight slices with their prize and weight; the RULETA coupon is single use and lasts 7 days.",
+      "rule": "Each slice is set in the panel: prize, type, value, minimum and weight.",
+      "watch": "RULETA coupons used before they expire",
+      "p": {
+        "h": "Spin the wheel",
+        "prize": "Free shipping"
+      },
+      "alt": "Sample wheel on a phone with the prize Free shipping"
+    },
+    "production": {
+      "name": "The production email",
+      "msg": "«Hands on! Your order is in production»: one email for each moment of the order.",
+      "rule": "Six moments, from purchase to shipping; each email is switched on or paused in the panel.",
+      "watch": "WhatsApp questions about the order's status",
+      "p": {
+        "subj": "Hands on! Your order is in production",
+        "m": "The collar with Nina's name is already in the workshop.",
+        "cta": "Follow my order"
+      },
+      "alt": "Sample email saying the order is in production"
+    },
+    "box": {
+      "name": "The shipping box",
+      "msg": "«Handmade for Nina»: the box names the pet of the order.",
+      "rule": "Inside, a card on caring for the piece and the birthday reminder.",
+      "watch": "Photos of the box in stories",
+      "p": {
+        "h": "Handmade for Nina",
+        "s": "Velmar"
+      },
+      "alt": "Sample shipping box with the pet's name"
+    },
+    "birthday": {
+      "name": "The pet's birthday",
+      "msg": "«Happy birthday, Toto!»: an email on the day, with what is new in the store.",
+      "rule": "It goes out with the date the family entered; switched on or paused like the others.",
+      "watch": "Orders in the birthday week",
+      "p": {
+        "subj": "Happy birthday, Toto!",
+        "m": "Today we celebrate Toto. See what is new with his name.",
+        "cta": "See the store"
+      },
+      "alt": "Sample email for the pet's birthday"
+    }
+  },
+  "rules": [
+    "Every piece names the pet.",
+    "Its own illustrations, labelled «Illustrative image».",
+    "One theme per date, with its coupon."
+  ],
+  "calendar": {
+    "title": "Sixteen themes a year",
+    "lanes": {
+      "dates": "Themes"
+    },
+    "dates": {
+      "madre": "Mother's Day",
+      "halloween": "Halloween",
+      "orgullo": "Pride",
+      "black": "Black Friday",
+      "navidad": "Christmas",
+      "nuevo": "New Year",
+      "valentin": "Valentine's Day",
+      "pascuas": "Easter",
+      "animal": "Animal Day",
+      "hot": "Hot Sale",
+      "mayo": "May 25th",
+      "padre": "Father's Day",
+      "bandera": "Flag Day",
+      "julio": "July 9th",
+      "amigo": "Friendship Day",
+      "nino": "Children's Day"
+    }
+  },
+  "next": "Confirming Velmar's palette and type with them; today both come from its logo.",
+  "source": "The coupons, the wheel, the themes and the emails are in the demo's repo; the shipping box is the playbook's proposal."
+}

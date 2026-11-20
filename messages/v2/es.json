@@ -1468,5 +1468,77 @@
         "El logo al final, y sus aplicaciones."
       ]
     }
+  },
+  "mkt": {
+    "kicker": "Playbook de marketing",
+    "note": "Un plan: qué pieza va en cada momento, cómo se hace y qué se mira. Las piezas son ejemplos en la piel de la marca.",
+    "goal": "Lo que busca",
+    "audience": "A quién le habla",
+    "count": {
+      "touch": "puntos de contacto",
+      "digital": "en pantalla",
+      "physical": "en la calle"
+    },
+    "lanes": {
+      "digital": "En pantalla",
+      "physical": "En la calle"
+    },
+    "origin": {
+      "repo": "En su repo",
+      "doc": "En sus documentos",
+      "site": "En este sitio",
+      "plan": "Propuesta del playbook"
+    },
+    "map": "El camino, punto por punto",
+    "walk": "Recorrer el camino",
+    "pause": "Pausar",
+    "replay": "Recorrer de nuevo",
+    "step": "Punto",
+    "of": "de",
+    "prev": "Punto anterior",
+    "next": "Punto siguiente",
+    "keys": "Con el foco en un punto, las flechas pasan al anterior y al siguiente.",
+    "msg": "El mensaje",
+    "rule": "Cómo se hace",
+    "watch": "Qué se mira",
+    "where": "Dónde está",
+    "calendar": "El año de campañas",
+    "calNote": "Las fechas salen de su repo.",
+    "months": [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic"
+    ],
+    "monthsLong": [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre"
+    ],
+    "rules": "Cómo habla",
+    "nextStep": "Próximo paso",
+    "source": "De dónde sale",
+    "wall": {
+      "title": "Seis playbooks de marketing",
+      "lead": "Uno por proyecto con marca: el camino del cliente, de la pantalla a la calle.",
+      "open": "Ver el playbook"
+    }
   }
 }

@@ -1,0 +1,125 @@
+{
+  "title": "Lucero: de la vereda a la mesa",
+  "goal": "Que entre, pida desde la mesa y vuelva otra noche.",
+  "audience": "Vecinos del barrio que eligen dónde cenar a la noche.",
+  "stages": [
+    "Pasa",
+    "Se sienta",
+    "Pide",
+    "Juega",
+    "Vuelve"
+  ],
+  "touches": {
+    "ig": {
+      "name": "El plato del día",
+      "msg": "El plato del día, servido, con manos y vapor, antes de las 12 y antes de las 19.",
+      "rule": "Historias para lo que cambia y feed para lo que queda; el link de la carta en la bio.",
+      "watch": "Toques al link de la carta, una medida por mes",
+      "p": {
+        "h": "Ñoquis de papa",
+        "s": "Plato del día",
+        "tag": "Ver la carta"
+      },
+      "alt": "Publicación de ejemplo con el plato del día"
+    },
+    "board": {
+      "name": "La pizarra de la vereda",
+      "msg": "Arriba el plato del día, en el medio algo que pasa solo hoy, abajo el QR.",
+      "rule": "Letra grande, tiza blanca, y cambiarla todos los días.",
+      "watch": "Mesas que llegan nombrando la pizarra",
+      "p": {
+        "l": [
+          "Hoy: ñoquis de papa",
+          "Girá la ruleta del menú",
+          "Escaneá la carta"
+        ]
+      },
+      "alt": "Pizarra de vereda de ejemplo con tres renglones"
+    },
+    "qr": {
+      "name": "El QR de la mesa",
+      "msg": "«Escaneá, pedí y Gus te lo trae», a la altura de la vista.",
+      "rule": "Impreso mate y revisado cada semana: uno despegado es una mesa que deja de pedir.",
+      "watch": "QR despegados en la revisión semanal",
+      "p": {
+        "h": "Escaneá, pedí y Gus te lo trae"
+      },
+      "alt": "Atril de mesa de ejemplo con el QR y una frase"
+    },
+    "carta": {
+      "name": "La carta en el celular",
+      "msg": "La carta de la mesa en el celular, con el pedido directo a cocina.",
+      "rule": "Cada pedido entra a cocina con su origen: por QR o por el mozo.",
+      "watch": "Pedidos por QR y por el mozo",
+      "p": {
+        "h": "Lucero",
+        "s": "Pastas · Parrilla · Pizzas",
+        "cta": "Pedir"
+      },
+      "alt": "Carta de ejemplo en el celular con el botón Pedir"
+    },
+    "ruleta": {
+      "name": "La ruleta de la casa",
+      "msg": "«Girá y ganá»: un tiro por visita, apenas se abre la carta.",
+      "rule": "Premios y chances se configuran en el CRM; cada local elige los suyos.",
+      "watch": "Premios que valida el mozo",
+      "p": {
+        "h": "Girá y ganá",
+        "prize": "Postre de la casa"
+      },
+      "alt": "Ruleta de ejemplo con el premio Postre de la casa"
+    },
+    "code": {
+      "name": "El código en la mesa",
+      "msg": "«Mostrale el código al mozo»: el premio se valida en persona.",
+      "rule": "El mozo lo valida en la mesa; un código por premio.",
+      "watch": "Códigos validados por noche",
+      "p": {
+        "h": "Postre de la casa",
+        "code": "LUC-27",
+        "s": "Mostrale el código al mozo"
+      },
+      "alt": "Ticket de ejemplo con el código del premio"
+    },
+    "review": {
+      "name": "La reseña en Google",
+      "msg": "Se pide con el postre o al traer la cuenta, cuando ya dijo que le gustó.",
+      "rule": "Responder todas por el nombre; a una mala, agradecer y seguir por privado.",
+      "watch": "Reseñas respondidas por nombre",
+      "p": {
+        "h": "¿Te gustó la cena?",
+        "s": "Contalo en Google"
+      },
+      "alt": "Pedido de reseña de ejemplo con cinco estrellas para elegir"
+    },
+    "matches": {
+      "name": "La caja de fósforos",
+      "msg": "Una caja de fósforos con la marca, para llevarse a casa.",
+      "rule": "Llega con la cuenta: el submark de un lado y el QR de la carta del otro.",
+      "watch": "Visitas que llegan desde el QR de la caja",
+      "p": {
+        "h": "Lucero",
+        "s": "Volvé de noche"
+      },
+      "alt": "Caja de fósforos de ejemplo con la marca de Lucero"
+    }
+  },
+  "rules": [
+    "Una frase por pieza, en la voz del bodegón.",
+    "Lo que cambia, en historias; lo que queda, en el feed.",
+    "El premio se valida en persona, en la mesa."
+  ],
+  "calendar": {
+    "title": "Tres temporadas al año",
+    "lanes": {
+      "season": "Temporadas"
+    },
+    "dates": {
+      "halloween": "Halloween",
+      "navidad": "Navidad",
+      "valentin": "San Valentín"
+    }
+  },
+  "next": "El pasaporte de visitas, ya escrito en su roadmap.",
+  "source": "Las guías de Instagram, reseñas, QR y pizarra son de Eclipse Academy, en el repo de Lucero; la caja de fósforos es propuesta del playbook."
+}

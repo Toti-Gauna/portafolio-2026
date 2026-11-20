@@ -4,6 +4,8 @@ import { sitePath } from '@/v2/site';
 import { Mark, skinVars } from './BrandBoard';
 import { BRAND_ORDER, brandOf } from './brands';
 import { WallBlind } from './WallBlind';
+import { mktCopy } from '../mkt/copy';
+import { PLAY_ORDER } from '../mkt/plays';
 
 /**
  * The wall of the Brand Lab (lote 6.1): one tile per brand, each in its own field, with its submark, its display
@@ -11,7 +13,7 @@ import { WallBlind } from './WallBlind';
  * told apart. Each tile opens its brand.
  */
 export function BrandWall({ locale }: { locale: V2Locale }) {
-  const L = v2Messages(locale).brandlab;
+  const L = v2Messages(locale).brandlab, M = v2Messages(locale).mkt;
   return (
     <section className="blw-sec" aria-labelledby="blw-title">
       <div className="blw-method" data-reveal>
@@ -37,6 +39,23 @@ export function BrandWall({ locale }: { locale: V2Locale }) {
                   <rect width="360" height="90" fill={`url(#blw-${id})`} />
                 </svg>
                 <span className="blw-name" aria-hidden="true"><b>{copy.name}</b><span>{L.kinds[spec.kind]}</span></span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="blw-head" data-reveal>
+        <h2 id="blw-mkt">{M.wall.title}</h2>
+      </div>
+      <p className="blw-lead" data-reveal>{M.wall.lead}</p>
+      <ul className="blw-mk" aria-labelledby="blw-mkt">
+        {PLAY_ORDER.map((id) => {
+          const { spec, copy } = brandOf(locale, id);
+          return (
+            <li key={id} data-reveal>
+              <Link className="blw-mk-a" data-on="m" href={sitePath(locale, `brand-lab/${id}/#marketing`)} style={skinVars(spec)}>
+                <span className="blw-mk-mark" aria-hidden="true"><Mark art={spec.art(copy.art).logo.submark} /></span>
+                <span className="blw-mk-t"><b>{mktCopy(locale, id).title}</b><span>{M.wall.open}</span></span>
               </Link>
             </li>
           );

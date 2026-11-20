@@ -1,0 +1,121 @@
+{
+  "title": "Clínica Brisa: cuidar con calma",
+  "goal": "Que vuelva a su control cuando la profesional lo indicó.",
+  "audience": "Familias y adultos de la clínica, con sus chicos.",
+  "stages": [
+    "Busca",
+    "Reserva",
+    "Viene",
+    "Sigue",
+    "Vuelve"
+  ],
+  "touches": {
+    "home": {
+      "name": "La web con turnos",
+      "msg": "«Pedir primera consulta»: la web lleva directo a elegir día y horario.",
+      "rule": "Una acción por pantalla; el turno se pide en el calendario del mes.",
+      "watch": "Solicitudes de primera consulta",
+      "p": {
+        "h": "Clínica Brisa",
+        "s": "Turnos online",
+        "cta": "Pedir primera consulta"
+      },
+      "alt": "Portada de ejemplo de la web de la clínica con su botón de turnos"
+    },
+    "wa": {
+      "name": "El WhatsApp de la clínica",
+      "msg": "«Mi próximo turno», «Mis presupuestos» y horarios, con respuestas cortas; lo clínico pasa a recepción.",
+      "rule": "Respuestas administrativas; cualquier consulta clínica la toma una persona.",
+      "watch": "Conversaciones derivadas a recepción",
+      "p": {
+        "who": "Clínica Brisa",
+        "q": "Mi próximo turno",
+        "m": [
+          "Tu próximo turno es el martes a las 10:30."
+        ]
+      },
+      "alt": "Chat de ejemplo que responde por el próximo turno"
+    },
+    "reminder": {
+      "name": "El recordatorio de 24 h",
+      "msg": "Un día antes, el recordatorio del turno, para quien lo pidió.",
+      "rule": "La baja frena el envío y abre una tarea para que recepción llame.",
+      "watch": "Bajas y tareas de contacto abiertas",
+      "p": {
+        "who": "Clínica Brisa",
+        "m": [
+          "Mañana a las 10:30 tenés turno en la clínica.",
+          "Si necesitás moverlo, respondé este mensaje."
+        ]
+      },
+      "alt": "Chat de ejemplo con el recordatorio del turno"
+    },
+    "receipt": {
+      "name": "El comprobante de turno",
+      "msg": "Un boleto de papel con su talón: fecha, sede y profesional, igual que lo ve recepción.",
+      "rule": "La fecha en serif y los mismos datos que tiene recepción, para hablar de lo mismo.",
+      "watch": "Turnos que llegan con su comprobante",
+      "p": {
+        "h": "Turno",
+        "code": "A-0012",
+        "s": "Martes · 10:30"
+      },
+      "alt": "Comprobante de turno de ejemplo con su talón"
+    },
+    "kids": {
+      "name": "Brisa Chicos",
+      "msg": "Un juego de memoria con los Brisitos, para la espera.",
+      "rule": "Premios cosméticos, como el sticker «Buena memoria», separados de turnos y tratamientos.",
+      "watch": "Partidas terminadas en la sala",
+      "p": {
+        "h": "Brisa Chicos",
+        "prize": "Sticker «Buena memoria»"
+      },
+      "alt": "Juego de memoria de ejemplo con el sticker Buena memoria"
+    },
+    "control": {
+      "name": "El control indicado",
+      "msg": "«Tenés un control ya indicado por tu profesional para coordinar. Podés elegir horario en el portal.»",
+      "rule": "Dos mensajes cada 30 días como máximo; a un menor se le escribe a su adulto responsable.",
+      "watch": "Controles coordinados desde el segmento",
+      "p": {
+        "who": "Clínica Brisa",
+        "m": [
+          "Hola, Ana: tenés un control ya indicado por tu profesional para coordinar.",
+          "Podés elegir horario en el portal o responder este mensaje."
+        ]
+      },
+      "alt": "Chat de ejemplo con el aviso de un control indicado"
+    },
+    "kit": {
+      "name": "El kit de cuidado",
+      "msg": "Una caja para el cuidado diario, que se lleva después de la consulta.",
+      "rule": "Se entrega en recepción; adentro, la tarjeta con el próximo control.",
+      "watch": "Controles reservados con la tarjeta",
+      "p": {
+        "h": "Kit de cuidado",
+        "s": "Clínica Brisa"
+      },
+      "alt": "Caja de ejemplo del kit de cuidado de la clínica"
+    },
+    "again": {
+      "name": "Volver a coordinar",
+      "msg": "«Si querés volver a coordinar el turno que quedó cancelado, podés elegir un horario cuando te quede cómodo.»",
+      "rule": "Mensajes discretos: el panel frena la urgencia, el miedo, las ofertas y el detalle clínico.",
+      "watch": "Turnos cancelados que vuelven a la agenda",
+      "p": {
+        "subj": "Tu turno, cuando te quede cómodo",
+        "m": "Si querés volver a coordinar el turno que quedó cancelado, podés elegir un horario en el portal.",
+        "cta": "Elegir horario"
+      },
+      "alt": "Mail de ejemplo para volver a coordinar un turno"
+    }
+  },
+  "rules": [
+    "Calma: horarios y turnos, con palabras simples.",
+    "Lo clínico lo habla una persona.",
+    "A los chicos, juegos con premios cosméticos."
+  ],
+  "next": "El QR en el comprobante de turno, ya escrito en sus requisitos.",
+  "source": "Las campañas, el chat, el recordatorio y el comprobante están en el repo de DentalOS, con mensajes simulados; el kit es propuesta del playbook."
+}

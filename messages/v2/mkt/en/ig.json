@@ -1,0 +1,107 @@
+{
+  "title": "IG, from a link to an interview",
+  "goal": "A recruiter writes to me after seeing a case.",
+  "audience": "Recruiters and tech leads looking for a senior product and AI profile.",
+  "stages": [
+    "Finds me",
+    "Meets me",
+    "Weighs me",
+    "Writes me"
+  ],
+  "touches": {
+    "post": {
+      "name": "One case a week",
+      "msg": "A case in three lines: the problem, what I built and where it lives, with the link to its page.",
+      "rule": "One case a week on LinkedIn, in the order of Work, with its ten-second film.",
+      "watch": "Visits to the case page from LinkedIn",
+      "p": {
+        "h": "CompliA, in ten seconds",
+        "s": "One case a week",
+        "tag": "See the case"
+      },
+      "alt": "Sample post with the CompliA case and the link to its page"
+    },
+    "share": {
+      "name": "The shared link",
+      "msg": "Ignacio Gauna · Sr AI Fullstack Developer, with the portfolio's image.",
+      "rule": "Every page carries its title, description and social image: the link introduces itself.",
+      "watch": "Clicks on the link in each channel it is shared",
+      "p": {
+        "h": "Ignacio Gauna · Sr AI Fullstack Developer",
+        "d": "portafolio.eclipse-business.com"
+      },
+      "alt": "Preview of the link to the portfolio, with its image and title"
+    },
+    "card": {
+      "name": "The business card",
+      "msg": "Name, role and a QR code that opens the portfolio.",
+      "rule": "Handed over at every meeting in person; the QR leads to the portfolio's door.",
+      "watch": "Visits that arrive from the card's QR",
+      "p": {
+        "h": "Ignacio Gauna",
+        "s": "Sr AI Fullstack Developer",
+        "d": "portafolio.eclipse-business.com"
+      },
+      "alt": "Sample business card with the monogram, the role and a QR code"
+    },
+    "trailer": {
+      "name": "The trailer",
+      "msg": "Meet Ignacio: the road from Mar del Plata to today, in a short film.",
+      "rule": "It opens with a click from the door, plays only when asked and has a text version.",
+      "watch": "How many reach the end and enter the portfolio",
+      "p": {
+        "h": "Meet Ignacio",
+        "s": "From Mar del Plata to today",
+        "cta": "Watch the trailer"
+      },
+      "alt": "Vertical screen of the Meet Ignacio trailer, with its button"
+    },
+    "case": {
+      "name": "The case in ten seconds",
+      "msg": "Who it is for, what it does, in use and where it lives: a film opens every case.",
+      "rule": "Three layers of reading: the film in 5 seconds, the summary in 30 and the detail folded.",
+      "watch": "Cases read down to «More detail»",
+      "p": {
+        "h": "CompliA",
+        "s": "Who for · What it does · In use · Where it is",
+        "cta": "See the case"
+      },
+      "alt": "Sample case page with the four chapters of its film"
+    },
+    "sheet": {
+      "name": "A printed sheet",
+      "msg": "Role, three cases and contact on a single page, with the QR to the portfolio.",
+      "rule": "For interviews in person: one sheet, in the portfolio's order and saying what it says.",
+      "watch": "Interview questions about each case",
+      "p": {
+        "h": "Ignacio Gauna · Sr AI Fullstack Developer",
+        "l": [
+          "CompliA",
+          "Eclipse",
+          "Agentic system",
+          "Contact"
+        ]
+      },
+      "alt": "Sample printed sheet with the role, three cases and the contact"
+    },
+    "mail": {
+      "name": "The direct email",
+      "msg": "A «Write» button opens the email, with LinkedIn right beside it.",
+      "rule": "Contact lives on the home page and in About me: always one click away.",
+      "watch": "Emails that name a case",
+      "p": {
+        "subj": "Contact from the portfolio",
+        "m": "Hi Ignacio, I am writing about a senior role.",
+        "cta": "Reply"
+      },
+      "alt": "Sample email arriving from the portfolio"
+    }
+  },
+  "rules": [
+    "First the role, then the case, last the contact.",
+    "Every claim carries its case and its status.",
+    "One piece, one action: see the case or write."
+  ],
+  "next": "The series of cases on LinkedIn, one a week, in the order of Work.",
+  "source": "What is marked «On this site» already works on the portfolio; the rest is the playbook's proposal for the job search."
+}
