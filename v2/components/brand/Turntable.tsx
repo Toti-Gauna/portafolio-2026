@@ -11,13 +11,13 @@ export const CAN_SIDES = 24;
 const rad = (d: number) => (d * Math.PI) / 180;
 const LIGHT = (() => { const v = [-0.5, -0.72, 0.62], l = Math.hypot(...v); return v.map((x) => x / l); })();
 
-/** How dark a face is (0 lit … 0.62 in shadow) once the object is turned: its normal through rotateX(rx) rotateY(ry). */
+/** How dark a face is (0 lit … 0.44 in shadow) once the object is turned: its normal through rotateX(rx) rotateY(ry). */
 export function shade(n: [number, number, number], rx: number, ry: number) {
   const cy = Math.cos(rad(ry)), sy = Math.sin(rad(ry)), cx = Math.cos(rad(rx)), sx = Math.sin(rad(rx));
   const x = cy * n[0] + sy * n[2], y0 = n[1], z0 = -sy * n[0] + cy * n[2];
   const y = cx * y0 - sx * z0, z = sx * y0 + cx * z0;
   const lit = Math.max(0, x * LIGHT[0] + y * LIGHT[1] + z * LIGHT[2]);
-  return Math.round((1 - lit) * 0.62 * 100) / 100;
+  return Math.round((1 - lit) * 0.44 * 100) / 100;
 }
 
 type Face = { key: string; n: [number, number, number]; style: CSSProperties; svg?: { box: string; inner: string; none?: boolean }; fill?: string; round?: boolean };
