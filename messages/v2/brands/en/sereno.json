@@ -1,0 +1,49 @@
+{
+  "name": "Sereno",
+  "owner": "A sourdough bakery invented for the lab",
+  "idea": "The sereno keeps watch at night: a moon of dough, scored like a loaf, and one light on, the oven.",
+  "place": "A neighbourhood bakery that bakes before dawn",
+  "traits": ["Warm", "Nocturnal", "Handmade"],
+  "palette": {
+    "oven": { "name": "Oven", "use": "The brand's own field" },
+    "night": { "name": "Night", "use": "Ink, moon and night field" },
+    "dough": { "name": "Dough", "use": "The moon on the night" },
+    "flour": { "name": "Flour", "use": "The lit window and labels" },
+    "crust": { "name": "Crust", "use": "Scores, twine and details" },
+    "wheat": { "name": "Wheat", "use": "Ears, hours and dots" }
+  },
+  "type": {
+    "display": { "role": "Name and headlines, with the weight of a loaf", "sample": "While you sleep, we bake." },
+    "text": { "role": "Labels, hours and the facts of each loaf", "sample": "Country loaf · sourdough · out at 6 am" }
+  },
+  "grid": [
+    "The moon comes from two circles: the dough, and a second one, shifted, that bites it.",
+    "The score is the module: three parallel scores, each centred on the same ring.",
+    "The light is two modules wide, touches the circle from inside and sets the clear space."
+  ],
+  "alt": {
+    "logo": "Sereno logo: a moon of dough with three scores and one light, above the name",
+    "secondary": "Horizontal version: the moon, the name and “Bread before dawn” on one line",
+    "submark": "Sereno's moon of dough",
+    "patterns": "Three patterns: bread scores, phases of the moon and ears of wheat",
+    "post": "Sample post: “While you sleep, we bake” beside the moon, on orange",
+    "story": "Sample story: one loaf's night, from feeding the starter to warm bread",
+    "poster": "Sample poster: the moon over the sleeping street and a single lit window",
+    "print": "Sample hang tag in the shape of an oven mouth",
+    "object": "Bread box in 3D: the moon on the front and loaf scores on the lid"
+  },
+  "pieces": { "print": "Hang tag", "object": "Bread box" },
+  "source": "Sereno is a brand exercise invented for the lab: the logo, the palette, the chosen typefaces and every piece were drawn for this board, with sample copy.",
+  "art": {
+    "name": "Sereno", "tag": "BREAD BEFORE DAWN",
+    "postA": "While", "postB": "you sleep,", "postC": "we bake.", "postD": "Sourdough", "postE": "Out at 6 am",
+    "storyTitle": "One loaf, one night",
+    "time0": "10 pm", "step0": "Feeding the starter",
+    "time1": "1 am", "step1": "Mixing and resting",
+    "time2": "4 am", "step2": "Shaping, scoring, baking",
+    "time3": "6 am", "step3": "Warm bread",
+    "posterA": "The street sleeps.", "posterB": "The oven is", "posterC": "wide awake.", "posterD": "Sourdough · from 6 am",
+    "tagKind": "Country loaf", "tagA": "SOURDOUGH", "tagB": "Flour, water, salt and time.", "tagC": "Baked today · 5:40 am",
+    "boxSide": "Sourdough"
+  }
+}

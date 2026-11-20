@@ -1,0 +1,51 @@
+{
+  "name": "Lucero",
+  "owner": "Bodegón ficticio: la marca de la demo de Eclipse para locales de comida",
+  "idea": "La primera luz de la noche: una carta de bodegón donde cada línea de puntos termina en un lucero.",
+  "place": "Un bodegón de barrio, de noche",
+  "traits": ["Cálida", "Nocturna", "Casera"],
+  "palette": {
+    "wine": { "name": "Vino", "use": "El campo de la marca" },
+    "night": { "name": "Noche de salón", "use": "El fondo de la demo" },
+    "cream": { "name": "Crema", "use": "El nombre y los textos" },
+    "notebook": { "name": "Papel de libreta", "use": "La carta y las comandas" },
+    "amber": { "name": "Ámbar de lámpara", "use": "El lucero y la acción" },
+    "copper": { "name": "Cobre", "use": "Acentos de los juegos" }
+  },
+  "type": {
+    "display": { "role": "El nombre en redonda; los títulos, en itálica", "sample": "Abrimos cuando sale el lucero." },
+    "text": { "role": "Platos, precios y rótulos de la carta", "sample": "Milanesa napolitana, ñoquis con estofado y flan con dulce de leche: la carta, mesa por mesa." }
+  },
+  "grid": [
+    "El módulo es la distancia entre la altura de x y la de mayúsculas.",
+    "El lucero mide dos módulos: centro en la línea de mayúsculas, puntas sobre un círculo.",
+    "Los puntos de la carta avanzan de a medio módulo; el aire es un módulo."
+  ],
+  "alt": {
+    "logo": "Logo de Lucero: el nombre en serif, un lucero ámbar y una línea de carta",
+    "secondary": "Versión reducida: el nombre con su lucero y la etiqueta Demo",
+    "submark": "Sello de Lucero: un aro, la L y el lucero",
+    "patterns": "Tres patrones: libreta de comandas, líneas de puntos con luceros y sellos sobre vino",
+    "post": "Publicación de ejemplo: la carta de esta noche con cuatro platos y sus precios",
+    "story": "Historia de ejemplo: el pedido de la mesa 4, en tres pasos hasta la mesa",
+    "poster": "Cartel de ejemplo: una línea de puntos sube hasta el lucero sobre la frase de apertura",
+    "print": "Comanda de ejemplo de la mesa 4, con tres platos y el sello",
+    "object": "Caja de fósforos en 3D: el nombre y el lucero al frente, raspadores arriba y abajo"
+  },
+  "pieces": { "print": "Comanda de mesa", "object": "Caja de fósforos" },
+  "source": "Del repo de la demo: nombre, colores y tipografías. El lucero, la grilla, los patrones y las piezas (platos y precios de ejemplo) se dibujaron para el tablero.",
+  "art": {
+    "name": "Lucero", "initial": "L", "kind": "bodegón", "night": "de noche", "demo": "DEMO", "sample": "Carta de ejemplo",
+    "postA": "Esta noche,", "postB": "en la carta",
+    "dish1": "Milanesa napolitana", "price1": "$ 12.500", "dish2": "Ñoquis con estofado", "price2": "$ 9.800",
+    "dish3": "Flan con dulce de leche", "price3": "$ 4.200", "dish4": "Vermut con soda", "price4": "$ 3.500",
+    "storyA": "Tu pedido,", "storyB": "en camino.",
+    "step1": "Pedido", "step1b": "Mesa 4 · 21:32", "step2": "En cocina", "step2b": "Marcha la comanda", "step3": "En la mesa", "step3b": "Buen provecho",
+    "cta": "Ver la carta",
+    "posterA": "Abrimos", "posterB": "cuando sale", "posterC": "el lucero.", "days": "Martes a domingo", "hours": "desde las 20 h",
+    "ticket": "COMANDA", "table": "Mesa 4", "covers": "2 cubiertos", "time": "21:32",
+    "qty1": "2", "item1": "Milanesa napolitana", "qty2": "1", "item2": "Ñoquis con estofado", "qty3": "2", "item3": "Flan con dulce de leche",
+    "thanksA": "Gracias", "thanksB": "por venir.",
+    "matches": "Fósforos de la casa", "backA": "Una luz", "backB": "para cada mesa."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Volta",
+  "owner": "A fictional supplements and sport shop: the brand of a sales demo",
+  "idea": "A training box turned into a brand: carbon, steel and chalk, with volt as the only signal light.",
+  "place": "An online demo store, based in Mar del Plata",
+  "traits": ["Electric", "Industrial", "Direct"],
+  "palette": {
+    "volt": { "name": "Volt", "use": "The signal light" },
+    "carbon": { "name": "Carbon", "use": "The floor of the box" },
+    "plate": { "name": "Plate", "use": "Cards, labels and packs" },
+    "chalk": { "name": "Chalk", "use": "Text and the V's stroke" },
+    "steel": { "name": "Steel", "use": "Secondary text" },
+    "plasma": { "name": "Plasma", "use": "Accent on volt" }
+  },
+  "type": {
+    "display": { "role": "Headlines in capitals, tall and tight", "sample": "Charge your best self." },
+    "text": { "role": "Interface, labels and data", "sample": "24 g of protein per scoop, with batch and expiry date in plain sight." }
+  },
+  "grid": [
+    "The plate is six modules a side; the symbol sits on the middle four.",
+    "The chalk stroke aims at the tip of the bolt: that is where the V closes.",
+    "The name stands as tall as the V, one and a half modules away."
+  ],
+  "alt": {
+    "logo": "Volta logo: the plate with the V and its bolt, beside the name",
+    "secondary": "Stacked version: the plate on top and the name below, on its lane",
+    "submark": "Volta symbol: a V that closes with a bolt",
+    "patterns": "Three patterns: bolts with one switched on, graph paper and the box floor with tape",
+    "post": "Sample post: Charge your best self, the scoreboard at 24 g and the tub",
+    "story": "Sample story: how to load up, in three scoreboard readings",
+    "poster": "Sample poster: the giant symbol on carbon, with the name and the demo tape",
+    "print": "Sample Club Volta coupon, as a ticket with its stub",
+    "object": "Ionic Whey tub in 3D: volt lid, house label and how to use it"
+  },
+  "pieces": { "print": "Club coupon", "object": "Ionic Whey tub, 2 lb" },
+  "source": "Symbol, colours, typefaces and the LED scoreboard come from the demo's repo. The grid, the patterns, the pieces and the tub were drawn for this board, with sample copy.",
+  "art": {
+    "name": "Volta", "descriptor": "Supplements and sport", "house": "Volta Lab", "line": "Whey", "sub": "100% · 24 g prot", "flavor": "Chocolate",
+    "seal": "House brand", "postA": "Charge your", "postB": "best self", "gram": "g", "postC": "of protein", "postD": "per scoop",
+    "storyA": "How to", "storyB": "load up", "use": "How to use",
+    "u1": "scoop", "s1": "30 g of powder", "u2": "ml", "s2": "of water or milk", "u3": "sec", "s3": "in the shaker",
+    "demo": "Demo store", "demoShort": "Demo",
+    "off": "Off", "club": "Club Volta", "cupA": "On your first order", "code": "WELCOME10"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Clínica Brisa",
+  "owner": "The fictional dental clinic of the DentalOS demo",
+  "idea": "A tooth, a golden breeze and a paper folio: every visit leaves its next step in writing.",
+  "place": "The booking portal, the front desk and the waiting room",
+  "traits": ["Editorial", "Clinical", "Warm"],
+  "palette": {
+    "green": { "name": "Clinic green", "use": "The brand's field" },
+    "paper": { "name": "Warm paper", "use": "Reading ground and folios" },
+    "ink": { "name": "Green ink", "use": "Text on paper" },
+    "gold": { "name": "Gold", "use": "The breeze, the dot, hairlines" },
+    "sand": { "name": "Sand", "use": "Warm surfaces and date blocks" },
+    "night": { "name": "Night", "use": "Dark bands and the footer" }
+  },
+  "type": {
+    "display": { "role": "Titles, large dates and the folio's figures", "sample": "Every visit has a next step." },
+    "text": { "role": "Body text, buttons, labels and states", "sample": "Thursday, October 22, 10:00 · Orthodontic check-up · Centro branch" }
+  },
+  "grid": [
+    "Tooth and breeze share one axis: the breeze reaches equally far on each side.",
+    "The breeze is a circle's arc, crossing the tooth with half a stroke of air.",
+    "The gold dot is the module: it spaces symbol and name and sets the clear space."
+  ],
+  "alt": {
+    "logo": "Clínica Brisa logo: a tooth crossed by a golden breeze, beside the name",
+    "secondary": "Horizontal version: symbol, name on one line and the demo's tag",
+    "submark": "Clínica Brisa symbol: tooth, breeze and dot",
+    "patterns": "Three patterns: breezes laid like scales, a chart of teeth and a month in dots",
+    "post": "Sample post: “Every visit has a next step” on green",
+    "story": "Sample story: an appointment reminder with its paper folio",
+    "poster": "Sample poster on paper: the tooth at large scale and an invitation to book",
+    "print": "Sample appointment card with a perforated edge and the day in large figures",
+    "object": "The care kit box in 3D: the symbol in front, the next appointment on the back"
+  },
+  "pieces": { "print": "Appointment card", "object": "Care kit box" },
+  "source": "Colours, typefaces and symbol come from the DentalOS repo. The band of air, the grid, the patterns, the pieces and the box were drawn for this board with sample data.",
+  "art": {
+    "first": "Clínica", "last": "Brisa", "name": "Clínica Brisa", "tag": "DentalOS · demo",
+    "kicker": "YOUR NEXT STEP", "lineA": "Every visit", "lineB": "has a", "lineC": "next step.",
+    "postA": "Your visit, your reminder", "postB": "and what comes next.",
+    "storyA": "See you", "storyB": "on Thursday.",
+    "dow": "Thursday", "month": "October", "time": "10:00", "service": "Orthodontic check-up", "where": "Centro branch · A-0012",
+    "status": "Confirmed", "cta": "View or change", "sample": "Sample data",
+    "posterKicker": "ONLINE BOOKING", "posterA": "Book your visit", "posterB": "online.", "posterSub": "Pick a day and a time. We remind you.",
+    "kit": "Care kit", "next": "Your next step", "day": "Day", "hour": "Time", "tagA": "Every visit has", "tagB": "a next step."
+  }
+}

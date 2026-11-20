@@ -1,0 +1,51 @@
+{
+  "name": "Lucero",
+  "owner": "A fictional bodegón: the brand of Eclipse's demo for food venues",
+  "idea": "The evening star over a neighbourhood bodegón: every dotted line of its menu ends in that first light.",
+  "place": "A neighbourhood bodegón, after dark",
+  "traits": ["Warm", "Late-night", "Homemade"],
+  "palette": {
+    "wine": { "name": "Wine", "use": "The brand's field" },
+    "night": { "name": "Dining-room night", "use": "The background of the demo" },
+    "cream": { "name": "Cream", "use": "The name and all text" },
+    "notebook": { "name": "Notebook paper", "use": "The menu and order tickets" },
+    "amber": { "name": "Lamp amber", "use": "The star and the action" },
+    "copper": { "name": "Copper", "use": "Accents in the games" }
+  },
+  "type": {
+    "display": { "role": "The name upright; headings in italic", "sample": "We open with the first star." },
+    "text": { "role": "Dishes, prices and labels on the menu", "sample": "Milanesa napolitana, gnocchi with ragù and flan with dulce de leche: the menu, table by table." }
+  },
+  "grid": [
+    "The module is the distance between the x-height and the cap height.",
+    "The star is two modules wide: centre on the cap line, points on a circle.",
+    "The menu's dots step half a module; clear space is one module per side."
+  ],
+  "alt": {
+    "logo": "Lucero logo: the name in serif, an amber star above and a dotted menu line",
+    "secondary": "Reduced version: the name with its star and the Demo tag",
+    "submark": "Lucero seal: a ring, the L and the star",
+    "patterns": "Three patterns: order notebook, dotted lines with stars, and seals on wine",
+    "post": "Sample post: tonight's menu with four dishes and their prices",
+    "story": "Sample story: table 4's order, three steps on its way to the table",
+    "poster": "Sample poster: a dotted line climbs to the star above the opening line",
+    "print": "Sample order ticket for table 4, with three dishes and the seal",
+    "object": "Matchbox in 3D: the name and the star on the front, strikers on top and bottom"
+  },
+  "pieces": { "print": "Order ticket", "object": "Matchbox" },
+  "source": "From the demo's repo: name, colours and typefaces. The star, the grid, the patterns and the pieces (sample dishes and prices) were drawn for this board.",
+  "art": {
+    "name": "Lucero", "initial": "L", "kind": "bodegón", "night": "after dark", "demo": "DEMO", "sample": "Sample menu",
+    "postA": "Tonight,", "postB": "on the menu",
+    "dish1": "Milanesa napolitana", "price1": "$12,500", "dish2": "Gnocchi with ragù", "price2": "$9,800",
+    "dish3": "Flan with dulce de leche", "price3": "$4,200", "dish4": "Vermouth and soda", "price4": "$3,500",
+    "storyA": "Your order,", "storyB": "on its way.",
+    "step1": "Ordered", "step1b": "Table 4 · 9:32 pm", "step2": "In the kitchen", "step2b": "Your ticket is up", "step3": "At your table", "step3b": "Enjoy",
+    "cta": "See the menu",
+    "posterA": "We open", "posterB": "with the first", "posterC": "star.", "days": "Tuesday to Sunday", "hours": "from 8 pm",
+    "ticket": "ORDER", "table": "Table 4", "covers": "2 guests", "time": "9:32 pm",
+    "qty1": "2", "item1": "Milanesa napolitana", "qty2": "1", "item2": "Gnocchi with ragù", "qty3": "2", "item3": "Flan with dulce de leche",
+    "thanksA": "Thanks", "thanksB": "for coming.",
+    "matches": "House matches", "backA": "A light", "backB": "for every table."
+  }
+}

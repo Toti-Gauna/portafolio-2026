@@ -16,8 +16,9 @@ const HEX = /^#[0-9a-f]{6}$/i;
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 const strings = (o: unknown): string[] => (typeof o === 'string' ? [o] : o && typeof o === 'object' ? Object.values(o).flatMap(strings) : []);
 const keys = (o: object): string[] => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' && !Array.isArray(v) ? keys(v).map((x) => `${k}.${x}`) : [k])).sort();
+const ART = import.meta.glob<{ BRAND: BrandSpec }>('../../v2/components/brand/art/*.ts');
 const load = async (id: string) => {
-  const spec = (await import(`../../v2/components/brand/art/${id}.ts`)).BRAND as BrandSpec;
+  const spec = (await ART[`../../v2/components/brand/art/${id}.ts`]()).BRAND;
   const copy = (lang: 'es' | 'en') => JSON.parse(readFileSync(`messages/v2/brands/${lang}/${id}.json`, 'utf8')) as BrandCopy;
   return { spec, es: copy('es'), en: copy('en') };
 };

@@ -1,0 +1,50 @@
+{
+  "name": "Eclipse",
+  "owner": "El estudio de software de Ignacio Gauna",
+  "idea": "Un observatorio: tu negocio sale de la sombra y el ámbar es la única fuente de luz.",
+  "place": "En su landing, su portal de clientes y sus propuestas",
+  "traits": ["Precisa", "Editorial", "Cálida"],
+  "palette": {
+    "void": { "name": "Void", "use": "El fondo profundo, de noche" },
+    "dawn": { "name": "Dawn", "use": "Texto y tramos iluminados" },
+    "night": { "name": "Night", "use": "Superficies oscuras" },
+    "corona": { "name": "Corona", "use": "La luz: una acción por pantalla" },
+    "mist": { "name": "Mist", "use": "Texto secundario sobre oscuro" },
+    "flare": { "name": "Flare", "use": "El brillo de la corona" }
+  },
+  "type": {
+    "display": { "role": "Un momento grande por sección, en serif", "sample": "Tu negocio, a plena luz." },
+    "text": { "role": "Interfaz, cuerpo y la palabra ECLIPSE", "sample": "Webs, sistemas y agentes de IA: antes de hablar, te mostramos tu negocio funcionando." }
+  },
+  "grid": [
+    "Un cuadrado de 24 unidades: el sol mide 6,5 de radio; la corona, 8,6.",
+    "El destello cae sobre la diagonal, a 45°, entre el sol y la corona.",
+    "La palabra se centra en el eje del disco y respira medio cuadratín entre letras."
+  ],
+  "alt": {
+    "logo": "Logo de Eclipse: un eclipse total con su corona ámbar y la palabra ECLIPSE debajo",
+    "secondary": "Versión horizontal, como en el header: el eclipse junto a la palabra ECLIPSE",
+    "submark": "Símbolo de Eclipse: el anillo de la corona con su destello",
+    "patterns": "Tres patrones: fases del eclipse, reglas de instrumento y discos que se ocultan sobre ámbar",
+    "post": "Publicación de ejemplo: un eclipse total y la frase Tu negocio, a plena luz",
+    "story": "Historia de ejemplo: Webs, Sistemas, Contenido, Todo conectado y el botón Pedí tu demo",
+    "poster": "Cartel de ejemplo en papel claro: el dial del observatorio y Te mostramos tu negocio funcionando",
+    "print": "Pasaporte de proyecto de ejemplo, en ámbar: las cinco etapas y la segunda encendida",
+    "object": "Caja de bienvenida en 3D: el eclipse al frente, tapa ámbar y reglas en los lados"
+  },
+  "pieces": { "print": "Pasaporte de proyecto", "object": "Caja de bienvenida" },
+  "source": "El eclipse, la palabra, los colores y las tipografías salen del repo de Eclipse. La grilla, los patrones, las piezas y la caja se dibujaron para el tablero, como ejemplos.",
+  "art": {
+    "word": "ECLIPSE",
+    "eyebrow": "Desarrollo · IA · Automatización",
+    "lightA": "Tu negocio,", "lightB": "a plena", "lightC": "luz.",
+    "g1": "Webs.", "g2": "Sistemas.", "g3": "Contenido.", "g4": "Todo conectado.",
+    "cta": "Pedí tu demo",
+    "totality": "Totalidad",
+    "showA": "Te mostramos", "showB": "tu negocio", "showC": "funcionando.",
+    "passport": "Pasaporte de proyecto",
+    "stage0": "Preparación", "stage1": "Construcción", "stage2": "Revisión de Eclipse", "stage3": "Revisión del cliente", "stage4": "Entrega",
+    "now": "2", "of": "de 5",
+    "madeA": "Hecho a medida", "madeB": "de tu negocio."
+  }
+}

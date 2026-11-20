@@ -1,0 +1,48 @@
+{
+  "name": "Brote",
+  "owner": "Marca inventada para este lab: un vivero de plantas de interior",
+  "idea": "La «o» de brote es una maceta: de ahí crece cada planta, con su ficha de cuidados.",
+  "place": "Un vivero de interior: macetas, envíos y fichas de cuidados",
+  "traits": ["Blanda", "Juguetona", "Clara"],
+  "palette": {
+    "sprout": { "name": "Brote", "use": "El campo de la marca" },
+    "leaf": { "name": "Hoja", "use": "Hojas, botones y tramos oscuros" },
+    "lime": { "name": "Cal", "use": "Papel, etiquetas y texto claro" },
+    "pot": { "name": "Maceta", "use": "La «o» y cada maceta" },
+    "soil": { "name": "Tierra", "use": "Texto sobre campos claros" },
+    "moss": { "name": "Musgo", "use": "La segunda hoja de cada planta" }
+  },
+  "type": {
+    "display": { "role": "Títulos redondos, con peso y gracia", "sample": "Tu casa también brota." },
+    "text": { "role": "Fichas de cuidados y textos largos", "sample": "Riego una vez por semana, luz indirecta y una maceta con buen drenaje." }
+  },
+  "grid": [
+    "La «o» es la maceta: su círculo es la medida de todo el logo.",
+    "Cada hoja es el cruce de dos círculos iguales; la chica mide tres cuartos.",
+    "El tallo sigue el eje de la «o». Aire mínimo: media «o» por lado."
+  ],
+  "alt": {
+    "logo": "Logo de Brote: la palabra brote, con la «o» como maceta y su brote",
+    "secondary": "Versión en una línea: el logo y la leyenda vivero de interior",
+    "submark": "Símbolo de Brote: una maceta redonda con su brote de dos hojas",
+    "patterns": "Tres patrones: follaje con semillas, macetas con brotes y escamas de terracota",
+    "post": "Publicación de ejemplo: la planta de la semana, un potus con sus tres cuidados",
+    "story": "Historia de ejemplo: la ficha de cuidados de una calathea",
+    "poster": "Cartel de ejemplo: un sábado de intercambio de esquejes, con una planta gigante",
+    "print": "Estaca de ejemplo para la maceta, con la ficha de cuidados de un ficus",
+    "object": "Maceta de terracota en 3D con su etiqueta de papel y la planta vista desde arriba"
+  },
+  "pieces": { "print": "Estaca con ficha de cuidados", "object": "Maceta con su etiqueta" },
+  "source": "Brote es un ejercicio de marca del lab: logo, colores, patrones y piezas se dibujaron para este tablero. Sus tipografías, Bricolage Grotesque y Figtree, son de licencia abierta.",
+  "art": {
+    "nameA": "br", "nameB": "te",
+    "tagA": "vivero de", "tagB": "interior",
+    "postKicker": "Planta de la semana", "postName": "Potus",
+    "care1": "Riego semanal", "care2": "Luz indirecta", "care3": "Cuidado fácil",
+    "storyKicker": "Ficha de cuidados", "storyName": "Calathea", "storyCta": "Guardá la ficha",
+    "rowWater": "Riego", "rowLight": "Luz", "rowCare": "Atención",
+    "posterA": "Sábado de", "posterB": "esquejes", "posterC": "Traé uno,", "posterD": "llevate otro.", "posterDate": "Sáb 14 · 10 h",
+    "printName": "Ficus", "valWater": "1 vez por semana", "valLight": "Indirecta", "valCare": "Fácil",
+    "potName": "Monstera"
+  }
+}

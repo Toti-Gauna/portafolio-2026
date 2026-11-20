@@ -1,0 +1,47 @@
+{
+  "name": "Clínica Brisa",
+  "owner": "La clínica dental ficticia de la demo DentalOS",
+  "idea": "Un diente, una brisa de oro y un folio de papel: cada consulta deja anotado su próximo paso.",
+  "place": "El portal de turnos, la recepción y la sala de espera",
+  "traits": ["Editorial", "Clínica", "Cálida"],
+  "palette": {
+    "green": { "name": "Verde clínica", "use": "El campo de la marca" },
+    "paper": { "name": "Papel cálido", "use": "Fondo de lectura y folios" },
+    "ink": { "name": "Tinta verdosa", "use": "Texto sobre papel" },
+    "gold": { "name": "Oro", "use": "La brisa, el punto, los filetes" },
+    "sand": { "name": "Arena", "use": "Superficies cálidas y bloques de fecha" },
+    "night": { "name": "Noche", "use": "Bandas oscuras y el pie" }
+  },
+  "type": {
+    "display": { "role": "Títulos, fechas grandes y cifras del folio", "sample": "Cada consulta tiene un próximo paso." },
+    "text": { "role": "Texto, botones, rótulos y estados", "sample": "Jueves 22 de octubre, 10:00 h · Control de ortodoncia · Sede Centro" }
+  },
+  "grid": [
+    "Diente y brisa comparten un eje: la brisa sobresale lo mismo a cada lado.",
+    "La brisa es un arco de círculo y cruza el diente con medio grosor de aire.",
+    "El punto de oro es el módulo: separa símbolo y nombre, y mide el aire mínimo."
+  ],
+  "alt": {
+    "logo": "Logo de Clínica Brisa: un diente cruzado por una brisa de oro, junto al nombre",
+    "secondary": "Versión horizontal: símbolo, nombre en una línea y la etiqueta de la demo",
+    "submark": "Símbolo de Clínica Brisa: diente, brisa y punto",
+    "patterns": "Tres patrones: brisas como escamas, una carta de dientes y un mes en puntos",
+    "post": "Publicación de ejemplo: «Cada consulta tiene un próximo paso» sobre verde",
+    "story": "Historia de ejemplo: recordatorio de turno con su folio de papel",
+    "poster": "Cartel de ejemplo sobre papel: el diente en grande y la invitación a reservar",
+    "print": "Tarjeta de turno de ejemplo, con borde perforado y el día en grande",
+    "object": "Caja del kit de cuidado en 3D: el símbolo al frente y el próximo turno detrás"
+  },
+  "pieces": { "print": "Tarjeta de turno", "object": "Caja del kit de cuidado" },
+  "source": "Colores, tipografías y símbolo: del repo de DentalOS. La banda de aire, la grilla, los patrones, las piezas y la caja se dibujaron para el tablero con datos de muestra.",
+  "art": {
+    "first": "Clínica", "last": "Brisa", "name": "Clínica Brisa", "tag": "DentalOS · demo",
+    "kicker": "TU PRÓXIMO PASO", "lineA": "Cada consulta", "lineB": "tiene un", "lineC": "próximo paso.",
+    "postA": "Tu turno, tu recordatorio", "postB": "y lo que sigue, anotados.",
+    "storyA": "Te esperamos", "storyB": "el jueves.",
+    "dow": "jueves", "month": "octubre", "time": "10:00 h", "service": "Control de ortodoncia", "where": "Sede Centro · A-0012",
+    "status": "Confirmado", "cta": "Ver o cambiar", "sample": "Datos de muestra",
+    "posterKicker": "TURNOS EN LÍNEA", "posterA": "Reservá tu turno", "posterB": "en línea.", "posterSub": "Elegís día y horario. Te lo recordamos.",
+    "kit": "Kit de cuidado", "next": "Tu próximo paso", "day": "Día", "hour": "Hora", "tagA": "Cada consulta tiene", "tagB": "un próximo paso."
+  }
+}
