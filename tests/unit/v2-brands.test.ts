@@ -72,7 +72,8 @@ describe.each(IDS.filter((id) => !ONLY || id === ONLY))('brand %s', (id) => {
     const a = spec.art(new Proxy(es.art, { get: (o, k: string) => (k in o ? o[k] : (missing.push(k), '')) }));
     expect(missing, 'words the drawings ask for and the copy lacks').toEqual([]);
     for (const [name, svg] of drawings(a)) {
-      expect(svg, name).not.toMatch(/<script|<image|<img|<foreignObject|<title|href="http|url\(\s*['"]?http|undefined|NaN/i);
+      expect(svg, name).not.toMatch(/<script|<image|<img|<foreignObject|<title|href="http|url\(\s*['"]?http/i);
+      expect(svg, `${name}: a value that did not compute`).not.toMatch(/\bundefined\b|\bNaN\b/);
       for (const t of svg.matchAll(/<text\b[^>]*>/g)) {
         expect(t[0], `${name}: a <text> takes the brand's font from class bl-fd or bl-ft`).toMatch(/class="[^"]*\bbl-f[dt]\b/);
         expect(t[0], `${name}: font-size as an attribute`).toMatch(/font-size="[\d.]+"/);
