@@ -1,0 +1,107 @@
+{
+  "title": "IG, del enlace a la entrevista",
+  "goal": "Que un reclutador me escriba después de ver un caso.",
+  "audience": "Reclutadores y líderes técnicos que buscan un perfil senior de producto e IA.",
+  "stages": [
+    "Me encuentra",
+    "Me conoce",
+    "Me evalúa",
+    "Me escribe"
+  ],
+  "touches": {
+    "post": {
+      "name": "Un caso por semana",
+      "msg": "Un caso en tres líneas: el problema, lo que construí y dónde está, con el enlace a su página.",
+      "rule": "Un caso por semana en LinkedIn, en el orden de Work, con su película de diez segundos.",
+      "watch": "Visitas a la página del caso desde LinkedIn",
+      "p": {
+        "h": "CompliA, en diez segundos",
+        "s": "Un caso por semana",
+        "tag": "Ver el caso"
+      },
+      "alt": "Publicación de ejemplo con el caso de CompliA y el enlace a su página"
+    },
+    "share": {
+      "name": "El enlace compartido",
+      "msg": "Ignacio Gauna · Sr AI Fullstack Developer, con la imagen del portafolio.",
+      "rule": "Cada página trae su título, su descripción y su imagen para redes: el enlace se presenta solo.",
+      "watch": "Clics al enlace en cada canal donde se comparte",
+      "p": {
+        "h": "Ignacio Gauna · Sr AI Fullstack Developer",
+        "d": "portafolio.eclipse-business.com"
+      },
+      "alt": "Vista previa del enlace al portafolio, con su imagen y su título"
+    },
+    "card": {
+      "name": "La tarjeta personal",
+      "msg": "Nombre, rol y un QR que abre el portafolio.",
+      "rule": "En mano, en cada encuentro en persona; el QR lleva a la puerta del portafolio.",
+      "watch": "Visitas que llegan desde el QR de la tarjeta",
+      "p": {
+        "h": "Ignacio Gauna",
+        "s": "Sr AI Fullstack Developer",
+        "d": "portafolio.eclipse-business.com"
+      },
+      "alt": "Tarjeta personal de ejemplo con el monograma, el rol y un QR"
+    },
+    "trailer": {
+      "name": "El tráiler",
+      "msg": "Conocer a Ignacio: el camino desde Mar del Plata hasta hoy, en una película corta.",
+      "rule": "Se abre con un clic desde la puerta, arranca solo cuando se lo pide y tiene su versión en texto.",
+      "watch": "Cuántos llegan al final y entran al portafolio",
+      "p": {
+        "h": "Conocer a Ignacio",
+        "s": "De Mar del Plata a hoy",
+        "cta": "Ver el tráiler"
+      },
+      "alt": "Pantalla vertical del tráiler Conocer a Ignacio, con su botón"
+    },
+    "case": {
+      "name": "El caso en diez segundos",
+      "msg": "Para quién, qué hace, en uso y dónde está: la película abre cada caso.",
+      "rule": "Tres capas de lectura: la película en 5 segundos, el resumen en 30 y el detalle plegado.",
+      "watch": "Casos que se leen hasta «Más detalle»",
+      "p": {
+        "h": "CompliA",
+        "s": "Para quién · Qué hace · En uso · Dónde está",
+        "cta": "Ver el caso"
+      },
+      "alt": "Página de caso de ejemplo con los cuatro capítulos de su película"
+    },
+    "sheet": {
+      "name": "Una hoja impresa",
+      "msg": "Rol, tres casos y contacto en una sola página, con el QR al portafolio.",
+      "rule": "Para entrevistas en persona: una hoja, en el orden del portafolio y con lo mismo que dice.",
+      "watch": "Preguntas de la entrevista sobre cada caso",
+      "p": {
+        "h": "Ignacio Gauna · Sr AI Fullstack Developer",
+        "l": [
+          "CompliA",
+          "Eclipse",
+          "Sistema agéntico",
+          "Contacto"
+        ]
+      },
+      "alt": "Hoja impresa de ejemplo con el rol, tres casos y el contacto"
+    },
+    "mail": {
+      "name": "El mail directo",
+      "msg": "Un botón «Escribir» abre el mail, con LinkedIn al lado.",
+      "rule": "El contacto vive en el inicio y en Sobre mí: siempre a un clic.",
+      "watch": "Mails que nombran un caso",
+      "p": {
+        "subj": "Contacto desde el portafolio",
+        "m": "Hola, Ignacio: te escribo por un puesto senior.",
+        "cta": "Responder"
+      },
+      "alt": "Mail de ejemplo que llega desde el portafolio"
+    }
+  },
+  "rules": [
+    "Primero el rol, después el caso, al final el contacto.",
+    "Cada afirmación lleva su caso y su estado.",
+    "Una pieza, una acción: ver el caso o escribir."
+  ],
+  "next": "La serie de casos en LinkedIn, uno por semana, en el orden de Work.",
+  "source": "Lo marcado «En este sitio» ya funciona en el portafolio; el resto es la propuesta del playbook para buscar trabajo."
+}

@@ -203,3 +203,16 @@
 .blw-name b { font-family: var(--bl-display); font-weight: var(--bl-hw); font-style: var(--bl-hs); text-transform: var(--bl-ht); letter-spacing: var(--bl-hk); font-size: clamp(18px, 2.2vw, 24px); line-height: 1.1; }
 .blw-name span { font-family: var(--bl-text); font-size: 13px; color: var(--m-muted); }
 .blw[data-blind] .blw-name { visibility: hidden; }
+
+/* ---------- the six marketing playbooks (lote 6.3) ---------- */
+.blw-lead { margin: 0; font-size: 17px; line-height: 1.45; color: var(--color-text); max-width: 640px; }
+.blw-mk { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 720px) { .blw-mk { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .blw-mk { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.blw-mk-a { display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: center; gap: 14px; min-height: 76px; padding: 12px 16px; border-radius: var(--radius-lg); background: var(--m-bg); color: var(--m-ink); text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.14); }
+.blw-mk-a .bl-acc { fill: var(--m-accent); }
+.blw-mk-mark svg { display: block; width: 52px; height: 52px; }
+.blw-mk-t { display: grid; gap: 2px; }
+.blw-mk-t b { font-family: var(--bl-display); font-weight: var(--bl-hw); font-style: var(--bl-hs); text-transform: var(--bl-ht); letter-spacing: var(--bl-hk); font-size: 19px; line-height: 1.15; }
+.blw-mk-t span { font-family: var(--bl-text); font-size: 14px; color: var(--m-muted); }
+.blw-mk-a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }

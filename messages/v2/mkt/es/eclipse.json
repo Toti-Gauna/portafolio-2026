@@ -1,0 +1,120 @@
+{
+  "title": "Eclipse: mostrar antes de hablar",
+  "goal": "Que el dueño vea su negocio funcionando y pida su plan.",
+  "audience": "Dueños de pymes de Mar del Plata, empezando por las inmobiliarias.",
+  "stages": [
+    "Primer toque",
+    "Ve la demo",
+    "Conversa",
+    "Propuesta",
+    "Arranca"
+  ],
+  "touches": {
+    "mail": {
+      "name": "El mail de apertura",
+      "msg": "Una apertura por una necesidad concreta: las consultas que llegan fuera de horario, ordenadas en una demo corta.",
+      "rule": "Tandas de 5 a 10 prospectos, una variable por tanda: señal a los 2 días y cierre a los 7.",
+      "watch": "Respuestas por tanda, anotadas en el CRM",
+      "p": {
+        "subj": "Una demo corta para tu inmobiliaria",
+        "m": "Las consultas que llegan fuera de horario también se pueden ordenar: armamos una demo corta para mostrártelo.",
+        "cta": "Ver la demo"
+      },
+      "alt": "Mail de apertura de ejemplo con el botón Ver la demo"
+    },
+    "call": {
+      "name": "La llamada",
+      "msg": "«¿Hablo con quien decide cómo se atienden las consultas nuevas? Son 30 segundos y te cuento para qué llamo.»",
+      "rule": "Primero el decisor; treinta segundos para decir para qué se llama, y la demo después.",
+      "watch": "Conversaciones con quien decide",
+      "p": {
+        "who": "Eclipse",
+        "m": "¿Hablo con quien decide cómo se atienden las consultas nuevas?"
+      },
+      "alt": "Pantalla de llamada de ejemplo con la primera frase"
+    },
+    "visit": {
+      "name": "La visita",
+      "msg": "«Pasé a mostrarte una demo de cómo una inmobiliaria ordena sus consultas; si ahora es mal momento, coordinamos otro.»",
+      "rule": "La demo en el celular, en mano; si es mal momento, se agenda otro día.",
+      "watch": "Reuniones agendadas en la misma visita",
+      "p": {
+        "h": "Pasé a mostrarte una demo",
+        "l": [
+          "La demo, en el celular",
+          "Una reunión corta",
+          "La propuesta, por escrito"
+        ]
+      },
+      "alt": "Hoja de ejemplo que acompaña la visita, con los tres pasos"
+    },
+    "demo": {
+      "name": "La demo de su rubro",
+      "msg": "«¿Qué negocio querés potenciar?»: elige su rubro y ve su negocio funcionando, con guía o por su cuenta.",
+      "rule": "La primera acción de cada plan es ver la demo, con un negocio ficticio rotulado «Demo».",
+      "watch": "Las señales selector_chosen y demo_opened, con su rubro",
+      "p": {
+        "h": "¿Qué negocio querés potenciar?",
+        "s": "Inmobiliarias",
+        "cta": "Ver con guía"
+      },
+      "alt": "Selector de rubro de ejemplo con el botón Ver con guía"
+    },
+    "wa": {
+      "name": "WhatsApp con el plan",
+      "msg": "«Pedir este plan» abre WhatsApp con el plan elegido ya escrito en el mensaje.",
+      "rule": "Una persona responde y lo anota en el CRM; el sistema calcula los recordatorios y los manda una persona.",
+      "watch": "whatsapp_opened, con su origen y su plan",
+      "p": {
+        "who": "Eclipse",
+        "q": "Hola, quiero pedir el plan Growth.",
+        "m": [
+          "¡Hola! Te muestro la demo de tu rubro y armamos la propuesta."
+        ]
+      },
+      "alt": "Chat de ejemplo que abre con el plan elegido"
+    },
+    "proposal": {
+      "name": "La propuesta escrita",
+      "msg": "Respondió: llamada el mismo día y propuesta desglosada, pieza por pieza, dentro de las 24 horas.",
+      "rule": "Toques a los 2, 5 y 9 días; archivo a los 14 y reactivación a los 60.",
+      "watch": "La actividad proposal_sent en el CRM",
+      "p": {
+        "subj": "Tu propuesta, pieza por pieza",
+        "m": "Lo que incluye, el mantenimiento y la fecha de vigencia.",
+        "cta": "Ver la propuesta"
+      },
+      "alt": "Mail de ejemplo con la propuesta desglosada"
+    },
+    "paid": {
+      "name": "El pago acreditado",
+      "msg": "El proyecto arranca con el primer pago acreditado en el banco.",
+      "rule": "Un comprobante avisa; el pago cuenta cuando se verifica y queda en estado collected.",
+      "watch": "Payment con estado collected",
+      "p": {
+        "h": "Pago acreditado",
+        "code": "collected",
+        "s": "Arranca el proyecto"
+      },
+      "alt": "Comprobante de ejemplo con el estado collected"
+    },
+    "box": {
+      "name": "La caja de bienvenida",
+      "msg": "«Tu negocio, a plena luz»: llega con el arranque y abre el portal del proyecto.",
+      "rule": "Adentro, el acceso al portal y las cinco etapas del proyecto, de la preparación a la entrega.",
+      "watch": "Primer ingreso del cliente al portal",
+      "p": {
+        "h": "Tu negocio, a plena luz",
+        "s": "Bienvenido a Eclipse"
+      },
+      "alt": "Caja de bienvenida de ejemplo con el eclipse en la tapa"
+    }
+  },
+  "rules": [
+    "Primero la demo, después la conversación.",
+    "Cada demo dice «Demo» y usa un negocio ficticio.",
+    "Un clic es una señal; el pago acreditado es el arranque."
+  ],
+  "next": "Medir las señales del sitio con un proveedor de analítica, con eventos libres de datos personales.",
+  "source": "La apertura, la cadencia y el embudo están en los documentos de Eclipse; la demo y WhatsApp, en su código. La caja es propuesta del playbook."
+}

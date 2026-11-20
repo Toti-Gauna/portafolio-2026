@@ -1,0 +1,121 @@
+{
+  "title": "Clínica Brisa: care, calmly",
+  "goal": "They come back for the check-up their dentist set.",
+  "audience": "The clinic's families and adults, with their kids.",
+  "stages": [
+    "Looks",
+    "Books",
+    "Comes in",
+    "Follows up",
+    "Returns"
+  ],
+  "touches": {
+    "home": {
+      "name": "The booking site",
+      "msg": "«Book a first visit»: the site goes straight to choosing a day and a time.",
+      "rule": "One action per screen; the appointment is booked on the month's calendar.",
+      "watch": "First-visit requests",
+      "p": {
+        "h": "Clínica Brisa",
+        "s": "Online booking",
+        "cta": "Book a first visit"
+      },
+      "alt": "Sample home page of the clinic with its booking button"
+    },
+    "wa": {
+      "name": "The clinic's WhatsApp",
+      "msg": "«My next appointment», «My estimates» and opening hours, with short answers; anything clinical goes to reception.",
+      "rule": "Administrative answers; a person takes any clinical question.",
+      "watch": "Conversations handed to reception",
+      "p": {
+        "who": "Clínica Brisa",
+        "q": "My next appointment",
+        "m": [
+          "Your next appointment is on Tuesday at 10:30."
+        ]
+      },
+      "alt": "Sample chat answering about the next appointment"
+    },
+    "reminder": {
+      "name": "The 24-hour reminder",
+      "msg": "A day before, the appointment reminder, for those who asked for it.",
+      "rule": "Opting out stops the send and opens a task for reception to call.",
+      "watch": "Opt-outs and open contact tasks",
+      "p": {
+        "who": "Clínica Brisa",
+        "m": [
+          "Tomorrow at 10:30 you have an appointment at the clinic.",
+          "If you need to move it, reply to this message."
+        ]
+      },
+      "alt": "Sample chat with the appointment reminder"
+    },
+    "receipt": {
+      "name": "The appointment slip",
+      "msg": "A paper ticket with its stub: date, branch and dentist, just as reception sees them.",
+      "rule": "The date in serif and the same details reception holds, so both talk about the same thing.",
+      "watch": "Appointments that arrive with their slip",
+      "p": {
+        "h": "Appointment",
+        "code": "A-0012",
+        "s": "Tuesday · 10:30"
+      },
+      "alt": "Sample appointment slip with its stub"
+    },
+    "kids": {
+      "name": "Brisa Chicos",
+      "msg": "A memory game with the Brisitos, for the wait.",
+      "rule": "Cosmetic prizes, like the «Good memory» sticker, kept apart from appointments and treatments.",
+      "watch": "Games finished in the waiting room",
+      "p": {
+        "h": "Brisa Chicos",
+        "prize": "«Good memory» sticker"
+      },
+      "alt": "Sample memory game with the Good memory sticker"
+    },
+    "control": {
+      "name": "The check-up already set",
+      "msg": "«Your dentist has set a check-up for you to book. You can pick a time in the portal.»",
+      "rule": "Two messages every 30 days at most; for a child, the message goes to their responsible adult.",
+      "watch": "Check-ups booked from the segment",
+      "p": {
+        "who": "Clínica Brisa",
+        "m": [
+          "Hi Ana, your dentist has set a check-up for you to book.",
+          "You can pick a time in the portal or reply to this message."
+        ]
+      },
+      "alt": "Sample chat about a check-up already set"
+    },
+    "kit": {
+      "name": "The care kit",
+      "msg": "A box for daily care, taken home after the visit.",
+      "rule": "Handed over at reception; inside, the card with the next check-up.",
+      "watch": "Check-ups booked with the card",
+      "p": {
+        "h": "Care kit",
+        "s": "Clínica Brisa"
+      },
+      "alt": "Sample box of the clinic's care kit"
+    },
+    "again": {
+      "name": "Booking again",
+      "msg": "«If you'd like to rebook the appointment that was cancelled, you can pick a time whenever it suits you.»",
+      "rule": "Discreet messages: the panel stops urgency, fear, offers and clinical detail.",
+      "watch": "Cancelled appointments that return to the calendar",
+      "p": {
+        "subj": "Your appointment, whenever it suits you",
+        "m": "If you'd like to rebook the appointment that was cancelled, you can pick a time in the portal.",
+        "cta": "Pick a time"
+      },
+      "alt": "Sample email to rebook an appointment"
+    }
+  },
+  "rules": [
+    "Calm: hours and appointments, in simple words.",
+    "A person talks about anything clinical.",
+    "For kids, games with cosmetic prizes."
+  ],
+  "next": "The QR code on the appointment slip, already written in its requirements.",
+  "source": "The campaigns, the chat, the reminder and the slip are in DentalOS's repo, with simulated messages; the kit is the playbook's proposal."
+}

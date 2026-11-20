@@ -1,0 +1,143 @@
+{
+  "title": "Volta: el laboratorio que te avisa",
+  "goal": "Que vuelva a comprar antes de que se le termine el pote.",
+  "audience": "Gente que entrena en Mar del Plata y compra por Instagram y WhatsApp.",
+  "stages": [
+    "Descubre",
+    "Elige",
+    "Compra",
+    "Recibe",
+    "Vuelve"
+  ],
+  "touches": {
+    "post": {
+      "name": "El post con palabra clave",
+      "msg": "Un producto y una palabra para comentar: WHEY, CREATINA o SHAKER.",
+      "rule": "El Estudio saca post, historia y carrusel de la misma plantilla, con su texto y su palabra clave.",
+      "watch": "Comentarios con la palabra clave",
+      "p": {
+        "h": "Ionic Whey",
+        "s": "Proteína de suero",
+        "tag": "Comentá WHEY"
+      },
+      "alt": "Publicación de ejemplo de Ionic Whey con la palabra clave WHEY"
+    },
+    "date": {
+      "name": "La fecha comercial",
+      "msg": "«Overclock de precios»: 72 horas con los más vendidos, con su banner, su cupón y su sala de espera.",
+      "rule": "Cada fecha trae key visual, cupón y cinco productos; las fechas fuertes abren una sala de espera.",
+      "watch": "Los resultados del cupón de la campaña",
+      "p": {
+        "h": "Overclock de precios",
+        "s": "CyberMonday · 72 horas",
+        "cta": "Entrar"
+      },
+      "alt": "Portada de ejemplo de la campaña de CyberMonday"
+    },
+    "game": {
+      "name": "El juego del shaker",
+      "msg": "Shaker Rush: un juego corto que entrega un cupón SHAKER para la compra.",
+      "rule": "Un cupón por día; el premio puede ser una muestra o el shaker de la marca.",
+      "watch": "Cupones SHAKER usados en el carrito",
+      "p": {
+        "h": "Shaker Rush",
+        "prize": "Cupón SHAKER"
+      },
+      "alt": "Juego de ejemplo en un celular con el premio Cupón SHAKER"
+    },
+    "wa": {
+      "name": "WhatsApp por estado",
+      "msg": "Doce mensajes, uno por estado del pedido, con los datos ya puestos: listo para retirar, enviado, entregado.",
+      "rule": "El panel arma cada mensaje y una persona lo envía con un toque.",
+      "watch": "Pedidos que llegan a entregado",
+      "p": {
+        "who": "Volta",
+        "m": [
+          "¡Tu pedido está listo para retirar! Pasá por el local en horario comercial y decí el código."
+        ]
+      },
+      "alt": "Chat de ejemplo con el aviso de pedido listo para retirar"
+    },
+    "counter": {
+      "name": "El mostrador",
+      "msg": "Retiro con código y venta en el local, con el mismo stock que la tienda.",
+      "rule": "Sale primero el lote que vence antes; al cierre, la caja esperada del día.",
+      "watch": "Ventas del mostrador en el cierre del día",
+      "p": {
+        "h": "Retirá acá",
+        "s": "Decí tu código"
+      },
+      "alt": "Cartel de mostrador de ejemplo para retirar pedidos"
+    },
+    "sample": {
+      "name": "La muestra del Club",
+      "msg": "Desde el nivel Atleta, un sachet de muestra en cada pedido.",
+      "rule": "Probar antes de comprar el pote: la muestra viaja con el pedido y también es premio de la ruleta.",
+      "watch": "Pedidos del producto que viajó como muestra",
+      "p": {
+        "h": "Muestra",
+        "s": "Club Volta · Atleta"
+      },
+      "alt": "Sachet de muestra de ejemplo del Club Volta"
+    },
+    "repurchase": {
+      "name": "El aviso de recompra",
+      "msg": "«Calculamos que el jueves se te termina tu creatina. ¿Te preparamos otro?», con el bolso ya armado.",
+      "rule": "Unos 5 días antes de que se termine el pote, según los servicios por semana de cada cliente.",
+      "watch": "El segmento «se le termina esta semana»",
+      "p": {
+        "who": "Volta",
+        "m": [
+          "Calculamos que el jueves se te termina tu creatina. ¿Te preparamos otro?",
+          "Te dejé el bolso armado con lo mismo."
+        ]
+      },
+      "alt": "Chat de ejemplo con el aviso de recompra y el bolso armado"
+    },
+    "gift": {
+      "name": "El regalo, en historia",
+      "msg": "Quien recibe un regalo lo abre como tarjeta de atleta y la comparte en una historia.",
+      "rule": "Historia 9:16 dibujada en el navegador, sobre un estudio neutro y con el producto al frente.",
+      "watch": "Historias compartidas desde el regalo",
+      "p": {
+        "h": "Tarjeta de atleta",
+        "s": "Un regalo para vos",
+        "cta": "Compartir"
+      },
+      "alt": "Historia de ejemplo con la tarjeta de atleta de un regalo"
+    }
+  },
+  "rules": [
+    "Habla de laboratorio: dosis, lote y vencimiento a la vista.",
+    "Una palabra clave por pieza, fácil de comentar.",
+    "Cada fecha tiene su cupón y su final anunciado."
+  ],
+  "calendar": {
+    "title": "Diecisiete fechas al año",
+    "lanes": {
+      "sales": "Comerciales",
+      "sport": "Del deporte"
+    },
+    "dates": {
+      "madre": "Día de la Madre",
+      "halloween": "Halloween",
+      "cyber": "CyberMonday",
+      "black": "Black Friday",
+      "navidad": "Navidad",
+      "nuevo": "Año Nuevo",
+      "valentin": "San Valentín",
+      "gym": "Vuelta al gym",
+      "hot": "Hot Sale",
+      "padre": "Día del Padre",
+      "amigo": "Día del Amigo",
+      "verano": "Operación verano",
+      "crossfit": "CrossFit Open",
+      "actividad": "Día de la Actividad Física",
+      "running": "Día del Running",
+      "futbol": "Día del Futbolista",
+      "box": "Día del Boxeador"
+    }
+  },
+  "next": "En producción, los mensajes y los avisos salen desde el servidor de la tienda.",
+  "source": "Todo está en el repo de la demo de Volta, con sus datos de muestra; los envíos de la demo quedan en una bandeja de salida."
+}

@@ -1,0 +1,143 @@
+{
+  "title": "Volta: the lab that reminds you",
+  "goal": "They buy again before the tub runs out.",
+  "audience": "People who train in Mar del Plata and buy through Instagram and WhatsApp.",
+  "stages": [
+    "Discovers",
+    "Chooses",
+    "Buys",
+    "Receives",
+    "Returns"
+  ],
+  "touches": {
+    "post": {
+      "name": "The keyword post",
+      "msg": "One product and one word to comment: WHEY, CREATINA or SHAKER.",
+      "rule": "The Studio makes the post, story and carousel from the same template, with its text and its keyword.",
+      "watch": "Comments with the keyword",
+      "p": {
+        "h": "Ionic Whey",
+        "s": "Whey protein",
+        "tag": "Comment WHEY"
+      },
+      "alt": "Sample post for Ionic Whey with the keyword WHEY"
+    },
+    "date": {
+      "name": "The sales date",
+      "msg": "«Overclock de precios»: 72 hours with the best sellers, with its banner, its coupon and its waiting room.",
+      "rule": "Every date brings a key visual, a coupon and five products; the big dates open a waiting room.",
+      "watch": "The results of the campaign's coupon",
+      "p": {
+        "h": "Overclock de precios",
+        "s": "CyberMonday · 72 hours",
+        "cta": "Enter"
+      },
+      "alt": "Sample cover of the CyberMonday campaign"
+    },
+    "game": {
+      "name": "The shaker game",
+      "msg": "Shaker Rush: a short game that hands out a SHAKER coupon for the purchase.",
+      "rule": "One coupon a day; the prize can be a sample or the brand's shaker.",
+      "watch": "SHAKER coupons used in the cart",
+      "p": {
+        "h": "Shaker Rush",
+        "prize": "SHAKER coupon"
+      },
+      "alt": "Sample game on a phone with the prize SHAKER coupon"
+    },
+    "wa": {
+      "name": "WhatsApp by status",
+      "msg": "Twelve messages, one per order status, with the details already in: ready for pickup, shipped, delivered.",
+      "rule": "The panel writes each message and a person sends it with one tap.",
+      "watch": "Orders that reach delivered",
+      "p": {
+        "who": "Volta",
+        "m": [
+          "Your order is ready for pickup! Drop by the shop during opening hours and say your code."
+        ]
+      },
+      "alt": "Sample chat with the ready-for-pickup message"
+    },
+    "counter": {
+      "name": "The counter",
+      "msg": "Pickup with a code and sales in the shop, from the same stock as the store.",
+      "rule": "The batch that expires first goes out first; at closing, the day's expected till.",
+      "watch": "Counter sales in the day's closing",
+      "p": {
+        "h": "Pick up here",
+        "s": "Say your code"
+      },
+      "alt": "Sample counter sign for picking up orders"
+    },
+    "sample": {
+      "name": "The Club's sample",
+      "msg": "From the Atleta level on, a sample sachet in every order.",
+      "rule": "Try before buying the tub: the sample travels with the order and is also a prize of the wheel.",
+      "watch": "Orders of the product that travelled as a sample",
+      "p": {
+        "h": "Sample",
+        "s": "Club Volta · Atleta"
+      },
+      "alt": "Sample sachet of the Volta Club"
+    },
+    "repurchase": {
+      "name": "The reorder reminder",
+      "msg": "«We reckon your creatine runs out on Thursday. Shall we get another ready?», with the bag already packed.",
+      "rule": "About 5 days before the tub runs out, from each customer's servings per week.",
+      "watch": "The segment «runs out this week»",
+      "p": {
+        "who": "Volta",
+        "m": [
+          "We reckon your creatine runs out on Thursday. Shall we get another ready?",
+          "I left the bag packed with the same."
+        ]
+      },
+      "alt": "Sample chat with the reorder reminder and the packed bag"
+    },
+    "gift": {
+      "name": "The gift, as a story",
+      "msg": "Whoever receives a gift opens it as an athlete card and shares it in a story.",
+      "rule": "A 9:16 story drawn in the browser, on a neutral studio, with the product up front.",
+      "watch": "Stories shared from the gift",
+      "p": {
+        "h": "Athlete card",
+        "s": "A gift for you",
+        "cta": "Share"
+      },
+      "alt": "Sample story with the athlete card of a gift"
+    }
+  },
+  "rules": [
+    "It talks like a lab: dose, batch and expiry in sight.",
+    "One keyword per piece, easy to comment.",
+    "Every date has its coupon and an announced end."
+  ],
+  "calendar": {
+    "title": "Seventeen dates a year",
+    "lanes": {
+      "sales": "Sales",
+      "sport": "Sport"
+    },
+    "dates": {
+      "madre": "Mother's Day",
+      "halloween": "Halloween",
+      "cyber": "CyberMonday",
+      "black": "Black Friday",
+      "navidad": "Christmas",
+      "nuevo": "New Year",
+      "valentin": "Valentine's Day",
+      "gym": "Back to the gym",
+      "hot": "Hot Sale",
+      "padre": "Father's Day",
+      "amigo": "Friendship Day",
+      "verano": "Operation summer",
+      "crossfit": "CrossFit Open",
+      "actividad": "Physical Activity Day",
+      "running": "Running Day",
+      "futbol": "Footballer's Day",
+      "box": "Boxer's Day"
+    }
+  },
+  "next": "In production, the messages and reminders go out from the store's server.",
+  "source": "All of it is in the repo of Volta's demo, with its sample data; the demo's sends land in an outbox."
+}

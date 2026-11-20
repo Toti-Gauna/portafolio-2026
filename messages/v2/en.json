@@ -1468,5 +1468,77 @@
         "The logo last, and its applications."
       ]
     }
+  },
+  "mkt": {
+    "kicker": "Marketing playbook",
+    "note": "A plan: which piece goes in each moment, how it is done and what is looked at. The pieces are examples in the brand's skin.",
+    "goal": "What it is after",
+    "audience": "Who it speaks to",
+    "count": {
+      "touch": "touchpoints",
+      "digital": "on screen",
+      "physical": "on the street"
+    },
+    "lanes": {
+      "digital": "On screen",
+      "physical": "On the street"
+    },
+    "origin": {
+      "repo": "In its repo",
+      "doc": "In its documents",
+      "site": "On this site",
+      "plan": "Playbook proposal"
+    },
+    "map": "The way, point by point",
+    "walk": "Walk the way",
+    "pause": "Pause",
+    "replay": "Walk it again",
+    "step": "Point",
+    "of": "of",
+    "prev": "Previous point",
+    "next": "Next point",
+    "keys": "With the focus on a point, the arrows move to the previous and the next one.",
+    "msg": "The message",
+    "rule": "How it is done",
+    "watch": "What is looked at",
+    "where": "Where it lives",
+    "calendar": "The year of campaigns",
+    "calNote": "The dates come from its repo.",
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "monthsLong": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "rules": "How it talks",
+    "nextStep": "Next step",
+    "source": "Where it comes from",
+    "wall": {
+      "title": "Six marketing playbooks",
+      "lead": "One per project with a brand: the customer's way, from the screen to the street.",
+      "open": "See the playbook"
+    }
   }
 }

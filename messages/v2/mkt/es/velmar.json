@@ -1,0 +1,130 @@
+{
+  "title": "Velmar: hecho a mano, con nombre",
+  "goal": "Que encargue una pieza con nombre y vuelva para el cumpleaños de su mascota.",
+  "audience": "Familias con perros y gatos que regalan cosas con nombre.",
+  "stages": [
+    "Descubre",
+    "Personaliza",
+    "Compra",
+    "Espera",
+    "Vuelve"
+  ],
+  "touches": {
+    "fair": {
+      "name": "La feria",
+      "msg": "La placa NFC «Seguinos» abre la tienda en el celular, y el cupón FERIA2000 la sigue después.",
+      "rule": "Una placa a la vista en el puesto: se acerca el celular y aparece la tienda.",
+      "watch": "Usos del cupón FERIA2000",
+      "p": {
+        "h": "Seguinos",
+        "s": "Acercá el celular"
+      },
+      "alt": "Placa NFC de ejemplo con la palabra Seguinos"
+    },
+    "carousel": {
+      "name": "El carrusel en cuatro pasos",
+      "msg": "«Cómo pedir el tuyo»: elegir y subir la foto, aprobar la vista previa, pagar y seguir el pedido.",
+      "rule": "El Estudio arma el carrusel 4:5 y su texto sugerido desde el producto.",
+      "watch": "Guardados y mensajes desde el carrusel",
+      "p": {
+        "h": "Cómo pedir el tuyo",
+        "steps": [
+          "Elegí tu pieza y subí tu foto",
+          "Mirá la vista previa y aprobala",
+          "Pagá como prefieras",
+          "Seguí tu pedido hasta tu casa"
+        ]
+      },
+      "alt": "Lámina de ejemplo del carrusel Cómo pedir el tuyo, con cuatro pasos"
+    },
+    "theme": {
+      "name": "La temática de la fecha",
+      "msg": "«Su día, sus cosas»: la tienda se viste para el Día del Animal, con su cinta y su cupón.",
+      "rule": "Dieciséis temáticas, cada una con pantalla de carga, paleta, banner, cinta, cupón y ofertas.",
+      "watch": "Ventas con el cupón de la temática",
+      "p": {
+        "h": "Su día, sus cosas",
+        "s": "Día del Animal",
+        "cta": "Ver ofertas"
+      },
+      "alt": "Portada de ejemplo de la temática del Día del Animal"
+    },
+    "wheel": {
+      "name": "La ruleta de cupones",
+      "msg": "Ocho gajos con su premio y su peso; el cupón RULETA es de un uso y vale 7 días.",
+      "rule": "Cada gajo se configura en el panel: premio, tipo, valor, mínimo y peso.",
+      "watch": "Cupones RULETA usados antes de vencer",
+      "p": {
+        "h": "Girá la ruleta",
+        "prize": "Envío gratis"
+      },
+      "alt": "Ruleta de ejemplo en un celular con el premio Envío gratis"
+    },
+    "production": {
+      "name": "El mail de producción",
+      "msg": "«¡Manos a la obra! Tu pedido está en producción»: un mail por cada momento del pedido.",
+      "rule": "Seis momentos, de la compra al envío; cada mail se activa o se pausa en el panel.",
+      "watch": "Consultas por WhatsApp sobre el estado del pedido",
+      "p": {
+        "subj": "¡Manos a la obra! Tu pedido está en producción",
+        "m": "El collar con el nombre de Nina ya está en el taller.",
+        "cta": "Seguir mi pedido"
+      },
+      "alt": "Mail de ejemplo que avisa que el pedido está en producción"
+    },
+    "box": {
+      "name": "La caja de envío",
+      "msg": "«Hecho a mano para Nina»: la caja nombra a la mascota del pedido.",
+      "rule": "Adentro, una tarjeta con el cuidado de la pieza y el aviso del cumpleaños.",
+      "watch": "Fotos de la caja en historias",
+      "p": {
+        "h": "Hecho a mano para Nina",
+        "s": "Velmar"
+      },
+      "alt": "Caja de envío de ejemplo con el nombre de la mascota"
+    },
+    "birthday": {
+      "name": "El cumpleaños de la mascota",
+      "msg": "«¡Feliz cumple, Toto!»: un mail en su día, con lo nuevo de la tienda.",
+      "rule": "Sale con la fecha que cargó la familia; se activa o se pausa como los demás.",
+      "watch": "Pedidos en la semana del cumpleaños",
+      "p": {
+        "subj": "¡Feliz cumple, Toto!",
+        "m": "Hoy festejamos a Toto. Mirá lo nuevo con su nombre.",
+        "cta": "Ver la tienda"
+      },
+      "alt": "Mail de ejemplo por el cumpleaños de la mascota"
+    }
+  },
+  "rules": [
+    "Cada pieza nombra a la mascota.",
+    "Ilustraciones propias, rotuladas «Imagen ilustrativa».",
+    "Una temática por fecha, con su cupón."
+  ],
+  "calendar": {
+    "title": "Dieciséis temáticas al año",
+    "lanes": {
+      "dates": "Temáticas"
+    },
+    "dates": {
+      "madre": "Día de la Madre",
+      "halloween": "Halloween",
+      "orgullo": "Orgullo",
+      "black": "Black Friday",
+      "navidad": "Navidad",
+      "nuevo": "Año Nuevo",
+      "valentin": "San Valentín",
+      "pascuas": "Pascuas",
+      "animal": "Día del Animal",
+      "hot": "Hot Sale",
+      "mayo": "25 de Mayo",
+      "padre": "Día del Padre",
+      "bandera": "Día de la Bandera",
+      "julio": "9 de Julio",
+      "amigo": "Día del Amigo",
+      "nino": "Día del Niño"
+    }
+  },
+  "next": "Confirmar con Velmar su paleta y su tipografía, que hoy salen de su logo.",
+  "source": "Los cupones, la ruleta, las temáticas y los mails están en el repo de la demo; la caja de envío es propuesta del playbook."
+}

@@ -1,0 +1,120 @@
+{
+  "title": "Eclipse: show before you talk",
+  "goal": "The owner sees their business working and asks for a plan.",
+  "audience": "Small business owners in Mar del Plata, starting with real estate agencies.",
+  "stages": [
+    "First touch",
+    "Sees the demo",
+    "Talks",
+    "Proposal",
+    "Starts"
+  ],
+  "touches": {
+    "mail": {
+      "name": "The opening email",
+      "msg": "An opening built on a concrete need: the enquiries that arrive after hours, put in order in a short demo.",
+      "rule": "Batches of 5 to 10 prospects, one variable per batch: a signal at 2 days and a close at 7.",
+      "watch": "Replies per batch, logged in the CRM",
+      "p": {
+        "subj": "A short demo for your agency",
+        "m": "The enquiries that arrive after hours can be put in order too: we built a short demo to show you how.",
+        "cta": "See the demo"
+      },
+      "alt": "Sample opening email with the See the demo button"
+    },
+    "call": {
+      "name": "The call",
+      "msg": "«Am I speaking with whoever decides how new enquiries are handled? It takes 30 seconds to tell you why I'm calling.»",
+      "rule": "The decision maker first; thirty seconds to say why the call, and the demo after.",
+      "watch": "Conversations with the decision maker",
+      "p": {
+        "who": "Eclipse",
+        "m": "Am I speaking with whoever decides how new enquiries are handled?"
+      },
+      "alt": "Sample call screen with the first sentence"
+    },
+    "visit": {
+      "name": "The visit",
+      "msg": "«I dropped by to show you a demo of how an agency puts its enquiries in order; if now is a bad time, we set another.»",
+      "rule": "The demo on the phone, in hand; if it is a bad time, another day is booked.",
+      "watch": "Meetings booked during the visit itself",
+      "p": {
+        "h": "I dropped by to show you a demo",
+        "l": [
+          "The demo, on the phone",
+          "A short meeting",
+          "The proposal, in writing"
+        ]
+      },
+      "alt": "Sample sheet that comes with the visit, with the three steps"
+    },
+    "demo": {
+      "name": "The demo of their trade",
+      "msg": "«Which business do you want to power up?»: they pick their trade and see their business working, guided or on their own.",
+      "rule": "The first action of every plan is to see the demo, with a fictional business labelled «Demo».",
+      "watch": "The selector_chosen and demo_opened signals, with their trade",
+      "p": {
+        "h": "Which business do you want to power up?",
+        "s": "Real estate",
+        "cta": "See it guided"
+      },
+      "alt": "Sample trade selector with the See it guided button"
+    },
+    "wa": {
+      "name": "WhatsApp with the plan",
+      "msg": "«Ask for this plan» opens WhatsApp with the chosen plan already written in the message.",
+      "rule": "A person replies and logs it in the CRM; the system works out the reminders and a person sends them.",
+      "watch": "whatsapp_opened, with its origin and its plan",
+      "p": {
+        "who": "Eclipse",
+        "q": "Hi, I'd like the Growth plan.",
+        "m": [
+          "Hi! I'll show you the demo for your trade and we'll put the proposal together."
+        ]
+      },
+      "alt": "Sample chat that opens with the chosen plan"
+    },
+    "proposal": {
+      "name": "The written proposal",
+      "msg": "They replied: a call the same day and a proposal broken down piece by piece within 24 hours.",
+      "rule": "Touches at 2, 5 and 9 days; archived at 14 and reactivated at 60.",
+      "watch": "The proposal_sent activity in the CRM",
+      "p": {
+        "subj": "Your proposal, piece by piece",
+        "m": "What it includes, the maintenance and the date it is valid until.",
+        "cta": "See the proposal"
+      },
+      "alt": "Sample email with the itemised proposal"
+    },
+    "paid": {
+      "name": "The cleared payment",
+      "msg": "The project starts with the first payment cleared at the bank.",
+      "rule": "A receipt announces it; the payment counts once it is verified and marked collected.",
+      "watch": "Payment with status collected",
+      "p": {
+        "h": "Payment cleared",
+        "code": "collected",
+        "s": "The project starts"
+      },
+      "alt": "Sample receipt with the status collected"
+    },
+    "box": {
+      "name": "The welcome box",
+      "msg": "«Your business, in full light»: it arrives with the start and opens the project's portal.",
+      "rule": "Inside, the access to the portal and the project's five stages, from preparation to delivery.",
+      "watch": "The client's first sign-in to the portal",
+      "p": {
+        "h": "Your business, in full light",
+        "s": "Welcome to Eclipse"
+      },
+      "alt": "Sample welcome box with the eclipse on its lid"
+    }
+  },
+  "rules": [
+    "First the demo, then the conversation.",
+    "Every demo says «Demo» and uses a fictional business.",
+    "A click is a signal; the cleared payment is the start."
+  ],
+  "next": "Measuring the site's signals with an analytics provider, with events free of personal data.",
+  "source": "The opening, the cadence and the funnel are in Eclipse's documents; the demo and WhatsApp, in its code. The box is the playbook's proposal."
+}
