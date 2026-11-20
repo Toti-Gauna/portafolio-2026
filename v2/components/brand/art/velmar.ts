@@ -65,7 +65,7 @@ function art(t: Record<string, string>): BrandArt {
     // every edge runs on one lattice at 45°: ink, air, ink, air, ink, each one module wide
     + `<path class="bl-g" d="${LAT.map((c) => diag(-1, c) + diag(1, c - 870)).join('')}"/>`
     // the two modules of air on the axis: the notch between the peaks, and the gap between the M and the V
-    + cell(LAT[1], LAT[2], LAT[0] - 870, LAT[1] - 870) + cell(LAT[3], LAT[4], LAT[3] - 870, LAT[4] - 870)
+    + cell(LAT[1], LAT[2], LAT[1] - 870, LAT[2] - 870) + cell(LAT[3], LAT[4], LAT[3] - 870, LAT[4] - 870)
     // the axis of symmetry
     + `<path class="bl-g" d="M435 ${r(Y0 - 26)}V${r(Y1 + 26)}"/>`
     // 45° at the foot of the M, 90° inside the V
@@ -110,14 +110,14 @@ function art(t: Record<string, string>): BrandArt {
 
   // a story: how an order goes, on olive; the mark rises from the bottom, tone on tone
   const step = (i: number) => {
-    const cy = 222 + i * 56;
+    const cy = 228 + i * 55;
     return `<path d="M44 ${cy - 17}l17 17-17 17-17-17z" fill="${i === 2 ? PAPER : 'none'}" stroke="${PAPER}" stroke-width="1.6"/>`
       + fd(44, cy + 5.5, String(i + 1), 16, { fill: i === 2 ? OLIVE : PAPER, anchor: 'middle', w: 600, ls: 0 }) + ft(76, cy + 5.5, t[`step${i}`], 16, { fill: PAPER })
       + (i < 2 ? `<path d="M44 ${cy + 22}V${cy + 34}" stroke="${PAPER}" stroke-width="1.5" stroke-dasharray="3 3"/>` : '');
   };
   const story = `<rect width="270" height="480" fill="${OLIVE}"/>${mark(-22, 322, 314, DEEP)}`
     + mark(26, 32, 40, PAPER) + fd(76, 57, t.name, 25, { fill: PAPER })
-    + fd(26, 128, t.storyA, 33, { fill: PAPER }) + fd(26, 165, t.storyB, 33, { fill: SAND, italic: true })
+    + fd(26, 128, t.storyA, 38, { fill: PAPER }) + fd(26, 170, t.storyB, 38, { fill: SAND, italic: true })
     + [0, 1, 2].map(step).join('')
     + `<rect x="26" y="402" width="218" height="46" rx="23" fill="${PAPER}"/>` + ft(135, 430.5, t.cta, 15.5, { fill: OLIVE, w: 800, anchor: 'middle' });
 
@@ -147,7 +147,7 @@ function art(t: Record<string, string>): BrandArt {
   const tape = (x: number, y: number, w: number, h: number) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${OLIVE}"/>`;
   const drop = tape(D / 2 - 17, 0, 34, 26) + chevrons(D / 2 - 7, 16, 14, 1, 0, PAPER, 2.6); // the tape folds down the sides
   const faces = {
-    front: kraft(W, H) + mark(15, 20, 60, INK) + fd(86, 59, t.name, 42) + eye(W / 2, 97, t.made, 16, { anchor: 'middle', ls: 0.1 }),
+    front: kraft(W, H) + mark(13, 20, 60, INK) + fd(82, 59, t.name, 42) + eye(W / 2, 97, t.made, 16, { anchor: 'middle', ls: 0.1 }),
     back: kraft(W, H) + mark(90, 9, 30, INK) + [t.boxA, t.boxB, t.boxC].map((s, i) => fd(W / 2, 59 + i * 22, s, 18, { anchor: 'middle', italic: true, ls: -0.01 })).join(''),
     right: kraft(D, H) + drop + `<path d="M55 60l20-20 20 20M55 80l20-20 20 20" fill="none" stroke="${INK}" stroke-width="7" stroke-linejoin="miter"/>` + eye(D / 2, 103, t.up, 16, { anchor: 'middle', ls: 0.06 }),
     left: kraft(D, H) + drop + fd(D / 2, 66, t.city, 21, { anchor: 'middle', italic: true, ls: -0.01 }) + chevrons(34, 92, 12, 5, 5.5, INK, 2.6),

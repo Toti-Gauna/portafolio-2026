@@ -204,13 +204,16 @@ function art(t: Record<string, string>): BrandArt {
     + `<circle cx="120" cy="286" r="7" fill="none" stroke="${BROTE}" stroke-width="4.5"/>`;
 
   /* ---- in 3D: a terracotta pot with its paper label. The label wraps it; its middle faces the visitor */
-  const PR = 78, PH = 136, LR = 84, LW = Math.round(2 * Math.PI * PR);
-  const label = `<rect width="${LW}" height="${PH}" fill="${MACETA}"/><rect width="${LW}" height="9" fill="${TIERRA}" fill-opacity="0.24"/><rect y="${PH - 9}" width="${LW}" height="9" fill="${TIERRA}" fill-opacity="0.14"/>`
-    + `<rect y="28" width="${LW}" height="84" fill="${CAL}"/><path d="M4 36H${LW}M4 104H${LW}" stroke="${HOJA}" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0 8" fill="none"/>`
-    + wordAt(LW / 2, 94, 46, t, LIGHT)
-    + txt(322, 72, t.potName, 25, { ls: -0.5 }) + body(323, 93, t.care1, 16, { fill: HOJA, w: 700 })
-    + badge('water', 72, 60, 14, HOJA, BROTE) + badge('light', 108, 60, 14, HOJA, BROTE) + badge('care', 144, 60, 14, HOJA, BROTE) + body(108, 96, t.care2, 16, { fill: TIERRA, w: 700, anchor: 'middle' })
-    + leaf(18, 92, 60, 44, HOJA) + leaf(LW - 18, 92, 120, 44, MUSGO);
+  const PR = 98, PH = 170, LR = 105, LW = Math.round(2 * Math.PI * PR), MID = LW / 2 + 18;
+  const label = `<rect width="${LW}" height="${PH}" fill="${MACETA}"/><rect width="${LW}" height="11" fill="${TIERRA}" fill-opacity="0.24"/><rect y="${PH - 11}" width="${LW}" height="11" fill="${TIERRA}" fill-opacity="0.14"/>`
+    + `<rect y="28" width="${LW}" height="114" fill="${CAL}"/><path d="M5 37H${LW}M5 133H${LW}" stroke="${HOJA}" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="0 9" fill="none"/>`
+    // the front: the logo and the plant's name
+    + wordAt(MID, 101, 50, t, LIGHT) + txt(MID, 124, t.potName, 20, { anchor: 'middle', ls: -0.3 })
+    // to its right, the care card; to its left, the plant
+    + badge('water', MID + 116, 66, 15, HOJA, BROTE) + badge('light', MID + 152, 66, 15, HOJA, BROTE) + badge('care', MID + 188, 66, 15, HOJA, BROTE)
+    + body(MID + 152, 104, t.care1, 16, { fill: TIERRA, w: 700, anchor: 'middle' }) + body(MID + 152, 124, t.care2, 16, { fill: HOJA, w: 700, anchor: 'middle' })
+    + plant(MID - 166, 134, [[152, 0, 56, MUSGO, CAL], [28, 0, 56, MUSGO, CAL], [120, 0, 74, HOJA], [60, 0, 74, HOJA], [90, 0, 86, MUSGO, CAL]], 0.5)
+    + leaf(24, 124, 64, 62, HOJA) + leaf(LW - 24, 124, 116, 62, MUSGO);
   // seen from above: the rim, the soil and the plant
   const above = (d: number) => {
     const c = d / 2, k = d / 168;
@@ -225,7 +228,7 @@ function art(t: Record<string, string>): BrandArt {
     patterns: [{ box: [0, 0, 120, 120], svg: foliage }, { box: [0, 0, 120, 120], svg: pots }, { box: [0, 0, 120, 120], svg: scales }],
     digital: { post: { box: [0, 0, 400, 400], svg: post }, story: { box: [0, 0, 270, 480], svg: story } },
     physical: { poster: { box: [0, 0, 300, 400], svg: poster }, print: { box: [0, 0, 240, 350], svg: print } },
-    object: { kind: 'can', r: PR, h: PH, label, top: above(2 * PR), lid: { r: LR, h: 28, side: MACETA, top: above(2 * LR) } },
+    object: { kind: 'can', r: PR, h: PH, label, top: above(2 * PR), lid: { r: LR, h: 34, side: MACETA, top: above(2 * LR) } },
   };
 }
 

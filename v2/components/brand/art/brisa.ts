@@ -113,7 +113,7 @@ function art(t: Record<string, string>): BrandArt {
   const story = `<rect width="270" height="480" fill="${PAPER}"/><rect width="270" height="72" fill="${GREEN}"/>${mark(38, 52, 1.25)}${txt(66, 46, t.name, 20)}`
     + txt(22, 106, t.kicker, 13, { cls: 'bl-ft', w: 700, fill: GOLD_INK, ls: 1.1 }) + txt(22, 142, t.storyA, 30, { fill: INK, ls: -0.4 }) + txt(22, 176, t.storyB, 30, { fill: GREEN, ls: -0.4 })
     + sheet(20, 198, 230, 172, CARD)
-    + txt(40, 268, '22', 74, { fill: GREEN, ls: -1.5 }) + txt(124, 230, t.dow, 14, { cls: 'bl-ft', fill: GREY }) + txt(124, 248, t.month, 14, { cls: 'bl-ft', fill: GREY }) + txt(124, 268, t.time, 16, { cls: 'bl-ft', w: 700, fill: INK })
+    + txt(40, 268, '22', 74, { fill: GREEN, ls: -1.5 }) + txt(128, 230, t.dow, 14, { cls: 'bl-ft', fill: GREY }) + txt(128, 248, t.month, 14, { cls: 'bl-ft', fill: GREY }) + txt(128, 268, t.time, 16, { cls: 'bl-ft', w: 700, fill: INK })
     + rule(40, 284, 232) + txt(40, 311, t.service, 19, { fill: INK })
     + txt(40, 332, t.where, 13, { cls: 'bl-ft', fill: GREY })
     + `<rect x="40" y="343" width="${n(t.status.length * 6.9 + 30)}" height="20" rx="10" fill="${MINT_50}" stroke="${MINT}"/><circle cx="51" cy="353" r="3" fill="${GREEN}"/>` + txt(59, 357.5, t.status, 13, { cls: 'bl-ft', w: 700, fill: DEEP })
@@ -130,12 +130,12 @@ function art(t: Record<string, string>): BrandArt {
     + txt(26, 380, t.name, 15, { fill: INK }) + txt(274, 380, t.tag, 14, { cls: 'bl-ft', fill: GREY, anchor: 'end' });
   // the appointment card: the folio, to carry in a pocket
   const print = sheet(0.5, 0.5, 239, 149, CARD)
-    + txt(16, 27, t.name, 15, { fill: INK }) + rule(16, 38, 158)
-    + txt(15, 92, '22', 60, { fill: GREEN, ls: -1.2 }) + txt(84, 61, t.dow, 12, { cls: 'bl-ft', fill: GREY }) + txt(84, 76, t.month, 12, { cls: 'bl-ft', fill: GREY }) + txt(84, 92, t.time, 14, { cls: 'bl-ft', w: 700, fill: INK })
-    + rule(16, 104, 158) + txt(16, 123, t.service, 15, { fill: INK }) + txt(16, 139, t.where, 11, { cls: 'bl-ft', fill: GREY })
+    + txt(16, 27, t.name, 15, { fill: INK }) + rule(16, 38, 152)
+    + txt(15, 92, '22', 60, { fill: GREEN, ls: -1.2 }) + txt(87, 61, t.dow, 12, { cls: 'bl-ft', fill: GREY }) + txt(87, 76, t.month, 12, { cls: 'bl-ft', fill: GREY }) + txt(87, 92, t.time, 14, { cls: 'bl-ft', w: 700, fill: INK })
+    + rule(16, 104, 152) + txt(16, 123, t.service, 15, { fill: INK }) + txt(16, 139, t.where, 11, { cls: 'bl-ft', fill: GREY })
     // the stub: the symbol and the state of the appointment, past a line of perforation
-    + `<path d="M170.5 0.5V149.5" stroke="${LINE_STRONG}" stroke-width="1" stroke-dasharray="2 4" fill="none"/>` + mark(205, 86, 1.5, { tooth: GREEN, gold: GOLD_PRINT })
-    + txt(205, 118, t.status, 11, { cls: 'bl-ft', w: 700, fill: GOLD_INK, anchor: 'middle', ls: 0.4 });
+    + `<path d="M164.5 0.5V149.5" stroke="${LINE_STRONG}" stroke-width="1" stroke-dasharray="2 4" fill="none"/>` + mark(202, 84, 1.45, { tooth: GREEN, gold: GOLD_PRINT })
+    + txt(202, 116, t.status, 11, { cls: 'bl-ft', w: 700, fill: GOLD_INK, anchor: 'middle' });
 
   /* ---------- in 3D: the care kit the clinic hands over, with the next appointment written on its back ---------- */
   const [W, H, D] = [176, 206, 78];

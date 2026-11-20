@@ -11,9 +11,9 @@ const rad = (d: number) => (d * Math.PI) / 180;
 const n = (v: number) => Math.round(v * 100) / 100;
 
 /* The moon, in radii of the dough circle: a second circle (BITE) moved OFF along AXIS bites it. One module (MOD) is
-   the width of a score; the three scores are parallel, SLANT away from the axis, centred on one ring every STEP
-   degrees; the light is two modules wide and touches the dough circle from inside. */
-const BITE = 0.9, OFF = 0.54, AXIS = -34, MOD = 0.12, RING = 0.665, STEP = 30, SLANT = 60, CUT = 0.3;
+   the width of a score; the three scores are centred on one ring every STEP degrees, each at the same
+   SLANT to its radius; the light is two modules wide and touches the dough circle from inside. */
+const BITE = 0.9, OFF = 0.54, AXIS = -34, MOD = 0.12, RING = 0.68, STEP = 30, SLANT = 60, CUT = 0.3;
 
 /** What is left of the circle (cx, cy, r) when the second circle bites it. */
 const crescent = (cx: number, cy: number, r: number) => {
@@ -23,8 +23,10 @@ const crescent = (cx: number, cy: number, r: number) => {
 };
 const moon = (cx: number, cy: number, r: number) => {
   const at = (deg: number, k = 1): [number, number] => [cx + r * k * Math.cos(rad(deg)), cy + r * k * Math.sin(rad(deg))];
-  const hx = (Math.cos(rad(AXIS + SLANT)) * r * CUT) / 2, hy = (Math.sin(rad(AXIS + SLANT)) * r * CUT) / 2;
-  const cuts = [-1, 0, 1].map((i) => { const [mx, my] = at(AXIS + 180 + i * STEP, RING); return [mx - hx, my - hy, mx + hx, my + hy]; });
+  const cuts = [-1, 0, 1].map((i) => {
+    const a = AXIS + 180 + i * STEP, [mx, my] = at(a, RING), hx = (Math.cos(rad(a + SLANT)) * r * CUT) / 2, hy = (Math.sin(rad(a + SLANT)) * r * CUT) / 2;
+    return [mx - hx, my - hy, mx + hx, my + hy];
+  });
   return { body: crescent(cx, cy, r), cuts, light: at(AXIS, 1 - MOD), bite: at(AXIS, OFF), at };
 };
 /** A score as a closed shape (a hole in the dough). */
@@ -67,8 +69,8 @@ function art(t: Record<string, string>): BrandArt {
     + m.cuts.map((c, i) => `<path class="bl-draw" style="--i:${6 + i}" fill="none" stroke="${OVEN}" stroke-width="${n(R * MOD)}" stroke-linecap="round" d="M${n(c[0])} ${n(c[1])}L${n(c[2])} ${n(c[3])}"/>`).join('')
     + `<circle class="bl-fill" style="--i:9" cx="${n(m.light[0])}" cy="${n(m.light[1])}" r="${n(R * MOD)}" fill="${FLOUR}"/>`
     + `<g class="bl-fill" style="--i:10">${txt(CX, BASE, t.name, SIZE, { anchor: 'middle' })}</g>`
-    + `<g class="bl-fill" style="--i:12">${txt(CX + 3, BASE + 30, t.tag, 15.5, { ft: true, w: 600, anchor: 'middle', len: 256 })}</g>`;
-  const [L, Rt, T, B] = [CX - 133 - X, CX + 133 + X, CY - R - X, BASE + 30 + X]; // clear space: one light around the lockup
+    + `<g class="bl-fill" style="--i:12">${txt(CX + 1.5, BASE + 29, t.tag, 16, { ft: true, w: 600, anchor: 'middle', len: 216 })}</g>`;
+  const [L, Rt, T, B] = [CX - 133 - X, CX + 133 + X, CY - R - X, BASE + 29 + X]; // clear space: one light around the lockup
   const grid = [
     `<rect class="bl-g" x="${n(L)}" y="${n(T)}" width="${n(Rt - L)}" height="${n(B - T)}"/>`,
     ...[[L, T], [Rt - X, T], [L, B - X], [Rt - X, B - X]].map(([x, y]) => `<rect class="bl-gm" x="${n(x)}" y="${n(y)}" width="${n(X)}" height="${n(X)}"/>`),
@@ -76,11 +78,11 @@ function art(t: Record<string, string>): BrandArt {
     `<path class="bl-g" d="M${CX} ${n(T)}V${n(B)}M${n(L)} ${BASE}H${n(Rt)}M${n(L)} ${n(BASE - SIZE * 0.5)}H${n(Rt)}M${n(L)} ${n(BASE - SIZE * 0.77)}H${n(Rt)}"/>`,
     // the two circles of the moon, the axis that joins their centres and the ring the scores are centred on
     `<circle class="bl-gc" cx="${CX}" cy="${CY}" r="${R}"/><circle class="bl-gc" cx="${n(m.bite[0])}" cy="${n(m.bite[1])}" r="${n(R * BITE)}"/><circle class="bl-gc" cx="${CX}" cy="${CY}" r="${n(R * RING)}"/>`,
-    `<path class="bl-g" d="M${m.at(AXIS + 180, 1.5).map(n).join(' ')}L${m.at(AXIS, 1.62).map(n).join(' ')}"/>`,
+    `<path class="bl-g" d="M${m.at(AXIS + 180, 1.3).map(n).join(' ')}L${m.at(AXIS, 1.62).map(n).join(' ')}${[-1, 1].map((i) => `M${CX} ${CY}L${m.at(AXIS + 180 + i * STEP, 1.3).map(n).join(' ')}`).join('')}"/>`,
     `<rect class="bl-gm" x="${n(m.light[0] - X / 2)}" y="${n(m.light[1] - X / 2)}" width="${n(X)}" height="${n(X)}"/>`,
     ...[[CX, CY], m.bite, m.light, ...m.cuts.map((c) => [(c[0] + c[2]) / 2, (c[1] + c[3]) / 2])].map(([x, y]) => `<circle class="bl-gp" cx="${n(x)}" cy="${n(y)}" r="2.2"/>`),
   ].join('');
-  const secondary = mark(53, 42, 32) + txt(99, 51, t.name, 46) + txt(101, 73, t.tag, 12, { ft: true, w: 600, len: 156 });
+  const secondary = mark(53, 42, 32) + txt(99, 51, t.name, 46) + txt(100.5, 73, t.tag, 12, { ft: true, w: 600, len: 157 });
   const submark = mark(50, 50, 41, { ink: 'currentColor', acc: true });
 
   // ---- patterns: the score, the night the dough grows through, the wheat ----
@@ -98,7 +100,7 @@ function art(t: Record<string, string>): BrandArt {
     + txt(68, 148 + i * 62, t[`time${i}`], 13.5, { ft: true, w: 600, fill: WHEAT, ls: 1 }) + txt(68, 167 + i * 62, t[`step${i}`], 14.5, { ft: true, fill: DOUGH });
   const story = `<rect width="270" height="480" fill="${NIGHT}"/>${mark(40, 46, 17, { ink: DOUGH, light: OVEN })}${txt(66, 54, t.name, 24, { fill: DOUGH })}`
     + txt(24, 108, t.storyTitle, 23, { fill: DOUGH }) + dots('M42 172V348', DOUGH, 2.2, 8) + `<g>${[0.25, 0.5, 0.75].map((f, i) => `<circle cx="42" cy="${152 + i * 62}" r="17" fill="${NIGHT}"/>` + row(i, f)).join('')}</g>`
-    + `<circle cx="135" cy="508" r="150" fill="${OVEN}"/>${scores(135, 378, 20, 4.4, 15, AXIS + SLANT + 90, NIGHT)}`
+    + `<circle cx="135" cy="508" r="150" fill="${OVEN}"/>${scores(135, 378, 20, 4.4, 15, 116, NIGHT)}`
     + txt(135, 432, t.time3, 34, { anchor: 'middle' }) + txt(135, 458, t.step3, 15, { ft: true, w: 600, anchor: 'middle' });
 
   // ---- on the street: the street asleep and one window lit ----
@@ -116,30 +118,30 @@ function art(t: Record<string, string>): BrandArt {
     + `<text class="bl-fd" x="150" y="277" font-size="27" font-weight="400" fill="${DOUGH}" text-anchor="middle">${t.posterB} <tspan fill="${OVEN}">${t.posterC}</tspan></text>`
     + street + txt(20, 388, t.name, 18, { fill: DOUGH }) + txt(280, 387, t.posterD, 14, { ft: true, fill: DOUGH, anchor: 'end' });
   // a hang tag in the shape of an oven mouth
-  const [PW, PH] = [200, 270];
-  const print = `<path d="M100 26C95 14 108 6 103 -6M100 26C106 15 96 6 99 -6" fill="none" stroke="${CRUST}" stroke-width="1.8" stroke-linecap="round"/>`
+  const [PW, PH] = [200, 270], UP = 22;
+  const print = `<path d="M100 ${UP + 26}C92 ${UP + 4} 110 14 104 -4M100 ${UP + 26}C108 ${UP + 6} 95 14 98 -4" fill="none" stroke="${CRUST}" stroke-width="1.8" stroke-linecap="round"/><g transform="translate(0 ${UP})">`
     + `<path fill-rule="evenodd" fill="${FLOUR}" d="M0 ${PH}V${PW / 2 + 8}A${PW / 2} ${PW / 2} 0 0 1 ${PW} ${PW / 2 + 8}V${PH}ZM100 20a7 7 0 1 0 0.01 0Z"/>`
     + `<path d="M0 ${PH - 30}H${PW}V${PH}H0Z" fill="${OVEN}"/>` + dots(`M9 ${PH - 38}V${PW / 2 + 8}A91 91 0 0 1 191 ${PW / 2 + 8}V${PH - 38}`, CRUST, 1.6, 5)
     + mark(100, 76, 30) + txt(100, 143, t.name, 30, { anchor: 'middle' }) + dots('M52 157H150', CRUST, 2, 7)
     + txt(100, 182, t.tagKind, 19, { anchor: 'middle' }) + txt(101, 200, t.tagA, 11, { ft: true, w: 600, fill: CRUST, anchor: 'middle', ls: 2 })
-    + txt(100, 222, t.tagB, 11.5, { ft: true, anchor: 'middle' }) + txt(100, PH - 10.5, t.tagC, 11.5, { ft: true, w: 600, anchor: 'middle' });
+    + txt(100, 222, t.tagB, 11.5, { ft: true, anchor: 'middle' }) + txt(100, PH - 10.5, t.tagC, 11.5, { ft: true, w: 600, anchor: 'middle' }) + '</g>';
 
   // ---- in 3D: the bread box, scored on top like a loaf ----
-  const [W, H, D] = [220, 140, 110];
-  const side = `<rect width="${D}" height="${H}" fill="${NIGHT}"/>${txt(D / 2, 42, t.boxSide, 17, { fill: DOUGH, anchor: 'middle' })}${dots(`M14 60H${D - 12}`, WHEAT, 2, 6.5)}`
-    + phases(19, 88, 9, 24, DOUGH, OVEN) + dots(`M14 116H${D - 12}`, WHEAT, 2, 6.5);
+  const [W, H, D] = [220, 140, 124];
+  const side = `<rect width="${D}" height="${H}" fill="${DOUGH}"/>${txt(D / 2, 44, t.boxSide, 17, { anchor: 'middle' })}${dots(`M16 62H${D - 14}`, CRUST, 2.2, 6.6)}`
+    + phases(D / 2 - 39, 90, 10, 26, NIGHT, OVEN) + dots(`M16 118H${D - 14}`, CRUST, 2.2, 6.6);
   return {
     logo: { main: { box: [0, 0, LW, LH], svg: main }, grid, secondary: { box: [0, 0, 280, 84], svg: secondary }, submark: { box: [0, 0, 100, 100], svg: submark } },
     patterns: [{ box: [0, 0, 120, 120], svg: p1 }, { box: [0, 0, 120, 120], svg: p2 }, { box: [0, 0, 120, 120], svg: p3 }],
     digital: { post: { box: [0, 0, 400, 400], svg: post }, story: { box: [0, 0, 270, 480], svg: story } },
-    physical: { poster: { box: [0, 0, 300, 400], svg: poster }, print: { box: [0, 0, PW, PH], svg: print } },
+    physical: { poster: { box: [0, 0, 300, 400], svg: poster }, print: { box: [0, 0, PW, PH + UP], svg: print } },
     object: {
       kind: 'box', size: [W, H, D],
       faces: {
         front: `<rect width="${W}" height="${H}" fill="${OVEN}"/>${mark(W / 2, 52, 40)}${txt(W / 2, 126, t.name, 31, { anchor: 'middle' })}`,
         back: `<rect width="${W}" height="${H}" fill="${OVEN}"/>${txt(W / 2, 50, `${t.postA} ${t.postB}`, 22, { anchor: 'middle' })}${txt(W / 2, 78, t.postC, 22, { fill: FLOUR, anchor: 'middle' })}${phases(W / 2 - 39, 108, 9, 26, NIGHT, FLOUR)}`,
         left: side, right: side,
-        top: `<rect width="${W}" height="${D}" fill="${DOUGH}"/>${scores(W / 2, 40, 44, 8, 19, AXIS + SLANT, CRUST)}${txt(W / 2 + 1, 94, t.tag, 16, { ft: true, w: 600, anchor: 'middle', ls: 1.2 })}`,
+        top: `<rect width="${W}" height="${D}" fill="${DOUGH}"/>${scores(W / 2, 46, 46, 8.5, 20, 26, CRUST)}${txt(W / 2, 106, t.tag, 16, { ft: true, w: 600, anchor: 'middle', len: 184 })}`,
         bottom: `<rect width="${W}" height="${D}" fill="${CRUST}"/>`,
       },
     },

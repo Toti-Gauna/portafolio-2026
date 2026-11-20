@@ -18,7 +18,7 @@
   },
   "grid": [
     "The moon comes from two circles: the dough, and a second one, shifted, that bites it.",
-    "The score is the module: three parallel scores, each centred on the same ring.",
+    "The score is the module: three scores every 30° on one ring, all at one slant.",
     "The light is two modules wide, touches the circle from inside and sets the clear space."
   ],
   "alt": {
@@ -42,7 +42,7 @@
     "time1": "1 am", "step1": "Mixing and resting",
     "time2": "4 am", "step2": "Shaping, scoring, baking",
     "time3": "6 am", "step3": "Warm bread",
-    "posterA": "The street sleeps.", "posterB": "The oven is", "posterC": "wide awake.", "posterD": "Sourdough · from 6 am",
+    "posterA": "The street sleeps.", "posterB": "The oven's", "posterC": "awake.", "posterD": "Sourdough · from 6 am",
     "tagKind": "Country loaf", "tagA": "SOURDOUGH", "tagB": "Flour, water, salt and time.", "tagC": "Baked today · 5:40 am",
     "boxSide": "Sourdough"
   }
