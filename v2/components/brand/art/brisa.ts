@@ -86,10 +86,10 @@ function art(t: Record<string, string>): BrandArt {
 
   /* ---------- patterns ---------- */
   // breezes laid like scales: hairlines on the green, and one of them in gold with its dot
-  const scales = `<rect width="120" height="120" fill="${GREEN}"/><g fill="none" stroke="${TEAL}" stroke-width="1" stroke-opacity="0.55">`
-    + [0, 1, 2, 3].map((r) => `<path d="${breezes(r % 2 ? -30 : 0, 22 + r * 30, 60, r % 2 ? 3 : 2)}"/>`).join('')
-    + `</g><path d="${breezes(30, 52, 60, 1)}" fill="none" stroke="${GOLD}" stroke-width="3" stroke-linecap="round"/><circle cx="90" cy="27" r="4" fill="${GOLD}"/>`
-    + `<path d="${breezes(-30, 112, 60, 1)}${breezes(90, 112, 60, 1)}" fill="none" stroke="${ENAMEL}" stroke-width="3" stroke-linecap="round"/>`;
+  const scales = `<rect width="120" height="120" fill="${GREEN}"/><g fill="none" stroke="${TEAL}" stroke-width="1" stroke-opacity="0.7">`
+    + [0, 1, 2, 3, 4, 5, 6, 7].map((r) => `<path d="${breezes(r % 2 ? -30 : 0, 12 + r * 15, 60, r % 2 ? 3 : 2)}"/>`).join('')
+    + `</g><path d="${breezes(30, 57, 60, 1)}" fill="none" stroke="${GOLD}" stroke-width="3.2" stroke-linecap="round"/><circle cx="86" cy="15.6" r="4.4" fill="${GOLD}"/>`
+    + `<path d="${breezes(-30, 117, 60, 1)}${breezes(90, 117, 60, 1)}" fill="none" stroke="${ENAMEL}" stroke-width="1.6" stroke-linecap="round"/>`;
   // the chart: one tooth per cell between hairlines, and the one with the next step, whole
   const cell = (c: number, r: number) => `translate(${n(c * 40 + 20 - 24 * 0.92)} ${n(r * 40 + 21 - 23.7 * 0.92)}) scale(0.92)`;
   const chart = `<rect width="120" height="120" fill="${PAPER}"/><path d="M0 0.5H120M0 40.5H120M0 80.5H120M0.5 0V120M40.5 0V120M80.5 0V120" stroke="${LINE}" stroke-width="1" fill="none"/>`
@@ -123,22 +123,24 @@ function art(t: Record<string, string>): BrandArt {
   /* ---------- on the street ---------- */
   // the poster: the tooth, very large, on paper; a frame of hairlines and the invitation to book
   const poster = `<rect width="300" height="400" fill="${PAPER}"/><rect x="10.5" y="10.5" width="279" height="379" fill="none" stroke="${LINE}"/>`
-    + txt(26, 40, t.posterKicker, 14, { cls: 'bl-ft', w: 700, fill: GOLD_INK, ls: 1.2 }) + `<circle cx="268" cy="35" r="5" fill="${GOLD_PRINT}"/>` + rule(26, 52, 274)
+    + txt(26, 40, t.posterKicker, 14, { cls: 'bl-ft', w: 700, fill: GOLD_INK, ls: 1.2 }) + rule(26, 52, 274)
     + mark(150, 244, 7, { tooth: GREEN, gold: GOLD_PRINT })
     + txt(26, 292, t.posterA, 33, { fill: INK, ls: -0.5 }) + txt(26, 327, t.posterB, 33, { fill: GREEN, ls: -0.5 })
     + txt(26, 350, t.posterSub, 14, { cls: 'bl-ft', fill: GREY }) + rule(26, 362, 274)
     + txt(26, 380, t.name, 15, { fill: INK }) + txt(274, 380, t.tag, 14, { cls: 'bl-ft', fill: GREY, anchor: 'end' });
   // the appointment card: the folio, to carry in a pocket
   const print = sheet(0.5, 0.5, 239, 149, CARD)
-    + mark(26, 30, 0.82, { tooth: GREEN, gold: GOLD_PRINT }) + txt(42, 26, t.name, 14, { fill: INK }) + txt(224, 26, t.kicker, 11, { cls: 'bl-ft', w: 700, fill: GOLD_INK, anchor: 'end', ls: 0.9 }) + rule(16, 38, 224)
-    + txt(16, 92, '22', 60, { fill: GREEN, ls: -1.2 }) + txt(86, 60, t.dow, 12, { cls: 'bl-ft', fill: GREY }) + txt(86, 75, t.month, 12, { cls: 'bl-ft', fill: GREY }) + txt(86, 92, t.time, 14, { cls: 'bl-ft', w: 700, fill: INK })
-    + `<path d="${breezes(160, 86, 60, 1)}" fill="none" stroke="${GOLD_PRINT}" stroke-width="2.6" stroke-linecap="round"/><circle cx="216" cy="62" r="4.4" fill="${GOLD_PRINT}"/>`
-    + rule(16, 104, 224) + txt(16, 123, t.service, 15, { fill: INK }) + txt(16, 139, t.where, 11, { cls: 'bl-ft', fill: GREY });
+    + txt(16, 27, t.name, 15, { fill: INK }) + rule(16, 38, 158)
+    + txt(15, 92, '22', 60, { fill: GREEN, ls: -1.2 }) + txt(84, 61, t.dow, 12, { cls: 'bl-ft', fill: GREY }) + txt(84, 76, t.month, 12, { cls: 'bl-ft', fill: GREY }) + txt(84, 92, t.time, 14, { cls: 'bl-ft', w: 700, fill: INK })
+    + rule(16, 104, 158) + txt(16, 123, t.service, 15, { fill: INK }) + txt(16, 139, t.where, 11, { cls: 'bl-ft', fill: GREY })
+    // the stub: the symbol and the state of the appointment, past a line of perforation
+    + `<path d="M170.5 0.5V149.5" stroke="${LINE_STRONG}" stroke-width="1" stroke-dasharray="2 4" fill="none"/>` + mark(205, 86, 1.5, { tooth: GREEN, gold: GOLD_PRINT })
+    + txt(205, 118, t.status, 11, { cls: 'bl-ft', w: 700, fill: GOLD_INK, anchor: 'middle', ls: 0.4 });
 
   /* ---------- in 3D: the care kit the clinic hands over, with the next appointment written on its back ---------- */
-  const [W, H, D] = [170, 190, 72];
+  const [W, H, D] = [176, 206, 78];
   const side = `<rect width="${D}" height="${H}" fill="${DEEP}"/><g fill="none" stroke="${GOLD}" stroke-width="1.1">`
-    + Array.from({ length: 12 }, (_, r) => `<path d="${breezes(r % 2 ? -18 : 0, 14 + r * 15, 36, r % 2 ? 3 : 2)}"/>`).join('') + '</g>';
+    + Array.from({ length: 13 }, (_, r) => `<path d="${breezes(r % 2 ? -19.5 : 0, 16 + r * 15, 39, r % 2 ? 3 : 2)}"/>`).join('') + '</g>';
   return {
     logo: { main: { box: [0, 0, 440, 220], svg: main }, grid, secondary: { box: [0, 0, 296, 88], svg: secondary }, submark: { box: [0, 0, 100, 100], svg: submark } },
     patterns: [{ box: [0, 0, 120, 120], svg: scales }, { box: [0, 0, 120, 120], svg: chart }, { box: [0, 0, 120, 120], svg: month }],
@@ -148,15 +150,15 @@ function art(t: Record<string, string>): BrandArt {
       kind: 'box', size: [W, H, D],
       faces: {
         front: `<rect width="${W}" height="${H}" fill="${GREEN}"/><rect x="7.5" y="7.5" width="${W - 15}" height="${H - 15}" fill="none" stroke="${GOLD}" stroke-width="1"/>`
-          + mark(W / 2, 110, 2.9) + txt(W / 2, 140, t.name, 22, { anchor: 'middle' }) + rule(W / 2 - 18, 150, W / 2 + 18, GOLD, 1.5)
-          + txt(W / 2, 171, t.kit, 16, { cls: 'bl-ft', w: 600, fill: MINT, anchor: 'middle', ls: 0.3 }),
+          + mark(W / 2, 120, 3.1) + txt(W / 2, 152, t.name, 23, { anchor: 'middle' }) + rule(W / 2 - 18, 163, W / 2 + 18, GOLD, 1.5)
+          + txt(W / 2, 185, t.kit, 16, { cls: 'bl-ft', w: 600, fill: MINT, anchor: 'middle', ls: 0.3 }),
         back: `<rect width="${W}" height="${H}" fill="${PAPER}"/><rect x="7.5" y="7.5" width="${W - 15}" height="${H - 15}" fill="none" stroke="${LINE}" stroke-width="1"/>`
-          + txt(W / 2, 40, t.next, 20, { fill: GREEN, anchor: 'middle' }) + rule(20, 52, W - 20)
-          + txt(20, 84, t.day, 16, { cls: 'bl-ft', fill: GREY }) + rule(66, 86, W - 20, LINE_STRONG) + txt(20, 116, t.hour, 16, { cls: 'bl-ft', fill: GREY }) + rule(66, 118, W - 20, LINE_STRONG)
-          + `<path d="${breezes(W / 2 - 15, 137, 30, 1)}" fill="none" stroke="${GOLD_PRINT}" stroke-width="2.4" stroke-linecap="round"/>`
-          + txt(W / 2, 158, t.tagA, 16, { fill: INK, anchor: 'middle' }) + txt(W / 2, 176, t.tagB, 16, { fill: INK, anchor: 'middle' }),
+          + txt(W / 2, 44, t.next, 21, { fill: GREEN, anchor: 'middle' }) + rule(20, 57, W - 20)
+          + txt(20, 90, t.day, 16, { cls: 'bl-ft', fill: GREY }) + rule(66, 92, W - 20, LINE_STRONG) + txt(20, 124, t.hour, 16, { cls: 'bl-ft', fill: GREY }) + rule(66, 126, W - 20, LINE_STRONG)
+          + `<path d="${breezes(W / 2 - 15, 150, 30, 1)}" fill="none" stroke="${GOLD_PRINT}" stroke-width="2.4" stroke-linecap="round"/>`
+          + txt(W / 2, 172, t.tagA, 16, { fill: INK, anchor: 'middle' }) + txt(W / 2, 190, t.tagB, 16, { fill: INK, anchor: 'middle' }),
         left: side, right: side,
-        top: `<rect width="${W}" height="${D}" fill="${GOLD}"/>${mark(W / 2, 59, 1.75, { tooth: NIGHT, gold: NIGHT })}`,
+        top: `<rect width="${W}" height="${D}" fill="${GOLD}"/>${mark(W / 2, 64, 1.9, { tooth: NIGHT, gold: NIGHT })}`,
         bottom: `<rect width="${W}" height="${D}" fill="${NIGHT}"/>`,
       },
     },
