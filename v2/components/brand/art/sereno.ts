@@ -99,7 +99,7 @@ function art(t: Record<string, string>): BrandArt {
   const row = (i: number, f: number) => phase(42, 152 + i * 62, 12, f, DOUGH)
     + txt(68, 148 + i * 62, t[`time${i}`], 13.5, { ft: true, w: 600, fill: WHEAT, ls: 1 }) + txt(68, 167 + i * 62, t[`step${i}`], 14.5, { ft: true, fill: DOUGH });
   const story = `<rect width="270" height="480" fill="${NIGHT}"/>${mark(40, 46, 17, { ink: DOUGH, light: OVEN })}${txt(66, 54, t.name, 24, { fill: DOUGH })}`
-    + txt(24, 108, t.storyTitle, 23, { fill: DOUGH }) + dots('M42 172V348', DOUGH, 2.2, 8) + `<g>${[0.25, 0.5, 0.75].map((f, i) => `<circle cx="42" cy="${152 + i * 62}" r="17" fill="${NIGHT}"/>` + row(i, f)).join('')}</g>`
+    + txt(24, 108, t.storyTitle, 23, { fill: DOUGH }) + dots('M42 172V388', DOUGH, 2.2, 8) + `<g>${[0.25, 0.5, 0.75].map((f, i) => `<circle cx="42" cy="${152 + i * 62}" r="17" fill="${NIGHT}"/>` + row(i, f)).join('')}</g>`
     + `<circle cx="135" cy="508" r="150" fill="${OVEN}"/>${scores(135, 378, 20, 4.4, 15, 116, NIGHT)}`
     + txt(135, 432, t.time3, 34, { anchor: 'middle' }) + txt(135, 458, t.step3, 15, { ft: true, w: 600, anchor: 'middle' });
 
@@ -111,11 +111,11 @@ function art(t: Record<string, string>): BrandArt {
     // the bakery: an oven mouth with its light on, and the first bread in the air
     + `<path fill="${DOUGH}" fill-opacity="0.24" d="M144 ${G}V${G - 46}h38V${G}Z"/><rect x="170" y="${G - 58}" width="7" height="12" fill="${DOUGH}" fill-opacity="0.24"/>`
     + `<path fill="${OVEN}" d="M152 ${G}v-16a11 11 0 0 1 22 0v16Z"/><circle cx="163" cy="${G - 36}" r="3.4" fill="${FLOUR}"/>`
-    + [[173.5, G - 66, 2.6], [177, G - 76, 2.1], [174, G - 85, 1.6]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${DOUGH}" fill-opacity="0.5"/>`).join('')
+    + [[173.5, G - 65, 2.6], [176.5, G - 73, 2.1], [174, G - 80, 1.6]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${DOUGH}" fill-opacity="0.5"/>`).join('')
     + `<path d="M0 ${G}H300" stroke="${DOUGH}" stroke-opacity="0.4" stroke-width="1.5"/>`;
-  const poster = `<rect width="300" height="400" fill="${NIGHT}"/>${mark(150, 112, 82, { ink: DOUGH, light: OVEN })}`
-    + txt(150, 244, t.posterA, 27, { fill: DOUGH, anchor: 'middle' })
-    + `<text class="bl-fd" x="150" y="277" font-size="27" font-weight="400" fill="${DOUGH}" text-anchor="middle">${t.posterB} <tspan fill="${OVEN}">${t.posterC}</tspan></text>`
+  const poster = `<rect width="300" height="400" fill="${NIGHT}"/>${mark(150, 108, 82, { ink: DOUGH, light: OVEN })}`
+    + txt(150, 236, t.posterA, 27, { fill: DOUGH, anchor: 'middle' })
+    + `<text class="bl-fd" x="150" y="269" font-size="27" font-weight="400" fill="${DOUGH}" text-anchor="middle">${t.posterB} <tspan fill="${OVEN}">${t.posterC}</tspan></text>`
     + street + txt(20, 388, t.name, 18, { fill: DOUGH }) + txt(280, 387, t.posterD, 14, { ft: true, fill: DOUGH, anchor: 'end' });
   // a hang tag in the shape of an oven mouth
   const [PW, PH] = [200, 270], UP = 22;

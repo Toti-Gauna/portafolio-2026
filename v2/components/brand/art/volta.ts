@@ -67,11 +67,11 @@ const tub = (x: number, y: number, s: number, id: string, t: Record<string, stri
   const ridges = Array.from({ length: 25 }, (_, i) => `M${r2(((i + 1) * 188) / 26)} 6v31`).join('');
   return `<defs>${cyl}</defs><g transform="translate(${x} ${y}) scale(${s})">`
     + `<path d="${body}" fill="${PLATE}"/><rect x="6" y="38" width="176" height="10" fill="#000" opacity=".3"/>`
-    + labelBolt(6 + 176 * 0.3, 64, 176 * 0.7, 111) + `<rect x="6" y="175" width="176" height="17" fill="${CHOC}"/><rect x="6" y="175" width="176" height="5" fill="#fff" opacity=".22"/>`
+    + labelBolt(6 + 176 * 0.36, 64, 176 * 0.64, 111) + `<rect x="6" y="175" width="176" height="17" fill="${CHOC}"/><rect x="6" y="175" width="176" height="5" fill="#fff" opacity=".22"/>`
     + `<path d="${body}" fill="url(#${id})" opacity=".85"/>`
     + `<path d="${lid}" fill="${VOLT}"/><path d="${ridges}" fill="none" stroke="#000" stroke-opacity=".2" stroke-width="1.4"/><path d="M4 2.5h180" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"/>`
     + `<path d="${lid}" fill="url(#${id})" opacity=".7"/><rect y="37" width="188" height="3" fill="#000" opacity=".35"/></g>`
-    + tag(x + s * 19, y + s * 88, t.house, 17, { ls: 0.6, op: 0.86 }) + txt(x + s * 19, y + s * 126, up(t.line), 26, { cls: 'bl-ft', w: 850, wide: true });
+    + tag(x + s * 19, y + s * 88, t.house, 17, { ls: 0.6, op: 0.86 }) + txt(x + s * 19, y + s * 126, up(t.line), 25, { cls: 'bl-ft', w: 850, wide: true });
 };
 
 function art(t: Record<string, string>): BrandArt {
@@ -87,8 +87,8 @@ function art(t: Record<string, string>): BrandArt {
     + `<g class="bl-fill" style="--i:2"><rect x="${PX}" y="${PY}" width="${PS}" height="${PS}" rx="6" fill="${CARBON}"/>${bevel(PX, PY, PS, PS, 2.5)}</g>`
     + `<g transform="translate(${SX} ${SY}) scale(${K})"><path class="bl-fill" style="--i:4" d="${V_L}" fill="${CHALK}"/><path class="bl-fill" style="--i:7" d="${V_R}" fill="${VOLT}"/></g>`
     + txt(NX, BASE, up(t.name), NF, { fill: CARBON, ls: NF * 0.06, fillAt: 9 })
-    + `<g class="bl-fill" style="--i:12">${tag(PX, PY + PS + U + 14, t.descriptor, 20, { fill: CARBON, ls: 3 })}</g>`
-    + Array.from({ length: 9 }, (_, i) => `<path class="bl-draw" style="--i:${13 + i}" d="M${r2(PX + i * step)} 238h${r2(dash)}" fill="none" stroke="${CARBON}" stroke-width="4"/>`).join('');
+    + `<g class="bl-fill" style="--i:12">${tag(PX, PY + PS + U + 20, t.descriptor, 20, { fill: CARBON, ls: 3 })}</g>`
+    + Array.from({ length: 9 }, (_, i) => `<path class="bl-draw" style="--i:${13 + i}" d="M${r2(PX + i * step)} 244h${r2(dash)}" fill="none" stroke="${CARBON}" stroke-width="4"/>`).join('');
   const grid = [
     // the plate: six modules a side; the symbol's box: the four in the middle
     `<path class="bl-g" d="${[1, 2, 3, 4, 5].map((i) => `M${PX + i * U} ${PY - 10}V${PY + PS + 10}M${PX - 10} ${PY + i * U}H${PX + PS + 10}`).join('')}"/>`,
@@ -167,8 +167,8 @@ function art(t: Record<string, string>): BrandArt {
   const label = `<rect width="${LW3}" height="${H}" fill="${PLATE}"/><rect width="${LW3}" height="9" fill="#000" opacity=".32"/><rect y="9" width="${LW3}" height="2.5" fill="${VOLT}"/>`
     + `<rect y="128" width="${LW3}" height="22" fill="${CHOC}"/><rect y="128" width="${LW3}" height="6" fill="#fff" opacity=".22"/>`
     // the front
-    + labelBolt(262, 14, 216, 114) + sym(222, 21, 22) + tag(250, 38, t.house, 16, { ls: 2.2, op: 0.86 })
-    + txt(222, 88, up(t.line), 40, { cls: 'bl-ft', w: 850, wide: true }) + tag(222, 112, t.sub, 16, { w: 600, ls: 0.4, op: 0.78 }) + tag(222, 145, t.flavor, 16, { ls: 2 })
+    + labelBolt(254, 14, 216, 114) + sym(214, 21, 22) + tag(242, 38, t.house, 16, { ls: 2.2, op: 0.86 })
+    + txt(214, 88, up(t.line), 40, { cls: 'bl-ft', w: 850, wide: true }) + tag(214, 112, t.sub, 16, { w: 600, ls: 0.4, op: 0.78 }) + tag(214, 145, t.flavor, 16, { ls: 2 })
     // how to load up, on the left
     + tag(28, 36, t.use, 16, { fill: VOLT, ls: 1.6 }) + use(0, '1', t.u1) + use(1, '250', t.u2) + use(2, '20', t.u3)
     // the demo notice, on the seam
@@ -177,7 +177,7 @@ function art(t: Record<string, string>): BrandArt {
     + `<circle cx="${LR}" cy="${LR}" r="72" fill="none" stroke="${CARBON}" stroke-opacity=".16" stroke-width="1.5"/>${plate(LR - 40, LR - 40, 80)}`;
 
   return {
-    logo: { main: { box: [0, 0, W, 262], svg: main }, grid, secondary: { box: [0, 0, 156, 180], svg: secondary }, submark: { box: [0, 0, 100, 100], svg: submark } },
+    logo: { main: { box: [0, 0, W, 268], svg: main }, grid, secondary: { box: [0, 0, 156, 180], svg: secondary }, submark: { box: [0, 0, 100, 100], svg: submark } },
     patterns: [{ box: [0, 0, 120, 120], svg: p0 }, { box: [0, 0, 120, 120], svg: p1 }, { box: [0, 0, 120, 120], svg: p2 }],
     digital: { post: { box: [0, 0, 400, 400], svg: post }, story: { box: [0, 0, 270, 480], svg: story } },
     physical: { poster: { box: [0, 0, 300, 400], svg: poster }, print: { box: [0, 0, TW, TH], svg: print } },

@@ -41,7 +41,7 @@
     "storyA": "See you", "storyB": "on Thursday.",
     "dow": "Thursday", "month": "October", "time": "10:00", "service": "Orthodontic check-up", "where": "Centro branch · A-0012",
     "status": "Confirmed", "cta": "View or change", "sample": "Sample data",
-    "posterKicker": "ONLINE BOOKING", "posterA": "Book your visit", "posterB": "online.", "posterSub": "Pick a day and a time. We remind you.",
+    "posterKicker": "ONLINE BOOKING", "posterA": "Book your visit", "posterB": "online.", "posterSub": "Pick a day and a time. We’ll remind you.",
     "kit": "Care kit", "next": "Your next step", "day": "Day", "hour": "Time", "tagA": "Every visit has", "tagB": "a next step."
   }
 }
