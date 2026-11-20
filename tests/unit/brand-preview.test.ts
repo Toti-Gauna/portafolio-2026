@@ -11,7 +11,7 @@ import { describe, it } from 'vitest';
  * writes <dir>/<id>.html (default dir: .brand-preview/, ignored by git). Without BRAND_PREVIEW it does nothing.
  */
 const id = process.env.BRAND_PREVIEW;
-const ART = import.meta.glob<{ BRAND: unknown }>('../../v2/components/brand/art/*.ts');
+const ART = import.meta.glob<{ BRAND: import('../../v2/components/brand/types').BrandSpec }>('../../v2/components/brand/art/*.ts');
 describe.skipIf(!id)('brand preview', () => {
   it('writes the board of one brand', async () => {
     const lang = process.env.BRAND_LANG === 'en' ? 'en' : 'es';
