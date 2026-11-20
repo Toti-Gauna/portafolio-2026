@@ -204,7 +204,7 @@ function art(t: Record<string, string>): BrandArt {
     + `<circle cx="120" cy="286" r="7" fill="none" stroke="${BROTE}" stroke-width="4.5"/>`;
 
   /* ---- in 3D: a terracotta pot with its paper label. The label wraps it; its middle faces the visitor */
-  const PR = 98, PH = 170, LR = 105, LW = Math.round(2 * Math.PI * PR), MID = LW / 2 + 18;
+  const PR = 98, PH = 170, LR = 100.5, LW = Math.round(2 * Math.PI * PR), MID = LW / 2 + 18;
   const label = `<rect width="${LW}" height="${PH}" fill="${MACETA}"/><rect width="${LW}" height="11" fill="${TIERRA}" fill-opacity="0.24"/><rect y="${PH - 11}" width="${LW}" height="11" fill="${TIERRA}" fill-opacity="0.14"/>`
     + `<rect y="28" width="${LW}" height="114" fill="${CAL}"/><path d="M5 37H${LW}M5 133H${LW}" stroke="${HOJA}" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="0 9" fill="none"/>`
     // the front: the logo and the plant's name

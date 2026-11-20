@@ -14,9 +14,9 @@ const r2 = (n: number) => Math.round(n * 100) / 100;
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const up = (s: string) => esc(s.toUpperCase());
 
-type TxtOpt = { fill?: string; w?: number; cls?: string; anchor?: string; ls?: number; op?: number; rot?: string; wide?: boolean; extra?: string };
+type TxtOpt = { fill?: string; w?: number; cls?: string; anchor?: string; ls?: number; op?: number; rot?: string; wide?: boolean; fillAt?: number };
 const txt = (x: number, y: number, s: string, size: number, o: TxtOpt = {}) =>
-  `<text class="${o.cls ?? 'bl-fd'}${o.extra ? ` ${o.extra}` : ''}" x="${r2(x)}" y="${r2(y)}" font-size="${r2(size)}" font-weight="${o.w ?? 800}" fill="${o.fill ?? CHALK}"`
+  `<text class="${o.cls ?? 'bl-fd'}${o.fillAt === undefined ? '' : ` bl-fill" style="--i:${o.fillAt}`}" x="${r2(x)}" y="${r2(y)}" font-size="${r2(size)}" font-weight="${o.w ?? 800}" fill="${o.fill ?? CHALK}"`
   + `${o.anchor ? ` text-anchor="${o.anchor}"` : ''}${o.ls ? ` letter-spacing="${r2(o.ls)}"` : ''}${o.op ? ` opacity="${o.op}"` : ''}${o.rot ? ` transform="${o.rot}"` : ''}${o.wide ? ' font-stretch="125%"' : ''}>${s}</text>`;
 /** A label in the text face: caps, bold and tracked (the repo's «eyebrow»). */
 const tag = (x: number, y: number, s: string, size: number, o: TxtOpt = {}) => txt(x, y, up(s), size, { cls: 'bl-ft', w: 700, ls: size * 0.12, ...o });
@@ -27,9 +27,9 @@ const sym = (x: number, y: number, size: number, l = CHALK, r = VOLT) =>
   `<g transform="translate(${r2(x)} ${r2(y)}) scale(${r2(size / 64)})"><path d="${V_L}" fill="${l}"/><path d="${V_R}" fill="${r}"/></g>`;
 /** The steel plate of the header: a square of six modules with a bevel, the symbol on the four in the middle. */
 const bevel = (x: number, y: number, w: number, h: number, sw: number) =>
-  `<path d="M${r2(x + sw / 2)} ${r2(y + h)}V${r2(y + sw / 2)}H${r2(x + w)}" fill="none" stroke="${CHALK}" stroke-opacity=".16" stroke-width="${r2(sw)}"/>`;
+  `<path d="M${r2(x + sw / 2)} ${r2(y + h)}V${r2(y + sw / 2)}H${r2(x + w)}" fill="none" stroke="${CHALK}" stroke-opacity=".2" stroke-width="${r2(sw)}"/>`;
 const plate = (x: number, y: number, size: number, fill = CARBON) =>
-  `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(size)}" height="${r2(size)}" rx="${r2(size / 24)}" fill="${fill}"/>${bevel(x, y, size, size, size / 36)}${sym(x + size / 6, y + size / 6, (size * 2) / 3)}`;
+  `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(size)}" height="${r2(size)}" rx="${r2(size / 24)}" fill="${fill}"/>${bevel(x, y, size, size, size / 60)}${sym(x + size / 6, y + size / 6, (size * 2) / 3)}`;
 
 /** Lane marking (app/box.css, `lane`): dashes of 18 and gaps of 12, painted under a label. */
 const lane = (x: number, y: number, w: number, color: string, k = 1, op = 1) =>
@@ -84,9 +84,9 @@ function art(t: Record<string, string>): BrandArt {
   const dash = LW / (9 + (8 * 2) / 3), step = (dash * 5) / 3; // nine dashes, 3 : 2
   const P = (x: number, y: number) => `${r2(SX + x * K)} ${r2(SY + y * K)}`;
   const main = `<rect class="bl-draw" style="--i:0" x="${PX}" y="${PY}" width="${PS}" height="${PS}" rx="6" fill="none" stroke="${CARBON}" stroke-width="3"/>`
-    + `<g class="bl-fill" style="--i:2"><rect x="${PX}" y="${PY}" width="${PS}" height="${PS}" rx="6" fill="${CARBON}"/>${bevel(PX, PY, PS, PS, 4)}</g>`
+    + `<g class="bl-fill" style="--i:2"><rect x="${PX}" y="${PY}" width="${PS}" height="${PS}" rx="6" fill="${CARBON}"/>${bevel(PX, PY, PS, PS, 2.5)}</g>`
     + `<g transform="translate(${SX} ${SY}) scale(${K})"><path class="bl-fill" style="--i:4" d="${V_L}" fill="${CHALK}"/><path class="bl-fill" style="--i:7" d="${V_R}" fill="${VOLT}"/></g>`
-    + txt(NX, BASE, up(t.name), NF, { fill: CARBON, ls: NF * 0.06, extra: 'bl-fill" style="--i:9' })
+    + txt(NX, BASE, up(t.name), NF, { fill: CARBON, ls: NF * 0.06, fillAt: 9 })
     + `<g class="bl-fill" style="--i:12">${tag(PX, PY + PS + U + 14, t.descriptor, 20, { fill: CARBON, ls: 3 })}</g>`
     + Array.from({ length: 9 }, (_, i) => `<path class="bl-draw" style="--i:${13 + i}" d="M${r2(PX + i * step)} 238h${r2(dash)}" fill="none" stroke="${CARBON}" stroke-width="4"/>`).join('');
   const grid = [
@@ -98,8 +98,7 @@ function art(t: Record<string, string>): BrandArt {
     `<path class="bl-g" d="M8 ${r2(TOP)}H${W - 8}M8 ${r2(BASE)}H${W - 8}"/>`,
     // the outer edge of the chalk stroke aims at the tip of the bolt, and so does the bolt's own blade
     `<path class="bl-gc" d="M${P(4 - (14 * 22) / 48, -6)}L${P(4 + (52 * 22) / 48, 60)}M${P(55 + (26 * 28) / 30, 4)}L${P(27, 60)}"/>`,
-    `<path class="bl-g" d="M${P(0, 30)}H${r2(SX + 64 * K)}M${P(0, 37)}H${r2(SX + 64 * K)}"/>`,
-    ...[[27, 60], [4, 8], [18, 8], [44, 8], [61, 8], [48, 30], [55, 30], [29, 37], [35.5, 37]].map(([x, y]) => `<circle class="bl-gp" cx="${r2(SX + x * K)}" cy="${r2(SY + y * K)}" r="${x === 27 ? 3.4 : 2.2}"/>`),
+    ...[[27, 60], [4, 8], [18, 8], [44, 8], [61, 8]].map(([x, y]) => `<circle class="bl-gp" cx="${r2(SX + x * K)}" cy="${r2(SY + y * K)}" r="${x === 27 ? 3.4 : 2.2}"/>`),
     // a module and a half between plate and name; one module of clear space around the lockup
     `<rect class="bl-gm" x="${PX + PS}" y="${r2(TOP)}" width="${1.5 * U}" height="${r2(BASE - TOP)}"/>`,
     `<rect class="bl-g" x="${PX - U}" y="${PY - U}" width="${r2(END - PX + 2 * U)}" height="${PS + 2 * U}"/>`,
@@ -118,8 +117,8 @@ function art(t: Record<string, string>): BrandArt {
   const fine = Array.from({ length: 15 }, (_, i) => `M${i * 8 + 0.5} 0V120M0 ${i * 8 + 0.5}H120`).join('');
   const major = [0, 1, 2].map((i) => `M${i * 40 + 0.5} 0V120M0 ${i * 40 + 0.5}H120`).join('');
   const p1 = `<rect width="120" height="120" fill="${PAPER}"/><path d="${fine}" stroke="${GRAPHITE}" stroke-opacity=".09" fill="none"/><path d="${major}" stroke="${GRAPHITE}" stroke-opacity=".24" fill="none"/>`
-    + `<rect x="41" y="41" width="7.5" height="7.5" fill="${VOLT}"/><rect x="89" y="73" width="7.5" height="7.5" fill="${GRAPHITE}"/>`
-    + `<path d="M77 80.5h7M80.5 77v7M37 0.5h7M40.5 -3v7M37 120.5h7M40.5 117v7" stroke="${GRAPHITE}" stroke-width="1.5" fill="none"/>`;
+    + `<g transform="translate(20.5 18.5) scale(1.25)" stroke="${GRAPHITE}" stroke-width="1.3" stroke-linejoin="round"><path d="${V_L}" fill="${PAPER}"/><path d="${V_R}" fill="${VOLT}"/></g>`
+    + `<path d="M17 20.5h7M20.5 17v7M97 100.5h7M100.5 97v7" stroke="${GRAPHITE}" stroke-width="1.3" fill="none"/><rect x="104.5" y="8.5" width="8" height="8" fill="${GRAPHITE}"/>`;
   const p2 = `<rect width="120" height="120" fill="${NIGHT}"/>${hazard(0, 8, 120, 22, VOLT, CARBON, 24)}`
     + `<path d="M0 60h120" stroke="${CHALK}" stroke-opacity=".5" stroke-width="3" stroke-dasharray="18 12" fill="none"/>`
     + `<path d="M15 90h120M-105 90h120" stroke="${VOLT}" stroke-width="3" stroke-dasharray="18 12" fill="none"/>`
@@ -129,11 +128,11 @@ function art(t: Record<string, string>): BrandArt {
   const post = `<rect width="400" height="400" fill="${VOLT}"/>${plate(24, 22, 40)}${txt(74, 56, up(t.name), 40, { fill: CARBON, ls: 2.4 })}`
     + `<rect x="212" y="26" width="164" height="32" rx="2" fill="${CARBON}"/>${tag(294, 48, t.seal, 17, { fill: VOLT, ls: 1, anchor: 'middle' })}`
     + txt(24, 120, up(t.postA), 58, { fill: CARBON, w: 900, ls: 0.6 }) + txt(24, 178, up(t.postB), 58, { fill: CARBON, w: 900, ls: 0.6 })
-    + `<rect y="196" width="400" height="204" fill="${CARBON}"/>`
-    + `<rect x="24" y="216" width="176" height="92" rx="2" fill="${PLATE}"/><rect x="24" y="216" width="176" height="3" fill="${VOLT}"/>${bevel(24, 219, 176, 89, 1.5)}`
-    + led('24', 38, 233, 60, VOLT) + txt(134, 293, up(t.gram), 46, { w: 800 })
-    + tag(24, 338, t.postC, 17, { ls: 1.4 }) + tag(24, 360, t.postD, 17, { ls: 1.4, fill: STEEL }) + lane(24, 378, 176, CHALK, 1, 0.45)
-    + tub(218, 204, 0.9, 'bl-volta-post-cyl', t);
+    + `<rect x="14" y="196" width="372" height="190" rx="2" fill="${CARBON}"/>`
+    + `<rect x="28" y="212" width="166" height="88" rx="2" fill="${PLATE}"/><rect x="28" y="212" width="166" height="3" fill="${VOLT}"/>${bevel(28, 215, 166, 85, 1.5)}`
+    + led('24', 40, 228, 58, VOLT) + txt(132, 286, up(t.gram), 44, { w: 800 })
+    + tag(28, 328, t.postC, 17, { ls: 1.4 }) + tag(28, 350, t.postD, 17, { ls: 1.4, fill: STEEL }) + lane(28, 368, 166, CHALK, 1, 0.45)
+    + tub(212, 203, 0.86, 'bl-volta-post-cyl', t);
 
   const sheet = Array.from({ length: 60 }, (_, i) => `${i < 34 ? `M${i * 8 + 0.5} 0V480` : ''}M0 ${i * 8 + 0.5}H270`).join('');
   const sheet40 = Array.from({ length: 12 }, (_, i) => `${i < 7 ? `M${i * 40 + 0.5} 0V480` : ''}M0 ${i * 40 + 0.5}H270`).join('');
@@ -150,9 +149,9 @@ function art(t: Record<string, string>): BrandArt {
     + hazard(0, 446, 270, 34, VOLT, CARBON, 16) + `<rect x="22" y="451" width="130" height="24" rx="2" fill="${CARBON}"/>${tag(87, 468, t.demo, 13, { fill: VOLT, ls: 1.5, anchor: 'middle' })}`;
 
   // ---- on the street: the poster (the symbol from across the avenue) and a coupon of the club, as a ticket ----
-  const poster = `<rect width="300" height="400" fill="${CARBON}"/><path d="M60.5 26V400M180.5 26V400" stroke="${CHALK}" stroke-opacity=".05" fill="none"/>`
-    + hazard(0, 0, 300, 26, VOLT, CARBON, 16) + `<rect x="16" y="3" width="140" height="20" rx="2" fill="${CARBON}"/>${tag(86, 18, t.demo, 14, { fill: VOLT, ls: 1.5, anchor: 'middle' })}`
-    + sym(19 - 4 * 4.6, 44 - 8 * 4.6, 64 * 4.6)
+  const poster = `<rect width="300" height="400" fill="${CARBON}"/>`
+    + hazard(0, 0, 300, 26, VOLT, CARBON, 16) + `<rect x="80" y="3" width="140" height="20" rx="2" fill="${CARBON}"/>${tag(150, 18, t.demo, 14, { fill: VOLT, ls: 1.5, anchor: 'middle' })}`
+    + sym(19 - 4 * 4.4, 46 - 8 * 4.4, 64 * 4.4)
     + txt(19, 358, up(t.name), 80, { ls: 4.8 }) + tag(19, 380, t.descriptor, 14.5, { fill: VOLT, ls: 2 }) + lane(19, 391, 262, CHALK, 1, 0.45);
   const TW = 264, TH = 116;
   const print = `<path d="M2 0H72l8 8 8-8H${TW - 2}a2 2 0 0 1 2 2V${TH - 2}a2 2 0 0 1-2 2H88l-8-8-8 8H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="${PLATE}"/>`
@@ -168,8 +167,8 @@ function art(t: Record<string, string>): BrandArt {
   const label = `<rect width="${LW3}" height="${H}" fill="${PLATE}"/><rect width="${LW3}" height="9" fill="#000" opacity=".32"/><rect y="9" width="${LW3}" height="2.5" fill="${VOLT}"/>`
     + `<rect y="128" width="${LW3}" height="22" fill="${CHOC}"/><rect y="128" width="${LW3}" height="6" fill="#fff" opacity=".22"/>`
     // the front
-    + labelBolt(246, 14, 216, 114) + sym(206, 21, 22) + tag(234, 38, t.house, 16, { ls: 2.2, op: 0.86 })
-    + txt(206, 88, up(t.line), 40, { cls: 'bl-ft', w: 850, wide: true }) + tag(206, 112, t.sub, 16, { w: 600, ls: 0.4, op: 0.78 }) + tag(206, 145, t.flavor, 16, { ls: 2 })
+    + labelBolt(262, 14, 216, 114) + sym(222, 21, 22) + tag(250, 38, t.house, 16, { ls: 2.2, op: 0.86 })
+    + txt(222, 88, up(t.line), 40, { cls: 'bl-ft', w: 850, wide: true }) + tag(222, 112, t.sub, 16, { w: 600, ls: 0.4, op: 0.78 }) + tag(222, 145, t.flavor, 16, { ls: 2 })
     // how to load up, on the left
     + tag(28, 36, t.use, 16, { fill: VOLT, ls: 1.6 }) + use(0, '1', t.u1) + use(1, '250', t.u2) + use(2, '20', t.u3)
     // the demo notice, on the seam
