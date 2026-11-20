@@ -1,0 +1,45 @@
+{
+  "name": "Volta",
+  "owner": "Tienda ficticia de suplementos y deporte: la marca de una demo de venta",
+  "idea": "Un box de entrenamiento hecho marca: carbono, acero y tiza, con el voltio como única luz de señal.",
+  "place": "Una tienda online de demostración, con base en Mar del Plata",
+  "traits": ["Eléctrica", "Industrial", "Directa"],
+  "palette": {
+    "volt": { "name": "Voltio", "use": "La luz de señal" },
+    "carbon": { "name": "Carbono", "use": "El piso del box" },
+    "plate": { "name": "Placa", "use": "Tarjetas, rótulos y envases" },
+    "chalk": { "name": "Tiza", "use": "Texto y trazo de la V" },
+    "steel": { "name": "Acero", "use": "Texto secundario" },
+    "plasma": { "name": "Plasma", "use": "Acento sobre voltio" }
+  },
+  "type": {
+    "display": { "role": "Titulares en mayúsculas, altos y apretados", "sample": "Cargá tu mejor versión." },
+    "text": { "role": "Interfaz, rótulos y datos", "sample": "24 g de proteína por scoop, con lote y vencimiento a la vista." }
+  },
+  "grid": [
+    "La placa mide seis módulos de lado; el símbolo ocupa los cuatro del centro.",
+    "El trazo de tiza apunta a la punta del rayo: ahí cierra la V.",
+    "El nombre mide lo que la V, de tope a punta, a módulo y medio."
+  ],
+  "alt": {
+    "logo": "Logo de Volta: la placa con la V y su rayo, junto al nombre",
+    "secondary": "Versión apilada: la placa arriba y el nombre debajo, sobre su carril",
+    "submark": "Símbolo de Volta: una V que cierra con un rayo",
+    "patterns": "Tres patrones: rayos con uno encendido, hoja milimetrada y piso del box con cinta",
+    "post": "Publicación de ejemplo: Cargá tu mejor versión, el marcador en 24 g y el pote",
+    "story": "Historia de ejemplo: cómo se carga, en tres lecturas del marcador",
+    "poster": "Cartel de ejemplo: el símbolo gigante sobre carbono, con el nombre y la cinta de demo",
+    "print": "Cupón de ejemplo del Club Volta, como ticket con su talón",
+    "object": "Pote de Ionic Whey en 3D: tapa voltio, rótulo de la casa y modo de uso"
+  },
+  "pieces": { "print": "Cupón del club", "object": "Pote de Ionic Whey, 2 lb" },
+  "source": "Símbolo, colores, tipografías y marcador LED salen del repo de la demo. La grilla, los patrones, las piezas y el pote se dibujaron para el tablero, con textos de ejemplo.",
+  "art": {
+    "name": "Volta", "descriptor": "Suplementos y deporte", "house": "Volta Lab", "line": "Whey", "sub": "100% · 24 g prot", "flavor": "Chocolate",
+    "seal": "Marca propia", "postA": "Cargá tu", "postB": "mejor versión", "gram": "g", "postC": "de proteína", "postD": "por scoop",
+    "storyA": "Cómo se", "storyB": "carga", "use": "Modo de uso",
+    "u1": "scoop", "s1": "30 g de polvo", "u2": "ml", "s2": "de agua o leche", "u3": "seg", "s3": "en el shaker",
+    "demo": "Tienda demo", "demoShort": "Demo",
+    "off": "Off", "club": "Club Volta", "cupA": "En tu primera compra", "code": "BIENVENIDA10"
+  }
+}

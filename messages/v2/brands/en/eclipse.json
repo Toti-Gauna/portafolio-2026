@@ -1,0 +1,50 @@
+{
+  "name": "Eclipse",
+  "owner": "Ignacio Gauna's software studio",
+  "idea": "An observatory: your business comes out of the shadow, and amber is the only source of light.",
+  "place": "On its landing page, its client portal and its proposals",
+  "traits": ["Precise", "Editorial", "Warm"],
+  "palette": {
+    "void": { "name": "Void", "use": "The deep background, at night" },
+    "dawn": { "name": "Dawn", "use": "Text and lit sections" },
+    "night": { "name": "Night", "use": "Dark surfaces" },
+    "corona": { "name": "Corona", "use": "The light: one action per screen" },
+    "mist": { "name": "Mist", "use": "Secondary text on dark" },
+    "flare": { "name": "Flare", "use": "The glow of the corona" }
+  },
+  "type": {
+    "display": { "role": "One big serif moment per section", "sample": "Your business, in full light." },
+    "text": { "role": "Interface, body copy and the ECLIPSE wordmark", "sample": "Websites, systems and AI agents: before we talk, we show you your business already working." }
+  },
+  "grid": [
+    "A 24-unit square: the sun has a radius of 6.5; the corona, 8.6.",
+    "The glint sits on the diagonal, at 45°, between the sun and the corona.",
+    "The wordmark is centred on the disc's axis, with half an em between letters."
+  ],
+  "alt": {
+    "logo": "Eclipse logo: a total eclipse with its amber corona and the word ECLIPSE under it",
+    "secondary": "Horizontal version, as in the header: the eclipse beside the word ECLIPSE",
+    "submark": "Eclipse symbol: the ring of the corona with its glint",
+    "patterns": "Three patterns: phases of the eclipse, instrument rulers and discs in occultation on amber",
+    "post": "Sample post: a total eclipse and the line Your business, in full light",
+    "story": "Sample story: Websites, Systems, Content, All connected and the Get your demo button",
+    "poster": "Sample poster on light paper: the observatory dial and We show you your business already working",
+    "print": "Sample project passport, in amber: the five stages, with the second one lit",
+    "object": "Welcome box in 3D: the eclipse on the front, an amber lid, rulers on the sides"
+  },
+  "pieces": { "print": "Project passport", "object": "Welcome box" },
+  "source": "The eclipse, the wordmark, the colours and the typefaces come from Eclipse's repo. The grid, the patterns, the pieces and the box were drawn for this board, as samples.",
+  "art": {
+    "word": "ECLIPSE",
+    "eyebrow": "Development · AI · Automation",
+    "lightA": "Your business,", "lightB": "in full", "lightC": "light.",
+    "g1": "Websites.", "g2": "Systems.", "g3": "Content.", "g4": "All connected.",
+    "cta": "Get your demo",
+    "totality": "Totality",
+    "showA": "We show you", "showB": "your business", "showC": "already working.",
+    "passport": "Project passport",
+    "stage0": "Preparation", "stage1": "Build", "stage2": "Eclipse review", "stage3": "Client review", "stage4": "Delivery",
+    "now": "2", "of": "of 5",
+    "madeA": "Built around", "madeB": "your business."
+  }
+}

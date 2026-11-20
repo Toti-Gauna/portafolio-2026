@@ -1,0 +1,44 @@
+{
+  "name": "IG",
+  "owner": "La marca personal de Ignacio Gauna",
+  "idea": "Un asta, una G y un punto coral: la firma de quien construye software capa por capa.",
+  "place": "Este portafolio, de la puerta al pie",
+  "traits": ["Precisa", "Cálida", "En movimiento"],
+  "palette": {
+    "ink": { "name": "Índigo tinta", "use": "El fondo de casi todo" },
+    "paper": { "name": "Papel", "use": "Texto y tramos claros" },
+    "coral": { "name": "Coral", "use": "El punto y la acción principal" },
+    "night": { "name": "Noche", "use": "Superficies y tarjetas" },
+    "blue": { "name": "Azul IG", "use": "Acento sobre papel" },
+    "mist": { "name": "Niebla", "use": "Texto secundario" }
+  },
+  "type": {
+    "display": { "role": "Títulos grandes, apretados y con peso", "sample": "Construyo software que llega a producción." },
+    "text": { "role": "Rótulos, datos y código", "sample": "Sr AI Fullstack Developer · Mar del Plata, Argentina" }
+  },
+  "grid": [
+    "El punto coral es el módulo: todo se mide en puntos.",
+    "La G es un solo círculo; el punto es ese círculo, cuatro veces más chico.",
+    "Aire mínimo alrededor: un módulo por lado."
+  ],
+  "alt": {
+    "logo": "Logo de IG: el monograma con su punto coral y el nombre Ignacio Gauna",
+    "secondary": "Versión horizontal: monograma, nombre y rol en una línea",
+    "submark": "Monograma IG",
+    "patterns": "Tres patrones: puntos con uno encendido, astas y arcos, y barras del espectro",
+    "post": "Publicación de ejemplo: Sr AI Fullstack Developer sobre índigo",
+    "story": "Historia de ejemplo: el oficio en cinco capas",
+    "poster": "Cartel de ejemplo en coral con el monograma y la frase del portafolio",
+    "print": "Tarjeta personal de ejemplo",
+    "object": "Caja de tarjetas en 3D: el monograma al frente y el espectro en los lados"
+  },
+  "pieces": { "print": "Tarjeta personal", "object": "Caja de tarjetas" },
+  "source": "El monograma, los colores y las tipografías son los de este sitio. La grilla, los patrones y las piezas se dibujaron para el tablero, como aplicaciones de ejemplo.",
+  "art": {
+    "first": "Ignacio", "last": "Gauna", "level": "Sr", "role": "AI Fullstack Developer", "roleA": "AI Fullstack", "roleB": "Developer",
+    "site": "portafolio.eclipse-business.com",
+    "storyTitle": "El oficio, en capas", "layer0": "Planificación", "layer1": "Código", "layer2": "Agentes", "layer3": "Tests", "layer4": "Deploy",
+    "storyA": "Cinco capas,", "storyB": "un solo criterio.",
+    "posterA": "Software para", "posterB": "un mundo con", "posterC": "más soluciones."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Brote",
+  "owner": "A brand invented for this lab: an indoor plant nursery",
+  "idea": "The “o” in brote is a pot: every plant grows out of it, with its own care card.",
+  "place": "An indoor plant nursery: pots, deliveries and care cards",
+  "traits": ["Soft", "Playful", "Clear"],
+  "palette": {
+    "sprout": { "name": "Sprout", "use": "The brand’s field" },
+    "leaf": { "name": "Leaf", "use": "Leaves, buttons and dark sections" },
+    "lime": { "name": "Limewash", "use": "Paper, labels and light text" },
+    "pot": { "name": "Pot", "use": "The “o” and every pot" },
+    "soil": { "name": "Soil", "use": "Text on light fields" },
+    "moss": { "name": "Moss", "use": "The second leaf of each plant" }
+  },
+  "type": {
+    "display": { "role": "Round headlines with weight and charm", "sample": "Your home is sprouting too." },
+    "text": { "role": "Care cards and longer reads", "sample": "Water once a week, give it indirect light and a pot that drains well." }
+  },
+  "grid": [
+    "The “o” is the pot: its circle is the measure of the whole logo.",
+    "Each leaf is where two equal circles cross; the small one is three quarters the size.",
+    "The stem follows the axis of the “o”. Clear space: half an “o” on every side."
+  ],
+  "alt": {
+    "logo": "Brote logo: the word brote, its “o” a pot with a sprout growing out of it",
+    "secondary": "One-line version: the logo and the tagline indoor plant nursery",
+    "submark": "Brote symbol: a round pot with its two-leaf sprout",
+    "patterns": "Three patterns: foliage with seeds, pots with sprouts and terracotta scales",
+    "post": "Sample post: the plant of the week, a pothos with its three care notes",
+    "story": "Sample story: the care card of a calathea",
+    "poster": "Sample poster: a Saturday cutting swap, with one giant plant",
+    "print": "Sample stake for the pot, carrying the care card of a ficus",
+    "object": "Terracotta pot in 3D with its paper label and the plant seen from above"
+  },
+  "pieces": { "print": "Stake with a care card", "object": "Pot with its label" },
+  "source": "Brote is a brand exercise from the lab: logo, colours, patterns and pieces were drawn for this board. Its typefaces, Bricolage Grotesque and Figtree, are open-licence.",
+  "art": {
+    "nameA": "br", "nameB": "te",
+    "tagA": "indoor plant", "tagB": "nursery",
+    "postKicker": "Plant of the week", "postName": "Pothos",
+    "care1": "Weekly watering", "care2": "Indirect light", "care3": "Easy care",
+    "storyKicker": "Care card", "storyName": "Calathea", "storyCta": "Save this card",
+    "rowWater": "Water", "rowLight": "Light", "rowCare": "Attention",
+    "posterA": "Swap your", "posterB": "cuttings", "posterC": "Bring one,", "posterD": "take another.", "posterDate": "Sat 14 · 10 am",
+    "printName": "Ficus", "valWater": "Once a week", "valLight": "Indirect", "valCare": "Easy",
+    "potName": "Monstera"
+  }
+}

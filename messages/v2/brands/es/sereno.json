@@ -1,0 +1,49 @@
+{
+  "name": "Sereno",
+  "owner": "Una panadería de masa madre inventada para el laboratorio",
+  "idea": "El sereno vela de noche: una luna de masa, cortada como un pan, y una sola luz encendida, el horno.",
+  "place": "Una panadería de barrio que hornea de madrugada",
+  "traits": ["Cálida", "Nocturna", "De oficio"],
+  "palette": {
+    "oven": { "name": "Horno", "use": "El campo de la marca" },
+    "night": { "name": "Noche", "use": "Tinta, luna y campo nocturno" },
+    "dough": { "name": "Masa", "use": "La luna sobre la noche" },
+    "flour": { "name": "Harina", "use": "La luz encendida y etiquetas" },
+    "crust": { "name": "Corteza", "use": "Cortes, hilos y detalles" },
+    "wheat": { "name": "Trigo", "use": "Espigas, horas y puntos" }
+  },
+  "type": {
+    "display": { "role": "Nombre y títulos, con el peso de una hogaza", "sample": "Mientras dormís, horneamos." },
+    "text": { "role": "Rótulos, horarios y datos de cada pan", "sample": "Pan de campo · masa madre · sale a las 6:00" }
+  },
+  "grid": [
+    "La luna sale de dos círculos: el de la masa y otro, corrido, que la muerde.",
+    "El corte es el módulo: tres cortes cada 30° sobre un mismo círculo, igual de inclinados.",
+    "La luz mide dos módulos, toca por dentro el círculo y marca el aire mínimo."
+  ],
+  "alt": {
+    "logo": "Logo de Sereno: una luna de masa con tres cortes y una luz, sobre el nombre",
+    "secondary": "Versión horizontal: la luna, el nombre y «Pan de madrugada» en una línea",
+    "submark": "La luna de masa de Sereno",
+    "patterns": "Tres patrones: cortes de pan, fases de la luna y espigas de trigo",
+    "post": "Publicación de ejemplo: «Mientras dormís, horneamos» junto a la luna, sobre naranja",
+    "story": "Historia de ejemplo: la noche de un pan, del refresco de masa madre al pan caliente",
+    "poster": "Cartel de ejemplo: la luna sobre el barrio dormido y una sola ventana encendida",
+    "print": "Etiqueta colgante de ejemplo con forma de boca de horno",
+    "object": "Caja de pan en 3D: la luna al frente y cortes de hogaza en la tapa"
+  },
+  "pieces": { "print": "Etiqueta colgante", "object": "Caja de pan" },
+  "source": "Sereno es un ejercicio de marca inventado para el laboratorio: el logo, la paleta, las tipografías elegidas y cada pieza se dibujaron para este tablero, con textos de ejemplo.",
+  "art": {
+    "name": "Sereno", "tag": "PAN DE MADRUGADA",
+    "postA": "Mientras", "postB": "dormís,", "postC": "horneamos.", "postD": "Masa madre", "postE": "Sale a las 6:00",
+    "storyTitle": "La noche de un pan",
+    "time0": "22:00", "step0": "Refresco de masa madre",
+    "time1": "01:00", "step1": "Amasado y reposo",
+    "time2": "04:00", "step2": "Formado, corte y horno",
+    "time3": "06:00", "step3": "Pan caliente",
+    "posterA": "El barrio duerme.", "posterB": "El horno,", "posterC": "despierto.", "posterD": "Masa madre · desde las 6",
+    "tagKind": "Pan de campo", "tagA": "MASA MADRE", "tagB": "Harina, agua, sal y tiempo.", "tagC": "Horneado hoy · 05:40",
+    "boxSide": "Masa madre"
+  }
+}

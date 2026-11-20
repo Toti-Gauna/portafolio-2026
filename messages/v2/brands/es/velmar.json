@@ -1,0 +1,48 @@
+{
+  "name": "Velmar",
+  "owner": "Marca de un cliente; sistema visual armado por Ignacio para la demo",
+  "idea": "Una M de dos picos sobre una V, a 45°: objetos hechos a pedido para la casa y la mascota.",
+  "place": "La demo de una tienda de objetos a pedido, Mar del Plata",
+  "traits": ["Hogareña", "Artesanal", "A medida"],
+  "palette": {
+    "paper": { "name": "Papel", "use": "El fondo de la tienda" },
+    "olive": { "name": "Verde oliva", "use": "Logo, botones y enlaces" },
+    "ink": { "name": "Tinta oliva", "use": "Texto y bandas de noche" },
+    "sand": { "name": "Arena", "use": "Chips y fondos suaves" },
+    "wood": { "name": "Madera", "use": "Decoración, como la madera clara" },
+    "brass": { "name": "Latón", "use": "Detalle dorado sobre la noche" }
+  },
+  "type": {
+    "display": { "role": "Titulares editoriales y el nombre del logo", "sample": "Objetos hechos a pedido para tu casa y tu mascota" },
+    "text": { "role": "Texto de interfaz y rótulos en mayúsculas", "sample": "Elegí la pieza, sumá su nombre y la hacemos para vos, en Mar del Plata." }
+  },
+  "grid": [
+    "Cada trazo corre a 45° con el mismo grosor: ese grosor es el módulo.",
+    "La M termina donde empieza la V: una línea horizontal parte la marca en dos mitades.",
+    "Entre la M y la V queda un módulo de aire; alrededor de la marca, otro."
+  ],
+  "alt": {
+    "logo": "Logo de Velmar: la M de dos picos sobre la V, en oliva, y el nombre",
+    "secondary": "Versión apilada: el monograma, el nombre Velmar y Mar del Plata",
+    "submark": "Monograma de Velmar: la M sobre la V",
+    "patterns": "Tres patrones: chevrones sobre papel, el monograma en latón y un acolchado oliva",
+    "post": "Publicación de ejemplo: un collar oliva con una chapita de latón que dice Nina",
+    "story": "Historia de ejemplo: un pedido en tres pasos, sobre verde oliva",
+    "poster": "Cartel de ejemplo: el monograma en latón con una etiqueta colgando de la V",
+    "print": "Etiqueta colgante de ejemplo, con el nombre Nina escrito a mano",
+    "object": "Caja de envío en 3D: cartón, el logo en una tinta y cinta verde oliva"
+  },
+  "pieces": { "print": "Etiqueta colgante", "object": "Caja de envío" },
+  "source": "El logo es la marca del cliente; colores y tipografías, la paleta provisional de la demo. Grilla, patrones, piezas y caja se dibujaron para el tablero.",
+  "art": {
+    "name": "Velmar", "city": "Mar del Plata", "cityUp": "MAR DEL PLATA", "made": "HECHO A PEDIDO",
+    "petA": "Nina", "petB": "Toto",
+    "postA": "Un collar", "postB": "con su nombre.",
+    "storyA": "Tu pedido,", "storyB": "paso a paso.",
+    "step0": "Elegí tu pieza", "step1": "Sumá su nombre", "step2": "La hacemos para vos", "cta": "Hacé tu pedido",
+    "posterA": "Hecho a pedido.", "posterB": "Para tu casa y tu mascota",
+    "tagFor": "HECHO A PEDIDO PARA", "tagK1": "Pieza", "tagV1": "Collar con nombre", "tagK2": "Hecho en",
+    "boxA": "Objetos hechos a pedido", "boxB": "para tu casa", "boxC": "y tu mascota.",
+    "up": "HACIA ARRIBA", "forUp": "PARA"
+  }
+}
