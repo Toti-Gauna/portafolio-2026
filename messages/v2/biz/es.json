@@ -1,0 +1,755 @@
+{
+  "note": "Todo lo que sigue sale del código y los documentos de mis proyectos. Los números son los escenarios de ejemplo de cada demo.",
+  "index": "En esta página",
+  "seeCase": "Ver el proyecto",
+  "projects": {
+    "eclipse": "Eclipse",
+    "volta": "Volta",
+    "velmar": "Velmar",
+    "dentalos": "DentalOS",
+    "lucero": "Lucero"
+  },
+  "tabs": "Proyecto",
+  "sections": {
+    "model": {
+      "k": "Modelo",
+      "title": "Quién paga qué, y por qué.",
+      "lead": "Antes de diseñar una pantalla, dibujo por dónde entra la plata y qué recibe cada uno a cambio."
+    },
+    "pricing": {
+      "k": "Precios",
+      "title": "Cómo se arma un precio.",
+      "lead": "La estructura primero: niveles que se suman, reglas claras y descuentos en un orden que se puede explicar."
+    },
+    "unit": {
+      "k": "Economía unitaria",
+      "title": "Lo que deja cada venta.",
+      "lead": "Las fórmulas son las del código de cada demo. Mové los valores y mirá cómo cambia el resultado."
+    },
+    "funnel": {
+      "k": "Embudo",
+      "title": "El recorrido, etapa por etapa.",
+      "lead": "Cada etapa tiene el módulo que la construye. Así el embudo se puede navegar en la demo, de punta a punta."
+    },
+    "loop": {
+      "k": "Ciclo de crecimiento",
+      "title": "Lo que hace volver.",
+      "lead": "Cada ciclo es una secuencia concreta del producto: qué pasa, en qué orden y quién da el paso siguiente."
+    },
+    "sale": {
+      "k": "Venta",
+      "title": "Cómo vendo: la demo primero.",
+      "lead": "El cliente ve su negocio funcionando antes de hablar de precio. Después, propuesta por escrito y un pago acreditado."
+    },
+    "first": {
+      "k": "La métrica que va primero",
+      "title": "El primer número de cada panel.",
+      "lead": "Cada panel abre con un número elegido a propósito, y con una regla sobre qué cuenta y qué espera."
+    }
+  },
+  "model": {
+    "money": "Paga",
+    "value": "Recibe",
+    "decision": "La decisión",
+    "items": {
+      "eclipse": {
+        "nodes": {
+          "client": "La inmobiliaria",
+          "eclipse": "Eclipse"
+        },
+        "links": {
+          "plan": "Plan mensual",
+          "product": "Web, CRM y demo del rubro"
+        },
+        "decision": "Todo son planes mensuales, con la puesta en marcha incluida. El trabajo empieza con el primer pago acreditado."
+      },
+      "lucero": {
+        "nodes": {
+          "diner": "El comensal",
+          "venue": "El local",
+          "eclipse": "Eclipse"
+        },
+        "links": {
+          "bill": "Paga en la caja",
+          "sub": "Suscripción mensual",
+          "menu": "Carta por QR y juegos",
+          "system": "Carta, Gus y CRM"
+        },
+        "decision": "Cero comisión por pedido: el local paga una suscripción y cada pedido se cobra entero en su caja."
+      },
+      "volta": {
+        "nodes": {
+          "supplier": "Distribuidoras",
+          "store": "La tienda",
+          "customer": "El cliente"
+        },
+        "links": {
+          "cost": "Costo del proveedor",
+          "price": "Precio de lista",
+          "goods": "Mercadería",
+          "order": "Pedido armado"
+        },
+        "decision": "Revende marcas y suma una propia. Gana el precio menos el costo puesto: proveedor más embalaje."
+      },
+      "velmar": {
+        "nodes": {
+          "customer": "El cliente",
+          "workshop": "El taller"
+        },
+        "links": {
+          "price": "Precio base más personalización",
+          "made": "Un objeto hecho a pedido"
+        },
+        "decision": "Cada producto tiene su receta: insumos, minutos de máquina y minutos a mano. De ahí sale el precio sugerido."
+      },
+      "dentalos": {
+        "nodes": {
+          "patient": "El paciente",
+          "clinic": "La clínica"
+        },
+        "links": {
+          "care": "Cada atención",
+          "follow": "Turno, recordatorio y seguimiento"
+        },
+        "decision": "Cada campaña se evalúa por contribución: cuántas atenciones cubren su costo, antes de mandarla."
+      }
+    }
+  },
+  "pricing": {
+    "eclipse": {
+      "tab": "Eclipse · seis niveles",
+      "lead": "Planes mensuales diseñados para inmobiliarias, el primer rubro. Cada nivel suma al anterior.",
+      "includes": "Lo que ofrece",
+      "who": "Para quién",
+      "all": "Todo",
+      "levels": [
+        {
+          "name": "Contact",
+          "phrase": "Tu web y tu CRM, completos",
+          "who": "Para empezar a ordenar la operación.",
+          "adds": [
+            "Web del producto",
+            "CRM completo",
+            "Roles básicos",
+            "Centro de ayuda"
+          ]
+        },
+        {
+          "name": "Growth",
+          "phrase": "Crecé y rendí cuentas",
+          "who": "Equipos de 1 a 3 personas que quieren mostrar resultados.",
+          "adds": [
+            "Panel para el dueño del inmueble",
+            "Mapas y métricas",
+            "Academy inicial",
+            "Contenido mensual: imágenes, motion y un tour"
+          ]
+        },
+        {
+          "name": "Escalar",
+          "phrase": "Coordiná al equipo",
+          "who": "Equipos de hasta 6 personas.",
+          "adds": [
+            "Reparto y seguimiento de consultas",
+            "Campañas de 15 s en horizontal y vertical",
+            "Agente de voz",
+            "Kit para ofrecer tours"
+          ]
+        },
+        {
+          "name": "Hípergrowth",
+          "phrase": "Decidí con datos",
+          "who": "Equipos de hasta 10 personas, con volumen.",
+          "adds": [
+            "Análisis y recomendaciones con fuente",
+            "Contratos y documentación con revisión",
+            "Más producción mensual"
+          ]
+        },
+        {
+          "name": "Deluxe",
+          "phrase": "Sumá servicios nuevos",
+          "who": "Equipos de hasta 15 que administran carteras.",
+          "adds": [
+            "Chatbot integrado al CRM",
+            "Administración con tu marca",
+            "Más producción y voz"
+          ]
+        },
+        {
+          "name": "Partner",
+          "phrase": "Varias sedes, una visión",
+          "who": "Varias sedes o carteras, con propuesta a medida.",
+          "adds": [
+            "Sedes con permisos propios",
+            "Más capacidad y producción",
+            "Revisión mensual con recomendaciones"
+          ]
+        }
+      ],
+      "rules": [
+        "Mensualidad, puesta en marcha y variables, separados.",
+        "Lo incluido se cobra una sola vez.",
+        "Aviso al 80 % de la cuota; al 100 % se pausa solo lo que se consume.",
+        "Los extras se cotizan antes, por escrito.",
+        "Precios limpios: cero tachados."
+      ],
+      "note": "Cada capacidad se construye con su primer cliente."
+    },
+    "lucero": {
+      "tab": "Lucero · tres planes",
+      "lead": "Tres planes que se suman: cada uno incluye todo lo del anterior.",
+      "plans": [
+        {
+          "name": "Carta y CRM",
+          "phrase": "Tu carta en el celular y tu local en orden.",
+          "points": [
+            "Carta por QR en cada mesa",
+            "Gus, el mozo animado que lleva la comanda",
+            "CRM: pedidos, cocina, clientes y stock"
+          ]
+        },
+        {
+          "name": "Juegos y ruleta",
+          "phrase": "Más motivos para quedarse y volver.",
+          "points": [
+            "Juegos mientras llega la comida",
+            "Ruleta para ganar el menú del día",
+            "Premios y probabilidades que elige el local"
+          ]
+        },
+        {
+          "name": "Mesa y Academy",
+          "phrase": "La mesa juega junta y el local aprende.",
+          "points": [
+            "Juegos para toda la mesa",
+            "Salas con link, código o QR",
+            "Academy: marketing digital y físico"
+          ]
+        }
+      ],
+      "rules": [
+        "Cero comisión por pedido.",
+        "La compra se coordina por WhatsApp, con el plan en el mensaje."
+      ]
+    },
+    "volta": {
+      "tab": "Volta · orden de descuentos",
+      "lead": "En el carrito, cada descuento se aplica sobre lo que dejó el anterior, en este orden.",
+      "steps": {
+        "subtotal": {
+          "t": "Subtotal",
+          "d": "Precio de lista de cada variante por su cantidad."
+        },
+        "packOrStack": {
+          "t": "Pack o stack",
+          "d": "Pack completo: 10 %, y 5 % más cada mes. Stack: 10 % con tres categorías. Uno u otro."
+        },
+        "coupon": {
+          "t": "Cupón",
+          "d": "Porcentaje, monto fijo con mínimo o envío gratis; uno por compra."
+        },
+        "transfer": {
+          "t": "Transferencia o QR",
+          "d": "10 % sobre lo que queda, con comprobante que aprueba el dueño."
+        },
+        "shipping": {
+          "t": "Envío",
+          "d": "Gratis desde un umbral, medido sobre el subtotal."
+        },
+        "giftcard": {
+          "t": "Gift card",
+          "d": "El saldo paga productos y envío; vence a los 12 meses."
+        }
+      }
+    }
+  },
+  "unit": {
+    "scenario": "Escenario de ejemplo",
+    "source": "Valores de muestra del repo",
+    "pesos": "pesos",
+    "velmar": {
+      "tab": "Velmar · receta",
+      "title": "¿A cuánto vender un objeto hecho a pedido?",
+      "presets": {
+        "plate": "Placa NFC",
+        "collar": "Collar con nombre"
+      },
+      "fields": {
+        "materials": "Insumos",
+        "machineMin": "Minutos de máquina",
+        "machineHour": "Hora de máquina",
+        "handMin": "Minutos a mano",
+        "handHour": "Hora a mano",
+        "margin": "Margen objetivo"
+      },
+      "out": {
+        "machine": "Máquina",
+        "hand": "Mano",
+        "materials": "Insumos",
+        "cost": "Costo de la receta",
+        "price": "Precio sugerido",
+        "profit": "Ganancia por unidad"
+      },
+      "rule": "El margen se mide sobre el precio de venta, y el precio sube a los 100 pesos siguientes."
+    },
+    "volta": {
+      "tab": "Volta · costo puesto",
+      "title": "¿Qué precio deja el margen pedido?",
+      "fields": {
+        "supplier": "Costo del proveedor",
+        "packaging": "Embalaje",
+        "margin": "Margen objetivo",
+        "ending": "Terminación"
+      },
+      "endings": {
+        "900": "en 900",
+        "500": "a 500",
+        "100": "a 100"
+      },
+      "out": {
+        "landed": "Costo puesto",
+        "suggested": "Precio sugerido",
+        "proposed": "Precio propuesto",
+        "margin": "Margen real"
+      },
+      "states": {
+        "loss": "Pierde plata",
+        "low": "Margen bajo",
+        "ok": "Buen margen"
+      },
+      "rule": "El precio propuesto siempre redondea hacia arriba: deja al menos el margen pedido."
+    },
+    "dentalos": {
+      "tab": "DentalOS · campaña",
+      "title": "¿Cuántas atenciones cubren una campaña?",
+      "fields": {
+        "listPrice": "Precio por atención",
+        "discount": "Descuento",
+        "serviceCost": "Costo del servicio",
+        "otherVariable": "Otros variables",
+        "fixedCost": "Costo fijo de la campaña",
+        "audience": "Contactos",
+        "costPerContact": "Costo por contacto",
+        "responsePct": "Respuesta supuesta"
+      },
+      "out": {
+        "contribution": "Contribución por atención",
+        "campaign": "Costo de la campaña",
+        "breakeven": "Atenciones para cubrirla",
+        "projected": "Atenciones proyectadas",
+        "result": "Resultado proyectado"
+      },
+      "none": "Con contribución cero o negativa, la campaña se mira por continuidad.",
+      "rule": "Contribución es ingreso neto menos costos variables: es distinta de la ganancia. La respuesta es un supuesto."
+    }
+  },
+  "funnel": {
+    "legend": "La forma es ilustrativa: el recorrido está diseñado y se navega en la demo.",
+    "signal": "Señal",
+    "record": "Registro",
+    "eclipseQuote": "«Un clic en WhatsApp es distinto de una conversación, una solicitud es distinta de una propuesta y una aceptación es distinta de un cobro.»",
+    "items": {
+      "eclipse": [
+        {
+          "t": "Rubro abierto",
+          "d": "El visitante elige su rubro."
+        },
+        {
+          "t": "Demo vista",
+          "d": "Abre la demo del rubro."
+        },
+        {
+          "t": "Consulta",
+          "d": "Abre WhatsApp con el plan en el mensaje."
+        },
+        {
+          "t": "Conversación",
+          "d": "Una persona habló con el cliente."
+        },
+        {
+          "t": "Propuesta enviada",
+          "d": "Alcance, precio y plazos por escrito."
+        },
+        {
+          "t": "Aceptación",
+          "d": "Acuerdo escrito."
+        },
+        {
+          "t": "Pago acreditado",
+          "d": "El pago está en la cuenta, más allá del comprobante."
+        }
+      ],
+      "volta": [
+        {
+          "t": "Descubrir",
+          "d": "Inicio, objetivo de entrenamiento y buscador."
+        },
+        {
+          "t": "Elegir",
+          "d": "Ficha técnica, comparador y «Armá tu stack»."
+        },
+        {
+          "t": "Carrito",
+          "d": "Barra de envío gratis, stack y un cupón."
+        },
+        {
+          "t": "Checkout",
+          "d": "Tres pasos, con la fecha real del cadete."
+        },
+        {
+          "t": "Pago",
+          "d": "Transferencia con comprobante o cobro en el mostrador."
+        },
+        {
+          "t": "Cumplimiento",
+          "d": "Armado, control de lote y despacho."
+        },
+        {
+          "t": "Retención",
+          "d": "Recompra, Club, packs mensuales y cumpleaños."
+        },
+        {
+          "t": "Referencia",
+          "d": "Regalos: el objetivo es que traigan clientes nuevos."
+        }
+      ],
+      "velmar": [
+        {
+          "t": "Descubrir",
+          "d": "Inicio, categorías y la temática del día."
+        },
+        {
+          "t": "Personalizar",
+          "d": "Vista previa en vivo del diseño."
+        },
+        {
+          "t": "Carrito",
+          "d": "Envío gratis, cupones y misión."
+        },
+        {
+          "t": "Gancho",
+          "d": "Ruleta al ir a pagar."
+        },
+        {
+          "t": "Checkout y pago",
+          "d": "Retiro, cadete o envío; Mercado Pago, transferencia o QR."
+        },
+        {
+          "t": "Producción",
+          "d": "A fabricar, en máquina, terminación y listo."
+        },
+        {
+          "t": "Seguimiento",
+          "d": "Estados del pedido y ayuda por WhatsApp."
+        },
+        {
+          "t": "Retención",
+          "d": "Club, misiones y el cumpleaños de la mascota."
+        }
+      ],
+      "dentalos": [
+        {
+          "t": "Información",
+          "d": "Sedes, servicios y primera visita."
+        },
+        {
+          "t": "Reserva",
+          "d": "Calendario, WhatsApp o llamada."
+        },
+        {
+          "t": "Confirmación",
+          "d": "Recepción confirma; el turno lleva ID y versión."
+        },
+        {
+          "t": "Recordatorio",
+          "d": "24 horas antes, con consentimiento."
+        },
+        {
+          "t": "Atención",
+          "d": "Agenda del día y estado de cada turno."
+        },
+        {
+          "t": "Continuidad",
+          "d": "Controles indicados que vuelven a la agenda."
+        },
+        {
+          "t": "Presupuesto",
+          "d": "Emitido, aceptado o vencido, con seguimiento."
+        },
+        {
+          "t": "Recupero",
+          "d": "Una cancelación ofrece el lugar a la lista de espera."
+        },
+        {
+          "t": "Medición",
+          "d": "Proyectado, simulado y observado, en tres bloques separados."
+        }
+      ],
+      "lucero": [
+        {
+          "t": "En el local",
+          "d": "QR en la mesa, pizarra de vereda y vidriera."
+        },
+        {
+          "t": "Primer gancho",
+          "d": "La ruleta aparece al abrir la carta."
+        },
+        {
+          "t": "Pedido",
+          "d": "Carta con Gus, agregados y «Mandar a la cocina»."
+        },
+        {
+          "t": "Espera",
+          "d": "Juegos individuales y de mesa."
+        },
+        {
+          "t": "Cocina",
+          "d": "Enviado, en cocina, listo y entregado."
+        },
+        {
+          "t": "Cuenta",
+          "d": "Se pide desde la mesa y se cobra en la caja."
+        },
+        {
+          "t": "Retención",
+          "d": "Visitas, plato favorito y un tiro en la próxima."
+        },
+        {
+          "t": "Aprendizaje",
+          "d": "Academy: marketing digital y físico para el local."
+        }
+      ]
+    }
+  },
+  "loop": {
+    "play": "Recorrer el ciclo",
+    "pause": "Pausar",
+    "step": "Paso",
+    "of": "de",
+    "items": {
+      "volta": {
+        "title": "La recompra",
+        "steps": [
+          {
+            "t": "Pedido pagado",
+            "d": "El pote empieza a contar el día que llega."
+          },
+          {
+            "t": "Cuánto dura",
+            "d": "Servicios por cantidad, según cuántas veces por semana se toma."
+          },
+          {
+            "t": "Aviso",
+            "d": "Cinco días antes de que se termine, aparece en «Hoy en tu tienda»."
+          },
+          {
+            "t": "Mensaje",
+            "d": "WhatsApp con el texto armado, enviado por una persona."
+          },
+          {
+            "t": "Bolso cargado",
+            "d": "El link abre el carrito con el mismo pedido."
+          },
+          {
+            "t": "Confirma",
+            "d": "Un pedido nuevo, y el ciclo vuelve a empezar."
+          }
+        ]
+      },
+      "lucero": {
+        "title": "La próxima visita",
+        "steps": [
+          {
+            "t": "QR de la mesa",
+            "d": "La carta se abre en el celular."
+          },
+          {
+            "t": "Ruleta",
+            "d": "Un tiro por visita, apenas se abre la carta."
+          },
+          {
+            "t": "Premio",
+            "d": "Un código que valida el mozo."
+          },
+          {
+            "t": "CRM",
+            "d": "La visita y el gasto quedan en el cliente."
+          },
+          {
+            "t": "Otro tiro",
+            "d": "«En tu próxima visita tenés otro tiro.»"
+          }
+        ]
+      },
+      "dentalos": {
+        "title": "El recupero de agenda",
+        "steps": [
+          {
+            "t": "Cancelación",
+            "d": "Un turno queda libre."
+          },
+          {
+            "t": "Vacante",
+            "d": "Se crea una tarea si hay alguien compatible en espera."
+          },
+          {
+            "t": "Lista de espera",
+            "d": "Profesional, sede y horario que encajan."
+          },
+          {
+            "t": "Oferta",
+            "d": "Recepción ofrece el lugar."
+          },
+          {
+            "t": "Turno confirmado",
+            "d": "La agenda vuelve a llenarse."
+          }
+        ]
+      },
+      "eclipse": {
+        "title": "El seguimiento comercial",
+        "steps": [
+          {
+            "t": "Respuesta",
+            "d": "Llamada el mismo día."
+          },
+          {
+            "t": "Propuesta",
+            "d": "Por escrito, en 24 horas o menos."
+          },
+          {
+            "t": "Día 2",
+            "d": "Primer toque."
+          },
+          {
+            "t": "Días 5 y 9",
+            "d": "Dos toques más."
+          },
+          {
+            "t": "Día 14",
+            "d": "Pasa al archivo."
+          },
+          {
+            "t": "Día 60",
+            "d": "Vuelve como reactivación."
+          }
+        ]
+      }
+    }
+  },
+  "sale": {
+    "meeting": "La reunión de 10 minutos",
+    "meetingLead": "El guion de la demo de Volta, minuto a minuto.",
+    "scrub": "Minuto de la reunión",
+    "beats": [
+      {
+        "t": "El dolor",
+        "d": "Pantalla apagada: el dueño cuenta cómo trabaja hoy."
+      },
+      {
+        "t": "La ficha",
+        "d": "Un producto, como lo ve el cliente."
+      },
+      {
+        "t": "Armá tu stack",
+        "d": "Tres categorías y el descuento aparece solo."
+      },
+      {
+        "t": "Ruleta y juego",
+        "d": "Lo que hace volver."
+      },
+      {
+        "t": "Regalos",
+        "d": "Quien recibe elige el sabor y ve su regalo."
+      },
+      {
+        "t": "Temática",
+        "d": "La tienda cambia de color con la fecha."
+      },
+      {
+        "t": "Instagram",
+        "d": "Una pieza lista desde el Estudio."
+      },
+      {
+        "t": "El panel",
+        "d": "Hoy en tu tienda: qué hacer primero."
+      },
+      {
+        "t": "Cierre",
+        "d": "Qué incluye, precio y el próximo paso."
+      }
+    ],
+    "pattern": "El patrón, en todos los proyectos",
+    "steps": [
+      {
+        "t": "Demo con su marca",
+        "d": "Marca blanca: unos 15 minutos por prospecto."
+      },
+      {
+        "t": "Reunión corta",
+        "d": "Diez minutos, de lo que duele a lo que enamora."
+      },
+      {
+        "t": "Propuesta escrita",
+        "d": "Alcance, precio y plazos, desglosados."
+      },
+      {
+        "t": "Pago acreditado",
+        "d": "El trabajo empieza con el primer pago en la cuenta."
+      },
+      {
+        "t": "Producción",
+        "d": "Una etapa aparte, con su plazo."
+      },
+      {
+        "t": "Mantenimiento",
+        "d": "Mejoras y soporte, en Eclipse."
+      }
+    ],
+    "quote": "«Lo anoto y te digo si se puede y cuánto sale.»",
+    "quoteBy": "Para lo que queda fuera del alcance: la regla del guion."
+  },
+  "first": {
+    "how": "Cómo se cuenta",
+    "rule": "La regla",
+    "items": {
+      "volta": {
+        "where": "Hoy en tu tienda",
+        "kpi": "Vendido hoy",
+        "how": "Pedidos de hoy ya pagados.",
+        "rule": "Un comprobante en revisión suma recién cuando el dueño lo aprueba."
+      },
+      "velmar": {
+        "where": "Inicio del panel",
+        "kpi": "Ventas de los últimos 7 días",
+        "how": "Pedidos pagados, con la variación contra la semana anterior.",
+        "rule": "La variación se compara con la semana anterior, cuando la hay."
+      },
+      "dentalos": {
+        "where": "Agenda de hoy",
+        "kpi": "Turnos activos",
+        "how": "Turnos del día en estado activo.",
+        "rule": "Cada porcentaje muestra su denominador."
+      },
+      "lucero": {
+        "where": "CRM del local",
+        "kpi": "Pedidos de hoy",
+        "how": "Pedidos del día, con cocina y mesas al lado.",
+        "rule": "Primero lo que el local tiene que atender."
+      },
+      "eclipse": {
+        "where": "Demo de Lumen",
+        "kpi": "Consultas respondidas en menos de un minuto",
+        "how": "Rápidas sobre respondidas de la semana.",
+        "rule": "Es el número clave que la demo pone primero."
+      }
+    },
+    "own": {
+      "where": "Mi propio negocio",
+      "kpi": "Pago acreditado",
+      "how": "La etapa 7 del embudo de Eclipse.",
+      "rule": "Un comprobante es una promesa; lo que cuenta es el pago en la cuenta."
+    }
+  }
+}
