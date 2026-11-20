@@ -11,11 +11,12 @@ import { describe, it } from 'vitest';
  * writes <dir>/<id>.html (default dir: .brand-preview/, ignored by git). Without BRAND_PREVIEW it does nothing.
  */
 const id = process.env.BRAND_PREVIEW;
+const ART = import.meta.glob<{ BRAND: unknown }>('../../v2/components/brand/art/*.ts');
 describe.skipIf(!id)('brand preview', () => {
   it('writes the board of one brand', async () => {
     const lang = process.env.BRAND_LANG === 'en' ? 'en' : 'es';
     const out = resolve(process.env.BRAND_OUT ?? '.brand-preview');
-    const { BRAND } = await import(`../../v2/components/brand/art/${id}.ts`);
+    const { BRAND } = await ART[`../../v2/components/brand/art/${id}.ts`]();
     const copy = JSON.parse(readFileSync(`messages/v2/brands/${lang}/${id}.json`, 'utf8'));
     const labels = JSON.parse(readFileSync(`messages/v2/${lang}.json`, 'utf8')).brandlab;
     const { BrandBoard } = await import('../../v2/components/brand/BrandBoard');
