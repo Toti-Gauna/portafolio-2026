@@ -1,0 +1,122 @@
+{
+  "lead": "Self-taught. I build AI products end to end and I am looking for new challenges, with an international outlook.",
+  "sheet": {
+    "title": "The sheet",
+    "rows": {
+      "role": { "k": "Role", "v": "AI Fullstack Developer" },
+      "where": { "k": "Where", "v": "Mar del Plata, Argentina" },
+      "langs": { "k": "Languages", "v": "Native Spanish · English C1" },
+      "today": { "k": "Today", "v": "At Tsoft, since 2024" },
+      "before": { "k": "Before", "v": "TACH Argentina (2021 – 2022) and Ada ITW (2023 – 2024)" },
+      "school": { "k": "Education", "v": "Self-taught: I read and study online" }
+    },
+    "level": "Sr",
+    "stack": "At work I use",
+    "stackItems": ["React", "TypeScript", "Next.js", "React Native", "Tailwind", "Node.js", "SQL", "CI/CD", "RAG with LLMs"],
+    "how": { "k": "How I work", "v": "With an agentic system of 11 agents and a person who approves.", "cta": "See how I work" }
+  },
+  "contact": {
+    "copy": "Copy the email",
+    "copied": "Email copied",
+    "write": "Write to me",
+    "linkedin": "LinkedIn",
+    "title": "Open to new opportunities.",
+    "lead": "I am after fullstack challenges with AI: boosting businesses and automating hard processes, in any industry."
+  },
+  "index": { "label": "On this page", "story": "Story", "timeline": "Journey", "sky": "Skills", "cases": "Cases", "contact": "Contact" },
+  "story": {
+    "k": "The story",
+    "title": "In 30 seconds.",
+    "beats": [
+      "It all started in Mar del Plata: at 17 I built my first product, a games website.",
+      "I am self-taught: I read a lot and study online.",
+      "I taught JavaScript and React, and teaching strengthened my basics.",
+      "Today I build AI products end to end, like CompliA.",
+      "New challenges drive me: boosting businesses and automating hard processes, in any industry."
+    ]
+  },
+  "timeline": {
+    "k": "The journey",
+    "title": "From 2021 to today.",
+    "lead": "I talk about challenges and about what can be told of each place.",
+    "chart": "Timeline: pick a moment",
+    "today": "Today",
+    "tsoft": "Tsoft · 2024 – today",
+    "case": "See the case",
+    "world": "See it in the world of Work",
+    "stops": {
+      "seed": { "when": "Mar del Plata · at 17", "short": "At 17", "title": "My first product: a games website", "text": ["At 17 I built my first product, a games website. It changed my life and opened the road I am on."] },
+      "tach": { "when": "2021 – 2022 · TACH Argentina", "short": "TACH Argentina", "title": "A digital wallet, end to end", "text": ["Working remotely, I built the back office, the landing page and the app of a digital wallet, on web and mobile."] },
+      "ada": { "when": "2023 – 2024 · Ada ITW", "short": "Ada ITW", "title": "Teaching people to code", "text": ["I taught JavaScript and React: projects, hello worlds and students starting from zero.", "Teaching strengthened my basics and taught me to explain technical ideas clearly."] },
+      "tuenti": { "when": "2024 · Tsoft", "short": "Tuenti", "title": "Gamification at Tuenti", "text": ["I started working on Tuenti: interactive and reward mechanics, such as the Tuenti roulette and the referral system."] },
+      "dash": { "when": "Tsoft", "short": "Measuring", "title": "Measuring what works", "text": ["I built a dashboard to measure Tuenti's data: referrals, recurrence and gamification."] },
+      "award": { "when": "January 2026", "short": "Recognition", "title": "Special Recognition from Tsoft", "text": ["An internal Special Recognition from Tsoft, with a message and a gesture from the People team."] },
+      "ai": { "when": "2026 · Tsoft", "short": "AI and team", "title": "AI products and a team that grows", "text": ["I designed and built CompliA, the RAG assistant of Telefónica's compliance portal, now in internal production.", "I built Supernova Eventos and trained colleagues to raise the team's level. In April, an in-person day with clients in Buenos Aires."] },
+      "own": { "when": "Today · my own paths", "short": "My own paths", "title": "Boosting businesses and automating the hard parts", "text": ["Eclipse and a lab of demos and trailers: my own products, in any industry."] }
+    }
+  },
+  "sky": {
+    "k": "Skills",
+    "title": "A sky of what I use.",
+    "lead": "Every star is a skill and opens its proofs. Its size is how many proofs it has on this site.",
+    "hint": "Drag the sky, pick a constellation or tap a star.",
+    "groupsLabel": "Constellations",
+    "stage": "Sky of skills",
+    "from": { "work": "From work", "own": "From my projects", "study": "Studying" },
+    "legend": "Full star: with proofs. Hollow star: studying.",
+    "proofs": "Proofs",
+    "proofCount": { "one": "proof", "other": "proofs" },
+    "kin": "Used together with",
+    "list": "See the skills as a list",
+    "prev": "Previous star",
+    "next": "Next star",
+    "pages": { "how": "How I work", "brand": "Brand Lab", "system": "Sistema IG", "timeline": "The journey" },
+    "groups": {
+      "front": "Interfaces",
+      "back": "Servers and data",
+      "ai": "AI",
+      "craft": "Quality, motion and design",
+      "product": "Product",
+      "study": "Studying"
+    },
+    "stars": {
+      "react": { "name": "React", "note": "Tuenti, CompliA and my products." },
+      "typescript": { "name": "TypeScript", "note": "In everything I write today." },
+      "nextjs": { "name": "Next.js", "note": "Work, Eclipse and this site." },
+      "reactnative": { "name": "React Native", "note": "Tuenti apps." },
+      "tailwind": { "name": "Tailwind CSS", "note": "Work and Eclipse." },
+      "node": { "name": "Node.js", "note": "Work and the Eclipse backend." },
+      "sql": { "name": "SQL and PostgreSQL", "note": "Work; PostgreSQL with Prisma in my backends." },
+      "cicd": { "name": "CI/CD", "note": "Pipelines at Tsoft; GitHub Actions in my repos." },
+      "security": { "name": "Security", "note": "HttpOnly, CSRF, 2FA and Argon2 in what I build." },
+      "rag": { "name": "RAG with LLMs", "note": "CompliA." },
+      "agents": { "name": "Agent systems", "note": "Roles, specs, tests and gates." },
+      "claude": { "name": "Claude", "note": "I built the agentic system I work with in my repos on Claude." },
+      "ml": { "name": "Machine learning", "note": "Fundamentals." },
+      "tests": { "name": "Vitest and Playwright", "note": "Tests and e2e in my projects." },
+      "motion": { "name": "GSAP and WebGL", "note": "Kinetic Studio and the trailer." },
+      "design": { "name": "Interface design", "note": "Interfaces and visual systems, like the one of this site." },
+      "gamification": { "name": "Gamification and payments", "note": "Gamification, payments and top-ups in Tuenti products." },
+      "compliance": { "name": "Compliance", "note": "Telefónica's compliance portal, with CompliA." },
+      "teaching": { "name": "Teaching", "note": "JavaScript and React at Ada ITW." },
+      "sales": { "name": "Consultative selling", "note": "SPIN Selling, studying." },
+      "python": { "name": "Python", "note": "Study and my own projects." },
+      "c": { "name": "C", "note": "Study and my own projects." },
+      "aws": { "name": "AWS", "note": "Knowledge and study." },
+      "azure": { "name": "Azure", "note": "Knowledge and study." },
+      "arvr": { "name": "AR/VR", "note": "Augmented and virtual reality: knowledge and study." },
+      "blender": { "name": "Blender", "note": "3D modelling and animation: knowledge and study." },
+      "meshy": { "name": "Meshy", "note": "3D models generated with AI: knowledge and study." }
+    }
+  },
+  "cases": {
+    "k": "To look at",
+    "title": "Three cases to start with.",
+    "cta": "See the case",
+    "items": {
+      "complia": "An AI assistant inside a compliance portal: I designed and built it, with its RAG, its validations and its recommendations.",
+      "eclipse": "My studio, built as a complete system: landing page, client portal, its own backend and an internal portal.",
+      "agentes": "How I work: 11 agents with separate roles and gates where a person decides."
+    }
+  }
+}

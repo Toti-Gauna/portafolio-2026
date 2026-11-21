@@ -1,0 +1,122 @@
+{
+  "lead": "Autodidacta. Construyo productos con IA de punta a punta y busco nuevos desafíos, con una mirada internacional.",
+  "sheet": {
+    "title": "La ficha",
+    "rows": {
+      "role": { "k": "Rol", "v": "AI Fullstack Developer" },
+      "where": { "k": "Dónde", "v": "Mar del Plata, Argentina" },
+      "langs": { "k": "Idiomas", "v": "Español nativo · Inglés C1" },
+      "today": { "k": "Hoy", "v": "En Tsoft, desde 2024" },
+      "before": { "k": "Antes", "v": "TACH Argentina (2021 – 2022) y Ada ITW (2023 – 2024)" },
+      "school": { "k": "Formación", "v": "Autodidacta: leo y estudio por internet" }
+    },
+    "level": "Sr",
+    "stack": "En el trabajo uso",
+    "stackItems": ["React", "TypeScript", "Next.js", "React Native", "Tailwind", "Node.js", "SQL", "CI/CD", "RAG con LLM"],
+    "how": { "k": "Cómo trabajo", "v": "Con un sistema agéntico de 11 agentes y una persona que aprueba.", "cta": "Ver cómo trabajo" }
+  },
+  "contact": {
+    "copy": "Copiar el mail",
+    "copied": "Mail copiado",
+    "write": "Escribime",
+    "linkedin": "LinkedIn",
+    "title": "Abierto a nuevas oportunidades.",
+    "lead": "Busco desafíos de desarrollo fullstack con IA: potenciar negocios y automatizar procesos difíciles, en cualquier rubro."
+  },
+  "index": { "label": "En esta página", "story": "Historia", "timeline": "Recorrido", "sky": "Capacidades", "cases": "Casos", "contact": "Contacto" },
+  "story": {
+    "k": "La historia",
+    "title": "En 30 segundos.",
+    "beats": [
+      "Todo empezó en Mar del Plata: a los 17 programé mi primer producto, una web de juegos.",
+      "Soy autodidacta: leo mucho y estudio por internet.",
+      "Enseñé JavaScript y React, y enseñar me afianzó las bases.",
+      "Hoy construyo productos con IA de punta a punta, como CompliA.",
+      "Me mueven los desafíos nuevos: potenciar negocios y automatizar procesos difíciles, en cualquier rubro."
+    ]
+  },
+  "timeline": {
+    "k": "El recorrido",
+    "title": "De 2021 a hoy.",
+    "lead": "Hablo de desafíos y de lo que se puede contar de cada lugar.",
+    "chart": "Línea de tiempo: elegí un momento",
+    "today": "Hoy",
+    "tsoft": "Tsoft · 2024 – hoy",
+    "case": "Ver el caso",
+    "world": "Ver en el mundo de Work",
+    "stops": {
+      "seed": { "when": "Mar del Plata · a los 17", "short": "A los 17", "title": "Mi primer producto: una web de juegos", "text": ["Con 17 años programé mi primer producto, una web de juegos. Me cambió la vida y abrió el camino que sigo."] },
+      "tach": { "when": "2021 – 2022 · TACH Argentina", "short": "TACH Argentina", "title": "Una billetera virtual, de punta a punta", "text": ["En remoto, trabajé en el backoffice, la landing y la app de una billetera virtual, en web y móvil."] },
+      "ada": { "when": "2023 – 2024 · Ada ITW", "short": "Ada ITW", "title": "Enseñar a programar", "text": ["Dicté JavaScript y React: proyectos, hello worlds y alumnos que arrancaban de cero.", "Enseñar me ayudó a afianzar las bases y a explicar ideas técnicas con claridad."] },
+      "tuenti": { "when": "2024 · Tsoft", "short": "Tuenti", "title": "Gamificación en Tuenti", "text": ["Entré trabajando en Tuenti: mecánicas interactivas y de recompensa, como la ruleta Tuenti y el sistema de referidos."] },
+      "dash": { "when": "Tsoft", "short": "Medir", "title": "Medir lo que funciona", "text": ["Construí un dashboard para medir los datos de Tuenti: referidos, recurrencia y gamificación."] },
+      "award": { "when": "Enero 2026", "short": "Reconocimiento", "title": "Reconocimiento Especial de Tsoft", "text": ["Un Reconocimiento Especial interno de Tsoft, con un mensaje y un gesto del equipo de People."] },
+      "ai": { "when": "2026 · Tsoft", "short": "IA y equipo", "title": "Productos con IA y un equipo que crece", "text": ["Diseñé y construí CompliA, el asistente con RAG del portal de compliance de Telefónica, hoy en producción interna.", "Hice Supernova Eventos y capacité a compañeros para subir el nivel del equipo. En abril, una jornada presencial con clientes en Buenos Aires."] },
+      "own": { "when": "Hoy · caminos propios", "short": "Caminos propios", "title": "Potenciar negocios y automatizar lo difícil", "text": ["Eclipse y un laboratorio de demos y tráileres: productos propios, en cualquier rubro."] }
+    }
+  },
+  "sky": {
+    "k": "Capacidades",
+    "title": "Un cielo de lo que uso.",
+    "lead": "Cada estrella es una capacidad y abre sus pruebas. Su tamaño es cuántas pruebas tiene en este sitio.",
+    "hint": "Arrastrá el cielo, elegí una constelación o tocá una estrella.",
+    "groupsLabel": "Constelaciones",
+    "stage": "Cielo de capacidades",
+    "from": { "work": "Del trabajo", "own": "De mis proyectos", "study": "En estudio" },
+    "legend": "Estrella llena: con pruebas. Estrella hueca: en estudio.",
+    "proofs": "Pruebas",
+    "proofCount": { "one": "prueba", "other": "pruebas" },
+    "kin": "Se usó junto con",
+    "list": "Ver las capacidades como lista",
+    "prev": "Estrella anterior",
+    "next": "Estrella siguiente",
+    "pages": { "how": "Cómo trabajo", "brand": "Brand Lab", "system": "Sistema IG", "timeline": "El recorrido" },
+    "groups": {
+      "front": "Interfaces",
+      "back": "Servidores y datos",
+      "ai": "IA",
+      "craft": "Calidad, movimiento y diseño",
+      "product": "Producto",
+      "study": "En estudio"
+    },
+    "stars": {
+      "react": { "name": "React", "note": "Tuenti, CompliA y mis productos." },
+      "typescript": { "name": "TypeScript", "note": "En todo lo que escribo hoy." },
+      "nextjs": { "name": "Next.js", "note": "Trabajo, Eclipse y este sitio." },
+      "reactnative": { "name": "React Native", "note": "Apps de Tuenti." },
+      "tailwind": { "name": "Tailwind CSS", "note": "Trabajo y Eclipse." },
+      "node": { "name": "Node.js", "note": "Trabajo y el backend de Eclipse." },
+      "sql": { "name": "SQL y PostgreSQL", "note": "Trabajo; PostgreSQL con Prisma en mis backends." },
+      "cicd": { "name": "CI/CD", "note": "Pipelines en Tsoft; GitHub Actions en mis repos." },
+      "security": { "name": "Seguridad", "note": "HttpOnly, CSRF, 2FA y Argon2 en lo que construyo." },
+      "rag": { "name": "RAG con LLM", "note": "CompliA." },
+      "agents": { "name": "Sistemas con agentes", "note": "Roles, especificación, pruebas y puertas." },
+      "claude": { "name": "Claude", "note": "Con Claude armé el sistema agéntico con el que trabajo en mis repos." },
+      "ml": { "name": "Machine learning", "note": "Fundamentos." },
+      "tests": { "name": "Vitest y Playwright", "note": "Tests y e2e en mis proyectos." },
+      "motion": { "name": "GSAP y WebGL", "note": "Kinetic Studio y el tráiler." },
+      "design": { "name": "Diseño de interfaces", "note": "Interfaces y sistemas visuales, como el de este sitio." },
+      "gamification": { "name": "Gamificación y pagos", "note": "Gamificación, pagos y recargas en productos de Tuenti." },
+      "compliance": { "name": "Compliance", "note": "El portal de compliance de Telefónica, con CompliA." },
+      "teaching": { "name": "Enseñanza", "note": "JavaScript y React en Ada ITW." },
+      "sales": { "name": "Ventas consultivas", "note": "SPIN Selling, estudiando." },
+      "python": { "name": "Python", "note": "Estudio y proyectos propios." },
+      "c": { "name": "C", "note": "Estudio y proyectos propios." },
+      "aws": { "name": "AWS", "note": "Conocimiento y estudio." },
+      "azure": { "name": "Azure", "note": "Conocimiento y estudio." },
+      "arvr": { "name": "AR/VR", "note": "Realidad aumentada y virtual: conocimiento y estudio." },
+      "blender": { "name": "Blender", "note": "Modelado y animación 3D: conocimiento y estudio." },
+      "meshy": { "name": "Meshy", "note": "Modelos 3D generados con IA: conocimiento y estudio." }
+    }
+  },
+  "cases": {
+    "k": "Para mirar",
+    "title": "Tres casos para empezar.",
+    "cta": "Ver el caso",
+    "items": {
+      "complia": "Un asistente con IA en un portal de compliance: lo diseñé y construí, con su RAG, sus validaciones y sus recomendaciones.",
+      "eclipse": "Mi estudio, construido como un sistema completo: landing, portal de clientes, backend propio y portal interno.",
+      "agentes": "Cómo trabajo: 11 agentes con roles separados y puertas donde decide una persona."
+    }
+  }
+}
