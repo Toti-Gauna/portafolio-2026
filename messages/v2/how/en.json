@@ -1,0 +1,91 @@
+{
+  "index": { "label": "On this page", "method": "Method", "system": "System", "rules": "Rules" },
+  "method": {
+    "k": "The method",
+    "title": "A cycle of six steps.",
+    "lead": "What I learn when I deliver comes back in as a problem.",
+    "ring": "The method's cycle: pick a step",
+    "walk": "Walk the cycle",
+    "pause": "Pause",
+    "replay": "Walk it again",
+    "step": "Step",
+    "of": "of",
+    "did": "What I did",
+    "back": "It starts again",
+    "steps": [
+      { "name": "Understand the problem", "short": "Understand", "text": "Before building, I understand the context and the business. Talking to the people who use the software changes what gets prioritised.", "example": "In-person day with clients in Buenos Aires (April 2026): demos, alignment and direct conversation about their real challenges." },
+      { "name": "Align and negotiate priorities", "short": "Align", "text": "I agree on scope and priorities before writing code, and I hold the difficult conversations when they are needed.", "example": "At Tsoft I take part in technical decisions with the team and support people who join." },
+      { "name": "Design", "short": "Design", "text": "I design the interface and the system together: rules, states and limits before pretty screens.", "example": "Volta and DentalOS: navigable demos with their own identity and labelled data." },
+      { "name": "Build in stages", "short": "Build", "text": "I split the work into small batches, each with its acceptance criteria.", "example": "Eclipse moves forward in documented batches, with approval gates." },
+      { "name": "Show and validate", "short": "Validate", "text": "I show something that works as early as possible and test it: automated tests, visual QA and demos.", "example": "Velmar: a navigable demo for a client, with sample data." },
+      { "name": "Deliver and learn", "short": "Deliver", "text": "I ship with CI/CD, document what I learned and apply it again.", "example": "At Tsoft I work with deployment pipelines, integrations and CI/CD on Telefónica and Tuenti projects." }
+    ]
+  },
+  "system": {
+    "k": "The system",
+    "title": "An agentic system, split into parts.",
+    "lead": "I program with agents: each one has its part, and a person approves every delivery.",
+    "flowLabel": "How a change travels",
+    "agentsLabel": "The 11 agents",
+    "follow": "Follow a change",
+    "pause": "Pause",
+    "replay": "Follow another change",
+    "step": "Step",
+    "of": "of",
+    "acts": "Works at",
+    "here": "Working here",
+    "carries": "Carries",
+    "skills": "Loads its skills depending on the task.",
+    "case": "See the system in detail",
+    "nodes": {
+      "ask": { "label": "Request", "sub": "a real problem", "note": "Everything starts with something someone needs to solve." },
+      "chief": { "label": "Direction", "sub": "plan, scope, cost", "note": "Decides what gets done and in what order; the code is for the role agents." },
+      "spec": { "label": "Spec", "sub": "criteria and rollback", "note": "A short document: problem, scope, acceptance criteria and how to roll back." },
+      "roles": { "label": "Role agents", "sub": "skills per task", "note": "Each agent takes its part of the batch and loads the skills the task asks for." },
+      "qa": { "label": "Tests and QA", "sub": "CI + visual QA", "note": "Every claim carries its level of evidence; what fails goes back to the agents." },
+      "gate": { "label": "Human gate", "sub": "I approve", "note": "I authorise publishing, spending and changing prices." },
+      "ship": { "label": "Publish", "sub": "with my OK", "note": "It is published once I give my OK, and what was learned goes back into the method." }
+    },
+    "edges": { "brief": "the request", "plan": "the plan", "lote": "the batches", "change": "the changes", "evidence": "the evidence", "fail": "what failed", "release": "what was approved" },
+    "agents": {
+      "chief": { "name": "Direction", "role": "Owns the plan, the scope and the cost: decides what gets done and in what order." },
+      "uxui": { "name": "UX/UI", "role": "Flows, states and accessibility before screens." },
+      "design": { "name": "Design", "role": "Visual system, type, colour and motion, with a review rubric." },
+      "marketing": { "name": "Marketing", "role": "Message, positioning and content." },
+      "ads": { "name": "Ads", "role": "Pieces and hooks for campaigns, with honesty rules." },
+      "frontend": { "name": "Frontend architect", "role": "Project analysis, components, data integration and performance." },
+      "backend": { "name": "Backend architect", "role": "Layers, schemas, services and transactions, always discovery first." },
+      "security": { "name": "Cybersecurity", "role": "Threat modelling, OWASP and hardening; tests only in our own environments." },
+      "game": { "name": "Game architect", "role": "Mechanics, reward economies and web game performance." },
+      "trailer": { "name": "Trailer architect", "role": "Direction, storyboard, motion and sound for pieces like my trailer." },
+      "docs": { "name": "Documentation", "role": "Documents projects and decisions." }
+    }
+  },
+  "rules": {
+    "k": "The rules",
+    "title": "How they work together.",
+    "ladder": "Three levels of evidence",
+    "levels": [
+      { "t": "Read", "d": "A document or a source says so." },
+      { "t": "Tested locally", "d": "It ran on my machine, with its tests." },
+      { "t": "In a real environment", "d": "It runs where it is used." }
+    ],
+    "run": "Run of 10/27/2026, all green",
+    "counts": [
+      { "n": "463", "d": "Eclipse-Web tests" },
+      { "n": "779", "d": "Eclipse backend tests" },
+      { "n": "132", "d": "internal portal tests" },
+      { "n": "14", "d": "complete browser journeys" }
+    ],
+    "items": [
+      { "t": "A system with roles", "d": "Eleven agents with separate responsibilities, with skills that load depending on the task." },
+      { "t": "Specification first", "d": "Every change starts with a short document: problem, scope, acceptance criteria and how to roll back." },
+      { "t": "Every claim with its evidence", "d": "I tell apart what I read, what I tested locally and what runs in a real environment, and I label it." },
+      { "t": "Gates with human approval", "d": "I authorise publishing, spending and changing prices." },
+      { "t": "Tested with tests", "d": "Automated tests, end-to-end journeys with Playwright and CI that runs the tests and the build." },
+      { "t": "Visual QA with binary criteria", "d": "Every redesign is compared with the previous one at several widths and with reduced motion, in Chromium." },
+      { "t": "Cost and honesty as rules", "d": "Everything fictional says «Demo», and every new dependency or expense goes through my OK." }
+    ],
+    "business": "How I think about business"
+  }
+}
