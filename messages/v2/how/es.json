@@ -1,0 +1,91 @@
+{
+  "index": { "label": "En esta página", "method": "Método", "system": "Sistema", "rules": "Reglas" },
+  "method": {
+    "k": "El método",
+    "title": "Un ciclo de seis pasos.",
+    "lead": "Lo que aprendo al entregar vuelve a entrar como problema.",
+    "ring": "El ciclo del método: elegí un paso",
+    "walk": "Recorrer el ciclo",
+    "pause": "Pausar",
+    "replay": "Recorrer de nuevo",
+    "step": "Paso",
+    "of": "de",
+    "did": "Lo que hice",
+    "back": "Vuelve a empezar",
+    "steps": [
+      { "name": "Entender el problema", "short": "Entender", "text": "Antes de construir, entiendo el contexto y el negocio. Hablar con quienes usan el software cambia lo que se prioriza.", "example": "Jornada presencial con clientes en Buenos Aires (abril de 2026): demos, alineación y conversación directa sobre sus desafíos reales." },
+      { "name": "Alinear y negociar prioridades", "short": "Alinear", "text": "Acuerdo alcance y prioridades antes de escribir código, y sostengo las conversaciones difíciles cuando son necesarias.", "example": "En Tsoft participo en decisiones técnicas con el equipo y acompaño a quienes se suman." },
+      { "name": "Diseñar", "short": "Diseñar", "text": "Diseño la interfaz y el sistema juntos: reglas, estados y límites antes que pantallas lindas.", "example": "Volta y DentalOS: demos navegables con identidad propia y datos rotulados." },
+      { "name": "Construir por etapas", "short": "Construir", "text": "Divido el trabajo en lotes chicos, cada uno con su criterio de aceptación.", "example": "Eclipse avanza por lotes documentados, con puertas de aprobación." },
+      { "name": "Mostrar y validar", "short": "Validar", "text": "Muestro algo que funciona cuanto antes y lo pruebo: tests automáticos, QA visual y demos.", "example": "Velmar: una demo navegable para un cliente, con datos de ejemplo." },
+      { "name": "Entregar y aprender", "short": "Entregar", "text": "Entrego con CI/CD, dejo documentado lo que aprendí y lo vuelvo a aplicar.", "example": "En Tsoft trabajo con pipelines de despliegue, integraciones y CI/CD en proyectos de Telefónica y Tuenti." }
+    ]
+  },
+  "system": {
+    "k": "El sistema",
+    "title": "Un sistema agéntico, dividido en partes.",
+    "lead": "Programo con agentes: cada uno tiene su parte y una persona aprueba cada entrega.",
+    "flowLabel": "Cómo viaja un cambio",
+    "agentsLabel": "Los 11 agentes",
+    "follow": "Seguir un cambio",
+    "pause": "Pausar",
+    "replay": "Seguir otro cambio",
+    "step": "Paso",
+    "of": "de",
+    "acts": "Actúa en",
+    "here": "Acá trabajan",
+    "carries": "Lleva",
+    "skills": "Carga sus skills según la tarea.",
+    "case": "Ver el sistema en detalle",
+    "nodes": {
+      "ask": { "label": "Pedido", "sub": "un problema real", "note": "Todo arranca con algo que alguien necesita resolver." },
+      "chief": { "label": "Dirección", "sub": "plan, alcance, costo", "note": "Decide qué se hace y en qué orden; el código queda para los agentes de rol." },
+      "spec": { "label": "Especificación", "sub": "criterios y reversión", "note": "Un documento corto: problema, alcance, criterios de aceptación y cómo revertir." },
+      "roles": { "label": "Agentes por rol", "sub": "skills según la tarea", "note": "Cada agente toma su parte del lote y carga las skills que la tarea pide." },
+      "qa": { "label": "Tests y QA", "sub": "CI + QA visual", "note": "Cada afirmación lleva su nivel de evidencia; lo que falla vuelve a los agentes." },
+      "gate": { "label": "Puerta humana", "sub": "apruebo yo", "note": "Publicar, gastar y cambiar precios lo autorizo yo." },
+      "ship": { "label": "Publicar", "sub": "con mi OK", "note": "Se publica recién con mi OK, y lo aprendido vuelve al método." }
+    },
+    "edges": { "brief": "el pedido", "plan": "el plan", "lote": "los lotes", "change": "los cambios", "evidence": "la evidencia", "fail": "lo que falló", "release": "lo aprobado" },
+    "agents": {
+      "chief": { "name": "Dirección", "role": "Ordena el plan, el alcance y el costo: decide qué se hace y en qué orden." },
+      "uxui": { "name": "UX/UI", "role": "Flujos, estados y accesibilidad antes que pantallas." },
+      "design": { "name": "Diseño", "role": "Sistema visual, tipografía, color y motion, con una rúbrica de revisión." },
+      "marketing": { "name": "Marketing", "role": "Mensaje, posicionamiento y contenido." },
+      "ads": { "name": "Anuncios", "role": "Piezas y ganchos para campañas, con reglas de honestidad." },
+      "frontend": { "name": "Arquitecto frontend", "role": "Análisis de proyecto, componentes, integración de datos y rendimiento." },
+      "backend": { "name": "Arquitecto backend", "role": "Capas, esquemas, servicios y transacciones, siempre con descubrimiento primero." },
+      "security": { "name": "Ciberseguridad", "role": "Modelado de amenazas, OWASP y endurecimiento; pruebas solo en entornos propios." },
+      "game": { "name": "Arquitecto de juegos", "role": "Mecánicas, economía de recompensas y rendimiento de juegos web." },
+      "trailer": { "name": "Arquitecto de tráileres", "role": "Dirección, storyboard, motion y sonido de piezas como mi tráiler." },
+      "docs": { "name": "Documentación", "role": "Documenta proyectos y decisiones." }
+    }
+  },
+  "rules": {
+    "k": "Las reglas",
+    "title": "Cómo trabajan juntos.",
+    "ladder": "Tres niveles de evidencia",
+    "levels": [
+      { "t": "Leído", "d": "Lo dice un documento o una fuente." },
+      { "t": "Probado en local", "d": "Corrió en mi máquina, con sus tests." },
+      { "t": "En un entorno real", "d": "Corre donde lo usan." }
+    ],
+    "run": "Corrida del 27/10/2026, todo en verde",
+    "counts": [
+      { "n": "463", "d": "tests de Eclipse-Web" },
+      { "n": "779", "d": "tests del backend de Eclipse" },
+      { "n": "132", "d": "tests del portal interno" },
+      { "n": "14", "d": "recorridos completos en navegador" }
+    ],
+    "items": [
+      { "t": "Un sistema con roles", "d": "Once agentes con responsabilidades separadas, con skills que se cargan según la tarea." },
+      { "t": "Primero la especificación", "d": "Cada cambio arranca con un documento corto: problema, alcance, criterios de aceptación y cómo revertir." },
+      { "t": "Cada afirmación con su evidencia", "d": "Separo lo que leí, lo que probé en local y lo que corre en un entorno real, y lo rotulo." },
+      { "t": "Puertas con aprobación humana", "d": "Publicar, gastar y cambiar precios lo autorizo yo." },
+      { "t": "Se prueba con tests", "d": "Tests automáticos, recorridos de punta a punta con Playwright y CI que corre los tests y el build." },
+      { "t": "QA visual con criterios binarios", "d": "Cada rediseño se compara con el anterior en varios anchos y con movimiento reducido, en Chromium." },
+      { "t": "Costo y honestidad como reglas", "d": "Todo lo ficticio dice «Demo», y cada dependencia o gasto nuevo pasa por mi OK." }
+    ],
+    "business": "Cómo pienso el negocio"
+  }
+}
