@@ -1,0 +1,22 @@
+{
+  "meta": "Tráileres hechos con código y recorridos de mis productos.",
+  "kicker": "Video",
+  "title": "Todo, en movimiento.",
+  "lead": "Tráileres hechos con código y recorridos de mis productos, con datos de muestra.",
+  "filters": {
+    "kind": "Tipo",
+    "shape": "Formato",
+    "all": "Todo",
+    "kinds": { "trailer": "Tráiler", "product": "Productos", "motion": "Motion" },
+    "shapes": { "wide": "Pantalla", "tall": "Celular" }
+  },
+  "count": { "one": "película", "other": "películas" },
+  "trailer": {
+    "name": "Conocer a Ignacio",
+    "wide": { "caption": "Mi recorrido en 130 segundos, hecho con código.", "alt": "Póster del tráiler: el grafo de mi recorrido, de los 17 años a hoy." },
+    "tall": { "caption": "La misma película, en su edición vertical 9:16.", "alt": "Póster de la edición vertical: el cierre con mi nombre y mi contacto." }
+  },
+  "open": "Abrir el tráiler",
+  "player": { "label": "Reproductor de video", "close": "Cerrar", "prev": "Película anterior", "next": "Película siguiente", "case": "Ver el caso", "of": "de" },
+  "more": "Todos los casos en Work"
+}

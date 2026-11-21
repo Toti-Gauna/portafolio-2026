@@ -41,6 +41,7 @@ export function WorldExplorer({ locale, kicker, title, lead }: { locale: V2Local
         <div className="v2-intro">
           <p className="v2-label">{w.map}</p>
           <p className="v2-sec-text">{lead}</p>
+          <p><Link className="wd-films" href={sitePath(locale, 'video/')}>{m.site.films}<ArrowIcon size={14} /></Link></p>
           <ul className="wd-legend">
             <li><i className="wd-key wd-key--done" aria-hidden="true" />{w.legend.done}</li>
             <li><i className="wd-key wd-key--plan" aria-hidden="true" />{w.legend.plan}</li>

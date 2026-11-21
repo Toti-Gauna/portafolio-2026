@@ -516,7 +516,7 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 }
 
 /* the way from a stop to its case (lote 5.1) */
-.wi-case, .wd-case {
+.wi-case, .wd-case, .wd-films {
   display: inline-flex; align-items: center; justify-self: start; gap: 8px; min-height: var(--size-touch); padding: 0 16px; margin-top: var(--space-2);
   border-radius: var(--radius-md); border: 2px solid var(--from); color: var(--color-heading); font-size: 15px; font-weight: 800; text-decoration: none;
 }

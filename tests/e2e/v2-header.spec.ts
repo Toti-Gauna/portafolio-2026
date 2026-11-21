@@ -227,7 +227,7 @@ test('the home leads to every page, and the design system keeps the header witho
   await page.getByRole('link', { name: 'Explorar el portafolio' }).click();
   await expect(page.locator('#explorar')).toBeInViewport();
   const doors = page.locator('#explorar .hd-row');
-  await expect(doors.locator('.hd-t')).toHaveText(PAGES.slice(1).map((p) => p[0]));
+  await expect(doors.locator('.hd-t')).toHaveText([...PAGES.slice(1).map((p) => p[0]), 'Video']);
   await doors.nth(0).click();
   await expect(page).toHaveURL(/\/v2\/es\/work\/$/);
   await page.getByRole('link', { name: 'Sistema IG' }).click();
@@ -260,6 +260,7 @@ test('without JavaScript the header still names the current page and the foot le
   const cur = page.locator('.sh-nav a[aria-current]');
   await expect(cur).toHaveText('Brand Lab');
   expect(await cur.evaluate((el) => getComputedStyle(el).boxShadow)).not.toBe('none');
-  await expect(page.getByRole('navigation', { name: 'Mapa del sitio' }).getByRole('link')).toHaveCount(6);
+  // the six pages and Video (lote 7.2), which is reached from the foot and not from the header
+  await expect(page.getByRole('navigation', { name: 'Mapa del sitio' }).getByRole('link')).toHaveCount(7);
   await ctx.close();
 });

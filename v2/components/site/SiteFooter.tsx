@@ -16,6 +16,7 @@ export function SiteFooter({ locale }: { locale: V2Locale }) {
           {SITE_PAGES.map((p) => (
             <li key={p.key}><Link href={sitePath(locale, p.path)}>{m.site.pages[p.key].t}</Link></li>
           ))}
+          <li><Link href={sitePath(locale, 'video/')}>{m.site.video.t}</Link></li>
         </ul>
       </nav>
       <ShortcutsButton label={m.engine.help.button} />

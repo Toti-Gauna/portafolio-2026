@@ -36,8 +36,8 @@ test('role, best case and contact: what a recruiter looks for, in order, as real
   await expect(li).toHaveAttribute('href', /linkedin\.com\/in\//);
   await expect(li).toHaveAttribute('target', '_blank');
   await expect(li).toHaveAccessibleName(/se abre en otra pestaña/);
-  // a door to each of the other five pages
-  await expect(page.locator('#explorar .hd-t')).toHaveText(['Work', 'Cómo trabajo', 'Brand Lab', 'Negocio', 'Sobre mí']);
+  // a door to each of the other five pages, and to Video (lote 7.2)
+  await expect(page.locator('#explorar .hd-t')).toHaveText(['Work', 'Cómo trabajo', 'Brand Lab', 'Negocio', 'Sobre mí', 'Video']);
   await page.locator('#explorar .hd-row').first().click();
   await expect(page).toHaveURL(/\/v2\/es\/work\/$/);
   expect(errors).toEqual([]);

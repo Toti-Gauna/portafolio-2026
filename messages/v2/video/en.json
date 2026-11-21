@@ -1,0 +1,22 @@
+{
+  "meta": "Trailers made with code and walkthroughs of my products.",
+  "kicker": "Video",
+  "title": "Everything, in motion.",
+  "lead": "Trailers made with code and walkthroughs of my products, with sample data.",
+  "filters": {
+    "kind": "Type",
+    "shape": "Format",
+    "all": "All",
+    "kinds": { "trailer": "Trailer", "product": "Products", "motion": "Motion" },
+    "shapes": { "wide": "Screen", "tall": "Phone" }
+  },
+  "count": { "one": "film", "other": "films" },
+  "trailer": {
+    "name": "Meet Ignacio",
+    "wide": { "caption": "My journey in 130 seconds, made with code.", "alt": "Trailer poster: the graph of my journey, from age 17 to today." },
+    "tall": { "caption": "The same film, in its vertical 9:16 edition.", "alt": "Poster of the vertical edition: the closing card with my name and contact." }
+  },
+  "open": "Open the trailer",
+  "player": { "label": "Video player", "close": "Close", "prev": "Previous film", "next": "Next film", "case": "See the case", "of": "of" },
+  "more": "All the cases in Work"
+}
