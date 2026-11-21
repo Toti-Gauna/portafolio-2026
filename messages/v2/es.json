@@ -80,7 +80,12 @@
         "title": "De Mar del Plata.",
         "lead": "El recorrido y el contacto."
       }
-    }
+    },
+    "video": {
+      "t": "Video",
+      "d": "Tráileres y recorridos, en movimiento."
+    },
+    "films": "Ver los videos"
   },
   "layers": {
     "plan": "Planificación y ejecución",

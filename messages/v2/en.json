@@ -80,7 +80,12 @@
         "title": "From Mar del Plata.",
         "lead": "The journey and contact."
       }
-    }
+    },
+    "video": {
+      "t": "Video",
+      "d": "Trailers and walkthroughs, in motion."
+    },
+    "films": "See the videos"
   },
   "layers": {
     "plan": "Planning and execution",

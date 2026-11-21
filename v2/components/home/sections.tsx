@@ -97,6 +97,14 @@ export function HomeDoors({ locale }: { locale: V2Locale }) {
             </Link>
           </li>
         ))}
+        <li data-reveal>
+          <Link className="hd-row" href={sitePath(locale, 'video/')} data-boing data-cursor={m.site.more} style={{ '--c': '#ff5a3c' } as CSSProperties}>
+            <span className="hd-n" aria-hidden="true">{String(SITE_PAGES.length + 1).padStart(2, '0')}</span>
+            <span className="hd-t">{m.site.video.t}</span>
+            <span className="hd-d">{m.site.video.d}</span>
+            <ArrowIcon size={22} />
+          </Link>
+        </li>
       </ul>
     </HomeSection>
   );
