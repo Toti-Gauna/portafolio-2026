@@ -1,0 +1,209 @@
+{
+  "$doc": "Notas de dirección del storyboard (lote 8.1), en español: qué se ve, cómo se mueve, qué suena, cómo cambia en 9:16 y de dónde sale cada dato. Las palabras en pantalla están en messages/v2/trailer.",
+  "grammar": [
+    {
+      "t": "El punto",
+      "d": "El punto coral de la «i» es el protagonista: sale del monograma, cae, salta y aterriza. Está en todos los planos y la cámara lo sigue en un movimiento continuo."
+    },
+    {
+      "t": "Un color por aterrizaje",
+      "d": "Cada aterrizaje cambia el color de toda la pantalla con una onda desde el impacto, como en la puerta. Colores planos de la marca."
+    },
+    {
+      "t": "Siempre hacia arriba",
+      "d": "La cámara sube de frente en frente: 2021, 2023, 2024, 2026. El año queda marcado en una esquina."
+    },
+    {
+      "t": "Quién, primero",
+      "d": "Cada parada abre con el nombre de la empresa o el proyecto en una etiqueta, y su estampilla se sella en la esquina."
+    },
+    {
+      "t": "Paneles reales",
+      "d": "El producto se ve en un panel de vidrio girado en el espacio, con el recorte real del caso y su rótulo."
+    },
+    {
+      "t": "Verbos en píldoras",
+      "d": "Lo que hace cada producto son tres verbos, los de su caso: Tuenti, CompliA, Supernova y Eclipse. Se encienden de a uno y el último queda encendido."
+    },
+    {
+      "t": "Números que cuentan",
+      "d": "Dos cifras ruedan hasta su valor: los tests de Eclipse, con su fecha, y los 11 agentes."
+    },
+    {
+      "t": "Tiempo para leer",
+      "d": "Ningún plano pide leer más de tres palabras por segundo. Los rótulos chicos acompañan; lo que se lee es el nombre, la frase y los verbos."
+    }
+  ],
+  "chapters": {
+    "origen": "Empieza casi en silencio: un colchón de sintetizador y una campana cuando el punto aterriza. El clic en «Jugar» cae en el último tiempo del compás 4.",
+    "frentes": "Primer golpe en el compás 5: entra el arpegio. El bajo se suma en el compás 7.",
+    "tsoft": "Suman los platillos. El compás 12 respira (colchón y bajo) y el compás 13 golpea con bombo: llega CompliA.",
+    "propio": "El compás 20 es el aire antes del golpe del 21, con Eclipse. Del 24 al 28, un acorde por proyecto en el primer tiempo.",
+    "sistema": "Baja la densidad: once notas de arpegio, una por agente. La aprobación humana es una campana.",
+    "cierre": "Golpe final en el compás 33, todos los instrumentos. El compás 35 deja un acorde que queda sonando."
+  },
+  "shots": {
+    "mdp": {
+      "see": "La costa de Mar del Plata de noche, como en un mapa: tierra al oeste, el Atlántico al este. Una sola luz, en tierra.",
+      "move": "El punto se despega del monograma de la puerta y cae. Al tocar tierra se vuelve la luz de la ciudad, con sus anillos. La cámara baja con él.",
+      "sound": "Colchón solo. Campana en el aterrizaje (tiempo 4).",
+      "tall": "El mapa ocupa todo el alto; el texto va abajo.",
+      "src": "La historia en 30 segundos de Sobre mí y la costa del tráiler publicado."
+    },
+    "first": {
+      "see": "Una web de juegos retro dentro de un panel de vidrio. El punto es el botón «Jugar».",
+      "move": "La web se arma alrededor de la luz. En el último tiempo, un clic en «Jugar»: de ahí sale la onda que tiñe todo de coral.",
+      "sound": "Entra un pulso suave. El clic es el último tiempo del compás 4.",
+      "tall": "Texto arriba, panel abajo.",
+      "src": "«A los 17 programé mi primer producto, una web de juegos» (línea de tiempo de Sobre mí). La web es una ilustración."
+    },
+    "tach": {
+      "see": "Campo coral. Etiqueta con el nombre y las fechas. Tres paneles dibujados: backoffice, landing y app.",
+      "move": "El punto aterriza y la pantalla pasa a coral. Entra la etiqueta, se sella la estampilla y los tres paneles llegan de a uno, cada uno con su píldora.",
+      "sound": "Primer golpe: arranca el arpegio.",
+      "tall": "Etiqueta y píldoras arriba; los tres paneles abajo.",
+      "src": "«Trabajé en el backoffice, la landing y la app de una billetera virtual» (línea de tiempo). Los paneles son ilustraciones."
+    },
+    "ada": {
+      "see": "Campo azul. Un pizarrón con «Hola, mundo» y el aula de espaldas, figuras sin rostro.",
+      "move": "Onda azul desde el punto. El código se escribe, aparece la salida y entran las píldoras JavaScript y React. Cierra la frase sobre las bases.",
+      "sound": "Se suma el bajo.",
+      "tall": "El pizarrón abajo, a todo el ancho.",
+      "src": "«Dicté JavaScript y React» y «Enseñar me ayudó a afianzar las bases» (línea de tiempo)."
+    },
+    "tuenti": {
+      "see": "Campo papel. La ilustración propia de la ruleta, en un panel.",
+      "move": "El punto cae en la ruleta y la hace girar. Los tres verbos se encienden uno por tiempo.",
+      "sound": "Entran los platillos.",
+      "tall": "La ruleta abajo.",
+      "src": "Caso de Tuenti: su línea y sus verbos. Solo la ilustración propia, sin capturas."
+    },
+    "ia": {
+      "see": "Tinta. Una sola frase, enorme, sobre una trama de puntos.",
+      "move": "Corte a negro: el punto queda solo y late. La frase entra de una vez.",
+      "sound": "Respiro: colchón y bajo.",
+      "tall": "Igual, con la frase en tres líneas.",
+      "src": "Frase del tráiler publicado, acortada."
+    },
+    "complia": {
+      "see": "Tinta. La etiqueta de CompliA, su estampilla y un panel de vidrio girado con el recorte real de la demo.",
+      "move": "Golpe: el panel entra desde el fondo girando. Los verbos se encienden uno por compás y medio.",
+      "sound": "Golpe con bombo.",
+      "tall": "Etiqueta y verbos arriba, panel abajo.",
+      "src": "Caso de CompliA: verbos y recorte de la demo, con datos de ejemplo."
+    },
+    "complia-state": {
+      "see": "El mismo panel, más grande y casi de frente. A su lado, qué es, qué hice y el estado.",
+      "move": "La cámara se acerca al panel sin cortar. Entran la frase, «Lo diseñé y lo construí» y, al final, la insignia del estado. Es el plano más largo: 6,7 segundos.",
+      "sound": "Se sostiene.",
+      "tall": "Texto arriba, panel abajo.",
+      "src": "Línea del caso y «Diseñé y construí CompliA… hoy en producción interna» (línea de tiempo)."
+    },
+    "supernova": {
+      "see": "Campo ámbar. El recorte de la inscripción en un panel, la etiqueta y el estado «Prototipo».",
+      "move": "Onda ámbar. Los tres verbos, uno por tiempo; se sella la estampilla.",
+      "sound": "Vuelven los platillos.",
+      "tall": "Panel abajo.",
+      "src": "Caso de Supernova Eventos: verbos, estado y recorte con datos de ejemplo."
+    },
+    "own": {
+      "see": "Tinta. El camino del punto se abre en seis líneas, una por proyecto, cada una con su color y su nombre.",
+      "move": "El punto frena y su estela se divide en seis. La cámara toma la primera.",
+      "sound": "Un compás de aire: colchón y una nota por línea.",
+      "tall": "Las líneas bajan; los nombres van en vertical.",
+      "src": "Los seis proyectos propios con caso en Work."
+    },
+    "eclipse": {
+      "see": "Tinta. Dos paneles en profundidad (la landing y el portal de clientes), la etiqueta, los verbos y la cifra de tests.",
+      "move": "Golpe. Los paneles llegan uno detrás del otro, los verbos se encienden y la cifra rueda hasta 1.374 en el segundo compás.",
+      "sound": "Golpe del compás 21: cambia la tonalidad.",
+      "tall": "Texto arriba; los dos paneles abajo.",
+      "src": "Caso de Eclipse y la cifra del inicio: 1.374 tests, corrida del 28/10/2026."
+    },
+    "volta": {
+      "see": "Campo lima. El nombre enorme, una línea que dice qué es, su estado y el recorte en vidrio.",
+      "move": "Un compás: onda de color, nombre en el tiempo 1, la línea en el 2 y el estado en el 3.",
+      "sound": "Acorde del proyecto en el tiempo 1.",
+      "tall": "Nombre arriba, panel abajo.",
+      "src": "Caso de Volta: estado y recorte con datos ficticios."
+    },
+    "velmar": {
+      "see": "Campo naranja. El nombre enorme, una línea que dice qué es, su estado y el recorte en vidrio. El panel pasa al otro lado para cortar el ritmo.",
+      "move": "Un compás: onda de color, nombre en el tiempo 1, la línea en el 2 y el estado en el 3.",
+      "sound": "Acorde del proyecto.",
+      "tall": "Nombre arriba, panel abajo.",
+      "src": "Caso de Velmar: estado y recorte de la demo."
+    },
+    "dentalos": {
+      "see": "Campo menta. El nombre enorme, una línea que dice qué es, su estado y el recorte en vidrio.",
+      "move": "Un compás: onda de color, nombre en el tiempo 1, la línea en el 2 y el estado en el 3.",
+      "sound": "Acorde del proyecto.",
+      "tall": "Nombre arriba, panel abajo.",
+      "src": "Caso de DentalOS: estado y recorte con datos ficticios."
+    },
+    "kinetic": {
+      "see": "Campo coral. El nombre enorme, una línea que dice qué es, su estado y el recorte en vidrio. Espejado.",
+      "move": "Un compás: onda de color, nombre en el tiempo 1, la línea en el 2 y el estado en el 3.",
+      "sound": "Acorde del proyecto.",
+      "tall": "Nombre arriba, panel abajo.",
+      "src": "Caso de Kinetic Studio: estado y un cuadro de sus tráileres."
+    },
+    "games": {
+      "see": "Campo rosa. El nombre enorme, una línea que dice qué es, su estado y el recorte en vidrio.",
+      "move": "Un compás: onda de color, nombre en el tiempo 1, la línea en el 2 y el estado en el 3.",
+      "sound": "Acorde del proyecto.",
+      "tall": "Nombre arriba, panel abajo.",
+      "src": "Caso de games-market: estado y recorte, sin la marca del cliente."
+    },
+    "agents": {
+      "see": "Campo azul. Los once íconos de los agentes en un anillo alrededor del punto, y el número.",
+      "move": "Los íconos llegan de a uno, uno por nota. El número rueda hasta 11.",
+      "sound": "Once notas de arpegio.",
+      "tall": "Frase y número arriba, anillo abajo.",
+      "src": "Cómo trabajo: «un sistema agéntico, dividido en partes», 11 agentes."
+    },
+    "gate": {
+      "see": "Campo papel. Las siete estaciones de «Cómo viaja un cambio»; la puerta humana, encendida.",
+      "move": "El punto recorre las estaciones y se detiene en la puerta humana. Recién ahí pasa a «Publicar».",
+      "sound": "Silencio en el tiempo 4 y una campana: la aprobación.",
+      "tall": "Las estaciones en columna.",
+      "src": "Cómo trabajo: las siete estaciones y «una persona aprueba cada entrega»."
+    },
+    "drive": {
+      "see": "Campo coral. La frase, tres píldoras y las seis estampillas del recorrido abiertas en abanico.",
+      "move": "Las estampillas que se sellaron en cada parada vuelven juntas y se abren.",
+      "sound": "Golpe final.",
+      "tall": "Frase arriba, abanico abajo.",
+      "src": "La historia en 30 segundos: «Me mueven los desafíos nuevos…»."
+    },
+    "end": {
+      "see": "Tinta. El monograma, el nombre, «Abierto a nuevos desafíos», mail, LinkedIn y «Ver portafolio».",
+      "move": "El punto sube y aterriza en su lugar: es el punto de la «i». El monograma acusa el golpe. Queda quieto, con «Repetir».",
+      "sound": "Acorde final que queda sonando y una campana en el aterrizaje.",
+      "tall": "Igual, en columna.",
+      "src": "Cierre del tráiler publicado. El mail y LinkedIn son los del sitio."
+    }
+  },
+  "ask": [
+    {
+      "t": "La historia y su orden",
+      "d": "Origen, primeros frentes, Tsoft, camino propio, cómo trabajo y cierre. ¿Falta o sobra alguna parada?"
+    },
+    {
+      "t": "80 segundos",
+      "d": "Son 36 compases a 108 pulsos por minuto. Los cinco proyectos del medio duran un compás cada uno (2,2 s): nombre, una línea y estado. Con más aire para ellos, la película pasa de 90 segundos."
+    },
+    {
+      "t": "El cierre, con el cargo o como hoy",
+      "d": "El tráiler publicado termina con tu nombre y la frase, y deja el cargo afuera, como pediste. Acá quedó igual. ¿Sumamos «Sr AI Fullstack Developer» al final?"
+    },
+    {
+      "t": "TACH y Ada ITW, dibujados",
+      "d": "Sus paneles son ilustraciones propias, rotuladas, porque de esos frentes solo se cuenta lo aprobado."
+    },
+    {
+      "t": "Los colores de cada parada",
+      "d": "Tinta, coral, azul, papel y ámbar son los de la puerta. Los cinco proyectos usan su color de Work como campo entero."
+    }
+  ]
+}

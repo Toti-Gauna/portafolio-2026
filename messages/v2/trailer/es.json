@@ -1,0 +1,143 @@
+{
+  "title": "Conocer a Ignacio",
+  "logline": "Un punto de luz sale de Mar del Plata, sube por cada frente y vuelve a su lugar: el punto de la «i».",
+  "chapters": {
+    "origen": "Origen",
+    "frentes": "Primeros frentes",
+    "tsoft": "Tsoft",
+    "propio": "Camino propio",
+    "sistema": "Cómo trabajo",
+    "cierre": "Cierre"
+  },
+  "today": "hoy",
+  "shots": {
+    "mdp": {
+      "t": "Mar del Plata",
+      "kicker": "Mar del Plata · Argentina",
+      "line": "Todo empezó en Mar del Plata.",
+      "sea": "Océano Atlántico"
+    },
+    "first": {
+      "t": "El primer producto",
+      "kicker": "A los 17",
+      "line": "Programé mi primer producto: una web de juegos.",
+      "button": "Jugar"
+    },
+    "tach": {
+      "t": "TACH Argentina",
+      "name": "TACH Argentina",
+      "when": "2021 – 2022",
+      "line": "Una billetera virtual, de punta a punta.",
+      "pills": [
+        "Backoffice",
+        "Landing",
+        "App"
+      ],
+      "label": "Ilustración propia"
+    },
+    "ada": {
+      "t": "Ada ITW",
+      "name": "Ada ITW",
+      "when": "2023 – 2024",
+      "line": "Del código al aula.",
+      "pills": [
+        "JavaScript",
+        "React"
+      ],
+      "board": "Hola, mundo",
+      "after": "Enseñar me afianzó las bases."
+    },
+    "tuenti": {
+      "t": "Tsoft · Tuenti",
+      "name": "Tsoft · Tuenti",
+      "when": "2024 – hoy",
+      "line": "Gamificación, recargas y pagos.",
+      "label": "Ilustración propia"
+    },
+    "ia": {
+      "t": "Llega la IA",
+      "line": "Y llegó la IA."
+    },
+    "complia": {
+      "t": "CompliA",
+      "name": "CompliA",
+      "when": "Tsoft · 2026 – hoy",
+      "label": "Recorte de la demo. Datos de ejemplo."
+    },
+    "complia-state": {
+      "t": "CompliA, en uso",
+      "line": "Un asistente con IA en el portal de compliance de Telefónica.",
+      "fact": "Lo diseñé y lo construí.",
+      "label": "Recorte de la demo. Datos de ejemplo."
+    },
+    "supernova": {
+      "t": "Supernova Eventos",
+      "name": "Supernova Eventos",
+      "when": "Tsoft · 2026",
+      "label": "Prototipo con datos de ejemplo."
+    },
+    "own": {
+      "t": "Un camino propio",
+      "line": "En paralelo, un camino propio."
+    },
+    "eclipse": {
+      "t": "Eclipse",
+      "name": "Eclipse",
+      "line": "Mi estudio de desarrollo, IA y automatización.",
+      "count": "tests en verde",
+      "date": "Corrida del 28/10/2026",
+      "label": "Datos ficticios."
+    },
+    "volta": {
+      "t": "Volta",
+      "name": "Volta",
+      "line": "Tienda de suplementos deportivos."
+    },
+    "velmar": {
+      "t": "Velmar",
+      "name": "Velmar",
+      "line": "Tienda de productos personalizados."
+    },
+    "dentalos": {
+      "t": "DentalOS",
+      "name": "DentalOS",
+      "line": "Clínica odontológica ficticia."
+    },
+    "kinetic": {
+      "t": "Kinetic Studio",
+      "name": "Kinetic Studio",
+      "line": "Tráileres hechos con código."
+    },
+    "games": {
+      "t": "games-market",
+      "name": "games-market",
+      "line": "Juegos web para eventos."
+    },
+    "agents": {
+      "t": "El sistema",
+      "line": "Un sistema agéntico, dividido en partes.",
+      "count": "agentes"
+    },
+    "gate": {
+      "t": "La puerta humana",
+      "line": "Y una persona aprueba cada entrega."
+    },
+    "drive": {
+      "t": "Lo que me mueve",
+      "line": "Me mueven los desafíos nuevos.",
+      "pills": [
+        "Potenciar negocios",
+        "Automatizar procesos difíciles"
+      ]
+    },
+    "end": {
+      "t": "Final",
+      "name": "Ignacio Gauna",
+      "line": "Abierto a nuevos desafíos.",
+      "mail": "Mail",
+      "linkedin": "LinkedIn",
+      "enter": "Ver portafolio",
+      "replay": "Repetir"
+    }
+  }
+}
