@@ -1,0 +1,37 @@
+{
+  "$doc": "Tráiler «Conocer a Ignacio» de /v2 (lote 8.1): la estructura del guion. 36 compases de 4/4 a 108 bpm = 80 s. `bars` es [compás donde empieza, cuántos dura]; `cues` son los tiempos (negras desde el inicio del plano) en que entra cada parte. Las palabras están en messages/v2/trailer/<idioma>.json; los verbos y el estado de cada caso salen del propio caso (messages/v2/cases, ui.status): `show` dice cuáles se ven.",
+  "bpm": 108,
+  "beatsPerBar": 4,
+  "bars": 36,
+  "chapters": [
+    {"id": "origen", "bars": [1, 4], "zone": "about"},
+    {"id": "frentes", "bars": [5, 5], "zone": "work"},
+    {"id": "tsoft", "bars": [10, 10], "zone": "work"},
+    {"id": "propio", "bars": [20, 9], "zone": "work"},
+    {"id": "sistema", "bars": [29, 4], "zone": "how"},
+    {"id": "cierre", "bars": [33, 4], "zone": "home"}
+  ],
+  "drops": [5, 13, 21, 33],
+  "shots": [
+    {"id": "mdp", "chapter": "origen", "bars": [1, 2], "theme": "ink", "year": "", "cues": {"kicker": 3, "line": 4}},
+    {"id": "first", "chapter": "origen", "bars": [3, 2], "theme": "ink", "year": "", "cues": {"kicker": 0, "line": 1, "click": 7}},
+    {"id": "tach", "chapter": "frentes", "bars": [5, 2], "theme": "coral", "year": "2021", "stamp": "tach", "cues": {"name": 0, "stamp": 1, "line": 2, "pills": 4}},
+    {"id": "ada", "chapter": "frentes", "bars": [7, 3], "theme": "blue", "year": "2023", "stamp": "ada", "cues": {"name": 0, "stamp": 1, "line": 2, "pills": 4, "after": 8}},
+    {"id": "tuenti", "chapter": "tsoft", "bars": [10, 2], "theme": "paper", "year": "2024", "stamp": "tuenti", "case": "tuenti", "media": "/media/tuenti-cover.svg", "cues": {"name": 0, "stamp": 1, "line": 2, "verbs": 4}, "show": ["verbs"]},
+    {"id": "ia", "chapter": "tsoft", "bars": [12, 1], "theme": "ink", "year": "2026", "cues": {"line": 0}},
+    {"id": "complia", "chapter": "tsoft", "bars": [13, 2], "theme": "ink", "year": "2026", "stamp": "complia", "case": "complia", "media": "/media/complia-demo-poster.jpg", "clip": "/media/complia-demo.mp4", "cues": {"name": 0, "stamp": 1, "verbs": 2}, "show": ["verbs"], "frameAt": 1.5},
+    {"id": "complia-state", "chapter": "tsoft", "bars": [15, 3], "theme": "ink", "year": "2026", "case": "complia", "media": "/media/complia-demo-poster.jpg", "clip": "/media/complia-demo.mp4", "cues": {"line": 0, "fact": 5, "status": 8}, "show": ["state"], "frameAt": 6.35},
+    {"id": "supernova", "chapter": "tsoft", "bars": [18, 2], "theme": "amber", "year": "2026", "stamp": "supernova", "case": "supernova", "media": "/media/supernova/inscripcion.jpg", "clip": "/media/supernova/inscripcion.mp4", "cues": {"name": 0, "stamp": 1, "verbs": 2}, "show": ["verbs", "state"]},
+    {"id": "own", "chapter": "propio", "bars": [20, 1], "theme": "ink", "year": "", "cues": {"line": 0}},
+    {"id": "eclipse", "chapter": "propio", "bars": [21, 3], "theme": "ink", "year": "", "stamp": "eclipse", "case": "eclipse", "media": "/media/eclipse/landing-recorrido.jpg", "media2": "/media/eclipse/portal-clientes.jpg", "clip": "/media/eclipse/landing-recorrido.mp4", "count": {"to": 1374, "key": "tests"}, "cues": {"name": 0, "stamp": 1, "line": 2, "verbs": 4, "count": 7}, "show": ["verbs", "state"]},
+    {"id": "volta", "chapter": "propio", "bars": [24, 1], "theme": "lime", "year": "", "case": "volta", "media": "/media/volta/panel.jpg", "clip": "/media/volta/panel.mp4", "cues": {"name": 0, "line": 1, "state": 2}, "show": ["state"]},
+    {"id": "velmar", "chapter": "propio", "bars": [25, 1], "theme": "orange", "year": "", "case": "velmar", "media": "/media/velmar/panel.jpg", "clip": "/media/velmar/panel.mp4", "cues": {"name": 0, "line": 1, "state": 2}, "show": ["state"]},
+    {"id": "dentalos", "chapter": "propio", "bars": [26, 1], "theme": "mint", "year": "", "case": "dentalos", "media": "/media/dentalos/recepcion.jpg", "clip": "/media/dentalos/recepcion.mp4", "cues": {"name": 0, "line": 1, "state": 2}, "show": ["state"]},
+    {"id": "kinetic", "chapter": "propio", "bars": [27, 1], "theme": "coral", "year": "", "case": "kinetic", "media": "/media/kinetic/kinetic-formas.jpg", "clip": "/media/kinetic/kinetic-formas.mp4", "cues": {"name": 0, "line": 1, "state": 2}, "show": ["state"]},
+    {"id": "games", "chapter": "propio", "bars": [28, 1], "theme": "pink", "year": "", "case": "games", "media": "/media/games/ninja.jpg", "clip": "/media/games/ninja.mp4", "cues": {"name": 0, "line": 1, "state": 2}, "show": ["state"], "frameAt": 1.4},
+    {"id": "agents", "chapter": "sistema", "bars": [29, 2], "theme": "blue", "year": "", "count": {"to": 11, "key": "agents"}, "cues": {"line": 0, "count": 2}},
+    {"id": "gate", "chapter": "sistema", "bars": [31, 2], "theme": "paper", "year": "", "cues": {"stations": 0, "line": 3}},
+    {"id": "drive", "chapter": "cierre", "bars": [33, 2], "theme": "coral", "year": "", "cues": {"line": 0, "pills": 2, "stamps": 4}},
+    {"id": "end", "chapter": "cierre", "bars": [35, 2], "theme": "ink", "year": "", "cues": {"mark": 0, "name": 1, "line": 3, "links": 5}}
+  ]
+}

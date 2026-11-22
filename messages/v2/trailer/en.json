@@ -1,0 +1,143 @@
+{
+  "title": "Meet Ignacio",
+  "logline": "A point of light leaves Mar del Plata, climbs through every front and returns to its place: the dot of the “i”.",
+  "chapters": {
+    "origen": "Origin",
+    "frentes": "First fronts",
+    "tsoft": "Tsoft",
+    "propio": "My own path",
+    "sistema": "How I work",
+    "cierre": "Close"
+  },
+  "today": "today",
+  "shots": {
+    "mdp": {
+      "t": "Mar del Plata",
+      "kicker": "Mar del Plata · Argentina",
+      "line": "It all started in Mar del Plata.",
+      "sea": "Atlantic Ocean"
+    },
+    "first": {
+      "t": "The first product",
+      "kicker": "At 17",
+      "line": "I built my first product: a games website.",
+      "button": "Play"
+    },
+    "tach": {
+      "t": "TACH Argentina",
+      "name": "TACH Argentina",
+      "when": "2021 – 2022",
+      "line": "A digital wallet, end to end.",
+      "pills": [
+        "Back office",
+        "Landing",
+        "App"
+      ],
+      "label": "Own illustration"
+    },
+    "ada": {
+      "t": "Ada ITW",
+      "name": "Ada ITW",
+      "when": "2023 – 2024",
+      "line": "From code to the classroom.",
+      "pills": [
+        "JavaScript",
+        "React"
+      ],
+      "board": "Hello, world",
+      "after": "Teaching strengthened my basics."
+    },
+    "tuenti": {
+      "t": "Tsoft · Tuenti",
+      "name": "Tsoft · Tuenti",
+      "when": "2024 – today",
+      "line": "Gamification, top-ups and payments.",
+      "label": "Own illustration"
+    },
+    "ia": {
+      "t": "AI arrives",
+      "line": "Then came AI."
+    },
+    "complia": {
+      "t": "CompliA",
+      "name": "CompliA",
+      "when": "Tsoft · 2026 – today",
+      "label": "Clip from the demo. Sample data."
+    },
+    "complia-state": {
+      "t": "CompliA, in use",
+      "line": "An AI assistant inside Telefónica's compliance portal.",
+      "fact": "I designed it and built it.",
+      "label": "Clip from the demo. Sample data."
+    },
+    "supernova": {
+      "t": "Supernova Eventos",
+      "name": "Supernova Eventos",
+      "when": "Tsoft · 2026",
+      "label": "Prototype with sample data."
+    },
+    "own": {
+      "t": "My own path",
+      "line": "Alongside, a path of my own."
+    },
+    "eclipse": {
+      "t": "Eclipse",
+      "name": "Eclipse",
+      "line": "My development, AI and automation studio.",
+      "count": "tests passing",
+      "date": "Run of 28/10/2026",
+      "label": "Fictional data."
+    },
+    "volta": {
+      "t": "Volta",
+      "name": "Volta",
+      "line": "Sports-supplement store."
+    },
+    "velmar": {
+      "t": "Velmar",
+      "name": "Velmar",
+      "line": "Personalized-goods store."
+    },
+    "dentalos": {
+      "t": "DentalOS",
+      "name": "DentalOS",
+      "line": "A fictional dental clinic."
+    },
+    "kinetic": {
+      "t": "Kinetic Studio",
+      "name": "Kinetic Studio",
+      "line": "Trailers made in code."
+    },
+    "games": {
+      "t": "games-market",
+      "name": "games-market",
+      "line": "Web games for events."
+    },
+    "agents": {
+      "t": "The system",
+      "line": "An agentic system, split into parts.",
+      "count": "agents"
+    },
+    "gate": {
+      "t": "The human gate",
+      "line": "And a person approves every delivery."
+    },
+    "drive": {
+      "t": "What drives me",
+      "line": "New challenges drive me.",
+      "pills": [
+        "Boosting businesses",
+        "Automating hard processes"
+      ]
+    },
+    "end": {
+      "t": "End",
+      "name": "Ignacio Gauna",
+      "line": "Open to new challenges.",
+      "mail": "Email",
+      "linkedin": "LinkedIn",
+      "enter": "View portfolio",
+      "replay": "Replay"
+    }
+  }
+}
