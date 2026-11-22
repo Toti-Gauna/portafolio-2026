@@ -208,7 +208,7 @@
 
 .ui-crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
 .ui-crumbs li { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--color-text-faint); }
-.ui-crumbs a { display: inline-flex; align-items: center; min-height: var(--size-touch); color: var(--color-text-muted); text-decoration: none; }
+.ui-crumbs a { display: inline-flex; align-items: center; justify-content: center; min-height: var(--size-touch); min-width: var(--size-touch); color: var(--color-text-muted); text-decoration: none; }
 .ui-crumbs a:hover { color: var(--color-heading); text-decoration: underline; text-underline-offset: 5px; }
 .ui-crumbs [aria-current] { font-weight: 700; color: var(--color-heading); }
 

@@ -5,7 +5,7 @@ import { reducedMotion } from '@/v2/motion/env';
 import { PlayIcon } from '../ui/Icons';
 
 /**
- * The clip of a featured case: a poster until someone asks. With a mouse it plays while the pointer is on its
+ * The clip of a featured case: a poster until someone asks (an image that loads lazily, under the clip). With a mouse it plays while the pointer is on its
  * card; the button plays and pauses it for everyone (touch, keyboard, reduced motion). Muted, never downloaded
  * before it is needed, and paused when its card leaves the screen.
  */
@@ -35,7 +35,10 @@ export function CaseClip({ src, poster, alt, play, pause, name, card = '.hc-card
   }, [card]);
   return (
     <div className={['hc-clip', className].filter(Boolean).join(' ')} ref={root} data-playing={on || undefined}>
-      <video ref={video} muted loop playsInline preload="none" poster={poster} aria-label={alt} tabIndex={-1}>
+      {/* the poster is an image under the clip, not the video's `poster`: a browser fetches a poster at once wherever it
+          is on the page, an image waits until it comes near the screen (lote 9.2) */}
+      <img className="hc-poster" src={poster} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <video ref={video} muted loop playsInline preload="none" aria-label={alt} tabIndex={-1}>
         <source src={src} type="video/mp4" />
       </video>
       <button type="button" className="hc-play" aria-pressed={on} onClick={() => run(!on)}>

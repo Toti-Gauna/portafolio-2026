@@ -118,8 +118,9 @@ export function BrandBoard({ spec, copy, labels: L }: { spec: BrandSpec; copy: B
         <p className="bl-sub">{L.pairs}</p>
         <ul className="bl-pairs">
           {pairs.map(([, , fg, bg], i) => (
-            <li key={i} style={{ color: fg, background: bg }}>
-              <b aria-hidden="true">Aa</b>
+            <li key={i}>
+              {/* the pair itself is the big «Aa» (large text: 3:1 is enough); its codes and ratio are read in the field's own colours */}
+              <b aria-hidden="true" style={{ color: fg, background: bg }}>Aa</b>
               <span><code>{fg}</code> {L.on} <code>{bg}</code></span>
               <strong>{contrast(fg, bg).toFixed(1).replace('.', L.dec)}:1</strong>
             </li>

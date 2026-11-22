@@ -90,7 +90,7 @@
 .bl-share i { display: block; flex-basis: 0; }
 .bl-pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
 .bl-pairs li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--bl-radius); border: 1px solid var(--f-line); font-size: 13px; }
-.bl-pairs b { font-family: var(--bl-display); font-size: 24px; font-weight: var(--bl-hw); }
+.bl-pairs b { display: grid; place-items: center; min-width: 56px; padding: 6px 10px; border-radius: calc(var(--bl-radius) * 0.6); box-shadow: inset 0 0 0 1px var(--f-line); font-family: var(--bl-display); font-size: 24px; font-weight: var(--bl-hw); }
 .bl-pairs strong { font-size: 14px; }
 
 /* ---------- type ---------- */
