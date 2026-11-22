@@ -45,9 +45,9 @@ describe('v2 video (lote 7.2)', () => {
       expect(t.map((f) => f.shape)).toEqual(['wide', 'tall']);
       for (const f of t) expect(existsSync(`public${f.poster}`), f.poster).toBe(true);
     }
-    expect(trailerHref('es', 'wide')).toBe('/trailer/v2/index.html?lang=es');
-    expect(trailerHref('en', 'tall')).toBe('/trailer/v2/index.html?lang=en&o=v');
-    expect(existsSync('public/trailer/v2/index.html')).toBe(true);
+    expect(trailerHref('es', 'wide')).toBe('/v2/es/trailer/?play');
+    expect(trailerHref('en', 'tall')).toBe('/v2/en/trailer/?play&f=t');
+    expect(existsSync('app/v2/[locale]/trailer/page.tsx')).toBe(true);
   });
 
   it('few words outside the captions: title, line and filters stay under 60', () => {

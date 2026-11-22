@@ -35,7 +35,10 @@
     "anyway": "Watch it anyway",
     "textK": "Text version",
     "textTitle": "The trailer, in words.",
-    "now": "Now"
+    "now": "Now",
+    "mute": "Mute",
+    "unmute": "Turn sound on",
+    "unlock": "Turn the sound on"
   },
   "shots": {
     "mdp": {

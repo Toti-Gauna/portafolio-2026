@@ -1,4 +1,5 @@
 import { asset } from '@/lib/site';
+import { trailerHref } from '../video/films';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { LightField } from '../signature/LightField';
 import { Stack } from '../signature/Stack';
@@ -30,7 +31,7 @@ export function Home({ locale, gate = 'cinetica' }: { locale: V2Locale; gate?: G
     return `rgb(${c0.map((v, i) => Math.round(v + (c1[i] - v) * f)).join(', ')})`;
   };
   const lastName = [...m.hero.last];
-  const trailer = asset(`/trailer/v2/index.html?lang=${locale}`);
+  const trailer = asset(trailerHref(locale));
   const labels = {
     label: m.gate.label, meet: m.gate.meet, enter: m.gate.enter, loading: m.gate.loading, ready: m.gate.ready, progress: m.gate.progress, key: m.gate.key,
     level: m.hero.level, role: m.hero.role, edition: m.gate.edition, place: m.footer.place, steps: m.gate.steps,
@@ -67,7 +68,7 @@ export function Home({ locale, gate = 'cinetica' }: { locale: V2Locale; gate?: G
                 <h1 id="v2-name" className="v2-name"><JumpText text={m.hero.first} /><br /><JumpText text={m.hero.last} from={m.hero.first.length} tint={tint} /></h1>
                 <p className="v2-lead">{m.hero.leadBefore} <span className="v2-solutions">{m.hero.leadWord}</span> {m.hero.leadAfter}</p>
                 <div className="v2-actions">
-                  <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />} magnetic={10}>{m.hero.meet}</Button>
+                  <Button href={trailer} iconStart={<PlayIcon />} magnetic={10}>{m.hero.meet}</Button>
                   <Button href="#explorar" variant="secondary" iconEnd={<ArrowIcon />} magnetic={8}>{m.hero.explore}</Button>
                 </div>
                 <HomeStats locale={locale} />

@@ -13,8 +13,8 @@
   "count": { "one": "film", "other": "films" },
   "trailer": {
     "name": "Meet Ignacio",
-    "wide": { "caption": "My journey in 130 seconds, made with code.", "alt": "Trailer poster: the graph of my journey, from age 17 to today." },
-    "tall": { "caption": "The same film, in its vertical 9:16 edition.", "alt": "Poster of the vertical edition: the closing card with my name and contact." }
+    "wide": { "caption": "My journey in 80 seconds, made with code and with its own music.", "alt": "Trailer poster: TACH Argentina on coral, with the digital wallet in panels and its stamp." },
+    "tall": { "caption": "The same film, in its vertical 9:16 edition.", "alt": "Poster of the vertical edition: TACH Argentina on coral, with the panels below." }
   },
   "open": "Open the trailer",
   "player": { "label": "Video player", "close": "Close", "prev": "Previous film", "next": "Next film", "case": "See the case", "of": "of" },

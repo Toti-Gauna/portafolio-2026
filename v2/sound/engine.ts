@@ -18,6 +18,10 @@ const ROOM: Record<StyleId, { verb: number; delay: number; level: number }> = { 
 /** Background music: about -22 dBFS RMS, peaks well under -10 (measured offline, tests/e2e/v2-sound.spec.ts). */
 const MASTER = 0.24;
 
+/** A written score in seconds of an outside clock (the trailer, lote 8.3): see v2/trailer/score.ts. */
+export type ScoreEvent = { t: number; ev: NoteEvent; bright: number };
+export type Score = { bpm: number; length: number; gain: number; events: ScoreEvent[] };
+
 export type Sfx = 'open' | 'stop' | 'grab' | 'thud' | 'night' | 'day' | 'horn';
 const i5 = (n: number, len: number) => n % len;
 
@@ -94,6 +98,7 @@ export class MusicEngine {
     const s = this.session;
     if (!s) return;
     this.session = null;
+    this.score = null;
     clearInterval(this.timer);
     this.timer = undefined;
     const t = this.ctx.currentTime;
@@ -102,6 +107,53 @@ export class MusicEngine {
     s.gain.linearRampToValueAtTime(0, t + fade);
     // notes already scheduled for later bars die with their session
     setTimeout(() => s.disconnect(), (fade + 0.1) * 1000);
+  }
+
+  /**
+   * Plays a written score from second `from` of its own clock (the trailer, lote 8.3). It schedules a third of a
+   * second ahead, like the generative music, so a pause or a jump cuts it at once (stop() fades the session out).
+   * `scoreTime()` is where the score is now: the film follows it, so picture and sound never drift apart.
+   */
+  playScore(score: Score, from: number, fade = 0.03) {
+    this.stop(0.06);
+    this.style = 'circuito';
+    this.applyRoom(true);
+    const t = this.ctx.currentTime;
+    const s = this.ctx.createGain();
+    s.gain.setValueAtTime(0, t);
+    s.gain.linearRampToValueAtTime(score.gain, t + fade);
+    s.connect(this.bus);
+    this.session = s;
+    this.score = score;
+    this.origin = t - from;
+    this.cursor = score.events.findIndex((e) => e.t >= from - 1e-6);
+    if (this.cursor < 0) this.cursor = score.events.length;
+    this.scoreTick();
+    this.timer = setInterval(() => this.scoreTick(), 60);
+  }
+  /** Where the score is now, in its own seconds; null when no score plays. */
+  scoreTime(): number | null { return this.score && this.session ? this.ctx.currentTime - this.origin : null; }
+  private score: Score | null = null;
+  private origin = 0;
+  private cursor = 0;
+  private scoreTick() {
+    const s = this.session, sc = this.score;
+    if (!s || !sc) return;
+    const until = this.ctx.currentTime + 0.35 - this.origin, beat = 60 / sc.bpm;
+    while (this.cursor < sc.events.length && sc.events[this.cursor].t < until) {
+      const e = sc.events[this.cursor++];
+      this.play(e.ev, Math.max(this.ctx.currentTime, this.origin + e.t), beat, s, e.bright);
+    }
+    if (this.cursor >= sc.events.length) { clearInterval(this.timer); this.timer = undefined; }
+  }
+  /** Offline: lays the whole score down from 0 (for an OfflineAudioContext). */
+  layScore(score: Score) {
+    this.style = 'circuito';
+    this.applyRoom(true);
+    const s = this.ctx.createGain();
+    s.gain.value = score.gain;
+    s.connect(this.bus);
+    for (const e of score.events) this.play(e.ev, 0.05 + e.t, 60 / score.bpm, s, e.bright);
   }
 
   /** A short, bright chord on the tonic of the page: the gate opening (lote 3.1). It sounds on its own, with or without the music. */
@@ -417,6 +469,13 @@ export class MusicEngine {
 }
 
 /** Renders `seconds` of a style and a page to an AudioBuffer (samples for Ignacio, level checks in tests). */
+/** The score of the trailer, offline (tests and samples): `seconds` of it plus its tail. */
+export async function renderScore(score: Score, seconds = score.length + 3, sampleRate = 44100): Promise<AudioBuffer> {
+  const ctx = new OfflineAudioContext(2, Math.ceil(seconds * sampleRate), sampleRate);
+  new MusicEngine(ctx, ctx.destination, 'circuito', 'home').layScore(score);
+  return ctx.startRendering();
+}
+
 export async function renderMusic(style: StyleId, zone: ZoneKey | ZoneKey[], seconds: number, sampleRate = 44100): Promise<AudioBuffer> {
   const ctx = new OfflineAudioContext(2, Math.ceil(sampleRate * seconds), sampleRate);
   const tour = Array.isArray(zone) ? zone : [];
