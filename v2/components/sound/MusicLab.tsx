@@ -28,6 +28,11 @@ export function MusicLab({ labels, zones, colors }: { labels: Labels; zones: { k
       if (asWav) { const bytes = wav(ch, rate); let s = ''; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000)); out.wav = btoa(s); }
       return out;
     };
+    (window as Window & { __igSfxRender?: unknown }).__igSfxRender = async (kind: string, z: ZoneKey = 'home') => {
+      const [{ renderSfx }, { levels }] = await Promise.all([import('@/v2/sound/engine'), import('@/v2/sound/analyze')]);
+      const b = await renderSfx(kind as Parameters<typeof renderSfx>[0], z, 22050);
+      return levels([b.getChannelData(0), b.getChannelData(1)], 22050);
+    };
     return () => window.removeEventListener(MUSIC_BAR, onBar);
   }, []);
   // leaving the page ends the preview

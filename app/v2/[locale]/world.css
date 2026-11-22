@@ -268,7 +268,7 @@ path.wa-lit[d*='A'] { stroke: #060513; stroke-width: 0.9; }
 .wc-shadow { fill: #060513; opacity: 0.2; }
 /* clouds: they cross the frame slowly, each with its shadow on the land below */
 .ws-sky { position: absolute; inset: 0; overflow: clip; pointer-events: none; }
-.wk { position: absolute; left: 0; top: calc(3% + var(--i) * 9%); width: calc(120px + var(--i) * 26px); opacity: 0.82; translate: calc(-100% - 20px) 0; transition: opacity 600ms var(--motion-ease); }
+.wk { position: absolute; left: 0; top: calc(3% + var(--i) * 9%); width: calc(120px + var(--i) * 26px); opacity: 0.82; translate: calc(-100% - 20px) 0; transition: opacity var(--motion-slow) var(--motion-ease); }
 .wk:nth-child(even) { top: calc(20% + var(--i) * 5%); }
 .wk svg { display: block; width: 100%; height: auto; fill: #ffffff; }
 .wk svg + svg { position: absolute; left: 12%; top: 190%; fill: #060513; opacity: 0.1; scale: 1 0.6; }

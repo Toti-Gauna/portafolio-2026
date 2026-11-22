@@ -47,15 +47,15 @@ html:not([data-gate]) .vw-bar { display: none; }
   position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: var(--radius-xl);
   border: 1px solid var(--color-line); background: var(--color-surface); color: var(--color-heading); text-decoration: none; isolation: isolate;
 }
-.vw-tile::after { content: ''; position: absolute; inset: 0; border-radius: inherit; border: 2px solid var(--c); opacity: 0; transition: opacity 160ms; pointer-events: none; z-index: 3; }
+.vw-tile::after { content: ''; position: absolute; inset: 0; border-radius: inherit; border: 2px solid var(--c); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); pointer-events: none; z-index: 3; }
 @media (hover: hover) and (pointer: fine) { .vw-tile:hover::after { opacity: 1; } }
 .vw-media { position: absolute; inset: 0; }
 .vw-media img, .vw-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.vw-media video { opacity: 0; transition: opacity 220ms; }
+.vw-media video { opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); }
 .vw-tile[data-playing] .vw-media video { opacity: 1; }
 .vw-play {
   position: absolute; right: 10px; top: 10px; z-index: 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
-  background: rgba(6, 5, 19, 0.72); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.28); transition: opacity 160ms;
+  background: rgba(6, 5, 19, 0.72); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.28); transition: opacity var(--motion-fast) var(--motion-ease);
 }
 .vw-tile[data-playing] .vw-play { opacity: 0; }
 /* the «pie»: on the film, over a dark fade so it reads on any poster */

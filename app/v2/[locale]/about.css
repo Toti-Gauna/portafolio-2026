@@ -165,7 +165,7 @@ html:not([data-gate]) .sk-bar, html:not([data-gate]) .sk-hint { display: none; }
 .sk-dot { position: relative; display: grid; place-items: center; flex: none; width: 44px; height: 44px; }
 .sk-dot i { width: calc(var(--s) * 2 * var(--k)); height: calc(var(--s) * 2 * var(--k)); border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent), 0 0 20px color-mix(in srgb, var(--c) 70%, transparent); }
 .sk-star[data-hollow] .sk-dot i { background: transparent; border: 2px solid var(--c); box-shadow: none; }
-.sk-dot::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; border: 2px solid var(--c); opacity: 0; transition: opacity 160ms; }
+.sk-dot::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; border: 2px solid var(--c); opacity: 0; transition: opacity var(--motion-fast) var(--motion-ease); }
 .sk-star:hover .sk-dot::after { opacity: 0.5; }
 .sk-star[data-on] .sk-dot::after { opacity: 1; }
 .sk-star[data-kin] .sk-dot::after { opacity: 0.55; border-style: dashed; }

@@ -25,7 +25,7 @@
   width: 100%; min-height: 44px; padding: 8px; border: 1px solid var(--f-line); border-radius: min(var(--bl-radius), 14px);
   background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
-.mk-pt::after { content: ''; position: absolute; inset: -4px; border: 2px solid var(--f-accent); border-radius: inherit; opacity: 0; pointer-events: none; transition: opacity 160ms; }
+.mk-pt::after { content: ''; position: absolute; inset: -4px; border: 2px solid var(--f-accent); border-radius: inherit; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast) var(--motion-ease); }
 .mk-pt:hover::after { opacity: 0.45; }
 .mk-pt[aria-pressed='true']::after { opacity: 1; }
 .mk-pt:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
@@ -68,7 +68,7 @@
 .mk-seg-bg { fill: none; stroke: var(--f-line); stroke-width: 2; stroke-dasharray: 3 7; }
 .mk-seg { fill: none; stroke: var(--f-accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
 .mk-seg[data-on] { stroke-dashoffset: 0; }
-@media (prefers-reduced-motion: no-preference) { .mk-seg { transition: stroke-dashoffset 720ms var(--ease); } }
+@media (prefers-reduced-motion: no-preference) { .mk-seg { transition: stroke-dashoffset var(--motion-slow) var(--motion-ease); } }
 
 .mk-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
 .mk-step { font-size: 15px; flex: 1 1 220px; }

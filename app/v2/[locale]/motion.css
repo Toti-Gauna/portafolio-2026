@@ -154,3 +154,11 @@ html[data-nav='fade'] .v2-page { animation: v2-page-in var(--motion-slow) var(--
 .mo-rules { display: grid; gap: var(--space-3); max-width: 70ch; }
 .mo-rules li { padding-left: var(--space-5); position: relative; color: var(--color-text); }
 .mo-rules li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; border-radius: 2px; background: var(--color-coral-500); }
+
+/* Lote 9.1: one press for every button of the site — it gives a little under the finger and comes back.
+   The individual `scale` property composes with each piece's own transform, so nothing that is placed with a
+   transform (a star of the sky, a station, a point of a playbook) moves away. Buttons with a press of their own
+   keep it. With reduced motion, nothing gives. */
+@media (prefers-reduced-motion: no-preference) {
+  :where(.v2-main, .sh, .sm, .v2-foot) :where(button, summary):not(:disabled, .ui-btn, .sig-player-play, .gk-door, .gt-door):active { scale: 0.96; }
+}
