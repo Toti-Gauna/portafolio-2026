@@ -14,8 +14,8 @@ test('the wall: 25 films, the trailer first, fewer than 60 words outside the cap
   await expect(page.locator('h1')).toHaveText('Todo, en movimiento.');
   await expect(page.locator('.vw-cell')).toHaveCount(25);
   await expect(page.locator('.vw-cell').first()).toHaveAttribute('data-feature', '');
-  await expect(page.locator('.vw-tile').first()).toHaveAttribute('href', '/trailer/v2/index.html?lang=es');
-  await expect(page.locator('.vw-tile').nth(1)).toHaveAttribute('href', '/trailer/v2/index.html?lang=es&o=v');
+  await expect(page.locator('.vw-tile').first()).toHaveAttribute('href', '/v2/es/trailer/?play');
+  await expect(page.locator('.vw-tile').nth(1)).toHaveAttribute('href', '/v2/es/trailer/?play&f=t');
   const words = await page.locator('main').evaluate((m) => {
     const c = m.cloneNode(true) as HTMLElement;
     c.querySelectorAll('.vw-cap, dialog').forEach((e) => e.remove());
@@ -137,5 +137,5 @@ test('the ways in: the foot of every page, the home and Work; and in English', a
   await page.goto('/v2/en/video/');
   await expect(page.locator('h1')).toHaveText('Everything, in motion.');
   await expect(page.locator('.vw-count')).toContainText('25 films');
-  await expect(page.locator('.vw-tile').first()).toHaveAttribute('href', '/trailer/v2/index.html?lang=en');
+  await expect(page.locator('.vw-tile').first()).toHaveAttribute('href', '/v2/en/trailer/?play');
 });

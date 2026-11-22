@@ -190,3 +190,81 @@ test('in English', async ({ page }) => {
   await expect(page.locator('[data-slot="eclipse"] .tf-count')).toContainText('tests passing');
   await expect(page.locator('.tr-text')).toContainText('Open to new challenges.');
 });
+
+// Lote 8.3: the soundtrack, written for the film and played against it; the film follows the music's clock.
+type Sound = { state: string; playing: boolean; time: number | null; muted: boolean; locked: boolean };
+const sound = (page: Page) => page.evaluate(() => (window as unknown as { __igTrailerSound: () => Sound }).__igTrailerSound());
+
+test('it sounds: «Reproducir» starts the music on the film\'s clock, a chapter takes it along, «Silenciar» and pause', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/v2/es/trailer/');
+  await start(page);
+  await expect.poll(async () => (await sound(page)).playing, { timeout: 8000 }).toBe(true);
+  const s = await sound(page);
+  expect(s.state).toBe('running');
+  expect(s.locked).toBe(false);
+  await page.waitForTimeout(1200);
+  const [f, m] = [await film(page), await sound(page)];
+  expect(Math.abs(f.t - m.time!)).toBeLessThan(0.12);
+  // the site's own music waits while the trailer sounds
+  expect(await page.evaluate(() => (window as unknown as { __igMusic: () => { playing: boolean } }).__igMusic().playing)).toBe(false);
+  await page.getByRole('button', { name: 'Capítulo 5: Cómo trabajo' }).click();
+  await expect.poll(async () => (await sound(page)).time ?? 0).toBeGreaterThan(62);
+  expect(Math.abs((await film(page)).t - (await sound(page)).time!)).toBeLessThan(0.12);
+  await page.getByRole('button', { name: 'Silenciar' }).click();
+  expect((await sound(page)).muted).toBe(true);
+  await expect(page.getByRole('button', { name: 'Activar sonido' })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Pausar' }).click();
+  expect((await sound(page)).playing).toBe(false);
+});
+
+test('a link that asks for the film plays it at once, and one touch frees the sound when the browser holds it', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/v2/es/trailer/?play');
+  await expect.poll(async () => (await page.evaluate(() => '__igFilm' in window)) && (await film(page)).t, { timeout: 8000 }).toBeGreaterThan(0.3);
+  await expect(page.locator('.tp')).toHaveAttribute('data-state', 'playing');
+  // a page opened from a link has had no gesture yet: the film runs and the sound waits for one touch
+  const s = await sound(page);
+  if (s.locked) {
+    await expect(page.getByRole('button', { name: 'Activar el sonido' })).toBeVisible();
+    await page.getByRole('button', { name: 'Activar el sonido' }).click();
+  }
+  await expect.poll(async () => (await sound(page)).playing).toBe(true);
+  await expect(page.locator('.tp-unlock')).toHaveCount(0);
+  // the 9:16 edition by link
+  await page.goto('/v2/es/trailer/?play&f=t');
+  await expect(page.locator('.tf-stage')).toHaveClass(/\bt\b/, { timeout: 8000 });
+});
+
+test('with reduced motion a link does not start the film', async ({ browser }) => {
+  const calm = await browser.newContext({ reducedMotion: 'reduce' });
+  const page = await calm.newPage();
+  await page.goto('/v2/es/trailer/?play');
+  await page.waitForTimeout(800);
+  await expect(page.locator('.tp')).toHaveAttribute('data-state', 'poster');
+  expect(await page.evaluate(() => '__igFilm' in window)).toBe(false);
+  await calm.close();
+});
+
+test('the mix: the whole soundtrack rendered offline stays in the background range, quiet at first and full at the end', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto('/v2/es/trailer/');
+  await page.waitForFunction(() => '__igScoreRender' in window);
+  const r = await page.evaluate(() => (window as unknown as { __igScoreRender: (rate: number) => Promise<{ peakDb: number; rmsDb: number; per: number[] }> }).__igScoreRender(22050));
+  expect(r.peakDb).toBeLessThan(-6);
+  expect(r.rmsDb).toBeGreaterThan(-28);
+  expect(r.rmsDb).toBeLessThan(-16);
+  const mean = (a: number[]) => a.reduce((s, x) => s + x, 0) / a.length;
+  // Mar del Plata (0–4 s) is quieter than the hits; the breath of the own path (42–44 s) and the gate (67–70 s) dip
+  expect(mean(r.per.slice(0, 4))).toBeLessThan(mean(r.per.slice(15, 24)) - 8);
+  expect(mean(r.per.slice(43, 44))).toBeLessThan(mean(r.per.slice(46, 50)) - 4);
+  expect(mean(r.per.slice(67, 70))).toBeLessThan(mean(r.per.slice(72, 75)) - 6);
+});
+
+test('the gate, the home and Video open this trailer', async ({ page }) => {
+  await page.goto('/v2/es/');
+  await expect(page.getByRole('link', { name: 'Conocer a Ignacio' }).first()).toHaveAttribute('href', '/v2/es/trailer/?play');
+  await page.goto('/v2/en/video/');
+  await expect(page.locator('.vw-tile').first()).toHaveAttribute('href', '/v2/en/trailer/?play');
+  await expect(page.locator('.vw-tile').nth(1)).toHaveAttribute('href', '/v2/en/trailer/?play&f=t');
+});

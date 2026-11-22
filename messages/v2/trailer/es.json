@@ -35,7 +35,10 @@
     "anyway": "Verlo igual",
     "textK": "Versión en texto",
     "textTitle": "El tráiler, en palabras.",
-    "now": "Ahora"
+    "now": "Ahora",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido",
+    "unlock": "Activar el sonido"
   },
   "shots": {
     "mdp": {

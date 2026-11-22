@@ -6,7 +6,13 @@ import { PRESETS } from '@/v2/trailer/presets';
 import { type FilmData, ShotBody, StampSprite } from './shots';
 
 export type FilmHandle = { play: () => void; pause: () => void; seek: (t: number) => void; time: () => number };
-type Props = { fmt: Fmt; data: FilmData; api: (h: FilmHandle | null) => void; onTime: (t: number) => void; onEnd: () => void };
+type Props = {
+  fmt: Fmt; data: FilmData; api: (h: FilmHandle | null) => void; onTime: (t: number) => void; onEnd: () => void;
+  /** the soundtrack's clock (lote 8.3): while the music plays, the picture follows it */
+  clock?: () => number | null;
+};
+/** how far the picture may drift from the music before it is put back on the beat */
+const DRIFT = 0.045;
 
 const OUT = 'cubic-bezier(.2,.8,.2,1)', IN = 'cubic-bezier(.6,0,.9,.4)';
 const WAVE = 620, HOP = 0.42;
@@ -25,15 +31,16 @@ const num = (el: Element, k: string, d = 0) => { const v = el.getAttribute(k); r
  * player the time and to keep on stage only the shots near the playhead (the rest are `display: none`: no layers).
  * Only transform, opacity, clip-path and stroke-dashoffset are animated.
  */
-export default function Film({ fmt, data, api, onTime, onEnd }: Props) {
+export default function Film({ fmt, data, api, onTime, onEnd, clock: audioClock }: Props) {
   const stage = useRef<HTMLDivElement>(null);
-  const cb = useRef({ onTime, onEnd });
-  cb.current = { onTime, onEnd };
+  const cb = useRef({ onTime, onEnd, audioClock });
+  cb.current = { onTime, onEnd, audioClock };
 
   useLayoutEffect(() => {
     const root = stage.current!;
     let anims: Animation[] = [], drifts: Animation[] = [], clock: Animation | null = null, raf = 0, playing = false, held = 0, width = 0;
     // the governor: if the frames come slow, the panels stop drifting and show their still instead of their clip
+    let synced = 0;
     let lite = wentLite || !!(navigator as unknown as { connection?: { saveData?: boolean } }).connection?.saveData, last = 0, slow = 0, seen = 0;
     const slots = [...root.querySelectorAll<HTMLElement>('.tf-slot')];
     const live: boolean[] = slots.map(() => false);
@@ -133,8 +140,12 @@ export default function Film({ fmt, data, api, onTime, onEnd }: Props) {
     };
     const loop = (stamp: number) => {
       if (!playing) return;
-      const t = now(), dt = stamp - last;
+      let t = now();
+      const dt = stamp - last;
       last = stamp;
+      // the music is the master clock: if the picture drifted, it jumps back on the beat (rare: both clocks run the same)
+      const heard = cb.current.audioClock?.();
+      if (heard != null && heard < TOTAL && Math.abs(heard - t) > DRIFT) { const to = Math.max(0, heard) * 1000; [...anims, ...drifts].forEach((x) => { x.currentTime = to; }); synced++; t = Math.max(0, heard); }
       // two seconds of frames over 30 ms, after the first ones: go lite, for the rest of the film
       if (!lite && ++seen > 20 && dt < 250) { slow = dt > 30 ? slow + dt : Math.max(0, slow - dt * 2); if (slow > 2000) { lite = wentLite = true; drifts.forEach((x) => x.cancel()); drifts = []; root.dataset.lite = ''; } }
       stageAt(t);
@@ -171,8 +182,7 @@ export default function Film({ fmt, data, api, onTime, onEnd }: Props) {
     build();
     stageAt(0); // the player says where to start
     api(handle);
-    (window as unknown as { __igFilm?: () => object }).__igFilm = () => ({ t: now(), playing, fmt, animations: anims.length + drifts.length, lite, live: live.map((v, i) => (v ? SHOTS[i].id : '')).filter(Boolean), running: [...anims, ...drifts].filter((x) => x.playState === 'running').length });
-    (window as unknown as { __igFilmSeek?: (t: number) => void }).__igFilmSeek = (t) => handle.seek(t);
+    (window as unknown as { __igFilm?: () => object }).__igFilm = () => ({ t: now(), playing, fmt, animations: anims.length + drifts.length, lite, synced, live: live.map((v, i) => (v ? SHOTS[i].id : '')).filter(Boolean), running: [...anims, ...drifts].filter((x) => x.playState === 'running').length });
     // a new size of the stage is a new set of numbers: build again, at the same moment
     const ro = new ResizeObserver(() => {
       if (Math.abs(root.clientWidth - width) < 1) return;

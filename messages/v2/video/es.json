@@ -13,8 +13,8 @@
   "count": { "one": "película", "other": "películas" },
   "trailer": {
     "name": "Conocer a Ignacio",
-    "wide": { "caption": "Mi recorrido en 130 segundos, hecho con código.", "alt": "Póster del tráiler: el grafo de mi recorrido, de los 17 años a hoy." },
-    "tall": { "caption": "La misma película, en su edición vertical 9:16.", "alt": "Póster de la edición vertical: el cierre con mi nombre y mi contacto." }
+    "wide": { "caption": "Mi recorrido en 80 segundos, hecho con código y con su música.", "alt": "Póster del tráiler: TACH Argentina sobre coral, con la billetera virtual en paneles y su estampilla." },
+    "tall": { "caption": "La misma película, en su edición vertical 9:16.", "alt": "Póster de la edición vertical: TACH Argentina sobre coral, con los paneles debajo." }
   },
   "open": "Abrir el tráiler",
   "player": { "label": "Reproductor de video", "close": "Cerrar", "prev": "Película anterior", "next": "Película siguiente", "case": "Ver el caso", "of": "de" },

@@ -1,7 +1,8 @@
 /**
  * The wall of films of /v2 (lote 7.2). Every film comes from a case (lote 5.1: its film and the videos of its
  * gallery, with the alt and the caption approved there), so this page never says something a case does not; the
- * only films of its own are the two editions of the trailer «Conocer a Ignacio», which open the trailer itself.
+ * only films of its own are the two editions of the trailer «Conocer a Ignacio», which open the trailer itself
+ * (its page in /v2 since lote 8.3).
  */
 import { CASE_ORDER, CASES, type CaseMedia, type CaseSlug } from '../case/cases';
 
@@ -30,7 +31,8 @@ export const TRAILER_FILMS = (locale: string): Film[] => [
   { id: 'trailer-wide', kind: 'trailer', shape: 'wide', poster: `/media/trailer/ig-${locale}-wide.webp`, w: 1280, h: 720 },
   { id: 'trailer-tall', kind: 'trailer', shape: 'tall', poster: `/media/trailer/ig-${locale}-tall.webp`, w: 540, h: 960 },
 ];
-export const trailerHref = (locale: string, shape: FilmShape) => `/trailer/v2/index.html?lang=${locale}${shape === 'tall' ? '&o=v' : ''}`;
+/** The trailer of /v2 (lote 8.3): its page, asked to play at once (`?play`), in 9:16 for the tall edition. */
+export const trailerHref = (locale: string, shape: FilmShape = 'wide') => `/v2/${locale}/trailer/?play${shape === 'tall' ? '&f=t' : ''}`;
 
 /** The films of the cases, in the order of Work: each case's film first, then the videos of its gallery. */
 export function caseFilms(): Film[] {

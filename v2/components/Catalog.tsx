@@ -3,6 +3,7 @@ import { BASE_PATH, asset } from '@/lib/site';
 import { LAYERS, tokens } from '@/v2/tokens';
 import { type V2Locale, v2Messages } from '@/v2/i18n';
 import { TopBar } from './TopBar';
+import { trailerHref } from './video/films';
 import { Button, IconButton } from './ui/Button';
 import { Chip, Kbd, LayerChip, RoleBadge } from './ui/Chip';
 import { GlassCard, Panel, SectionHeading, Stat } from './ui/Card';
@@ -52,7 +53,7 @@ export function Catalog({ locale }: { locale: V2Locale }) {
         <Block id="botones" n="01" title={c.buttons.title} text={c.buttons.text}>
           <div className="cat-grid">
             <Specimen label={c.buttons.variants} wide>
-              <Button href={asset(`/trailer/v2/index.html?lang=${locale}`)} iconStart={<PlayIcon />}>{c.buttons.primary}</Button>
+              <Button href={asset(trailerHref(locale))} iconStart={<PlayIcon />}>{c.buttons.primary}</Button>
               <Button href={site()} variant="secondary" iconEnd={<ArrowIcon />}>{c.buttons.secondary}</Button>
               <Button href={cases('complia')} variant="quiet" iconEnd={<ArrowIcon />}>{c.buttons.quiet}</Button>
             </Specimen>

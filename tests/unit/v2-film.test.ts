@@ -81,7 +81,9 @@ describe('v2 trailer film (lote 8.2)', () => {
   it('the page: the trailer copy has the words of the player in both languages, and the film is asked for on demand', () => {
     const player = readFileSync('v2/components/trailer/TrailerPlayer.tsx', 'utf8');
     expect(player).toMatch(/dynamic\(\(\) => import\('\.\/Film'\), \{ ssr: false \}\)/);
-    expect(player).not.toMatch(/autoPlay|autoplay/);
+    // it starts on its own only when a link asked for it (`?play`, lote 8.3), and never with reduced motion
+    expect(player).not.toMatch(/autoPlay/);
+    expect(player).toMatch(/q\.has\('play'\) && !reduced/);
     const page = readFileSync('v2/components/trailer/TrailerPage.tsx', 'utf8');
     expect(page).not.toMatch(/>\s*[A-ZÁÉÍÓÚ][a-záéíóú]+ [a-záéíóú]+[^<{]*</); // no copy in the component
   });

@@ -121,7 +121,7 @@ test('the opening: four acts with the loading, a new colour at every landing, an
   expect(stops.filter((s) => s !== 'outside').slice(0, 3)).toEqual(['Cambiar el color de la puerta', 'Conocer a Ignacio', 'Ver portafolio']);
   await page.keyboard.press('2');
   await expect(page).toHaveURL(/\/v2\/es\/$/);
-  await expect(page.getByRole('link', { name: 'Conocer a Ignacio' }).first()).toHaveAttribute('href', /\/trailer\/v2\/index\.html\?lang=es$/);
+  await expect(page.getByRole('link', { name: 'Conocer a Ignacio' }).first()).toHaveAttribute('href', /\/v2\/es\/trailer\/\?play$/);
 
   await page.locator('.gk').focus();
   await page.keyboard.press('Enter');
