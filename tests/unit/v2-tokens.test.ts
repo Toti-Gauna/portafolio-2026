@@ -422,6 +422,22 @@ describe('v2 gate (lote 3.1)', () => {
     expect(run('/v2/es/puerta/', null)).toBe('off');
   });
 
+  it('a tap on the phone menu before the header is live is remembered, on every page (lote 9.3)', async () => {
+    const { gateScript } = await import('../../v2/gate/state');
+    const tap = (path: string, live: boolean) => {
+      const html = { dataset: (live ? { menuLive: 'true' } : {}) as Record<string, string> };
+      const handlers: ((e: unknown) => void)[] = [];
+      const env = { document: { documentElement: html, addEventListener: (_: string, f: (e: unknown) => void) => handlers.push(f) }, location: { pathname: path }, localStorage: { getItem: () => null } };
+      new Function('document', 'location', 'localStorage', gateScript(''))(env.document, env.location, env.localStorage);
+      const target = { closest: (sel: string) => (sel.includes('sh-menu') ? {} : null) };
+      handlers.forEach((f) => f({ target }));
+      return html.dataset.menuAsked;
+    };
+    expect(tap('/v2/es/', false)).toBe('1');
+    expect(tap('/v2/es/sobre-mi/', false)).toBe('1');
+    expect(tap('/v2/es/', true)).toBeUndefined();
+  });
+
   it('four versions, each with its name and its three lines in both languages; the roadmap has its four stages', async () => {
     const { GATE_VARIANTS, STEPS } = await import('../../v2/gate/state');
     expect(GATE_VARIANTS).toEqual(['cinetica', 'monograma', 'codigo', 'ascenso', 'postal']);
