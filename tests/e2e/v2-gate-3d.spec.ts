@@ -82,7 +82,7 @@ test('the count follows the real loading; under the gate the page waits; Enter o
   expect(stops.every((s) => s === 'outside' || ['Conocer a Ignacio', 'Ver portafolio', ''].includes(s))).toBe(true);
   await page.keyboard.press('2');
   await expect(page).toHaveURL(/\/puerta\/monograma\/$/);
-  await expect(page.getByRole('link', { name: 'Conocer a Ignacio' }).first()).toHaveAttribute('href', /\/trailer\/v2\/index\.html\?lang=es$/);
+  await expect(page.getByRole('link', { name: 'Conocer a Ignacio' }).first()).toHaveAttribute('href', /\/v2\/es\/trailer\/\?play$/);
 
   await page.locator('.gt').focus();
   await page.keyboard.press('Enter');
