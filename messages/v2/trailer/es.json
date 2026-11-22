@@ -10,6 +10,33 @@
     "cierre": "Cierre"
   },
   "today": "hoy",
+  "player": {
+    "meta": "El tráiler del portafolio de Ignacio Gauna: 80 segundos, de Mar del Plata a hoy.",
+    "kicker": "Tráiler",
+    "lead": "Ochenta segundos, de Mar del Plata a hoy.",
+    "film": "Tráiler «Conocer a Ignacio»",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "replay": "Repetir",
+    "loading": "Cargando",
+    "chapter": "Capítulo",
+    "chapters": "Capítulos",
+    "keys": "Espacio reproduce o pausa. Las flechas ← → cambian de capítulo.",
+    "format": "Formato",
+    "wide": "16:9",
+    "tall": "9:16",
+    "wideLabel": "Horizontal, 16:9",
+    "tallLabel": "Vertical, 9:16",
+    "full": "Pantalla completa",
+    "exitFull": "Salir de pantalla completa",
+    "enter": "Ver portafolio",
+    "length": "1:20 · seis capítulos",
+    "calm": "Tenés el movimiento reducido activado: la versión en texto está más abajo.",
+    "anyway": "Verlo igual",
+    "textK": "Versión en texto",
+    "textTitle": "El tráiler, en palabras.",
+    "now": "Ahora"
+  },
   "shots": {
     "mdp": {
       "t": "Mar del Plata",
