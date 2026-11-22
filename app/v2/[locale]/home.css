@@ -99,6 +99,11 @@
 .hc-media img { object-fit: contain; background: #2b50ff; }
 .hc-media figcaption { margin-top: var(--space-2); font-family: var(--family-mono); font-size: var(--type-label-size); line-height: 1.4; letter-spacing: 0.02em; color: var(--soft); }
 .hc-clip { position: relative; }
+/* the poster is a lazy image under the clip; the clip is see-through until it plays (lote 9.2) */
+.hc-clip > .hc-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.hc-clip > video { position: relative; background: transparent; }
+.hc-media .hc-clip > .hc-poster { inset: 2px; width: calc(100% - 4px); height: calc(100% - 4px); aspect-ratio: auto; border: 0; border-radius: calc(var(--radius-xl) - 2px); background: none; object-fit: cover; }
+.hc-media .hc-clip > video { background: transparent; }
 .hc-play {
   position: absolute; right: 10px; bottom: 10px; z-index: 2; display: grid; place-items: center; width: var(--size-touch); height: var(--size-touch); padding: 0;
   border-radius: 50%; border: 0; background: var(--btn); color: var(--btn-fg); cursor: pointer;
@@ -135,7 +140,7 @@
 }
 
 /* ── contact ─────────────────────────────────────────────────────────────── */
-.hm-contact .hm-title { max-width: 14ch; font-size: clamp(40px, 7.4vw, 112px); }
+.hm-contact .hm-title { max-width: 14ch; font-size: clamp(min(40px, 10.6vw), 7.4vw, 112px); }
 .hm-lead { max-width: 30ch; margin: 0; font-size: clamp(20px, 2.2vw, 30px); line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; color: var(--fg); }
 .hm-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: clamp(24px, 3vw, 40px) 0 0; }
 

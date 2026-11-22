@@ -114,8 +114,9 @@ export function CaseDs({ slug, spec, copy, labels: L }: { slug: string; spec: Ds
             {spec.pairs.map((p) => {
               const r = contrast(theme.vars[p.fg], theme.vars[p.bg]);
               return (
-                <li key={`${p.fg}${p.bg}`} style={{ color: `var(${p.fg})`, background: `var(${p.bg})` }}>
-                  <b aria-hidden="true">Aa</b>
+                <li key={`${p.fg}${p.bg}`}>
+                  {/* the pair is the big «Aa»; its names and ratio are read in the canvas's text colour (lote 9.2) */}
+                  <b aria-hidden="true" style={{ color: `var(${p.fg})`, background: `var(${p.bg})` }}>Aa</b>
                   <span><code>{p.fg}</code> {L.on} <code>{p.bg}</code></span>
                   <strong>{r.toFixed(1).replace('.', L.dec)}:1</strong>
                 </li>

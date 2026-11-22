@@ -173,8 +173,9 @@
   background: var(--color-coral-500); color: var(--color-on-accent); transition: transform var(--motion-fast) var(--motion-ease);
 }
 .sig-player-play:active { transform: scale(0.94); }
-.sig-player-chapters { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; }
-.sig-player-chapters button { display: grid; align-content: center; gap: 7px; width: 100%; min-height: var(--size-touch); padding: 0; border: 0; border-radius: var(--radius-xs); background: none; cursor: pointer; text-align: left; }
+/* the 6 px between chapters is inside each button (3 px a side), so every chapter is a touch target as wide as it can be (lote 9.2) */
+.sig-player-chapters { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; }
+.sig-player-chapters button { display: grid; align-content: center; gap: 7px; width: 100%; min-height: var(--size-touch); min-width: var(--size-touch); padding: 0 3px; border: 0; border-radius: var(--radius-xs); background: none; cursor: pointer; text-align: left; }
 .sig-player-track { display: block; height: 6px; overflow: hidden; border-radius: 3px; background: rgba(255, 255, 255, 0.16); }
 .sig-player-track span { display: block; height: 100%; background: linear-gradient(90deg, var(--from), var(--to)); transform: scaleX(0); transform-origin: left; }
 .sig-player-name { display: none; overflow: hidden; font-size: 13px; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; color: var(--color-text-subtle); }

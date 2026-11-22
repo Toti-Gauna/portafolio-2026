@@ -2,6 +2,8 @@
    case). Only transform, opacity and stroke-dashoffset move; nothing loops; reduced motion keeps every final state. */
 
 .bz { --bz-c1: #8aa4ff; --bz-c2: #c79bff; --bz-c3: #58d5ff; display: grid; gap: clamp(64px, 10vw, 128px); max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) var(--space-8); container-type: inline-size; }
+/* on a phone the page gutter is enough: a second one left the steps of the ladder under 44 px at 320 (lote 9.2) */
+@media (max-width: 600px) { .bz { padding-inline: 0; } }
 .bz :is(h2, h3, h4, p, ol, ul, dl, dd, figure, blockquote) { margin: 0; }
 .bz :is(ol, ul) { padding: 0; list-style: none; }
 .bz-top { display: grid; gap: 20px; }
@@ -87,9 +89,10 @@ html:not([data-gate]) .bz-panel + .bz-panel { padding-top: 32px; border-top: 1px
 /* 02 · pricing */
 .bz-ladder { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
 @container (min-width: 860px) { .bz-ladder { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; } }
-.bz-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; height: 240px; }
+/* the 6 px between steps is inside each step (the bar is inset 3 px a side): every step is as wide a target as it can be */
+.bz-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; align-items: end; height: 240px; }
 .bz-step { position: relative; display: grid; align-content: end; height: var(--h); min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--color-text); font: inherit; cursor: pointer; }
-.bz-step-bar { position: absolute; inset: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; background: color-mix(in srgb, var(--c) 22%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); transform-origin: bottom; transition: transform var(--motion-fast) var(--motion-ease); }
+.bz-step-bar { position: absolute; inset: 0 3px; border-radius: var(--radius-md) var(--radius-md) 0 0; background: color-mix(in srgb, var(--c) 22%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); transform-origin: bottom; transition: transform var(--motion-fast) var(--motion-ease); }
 .bz-step b { position: relative; padding: 8px 4px; font-size: 13px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
 .bz-step[aria-pressed='true'] .bz-step-bar { background: var(--c); }
 .bz-step[aria-pressed='true'] b { color: #0c0a24; }

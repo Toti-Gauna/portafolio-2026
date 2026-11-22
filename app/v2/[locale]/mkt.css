@@ -36,7 +36,8 @@
 .mk-thumb .mkp { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(var(--s)); box-shadow: none; }
 .mk-ol li[data-lane='physical'] .mk-thumb { border-style: dashed; }
 .mk-pt-t { display: flex; gap: 8px; align-items: baseline; font-size: 16px; font-weight: 700; line-height: 1.25; }
-.mk-pt-t b { font-family: var(--bl-display); color: var(--f-accent); font-size: 15px; }
+/* small text stays in the field's text colour; the accent marks it from underneath (on Brisa and Lucero the accent is under 4.5:1 for 15 px, lote 9.2) */
+.mk-pt-t b { font-family: var(--bl-display); color: inherit; font-size: 15px; text-decoration: underline 2px var(--f-accent); text-underline-offset: 4px; }
 .mk-pt[aria-pressed='true'] .mk-pt-t b { color: inherit; }
 .mk-pt-m { font-size: 13px; color: var(--f-muted); }
 
@@ -91,7 +92,7 @@ html[data-gate] .mk-detail[data-off] { display: none; }
 @container mk (min-width: 760px) { .mk-stage { min-height: 420px; padding: 36px 24px; } }
 .mk-info { display: grid; gap: 12px; align-content: start; }
 .mk-where { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--f-muted); }
-.mk-where b { color: var(--f-accent); }
+.mk-where b { color: inherit; text-decoration: underline 2px var(--f-accent); text-underline-offset: 3px; }
 .mk-info h3 { font-family: var(--bl-display); font-weight: var(--bl-hw); font-style: var(--bl-hs); text-transform: var(--bl-ht); letter-spacing: var(--bl-hk); font-size: clamp(26px, 3.6cqi, 38px); line-height: 1.05; }
 .mk-origin { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 4px 12px; border: 1px solid var(--f-line); border-radius: var(--bl-radius); font-size: 13px; font-weight: 700; }
 .mk-origin::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--f-accent); }
@@ -123,7 +124,7 @@ html[data-gate] .mk-detail[data-off] { display: none; }
 .mk-rules ol { display: grid; gap: 12px; }
 @container (min-width: 900px) { .mk-rules ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
 .mk-rules li { display: grid; gap: 6px; padding-top: 12px; border-top: var(--bl-rule) var(--f-line); }
-.mk-rn { font-size: 14px; font-weight: 700; color: var(--f-accent); }
+.mk-rn { font-size: 14px; font-weight: 700; color: inherit; text-decoration: underline 2px var(--f-accent); text-underline-offset: 4px; }
 .mk-rt { font-family: var(--bl-display); font-weight: var(--bl-hw); font-style: var(--bl-hs); font-size: clamp(21px, 2.4cqi, 27px); line-height: 1.2; }
 .mk-next { display: grid; gap: 4px; padding: 16px 18px; border: 2px solid var(--f-accent); border-radius: min(var(--bl-radius), 16px); font-size: 17px; }
 .mk-next b { font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--f-muted); }

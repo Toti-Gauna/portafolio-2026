@@ -49,7 +49,7 @@
 .ab-facts > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: baseline; }
 .ab-facts dt, .ab-stack h3 { font-family: var(--family-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted); }
 .ab-facts dd { font-size: 16px; line-height: 1.4; color: var(--color-heading); }
-.ab-facts dd .ab-link { min-height: 0; padding: 4px 0; font-size: 15px; }
+.ab-facts dd .ab-link { min-height: var(--size-touch); padding: 0; font-size: 15px; }
 .ab-stack { display: grid; gap: 8px; }
 .ab-stack ul { display: flex; flex-wrap: wrap; gap: 6px; }
 

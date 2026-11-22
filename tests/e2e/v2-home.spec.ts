@@ -159,7 +159,9 @@ test('a featured case plays its clip under the pointer and with its button, and 
   await card.scrollIntoViewIfNeeded();
   await settle(page, 1200);
   await expect(card.locator('video')).toHaveAttribute('preload', 'none');
-  await expect(card.locator('video')).toHaveAttribute('poster', /complia-demo-poster\.jpg$/);
+  // its poster is a lazy image under the clip (a video's `poster` is fetched wherever it is on the page, lote 9.2)
+  await expect(card.locator('.hc-poster')).toHaveAttribute('src', /complia-demo-poster\.jpg$/);
+  await expect(card.locator('.hc-poster')).toHaveAttribute('loading', 'lazy');
   expect(media).toEqual([]);
   expect(await calls(page)).toBe('');
   await card.locator('h3').hover();

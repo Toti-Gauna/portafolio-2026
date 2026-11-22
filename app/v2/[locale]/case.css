@@ -89,9 +89,10 @@
 /* the film plays: what has not come in yet waits out of sight (only with JavaScript, which sets html[data-gate]) */
 @media (prefers-reduced-motion: no-preference) {
   .cf [data-at] { transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-slow) var(--motion-ease); }
-  html[data-gate] .cf [data-at]:not([data-on]) { opacity: 0; }
-  html[data-gate] .cf .cf-title:not([data-on]) { transform: translateY(36px); }
-  html[data-gate] .cf .cf-line:not([data-on]), html[data-gate] .cf .cf-numbers:not([data-on]), html[data-gate] .cf .cf-status:not([data-on]) { transform: translateY(18px); }
+  /* the first frame — for whom, the name and the line — is there from the first paint (it is the largest thing on the
+     screen: hiding it pushed the page's LCP to 4.5–7.5 s on a phone, lote 9.2); the rest of the film comes in on its cue */
+  html[data-gate] .cf [data-at]:not([data-on], .cf-kind, .cf-title, .cf-line) { opacity: 0; }
+  html[data-gate] .cf .cf-numbers:not([data-on]), html[data-gate] .cf .cf-status:not([data-on]) { transform: translateY(18px); }
   html[data-gate] .cf .cf-verb:not([data-on]) { transform: translateY(14px) scale(0.9); }
   html[data-gate] .cf .cf-panel:not([data-on]) { transform: translateX(70px) rotateY(-30deg) rotateX(6deg) scale(0.92); }
   html[data-gate] .cf .cf-stamp:not([data-on]) { transform: rotate(-26deg) scale(1.7); }
@@ -134,6 +135,9 @@
 .cs2-facts dd { margin: 4px 0 0; font-size: 16px; line-height: 1.35; font-weight: 700; color: var(--color-heading); }
 .cs2-sec { display: grid; gap: clamp(18px, 2.4vw, 28px); padding-top: clamp(44px, 6vw, 84px); scroll-margin-top: calc(var(--size-header) + 8px); }
 .cs2-sec > * { min-width: 0; }
+/* below the film, each block is laid out (and asks for its fonts and pictures) only when it comes near the screen:
+   the object, the architecture, a product's design system and the gallery are most of the page (lote 9.2) */
+.cs2-in > .cs2-sec:nth-of-type(n + 2) { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 .cs2-h { margin: 0; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.02; font-weight: 800; font-variation-settings: 'wdth' 116; letter-spacing: -0.03em; color: var(--color-heading); }
 
 /* in 10 seconds */

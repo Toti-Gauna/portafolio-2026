@@ -36,6 +36,8 @@ export function TrailerPlayer({ data, labels: L, title, chapters, colors, home }
   const [chapter, setChapter] = useState(0);
   const [secs, setSecs] = useState(0);
   const [fmt, setFmt] = useState<Fmt>('w');
+  // until it hydrates the poster takes its shape from CSS with the same rules as below (no jump on a phone)
+  const [placed, setPlaced] = useState(false);
   const [narrow, setNarrow] = useState(false);
   const [calm, setCalm] = useState(false);
   const [full, setFull] = useState(false);
@@ -51,6 +53,7 @@ export function TrailerPlayer({ data, labels: L, title, chapters, colors, home }
     setCalm(reduced);
     setCanFull(!!document.fullscreenEnabled);
     if (q.get('f') === 't' || window.matchMedia('(orientation: portrait) and (max-width: 820px)').matches) setFmt('t');
+    setPlaced(true);
     // a link that asked for the film («Conocer a Ignacio»): it starts at once, unless motion is reduced
     if (q.has('play') && !reduced) autoplay.current = true;
     const ro = new ResizeObserver(() => { const n = el.clientWidth < WIDE_MIN; setNarrow(n); if (n) setFmt('t'); });
@@ -133,7 +136,7 @@ export function TrailerPlayer({ data, labels: L, title, chapters, colors, home }
         {asked && <Film key={fmt} fmt={fmt} data={data} api={api} onTime={onTime} onEnd={onEnd} clock={sound.time} />}
         {sound.locked && !sound.muted && <button type="button" className="tp-unlock" onClick={sound.unlock}>{L.unlock}</button>}
         {!asked && (
-          <div className={`tp-poster ${fmt}`}>
+          <div className={`tp-poster ${placed ? fmt : 'a'}`}>
             <svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="7" r="3.4" fill="#ff5a3c" stroke="none" /><path d="M11 16v25" /><path d="M41 21a13.5 13.5 0 1 0 1.5 12H30" /></svg>
             <p className="tp-poster-t">{title}</p>
             <p className="tp-poster-l">{L.length}</p>
