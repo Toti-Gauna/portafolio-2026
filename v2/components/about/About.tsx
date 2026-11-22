@@ -96,7 +96,7 @@ export function About({ locale }: { locale: V2Locale }) {
     );
   });
 
-  const index: [string, string][] = [['historia', A.index.story], ['recorrido', A.index.timeline], ['capacidades', A.index.sky], ['casos', A.index.cases], ['contacto', A.index.contact]];
+  const index: [string, string][] = [['historia', A.index.story], ['casos', A.index.cases], ['recorrido', A.index.timeline], ['capacidades', A.index.sky], ['contacto', A.index.contact]];
   const nn = (n: number) => String(n).padStart(2, '0');
 
   return (
@@ -158,6 +158,25 @@ export function About({ locale }: { locale: V2Locale }) {
           </ol>
         </section>
 
+        {/* the three cases come right after the story: the best case is a short scroll away (lote 9.3, the recruiter test) */}
+        <section className="ab-sec" id="casos" aria-labelledby="ab-cases-h">
+          <header className="ab-head" data-reveal>
+            <p className="ab-k">{A.cases.k}</p>
+            <h2 id="ab-cases-h">{A.cases.title}</h2>
+          </header>
+          <ul className="ab-cases">
+            {FIRST_CASES.map((c) => (
+              <li key={c} data-reveal>
+                <Link className="ab-case" href={caseHref(c)} style={{ '--c': CASES[c].color } as CSSProperties} data-boing>
+                  <b>{caseName(c)}</b>
+                  <span>{A.cases.items[c as keyof typeof A.cases.items]}</span>
+                  <em>{A.cases.cta}<ArrowIcon size={14} /></em>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section className="ab-sec" id="recorrido" aria-labelledby="ab-tl-h">
           <header className="ab-head" data-reveal>
             <p className="ab-k">{A.timeline.k}</p>
@@ -193,23 +212,6 @@ export function About({ locale }: { locale: V2Locale }) {
           </details>
         </section>
 
-        <section className="ab-sec" id="casos" aria-labelledby="ab-cases-h">
-          <header className="ab-head" data-reveal>
-            <p className="ab-k">{A.cases.k}</p>
-            <h2 id="ab-cases-h">{A.cases.title}</h2>
-          </header>
-          <ul className="ab-cases">
-            {FIRST_CASES.map((c) => (
-              <li key={c} data-reveal>
-                <Link className="ab-case" href={caseHref(c)} style={{ '--c': CASES[c].color } as CSSProperties} data-boing>
-                  <b>{caseName(c)}</b>
-                  <span>{A.cases.items[c as keyof typeof A.cases.items]}</span>
-                  <em>{A.cases.cta}<ArrowIcon size={14} /></em>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
 
         {/* the canonical contact block: the header's «Contacto» lands here */}
         <section className="ab-sec ab-contact" id="contacto" aria-labelledby="contacto-h">

@@ -20,11 +20,16 @@ export type Step = (typeof STEPS)[number];
 export const GATE_EVENT = 'ig:v2:gate'; // { action: 'enter' | 'meet' }
 export const gateOpen = () => typeof document !== 'undefined' && document.documentElement.dataset.gate === 'on';
 
-/** Runs in <head>, before anything is painted. A click on a door before the page is interactive still enters. */
+/**
+ * Runs in <head>, before anything is painted. A click on a door before the page is interactive still enters, and a
+ * tap on the phone's «Menu» before the header is interactive is remembered (`data-menu-asked`): the header opens the
+ * menu as soon as it is live (lote 9.3: on a slow phone the first tap after the gate was lost).
+ */
 export const gateScript = (base: string) => `(function(){try{var h=document.documentElement,p=location.pathname.slice(${base.length});
 if(/^\\/v2\\/[a-z]{2}(\\/puerta\\/[a-z]+)?\\/?$/.test(p)&&localStorage.getItem(${JSON.stringify(GATE_KEY)})!=='off'){h.dataset.gate='on';
 document.addEventListener('click',function(e){var t=e.target&&e.target.closest&&e.target.closest('[data-gate-enter]');if(t&&!h.dataset.gateLive)h.dataset.gate='off';},true);}
-else h.dataset.gate='off';}catch(e){document.documentElement.dataset.gate='off';}})();`;
+else h.dataset.gate='off';
+document.addEventListener('click',function(e){var t=e.target&&e.target.closest&&e.target.closest('.sh-menu[aria-haspopup]');if(t&&!h.dataset.menuLive)h.dataset.menuAsked='1';},true);}catch(e){document.documentElement.dataset.gate='off';}})();`;
 
 /**
  * The labels each version hangs on its 3D object, and the move (0…3) that brings the part each one names:

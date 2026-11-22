@@ -88,6 +88,14 @@ export function SiteHeaderClient({ locale, base, pages, labels, mail, linkedin }
     document.documentElement.classList.add('sm-open');
     setOpen(true);
   };
+  /* the header is live: a tap on «Menu» that came before it (remembered by the script in <head>) opens the menu now */
+  const asked = useRef(openMenu);
+  asked.current = openMenu;
+  useEffect(() => {
+    const html = document.documentElement;
+    html.dataset.menuLive = 'true';
+    if (html.dataset.menuAsked) { delete html.dataset.menuAsked; asked.current(); }
+  }, []);
   const closeMenu = useCallback((instant = false) => {
     const d = dialog.current;
     if (!d || !d.open) return;
@@ -120,7 +128,9 @@ export function SiteHeaderClient({ locale, base, pages, labels, mail, linkedin }
     };
   }, [closeMenu]);
   // a new page closes the menu
-  useEffect(() => { closeMenu(); }, [pathname, closeMenu]);
+  // it closes when the page changes, not when the header mounts: a tap that came before hydration has just opened it
+  const shownPath = useRef(pathname);
+  useEffect(() => { if (shownPath.current === pathname) return; shownPath.current = pathname; closeMenu(); }, [pathname, closeMenu]);
 
   const tools = (
     <>
