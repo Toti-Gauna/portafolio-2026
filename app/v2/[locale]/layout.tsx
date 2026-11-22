@@ -19,6 +19,7 @@ import './mkt.css';
 import './about.css';
 import './video.css';
 import './how.css';
+import './trailer.css';
 import './ds/eclipse.css';
 import './ds/volta.css';
 import './ds/velmar.css';

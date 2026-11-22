@@ -10,6 +10,33 @@
     "cierre": "Close"
   },
   "today": "today",
+  "player": {
+    "meta": "The trailer of Ignacio Gauna's portfolio: 80 seconds, from Mar del Plata to today.",
+    "kicker": "Trailer",
+    "lead": "Eighty seconds, from Mar del Plata to today.",
+    "film": "Trailer “Meet Ignacio”",
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "loading": "Loading",
+    "chapter": "Chapter",
+    "chapters": "Chapters",
+    "keys": "Space plays or pauses. The ← → arrows change chapter.",
+    "format": "Format",
+    "wide": "16:9",
+    "tall": "9:16",
+    "wideLabel": "Landscape, 16:9",
+    "tallLabel": "Portrait, 9:16",
+    "full": "Full screen",
+    "exitFull": "Exit full screen",
+    "enter": "View portfolio",
+    "length": "1:20 · six chapters",
+    "calm": "Reduced motion is on: the text version is further down.",
+    "anyway": "Watch it anyway",
+    "textK": "Text version",
+    "textTitle": "The trailer, in words.",
+    "now": "Now"
+  },
   "shots": {
     "mdp": {
       "t": "Mar del Plata",
