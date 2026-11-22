@@ -19,9 +19,9 @@
 .ch-svg .ob-cell-fill { fill: rgba(6, 5, 19, 0.1); stroke: rgba(6, 5, 19, 0.25); stroke-width: 0.6; }
 
 /* phases: what has not come yet waits out of sight; what is now, glows */
-.ch-svg [data-from], .ch-svg [data-only] { transition: opacity 380ms var(--motion-ease), transform 520ms cubic-bezier(0.25, 1.4, 0.4, 1); }
+.ch-svg [data-from], .ch-svg [data-only] { transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-base) var(--motion-spring); }
 .ch-svg [data-from]:not([data-on]), .ch-svg [data-only]:not([data-on]) { opacity: 0; transform: translateY(-14px); }
-.ch-svg [data-now] { opacity: 0; transition: opacity 320ms var(--motion-ease); }
+.ch-svg [data-now] { opacity: 0; transition: opacity var(--motion-base) var(--motion-ease); }
 .ch-svg [data-now][data-on] { opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
   .ch-svg [data-now][data-on] { animation: ob-pulse 900ms ease-out 1; transform-box: fill-box; transform-origin: 50% 50%; }

@@ -118,3 +118,45 @@ test('the music page fits a phone', async ({ page }) => {
   });
   expect(r).toEqual({ over: 0, small: [], tiny: [] });
 });
+
+// Lote 9.1: the final mix, measured offline on the real engine.
+test('the mix: every page plays at the same level, and every small sound sits over it at the same height', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.goto('/v2/es/sonido/');
+  await page.waitForFunction(() => '__igMusicRender' in window && '__igSfxRender' in window);
+  type L = { peakDb: number; rmsDb: number };
+  const PAGES: [string, string][] = [['home', 'circuito'], ['work', 'taller'], ['how', 'circuito'], ['brand', 'marea'], ['business', 'circuito'], ['about', 'marea'], ['system', 'circuito']];
+  const music: number[] = [];
+  for (const [z, s] of PAGES) {
+    const r = await page.evaluate(([s, z]) => (window as unknown as { __igMusicRender: (s: string, z: string, sec: number, rate: number) => Promise<L> }).__igMusicRender(s, z, 16, 22050), [s, z]);
+    music.push(r.rmsDb);
+  }
+  expect(Math.max(...music) - Math.min(...music)).toBeLessThan(2);
+  const peaks: number[] = [];
+  for (const k of ['open', 'stop', 'grab', 'thud', 'night', 'day', 'horn', 'accent']) {
+    const r = await page.evaluate((k) => (window as unknown as { __igSfxRender: (k: string) => Promise<L> }).__igSfxRender(k), k);
+    expect(r.peakDb, k).toBeGreaterThan(-19);
+    expect(r.peakDb, k).toBeLessThan(-12);
+    peaks.push(r.peakDb);
+  }
+  expect(Math.max(...peaks) - Math.min(...peaks)).toBeLessThan(3);
+  // a small sound peaks above the music's level, and the music's own peaks stay over it
+  const mean = music.reduce((a, b) => a + b, 0) / music.length;
+  expect(Math.min(...peaks)).toBeGreaterThan(mean + 3);
+});
+
+test('one press for every button of the site, and none with reduced motion', async ({ browser }) => {
+  for (const reduced of [false, true]) {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: reduced ? 'reduce' : 'no-preference' });
+    const page = await ctx.newPage();
+    await page.goto('/v2/es/como-trabajo/');
+    const step = page.locator('.mr-steps button').nth(2);
+    await step.scrollIntoViewIfNeeded();
+    const box = (await step.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    expect(await step.evaluate((e) => getComputedStyle(e).scale), `reduced: ${reduced}`).toBe(reduced ? 'none' : '0.96');
+    await page.mouse.up();
+    await ctx.close();
+  }
+});

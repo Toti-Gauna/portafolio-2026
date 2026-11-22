@@ -89,7 +89,7 @@ html:not([data-gate]) .bz-panel + .bz-panel { padding-top: 32px; border-top: 1px
 @container (min-width: 860px) { .bz-ladder { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; } }
 .bz-steps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; height: 240px; }
 .bz-step { position: relative; display: grid; align-content: end; height: var(--h); min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--color-text); font: inherit; cursor: pointer; }
-.bz-step-bar { position: absolute; inset: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; background: color-mix(in srgb, var(--c) 22%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); transform-origin: bottom; transition: transform 240ms var(--motion-ease); }
+.bz-step-bar { position: absolute; inset: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; background: color-mix(in srgb, var(--c) 22%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); transform-origin: bottom; transition: transform var(--motion-fast) var(--motion-ease); }
 .bz-step b { position: relative; padding: 8px 4px; font-size: 13px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
 .bz-step[aria-pressed='true'] .bz-step-bar { background: var(--c); }
 .bz-step[aria-pressed='true'] b { color: #0c0a24; }
@@ -175,12 +175,12 @@ html[lang='en'] .bz-quote { quotes: '“' '”'; }
 .bz-ring { position: relative; width: min(100%, 420px); aspect-ratio: 1; margin: 0 auto; }
 .bz-ring svg { display: block; width: 100%; height: 100%; }
 .bz-ring-base { fill: none; stroke: var(--color-line); stroke-width: 1.6; }
-.bz-ring-on { fill: none; stroke: var(--c); stroke-width: 2.4; stroke-linecap: round; transition: stroke-dashoffset 500ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+.bz-ring-on { fill: none; stroke: var(--c); stroke-width: 2.4; stroke-linecap: round; transition: stroke-dashoffset var(--motion-base) var(--motion-ease); }
 .bz-ring-title { position: absolute; inset: 30%; display: grid; place-content: center; gap: 4px; text-align: center; }
 .bz-ring-title b { font-size: clamp(16px, 4cqi, 20px); line-height: 1.2; color: var(--color-heading); }
 .bz-ring-title span { font-family: var(--family-mono); font-size: 14px; color: var(--c); }
 .bz-ring-steps li { position: absolute; transform: translate(-50%, -50%); }
-.bz-ring-steps button { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font: inherit; font-weight: 800; font-size: 16px; cursor: pointer; transition: transform 200ms var(--motion-ease); }
+.bz-ring-steps button { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--color-line); background: var(--color-surface); color: var(--color-text); font: inherit; font-weight: 800; font-size: 16px; cursor: pointer; transition: transform var(--motion-fast) var(--motion-ease); }
 .bz-ring-steps button[data-done] { border-color: var(--c); }
 .bz-ring-steps button[aria-pressed='true'] { border-color: var(--c); background: var(--c); color: #0c0a24; transform: scale(1.12); }
 .bz-loop-card { display: grid; gap: 10px; align-content: start; }
@@ -197,10 +197,10 @@ html:not([data-gate]) .bz-loop-list { position: static; width: auto; height: aut
 .bz-meet { display: grid; gap: 16px; }
 .bz-track { position: relative; height: 48px; margin: 0 24px; }
 .bz-track::before { content: ''; position: absolute; left: 0; right: 0; top: 22px; height: 4px; border-radius: 2px; background: var(--color-line); }
-.bz-track-fill { position: absolute; left: 0; right: 0; top: 22px; height: 4px; border-radius: 2px; background: var(--c); transform: scaleX(var(--p)); transform-origin: left; transition: transform 200ms var(--motion-ease); }
+.bz-track-fill { position: absolute; left: 0; right: 0; top: 22px; height: 4px; border-radius: 2px; background: var(--c); transform: scaleX(var(--p)); transform-origin: left; transition: transform var(--motion-fast) var(--motion-ease); }
 .bz-beats li { position: absolute; top: 2px; transform: translateX(-50%); }
 .bz-beats button { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
-.bz-beats button::before { content: ''; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--color-text-muted); background: var(--color-surface); transition: transform 200ms var(--motion-ease); }
+.bz-beats button::before { content: ''; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--color-text-muted); background: var(--color-surface); transition: transform var(--motion-fast) var(--motion-ease); }
 .bz-beats button[data-done]::before { border-color: var(--c); background: var(--c); }
 .bz-beats button[aria-pressed='true']::before { border-color: var(--c); background: var(--c); transform: scale(1.5); }
 .bz-scrub { display: grid; gap: 4px; font-size: 14px; color: var(--color-text-muted); }

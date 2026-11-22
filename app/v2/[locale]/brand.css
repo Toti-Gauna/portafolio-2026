@@ -59,7 +59,7 @@
 .bl-build { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
 @container (min-width: 900px) { .bl-build { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 40px; } }
 .bl-logo[data-mode='grid'] { padding: clamp(16px, 4cqi, 44px); border-radius: var(--bl-radius); background: var(--m-bg); border: 1px solid var(--f-line); }
-.bl-grid { transition: opacity 260ms var(--ease); }
+.bl-grid { transition: opacity var(--motion-fast) var(--motion-ease); }
 .bl-logo[data-grid='off'] .bl-grid { opacity: 0; }
 .bl-grid .bl-g { fill: none; stroke: var(--m-accent); stroke-width: 1px; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
 .bl-grid .bl-gc { fill: none; stroke: var(--m-accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
@@ -75,7 +75,7 @@
 .bl-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .bl-chip { display: grid; place-items: center; min-height: 150px; padding: 20px; border-radius: var(--bl-radius); background: var(--f-bg); color: var(--f-ink); border: 1px solid var(--a-line); }
 .bl-chip svg { display: block; width: 100%; max-width: 300px; height: auto; max-height: 150px; }
-.bl-chips .bl-chip svg { max-width: 96px; transition: transform 320ms var(--ease); }
+.bl-chips .bl-chip svg { max-width: 96px; transition: transform var(--motion-base) var(--motion-ease); }
 .bl-chip .bl-acc { fill: var(--f-accent); }
 @media (hover: hover) and (pointer: fine) { .bl-chips .bl-chip:hover svg { transform: translateY(-4px) rotate(6deg); } }
 

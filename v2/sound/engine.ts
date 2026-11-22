@@ -23,6 +23,11 @@ export type ScoreEvent = { t: number; ev: NoteEvent; bright: number };
 export type Score = { bpm: number; length: number; gain: number; events: ScoreEvent[] };
 
 export type Sfx = 'open' | 'stop' | 'grab' | 'thud' | 'night' | 'day' | 'horn';
+/**
+ * The mix of the small sounds (lote 9.1): a trim in dB per sound, so every one peaks near −15 dBFS — over the music's
+ * level (−22 dBFS RMS) without jumping out of it. Measured offline (`renderSfx`, tests/e2e/v2-sound.spec.ts).
+ */
+export const SFX_TRIM: Record<Sfx | 'accent', number> = { open: 9, stop: 17.5, grab: 13.5, thud: 7, night: 11, day: 8, horn: 15, accent: 6 };
 const i5 = (n: number, len: number) => n % len;
 
 export class MusicEngine {
@@ -159,9 +164,9 @@ export class MusicEngine {
   /** A short, bright chord on the tonic of the page: the gate opening (lote 3.1). It sounds on its own, with or without the music. */
   accent() {
     const z = ZONES[this.zone];
-    const t = this.ctx.currentTime + 0.03;
+    const t = this.ctx.currentTime + 0.03, dest = this.trimmed('accent');
     const tones = [...chord(z, 0, false), 12];
-    tones.forEach((semis, i) => this.play({ voice: 'chime', beat: 0, dur: 4, midi: place(z, semis, 72 + (i === 3 ? 12 : 0), 84 + (i === 3 ? 12 : 0)), vel: 0.34 }, t + i * 0.075, 0.5, this.bus, z.bright));
+    tones.forEach((semis, i) => this.play({ voice: 'chime', beat: 0, dur: 4, midi: place(z, semis, 72 + (i === 3 ? 12 : 0), 84 + (i === 3 ? 12 : 0)), vel: 0.34 }, t + i * 0.075, 0.5, dest, z.bright));
   }
 
   /**
@@ -170,21 +175,29 @@ export class MusicEngine {
    * Each sounds on its own, with or without the music playing.
    */
   sfx(kind: Sfx, power = 1) {
-    const z = ZONES[this.zone], t = this.ctx.currentTime + 0.02, k = Math.max(0.15, Math.min(1, power));
+    const z = ZONES[this.zone], t = this.ctx.currentTime + 0.02, k = Math.max(0.15, Math.min(1, power)), dest = this.trimmed(kind);
     const note = (voice: NoteEvent['voice'], semis: number, lo: number, at: number, dur: number, vel: number) =>
-      this.play({ voice, beat: 0, dur, midi: place(z, semis, lo, lo + 12), vel }, t + at, 0.5, this.bus, z.bright);
+      this.play({ voice, beat: 0, dur, midi: place(z, semis, lo, lo + 12), vel }, t + at, 0.5, dest, z.bright);
     const tones = chord(z, 0, false);
     switch (kind) {
       case 'open': [tones[0], tones[2], tones[1] + 12].forEach((s2, i) => note('chime', s2, 72, i * 0.07, 3, 0.3)); break;
       case 'stop': note('pluck', tones[i5(this.sfxN++, tones.length)], 67, 0, 1.2, 0.34); break;
       case 'grab': note('pluck', tones[2], 79, 0, 0.6, 0.3); note('pluck', tones[0] + 12, 79, 0.06, 0.6, 0.24); break;
-      case 'thud': this.play({ voice: 'kick', beat: 0, dur: 0.4, midi: 38, vel: 0.5 * k }, t, 0.5, this.bus, 0); if (k > 0.5) note('pluck', tones[0], 55, 0, 0.5, 0.2 * k); break;
-      case 'night': [tones[2], tones[1], tones[0]].forEach((s2, i) => note('chime', s2, 67, i * 0.16, 4, 0.26)); this.play({ voice: 'swell', beat: 0, dur: 2.2, midi: 60, vel: 0.3 }, t, 0.5, this.bus, 0); break;
+      case 'thud': this.play({ voice: 'kick', beat: 0, dur: 0.4, midi: 38, vel: 0.5 * k }, t, 0.5, dest, 0); if (k > 0.5) note('pluck', tones[0], 55, 0, 0.5, 0.2 * k); break;
+      case 'night': [tones[2], tones[1], tones[0]].forEach((s2, i) => note('chime', s2, 67, i * 0.16, 4, 0.26)); this.play({ voice: 'swell', beat: 0, dur: 2.2, midi: 60, vel: 0.3 }, t, 0.5, dest, 0); break;
       case 'day': [tones[0], tones[1], tones[2], tones[0] + 12].forEach((s2, i) => note('chime', s2, 72, i * 0.11, 3, 0.26)); break;
       case 'horn': note('keys', tones[0], 60, 0, 0.5, 0.42); note('keys', tones[2], 60, 0, 0.5, 0.36); break;
     }
   }
   private sfxN = 0;
+  /** A gain for one small sound, with its trim; it frees itself when the sound has rung out. */
+  private trimmed(kind: Sfx | 'accent') {
+    const g = this.ctx.createGain();
+    g.gain.value = 10 ** (SFX_TRIM[kind] / 20);
+    g.connect(this.bus);
+    if ('close' in this.ctx) setTimeout(() => g.disconnect(), 6000);
+    return g;
+  }
 
   /**
    * The hum of the car (lote 4.3, primera persona): two low oscillators through a filter; pitch, brightness and
@@ -469,6 +482,14 @@ export class MusicEngine {
 }
 
 /** Renders `seconds` of a style and a page to an AudioBuffer (samples for Ignacio, level checks in tests). */
+/** One small sound (or the gate's chord, `accent`), offline: for the mix tests (lote 9.1). */
+export async function renderSfx(kind: Sfx | 'accent', zone: ZoneKey = 'home', sampleRate = 44100): Promise<AudioBuffer> {
+  const ctx = new OfflineAudioContext(2, Math.ceil(4 * sampleRate), sampleRate);
+  const e = new MusicEngine(ctx, ctx.destination, 'circuito', zone);
+  if (kind === 'accent') e.accent(); else e.sfx(kind, 1);
+  return ctx.startRendering();
+}
+
 /** The score of the trailer, offline (tests and samples): `seconds` of it plus its tail. */
 export async function renderScore(score: Score, seconds = score.length + 3, sampleRate = 44100): Promise<AudioBuffer> {
   const ctx = new OfflineAudioContext(2, Math.ceil(seconds * sampleRate), sampleRate);
